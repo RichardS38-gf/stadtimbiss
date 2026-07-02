@@ -202,6 +202,10 @@
   background: rgba(0, 0, 0, 0.62);
 }
 
+.offer-card__overlay--accent {
+  background: rgba(230, 57, 70, 0.72);
+}
+
 .offer-card__content {
   position: relative;
   z-index: 1;
