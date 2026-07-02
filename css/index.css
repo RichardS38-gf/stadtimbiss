@@ -152,6 +152,11 @@
 }
 
 /* ---------- 4. Collage ---------- */
+.collage__title {
+  text-align: left;
+  margin-bottom: var(--space-6);
+}
+
 .collage__grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
