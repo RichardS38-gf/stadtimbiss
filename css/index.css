@@ -92,6 +92,11 @@
   max-width: 340px;
 }
 
+.about__text p a {
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
 @media (min-width: 768px) {
   .hero {
     min-height: 85vh;
@@ -532,6 +537,9 @@
 
 .about__text {
   padding: var(--space-7) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
