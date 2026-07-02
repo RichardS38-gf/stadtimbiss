@@ -485,18 +485,23 @@
 /* ---------- Über uns ---------- */
 .about {
   background: var(--color-bg-soft);
+  overflow: hidden;
 }
 
 .about__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6);
-  align-items: center;
+  gap: 0;
+  align-items: stretch;
 }
 
 .about__label {
   color: var(--color-accent);
   margin-bottom: var(--space-3);
+}
+
+.about__text {
+  padding: var(--space-7) var(--space-6) var(--space-7) 0;
 }
 
 .about__text h2 {
@@ -513,19 +518,25 @@
 
 .about__img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
+  min-height: 400px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 0;
   order: -1;
 }
 
 @media (min-width: 768px) {
   .about__grid {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-7);
+  }
+  .about__text {
+    padding: var(--space-8) var(--space-7) var(--space-8) var(--container-pad-desktop);
+    max-width: calc(var(--max-content-width) / 2);
+    margin-left: auto;
   }
   .about__img {
     order: 0;
+    min-height: 500px;
   }
 }
 
