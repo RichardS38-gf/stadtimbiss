@@ -154,7 +154,7 @@
 /* ---------- 4. Collage ---------- */
 .collage__title {
   text-align: left;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-7);
 }
 
 .collage__grid {
@@ -167,7 +167,7 @@
 .collage__grid:hover .collage__main,
 .collage__grid:hover .collage__top,
 .collage__grid:hover .collage__bottom {
-  filter: brightness(0.6);
+  filter: brightness(0.35);
 }
 
 .collage__main,
@@ -208,7 +208,7 @@
 
 .offers__title {
   text-align: center;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-7);
 }
 
 .offer-card {
@@ -476,11 +476,11 @@
 /* ---------- Sektions-Intro (zentrierte Überschrift + Subline) ---------- */
 .section-intro {
   text-align: center;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-7);
 }
 
 .section-intro h2 {
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .section-sub {
