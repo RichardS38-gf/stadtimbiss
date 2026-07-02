@@ -103,8 +103,8 @@ Restaurant Online Shop/  (Git-Repo)
 | Phase | Inhalt | Datei | Status |
 |-------|--------|-------|--------|
 | 1 | GitHub-Repo, Vercel, Ordnerstruktur, CSS-Grunddateien | phase-1-grundlage.md | abgeschlossen |
-| 2 | Startseite index.html | phase-2-startseite.md | in Arbeit |
-| 3 | Bestellseite bestellen.html | phase-3-bestellseite.md | offen |
+| 2 | Startseite index.html | phase-2-startseite.md | abgeschlossen |
+| 3 | Bestellseite bestellen.html | phase-3-bestellseite.md | in Arbeit |
 | 4 | Warenkorb (Slide-in) + Checkout + Danke-Seite | phase-4-warenkorb-checkout.md | offen |
 | 5 | Mobile-Polish, Animationen, Favicon | phase-5-polish.md | offen |
 
