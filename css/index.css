@@ -525,13 +525,17 @@
   order: -1;
 }
 
+.about__text {
+  padding: var(--space-7) var(--space-5);
+}
+
 @media (min-width: 768px) {
   .about__grid {
     grid-template-columns: 1fr 1fr;
   }
   .about__text {
-    padding: var(--space-8) var(--space-7) var(--space-8) var(--container-pad-desktop);
-    max-width: calc(var(--max-content-width) / 2);
+    padding: var(--space-8) var(--space-7);
+    max-width: 570px;
     margin-left: auto;
   }
   .about__img {
