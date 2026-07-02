@@ -1,0 +1,64 @@
+/* layout.css — Stadtimbiss */
+.container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--container-pad-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: var(--container-pad-desktop);
+  }
+}
+
+.section {
+  padding-block: var(--space-7);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--space-8);
+  }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
