@@ -107,6 +107,7 @@ Restaurant Online Shop/  (Git-Repo)
 | 3 | Bestellseite bestellen.html | phase-3-bestellseite.md | abgeschlossen |
 | 4 | Warenkorb (Slide-in) + Checkout + Danke-Seite | phase-4-warenkorb-checkout.md | abgeschlossen |
 | 5 | Mobile-Polish, Animationen, Favicon | phase-5-polish.md | abgeschlossen |
+| 6 | Neue vollwertige Startseite (Über uns, Highlights, Bewertungen, Kontakt) | phase-6-startseite-neu.md | abgeschlossen |
 
 ---
 
