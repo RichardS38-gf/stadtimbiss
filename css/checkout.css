@@ -36,6 +36,10 @@
   color: var(--color-muted);
 }
 
+.nav.scrolled {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+}
+
 @media (min-width: 1024px) {
   .nav__inner {
     min-height: 68px;

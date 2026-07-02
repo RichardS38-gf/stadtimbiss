@@ -53,6 +53,13 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
     });
     renderCart();
     renderCartMobile();
+    // Badge-Bounce (Animation neu starten)
+    const badge = document.getElementById('cart-count');
+    if (badge) {
+      badge.classList.remove('bounce');
+      void badge.offsetWidth;
+      badge.classList.add('bounce');
+    }
     // Visuelles Feedback
     btn.textContent = '✓ Hinzugefügt';
     btn.style.background = '#2a9d4e';
@@ -172,6 +179,12 @@ function renderCartMobile() {
     </div>
   `).join('');
 }
+
+// Sticky Nav Shadow beim Scrollen
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+});
 
 // Initial rendern
 renderCart();

@@ -472,3 +472,20 @@
   .cart-drawer { display: none !important; }
   .cart-overlay { display: none !important; }
 }
+
+/* ---------- 8. Micro-Animationen (Phase 5) ---------- */
+/* Nav-Shadow beim Scrollen */
+.nav.scrolled {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Warenkorb-Badge Bounce */
+@keyframes badge-bounce {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.cart-badge.bounce {
+  animation: badge-bounce 0.3s ease;
+}

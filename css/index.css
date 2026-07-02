@@ -29,6 +29,10 @@
   opacity: 1;
 }
 
+.nav.scrolled {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+}
+
 @media (min-width: 1024px) {
   .nav__inner {
     min-height: 68px;
@@ -245,6 +249,11 @@
 /* ---------- 6. Bestseller ---------- */
 .bestseller {
   background: var(--color-bg);
+}
+
+/* height:auto, damit das HTML height-Attribut das aspect-ratio nicht überschreibt */
+.product-card__img {
+  height: auto;
 }
 
 .product-card__btn {
