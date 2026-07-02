@@ -3,14 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stadtimbiss — Danke</title>
+  <title>Vielen Dank — Stadtimbiss</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=1">
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=1">
   <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/checkout.css?v=1">
 </head>
 <body>
-  <p>Kommt bald.</p>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">Stadtimbiss</a>
+    </div>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <main class="danke-main container">
+    <div class="danke-icon">✓</div>
+    <h1>Vielen Dank!</h1>
+    <p>Deine Bestellung wurde aufgenommen. Wir bereiten dein Essen vor.</p>
+    <div class="danke-info">
+      <div class="danke-info__item">
+        <strong>Bestellnummer</strong>
+        <span>#2025-1337</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Voraussichtliche Lieferzeit</strong>
+        <span>ca. 35 Minuten</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Zahlungsart</strong>
+        <span>Bar bei Lieferung</span>
+      </div>
+    </div>
+    <a href="index.html" class="btn btn--outline">← Zurück zur Startseite</a>
+  </main>
+
+  <script type="module">
+    import { clearCart } from './js/cart.js';
+    clearCart();
+  </script>
+
 </body>
 </html>

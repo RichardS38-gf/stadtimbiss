@@ -52,6 +52,7 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
       price: parseFloat(btn.dataset.price)
     });
     renderCart();
+    renderCartMobile();
     // Visuelles Feedback
     btn.textContent = '✓ Hinzugefügt';
     btn.style.background = '#2a9d4e';
@@ -104,5 +105,74 @@ const observer = new IntersectionObserver((entries) => {
 
 sections.forEach(s => observer.observe(s));
 
+// ---------- Warenkorb Slide-in (Mobile) ----------
+// Warenkorb-Button (Nav)
+document.getElementById('cart-toggle')?.addEventListener('click', openCartDrawer);
+
+// FAB
+document.getElementById('cart-fab')?.addEventListener('click', openCartDrawer);
+
+// Schließen
+document.getElementById('cart-close')?.addEventListener('click', closeCartDrawer);
+document.getElementById('cart-overlay')?.addEventListener('click', closeCartDrawer);
+
+function openCartDrawer() {
+  document.getElementById('cart-drawer').classList.add('active');
+  document.getElementById('cart-overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  renderCartMobile();
+}
+
+function closeCartDrawer() {
+  document.getElementById('cart-drawer').classList.remove('active');
+  document.getElementById('cart-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderCartMobile() {
+  const cart = getCart();
+  const itemsEl = document.getElementById('cart-items-mobile');
+  const emptyEl = document.getElementById('cart-empty-mobile');
+  const summaryEl = document.getElementById('cart-summary-mobile');
+  const subtotalEl = document.getElementById('cart-subtotal-mobile');
+  const totalEl = document.getElementById('cart-total-mobile');
+  const fabEl = document.getElementById('cart-fab');
+  const fabCount = document.getElementById('cart-fab-count');
+  const fabPrice = document.getElementById('cart-fab-price');
+
+  const count = getCartCount();
+  const subtotal = getCartTotal();
+
+  // FAB
+  if (fabEl) {
+    fabEl.classList.toggle('visible', count > 0);
+    if (fabCount) fabCount.textContent = count;
+    if (fabPrice) fabPrice.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+  }
+
+  if (!itemsEl) return;
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '';
+    if (emptyEl) emptyEl.style.display = 'block';
+    if (summaryEl) summaryEl.style.display = 'none';
+    return;
+  }
+
+  if (emptyEl) emptyEl.style.display = 'none';
+  if (summaryEl) summaryEl.style.display = 'block';
+  if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
+  if (totalEl) totalEl.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <span class="cart-item__name">${item.name}</span>
+      <span class="cart-item__qty">×${item.qty}</span>
+      <span class="cart-item__price">${(item.price * item.qty).toFixed(2).replace('.', ',')} €</span>
+    </div>
+  `).join('');
+}
+
 // Initial rendern
 renderCart();
+renderCartMobile();

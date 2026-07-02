@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=1">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/bestellen.css?v=1">
+  <link rel="stylesheet" href="css/bestellen.css?v=2">
   <script type="module" src="js/bestellen.js"></script>
 </head>
 <body>
@@ -325,6 +325,43 @@
     </aside>
 
   </div>
+
+  <!-- Warenkorb Slide-in (Mobile) -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header">
+      <h3>Deine Bestellung</h3>
+      <button class="cart-drawer__close" id="cart-close" aria-label="Warenkorb schließen">✕</button>
+    </div>
+    <div class="cart-drawer__body">
+      <div class="cart-items" id="cart-items-mobile"></div>
+      <div class="cart-empty" id="cart-empty-mobile">
+        <p>Noch keine Artikel im Warenkorb.</p>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cart-summary-mobile">
+      <div class="cart-summary__row">
+        <span>Zwischensumme</span>
+        <span id="cart-subtotal-mobile">0,00 €</span>
+      </div>
+      <div class="cart-summary__row">
+        <span>Lieferung</span>
+        <span>2,50 €</span>
+      </div>
+      <div class="cart-summary__row cart-summary__total">
+        <span>Gesamt</span>
+        <span id="cart-total-mobile">0,00 €</span>
+      </div>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
+    </div>
+  </div>
+
+  <!-- Floating Cart Button (Mobile only) -->
+  <button class="cart-fab" id="cart-fab">
+    🛒 Warenkorb
+    <span class="cart-fab__count" id="cart-fab-count">0</span>
+    <span class="cart-fab__price" id="cart-fab-price">0,00 €</span>
+  </button>
 
 </body>
 </html>
