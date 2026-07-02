@@ -2,8 +2,8 @@
 
 **Stand:** Juli 2026
 **Ziel:** Frontend-Demo eines Restaurant-Bestellshops für einen fiktiven Imbiss namens "Stadtimbiss". Keine Backend-Anbindung — reine Präsentations-Demo für Akquise bei echten Restaurants.
-**Vercel-URL:** (wird nach Phase 1 eingetragen)
-**GitHub:** (wird nach Phase 1 eingetragen)
+**Vercel-URL:** (Deployment ausstehend — Repo bei Vercel importieren)
+**GitHub:** https://github.com/RichardS38-gf/stadtimbiss
 **Tech-Stack:** Reines HTML/CSS/Vanilla-JS
 **Hosting:** Vercel (automatisches Deployment via GitHub)
 
@@ -102,7 +102,7 @@ Restaurant Online Shop/  (Git-Repo)
 
 | Phase | Inhalt | Datei | Status |
 |-------|--------|-------|--------|
-| 1 | GitHub-Repo, Vercel, Ordnerstruktur, CSS-Grunddateien | phase-1-grundlage.md | offen |
+| 1 | GitHub-Repo, Vercel, Ordnerstruktur, CSS-Grunddateien | phase-1-grundlage.md | teilw. — Vercel-Deploy ausstehend |
 | 2 | Startseite index.html | phase-2-startseite.md | offen |
 | 3 | Bestellseite bestellen.html | phase-3-bestellseite.md | offen |
 | 4 | Warenkorb (Slide-in) + Checkout + Danke-Seite | phase-4-warenkorb-checkout.md | offen |
