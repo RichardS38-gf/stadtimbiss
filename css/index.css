@@ -283,6 +283,90 @@
   color: var(--color-muted);
 }
 
+/* ---------- 5b. WM-Banner ---------- */
+.wm-banner {
+  background: #1a1a2e;
+  background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: var(--color-on-dark);
+  padding-block: var(--space-6);
+  overflow: hidden;
+  position: relative;
+}
+
+.wm-banner::before {
+  content: '⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️';
+  position: absolute;
+  right: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5rem;
+  opacity: 0.06;
+  letter-spacing: 0.5rem;
+  pointer-events: none;
+}
+
+.wm-banner__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.wm-banner__flag {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.wm-banner__text {
+  flex: 1;
+}
+
+.wm-banner__label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.wm-banner__headline {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-2xl);
+  color: var(--color-on-dark);
+  line-height: 1.2;
+  margin-bottom: var(--space-1);
+}
+
+.wm-banner__sub {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  color: #FFD700;
+  line-height: 1.1;
+}
+
+.wm-banner__btn {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .wm-banner__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-6);
+  }
+  .wm-banner__headline {
+    font-size: var(--text-2xl);
+  }
+  .wm-banner__sub {
+    font-size: var(--text-4xl);
+  }
+}
+
 /* ---------- 6. Bestseller ---------- */
 .bestseller {
   background: var(--color-bg);
