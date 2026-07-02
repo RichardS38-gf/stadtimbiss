@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=1">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/index.css?v=2">
+  <link rel="stylesheet" href="css/index.css?v=3">
 </head>
 <body>
 
@@ -62,11 +62,15 @@
           <p class="offer-card__text">Jeden Dienstag auf alle Burger</p>
           <a href="bestellen.html" class="btn btn--outline-light">Jetzt bestellen →</a>
         </article>
-        <article class="offer-card offer-card--dark">
-          <span class="offer-card__emoji">🥤</span>
-          <h3 class="offer-card__title">Gratis Getränk</h3>
-          <p class="offer-card__text">Ab 15 € Bestellwert</p>
-          <a href="bestellen.html" class="btn btn--outline-light">Jetzt bestellen →</a>
+        <article class="offer-card offer-card--dark offer-card--with-img">
+          <img src="Bilder/emmanuel-edward-RExMpBLx0bw-unsplash.jpg" alt="Erfrischendes Getränk" class="offer-card__bg-img" loading="lazy">
+          <div class="offer-card__overlay"></div>
+          <div class="offer-card__content">
+            <span class="offer-card__emoji">🥤</span>
+            <h3 class="offer-card__title">Gratis Getränk</h3>
+            <p class="offer-card__text">Ab 15 € Bestellwert</p>
+            <a href="bestellen.html" class="btn btn--outline-light">Jetzt bestellen →</a>
+          </div>
         </article>
       </div>
     </div>
@@ -175,7 +179,6 @@
   </footer>
 
   <script>
-    // Sticky Nav Shadow beim Scrollen
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => {
       if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
