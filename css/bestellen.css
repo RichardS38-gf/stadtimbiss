@@ -72,40 +72,91 @@
   padding-block: var(--space-4);
 }
 
-.order-mode-toggle {
+.order-mode-toggle--cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.mode-card {
+  position: relative;
+  overflow: hidden;
   display: flex;
-  gap: var(--space-2);
-}
-
-.mode-btn {
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  min-height: 44px;
-  padding: 0.5rem 1rem;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: var(--text-base);
-  color: var(--color-ink);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: var(--space-4) var(--space-5);
   background: var(--color-bg-soft);
-  border: 1px solid var(--color-line);
-  transition: all var(--transition);
+  border: 2px solid var(--color-line);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition), background var(--transition);
 }
 
-.mode-btn--active {
+.mode-card--active {
   background: var(--color-accent);
-  color: var(--color-on-dark);
   border-color: var(--color-accent);
 }
 
-.order-mode__info {
-  margin-top: var(--space-3);
-  font-size: var(--text-sm);
-  color: var(--color-muted);
-  text-align: center;
+.mode-card__emoji {
+  font-size: 1.75rem;
+  line-height: 1;
+  margin-bottom: 4px;
 }
+
+.mode-card__title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+.mode-card--active .mode-card__title {
+  color: var(--color-on-dark);
+}
+
+.mode-card__info {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted);
+  margin-top: 4px;
+}
+
+.mode-card--active .mode-card__info {
+  color: rgba(255,255,255,0.85);
+}
+
+.mode-card__sub {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.mode-card--active .mode-card__sub {
+  color: rgba(255,255,255,0.65);
+}
+
+.mode-card__bg-emoji {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  font-size: 4rem;
+  opacity: 0.12;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.mode-card--active .mode-card__bg-emoji {
+  opacity: 0.2;
+}
+
+.mode-btn { display: none; }
+.order-mode__info { display: none; }
 
 /* ---------- 3. Promo-Banner ---------- */
 .promo-banner {

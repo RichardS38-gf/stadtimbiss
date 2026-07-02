@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=1">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/bestellen.css?v=4">
+  <link rel="stylesheet" href="css/bestellen.css?v=5">
   <script type="module" src="js/bestellen.js"></script>
 </head>
 <body>
@@ -32,17 +32,32 @@
   <!-- 2. Lieferung/Abholung-Toggle -->
   <div class="order-mode">
     <div class="container">
-      <div class="order-mode-toggle">
-        <button class="mode-btn mode-btn--active" data-mode="lieferung">🛵 Lieferung</button>
-        <button class="mode-btn" data-mode="abholung">🏃 Abholung</button>
+      <div class="order-mode-toggle order-mode-toggle--cards">
+
+        <button class="mode-card mode-card--active" data-mode="lieferung">
+          <span class="mode-card__emoji">🛵</span>
+          <span class="mode-card__title">Lieferung</span>
+          <span class="mode-card__info">~35 Min &middot; ab 2,50 &euro;</span>
+          <span class="mode-card__sub">Mindest. 8,00 &euro;</span>
+          <span class="mode-card__bg-emoji" aria-hidden="true">🛵</span>
+        </button>
+
+        <button class="mode-card" data-mode="abholung">
+          <span class="mode-card__emoji">🏃</span>
+          <span class="mode-card__title">Abholung</span>
+          <span class="mode-card__info">~15 Min &middot; kostenlos</span>
+          <span class="mode-card__sub">Musterstra&szlig;e 1</span>
+          <span class="mode-card__bg-emoji" aria-hidden="true">🏃</span>
+        </button>
+
       </div>
-      <p class="order-mode__info" id="mode-info">Lieferung in ca. 35 Min · Mindestbestellwert 8,00 €</p>
     </div>
   </div>
 
   <!-- 3. Angebots-Banner -->
   <div class="promo-banner">
-    🔥 Dienstags-Deal: 2 Burger kaufen, 1 gratis bekommen!
+    <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+    Mindestbestellwert: 8 € &nbsp;·&nbsp; Lieferung ab 2,50 €
   </div>
 
   <!-- 4. Sticky Kategorienleiste -->

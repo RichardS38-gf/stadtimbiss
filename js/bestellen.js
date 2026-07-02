@@ -158,13 +158,16 @@ bindCartEvents(document.getElementById('cart-items'));
 bindCartEvents(document.getElementById('cart-items-mobile'));
 
 // ---------- Lieferung/Abholung Toggle ----------
-const modeBtns = document.querySelectorAll('.mode-btn');
+const modeBtns = document.querySelectorAll('.mode-btn, .mode-card');
 const modeInfo = document.getElementById('mode-info');
 
 modeBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    modeBtns.forEach(b => b.classList.remove('mode-btn--active'));
-    btn.classList.add('mode-btn--active');
+    modeBtns.forEach(b => {
+      b.classList.remove('mode-btn--active');
+      b.classList.remove('mode-card--active');
+    });
+    btn.classList.add(btn.classList.contains('mode-card') ? 'mode-card--active' : 'mode-btn--active');
     if (modeInfo) {
       modeInfo.textContent = btn.dataset.mode === 'lieferung'
         ? 'Lieferung in ca. 35 Min · Mindestbestellwert 8,00 €'
