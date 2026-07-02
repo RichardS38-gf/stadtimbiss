@@ -632,54 +632,59 @@
   margin-top: auto;
 }
 
-/* ---------- Bewertungen ---------- */
+/* ---------- Bewertungen Slider ---------- */
 .reviews {
   background: var(--color-bg-soft);
 }
 
-.review-card {
-  background: var(--color-bg-soft);
-  border: 1px solid var(--color-line);
+.review-slider {
+  background: var(--color-dark);
   border-radius: 10px;
-  padding: var(--space-5);
+  padding: var(--space-7);
 }
 
-.review-card__stars {
-  font-size: 1.1rem;
-  margin-bottom: var(--space-3);
-}
-
-.review-card__text {
-  font-style: italic;
-  line-height: 1.7;
+.review-slider__stars {
+  color: #f59e0b;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
   margin-bottom: var(--space-4);
 }
 
-.review-card__author {
+.review-slider__quote {
+  font-size: var(--text-2xl);
+  font-style: italic;
+  color: var(--color-on-dark);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+  transition: opacity 0.3s ease;
+  min-height: 4rem;
+}
+
+.review-slider__author {
   font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-ink);
+  color: rgba(255,255,255,0.5);
+  margin-bottom: var(--space-5);
+  transition: opacity 0.3s ease;
 }
 
-.review-card__date {
-  font-size: var(--text-xs);
-  color: var(--color-muted);
+.review-slider__dots {
+  display: flex;
+  gap: 8px;
 }
 
-.reviews__more {
-  text-align: left;
-  margin-top: var(--space-6);
+.review-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 0;
 }
 
-.reviews__more a {
-  color: var(--color-muted);
-  font-size: var(--text-sm);
-  font-weight: 600;
-}
-
-.reviews__more a:hover {
-  color: var(--color-accent);
-  opacity: 1;
+.review-dot--active {
+  background: var(--color-accent);
 }
 
 /* ---------- Kontakt ---------- */

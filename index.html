@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/index.css?v=22">
+  <link rel="stylesheet" href="css/index.css?v=23">
 </head>
 <body>
 
@@ -169,29 +169,16 @@
         </div>
         <a href="#" class="link-accent" style="white-space:nowrap;margin-bottom:0.25rem">Alle Bewertungen auf Google →</a>
       </div>
-      <div class="grid-3">
 
-        <article class="review-card">
-          <div class="review-card__stars" aria-label="5 von 5 Sternen">⭐⭐⭐⭐⭐</div>
-          <p class="review-card__text">„Bester Döner in ganz Braunschweig. Frisch, schnell und das Personal ist super nett. Komme jetzt seit 3 Jahren immer wieder."</p>
-          <p class="review-card__author">Mehmet K.</p>
-          <p class="review-card__date">vor 2 Wochen · Google</p>
-        </article>
-
-        <article class="review-card">
-          <div class="review-card__stars" aria-label="5 von 5 Sternen">⭐⭐⭐⭐⭐</div>
-          <p class="review-card__text">„Der Smash Burger ist der Hammer! Hab schon viele probiert aber hier stimmt einfach alles. Lieferung war auch schnell."</p>
-          <p class="review-card__author">Sarah L.</p>
-          <p class="review-card__date">vor 1 Monat · Google</p>
-        </article>
-
-        <article class="review-card">
-          <div class="review-card__stars" aria-label="5 von 5 Sternen">⭐⭐⭐⭐⭐</div>
-          <p class="review-card__text">„Endlich mal ein Imbiss der keine Kompromisse macht. Alles frisch, Portionen groß, Preise fair. 10/10."</p>
-          <p class="review-card__author">Thomas B.</p>
-          <p class="review-card__date">vor 3 Wochen · Google</p>
-        </article>
-
+      <div class="review-slider">
+        <div class="review-slider__stars">★★★★★</div>
+        <p class="review-slider__quote" id="review-quote">„Bester Döner in ganz Braunschweig. Frisch, schnell und das Personal ist super nett. Komme jetzt seit 3 Jahren immer wieder."</p>
+        <p class="review-slider__author" id="review-author">Mehmet K. · vor 2 Wochen · Google</p>
+        <div class="review-slider__dots">
+          <button class="review-dot review-dot--active" data-i="0" aria-label="Bewertung 1"></button>
+          <button class="review-dot" data-i="1" aria-label="Bewertung 2"></button>
+          <button class="review-dot" data-i="2" aria-label="Bewertung 3"></button>
+        </div>
       </div>
     </div>
   </section>
@@ -232,7 +219,7 @@
     </div>
   </section>
 
-  <!-- Sektion 10 — Footer -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer__cols">
@@ -262,6 +249,35 @@
     window.addEventListener('scroll', () => {
       if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
     });
+
+    // Review Slider
+    const reviews = [
+      { q: '„Bester Döner in ganz Braunschweig. Frisch, schnell und das Personal ist super nett. Komme jetzt seit 3 Jahren immer wieder."', a: 'Mehmet K. · vor 2 Wochen · Google' },
+      { q: '„Der Smash Burger ist der Hammer! Hab schon viele probiert aber hier stimmt einfach alles. Lieferung war auch schnell."', a: 'Sarah L. · vor 1 Monat · Google' },
+      { q: '„Endlich mal ein Imbiss der keine Kompromisse macht. Alles frisch, Portionen groß, Preise fair. 10/10."', a: 'Thomas B. · vor 3 Wochen · Google' }
+    ];
+
+    let current = 0;
+    const quoteEl = document.getElementById('review-quote');
+    const authorEl = document.getElementById('review-author');
+    const dots = document.querySelectorAll('.review-dot');
+
+    function showReview(i) {
+      if (!quoteEl) return;
+      quoteEl.style.opacity = '0';
+      authorEl.style.opacity = '0';
+      setTimeout(() => {
+        current = i;
+        quoteEl.textContent = reviews[i].q;
+        authorEl.textContent = reviews[i].a;
+        quoteEl.style.opacity = '1';
+        authorEl.style.opacity = '1';
+        dots.forEach((d, j) => d.classList.toggle('review-dot--active', j === i));
+      }, 300);
+    }
+
+    dots.forEach(d => d.addEventListener('click', () => showReview(parseInt(d.dataset.i))));
+    setInterval(() => showReview((current + 1) % reviews.length), 4000);
   </script>
 
 </body>
