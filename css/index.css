@@ -212,7 +212,7 @@
 }
 
 .offers__title {
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--space-7);
 }
 
@@ -480,7 +480,7 @@
 
 /* ---------- Sektions-Intro (zentrierte Überschrift + Subline) ---------- */
 .section-intro {
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--space-7);
 }
 
@@ -503,6 +503,7 @@
   grid-template-columns: 1fr;
   gap: 0;
   align-items: stretch;
+  min-height: 500px;
 }
 
 .about__label {
@@ -524,6 +525,7 @@
 
 .about__btn {
   margin-top: var(--space-2);
+  align-self: flex-start;
 }
 
 .about__img {
@@ -665,7 +667,7 @@
 }
 
 .reviews__more {
-  text-align: center;
+  text-align: left;
   margin-top: var(--space-6);
 }
 
