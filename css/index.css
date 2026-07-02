@@ -77,12 +77,12 @@
 
 .hero__subline {
   font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1.5rem;
   color: var(--color-on-dark);
-  opacity: 0.85;
+  opacity: 1;
   margin-bottom: var(--space-6);
-  max-width: 420px;
+  max-width: 480px;
 }
 
 .hero__actions {
