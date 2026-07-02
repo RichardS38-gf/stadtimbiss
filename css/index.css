@@ -638,9 +638,9 @@
 }
 
 .review-slider {
-  background: var(--color-dark);
+  background: transparent;
   border-radius: 10px;
-  padding: var(--space-7);
+  padding: var(--space-7) 0;
 }
 
 .review-slider__stars {
@@ -653,7 +653,7 @@
 .review-slider__quote {
   font-size: var(--text-2xl);
   font-style: italic;
-  color: var(--color-on-dark);
+  color: var(--color-ink);
   line-height: 1.5;
   margin-bottom: var(--space-4);
   transition: opacity 0.3s ease;
@@ -662,7 +662,7 @@
 
 .review-slider__author {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.5);
+  color: var(--color-muted);
   margin-bottom: var(--space-5);
   transition: opacity 0.3s ease;
 }
@@ -676,7 +676,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.2);
+  background: var(--color-line);
   border: none;
   cursor: pointer;
   transition: background 0.2s ease;
