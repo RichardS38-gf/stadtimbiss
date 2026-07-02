@@ -3,14 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stadtimbiss — Startseite</title>
+  <title>Stadtimbiss — Frisch. Schnell. Lecker.</title>
+  <meta name="description" content="Stadtimbiss — Braunschweigs bester Imbiss. Burger, Döner und mehr. Lieferung ab 2,50 €, 30–45 Min Lieferzeit.">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=1">
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=1">
   <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/index.css?v=1">
 </head>
 <body>
-  <p>Kommt bald.</p>
+
+  <!-- 1. Navigation -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">Stadtimbiss</a>
+      <a href="bestellen.html" class="btn btn--primary btn--sm">Jetzt bestellen →</a>
+    </div>
+  </header>
+
+  <!-- 2. Hero -->
+  <section class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="hero__label">🍔 Braunschweigs bester Imbiss</p>
+      <h1 class="hero__title">Stadtimbiss</h1>
+      <p class="hero__subline">Frisch. Schnell. Lecker.</p>
+      <div class="hero__actions">
+        <a href="bestellen.html?mode=lieferung" class="btn btn--primary btn--full">🛵 Lieferung bestellen</a>
+        <a href="bestellen.html?mode=abholung" class="btn btn--outline-light btn--full">🏃 Selbst abholen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Info-Banner -->
+  <section class="info-banner">
+    <div class="container info-banner__inner">
+      <span class="info-banner__item">🕐 Mo–So 11–23 Uhr</span>
+      <span class="info-banner__sep">|</span>
+      <span class="info-banner__item">🛵 Lieferung ab 2,50 €</span>
+      <span class="info-banner__sep">|</span>
+      <span class="info-banner__item">⏱ 30–45 Min Lieferzeit</span>
+    </div>
+  </section>
+
+  <!-- 4. Angebote -->
+  <section class="section offers">
+    <div class="container">
+      <h2 class="offers__title">Aktuelle Angebote</h2>
+      <div class="grid-2">
+        <article class="offer-card offer-card--accent">
+          <span class="offer-card__emoji">🍔</span>
+          <h3 class="offer-card__title">2 für 1</h3>
+          <p class="offer-card__text">Jeden Dienstag auf alle Burger</p>
+          <a href="bestellen.html" class="btn btn--outline-light">Jetzt bestellen →</a>
+        </article>
+        <article class="offer-card offer-card--dark">
+          <span class="offer-card__emoji">🥤</span>
+          <h3 class="offer-card__title">Gratis Getränk</h3>
+          <p class="offer-card__text">Ab 15 € Bestellwert</p>
+          <a href="bestellen.html" class="btn btn--outline-light">Jetzt bestellen →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Kategorie-Vorschau -->
+  <section class="section categories">
+    <div class="container">
+      <div class="section-header">
+        <h2>Unsere Speisekarte</h2>
+        <a href="bestellen.html" class="link-accent">Alle ansehen →</a>
+      </div>
+      <div class="grid-4">
+        <a href="bestellen.html#burger" class="category-card">
+          <span class="category-card__emoji">🍔</span>
+          <span class="category-card__name">Burger</span>
+          <span class="category-card__count">8 Gerichte</span>
+        </a>
+        <a href="bestellen.html#doener" class="category-card">
+          <span class="category-card__emoji">🥙</span>
+          <span class="category-card__name">Döner</span>
+          <span class="category-card__count">6 Gerichte</span>
+        </a>
+        <a href="bestellen.html#beilagen" class="category-card">
+          <span class="category-card__emoji">🍟</span>
+          <span class="category-card__name">Beilagen</span>
+          <span class="category-card__count">5 Gerichte</span>
+        </a>
+        <a href="bestellen.html#getraenke" class="category-card">
+          <span class="category-card__emoji">🥤</span>
+          <span class="category-card__name">Getränke</span>
+          <span class="category-card__count">10 Getränke</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Bestseller -->
+  <section class="section bestseller">
+    <div class="container">
+      <div class="section-header">
+        <h2>Unsere Bestseller</h2>
+        <a href="bestellen.html" class="link-accent">Alle Gerichte →</a>
+      </div>
+      <div class="grid-3">
+        <article class="product-card">
+          <img class="product-card__img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400" alt="Double Smash Burger mit zwei Patties und Cheddar" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__name">Double Smash Burger</h3>
+            <p class="product-card__desc">Zwei Patties, Cheddar, Soße, Gewürzgurken</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">8,90 €</span>
+            </div>
+            <a href="bestellen.html" class="btn btn--primary btn--full product-card__btn">In den Warenkorb</a>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-card__img" src="https://images.unsplash.com/photo-1561651188-d207bbec4ec3?w=400" alt="Klassischer Döner mit Salat und Tomaten" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__name">Klassischer Döner</h3>
+            <p class="product-card__desc">Mit Salat, Tomaten und Knoblauchsoße</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">6,50 €</span>
+            </div>
+            <a href="bestellen.html" class="btn btn--primary btn--full product-card__btn">In den Warenkorb</a>
+          </div>
+        </article>
+        <article class="product-card">
+          <img class="product-card__img" src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400" alt="Crispy Chicken Burger mit knusprigem Hähnchenfilet" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__name">Crispy Chicken Burger</h3>
+            <p class="product-card__desc">Knuspriges Hähnchenfilet, Coleslaw, Soße</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">7,90 €</span>
+            </div>
+            <a href="bestellen.html" class="btn btn--primary btn--full product-card__btn">In den Warenkorb</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div class="footer__col">
+          <p class="footer__brand">Stadtimbiss</p>
+          <p class="footer__claim">Frisch aus der Küche — direkt zu dir.</p>
+          <address class="footer__contact">
+            Musterstraße 1, 38100 Braunschweig<br>
+            Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
+            E-Mail: <a href="mailto:info@stadtimbiss.de">info@stadtimbiss.de</a>
+          </address>
+        </div>
+        <nav class="footer__col footer__links">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Kontakt</a>
+          <a href="#">Allergene &amp; Zusatzstoffe</a>
+        </nav>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Stadtimbiss — Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
 </body>
 </html>
