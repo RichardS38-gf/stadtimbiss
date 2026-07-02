@@ -758,7 +758,8 @@
   .contact-text {
     padding: var(--space-8) var(--space-7) var(--space-8) var(--container-pad-desktop);
     max-width: 570px;
-    margin-left: auto;
+    margin-left: 0;
+    margin-right: auto;
   }
   .contact-map {
     min-height: unset;
