@@ -556,7 +556,7 @@
   min-height: 400px;
   object-fit: cover;
   border-radius: 0;
-  order: -1;
+  order: 1;
 }
 
 .about__text {
