@@ -144,21 +144,32 @@
 @media (max-width: 767px) {
   .info-banner__inner {
     position: relative;
-    min-height: 2rem;
+    min-height: 2.5rem;
+    justify-content: center;
+    align-items: center;
   }
   .info-banner__item {
     position: absolute;
     opacity: 0;
     transition: opacity 0.4s ease;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
   }
   .info-banner__item.active {
     opacity: 1;
     position: relative;
     pointer-events: auto;
   }
+  .info-banner__item::before,
   .info-banner__item::after {
-    display: none;
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: rgba(255,255,255,0.5);
+    flex-shrink: 0;
   }
   .info-banner__sep {
     display: none !important;
