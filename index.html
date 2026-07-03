@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/index.css?v=34">
+  <link rel="stylesheet" href="css/index.css?v=35">
 </head>
 <body>
 
@@ -280,6 +280,18 @@
 
     dots.forEach(d => d.addEventListener('click', () => showReview(parseInt(d.dataset.i))));
     setInterval(() => showReview((current + 1) % reviews.length), 4000);
+    // Info-Banner Loop auf Mobile
+    const bannerItems = document.querySelectorAll('.info-banner__item');
+    if (bannerItems.length && window.innerWidth < 768) {
+      let current = 0;
+      bannerItems[0].classList.add('active');
+      setInterval(() => {
+        bannerItems[current].classList.remove('active');
+        current = (current + 1) % bannerItems.length;
+        bannerItems[current].classList.add('active');
+      }, 2500);
+    }
+
   </script>
 
 </body>
