@@ -352,6 +352,7 @@
   background-image: url('../Bilder/sandro-schuh-HgwY_YQ1m0w-unsplash.jpg');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   padding-block: var(--space-6);
 }
 
