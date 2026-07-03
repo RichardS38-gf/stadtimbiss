@@ -720,7 +720,7 @@
 
 @media (min-width: 768px) {
   .review-slider {
-    padding: var(--space-7) 0;
+    padding: var(--space-4) 0;
   }
   .review-slider__stars {
     font-size: 1.4rem;
