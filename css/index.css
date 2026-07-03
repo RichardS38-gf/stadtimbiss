@@ -148,7 +148,7 @@
   .info-banner__item:not(:last-child)::after {
     content: '';
     display: block;
-    width: 40px;
+    width: 120px;
     height: 1px;
     background: rgba(255,255,255,0.35);
     margin-top: var(--space-3);
