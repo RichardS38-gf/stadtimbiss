@@ -232,6 +232,16 @@
   background: var(--color-bg);
 }
 
+.offers .grid-2 {
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .offers .grid-2 {
+    padding-inline: 0;
+  }
+}
+
 .offers__title {
   text-align: left;
   margin-bottom: var(--space-7);
@@ -263,7 +273,8 @@
   transition: transform 0.3s ease;
 }
 
-.offer-card--with-img:hover {
+.offer-card--with-img:hover,
+.offer-card--with-img:active {
   transform: scale(1.02);
 }
 
