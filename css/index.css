@@ -438,7 +438,7 @@
 .wm-banner__label {
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   color: var(--color-on-dark);
   margin-bottom: var(--space-2);
 }
@@ -446,7 +446,7 @@
 .wm-banner__headline {
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: var(--text-2xl);
+  font-size: var(--text-sm);
   color: var(--color-on-dark);
   line-height: 1.2;
   margin-bottom: var(--space-1);
@@ -455,7 +455,7 @@
 .wm-banner__sub {
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: var(--text-3xl);
+  font-size: var(--text-lg);
   color: var(--color-on-dark);
   line-height: 1.1;
 }
@@ -470,6 +470,9 @@
     flex-direction: row;
     align-items: center;
     gap: var(--space-6);
+  }
+  .wm-banner__label {
+    font-size: var(--text-2xl);
   }
   .wm-banner__headline {
     font-size: var(--text-2xl);
