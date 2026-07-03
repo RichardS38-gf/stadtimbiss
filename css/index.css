@@ -826,15 +826,18 @@
     min-height: 560px;
   }
   .contact-text {
-    padding: var(--space-8) var(--space-6) var(--space-8) calc((100vw - var(--max-content-width)) / 2 + var(--container-pad-desktop));
+    padding: var(--space-8) var(--space-6) var(--space-8) var(--space-6);
     margin-left: 0;
     margin-right: 0;
   }
-  .contact-map {
-    min-height: unset;
-  }
   .contact-map iframe {
     min-height: unset;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-text {
+    padding-left: calc((100vw - var(--max-content-width)) / 2 + var(--container-pad-desktop));
   }
 }
 
