@@ -135,10 +135,16 @@
 .info-banner__item {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: var(--text-lg);
+  font-size: var(--text-sm);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .info-banner__item {
+    font-size: var(--text-lg);
+  }
 }
 
 .info-banner__sep {
