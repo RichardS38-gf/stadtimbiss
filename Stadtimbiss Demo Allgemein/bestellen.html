@@ -88,6 +88,19 @@
     .menu-card {
       overflow: visible;
     }
+    /* Footer weiß */
+    .footer { background: var(--color-dark); color: var(--color-on-dark); padding-top: var(--space-7); padding-bottom: var(--space-6); }
+    .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+    .footer__brand { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-on-dark); margin-bottom: var(--space-2); }
+    .footer__claim { opacity: 0.6; font-size: var(--text-sm); color: var(--color-on-dark); margin-bottom: var(--space-5); }
+    .footer__contact { font-style: normal; font-size: var(--text-sm); line-height: 1.9; color: var(--color-on-dark); opacity: 0.8; }
+    .footer__contact a { color: var(--color-on-dark); }
+    .footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer__links a { color: var(--color-on-dark); opacity: 0.6; font-size: var(--text-sm); }
+    .footer__links a:hover { opacity: 1; }
+    .footer__divider { border-top: 1px solid rgba(255,255,255,0.12); margin-block: var(--space-5); }
+    .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); color: var(--color-on-dark); }
+    @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
   </style>
 </head>
 <body>
