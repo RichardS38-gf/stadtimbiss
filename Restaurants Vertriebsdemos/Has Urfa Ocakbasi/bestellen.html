@@ -89,6 +89,17 @@
     .footer__divider { border-top: 1px solid rgba(255,255,255,0.12); margin-block: var(--space-5); }
     .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); }
     @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
+
+    /* Allergen Tooltip */
+    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color-line); color: var(--color-muted); font-size: 0.6rem; font-weight: 700; font-family: var(--font-body); font-style: normal; border: none; cursor: pointer; margin-left: 6px; flex-shrink: 0; transition: background 0.15s ease, color 0.15s ease; position: relative; vertical-align: middle; line-height: 1; }
+    .allergen-btn::before { content: 'i'; font-style: italic; }
+    .allergen-btn:hover { background: #2D7A2D; color: #fff; }
+    .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1A1A1A; color: #fff; font-size: 0.75rem; font-family: var(--font-body); font-weight: 400; line-height: 1.5; padding: 0.4rem 0.7rem; border-radius: 6px; white-space: nowrap; z-index: 9999; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+    .allergen-btn:hover .allergen-tooltip { display: block; }
+    @media (hover: none) { .allergen-btn.active .allergen-tooltip { display: block; } }
+    .menu-card__name { display: flex; align-items: center; gap: 4px; overflow: visible; }
+    .menu-card__body { overflow: visible; }
+    .menu-card { overflow: visible; }
   </style>
 </head>
 <body>
@@ -139,7 +150,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Aci Ezme" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">53. Aci Ezme</h3>
+            <h3 class="menu-card__name">53. Aci Ezme <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R), Senf (N)</span></button></h3>
             <p class="menu-card__desc">Scharf gewürzte Tomaten-Paprika-Paste</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">5,63 €</span>
@@ -151,7 +162,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Patlican Ezme" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">54. Patlican Ezme</h3>
+            <h3 class="menu-card__name">54. Patlican Ezme <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sesam (L)</span></button></h3>
             <p class="menu-card__desc">Gegrillte Auberginenpaste</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">6,20 €</span>
@@ -163,7 +174,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Karisik Meze Tabagi" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">55. Karisik Meze Tabagi</h3>
+            <h3 class="menu-card__name">55. Karisik Meze Tabagi <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G), Sellerie (R), Senf (N)</span></button></h3>
             <p class="menu-card__desc">Gemischte Mezeplatte mit verschiedenen Vorspeisen</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">11,35 €</span>
@@ -175,7 +186,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=300" alt="Halloumi Käse Teller" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">65. Halloumi-Käse-Teller</h3>
+            <h3 class="menu-card__name">65. Halloumi-Käse-Teller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Gegrillter Halloumi-Käse als Teller</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">15,35 €</span>
@@ -187,7 +198,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=300" alt="Halloumi Käse Tasche" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">66. Halloumi-Käse-Tasche</h3>
+            <h3 class="menu-card__name">66. Halloumi-Käse-Tasche <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Gegrillter Halloumi-Käse in der Tasche</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">9,64 €</span>
@@ -199,7 +210,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=300" alt="Halloumi Käse Dürüm" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">67. Halloumi-Käse-Dürüm</h3>
+            <h3 class="menu-card__name">67. Halloumi-Käse-Dürüm <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Gegrillter Halloumi-Käse im Dürüm-Wrap</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">10,77 €</span>
@@ -216,7 +227,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Mercimek Corbasi" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">46. Mercimek Corbasi</h3>
+            <h3 class="menu-card__name">46. Mercimek Corbasi <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Türkische Linsensuppe</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">6,78 €</span>
@@ -228,7 +239,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Paca" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">47. Paca</h3>
+            <h3 class="menu-card__name">47. Paca <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Türkische Lammhaxensuppe</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">8,89 €</span>
@@ -240,7 +251,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Iskembe Corbasi" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">48. Iskembe Corbasi</h3>
+            <h3 class="menu-card__name">48. Iskembe Corbasi <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Türkische Kuttelsuppe</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">8,89 €</span>
@@ -252,7 +263,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Tavuk Corbasi" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">49. Tavuk Corbasi</h3>
+            <h3 class="menu-card__name">49. Tavuk Corbasi <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Türkische Hühnersuppe</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">7,35 €</span>
@@ -264,7 +275,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Yayla Corbasi" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">50. Yayla Corbasi</h3>
+            <h3 class="menu-card__name">50. Yayla Corbasi <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Türkische Joghurtsuppe mit Minze</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">6,78 €</span>
@@ -276,7 +287,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Kuru Fasülye" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">51. Kuru Fasülye</h3>
+            <h3 class="menu-card__name">51. Kuru Fasülye <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Türkische weiße Bohneneintopf</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">9,63 €</span>
@@ -293,7 +304,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300" alt="Dönertasche Kalbfleisch" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">01. Dönertasche Kalbfleisch <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">01. Dönertasche Kalbfleisch <span class="menu-card__badge">Beliebt</span> <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Frisches Kalbfleisch, Salat, Tomaten, Soße in der Tasche</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">9,52 €</span>
@@ -305,7 +316,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300" alt="Döner Rollo" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">02. Döner Rollo</h3>
+            <h3 class="menu-card__name">02. Döner Rollo <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Dönerfleisch im Fladenbrot gerollt mit Salat und Soße</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">10,21 €</span>
@@ -317,7 +328,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" alt="Pomm Döner" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">03. Pomm-Döner</h3>
+            <h3 class="menu-card__name">03. Pomm-Döner <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Döner mit Pommes Frites</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">9,13 €</span>
@@ -341,7 +352,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Iskender Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">07. Iskender Kebab</h3>
+            <h3 class="menu-card__name">07. Iskender Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Dönerfleisch auf Fladenbrot mit Joghurt und Tomatensauce</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">20,21 €</span>
@@ -358,7 +369,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Dürüm Adana" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">08. Dürüm Adana</h3>
+            <h3 class="menu-card__name">08. Dürüm Adana <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Adana Kebab im Dürüm-Wrap</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">11,35 €</span>
@@ -370,7 +381,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Adana Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">09. Adana Kebab</h3>
+            <h3 class="menu-card__name">09. Adana Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Scharf gewürztes Hackfleisch vom Holzkohlegrill</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">19,91 €</span>
@@ -382,7 +393,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Yogurtlu Adana Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">10. Yogurtlu Adana Kebab</h3>
+            <h3 class="menu-card__name">10. Yogurtlu Adana Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Adana Kebab auf Joghurtbett mit Tomatensauce</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">21,63 €</span>
@@ -394,7 +405,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Urfa Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">11. Urfa Kebab</h3>
+            <h3 class="menu-card__name">11. Urfa Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Milder Hackfleischspieß vom Holzkohlegrill — Spezialität des Hauses</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">19,91 €</span>
@@ -406,7 +417,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Yogurtlu Urfa Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">12. Yogurtlu Urfa Kebab</h3>
+            <h3 class="menu-card__name">12. Yogurtlu Urfa Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Urfa Kebab auf Joghurtbett mit Tomatensauce</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">21,63 €</span>
@@ -418,7 +429,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Dürüm Tavuk" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">13. Dürüm Tavuk</h3>
+            <h3 class="menu-card__name">13. Dürüm Tavuk <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Hähnchen-Kebab im Dürüm-Wrap</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">11,92 €</span>
@@ -430,7 +441,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Kuzu Sis" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">14. Kuzu Sis</h3>
+            <h3 class="menu-card__name">14. Kuzu Sis <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Lammspieß vom Holzkohlegrill</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">22,77 €</span>
@@ -442,7 +453,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Tavuk Sis" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">16. Tavuk Sis <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">16. Tavuk Sis <span class="menu-card__badge">Beliebt</span> <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Hähnchenbrust-Spieß vom Holzkohlegrill</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">21,63 €</span>
@@ -454,7 +465,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Beyti Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">19. Beyti Kebab</h3>
+            <h3 class="menu-card__name">19. Beyti Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Gewürztes Hackfleisch vom Holzkohlegrill</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">20,48 €</span>
@@ -466,7 +477,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Sarma Beyti" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">20. Sarma Beyti</h3>
+            <h3 class="menu-card__name">20. Sarma Beyti <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Hackfleisch im Fladenbrot gerollt, überbacken</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">22,20 €</span>
@@ -478,7 +489,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Domatesli Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">23. Domatesli Kebab</h3>
+            <h3 class="menu-card__name">23. Domatesli Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Kebab mit frischen Tomaten vom Holzkohlegrill</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">21,63 €</span>
@@ -490,7 +501,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Patlicanli Kebab" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">24. Patlicanli Kebab</h3>
+            <h3 class="menu-card__name">24. Patlicanli Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Kebab mit gegrillten Auberginen</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">22,20 €</span>
@@ -507,7 +518,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Lahmacun" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">39. Lahmacun Portion</h3>
+            <h3 class="menu-card__name">39. Lahmacun Portion <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Türkische Fladenbrot-Pizza mit Hackfleisch</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">7,20 €</span>
@@ -519,7 +530,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Dönerli Lahmacun" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">41. Dönerli Lahmacun</h3>
+            <h3 class="menu-card__name">41. Dönerli Lahmacun <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Lahmacun mit Dönerfleisch belegt</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">12,90 €</span>
@@ -531,7 +542,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Peynirli Pide" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">42. Peynirli Pide</h3>
+            <h3 class="menu-card__name">42. Peynirli Pide <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Türkische Pide mit Käse</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">10,90 €</span>
@@ -543,7 +554,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Kiymali Pide" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">43. Kiymali Pide</h3>
+            <h3 class="menu-card__name">43. Kiymali Pide <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Türkische Pide mit Hackfleisch</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">11,90 €</span>
@@ -560,7 +571,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1579954115563-e72bf1381629?w=300" alt="Künefe" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">74. Künefe</h3>
+            <h3 class="menu-card__name">74. Künefe <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Nüsse (H)</span></button></h3>
             <p class="menu-card__desc">Türkische Süßspeise aus Kadayıf mit Käse und Zuckersirup — hausgemacht</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">9,26 €</span>
@@ -572,7 +583,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1619985204553-3e49b2b33c55?w=300" alt="Baklava" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">75. Baklava</h3>
+            <h3 class="menu-card__name">75. Baklava <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Nüsse (H), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Türkisches Blätterteiggebäck mit Nüssen und Honigsirup</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">8,69 €</span>
@@ -589,7 +600,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300" alt="Ayran" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Ayran</h3>
+            <h3 class="menu-card__name">Ayran <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Hausgemachter Ayran aus dem Brunnen, aufgeschäumt</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">2,50 €</span>
