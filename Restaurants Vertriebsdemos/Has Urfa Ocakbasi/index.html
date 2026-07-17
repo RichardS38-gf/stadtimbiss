@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Has Urfa Ocakbaşı — Holzkohlegrill Bochum</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    /* ── Navigation ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 3px solid var(--color-accent); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-green); line-height: 1.1; }
+    .nav__logo span { display: block; font-size: 0.65rem; font-family: var(--font-body); font-weight: 400; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .nav__links { display: none; gap: var(--space-5); }
+    .nav__links a { font-size: var(--text-sm); font-weight: 500; color: var(--color-ink); }
+    .nav__links a:hover { color: var(--color-green); opacity: 1; }
+    @media (min-width: 768px) { .nav__links { display: flex; } }
+    .nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.12); }
+
+    /* ── Hero ── */
+    .hero { position: relative; min-height: 60vh; display: flex; align-items: center; background-image: url('https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=1400'); background-size: cover; background-position: center; }
+    .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.82) 40%, rgba(0,0,0,0.15) 100%); }
+    .hero__content { position: relative; z-index: 1; padding-block: var(--space-7); max-width: 580px; }
+    .hero__label { font-family: var(--font-body); font-weight: 600; font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.7); margin-bottom: var(--space-3); }
+    .hero__title { font-size: 4.5rem; color: var(--color-on-dark); line-height: 1.0; margin-bottom: var(--space-3); }
+    .hero__accent { color: var(--color-accent); }
+    .hero__subline { font-size: 1.15rem; font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: var(--space-6); max-width: 440px; }
+    .hero__actions { display: flex; flex-direction: column; gap: var(--space-3); max-width: 340px; }
+    @media (min-width: 768px) { .hero { min-height: 82vh; } .hero__title { font-size: 6rem; } .hero__actions { flex-direction: row; max-width: none; } .hero__actions .btn { width: auto; } }
+
+    /* ── Info Banner ── */
+    .info-banner { background: var(--color-green); color: var(--color-on-dark); padding-block: var(--space-4); }
+    .info-banner__inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; max-width: 1140px; margin-inline: auto; padding-inline: var(--container-pad-mobile); }
+    .info-banner__item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .info-banner__sep { display: none; opacity: 0.4; }
+    @media (min-width: 768px) { .info-banner { padding-block: var(--space-5); } .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline; } .info-banner__item { font-size: var(--text-base); } }
+
+    /* ── Über uns ── */
+    .about { background: var(--color-bg-soft); overflow: hidden; }
+    .about__grid { display: grid; grid-template-columns: 1fr; align-items: stretch; min-height: 480px; }
+    .about__text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
+    .about__text h2 { margin-bottom: var(--space-4); }
+    .about__text p { margin-bottom: var(--space-4); }
+    .about__label { color: #2D7A2D; margin-bottom: var(--space-3); }
+    .about__btn { margin-top: var(--space-2); align-self: flex-start; }
+    .about__img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; order: 1; }
+    @media (min-width: 768px) { .about__grid { grid-template-columns: 1fr 1fr; } .about__text { padding: var(--space-8) var(--space-6) var(--space-8) calc((100vw - var(--max-content-width)) / 2 + var(--container-pad-desktop)); max-width: calc(var(--max-content-width) / 2 + (100vw - var(--max-content-width)) / 2); } .about__img { order: 0; min-height: unset; } }
+
+    /* ── Speisekarte Kategorien ── */
+    .categories { background: var(--color-bg); }
+    .category-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding: var(--space-5); text-align: center; background: var(--color-bg-soft); border: 1px solid var(--color-line); border-radius: 10px; transition: border-color var(--transition), box-shadow var(--transition); }
+    .category-card:hover { opacity: 1; border-color: #2D7A2D; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .category-card__emoji { font-size: 2.5rem; line-height: 1; }
+    .category-card__name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--color-ink); }
+    .category-card__count { font-size: var(--text-xs); color: var(--color-muted); }
+
+    /* ── Highlights Collage ── */
+    .collage { background: var(--color-bg-soft); }
+    .collage__title { text-align: left; margin-bottom: var(--space-7); }
+    .collage__grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 280px 200px; gap: 8px; }
+    .collage__grid:hover .collage__main, .collage__grid:hover .collage__top, .collage__grid:hover .collage__bottom { filter: brightness(0.35); }
+    .collage__main, .collage__top, .collage__bottom { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; transition: filter 0.3s ease; }
+    .collage__main { grid-row: 1 / 3; }
+    .collage__main:hover, .collage__top:hover, .collage__bottom:hover { filter: brightness(1) !important; }
+    @media (max-width: 767px) { .collage__grid { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 140px; } .collage__main { grid-row: 1/2; grid-column: 1/3; } }
+
+    /* ── Bewertungen ── */
+    .reviews { background: var(--color-bg); }
+    .section-intro { text-align: left; margin-bottom: var(--space-7); }
+    .section-sub { color: var(--color-muted); }
+    .review-slider { padding: var(--space-4) 0; }
+    .review-slider__stars { color: #f59e0b; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: var(--space-4); }
+    .review-slider__quote { font-size: var(--text-2xl); font-style: italic; color: var(--color-ink); line-height: 1.5; margin-bottom: var(--space-4); transition: opacity 0.3s ease; min-height: 4rem; }
+    .review-slider__author { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-5); transition: opacity 0.3s ease; }
+    .review-slider__dots { display: flex; gap: 8px; }
+    .review-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-line); border: none; cursor: pointer; transition: background 0.2s ease; padding: 0; }
+    .review-dot--active { background: #2D7A2D; }
+
+    /* ── Kontakt ── */
+    .contact { background: var(--color-bg-soft); overflow: hidden; }
+    .contact-grid { display: grid; grid-template-columns: 1fr; min-height: 420px; }
+    .contact-text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
+    .contact-text h2 { margin-bottom: var(--space-6); }
+    .contact-item { display: flex; gap: var(--space-3); margin-bottom: var(--space-4); font-size: var(--text-sm); line-height: 1.7; align-items: flex-start; }
+    .contact-item span { font-size: 1.25rem; flex-shrink: 0; padding-top: 2px; }
+    .contact-item strong { font-weight: 600; display: block; color: var(--color-ink); }
+    .contact-item div { flex: 1; }
+    .contact-btn { margin-top: var(--space-4); align-self: flex-start; }
+    .contact-map { min-height: 280px; }
+    .contact-map iframe { width: 100%; height: 100%; min-height: 280px; display: block; border: 0; }
+    @media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; min-height: 520px; } .contact-text { padding: var(--space-8) var(--space-6); } .contact-map { min-height: unset; } .contact-map iframe { min-height: unset; } }
+    @media (min-width: 1024px) { .contact-text { padding-left: calc((100vw - var(--max-content-width)) / 2 + var(--container-pad-desktop)); padding-right: var(--space-6); } }
+
+    /* ── Footer ── */
+    .footer { background: var(--color-dark); color: var(--color-on-dark); padding-top: var(--space-7); padding-bottom: var(--space-6); }
+    .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+    .footer__brand { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; margin-bottom: var(--space-2); color: var(--color-on-dark); }
+    .footer__claim { opacity: 0.7; font-size: var(--text-sm); margin-bottom: var(--space-5); color: var(--color-on-dark); }
+    .footer__contact { font-style: normal; font-size: var(--text-sm); line-height: 1.9; color: var(--color-on-dark); }
+    .footer__contact a { color: var(--color-on-dark); opacity: 0.8; }
+    .footer__contact a:hover { opacity: 1; }
+    .footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer__links a { color: var(--color-on-dark); opacity: 0.7; font-size: var(--text-sm); transition: opacity var(--transition); }
+    .footer__links a:hover { opacity: 1; }
+    .footer__divider { border-top: 1px solid rgba(255,255,255,0.15); margin-block: var(--space-5); }
+    .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); color: var(--color-on-dark); }
+    @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="1754.png" alt="Has Urfa Ocakbaşı" style="height:48px;width:auto;display:block;">
+      </a>
+      <nav class="nav__links">
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#speisekarte">Speisekarte</a>
+        <a href="#bewertungen">Bewertungen</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <a href="bestellen.html" class="btn btn--primary btn--sm">Jetzt bestellen →</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container">
+      <div class="hero__content">
+        <p class="hero__label">🔥 Holzkohlegrill · Bochum seit 1995</p>
+        <h1 class="hero__title">Echt.<br><span class="hero__accent">Türkisch.</span></h1>
+        <p class="hero__subline">Spezialitäten vom Holzkohlegrill — frisch zubereitet, direkt zu dir.</p>
+        <div class="hero__actions">
+          <a href="bestellen.html?mode=lieferung" class="btn btn--primary btn--full">🛵 Lieferung bestellen</a>
+          <a href="bestellen.html?mode=abholung" class="btn btn--outline-light btn--full">🏃 Selbst abholen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info-Banner -->
+  <section class="info-banner">
+    <div class="container info-banner__inner">
+      <span class="info-banner__item">🕐 So–Do 8:00–2:00 Uhr · Fr–Sa 8:00–4:00 Uhr</span>
+      <span class="info-banner__sep">|</span>
+      <span class="info-banner__item">🛵 Lieferung &amp; Abholung</span>
+      <span class="info-banner__sep">|</span>
+      <span class="info-banner__item">📞 0234 / 325 9000</span>
+    </div>
+  </section>
+
+  <!-- Über uns -->
+  <section class="about" id="ueber-uns">
+    <div class="about__grid">
+      <div class="about__text">
+        <p class="label about__label">Unsere Geschichte</p>
+        <h2>Mehr als ein Restaurant</h2>
+        <p>Has Urfa Ocakbaşı ist seit Jahrzehnten eine Institution in Bochum. Angefangen als kleines Lokal, ist daraus eines der bekanntesten türkischen Restaurants im Ruhrgebiet geworden.</p>
+        <p>Alles wird frisch zubereitet — vom Holzkohlegrill bis zum hausgemachten Ayran. Keine Kompromisse bei der Qualität, das spürt man bei jedem Bissen.</p>
+        <p>Frühstück, Mittagstisch, Abendessen — bei uns gibt es zu jeder Zeit frische Küche. Das türkische Frühstücksbuffet am Wochenende ist legendär.</p>
+        <a href="bestellen.html" class="btn btn--primary about__btn">Speisekarte ansehen</a>
+      </div>
+      <img class="about__img" src="1722.jpg" alt="Has Urfa Ocakbasi" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Speisekarte Kategorien -->
+  <section class="section categories" id="speisekarte">
+    <div class="container">
+      <div class="section-header">
+        <h2>Unsere Speisekarte</h2>
+        <a href="bestellen.html" class="link-accent">Alle Gerichte →</a>
+      </div>
+      <div class="grid-4">
+        <a href="bestellen.html#doener" class="category-card">
+          <span class="category-card__emoji">🥙</span>
+          <span class="category-card__name">Döner</span>
+          <span class="category-card__count">6 Gerichte</span>
+        </a>
+        <a href="bestellen.html#spiesse" class="category-card">
+          <span class="category-card__emoji">🍢</span>
+          <span class="category-card__name">Spieße</span>
+          <span class="category-card__count">8 Gerichte</span>
+        </a>
+        <a href="bestellen.html#vorspeisen" class="category-card">
+          <span class="category-card__emoji">🥗</span>
+          <span class="category-card__name">Vorspeisen</span>
+          <span class="category-card__count">7 Gerichte</span>
+        </a>
+        <a href="bestellen.html#grillteller" class="category-card">
+          <span class="category-card__emoji">🔥</span>
+          <span class="category-card__name">Grillteller</span>
+          <span class="category-card__count">5 Gerichte</span>
+        </a>
+        <a href="bestellen.html#pizza" class="category-card">
+          <span class="category-card__emoji">🫓</span>
+          <span class="category-card__name">Pide &amp; Pizza</span>
+          <span class="category-card__count">6 Gerichte</span>
+        </a>
+        <a href="bestellen.html#suppen" class="category-card">
+          <span class="category-card__emoji">🍲</span>
+          <span class="category-card__name">Suppen</span>
+          <span class="category-card__count">4 Gerichte</span>
+        </a>
+        <a href="bestellen.html#nachtisch" class="category-card">
+          <span class="category-card__emoji">🍯</span>
+          <span class="category-card__name">Nachtisch</span>
+          <span class="category-card__count">4 Gerichte</span>
+        </a>
+        <a href="bestellen.html#getraenke" class="category-card">
+          <span class="category-card__emoji">🥛</span>
+          <span class="category-card__name">Getränke</span>
+          <span class="category-card__count">8 Getränke</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collage -->
+  <section class="section collage">
+    <div class="container">
+      <h2 class="collage__title">Vom Holzkohlegrill</h2>
+      <div class="collage__grid">
+        <img class="collage__main" src="1725.jpg" alt="Vom Holzkohlegrill" loading="lazy">
+        <img class="collage__top" src="1719.jpg" alt="Vom Holzkohlegrill" loading="lazy">
+        <img class="collage__bottom" src="1723.jpg" alt="Vom Holzkohlegrill" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Bewertungen -->
+  <section class="section reviews" id="bewertungen">
+    <div class="container">
+      <div class="section-intro" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:var(--space-7)">
+        <div>
+          <h2>Was unsere Gäste sagen</h2>
+          <p class="section-sub">⭐ 4,5 Sterne auf Uber Eats · über 370 Bewertungen</p>
+        </div>
+        <a href="#" class="link-accent" style="white-space:nowrap">Alle Bewertungen →</a>
+      </div>
+      <div class="review-slider">
+        <div class="review-slider__stars">★★★★★</div>
+        <p class="review-slider__quote" id="review-quote">„Bestellung nach ca. 30 Minuten erhalten. Fahrer freundlich. Essen sehr lecker!"</p>
+        <p class="review-slider__author" id="review-author">Nadiye D. · vor 2 Wochen · Uber Eats</p>
+        <div class="review-slider__dots">
+          <button class="review-dot review-dot--active" data-i="0"></button>
+          <button class="review-dot" data-i="1"></button>
+          <button class="review-dot" data-i="2"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section class="contact" id="kontakt">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <h2>So findest du uns</h2>
+        <div class="contact-item">
+          <span>📍</span>
+          <div><strong>Adresse</strong>Alleestraße 26, 44793 Bochum</div>
+        </div>
+        <div class="contact-item">
+          <span>🕐</span>
+          <div><strong>Öffnungszeiten</strong>So–Do 8:00–2:00 Uhr<br>Fr–Sa 8:00–4:00 Uhr</div>
+        </div>
+        <div class="contact-item">
+          <span>📞</span>
+          <div><strong>Telefon</strong><a href="tel:02343259000">0234 / 325 9000</a></div>
+        </div>
+        <div class="contact-item">
+          <span>🌐</span>
+          <div><strong>Website</strong><a href="http://www.hasurfabochum.de" target="_blank">hasurfabochum.de</a></div>
+        </div>
+        <a href="bestellen.html" class="btn btn--primary contact-btn">Jetzt bestellen</a>
+      </div>
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.7357884802236!2d7.209702415769011!3d51.48136387963089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8e06af5dee93d%3A0x6552b5b2b5da8526!2sHas%20Urfa!5e0!3m2!1sde!2sde!4v1588024850210!5m2!1sde!2sde"
+          width="100%" height="100%" style="border:0;display:block;"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Has Urfa Ocakbasi Standort">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div>
+          <img src="1754.png" alt="Has Urfa Ocakbaşı" style="height:56px;width:auto;display:block;margin-bottom:var(--space-3);">
+          <p class="footer__claim">Holzkohlegrill · Authentische türkische Küche · Bochum</p>
+          <address class="footer__contact">
+            Alleestraße 26, 44793 Bochum<br>
+            Tel: <a href="tel:02343259000">0234 / 325 9000</a><br>
+            <a href="http://www.hasurfabochum.de" target="_blank">www.hasurfabochum.de</a>
+          </address>
+        </div>
+        <nav class="footer__links">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Allergene &amp; Zusatzstoffe</a>
+        </nav>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Has Urfa Ocakbaşı — Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
+
+    const reviews = [
+      { q: '„Bestellung nach ca. 30 Minuten erhalten. Fahrer freundlich. Essen sehr lecker!"', a: 'Nadiye D. · vor 2 Wochen · Uber Eats' },
+      { q: '„Nette Lieferung, freundlich, ganz lecker — danke!"', a: 'Ilayda E. · vor 1 Monat · Uber Eats' },
+      { q: '„Bester Adana Kebab den ich je gegessen habe. Authentisch wie in der Türkei."', a: 'Mehmet K. · vor 3 Wochen · Google' }
+    ];
+    let current = 0;
+    const quoteEl = document.getElementById('review-quote');
+    const authorEl = document.getElementById('review-author');
+    const dots = document.querySelectorAll('.review-dot');
+    function showReview(i) {
+      quoteEl.style.opacity = '0'; authorEl.style.opacity = '0';
+      setTimeout(() => {
+        current = i;
+        quoteEl.textContent = reviews[i].q; authorEl.textContent = reviews[i].a;
+        quoteEl.style.opacity = '1'; authorEl.style.opacity = '1';
+        dots.forEach((d, j) => d.classList.toggle('review-dot--active', j === i));
+      }, 300);
+    }
+    dots.forEach(d => d.addEventListener('click', () => showReview(parseInt(d.dataset.i))));
+    setInterval(() => showReview((current + 1) % reviews.length), 4000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+/* tokens.css — Has Urfa Ocakbasi */
+:root {
+  --color-accent:     #F5C800;   /* Gelb aus dem Logo */
+  --color-accent-dk:  #D4A900;   /* Dunkleres Gelb für Hover */
+  --color-bg:         #F5F5F0;   /* Helles Neutralgrau */
+  --color-bg-soft:    #FFFFFF;
+  --color-ink:        #1A1A1A;
+  --color-muted:      #888888;
+  --color-line:       #E0E0D8;
+  --color-dark:       #1A4A1A;   /* Dunkelgrün für Footer */
+  --color-on-dark:    #FFFFFF;
+
+  /* Grün als sekundäre Farbe für spezifische Elemente */
+  --color-green:      #2D7A2D;   /* Sattes Grün aus dem Hintergrund */
+  --color-green-dk:   #1A5C1A;
+
+  --font-head: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem;
+  --space-7: 3rem; --space-8: 5rem;
+
+  --container-pad-mobile:  1rem;
+  --container-pad-tablet:  1.5rem;
+  --container-pad-desktop: 2rem;
+  --max-content-width: 1200px;
+
+  --text-xs:   0.75rem; --text-sm:   0.875rem; --text-base: 1rem;
+  --text-lg:   1.125rem; --text-xl:  1.25rem; --text-2xl: 1.5rem;
+  --text-3xl:  2rem; --text-4xl: 2.5rem; --text-5xl: 3.5rem;
+
+  --transition: 0.2s ease;
+  --radius-sm: 4px; --radius-md: 8px;
+}

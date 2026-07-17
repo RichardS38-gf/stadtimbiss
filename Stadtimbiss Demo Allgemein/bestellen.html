@@ -9,21 +9,83 @@
   <meta property="og:description" content="Frisch. Schnell. Lecker. Jetzt online bestellen und liefern lassen.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600">
   <meta name="description" content="Bestelle bei Stadtimbiss — Burger, Döner, Beilagen und Getränke. Lieferung oder Abholung in Braunschweig.">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/tokens.css?v=1">
-  <link rel="stylesheet" href="css/base.css?v=1">
-  <link rel="stylesheet" href="css/layout.css?v=2">
-  <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/bestellen.css?v=8">
-  <link rel="stylesheet" href="css/index.css?v=3">
-  <script type="module" src="js/bestellen.js"></script>
+  <link rel="stylesheet" href="Stadtimbiss%20Demo%20Allgemein/css/reset.css">
+  <link rel="stylesheet" href="Stadtimbiss%20Demo%20Allgemein/css/tokens.css?v=1">
+  <link rel="stylesheet" href="Stadtimbiss%20Demo%20Allgemein/css/base.css?v=1">
+  <link rel="stylesheet" href="Stadtimbiss%20Demo%20Allgemein/css/layout.css?v=2">
+  <link rel="stylesheet" href="Stadtimbiss%20Demo%20Allgemein/css/components.css?v=1">
+  <link rel="stylesheet" href="Stadtimbiss%20Demo%20Allgemein/css/bestellen.css?v=8">
+  <link rel="stylesheet" href="Stadtimbiss%20Demo%20Allgemein/css/index.css?v=3">
+  <script type="module" src="Stadtimbiss%20Demo%20Allgemein/js/bestellen.js"></script>
+  <style>
+    /* Allergen Tooltip */
+    .allergen-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-line);
+      color: var(--color-muted);
+      font-size: 0.65rem;
+      font-weight: 700;
+      font-family: var(--font-body);
+      border: none;
+      cursor: pointer;
+      margin-left: 6px;
+      vertical-align: middle;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+      position: relative;
+    }
+    .allergen-btn:hover { background: var(--color-accent); color: #fff; }
+
+    .allergen-tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-dark);
+      color: var(--color-on-dark);
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      line-height: 1.5;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 200;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .allergen-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--color-dark);
+    }
+    .allergen-btn.active .allergen-tooltip,
+    .allergen-btn:hover .allergen-tooltip {
+      display: block;
+    }
+    .menu-card__name {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2px;
+    }
+  </style>
 </head>
 <body>
 
   <!-- 1. Navigation -->
   <header class="nav">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">Stadtimbiss</a>
+      <a href="Stadtimbiss%20Demo%20Allgemein/index.html" class="nav__logo">Stadtimbiss</a>
       <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
         🛒 <span class="cart-badge" id="cart-count">0</span>
       </button>
@@ -79,7 +141,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Double Smash Burger" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Double Smash Burger</h3>
+            <h3 class="menu-card__name">Double Smash Burger <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Senf (N)</span></button></h3>
             <p class="menu-card__desc">Zwei Patties, Cheddar, Soße, Gewürzgurken</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">8,90 €</span>
@@ -91,7 +153,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300" alt="Classic Cheeseburger" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Classic Cheeseburger</h3>
+            <h3 class="menu-card__name">Classic Cheeseburger <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Milch (G), Senf (N)</span></button></h3>
             <p class="menu-card__desc">Rindfleisch-Patty, Cheddar, Zwiebeln, Senf</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">6,90 €</span>
@@ -103,7 +165,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300" alt="BBQ Bacon Burger" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">BBQ Bacon Burger</h3>
+            <h3 class="menu-card__name">BBQ Bacon Burger <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Bacon, BBQ-Soße, Ringe, Cheddar</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">9,50 €</span>
@@ -115,7 +177,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=300" alt="Crispy Chicken Burger" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Crispy Chicken Burger</h3>
+            <h3 class="menu-card__name">Crispy Chicken Burger <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G), Senf (N)</span></button></h3>
             <p class="menu-card__desc">Knuspriges Hähnchenfilet, Coleslaw, Soße</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">7,90 €</span>
@@ -127,7 +189,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=300" alt="Veggie Burger" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Burger</h3>
+            <h3 class="menu-card__name">Veggie Burger <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Ei (C), Soja (F)</span></button></h3>
             <p class="menu-card__desc">Gemüse-Patty, Salat, Tomate, Avocado-Creme</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">7,50 €</span>
@@ -149,7 +211,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300" alt="Döner" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Döner</h3>
+            <h3 class="menu-card__name">Döner <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Hähnchen, Salat, Tomaten, Knoblauchsoße</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">6,50 €</span>
@@ -161,7 +223,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Dürüm" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Dürüm</h3>
+            <h3 class="menu-card__name">Dürüm <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Wrap-Version, extra knusprig</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">7,00 €</span>
@@ -173,7 +235,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1600628421055-4d30de868b8f?w=300" alt="Lahmacun" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Lahmacun</h3>
+            <h3 class="menu-card__name">Lahmacun <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Türkische Fladenbrot-Pizza, mit Salat</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">5,50 €</span>
@@ -190,7 +252,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" alt="Pommes Frites" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Pommes Frites</h3>
+            <h3 class="menu-card__name">Pommes Frites <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Kann Spuren von Gluten (A) enthalten</span></button></h3>
             <p class="menu-card__desc">Klassisch, mit Ketchup</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">2,50 €</span>
@@ -202,7 +264,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300" alt="Süßkartoffel-Pommes" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Süßkartoffel-Pommes</h3>
+            <h3 class="menu-card__name">Süßkartoffel-Pommes <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Kann Spuren von Gluten (A) enthalten</span></button></h3>
             <p class="menu-card__desc">Mit Dip</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">3,50 €</span>
@@ -214,7 +276,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1639024471283-03518883512d?w=300" alt="Onion Rings" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Onion Rings</h3>
+            <h3 class="menu-card__name">Onion Rings <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">8 Stück, knusprig</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">3,00 €</span>
@@ -226,7 +288,7 @@
         <article class="menu-card">
           <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Coleslaw" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Coleslaw</h3>
+            <h3 class="menu-card__name">Coleslaw <button class="allergen-btn" aria-label="Allergene">ⓘ<span class="allergen-tooltip">Ei (C), Senf (N), Sellerie (R)</span></button></h3>
             <p class="menu-card__desc">Hausgemachter Krautsalat</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">2,00 €</span>
@@ -323,7 +385,7 @@
           <span>Gesamt</span>
           <span id="cart-total">0,00 €</span>
         </div>
-        <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
+        <a href="Stadtimbiss%20Demo%20Allgemein/checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
       </div>
     </aside>
 
@@ -355,7 +417,7 @@
         <span>Gesamt</span>
         <span id="cart-total-mobile">0,00 €</span>
       </div>
-      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
+      <a href="Stadtimbiss%20Demo%20Allgemein/checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
     </div>
   </div>
 
@@ -391,5 +453,19 @@
     </div>
   </footer>
 
+  <script>
+    // Allergen Tooltip — Touch-Support
+    document.querySelectorAll('.allergen-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+        if (!isActive) btn.classList.add('active');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+    });
+  </script>
 </body>
 </html>

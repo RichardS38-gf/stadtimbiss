@@ -1,0 +1,28 @@
+/* components.css — Has Urfa Ocakbasi */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 0.75rem 1.5rem; min-height: 44px; font-family: var(--font-body); font-size: var(--text-base); font-weight: 600; line-height: 1; border: 2px solid transparent; cursor: pointer; transition: all var(--transition); white-space: nowrap; }
+
+/* Primär: Grün mit gelbem Text */
+.btn--primary { background: #2D7A2D; color: #F5C800; border-color: #2D7A2D; }
+.btn--primary:hover { background: #1A5C1A; border-color: #1A5C1A; opacity: 1; }
+
+/* Outline: grüner Rahmen */
+.btn--outline { background: transparent; color: #2D7A2D; border-color: #2D7A2D; }
+.btn--outline:hover { background: #2D7A2D; color: #F5C800; opacity: 1; }
+
+/* Outline Light: für dunkle Hintergründe */
+.btn--outline-light { background: transparent; color: var(--color-on-dark); border-color: var(--color-on-dark); }
+.btn--outline-light:hover { background: var(--color-on-dark); color: #2D7A2D; opacity: 1; }
+
+.btn--full { width: 100%; }
+.btn--sm { padding: 0.5rem 1rem; font-size: var(--text-sm); min-height: 36px; }
+
+.link-accent { color: #2D7A2D; font-weight: 600; font-size: var(--text-sm); white-space: nowrap; }
+
+.product-card { background: var(--color-bg-soft); border: 1px solid var(--color-line); overflow: hidden; border-radius: 10px; transition: box-shadow var(--transition); }
+.product-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.product-card__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; height: auto; }
+.product-card__body { padding: var(--space-4); }
+.product-card__name { font-family: var(--font-head); font-weight: 700; font-size: var(--text-lg); margin-bottom: var(--space-2); }
+.product-card__desc { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-4); }
+.product-card__footer { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.product-card__price { font-family: var(--font-head); font-weight: 800; font-size: var(--text-xl); color: #2D7A2D; }

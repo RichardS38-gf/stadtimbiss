@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bestellen — Has Urfa Ocakbaşı</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-accent); line-height: 1.1; }
+    .nav__logo span { display: block; font-size: 0.65rem; font-family: var(--font-body); font-weight: 400; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .cart-btn { display: flex; align-items: center; gap: 0.4rem; font-size: 1.4rem; position: relative; padding: 0.5rem; min-height: 44px; color: var(--color-ink); }
+    .cart-badge { display: none; position: absolute; top: 0; right: 0; background: var(--color-accent); color: white; font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; align-items: center; justify-content: center; }
+    .order-mode { background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); padding-block: var(--space-4); }
+    .order-mode-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); max-width: 540px; margin-inline: auto; }
+    .mode-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 2px; padding: var(--space-4) var(--space-5); background: var(--color-bg-soft); border: 2px solid var(--color-line); border-radius: 10px; cursor: pointer; text-align: left; transition: all var(--transition); }
+    .mode-card--active { background: var(--color-accent); border-color: var(--color-accent); }
+    .mode-card__emoji { font-size: 1.6rem; margin-bottom: 4px; }
+    .mode-card__title { font-family: var(--font-head); font-weight: 800; font-size: var(--text-lg); color: var(--color-ink); }
+    .mode-card--active .mode-card__title { color: var(--color-on-dark); }
+    .mode-card__info { font-size: var(--text-xs); color: var(--color-muted); }
+    .mode-card--active .mode-card__info { color: rgba(255,255,255,0.8); }
+    .category-nav { position: sticky; top: 64px; z-index: 90; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); }
+    .category-nav .container { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; display: flex; }
+    .category-nav .container::-webkit-scrollbar { display: none; }
+    .cat-link { display: inline-flex; align-items: center; padding: 0.875rem 1.25rem; font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); min-height: 44px; border-bottom: 3px solid transparent; transition: all var(--transition); }
+    .cat-link--active { color: var(--color-accent); border-bottom-color: var(--color-accent); font-weight: 700; }
+    .order-layout { display: flex; gap: var(--space-6); max-width: var(--max-content-width); margin-inline: auto; padding-inline: var(--container-pad-mobile); padding-block: var(--space-6); }
+    @media (min-width: 1024px) { .order-layout { padding-inline: var(--container-pad-desktop); } }
+    .menu-area { flex: 1; min-width: 0; }
+    .menu-section { margin-bottom: var(--space-7); }
+    .menu-section__title { font-size: var(--text-2xl); margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-accent); }
+    .menu-card { display: flex; gap: var(--space-3); padding-block: var(--space-4); border-bottom: 1px solid var(--color-line); }
+    .menu-card:last-child { border-bottom: none; }
+    .menu-card__img { width: 100px; height: 100px; object-fit: cover; flex-shrink: 0; background: var(--color-line); border-radius: 8px; }
+    .menu-card__body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .menu-card__name { font-family: var(--font-head); font-weight: 700; font-size: var(--text-base); margin-bottom: var(--space-1); }
+    .menu-card__badge { display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; background: var(--color-accent); color: white; padding: 0.15rem 0.4rem; border-radius: 3px; margin-left: 0.4rem; vertical-align: middle; }
+    .menu-card__desc { font-size: var(--text-xs); color: var(--color-muted); margin-bottom: var(--space-3); line-height: 1.5; }
+    .menu-card__footer { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+    .menu-card__price { font-family: var(--font-head); font-weight: 800; font-size: var(--text-lg); color: var(--color-accent); }
+    @media (min-width: 768px) { .menu-card__img { width: 120px; height: 120px; } }
+    .cart-sidebar { width: 320px; flex-shrink: 0; display: none; }
+    @media (min-width: 1024px) { .cart-sidebar { display: block; } }
+    .cart-sidebar__inner { position: sticky; top: 140px; background: var(--color-bg-soft); border: 1px solid var(--color-line); border-radius: 10px; padding: var(--space-5); }
+    .cart-sidebar__title { font-family: var(--font-head); font-weight: 800; font-size: var(--text-xl); margin-bottom: var(--space-4); }
+    .cart-empty { color: var(--color-muted); font-size: var(--text-sm); padding: var(--space-4) 0; }
+    .cart-item { display: flex; align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--color-line); font-size: var(--text-sm); }
+    .cart-item__name { flex: 1; font-weight: 500; }
+    .cart-item__controls { display: flex; align-items: center; gap: var(--space-1); }
+    .cart-item__qty-input { width: 40px; height: 28px; text-align: center; border: 1px solid var(--color-line); font-size: var(--text-sm); font-weight: 600; border-radius: 4px; -moz-appearance: textfield; }
+    .cart-item__qty-input::-webkit-inner-spin-button, .cart-item__qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .cart-item__remove { width: 24px; height: 24px; font-size: 0.7rem; color: var(--color-muted); display: flex; align-items: center; justify-content: center; }
+    .cart-item__remove:hover { color: var(--color-accent); }
+    .cart-item__price { font-family: var(--font-head); font-weight: 700; }
+    .cart-summary { margin-top: var(--space-4); }
+    .cart-summary__row { display: flex; justify-content: space-between; font-size: var(--text-sm); padding-block: var(--space-2); }
+    .cart-summary__total { font-family: var(--font-head); font-weight: 800; font-size: var(--text-lg); border-top: 2px solid var(--color-line); padding-top: var(--space-3); margin-top: var(--space-2); }
+    .cart-summary .btn { margin-top: var(--space-4); }
+    .cart-fab { display: none; position: fixed; bottom: 1rem; left: 1rem; right: 1rem; background: var(--color-accent); color: white; padding: 0.875rem 1.25rem; font-family: var(--font-body); font-weight: 600; font-size: 1rem; align-items: center; justify-content: space-between; z-index: 150; border-radius: 10px; box-shadow: 0 4px 20px rgba(139,26,26,0.4); min-height: 54px; }
+    .cart-fab.visible { display: flex; }
+    .cart-fab__count { background: white; color: var(--color-accent); font-weight: 800; font-size: 0.8rem; padding: 0.15rem 0.5rem; border-radius: 999px; }
+    .cart-fab__price { font-weight: 800; }
+    @media (min-width: 1024px) { .cart-fab { display: none !important; } }
+    .cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+    .cart-overlay.active { display: block; }
+    .cart-drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-bg-soft); z-index: 201; max-height: 80vh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform 0.3s ease; border-radius: 12px 12px 0 0; }
+    .cart-drawer.active { transform: translateY(0); }
+    .cart-drawer__header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--color-line); }
+    .cart-drawer__header h3 { font-family: var(--font-head); font-weight: 800; }
+    .cart-drawer__close { font-size: 1.25rem; color: var(--color-muted); min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .cart-drawer__body { flex: 1; overflow-y: auto; padding: 1rem 1.25rem; }
+    .cart-drawer__footer { padding: 1rem 1.25rem; border-top: 1px solid var(--color-line); }
+    @media (min-width: 1024px) { .cart-drawer, .cart-overlay { display: none !important; } }
+    .footer { background: var(--color-dark); color: var(--color-on-dark); padding-top: var(--space-7); padding-bottom: var(--space-6); margin-top: var(--space-7); }
+    .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+    .footer__brand { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; margin-bottom: var(--space-2); }
+    .footer__claim { opacity: 0.6; font-size: var(--text-sm); margin-bottom: var(--space-5); }
+    .footer__contact { font-style: normal; opacity: 0.8; font-size: var(--text-sm); line-height: 1.9; }
+    .footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer__links a { opacity: 0.6; font-size: var(--text-sm); transition: opacity var(--transition); }
+    .footer__links a:hover { opacity: 1; }
+    .footer__divider { border-top: 1px solid rgba(255,255,255,0.12); margin-block: var(--space-5); }
+    .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); }
+    @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo"><img src="1754.png" alt="Has Urfa Ocakbaşı" style="height:48px;width:auto;display:block;"></a>
+      <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">🛒 <span class="cart-badge" id="cart-count">0</span></button>
+    </div>
+  </header>
+
+  <div class="order-mode">
+    <div class="container">
+      <div class="order-mode-toggle">
+        <button class="mode-card mode-card--active" data-mode="lieferung">
+          <span class="mode-card__emoji">🛵</span>
+          <span class="mode-card__title">Lieferung</span>
+          <span class="mode-card__info">~35 Min · ab 2,50 €</span>
+        </button>
+        <button class="mode-card" data-mode="abholung">
+          <span class="mode-card__emoji">🏃</span>
+          <span class="mode-card__title">Abholung</span>
+          <span class="mode-card__info">~15 Min · kostenlos</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="category-nav">
+    <div class="container">
+      <a class="cat-link cat-link--active" href="#vorspeisen">🧀 Vorspeisen</a>
+      <a class="cat-link" href="#suppen">🍲 Suppen</a>
+      <a class="cat-link" href="#doener">🥙 Döner</a>
+      <a class="cat-link" href="#spiesse">🥩 Spieße</a>
+      <a class="cat-link" href="#pizza">🍕 Pizza &amp; Pide</a>
+      <a class="cat-link" href="#nachtisch">🍯 Nachtisch</a>
+      <a class="cat-link" href="#getraenke">🥤 Getränke</a>
+    </div>
+  </nav>
+
+  <div class="order-layout">
+    <main class="menu-area">
+
+      <!-- VORSPEISEN -->
+      <section class="menu-section" id="vorspeisen">
+        <h2 class="menu-section__title">🧀 Vorspeisen</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Aci Ezme" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">53. Aci Ezme</h3>
+            <p class="menu-card__desc">Scharf gewürzte Tomaten-Paprika-Paste</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">5,63 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v53" data-name="53. Aci Ezme" data-price="5.63">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Patlican Ezme" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">54. Patlican Ezme</h3>
+            <p class="menu-card__desc">Gegrillte Auberginenpaste</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">6,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v54" data-name="54. Patlican Ezme" data-price="6.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Karisik Meze Tabagi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">55. Karisik Meze Tabagi</h3>
+            <p class="menu-card__desc">Gemischte Mezeplatte mit verschiedenen Vorspeisen</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,35 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v55" data-name="55. Karisik Meze Tabagi" data-price="11.35">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=300" alt="Halloumi Käse Teller" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">65. Halloumi-Käse-Teller</h3>
+            <p class="menu-card__desc">Gegrillter Halloumi-Käse als Teller</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">15,35 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v65" data-name="65. Halloumi-Käse-Teller" data-price="15.35">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=300" alt="Halloumi Käse Tasche" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">66. Halloumi-Käse-Tasche</h3>
+            <p class="menu-card__desc">Gegrillter Halloumi-Käse in der Tasche</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">9,64 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v66" data-name="66. Halloumi-Käse-Tasche" data-price="9.64">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=300" alt="Halloumi Käse Dürüm" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">67. Halloumi-Käse-Dürüm</h3>
+            <p class="menu-card__desc">Gegrillter Halloumi-Käse im Dürüm-Wrap</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">10,77 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v67" data-name="67. Halloumi-Käse-Dürüm" data-price="10.77">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- SUPPEN -->
+      <section class="menu-section" id="suppen">
+        <h2 class="menu-section__title">🍲 Suppen</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Mercimek Corbasi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">46. Mercimek Corbasi</h3>
+            <p class="menu-card__desc">Türkische Linsensuppe</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">6,78 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s46" data-name="46. Mercimek Corbasi" data-price="6.78">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Paca" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">47. Paca</h3>
+            <p class="menu-card__desc">Türkische Lammhaxensuppe</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,89 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s47" data-name="47. Paca" data-price="8.89">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Iskembe Corbasi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">48. Iskembe Corbasi</h3>
+            <p class="menu-card__desc">Türkische Kuttelsuppe</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,89 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s48" data-name="48. Iskembe Corbasi" data-price="8.89">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Tavuk Corbasi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">49. Tavuk Corbasi</h3>
+            <p class="menu-card__desc">Türkische Hühnersuppe</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">7,35 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s49" data-name="49. Tavuk Corbasi" data-price="7.35">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Yayla Corbasi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">50. Yayla Corbasi</h3>
+            <p class="menu-card__desc">Türkische Joghurtsuppe mit Minze</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">6,78 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s50" data-name="50. Yayla Corbasi" data-price="6.78">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Kuru Fasülye" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">51. Kuru Fasülye</h3>
+            <p class="menu-card__desc">Türkische weiße Bohneneintopf</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">9,63 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s51" data-name="51. Kuru Fasülye" data-price="9.63">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- DÖNER -->
+      <section class="menu-section" id="doener">
+        <h2 class="menu-section__title">🥙 Döner</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300" alt="Dönertasche Kalbfleisch" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">01. Dönertasche Kalbfleisch <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Frisches Kalbfleisch, Salat, Tomaten, Soße in der Tasche</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">9,52 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d01" data-name="01. Dönertasche Kalbfleisch" data-price="9.52">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300" alt="Döner Rollo" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">02. Döner Rollo</h3>
+            <p class="menu-card__desc">Dönerfleisch im Fladenbrot gerollt mit Salat und Soße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">10,21 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d02" data-name="02. Döner Rollo" data-price="10.21">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" alt="Pomm Döner" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">03. Pomm-Döner</h3>
+            <p class="menu-card__desc">Döner mit Pommes Frites</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">9,13 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d03" data-name="03. Pomm-Döner" data-price="9.13">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300" alt="Dönerteller klein" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Dönerteller klein <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Dönerfleisch auf dem Teller mit Beilagen, Salat und Soße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">14,43 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d-teller" data-name="Dönerteller klein" data-price="14.43">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Iskender Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">07. Iskender Kebab</h3>
+            <p class="menu-card__desc">Dönerfleisch auf Fladenbrot mit Joghurt und Tomatensauce</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">20,21 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d07" data-name="07. Iskender Kebab" data-price="20.21">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- SPIEßE -->
+      <section class="menu-section" id="spiesse">
+        <h2 class="menu-section__title">🥩 Spieße</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Dürüm Adana" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">08. Dürüm Adana</h3>
+            <p class="menu-card__desc">Adana Kebab im Dürüm-Wrap</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,35 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp08" data-name="08. Dürüm Adana" data-price="11.35">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Adana Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">09. Adana Kebab</h3>
+            <p class="menu-card__desc">Scharf gewürztes Hackfleisch vom Holzkohlegrill</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">19,91 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp09" data-name="09. Adana Kebab" data-price="19.91">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Yogurtlu Adana Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">10. Yogurtlu Adana Kebab</h3>
+            <p class="menu-card__desc">Adana Kebab auf Joghurtbett mit Tomatensauce</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">21,63 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp10" data-name="10. Yogurtlu Adana Kebab" data-price="21.63">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Urfa Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">11. Urfa Kebab</h3>
+            <p class="menu-card__desc">Milder Hackfleischspieß vom Holzkohlegrill — Spezialität des Hauses</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">19,91 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp11" data-name="11. Urfa Kebab" data-price="19.91">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Yogurtlu Urfa Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">12. Yogurtlu Urfa Kebab</h3>
+            <p class="menu-card__desc">Urfa Kebab auf Joghurtbett mit Tomatensauce</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">21,63 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp12" data-name="12. Yogurtlu Urfa Kebab" data-price="21.63">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Dürüm Tavuk" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">13. Dürüm Tavuk</h3>
+            <p class="menu-card__desc">Hähnchen-Kebab im Dürüm-Wrap</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,92 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp13" data-name="13. Dürüm Tavuk" data-price="11.92">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Kuzu Sis" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">14. Kuzu Sis</h3>
+            <p class="menu-card__desc">Lammspieß vom Holzkohlegrill</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">22,77 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp14" data-name="14. Kuzu Sis" data-price="22.77">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Tavuk Sis" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">16. Tavuk Sis <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Hähnchenbrust-Spieß vom Holzkohlegrill</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">21,63 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp16" data-name="16. Tavuk Sis" data-price="21.63">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Beyti Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">19. Beyti Kebab</h3>
+            <p class="menu-card__desc">Gewürztes Hackfleisch vom Holzkohlegrill</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">20,48 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp19" data-name="19. Beyti Kebab" data-price="20.48">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Sarma Beyti" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">20. Sarma Beyti</h3>
+            <p class="menu-card__desc">Hackfleisch im Fladenbrot gerollt, überbacken</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">22,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp20" data-name="20. Sarma Beyti" data-price="22.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Domatesli Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">23. Domatesli Kebab</h3>
+            <p class="menu-card__desc">Kebab mit frischen Tomaten vom Holzkohlegrill</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">21,63 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp23" data-name="23. Domatesli Kebab" data-price="21.63">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Patlicanli Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">24. Patlicanli Kebab</h3>
+            <p class="menu-card__desc">Kebab mit gegrillten Auberginen</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">22,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="sp24" data-name="24. Patlicanli Kebab" data-price="22.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- PIZZA & PIDE -->
+      <section class="menu-section" id="pizza">
+        <h2 class="menu-section__title">🍕 Pizza &amp; Pide</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Lahmacun" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">39. Lahmacun Portion</h3>
+            <p class="menu-card__desc">Türkische Fladenbrot-Pizza mit Hackfleisch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">7,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p39" data-name="39. Lahmacun Portion" data-price="7.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Dönerli Lahmacun" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">41. Dönerli Lahmacun</h3>
+            <p class="menu-card__desc">Lahmacun mit Dönerfleisch belegt</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">12,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p41" data-name="41. Dönerli Lahmacun" data-price="12.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Peynirli Pide" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">42. Peynirli Pide</h3>
+            <p class="menu-card__desc">Türkische Pide mit Käse</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">10,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p42" data-name="42. Peynirli Pide" data-price="10.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300" alt="Kiymali Pide" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">43. Kiymali Pide</h3>
+            <p class="menu-card__desc">Türkische Pide mit Hackfleisch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p43" data-name="43. Kiymali Pide" data-price="11.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- NACHTISCH -->
+      <section class="menu-section" id="nachtisch">
+        <h2 class="menu-section__title">🍯 Nachtisch</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1579954115563-e72bf1381629?w=300" alt="Künefe" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">74. Künefe</h3>
+            <p class="menu-card__desc">Türkische Süßspeise aus Kadayıf mit Käse und Zuckersirup — hausgemacht</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">9,26 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n74" data-name="74. Künefe" data-price="9.26">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1619985204553-3e49b2b33c55?w=300" alt="Baklava" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">75. Baklava</h3>
+            <p class="menu-card__desc">Türkisches Blätterteiggebäck mit Nüssen und Honigsirup</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,69 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n75" data-name="75. Baklava" data-price="8.69">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- GETRÄNKE -->
+      <section class="menu-section" id="getraenke">
+        <h2 class="menu-section__title">🥤 Getränke</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300" alt="Ayran" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Ayran</h3>
+            <p class="menu-card__desc">Hausgemachter Ayran aus dem Brunnen, aufgeschäumt</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g-ayran" data-name="Ayran" data-price="2.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300" alt="Cola" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cola 0,5l</h3>
+            <p class="menu-card__desc">Klassische Cola</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g-cola" data-name="Cola 0,5l" data-price="2.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=300" alt="Wasser" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Wasser 0,5l</h3>
+            <p class="menu-card__desc">Still</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">1,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g-wasser" data-name="Wasser 0,5l" data-price="1.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <!-- Desktop Cart Sidebar -->
+    <aside class="cart-sidebar">
+      <div class="cart-sidebar__inner">
+        <h3 class="cart-sidebar__title">Deine Bestellung</h3>
+        <div id="cart-items"></div>
+        <div class="cart-empty" id="cart-empty">Noch keine Artikel im Warenkorb.</div>
+        <div class="cart-summary" id="cart-summary" style="display:none">
+          <div class="cart-summary__row"><span>Zwischensumme</span><span id="cart-subtotal">0,00 €</span></div>
+          <div class="cart-summary__row"><span>Lieferung</span><span>2,50 €</span></div>
+          <div class="cart-summary__row cart-summary__total"><span>Gesamt</span><span id="cart-total">0,00 €</span></div>
+          <a href="#" class="btn btn--primary btn--full" onclick="alert('Demo-Modus: In der echten Version würden Sie hier zur Kasse weitergeleitet.'); return false;">Zur Kasse →</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header">
+      <h3>Deine Bestellung</h3>
+      <button class="cart-drawer__close" id="cart-close">✕</button>
+    </div>
+    <div class="cart-drawer__body">
+      <div id="cart-items-mobile"></div>
+      <div class="cart-empty" id="cart-empty-mobile">Noch keine Artikel im Warenkorb.</div>
+    </div>
+    <div class="cart-drawer__footer" id="cart-summary-mobile" style="display:none">
+      <div class="cart-summary__row"><span>Zwischensumme</span><span id="cart-subtotal-mobile">0,00 €</span></div>
+      <div class="cart-summary__row"><span>Lieferung</span><span>2,50 €</span></div>
+      <div class="cart-summary__row cart-summary__total"><span>Gesamt</span><span id="cart-total-mobile">0,00 €</span></div>
+      <a href="#" class="btn btn--primary btn--full" onclick="alert('Demo-Modus'); return false;">Zur Kasse →</a>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cart-fab">
+    🛒 Warenkorb
+    <span class="cart-fab__count" id="cart-fab-count">0</span>
+    <span class="cart-fab__price" id="cart-fab-price">0,00 €</span>
+  </button>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div>
+          <p class="footer__brand">Has Urfa Ocakbaşı</p>
+          <p class="footer__claim">Holzkohlegrill · Authentische türkische Küche · Bochum</p>
+          <address class="footer__contact">
+            Alleestraße 26, 44793 Bochum<br>
+            Tel: <a href="tel:02343259000">0234 / 325 9000</a><br>
+            <a href="http://www.hasurfabochum.de" target="_blank">www.hasurfabochum.de</a>
+          </address>
+        </div>
+        <nav class="footer__links">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Allergene &amp; Zusatzstoffe</a>
+        </nav>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Has Urfa Ocakbaşı — Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    const KEY = 'hasurfa_cart';
+    const get = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+    const save = c => localStorage.setItem(KEY, JSON.stringify(c));
+    const count = () => get().reduce((s,i) => s+i.qty, 0);
+    const total = () => get().reduce((s,i) => s+i.price*i.qty, 0);
+    const fmt = n => n.toFixed(2).replace('.',',') + ' €';
+
+    function add(item) {
+      const c = get(), ex = c.find(i => i.id===item.id);
+      if(ex) ex.qty++; else c.push({...item,qty:1});
+      save(c); render();
+    }
+    function remove(id) { save(get().filter(i=>i.id!==id)); render(); }
+    function qty(id,q) { if(q<=0) return remove(id); const c=get(),i=c.find(x=>x.id===id); if(i) i.qty=q; save(c); render(); }
+
+    function itemHTML(i) {
+      return `<div class="cart-item"><span class="cart-item__name">${i.name}</span><div class="cart-item__controls"><input class="cart-item__qty-input" type="number" min="0" value="${i.qty}" data-id="${i.id}"><button class="cart-item__remove" data-id="${i.id}">✕</button></div><span class="cart-item__price">${fmt(i.price*i.qty)}</span></div>`;
+    }
+
+    function render() {
+      const c=get(), n=count(), t=total();
+      const badge=document.getElementById('cart-count');
+      if(badge){badge.textContent=n;badge.style.display=n>0?'flex':'none';}
+      const fab=document.getElementById('cart-fab');
+      if(fab) fab.classList.toggle('visible',n>0);
+      document.getElementById('cart-fab-count')&&(document.getElementById('cart-fab-count').textContent=n);
+      document.getElementById('cart-fab-price')&&(document.getElementById('cart-fab-price').textContent=fmt(t+2.5));
+      ['','−mobile'].forEach(s=>{
+        const items=document.getElementById('cart-items'+s.replace('−','-'));
+        const empty=document.getElementById('cart-empty'+s.replace('−','-'));
+        const summary=document.getElementById('cart-summary'+s.replace('−','-'));
+        const sub=document.getElementById('cart-subtotal'+s.replace('−','-'));
+        const tot=document.getElementById('cart-total'+s.replace('−','-'));
+        if(!items) return;
+        if(!c.length){items.innerHTML='';if(empty)empty.style.display='block';if(summary)summary.style.display='none';return;}
+        if(empty)empty.style.display='none';if(summary)summary.style.display='block';
+        if(sub)sub.textContent=fmt(t);if(tot)tot.textContent=fmt(t+2.5);
+        items.innerHTML=c.map(itemHTML).join('');
+      });
+    }
+
+    function bind(el) {
+      if(!el) return;
+      el.addEventListener('change',e=>{if(e.target.classList.contains('cart-item__qty-input'))qty(e.target.dataset.id,parseInt(e.target.value));});
+      el.addEventListener('click',e=>{if(e.target.classList.contains('cart-item__remove'))remove(e.target.dataset.id);});
+    }
+    bind(document.getElementById('cart-items'));
+    bind(document.getElementById('cart-items-mobile'));
+
+    document.querySelectorAll('.add-to-cart').forEach(btn=>btn.addEventListener('click',()=>{
+      add({id:btn.dataset.id,name:btn.dataset.name,price:parseFloat(btn.dataset.price)});
+      btn.textContent='✓ Hinzugefügt';btn.style.background='#2a9d4e';btn.style.borderColor='#2a9d4e';
+      setTimeout(()=>{btn.textContent='+ Hinzufügen';btn.style.background='';btn.style.borderColor='';},1000);
+    }));
+
+    document.querySelectorAll('.mode-card').forEach(btn=>btn.addEventListener('click',()=>{
+      document.querySelectorAll('.mode-card').forEach(b=>b.classList.remove('mode-card--active'));
+      btn.classList.add('mode-card--active');
+    }));
+
+    const p=new URLSearchParams(window.location.search);
+    if(p.get('mode')){const t=document.querySelector(`[data-mode="${p.get('mode')}"]`);if(t)t.click();}
+
+    const open=()=>{document.getElementById('cart-drawer').classList.add('active');document.getElementById('cart-overlay').classList.add('active');document.body.style.overflow='hidden';};
+    const close=()=>{document.getElementById('cart-drawer').classList.remove('active');document.getElementById('cart-overlay').classList.remove('active');document.body.style.overflow='';};
+    document.getElementById('cart-toggle')?.addEventListener('click',open);
+    document.getElementById('cart-fab')?.addEventListener('click',open);
+    document.getElementById('cart-close')?.addEventListener('click',close);
+    document.getElementById('cart-overlay')?.addEventListener('click',close);
+
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){
+        document.querySelectorAll('.cat-link').forEach(l=>l.classList.remove('cat-link--active'));
+        const a=document.querySelector(`.cat-link[href="#${e.target.id}"]`);
+        if(a)a.classList.add('cat-link--active');
+      }});
+    },{rootMargin:'-50% 0px -50% 0px'});
+    document.querySelectorAll('.menu-section').forEach(s=>obs.observe(s));
+
+    render();
+  </script>
+</body>
+</html>
