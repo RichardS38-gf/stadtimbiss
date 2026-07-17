@@ -14,7 +14,7 @@
   <style>
     .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
-    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: var(--color-ink); }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: var(--color-accent); }
     .nav__links { display: none; gap: var(--space-5); }
     .nav__links a { font-size: var(--text-sm); font-weight: 500; color: var(--color-ink); }
     .nav__links a:hover { color: var(--color-accent); opacity: 1; }
@@ -22,12 +22,13 @@
 
     /* Page Hero */
     .res-hero {
-      background: var(--color-dark);
+      background: var(--color-bg);
       padding: var(--space-7) 0;
       text-align: center;
+      border-bottom: 1px solid var(--color-line);
     }
-    .res-hero h1 { color: var(--color-on-dark); font-size: var(--text-4xl); margin-bottom: var(--space-3); }
-    .res-hero p { color: rgba(255,255,255,0.7); font-size: var(--text-lg); }
+    .res-hero h1 { color: var(--color-ink); font-size: var(--text-4xl); margin-bottom: var(--space-3); }
+    .res-hero p { color: var(--color-muted); font-size: var(--text-lg); }
 
     /* Form */
     .res-section { padding-block: var(--space-7); }
