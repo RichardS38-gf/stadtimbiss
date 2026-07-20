@@ -13,7 +13,11 @@
   <style>
     .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid #2A2A2A; }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
-    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: #D4A017; }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: #D4A017; }
+    .nav__links { display: none; gap: var(--space-5); }
+    .nav__links a { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--color-accent); }
+    .nav__links a:hover { color: var(--color-ink); opacity: 1; }
+    @media (min-width: 768px) { .nav__links { display: flex; } }
     .icon-gold { width: 1.1em; height: 1.1em; color: var(--color-accent); flex-shrink: 0; vertical-align: -0.15em; }
     .res-hero { background: #111; padding: var(--space-7) 0; text-align: center; border-bottom: 1px solid #2A2A2A; }
     .res-hero h1 { color: var(--color-ink); font-size: var(--text-4xl); margin-bottom: var(--space-3); display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
@@ -66,6 +70,12 @@
           <text x="88" y="24" font-family="'Noto Serif JP', serif" font-size="22" font-weight="700" fill="#F0EAD6">Garden</text>
         </svg>
       </a>
+      <nav class="nav__links">
+        <a href="index.html#ueber-uns">Willkommen</a>
+        <a href="index.html#speisekarte">Speisekarte</a>
+        <a href="index.html#bewertungen">Bewertungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
       <div style="display:flex;gap:0.5rem;">
         <a href="reservieren.html" class="btn btn--outline btn--sm"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> Reservieren</a>
         <a href="bestellen.html" class="btn btn--primary btn--sm">Jetzt bestellen →</a>
