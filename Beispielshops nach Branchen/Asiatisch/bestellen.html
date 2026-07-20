@@ -89,6 +89,7 @@
     .allergen-btn:hover { background: var(--color-accent); color: #fff; }
     .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1A1A1A; color: #fff; font-size: 0.75rem; padding: 0.4rem 0.7rem; border-radius: 6px; white-space: nowrap; z-index: 9999; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
     .allergen-btn:hover .allergen-tooltip { display: block; }
+    @media (hover: none) { .allergen-btn.active .allergen-tooltip { display: block; } }
     /* Footer */
     .footer { background: var(--color-dark); color: var(--color-on-dark); padding-top: var(--space-7); padding-bottom: var(--space-6); margin-top: var(--space-7); }
     .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
@@ -167,7 +168,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="California Roll" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">California Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">California Roll (8 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Sesam (L), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Krabben, Avocado, Gurke, Sesam</p>
             <div class="menu-card__footer"><span class="menu-card__price">8,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="California Roll" data-price="8.90">+ Hinzufügen</button></div>
           </div>
@@ -175,7 +176,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Dragon Roll" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Dragon Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Dragon Roll (8 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Fisch (D), Ei (C), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Garnelen, Avocado, Thunfisch, Spicy Mayo</p>
             <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s3" data-name="Dragon Roll" data-price="12.90">+ Hinzufügen</button></div>
           </div>
@@ -183,7 +184,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Rindfleisch Wok" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Rindfleisch Wok <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Rindfleisch Wok <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Soja (F), Sesam (L)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Zartes Rindfleisch, Gemüse, Austernsöße, Ingwer</p>
             <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w1" data-name="Rindfleisch Wok" data-price="13.90">+ Hinzufügen</button></div>
           </div>
@@ -191,7 +192,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Pad Thai" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Pad Thai <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Pad Thai <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Erdnüsse (H), Ei (C), Fisch (D), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Reisnudeln, Hähnchen, Ei, Erdnüsse, Tamarinde</p>
             <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w3" data-name="Pad Thai" data-price="12.90">+ Hinzufügen</button></div>
           </div>
@@ -199,7 +200,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Gyoza" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Gyoza (6 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Gyoza (6 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Japanische Teigtaschen mit Schweinefleisch und Kohl, Dip</p>
             <div class="menu-card__footer"><span class="menu-card__price">6,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Gyoza" data-price="6.90">+ Hinzufügen</button></div>
           </div>
@@ -207,7 +208,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Ramen" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Tonkotsu Ramen <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Tonkotsu Ramen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Reichhaltige Schweinebrühe, Chashu Pork, Ei, Bambussprossen, Nori</p>
             <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su1" data-name="Tonkotsu Ramen" data-price="13.90">+ Hinzufügen</button></div>
           </div>
@@ -215,7 +216,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Thai Green Curry" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Thai Green Curry <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Thai Green Curry <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Hähnchen, Kokosmilch, Aubergine, Basilikum, Jasminreis</p>
             <div class="menu-card__footer"><span class="menu-card__price">13,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Thai Green Curry" data-price="13.50">+ Hinzufügen</button></div>
           </div>
@@ -223,7 +224,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=300" alt="Lachs Bento" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Lachs Bento <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Lachs Bento <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D), Gluten (A), Ei (C), Soja (F), Sesam (L)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">6x Lachs Nigiri, California Roll, Miso Suppe, Edamame, Salat</p>
             <div class="menu-card__footer"><span class="menu-card__price">18,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b1" data-name="Lachs Bento" data-price="18.90">+ Hinzufügen</button></div>
           </div>
@@ -231,7 +232,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300" alt="Bubble Tea" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Bubble Tea <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Bubble Tea <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Taro, Matcha, Mango oder Erdbeere mit Tapioka Pearls</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Bubble Tea" data-price="4.90">+ Hinzufügen</button></div>
           </div>
@@ -244,7 +245,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="California Roll" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">California Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">California Roll (8 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Sesam (L), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Krabben, Avocado, Gurke, Sesam</p>
             <div class="menu-card__footer"><span class="menu-card__price">8,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="California Roll" data-price="8.90">+ Hinzufügen</button></div>
           </div>
@@ -252,7 +253,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Lachs Nigiri" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Lachs Nigiri (6 Stück)</h3>
+            <h3 class="menu-card__name">Lachs Nigiri (6 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D)</span></button></h3>
             <p class="menu-card__desc">Frischer Lachs auf Sushireis</p>
             <div class="menu-card__footer"><span class="menu-card__price">9,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s2" data-name="Lachs Nigiri" data-price="9.50">+ Hinzufügen</button></div>
           </div>
@@ -260,7 +261,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Dragon Roll" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Dragon Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Dragon Roll (8 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Fisch (D), Ei (C), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Garnelen, Avocado, Thunfisch, Spicy Mayo</p>
             <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s3" data-name="Dragon Roll" data-price="12.90">+ Hinzufügen</button></div>
           </div>
@@ -268,7 +269,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Thunfisch Maki" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Thunfisch Maki (6 Stück)</h3>
+            <h3 class="menu-card__name">Thunfisch Maki (6 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D)</span></button></h3>
             <p class="menu-card__desc">Roter Thunfisch, Sushireis, Nori</p>
             <div class="menu-card__footer"><span class="menu-card__price">7,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s4" data-name="Thunfisch Maki" data-price="7.90">+ Hinzufügen</button></div>
           </div>
@@ -276,7 +277,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Veggie Roll" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Roll (8 Stück)</h3>
+            <h3 class="menu-card__name">Veggie Roll (8 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sesam (L)</span></button></h3>
             <p class="menu-card__desc">Gurke, Avocado, Paprika, Karotte</p>
             <div class="menu-card__footer"><span class="menu-card__price">7,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s5" data-name="Veggie Roll" data-price="7.50">+ Hinzufügen</button></div>
           </div>
@@ -289,7 +290,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Rindfleisch Wok" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Rindfleisch Wok <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Rindfleisch Wok <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Soja (F), Sesam (L)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Zartes Rindfleisch, Gemüse, Austernsoße, Ingwer</p>
             <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w1" data-name="Rindfleisch Wok" data-price="13.90">+ Hinzufügen</button></div>
           </div>
@@ -297,7 +298,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Garnelen Wok" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Garnelen Wok</h3>
+            <h3 class="menu-card__name">Garnelen Wok <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Soja (F)</span></button></h3>
             <p class="menu-card__desc">Riesengarnelen, Pak Choi, Bambussprossen, Chili</p>
             <div class="menu-card__footer"><span class="menu-card__price">14,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w2" data-name="Garnelen Wok" data-price="14.90">+ Hinzufügen</button></div>
           </div>
@@ -305,7 +306,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Pad Thai" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Pad Thai <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Pad Thai <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Erdnüsse (H), Ei (C), Fisch (D), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Reisnudeln, Hähnchen, Ei, Erdnüsse, Tamarinde</p>
             <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w3" data-name="Pad Thai" data-price="12.90">+ Hinzufügen</button></div>
           </div>
@@ -313,7 +314,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Tofu Wok" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Tofu Wok (vegan)</h3>
+            <h3 class="menu-card__name">Tofu Wok (vegan) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Soja (F), Sesam (L)</span></button></h3>
             <p class="menu-card__desc">Knuspriger Tofu, Broccoli, Karotten, Sojasoße</p>
             <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w4" data-name="Tofu Wok" data-price="11.90">+ Hinzufügen</button></div>
           </div>
@@ -326,7 +327,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Gyoza" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Gyoza (6 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Gyoza (6 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Japanische Teigtaschen mit Schweinefleisch und Kohl, Dip</p>
             <div class="menu-card__footer"><span class="menu-card__price">6,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Gyoza" data-price="6.90">+ Hinzufügen</button></div>
           </div>
@@ -334,7 +335,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Frühlingsrollen" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Frühlingsrollen (4 Stück)</h3>
+            <h3 class="menu-card__name">Frühlingsrollen (4 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Soja (F)</span></button></h3>
             <p class="menu-card__desc">Knusprig, gefüllt mit Gemüse und Glasnudeln</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v2" data-name="Frühlingsrollen" data-price="5.90">+ Hinzufügen</button></div>
           </div>
@@ -342,7 +343,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Edamame" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Edamame</h3>
+            <h3 class="menu-card__name">Edamame <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Soja (F)</span></button></h3>
             <p class="menu-card__desc">Gedämpfte Sojabohnen mit Meersalz</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v3" data-name="Edamame" data-price="4.50">+ Hinzufügen</button></div>
           </div>
@@ -350,7 +351,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Dim Sum" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Dim Sum (4 Stück)</h3>
+            <h3 class="menu-card__name">Dim Sum (4 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Gluten (A)</span></button></h3>
             <p class="menu-card__desc">Gedämpfte Reisteigtaschen mit Garnelen</p>
             <div class="menu-card__footer"><span class="menu-card__price">7,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v4" data-name="Dim Sum" data-price="7.50">+ Hinzufügen</button></div>
           </div>
@@ -363,7 +364,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Ramen" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Tonkotsu Ramen <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Tonkotsu Ramen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Reichhaltige Schweinebrühe, Chashu Pork, Ei, Bambussprossen, Nori</p>
             <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su1" data-name="Tonkotsu Ramen" data-price="13.90">+ Hinzufügen</button></div>
           </div>
@@ -371,7 +372,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Pho" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Pho Bo</h3>
+            <h3 class="menu-card__name">Pho Bo <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D), Soja (F)</span></button></h3>
             <p class="menu-card__desc">Vietnamesische Rindfleischsuppe, Reisnudeln, Kräuter, Limette</p>
             <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su2" data-name="Pho Bo" data-price="11.90">+ Hinzufügen</button></div>
           </div>
@@ -379,7 +380,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Miso Suppe" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Miso Suppe</h3>
+            <h3 class="menu-card__name">Miso Suppe <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Soja (F), Gluten (A)</span></button></h3>
             <p class="menu-card__desc">Klassische japanische Miso-Suppe mit Tofu und Wakame</p>
             <div class="menu-card__footer"><span class="menu-card__price">3,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su3" data-name="Miso Suppe" data-price="3.90">+ Hinzufügen</button></div>
           </div>
@@ -392,7 +393,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Thai Green Curry" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Thai Green Curry <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Thai Green Curry <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D), Soja (F)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Hähnchen, Kokosmilch, Aubergine, Basilikum, Jasminreis</p>
             <div class="menu-card__footer"><span class="menu-card__price">13,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Thai Green Curry" data-price="13.50">+ Hinzufügen</button></div>
           </div>
@@ -400,7 +401,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Massaman Curry" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Massaman Curry</h3>
+            <h3 class="menu-card__name">Massaman Curry <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Erdnüsse (H), Soja (F)</span></button></h3>
             <p class="menu-card__desc">Rind, Kartoffeln, Kokosmilch, Erdnüsse, Jasminreis</p>
             <div class="menu-card__footer"><span class="menu-card__price">14,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c2" data-name="Massaman Curry" data-price="14.50">+ Hinzufügen</button></div>
           </div>
@@ -408,7 +409,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Veggie Curry" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Curry (vegan)</h3>
+            <h3 class="menu-card__name">Veggie Curry (vegan) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Soja (F)</span></button></h3>
             <p class="menu-card__desc">Tofu, Gemüse, rotes Curry, Kokosmilch, Jasminreis</p>
             <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c3" data-name="Veggie Curry" data-price="11.90">+ Hinzufügen</button></div>
           </div>
@@ -421,7 +422,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=300" alt="Lachs Bento" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Lachs Bento <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Lachs Bento <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D), Gluten (A), Ei (C), Soja (F), Sesam (L)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">6x Lachs Nigiri, California Roll, Miso Suppe, Edamame, Salat</p>
             <div class="menu-card__footer"><span class="menu-card__price">18,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b1" data-name="Lachs Bento" data-price="18.90">+ Hinzufügen</button></div>
           </div>
@@ -429,7 +430,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=300" alt="Wok Bento" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Wok Bento</h3>
+            <h3 class="menu-card__name">Wok Bento <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Soja (F), Ei (C)</span></button></h3>
             <p class="menu-card__desc">Rindfleisch Wok, Jasminreis, Gyoza, Miso Suppe</p>
             <div class="menu-card__footer"><span class="menu-card__price">17,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b2" data-name="Wok Bento" data-price="17.90">+ Hinzufügen</button></div>
           </div>
@@ -442,7 +443,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300" alt="Mochi" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Mochi Ice Cream (3 Stück)</h3>
+            <h3 class="menu-card__name">Mochi Ice Cream (3 Stück) <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Japanisches Reiskuchen-Eis mit den Sorten Matcha, Mango und Erdbeere</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="d1" data-name="Mochi Ice Cream" data-price="5.90">+ Hinzufügen</button></div>
           </div>
@@ -450,7 +451,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300" alt="Matcha Cheesecake" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Matcha Cheesecake</h3>
+            <h3 class="menu-card__name">Matcha Cheesecake <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
             <p class="menu-card__desc">Cremiger Käsekuchen mit japanischem Matcha</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="d2" data-name="Matcha Cheesecake" data-price="4.90">+ Hinzufügen</button></div>
           </div>
@@ -463,7 +464,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300" alt="Bubble Tea" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Bubble Tea <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Bubble Tea <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button> <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Taro, Matcha, Mango oder Erdbeere mit Tapioka Pearls</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Bubble Tea" data-price="4.90">+ Hinzufügen</button></div>
           </div>
@@ -471,7 +472,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300" alt="Matcha Latte" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Matcha Latte</h3>
+            <h3 class="menu-card__name">Matcha Latte <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Japanischer Matcha mit Milch, warm oder kalt</p>
             <div class="menu-card__footer"><span class="menu-card__price">3,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Matcha Latte" data-price="3.90">+ Hinzufügen</button></div>
           </div>
@@ -577,6 +578,19 @@
     document.querySelectorAll('.menu-section').forEach(s=>obs.observe(s));
     const nav=document.querySelector('.nav');window.addEventListener('scroll',()=>nav?.classList.toggle('scrolled',window.scrollY>10));
     render();
+
+    // Allergen-Tooltip (Tippen auf Mobilgeraeten)
+    document.querySelectorAll('.allergen-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+        if (!isActive) btn.classList.add('active');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+    });
   </script>
 </body>
 </html>
