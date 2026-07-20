@@ -56,16 +56,15 @@
     .info-banner__sep { display: none; color: var(--color-line); }
     @media (min-width: 768px) { .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline; } }
 
-    /* Über uns */
-    .about { overflow: hidden; background: #111; }
-    .about__grid { display: grid; grid-template-columns: 1fr; align-items: stretch; min-height: 480px; }
-    .about__text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
-    .about__text h2 { margin-bottom: var(--space-4); }
-    .about__text p { margin-bottom: var(--space-4); color: var(--color-muted); }
+    /* Über uns — zentriert gestapelt */
+    .about { overflow: hidden; background: #111; padding-block: var(--space-8); }
+    .about__intro { text-align: center; max-width: 640px; margin: 0 auto var(--space-6); }
+    .about__intro .gold-divider { margin-inline: auto; }
+    .about__intro h2 { margin-bottom: var(--space-3); }
+    .about__intro p { color: var(--color-muted); margin-bottom: var(--space-4); }
     .about__label { color: var(--color-accent); margin-bottom: var(--space-3); }
-    .about__btn { margin-top: var(--space-2); align-self: flex-start; }
-    .about__img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; order: 1; filter: brightness(0.85); }
-    @media (min-width: 768px) { .about__grid { grid-template-columns: 1fr 1fr; } .about__text { padding: var(--space-8) var(--space-6) var(--space-8) calc((100vw - var(--max-content-width)) / 2 + var(--container-pad-desktop)); } .about__img { order: 0; min-height: unset; } }
+    .about__btn { margin-top: var(--space-2); }
+    .about__stack-img { width: 100%; height: 420px; object-fit: cover; border-radius: 12px; filter: brightness(0.9); }
 
     /* Kategorien */
     .categories { background: var(--color-bg); }
@@ -186,16 +185,15 @@
   </section>
 
   <section class="about" id="ueber-uns">
-    <div class="about__grid">
-      <div class="about__text">
+    <div class="container">
+      <div class="about__intro">
         <div class="gold-divider"></div>
         <p class="label about__label">Unsere Geschichte</p>
         <h2>Mehr als nur ein Restaurant</h2>
-        <p>Asia Garden steht seit über 20 Jahren für authentische asiatische Küche. Von frischen Sushi-Rollen bis zum dampfenden Wok — alles wird täglich frisch zubereitet.</p>
-        <p>Unsere Köche bringen Rezepte aus Japan, China, Thailand und Vietnam direkt auf deinen Teller. Keine Kompromisse bei den Zutaten.</p>
+        <p>Asia Garden steht seit über 20 Jahren für authentische asiatische Küche — von Sushi bis Wok, täglich frisch zubereitet mit Rezepten aus Japan, China, Thailand und Vietnam.</p>
         <a href="bestellen.html" class="btn btn--primary about__btn">Speisekarte ansehen</a>
       </div>
-      <img class="about__img" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=800" alt="Asia Garden Küche" loading="lazy">
+      <img class="about__stack-img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=1200" alt="Asia Garden Küche" loading="lazy">
     </div>
   </section>
 
