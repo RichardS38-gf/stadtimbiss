@@ -84,8 +84,11 @@
     .collage__arrow:hover { background: var(--color-accent); color: var(--color-on-accent); opacity: 1; }
     .collage__strip { flex: 1; min-width: 0; display: flex; gap: var(--space-3); overflow-x: auto; padding-bottom: var(--space-2); scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; }
     .collage__strip::-webkit-scrollbar { display: none; }
-    .collage__item { flex-shrink: 0; width: 220px; height: 260px; border-radius: 10px; object-fit: cover; scroll-snap-align: start; transition: filter 0.3s ease; }
-    .collage__item:hover { filter: brightness(0.7); }
+    .collage__item { position: relative; flex-shrink: 0; width: 220px; height: 260px; border-radius: 10px; overflow: hidden; display: block; scroll-snap-align: start; }
+    .collage__item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 0.3s ease; }
+    .collage__item:hover img { filter: brightness(0.5); }
+    .collage__item__label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: var(--space-3); color: var(--color-ink); font-family: var(--font-head); font-weight: 700; font-size: var(--text-base); opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+    .collage__item:hover .collage__item__label { opacity: 1; }
     .collage__more { flex-shrink: 0; width: 220px; height: 260px; border-radius: 10px; background: var(--color-bg-card); border: 1px solid var(--color-line); display: flex; align-items: center; justify-content: center; color: var(--color-accent); font-family: var(--font-head); font-weight: 700; font-size: var(--text-sm); text-align: center; scroll-snap-align: start; }
 
     /* Section headers */
@@ -251,15 +254,15 @@
       <div class="collage__slider">
         <button class="collage__arrow collage__arrow--prev" aria-label="Zurück" type="button">&#8249;</button>
         <div class="collage__strip">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600" alt="Wok" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Suppe" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Küche" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600" alt="Wok-Gericht" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Suppe" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Küche" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600" alt="Wok-Gericht" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Suppe" loading="lazy">
-        <img class="collage__item" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Küche" loading="lazy">
+        <a class="collage__item" href="bestellen.html#wok"><img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600" alt="Rindfleisch Wok" loading="lazy"><span class="collage__item__label">Rindfleisch Wok</span></a>
+        <a class="collage__item" href="bestellen.html#suppen"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Tonkotsu Ramen" loading="lazy"><span class="collage__item__label">Tonkotsu Ramen</span></a>
+        <a class="collage__item" href="bestellen.html"><img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Aus unserer Küche" loading="lazy"><span class="collage__item__label">Aus unserer Küche</span></a>
+        <a class="collage__item" href="bestellen.html#wok"><img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600" alt="Pad Thai" loading="lazy"><span class="collage__item__label">Pad Thai</span></a>
+        <a class="collage__item" href="bestellen.html#suppen"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Miso Suppe" loading="lazy"><span class="collage__item__label">Miso Suppe</span></a>
+        <a class="collage__item" href="bestellen.html"><img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Frisch zubereitet" loading="lazy"><span class="collage__item__label">Frisch zubereitet</span></a>
+        <a class="collage__item" href="bestellen.html#wok"><img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600" alt="Garnelen Wok" loading="lazy"><span class="collage__item__label">Garnelen Wok</span></a>
+        <a class="collage__item" href="bestellen.html#suppen"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Pho Bo" loading="lazy"><span class="collage__item__label">Pho Bo</span></a>
+        <a class="collage__item" href="bestellen.html"><img src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Täglich frisch" loading="lazy"><span class="collage__item__label">Täglich frisch</span></a>
         </div>
         <button class="collage__arrow collage__arrow--next" aria-label="Weiter" type="button">&#8250;</button>
       </div>
