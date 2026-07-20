@@ -22,18 +22,11 @@
     .nav__links { display: none; gap: var(--space-5); }
     .nav__links a { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--color-accent); }
     .nav__links a:hover { color: var(--color-ink); opacity: 1; }
-    @media (max-width: 767px) {
-      .hero { display: block; }
-      .hero__img { min-height: 100vw; background-attachment: scroll; }
-      .hero__img::after { background: linear-gradient(to bottom, transparent 60%, #0D0D0D 100%); }
-      .hero__text { border-left: none; border-top: 3px solid var(--color-accent); }
-    }
     @media (min-width: 768px) { .nav__links { display: flex; } }
 
     /* Hero — Variante C */
     .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; }
-    .hero__img { display: block; background: url('https://demoasiatisch.vercel.app/Bilder/thomas-marban-EHK-EH1SRzQ-unsplash.jpg') center/cover; position: relative; overflow: hidden; }
-    .hero__img-tag { display: none; }
+    .hero__img { display: none; background: url('Bilder/thomas-marban-EHK-EH1SRzQ-unsplash.jpg') center/cover; position: relative; }
     .hero__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 50%, #0D0D0D 100%); }
     .hero__text { background: #0D0D0D; padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; border-left: 3px solid var(--color-accent); }
     .hero__kanji { font-size: 5rem; color: rgba(212,160,23,0.12); line-height: 1; margin-bottom: var(--space-3); font-family: serif; }
@@ -70,7 +63,7 @@
     }
     @media (min-width: 768px) {
       .hero { grid-template-columns: 1.7fr 1fr; min-height: 85vh; }
-      .hero__img { display: block; min-height: 85vh; }
+      .hero__img { display: block; }
       .hero__text { padding: var(--space-8) var(--space-7); }
       .hero__title { font-size: 2.75rem; }
     }
@@ -92,10 +85,7 @@
     .about__body { color: var(--color-muted); margin-bottom: var(--space-4); }
     .about__label { color: var(--color-accent) !important; margin-bottom: 0; }
     .about__btn { margin-top: var(--space-2); }
-    .about__stack-img { width: 100%; min-height: 300px; background-size: contain; background-repeat: no-repeat; background-position: center; background-color: #111; filter: brightness(0.85); }
-    @media (min-width: 768px) {
-      .about__stack-img { height: 420px; background-size: cover; background-attachment: fixed; }
-    }
+    .about__stack-img { width: 100%; height: 420px; background-size: cover; background-position: center; background-attachment: fixed; filter: brightness(0.85); }
 
     /* Kategorien */
     .categories { background: var(--color-bg); }
