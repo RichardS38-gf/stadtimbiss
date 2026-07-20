@@ -12,7 +12,7 @@
   --color-on-dark:    #F0EAD6;
   --color-on-accent:  #0D0D0D;   /* Text auf Gold */
 
-  --font-head: 'Poppins', system-ui, sans-serif;
+  --font-head: 'Noto Serif JP', 'Poppins', serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
   --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;

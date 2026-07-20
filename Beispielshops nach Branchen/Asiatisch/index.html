@@ -23,7 +23,7 @@
 
     /* Hero — Variante C */
     .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; }
-    .hero__img { display: none; background: url('https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=1000') center/cover; position: relative; }
+    .hero__img { display: none; background: url('Bilder/dave-weatherall-vIDwXIkbkOk-unsplash.jpg') center/cover; position: relative; }
     .hero__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 50%, #0D0D0D 100%); }
     .hero__text { background: #0D0D0D; padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; border-left: 3px solid var(--color-accent); }
     .hero__kanji { font-size: 5rem; color: rgba(212,160,23,0.12); line-height: 1; margin-bottom: var(--space-3); font-family: serif; }
@@ -131,7 +131,14 @@
 
   <header class="nav">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">Asia Garden<span>Wok & Sushi · Dim Sum</span></a>
+      <a href="index.html" class="nav__logo">
+        <svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="28" font-family="'Noto Serif JP', serif" font-size="22" font-weight="900" fill="#D4A017">Asia</text>
+          <text x="58" y="28" font-family="'Noto Serif JP', serif" font-size="22" font-weight="700" fill="#F0EAD6">Garden</text>
+          <line x1="0" y1="33" x2="138" y2="33" stroke="#D4A017" stroke-width="1" opacity="0.4"/>
+          <text x="0" y="40" font-family="Inter, sans-serif" font-size="7" font-weight="400" fill="#888880" letter-spacing="2">WOK · SUSHI · DIM SUM</text>
+        </svg>
+      </a>
       <nav class="nav__links">
         <a href="#ueber-uns">Über uns</a>
         <a href="#speisekarte">Speisekarte</a>
