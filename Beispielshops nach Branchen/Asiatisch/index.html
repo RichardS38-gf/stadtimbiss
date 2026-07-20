@@ -79,6 +79,11 @@
     /* Collage — horizontaler Filmstreifen */
     .collage { background: var(--color-bg); }
     .collage__title { text-align: left; margin-bottom: var(--space-7); }
+    .collage__slider { position: relative; }
+    .collage__arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(13,13,13,0.85); border: 1px solid var(--color-accent); color: var(--color-accent); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; z-index: 2; cursor: pointer; transition: background var(--transition); }
+    .collage__arrow:hover { background: var(--color-accent); color: var(--color-on-accent); opacity: 1; }
+    .collage__arrow--prev { left: 8px; }
+    .collage__arrow--next { right: 8px; }
     .collage__strip { display: flex; gap: var(--space-3); overflow-x: auto; padding-bottom: var(--space-2); scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; }
     .collage__strip::-webkit-scrollbar { display: none; }
     .collage__item { flex-shrink: 0; width: 220px; height: 260px; border-radius: 10px; object-fit: cover; scroll-snap-align: start; transition: filter 0.3s ease; }
@@ -245,7 +250,9 @@
   <section class="section collage">
     <div class="container">
       <h2 class="collage__title">Frisch aus unserer Küche</h2>
-      <div class="collage__strip">
+      <div class="collage__slider">
+        <button class="collage__arrow collage__arrow--prev" aria-label="Zurück" type="button">&#8249;</button>
+        <div class="collage__strip">
         <img class="collage__item" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600" alt="Wok" loading="lazy">
         <img class="collage__item" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Suppe" loading="lazy">
         <img class="collage__item" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Küche" loading="lazy">
@@ -256,6 +263,8 @@
         <img class="collage__item" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600" alt="Suppe" loading="lazy">
         <img class="collage__item" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=600" alt="Küche" loading="lazy">
         <a href="bestellen.html" class="collage__more">+ mehr<br>Gerichte</a>
+        </div>
+        <button class="collage__arrow collage__arrow--next" aria-label="Weiter" type="button">&#8250;</button>
       </div>
     </div>
   </section>
@@ -339,23 +348,15 @@
     dots.forEach(d => d.addEventListener('click', () => showReview(parseInt(d.dataset.i))));
     setInterval(() => showReview((current + 1) % reviews.length), 4000);
 
-    // Vertikales Scrollen wird in horizontales Scrollen im Filmstreifen umgeleitet,
-    // bis Anfang/Ende erreicht ist -- danach scrollt die Seite normal weiter.
-    // Listener sitzt auf der ganzen Sektion, nicht nur auf dem Streifen selbst,
-    // damit es auch greift wenn die Maus z.B. über der Überschrift steht.
+    // Klick-Pfeile scrollen den Filmstreifen um jeweils eine Bildbreite weiter
     const collageSection = document.querySelector('.collage');
     const strip = document.querySelector('.collage__strip');
-    if (collageSection && strip) {
-      collageSection.addEventListener('wheel', (e) => {
-        const atStart = strip.scrollLeft <= 0;
-        const atEnd = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 1;
-        const scrollingDown = e.deltaY > 0;
-        const scrollingUp = e.deltaY < 0;
-        if ((scrollingDown && !atEnd) || (scrollingUp && !atStart)) {
-          e.preventDefault();
-          strip.scrollLeft += e.deltaY;
-        }
-      }, { passive: false });
+    const prevBtn = document.querySelector('.collage__arrow--prev');
+    const nextBtn = document.querySelector('.collage__arrow--next');
+    if (strip && prevBtn && nextBtn) {
+      const step = () => (strip.querySelector('.collage__item, .collage__more')?.offsetWidth || 220) + 16;
+      nextBtn.addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }));
+      prevBtn.addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }));
     }
   </script>
 </body>
