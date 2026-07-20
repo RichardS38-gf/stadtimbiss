@@ -341,9 +341,12 @@
 
     // Vertikales Scrollen wird in horizontales Scrollen im Filmstreifen umgeleitet,
     // bis Anfang/Ende erreicht ist -- danach scrollt die Seite normal weiter.
+    // Listener sitzt auf der ganzen Sektion, nicht nur auf dem Streifen selbst,
+    // damit es auch greift wenn die Maus z.B. über der Überschrift steht.
+    const collageSection = document.querySelector('.collage');
     const strip = document.querySelector('.collage__strip');
-    if (strip) {
-      strip.addEventListener('wheel', (e) => {
+    if (collageSection && strip) {
+      collageSection.addEventListener('wheel', (e) => {
         const atStart = strip.scrollLeft <= 0;
         const atEnd = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 1;
         const scrollingDown = e.deltaY > 0;
