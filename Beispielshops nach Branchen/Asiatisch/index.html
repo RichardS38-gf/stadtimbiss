@@ -79,12 +79,10 @@
     /* Collage — horizontaler Filmstreifen */
     .collage { background: var(--color-bg); }
     .collage__title { text-align: left; margin-bottom: var(--space-7); }
-    .collage__slider { position: relative; }
-    .collage__arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(13,13,13,0.85); border: 1px solid var(--color-accent); color: var(--color-accent); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; z-index: 2; cursor: pointer; transition: background var(--transition); }
+    .collage__slider { display: flex; align-items: center; gap: var(--space-3); }
+    .collage__arrow { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: transparent; border: 1px solid var(--color-accent); color: var(--color-accent); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; transition: background var(--transition); }
     .collage__arrow:hover { background: var(--color-accent); color: var(--color-on-accent); opacity: 1; }
-    .collage__arrow--prev { left: 8px; }
-    .collage__arrow--next { right: 8px; }
-    .collage__strip { display: flex; gap: var(--space-3); overflow-x: auto; padding-bottom: var(--space-2); scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; }
+    .collage__strip { flex: 1; min-width: 0; display: flex; gap: var(--space-3); overflow-x: auto; padding-bottom: var(--space-2); scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; }
     .collage__strip::-webkit-scrollbar { display: none; }
     .collage__item { flex-shrink: 0; width: 220px; height: 260px; border-radius: 10px; object-fit: cover; scroll-snap-align: start; transition: filter 0.3s ease; }
     .collage__item:hover { filter: brightness(0.7); }
