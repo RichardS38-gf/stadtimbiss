@@ -16,13 +16,27 @@
   <style>
     /* Nav */
     .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid var(--color-line); }
+    @media (min-width: 768px) { .nav__links { display: flex; } }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
     .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--color-accent); line-height: 1.1; }
     .nav__logo span { display: block; font-size: 0.6rem; font-family: var(--font-body); font-weight: 400; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.12em; }
     .nav__links { display: none; gap: var(--space-5); }
     .nav__links a { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--color-accent); }
     .nav__links a:hover { color: var(--color-ink); opacity: 1; }
-    @media (min-width: 768px) { .nav__links { display: flex; } }
+    /* Nav Mobile Hamburger */
+    .nav__hamburger { display: flex; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; background: none; border: none; }
+    .nav__hamburger span { display: block; width: 22px; height: 2px; background: var(--color-accent); border-radius: 2px; transition: all 0.3s ease; }
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (min-width: 768px) { .nav__hamburger { display: none; } }
+
+    .nav__mobile-menu { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #0D0D0D; border-bottom: 1px solid var(--color-line); padding: var(--space-5) var(--space-5) var(--space-6); flex-direction: column; gap: var(--space-4); z-index: 99; }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a.nav__mobile-link { font-size: var(--text-base); font-weight: 500; color: var(--color-muted); padding-block: var(--space-2); border-bottom: 1px solid var(--color-line); }
+    .nav__mobile-menu a.nav__mobile-link:last-of-type { border-bottom: none; }
+    .nav__mobile-menu .nav__mobile-btns { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-3); }
+    @media (min-width: 768px) { .nav__mobile-menu { display: none !important; } }
 
     /* Hero — Variante C */
     .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; }
@@ -179,9 +193,22 @@
         <a href="#bewertungen">Bewertungen</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <div style="display:flex;gap:0.5rem;">
-        <a href="reservieren.html" class="btn btn--outline btn--sm"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> Reservieren</a>
-        <a href="bestellen.html" class="btn btn--primary btn--sm">Jetzt bestellen →</a>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <a href="reservieren.html" class="btn btn--outline btn--sm" style="display:none" id="nav-btn-reservieren"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> Reservieren</a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm" style="display:none" id="nav-btn-bestellen">Jetzt bestellen →</a>
+        <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile-menu" id="nav-mobile-menu">
+      <a href="#ueber-uns" class="nav__mobile-link">Willkommen</a>
+      <a href="#speisekarte" class="nav__mobile-link">Speisekarte</a>
+      <a href="#bewertungen" class="nav__mobile-link">Bewertungen</a>
+      <a href="#kontakt" class="nav__mobile-link">Kontakt</a>
+      <div class="nav__mobile-btns">
+        <a href="reservieren.html" class="btn btn--outline btn--full">🪑 Tisch reservieren</a>
+        <a href="bestellen.html" class="btn btn--primary btn--full">Jetzt bestellen →</a>
       </div>
     </div>
   </header>
@@ -350,6 +377,24 @@
   </footer>
 
   <script>
+    // Desktop: Buttons einblenden
+    if (window.innerWidth >= 768) {
+      document.getElementById('nav-btn-reservieren').style.display = '';
+      document.getElementById('nav-btn-bestellen').style.display = '';
+    }
+
+    // Hamburger
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }));
+
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
     const reviews = [
