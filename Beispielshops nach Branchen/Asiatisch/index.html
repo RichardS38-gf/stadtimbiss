@@ -41,6 +41,26 @@
     .icon-gold { width: 1.15em; height: 1.15em; color: var(--color-accent); flex-shrink: 0; vertical-align: -0.2em; }
     .btn--primary .icon-gold { color: var(--color-on-accent); }
     .hero__tag .icon-gold { width: 1em; height: 1em; }
+
+    /* Schreibmaschinen-Unterstrich: nur der Strich unter dem Wort tippt sich im Loop */
+    .tw-underline { position: relative; display: inline-block; }
+    .tw-underline::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -0.08em;
+      height: 0.08em;
+      width: 0%;
+      background: var(--color-accent);
+      animation: tw-underline-loop 3.5s steps(18, end) infinite;
+    }
+    @keyframes tw-underline-loop {
+      0%   { width: 0%; }
+      45%  { width: 100%; }
+      65%  { width: 100%; }
+      72%  { width: 0%; }
+      100% { width: 0%; }
+    }
     @media (min-width: 768px) {
       .hero { grid-template-columns: 1.7fr 1fr; min-height: 85vh; }
       .hero__img { display: block; }
@@ -171,7 +191,7 @@
     <div class="hero__text">
       <div class="hero__kanji">食</div>
       <p class="hero__tag"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="3" x2="15" y2="19"/><line x1="11" y1="3" x2="20" y2="19"/></svg> Wok · Sushi · Dim Sum</p>
-      <h1 class="hero__title">Frisch aus dem Wok.<span>Direkt auf den Tisch.</span></h1>
+      <h1 class="hero__title">Frisch aus dem Wok.<span>Direkt auf den <span class="tw-underline">Tisch</span>.</span></h1>
       <p class="hero__subline">Authentische asiatische Küche — frisch zubereitet, direkt zu dir.</p>
       <div class="hero__actions">
         <a href="bestellen.html" class="btn btn--primary"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg> Jetzt bestellen</a>
@@ -197,7 +217,7 @@
           <span class="gold-divider"></span>
           <p class="label about__label">Unsere Geschichte</p>
         </div>
-        <h2>Mehr als nur ein Restaurant</h2>
+        <h2>Mehr als nur ein <span class="tw-underline">Restaurant</span></h2>
         <p class="about__body">Asia Garden steht seit über 20 Jahren für authentische asiatische Küche — von Sushi bis Wok, täglich frisch zubereitet mit Rezepten aus Japan, China, Thailand und Vietnam.</p>
         <a href="bestellen.html" class="btn btn--primary about__btn">Speisekarte ansehen</a>
       </div>
