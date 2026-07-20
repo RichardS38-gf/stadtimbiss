@@ -1,11 +1,11 @@
-/* components.css — Asia Garden */
+/* components.css — Asia Garden Dark Theme */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 0.75rem 1.5rem; min-height: 44px; font-family: var(--font-body); font-size: var(--text-base); font-weight: 600; line-height: 1; border: 2px solid transparent; cursor: pointer; transition: all var(--transition); white-space: nowrap; }
-.btn--primary { background: var(--color-accent); color: var(--color-on-dark); border-color: var(--color-accent); }
+.btn--primary { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
 .btn--primary:hover { background: var(--color-accent-dk); border-color: var(--color-accent-dk); opacity: 1; }
 .btn--outline { background: transparent; color: var(--color-accent); border-color: var(--color-accent); }
-.btn--outline:hover { background: var(--color-accent); color: var(--color-on-dark); opacity: 1; }
-.btn--outline-light { background: transparent; color: var(--color-on-dark); border-color: var(--color-on-dark); }
-.btn--outline-light:hover { background: var(--color-on-dark); color: var(--color-ink); opacity: 1; }
+.btn--outline:hover { background: var(--color-accent); color: var(--color-on-accent); opacity: 1; }
+.btn--outline-light { background: transparent; color: var(--color-ink); border-color: rgba(240,234,214,0.3); }
+.btn--outline-light:hover { background: rgba(240,234,214,0.1); opacity: 1; }
 .btn--full { width: 100%; }
 .btn--sm { padding: 0.5rem 1rem; font-size: var(--text-sm); min-height: 36px; }
 .link-accent { color: var(--color-accent); font-weight: 600; font-size: var(--text-sm); }

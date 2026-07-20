@@ -1,15 +1,16 @@
 /* tokens.css — Asia Garden */
 :root {
-  --color-accent:     #C0392B;   /* Tiefes Rot */
-  --color-accent-dk:  #96281B;
-  --color-gold:       #D4A017;   /* Gold-Akzent */
-  --color-bg:         #F9F6F1;   /* Warmes Creme */
-  --color-bg-soft:    #FFFFFF;
-  --color-ink:        #1A1A1A;
-  --color-muted:      #888888;
-  --color-line:       #E8E0D5;
-  --color-dark:       #1A0A00;   /* Sehr dunkles Braun-Schwarz */
-  --color-on-dark:    #FFFFFF;
+  --color-accent:     #D4A017;   /* Gold */
+  --color-accent-dk:  #B8880F;
+  --color-bg:         #0D0D0D;   /* Fast Schwarz */
+  --color-bg-soft:    #141414;   /* Etwas heller */
+  --color-bg-card:    #1A1A1A;   /* Karten */
+  --color-ink:        #F0EAD6;   /* Warmes Weiß */
+  --color-muted:      #888880;
+  --color-line:       #2A2A2A;
+  --color-dark:       #000000;
+  --color-on-dark:    #F0EAD6;
+  --color-on-accent:  #0D0D0D;   /* Text auf Gold */
 
   --font-head: 'Poppins', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;

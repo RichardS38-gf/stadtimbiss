@@ -11,21 +11,21 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <style>
-    .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid #2A2A2A; }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
-    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: var(--color-accent); }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: #D4A017; }
     .cart-btn { display: flex; align-items: center; gap: 0.4rem; font-size: 1.4rem; position: relative; padding: 0.5rem; min-height: 44px; color: var(--color-ink); }
     .cart-badge { display: none; position: absolute; top: 0; right: 0; background: var(--color-accent); color: white; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; align-items: center; justify-content: center; }
-    .order-mode { background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); padding-block: var(--space-4); }
+    .order-mode { background: #111; border-bottom: 1px solid #2A2A2A; padding-block: var(--space-4); }
     .order-mode-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); max-width: 540px; margin-inline: auto; }
-    .mode-card { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4) var(--space-5); background: var(--color-bg-soft); border: 2px solid var(--color-line); border-radius: 10px; cursor: pointer; text-align: left; transition: all var(--transition); }
+    .mode-card { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4) var(--space-5); background: #1A1A1A; border: 2px solid #2A2A2A; border-radius: 10px; cursor: pointer; text-align: left; transition: all var(--transition); }
     .mode-card--active { background: var(--color-accent); border-color: var(--color-accent); }
     .mode-card__emoji { font-size: 1.6rem; margin-bottom: 4px; }
     .mode-card__title { font-family: var(--font-head); font-weight: 800; font-size: var(--text-lg); color: var(--color-ink); }
-    .mode-card--active .mode-card__title { color: var(--color-on-dark); }
+    .mode-card--active .mode-card__title { color: #0D0D0D; }
     .mode-card__info { font-size: var(--text-xs); color: var(--color-muted); }
-    .mode-card--active .mode-card__info { color: rgba(255,255,255,0.8); }
-    .category-nav { position: sticky; top: 64px; z-index: 90; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); }
+    .mode-card--active .mode-card__info { color: rgba(0,0,0,0.7); }
+    .category-nav { position: sticky; top: 64px; z-index: 90; background: #111; border-bottom: 1px solid #2A2A2A; }
     .category-nav .container { overflow-x: auto; white-space: nowrap; display: flex; }
     .category-nav .container::-webkit-scrollbar { display: none; }
     .cat-link { display: inline-flex; align-items: center; padding: 0.875rem 1.25rem; font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); min-height: 44px; border-bottom: 3px solid transparent; transition: all var(--transition); }
@@ -47,7 +47,7 @@
     @media (min-width: 768px) { .menu-card__img { width: 120px; height: 120px; } }
     .cart-sidebar { width: 320px; flex-shrink: 0; display: none; }
     @media (min-width: 1024px) { .cart-sidebar { display: block; } }
-    .cart-sidebar__inner { position: sticky; top: 140px; background: var(--color-bg-soft); border: 1px solid var(--color-line); border-radius: 10px; padding: var(--space-5); }
+    .cart-sidebar__inner { position: sticky; top: 140px; background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: var(--space-5); }
     .cart-sidebar__title { font-family: var(--font-head); font-weight: 800; font-size: var(--text-xl); margin-bottom: var(--space-4); }
     .cart-empty { color: var(--color-muted); font-size: var(--text-sm); padding: var(--space-4) 0; }
     .cart-item { display: flex; align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--color-line); font-size: var(--text-sm); }

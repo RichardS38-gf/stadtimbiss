@@ -12,101 +12,118 @@
   <link rel="stylesheet" href="css/components.css">
   <style>
     /* Nav */
-    .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid var(--color-line); }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
-    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: var(--color-accent); }
-    .nav__logo span { display: block; font-size: 0.65rem; font-family: var(--font-body); font-weight: 400; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--color-accent); line-height: 1.1; }
+    .nav__logo span { display: block; font-size: 0.6rem; font-family: var(--font-body); font-weight: 400; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.12em; }
     .nav__links { display: none; gap: var(--space-5); }
-    .nav__links a { font-size: var(--text-sm); font-weight: 500; color: var(--color-ink); }
+    .nav__links a { font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); }
     .nav__links a:hover { color: var(--color-accent); opacity: 1; }
     @media (min-width: 768px) { .nav__links { display: flex; } }
 
-    /* Hero */
-    .hero { position: relative; min-height: 60vh; display: flex; align-items: center; background-image: url('https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=1400'); background-size: cover; background-position: center; }
-    .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.2) 100%); }
-    .hero__content { position: relative; z-index: 1; padding-block: var(--space-7); max-width: 580px; }
-    .hero__label { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-gold); margin-bottom: var(--space-3); }
-    .hero__title { font-size: 5rem; color: var(--color-on-dark); line-height: 1.0; margin-bottom: var(--space-3); }
-    .hero__accent { color: var(--color-accent); }
-    .hero__subline { font-size: 1.15rem; font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: var(--space-6); max-width: 440px; }
-    .hero__actions { display: flex; flex-direction: column; gap: var(--space-3); max-width: 340px; }
-    @media (min-width: 768px) { .hero { min-height: 85vh; } .hero__title { font-size: 7rem; } .hero__actions { flex-direction: row; max-width: none; } .hero__actions .btn { width: auto; } }
+    /* Hero — Variante C */
+    .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; }
+    .hero__img { display: none; background: url('https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=1000') center/cover; position: relative; }
+    .hero__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 50%, #0D0D0D 100%); }
+    .hero__text { background: #0D0D0D; padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; border-left: 3px solid var(--color-accent); }
+    .hero__kanji { font-size: 5rem; color: rgba(212,160,23,0.12); line-height: 1; margin-bottom: var(--space-3); font-family: serif; }
+    .hero__tag { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-4); }
+    .hero__title { font-size: 3rem; color: var(--color-ink); line-height: 1.05; margin-bottom: var(--space-2); }
+    .hero__title span { display: block; color: var(--color-accent); }
+    .hero__subline { font-size: 1rem; color: var(--color-muted); margin-bottom: var(--space-6); line-height: 1.6; }
+    .hero__actions { display: flex; flex-direction: column; gap: var(--space-3); }
+    @media (min-width: 768px) {
+      .hero { grid-template-columns: 2fr 1fr; min-height: 85vh; }
+      .hero__img { display: block; }
+      .hero__text { padding: var(--space-8) var(--space-7); }
+      .hero__title { font-size: 3.5rem; }
+      .hero__actions { flex-direction: column; }
+    }
 
     /* Info Banner */
-    .info-banner { background: var(--color-accent); color: var(--color-on-dark); padding-block: var(--space-4); }
+    .info-banner { background: #111; border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); padding-block: var(--space-4); }
     .info-banner__inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; max-width: var(--max-content-width); margin-inline: auto; padding-inline: var(--container-pad-mobile); }
-    .info-banner__item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 0.5rem; }
-    .info-banner__sep { display: none; opacity: 0.4; }
-    @media (min-width: 768px) { .info-banner { padding-block: var(--space-5); } .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline; } .info-banner__item { font-size: var(--text-base); } }
+    .info-banner__item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
+    .info-banner__item strong { color: var(--color-accent); }
+    .info-banner__sep { display: none; color: var(--color-line); }
+    @media (min-width: 768px) { .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline; } }
 
     /* Über uns */
-    .about { background: var(--color-bg-soft); overflow: hidden; }
+    .about { overflow: hidden; background: #111; }
     .about__grid { display: grid; grid-template-columns: 1fr; align-items: stretch; min-height: 480px; }
     .about__text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
     .about__text h2 { margin-bottom: var(--space-4); }
-    .about__text p { margin-bottom: var(--space-4); }
+    .about__text p { margin-bottom: var(--space-4); color: var(--color-muted); }
     .about__label { color: var(--color-accent); margin-bottom: var(--space-3); }
     .about__btn { margin-top: var(--space-2); align-self: flex-start; }
-    .about__img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; order: 1; }
+    .about__img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; order: 1; filter: brightness(0.85); }
     @media (min-width: 768px) { .about__grid { grid-template-columns: 1fr 1fr; } .about__text { padding: var(--space-8) var(--space-6) var(--space-8) calc((100vw - var(--max-content-width)) / 2 + var(--container-pad-desktop)); } .about__img { order: 0; min-height: unset; } }
 
     /* Kategorien */
     .categories { background: var(--color-bg); }
-    .category-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding: var(--space-5); text-align: center; background: var(--color-bg-soft); border: 1px solid var(--color-line); border-radius: 10px; transition: border-color var(--transition), box-shadow var(--transition); }
-    .category-card:hover { opacity: 1; border-color: var(--color-accent); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .category-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding: var(--space-5); text-align: center; background: var(--color-bg-card); border: 1px solid var(--color-line); border-radius: 10px; transition: border-color var(--transition), box-shadow var(--transition); }
+    .category-card:hover { opacity: 1; border-color: var(--color-accent); box-shadow: 0 0 20px rgba(212,160,23,0.15); }
     .category-card__emoji { font-size: 2.5rem; line-height: 1; }
     .category-card__name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; color: var(--color-ink); }
     .category-card__count { font-size: var(--text-xs); color: var(--color-muted); }
 
     /* Collage */
-    .collage { background: var(--color-bg-soft); }
+    .collage { background: var(--color-bg); }
     .collage__title { text-align: left; margin-bottom: var(--space-7); }
-    .collage__grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 280px 200px; gap: 8px; }
+    .collage__grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 280px 200px; gap: 4px; border: 1px solid var(--color-line); border-radius: 10px; overflow: hidden; }
     .collage__grid:hover .collage__main, .collage__grid:hover .collage__top, .collage__grid:hover .collage__bottom { filter: brightness(0.35); }
-    .collage__main, .collage__top, .collage__bottom { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; transition: filter 0.3s ease; }
+    .collage__main, .collage__top, .collage__bottom { width: 100%; height: 100%; object-fit: cover; transition: filter 0.3s ease; }
     .collage__main { grid-row: 1 / 3; }
     .collage__main:hover, .collage__top:hover, .collage__bottom:hover { filter: brightness(1) !important; }
     @media (max-width: 767px) { .collage__grid { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 140px; } .collage__main { grid-row: 1/2; grid-column: 1/3; } }
 
-    /* Bewertungen */
-    .reviews { background: var(--color-bg); }
-    .section-intro { text-align: left; margin-bottom: var(--space-7); }
+    /* Section headers */
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-7); }
+    .section-header h2 { margin: 0; }
+    .section-intro { margin-bottom: var(--space-7); }
     .section-sub { color: var(--color-muted); }
+
+    /* Bewertungen */
+    .reviews { background: #111; }
     .review-slider { padding: var(--space-4) 0; }
-    .review-slider__stars { color: #f59e0b; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: var(--space-4); }
+    .review-slider__stars { color: var(--color-accent); font-size: 1.4rem; letter-spacing: 2px; margin-bottom: var(--space-4); }
     .review-slider__quote { font-size: var(--text-2xl); font-style: italic; color: var(--color-ink); line-height: 1.5; margin-bottom: var(--space-4); transition: opacity 0.3s ease; min-height: 4rem; }
     .review-slider__author { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-5); transition: opacity 0.3s ease; }
     .review-slider__dots { display: flex; gap: 8px; }
     .review-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-line); border: none; cursor: pointer; transition: background 0.2s ease; padding: 0; }
     .review-dot--active { background: var(--color-accent); }
 
+    /* Gold Divider */
+    .gold-divider { width: 60px; height: 2px; background: var(--color-accent); margin-bottom: var(--space-5); }
+
     /* Kontakt */
-    .contact { background: var(--color-bg-soft); overflow: hidden; }
+    .contact { background: var(--color-bg); overflow: hidden; }
     .contact-grid { display: grid; grid-template-columns: 1fr; min-height: 420px; }
     .contact-text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
-    .contact-text h2 { margin-bottom: var(--space-6); }
+    .contact-text h2 { margin-bottom: var(--space-3); }
     .contact-item { display: flex; gap: var(--space-3); margin-bottom: var(--space-4); font-size: var(--text-sm); line-height: 1.7; align-items: flex-start; }
     .contact-item span:first-child { font-size: 1.25rem; flex-shrink: 0; padding-top: 2px; }
-    .contact-item strong { font-weight: 600; display: block; color: var(--color-ink); }
-    .contact-item div { flex: 1; }
+    .contact-item strong { font-weight: 600; display: block; color: var(--color-accent); }
+    .contact-item div { flex: 1; color: var(--color-muted); }
+    .contact-item a { color: var(--color-ink); }
     .contact-btn { margin-top: var(--space-4); align-self: flex-start; }
     .contact-map { min-height: 280px; }
-    .contact-map iframe { width: 100%; height: 100%; min-height: 280px; display: block; border: 0; }
+    .contact-map iframe { width: 100%; height: 100%; min-height: 280px; display: block; border: 0; filter: invert(90%) hue-rotate(180deg); }
     @media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; min-height: 520px; } .contact-text { padding: var(--space-8) var(--space-6); } .contact-map { min-height: unset; } .contact-map iframe { min-height: unset; } }
     @media (min-width: 1024px) { .contact-text { padding-left: calc((100vw - var(--max-content-width)) / 2 + var(--container-pad-desktop)); padding-right: var(--space-6); } }
 
     /* Footer */
-    .footer { background: var(--color-dark); color: var(--color-on-dark); padding-top: var(--space-7); padding-bottom: var(--space-6); }
+    .footer { background: #000; color: var(--color-ink); padding-top: var(--space-7); padding-bottom: var(--space-6); border-top: 1px solid var(--color-line); }
     .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
-    .footer__brand { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-on-dark); margin-bottom: var(--space-2); }
-    .footer__claim { opacity: 0.6; font-size: var(--text-sm); color: var(--color-on-dark); margin-bottom: var(--space-5); }
-    .footer__contact { font-style: normal; font-size: var(--text-sm); line-height: 1.9; color: var(--color-on-dark); opacity: 0.8; }
-    .footer__contact a { color: var(--color-on-dark); }
+    .footer__brand { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-accent); margin-bottom: var(--space-2); }
+    .footer__claim { opacity: 0.5; font-size: var(--text-sm); color: var(--color-ink); margin-bottom: var(--space-5); }
+    .footer__contact { font-style: normal; font-size: var(--text-sm); line-height: 1.9; color: var(--color-muted); }
+    .footer__contact a { color: var(--color-ink); }
     .footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
-    .footer__links a { color: var(--color-on-dark); opacity: 0.6; font-size: var(--text-sm); }
-    .footer__links a:hover { opacity: 1; }
-    .footer__divider { border-top: 1px solid rgba(255,255,255,0.12); margin-block: var(--space-5); }
-    .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); color: var(--color-on-dark); }
+    .footer__links a { color: var(--color-muted); opacity: 0.6; font-size: var(--text-sm); }
+    .footer__links a:hover { opacity: 1; color: var(--color-accent); }
+    .footer__divider { border-top: 1px solid var(--color-line); margin-block: var(--space-5); }
+    .footer__copy { text-align: center; opacity: 0.3; font-size: var(--text-sm); color: var(--color-ink); }
     @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
   </style>
 </head>
@@ -114,7 +131,7 @@
 
   <header class="nav">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">Asia Garden<span>Wok & Sushi</span></a>
+      <a href="index.html" class="nav__logo">Asia Garden<span>Wok & Sushi · Dim Sum</span></a>
       <nav class="nav__links">
         <a href="#ueber-uns">Über uns</a>
         <a href="#speisekarte">Speisekarte</a>
@@ -128,39 +145,39 @@
     </div>
   </header>
 
+  <!-- Hero Variante C -->
   <section class="hero">
-    <div class="hero__overlay"></div>
-    <div class="container">
-      <div class="hero__content">
-        <p class="hero__label">🍜 Wok · Sushi · Dim Sum</p>
-        <h1 class="hero__title">Frisch.<br><span class="hero__accent">Asiatisch.</span></h1>
-        <p class="hero__subline">Authentische asiatische Küche — frisch zubereitet, direkt zu dir.</p>
-        <div class="hero__actions">
-          <a href="bestellen.html" class="btn btn--primary btn--full">🛒 Jetzt bestellen</a>
-          <a href="reservieren.html" class="btn btn--outline-light btn--full">🪑 Tisch reservieren</a>
-        </div>
+    <div class="hero__img"></div>
+    <div class="hero__text">
+      <div class="hero__kanji">食</div>
+      <p class="hero__tag">🍜 Wok · Sushi · Dim Sum</p>
+      <h1 class="hero__title">Aus dem Wok.<span>Auf den Tisch.</span></h1>
+      <p class="hero__subline">Authentische asiatische Küche — frisch zubereitet, direkt zu dir.</p>
+      <div class="hero__actions">
+        <a href="bestellen.html" class="btn btn--primary btn--full">🛒 Jetzt bestellen</a>
+        <a href="reservieren.html" class="btn btn--outline btn--full">🪑 Tisch reservieren</a>
       </div>
     </div>
   </section>
 
   <section class="info-banner">
     <div class="container info-banner__inner">
-      <span class="info-banner__item">🕐 Mo–So 11:30–22:30 Uhr</span>
-      <span class="info-banner__sep">|</span>
-      <span class="info-banner__item">🛵 Lieferung ab 2,50 €</span>
-      <span class="info-banner__sep">|</span>
-      <span class="info-banner__item">⏱ 30–45 Min Lieferzeit</span>
+      <span class="info-banner__item">🕐 <strong>Mo–So</strong> 11:30–22:30 Uhr</span>
+      <span class="info-banner__sep">·</span>
+      <span class="info-banner__item">🛵 Lieferung ab <strong>2,50 €</strong></span>
+      <span class="info-banner__sep">·</span>
+      <span class="info-banner__item">⏱ <strong>30–45 Min</strong> Lieferzeit</span>
     </div>
   </section>
 
   <section class="about" id="ueber-uns">
     <div class="about__grid">
       <div class="about__text">
+        <div class="gold-divider"></div>
         <p class="label about__label">Unsere Geschichte</p>
         <h2>Mehr als nur ein Restaurant</h2>
         <p>Asia Garden steht seit über 20 Jahren für authentische asiatische Küche. Von frischen Sushi-Rollen bis zum dampfenden Wok — alles wird täglich frisch zubereitet.</p>
-        <p>Unsere Köche bringen Rezepte aus Japan, China, Thailand und Vietnam direkt auf deinen Teller. Keine Kompromisse bei den Zutaten, das schmeckt man.</p>
-        <p>Ob zum Mitnehmen, auf Lieferung oder als Tischgast — bei uns bist du herzlich willkommen.</p>
+        <p>Unsere Köche bringen Rezepte aus Japan, China, Thailand und Vietnam direkt auf deinen Teller. Keine Kompromisse bei den Zutaten.</p>
         <a href="bestellen.html" class="btn btn--primary about__btn">Speisekarte ansehen</a>
       </div>
       <img class="about__img" src="https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=800" alt="Asia Garden Küche" loading="lazy">
@@ -174,46 +191,14 @@
         <a href="bestellen.html" class="link-accent">Alle Gerichte →</a>
       </div>
       <div class="grid-4">
-        <a href="bestellen.html#sushi" class="category-card">
-          <span class="category-card__emoji">🍣</span>
-          <span class="category-card__name">Sushi</span>
-          <span class="category-card__count">12 Gerichte</span>
-        </a>
-        <a href="bestellen.html#wok" class="category-card">
-          <span class="category-card__emoji">🥢</span>
-          <span class="category-card__name">Wok-Gerichte</span>
-          <span class="category-card__count">10 Gerichte</span>
-        </a>
-        <a href="bestellen.html#vorspeisen" class="category-card">
-          <span class="category-card__emoji">🥟</span>
-          <span class="category-card__name">Vorspeisen</span>
-          <span class="category-card__count">8 Gerichte</span>
-        </a>
-        <a href="bestellen.html#suppen" class="category-card">
-          <span class="category-card__emoji">🍜</span>
-          <span class="category-card__name">Suppen & Nudelgerichte</span>
-          <span class="category-card__count">6 Gerichte</span>
-        </a>
-        <a href="bestellen.html#curry" class="category-card">
-          <span class="category-card__emoji">🍛</span>
-          <span class="category-card__name">Curry</span>
-          <span class="category-card__count">6 Gerichte</span>
-        </a>
-        <a href="bestellen.html#desserts" class="category-card">
-          <span class="category-card__emoji">🍡</span>
-          <span class="category-card__name">Desserts</span>
-          <span class="category-card__count">4 Gerichte</span>
-        </a>
-        <a href="bestellen.html#getraenke" class="category-card">
-          <span class="category-card__emoji">🧋</span>
-          <span class="category-card__name">Getränke</span>
-          <span class="category-card__count">8 Getränke</span>
-        </a>
-        <a href="bestellen.html#bento" class="category-card">
-          <span class="category-card__emoji">🍱</span>
-          <span class="category-card__name">Bento Boxen</span>
-          <span class="category-card__count">5 Boxen</span>
-        </a>
+        <a href="bestellen.html#sushi" class="category-card"><span class="category-card__emoji">🍣</span><span class="category-card__name">Sushi</span><span class="category-card__count">12 Gerichte</span></a>
+        <a href="bestellen.html#wok" class="category-card"><span class="category-card__emoji">🥢</span><span class="category-card__name">Wok-Gerichte</span><span class="category-card__count">10 Gerichte</span></a>
+        <a href="bestellen.html#vorspeisen" class="category-card"><span class="category-card__emoji">🥟</span><span class="category-card__name">Vorspeisen</span><span class="category-card__count">8 Gerichte</span></a>
+        <a href="bestellen.html#suppen" class="category-card"><span class="category-card__emoji">🍜</span><span class="category-card__name">Suppen</span><span class="category-card__count">6 Gerichte</span></a>
+        <a href="bestellen.html#curry" class="category-card"><span class="category-card__emoji">🍛</span><span class="category-card__name">Curry</span><span class="category-card__count">6 Gerichte</span></a>
+        <a href="bestellen.html#bento" class="category-card"><span class="category-card__emoji">🍱</span><span class="category-card__name">Bento Boxen</span><span class="category-card__count">5 Boxen</span></a>
+        <a href="bestellen.html#desserts" class="category-card"><span class="category-card__emoji">🍡</span><span class="category-card__name">Desserts</span><span class="category-card__count">4 Gerichte</span></a>
+        <a href="bestellen.html#getraenke" class="category-card"><span class="category-card__emoji">🧋</span><span class="category-card__name">Getränke</span><span class="category-card__count">8 Getränke</span></a>
       </div>
     </div>
   </section>
@@ -222,17 +207,18 @@
     <div class="container">
       <h2 class="collage__title">Frisch aus unserer Küche</h2>
       <div class="collage__grid">
-        <img class="collage__main" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=800" alt="Sushi Platter" loading="lazy">
-        <img class="collage__top" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=500" alt="Wok Gericht" loading="lazy">
-        <img class="collage__bottom" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500" alt="Asiatische Suppe" loading="lazy">
+        <img class="collage__main" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=800" alt="Sushi" loading="lazy">
+        <img class="collage__top" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=500" alt="Wok" loading="lazy">
+        <img class="collage__bottom" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500" alt="Suppe" loading="lazy">
       </div>
     </div>
   </section>
 
   <section class="section reviews" id="bewertungen">
     <div class="container">
-      <div class="section-intro" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:var(--space-7)">
+      <div class="section-intro" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
         <div>
+          <div class="gold-divider"></div>
           <h2>Was unsere Gäste sagen</h2>
           <p class="section-sub">⭐ 4,7 Sterne auf Google · über 480 Bewertungen</p>
         </div>
@@ -254,27 +240,16 @@
   <section class="contact" id="kontakt">
     <div class="contact-grid">
       <div class="contact-text">
+        <div class="gold-divider"></div>
         <h2>So findest du uns</h2>
-        <div class="contact-item">
-          <span>📍</span>
-          <div><strong>Adresse</strong>Musterstraße 1, 12345 Musterstadt</div>
-        </div>
-        <div class="contact-item">
-          <span>🕐</span>
-          <div><strong>Öffnungszeiten</strong>Mo–So 11:30–22:30 Uhr</div>
-        </div>
-        <div class="contact-item">
-          <span>📞</span>
-          <div><strong>Telefon</strong><a href="tel:000000000">000 / 000 000</a></div>
-        </div>
-        <div class="contact-item">
-          <span>✉️</span>
-          <div><strong>E-Mail</strong><a href="mailto:info@asia-garden.de">info@asia-garden.de</a></div>
-        </div>
+        <div class="contact-item"><span>📍</span><div><strong>Adresse</strong>Musterstraße 1, 12345 Musterstadt</div></div>
+        <div class="contact-item"><span>🕐</span><div><strong>Öffnungszeiten</strong>Mo–So 11:30–22:30 Uhr</div></div>
+        <div class="contact-item"><span>📞</span><div><strong>Telefon</strong><a href="tel:000000000">000 / 000 000</a></div></div>
+        <div class="contact-item"><span>✉️</span><div><strong>E-Mail</strong><a href="mailto:info@asia-garden.de">info@asia-garden.de</a></div></div>
         <a href="bestellen.html" class="btn btn--primary contact-btn">Jetzt bestellen</a>
       </div>
       <div class="contact-map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d77946.0!2d10.5268!3d52.2689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a5be3d6eba8a91%3A0x425ac6d94ac4720!2sBraunschweig!5e0!3m2!1sde!2sde" width="100%" height="100%" style="border:0;display:block;" allowfullscreen="" loading="lazy" title="Asia Garden Standort"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d77946.0!2d10.5268!3d52.2689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a5be3d6eba8a91%3A0x425ac6d94ac4720!2sBraunschweig!5e0!3m2!1sde!2sde" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
       </div>
     </div>
   </section>
@@ -285,11 +260,7 @@
         <div>
           <p class="footer__brand">Asia Garden</p>
           <p class="footer__claim">Wok & Sushi — Authentische asiatische Küche.</p>
-          <address class="footer__contact">
-            Musterstraße 1, 12345 Musterstadt<br>
-            Tel: <a href="tel:000000000">000 / 000 000</a><br>
-            <a href="mailto:info@asia-garden.de">info@asia-garden.de</a>
-          </address>
+          <address class="footer__contact">Musterstraße 1, 12345 Musterstadt<br>Tel: <a href="tel:000000000">000 / 000 000</a><br><a href="mailto:info@asia-garden.de">info@asia-garden.de</a></address>
         </div>
         <nav class="footer__links">
           <a href="#">Impressum</a>
