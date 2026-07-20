@@ -4,6 +4,7 @@
 .btn--primary:hover { background: var(--color-accent-dk); border-color: var(--color-accent-dk); opacity: 1; }
 .btn--outline { background: transparent; color: var(--color-accent); border-color: var(--color-accent); }
 .btn--outline:hover { background: var(--color-accent); color: var(--color-on-accent); opacity: 1; }
+.btn--outline:hover .icon-gold { color: var(--color-on-accent); }
 .btn--outline-light { background: transparent; color: var(--color-ink); border-color: rgba(240,234,214,0.3); }
 .btn--outline-light:hover { background: rgba(240,234,214,0.1); opacity: 1; }
 .btn--full { width: 100%; }
