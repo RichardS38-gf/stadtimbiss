@@ -25,7 +25,7 @@
     @media (min-width: 768px) { .nav__links { display: flex; } }
 
     /* Hero — Variante C */
-    .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; }
+    .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; max-width: 1400px; margin-inline: auto; }
     .hero__img { display: none; background: url('Bilder/thomas-marban-EHK-EH1SRzQ-unsplash.jpg') center/cover; position: relative; }
     .hero__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 50%, #0D0D0D 100%); }
     .hero__text { background: #0D0D0D; padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; border-left: 3px solid var(--color-accent); }
@@ -37,14 +37,14 @@
     .hero__actions { display: flex; flex-direction: row; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-5); }
     .hero__actions .btn { flex: 1 1 auto; }
     .hero__info { display: flex; flex-direction: column; gap: var(--space-2); }
-    .hero__info-item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
+    .hero__info-item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
+    .hero__info-item::before { content: '–'; color: var(--color-accent); font-weight: 700; }
     .hero__info-item strong { color: var(--color-accent); }
     @media (min-width: 768px) {
       .hero { grid-template-columns: 2fr 1fr; min-height: 85vh; }
       .hero__img { display: block; }
       .hero__text { padding: var(--space-8) var(--space-7); }
       .hero__title { font-size: 3.5rem; }
-      .hero__info { flex-direction: row; flex-wrap: wrap; gap: var(--space-5); }
     }
 
     /* Info-Punkte jetzt im Hero -- info-banner-Regeln nicht mehr gebraucht */
@@ -165,9 +165,9 @@
         <a href="reservieren.html" class="btn btn--outline">🪑 Tisch reservieren</a>
       </div>
       <div class="hero__info">
-        <span class="hero__info-item">🕐 <strong>Mo–So</strong> 11:30–22:30 Uhr</span>
-        <span class="hero__info-item">🛵 Lieferung ab <strong>2,50 €</strong></span>
-        <span class="hero__info-item">⏱ <strong>30–45 Min</strong> Lieferzeit</span>
+        <span class="hero__info-item"><strong>Mo–So</strong> 11:30–22:30 Uhr</span>
+        <span class="hero__info-item">Lieferung ab <strong>2,50 €</strong></span>
+        <span class="hero__info-item"><strong>30–45 Min</strong> Lieferzeit</span>
       </div>
     </div>
   </section>
