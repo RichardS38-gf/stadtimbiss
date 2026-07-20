@@ -34,22 +34,20 @@
     .hero__title { font-size: 3rem; color: var(--color-ink); line-height: 1.05; margin-bottom: var(--space-2); }
     .hero__title span { display: block; color: var(--color-accent); }
     .hero__subline { font-size: 1rem; color: var(--color-muted); margin-bottom: var(--space-6); line-height: 1.6; }
-    .hero__actions { display: flex; flex-direction: column; gap: var(--space-3); }
+    .hero__actions { display: flex; flex-direction: row; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-5); }
+    .hero__actions .btn { flex: 1 1 auto; }
+    .hero__info { display: flex; flex-direction: column; gap: var(--space-2); }
+    .hero__info-item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
+    .hero__info-item strong { color: var(--color-accent); }
     @media (min-width: 768px) {
       .hero { grid-template-columns: 2fr 1fr; min-height: 85vh; }
       .hero__img { display: block; }
       .hero__text { padding: var(--space-8) var(--space-7); }
       .hero__title { font-size: 3.5rem; }
-      .hero__actions { flex-direction: column; }
+      .hero__info { flex-direction: row; flex-wrap: wrap; gap: var(--space-5); }
     }
 
-    /* Info Banner */
-    .info-banner { background: #111; border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); padding-block: var(--space-4); }
-    .info-banner__inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; max-width: var(--max-content-width); margin-inline: auto; padding-inline: var(--container-pad-mobile); }
-    .info-banner__item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
-    .info-banner__item strong { color: var(--color-accent); }
-    .info-banner__sep { display: none; color: var(--color-line); }
-    @media (min-width: 768px) { .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline; } }
+    /* Info-Punkte jetzt im Hero -- info-banner-Regeln nicht mehr gebraucht */
 
     /* Über uns */
     .about { overflow: hidden; background: #111; }
@@ -163,19 +161,14 @@
       <h1 class="hero__title">Aus dem Wok.<span>Auf den Tisch.</span></h1>
       <p class="hero__subline">Authentische asiatische Küche — frisch zubereitet, direkt zu dir.</p>
       <div class="hero__actions">
-        <a href="bestellen.html" class="btn btn--primary btn--full">🛒 Jetzt bestellen</a>
-        <a href="reservieren.html" class="btn btn--outline btn--full">🪑 Tisch reservieren</a>
+        <a href="bestellen.html" class="btn btn--primary">🛒 Jetzt bestellen</a>
+        <a href="reservieren.html" class="btn btn--outline">🪑 Tisch reservieren</a>
       </div>
-    </div>
-  </section>
-
-  <section class="info-banner">
-    <div class="container info-banner__inner">
-      <span class="info-banner__item">🕐 <strong>Mo–So</strong> 11:30–22:30 Uhr</span>
-      <span class="info-banner__sep">·</span>
-      <span class="info-banner__item">🛵 Lieferung ab <strong>2,50 €</strong></span>
-      <span class="info-banner__sep">·</span>
-      <span class="info-banner__item">⏱ <strong>30–45 Min</strong> Lieferzeit</span>
+      <div class="hero__info">
+        <span class="hero__info-item">🕐 <strong>Mo–So</strong> 11:30–22:30 Uhr</span>
+        <span class="hero__info-item">🛵 Lieferung ab <strong>2,50 €</strong></span>
+        <span class="hero__info-item">⏱ <strong>30–45 Min</strong> Lieferzeit</span>
+      </div>
     </div>
   </section>
 
