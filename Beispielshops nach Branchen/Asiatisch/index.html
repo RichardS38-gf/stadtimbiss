@@ -60,10 +60,10 @@
     .about { overflow: hidden; background: #111; padding-block: var(--space-8); }
     .about__intro { text-align: center; max-width: 640px; margin: 0 auto var(--space-6); }
     .about__label-row { display: inline-flex; align-items: center; gap: 10px; margin-bottom: var(--space-3); }
-    .about__label-row .gold-divider { width: 24px; height: 1px; margin-bottom: 0; }
+    .about__label-row .gold-divider { width: 24px; height: 1px; margin-bottom: 0; flex-shrink: 0; }
     .about__intro h2 { margin-bottom: var(--space-3); }
-    .about__intro p { color: var(--color-muted); margin-bottom: var(--space-4); }
-    .about__label { color: var(--color-accent); margin-bottom: 0; }
+    .about__body { color: var(--color-muted); margin-bottom: var(--space-4); }
+    .about__label { color: var(--color-accent) !important; margin-bottom: 0; }
     .about__btn { margin-top: var(--space-2); }
     .about__stack-img { width: 100%; height: 420px; background-size: cover; background-position: center; background-attachment: fixed; filter: brightness(0.85); }
 
@@ -193,7 +193,7 @@
           <p class="label about__label">Unsere Geschichte</p>
         </div>
         <h2>Mehr als nur ein Restaurant</h2>
-        <p>Asia Garden steht seit über 20 Jahren für authentische asiatische Küche — von Sushi bis Wok, täglich frisch zubereitet mit Rezepten aus Japan, China, Thailand und Vietnam.</p>
+        <p class="about__body">Asia Garden steht seit über 20 Jahren für authentische asiatische Küche — von Sushi bis Wok, täglich frisch zubereitet mit Rezepten aus Japan, China, Thailand und Vietnam.</p>
         <a href="bestellen.html" class="btn btn--primary about__btn">Speisekarte ansehen</a>
       </div>
     </div>
