@@ -25,34 +25,36 @@
     @media (min-width: 768px) { .nav__links { display: flex; } }
 
     /* Hero — Variante C */
-    .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; max-width: 1400px; margin-inline: auto; }
+    .hero { display: grid; grid-template-columns: 1fr; min-height: 60vh; }
     .hero__img { display: none; background: url('Bilder/thomas-marban-EHK-EH1SRzQ-unsplash.jpg') center/cover; position: relative; }
     .hero__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 50%, #0D0D0D 100%); }
     .hero__text { background: #0D0D0D; padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; border-left: 3px solid var(--color-accent); }
     .hero__kanji { font-size: 5rem; color: rgba(212,160,23,0.12); line-height: 1; margin-bottom: var(--space-3); font-family: serif; }
     .hero__tag { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: var(--space-4); }
-    .hero__title { font-size: 3rem; color: var(--color-ink); line-height: 1.05; margin-bottom: var(--space-2); }
+    .hero__title { font-size: 2.25rem; color: var(--color-ink); line-height: 1.15; margin-bottom: var(--space-2); }
     .hero__title span { display: block; color: var(--color-accent); }
     .hero__subline { font-size: 1rem; color: var(--color-muted); margin-bottom: var(--space-6); line-height: 1.6; }
-    .hero__actions { display: flex; flex-direction: row; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-5); }
+    .hero__actions { display: flex; flex-direction: row; flex-wrap: wrap; gap: var(--space-3); }
     .hero__actions .btn { flex: 1 1 auto; }
-    .hero__info { display: flex; flex-direction: column; gap: var(--space-2); }
-    .hero__info-item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
-    .hero__info-item::before { content: '–'; color: var(--color-accent); font-weight: 700; }
-    .hero__info-item strong { color: var(--color-accent); }
 
     /* Klassische Gold-Linienicons statt Emoji */
     .icon-gold { width: 1.15em; height: 1.15em; color: var(--color-accent); flex-shrink: 0; vertical-align: -0.2em; }
     .btn--primary .icon-gold { color: var(--color-on-accent); }
-    .hero__tag .icon-gold, .hero__info-item .icon-gold { width: 1em; height: 1em; }
+    .hero__tag .icon-gold { width: 1em; height: 1em; }
     @media (min-width: 768px) {
-      .hero { grid-template-columns: 2fr 1fr; min-height: 85vh; }
+      .hero { grid-template-columns: 1.7fr 1fr; min-height: 85vh; }
       .hero__img { display: block; }
       .hero__text { padding: var(--space-8) var(--space-7); }
-      .hero__title { font-size: 3.5rem; }
+      .hero__title { font-size: 2.75rem; }
     }
 
-    /* Info-Punkte jetzt im Hero -- info-banner-Regeln nicht mehr gebraucht */
+    /* Info Banner */
+    .info-banner { background: #111; border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); padding-block: var(--space-4); }
+    .info-banner__inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; max-width: var(--max-content-width); margin-inline: auto; padding-inline: var(--container-pad-mobile); }
+    .info-banner__item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-muted); }
+    .info-banner__item strong { color: var(--color-accent); }
+    .info-banner__sep { display: none; color: var(--color-line); }
+    @media (min-width: 768px) { .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline; } }
 
     /* Über uns */
     .about { overflow: hidden; background: #111; }
@@ -163,17 +165,22 @@
     <div class="hero__text">
       <div class="hero__kanji">食</div>
       <p class="hero__tag"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="3" x2="15" y2="19"/><line x1="11" y1="3" x2="20" y2="19"/></svg> Wok · Sushi · Dim Sum</p>
-      <h1 class="hero__title">Aus dem Wok.<span>Auf den Tisch.</span></h1>
+      <h1 class="hero__title">Frisch aus dem Wok.<span>Direkt auf den Tisch.</span></h1>
       <p class="hero__subline">Authentische asiatische Küche — frisch zubereitet, direkt zu dir.</p>
       <div class="hero__actions">
         <a href="bestellen.html" class="btn btn--primary"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg> Jetzt bestellen</a>
         <a href="reservieren.html" class="btn btn--outline"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> Tisch reservieren</a>
       </div>
-      <div class="hero__info">
-        <span class="hero__info-item"><strong>Mo–So</strong> 11:30–22:30 Uhr</span>
-        <span class="hero__info-item">Lieferung ab <strong>2,50 €</strong></span>
-        <span class="hero__info-item"><strong>30–45 Min</strong> Lieferzeit</span>
-      </div>
+    </div>
+  </section>
+
+  <section class="info-banner">
+    <div class="container info-banner__inner">
+      <span class="info-banner__item"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg> <strong>Mo–So</strong> 11:30–22:30 Uhr</span>
+      <span class="info-banner__sep">·</span>
+      <span class="info-banner__item"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M6 18V9h3l4 5h4l2 4M9 9V6h3"/></svg> Lieferung ab <strong>2,50 €</strong></span>
+      <span class="info-banner__sep">·</span>
+      <span class="info-banner__item"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"/><polyline points="12 10 12 13 14 14"/><path d="M9 3h6M11 3v2M13 3v2"/></svg> <strong>30–45 Min</strong> Lieferzeit</span>
     </div>
   </section>
 
