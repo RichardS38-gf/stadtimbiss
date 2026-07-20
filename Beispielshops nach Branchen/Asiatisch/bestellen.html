@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bestellen — Asia Garden</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍜</text></svg>">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; color: var(--color-accent); }
+    .cart-btn { display: flex; align-items: center; gap: 0.4rem; font-size: 1.4rem; position: relative; padding: 0.5rem; min-height: 44px; color: var(--color-ink); }
+    .cart-badge { display: none; position: absolute; top: 0; right: 0; background: var(--color-accent); color: white; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; align-items: center; justify-content: center; }
+    .order-mode { background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); padding-block: var(--space-4); }
+    .order-mode-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); max-width: 540px; margin-inline: auto; }
+    .mode-card { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4) var(--space-5); background: var(--color-bg-soft); border: 2px solid var(--color-line); border-radius: 10px; cursor: pointer; text-align: left; transition: all var(--transition); }
+    .mode-card--active { background: var(--color-accent); border-color: var(--color-accent); }
+    .mode-card__emoji { font-size: 1.6rem; margin-bottom: 4px; }
+    .mode-card__title { font-family: var(--font-head); font-weight: 800; font-size: var(--text-lg); color: var(--color-ink); }
+    .mode-card--active .mode-card__title { color: var(--color-on-dark); }
+    .mode-card__info { font-size: var(--text-xs); color: var(--color-muted); }
+    .mode-card--active .mode-card__info { color: rgba(255,255,255,0.8); }
+    .category-nav { position: sticky; top: 64px; z-index: 90; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); }
+    .category-nav .container { overflow-x: auto; white-space: nowrap; display: flex; }
+    .category-nav .container::-webkit-scrollbar { display: none; }
+    .cat-link { display: inline-flex; align-items: center; padding: 0.875rem 1.25rem; font-size: var(--text-sm); font-weight: 500; color: var(--color-muted); min-height: 44px; border-bottom: 3px solid transparent; transition: all var(--transition); }
+    .cat-link--active { color: var(--color-accent); border-bottom-color: var(--color-accent); font-weight: 700; }
+    .order-layout { display: flex; gap: var(--space-6); max-width: var(--max-content-width); margin-inline: auto; padding-inline: var(--container-pad-mobile); padding-block: var(--space-6); }
+    @media (min-width: 1024px) { .order-layout { padding-inline: var(--container-pad-desktop); } }
+    .menu-area { flex: 1; min-width: 0; }
+    .menu-section { margin-bottom: var(--space-7); }
+    .menu-section__title { font-size: var(--text-2xl); margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-accent); }
+    .menu-card { display: flex; gap: var(--space-3); padding-block: var(--space-4); border-bottom: 1px solid var(--color-line); overflow: visible; }
+    .menu-card:last-child { border-bottom: none; }
+    .menu-card__img { width: 100px; height: 100px; object-fit: cover; flex-shrink: 0; border-radius: 8px; }
+    .menu-card__body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; overflow: visible; }
+    .menu-card__name { font-family: var(--font-head); font-weight: 700; font-size: var(--text-base); margin-bottom: var(--space-1); display: flex; align-items: center; gap: 4px; overflow: visible; }
+    .menu-card__badge { display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; background: var(--color-accent); color: white; padding: 0.15rem 0.4rem; border-radius: 3px; margin-left: 0.4rem; }
+    .menu-card__desc { font-size: var(--text-xs); color: var(--color-muted); margin-bottom: var(--space-3); line-height: 1.5; }
+    .menu-card__footer { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+    .menu-card__price { font-family: var(--font-head); font-weight: 800; font-size: var(--text-lg); color: var(--color-accent); }
+    @media (min-width: 768px) { .menu-card__img { width: 120px; height: 120px; } }
+    .cart-sidebar { width: 320px; flex-shrink: 0; display: none; }
+    @media (min-width: 1024px) { .cart-sidebar { display: block; } }
+    .cart-sidebar__inner { position: sticky; top: 140px; background: var(--color-bg-soft); border: 1px solid var(--color-line); border-radius: 10px; padding: var(--space-5); }
+    .cart-sidebar__title { font-family: var(--font-head); font-weight: 800; font-size: var(--text-xl); margin-bottom: var(--space-4); }
+    .cart-empty { color: var(--color-muted); font-size: var(--text-sm); padding: var(--space-4) 0; }
+    .cart-item { display: flex; align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--color-line); font-size: var(--text-sm); }
+    .cart-item__name { flex: 1; font-weight: 500; }
+    .cart-item__controls { display: flex; align-items: center; gap: var(--space-1); }
+    .cart-item__qty-input { width: 40px; height: 28px; text-align: center; border: 1px solid var(--color-line); font-size: var(--text-sm); font-weight: 600; border-radius: 4px; -moz-appearance: textfield; }
+    .cart-item__qty-input::-webkit-inner-spin-button, .cart-item__qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .cart-item__remove { width: 24px; height: 24px; font-size: 0.7rem; color: var(--color-muted); display: flex; align-items: center; justify-content: center; }
+    .cart-item__price { font-family: var(--font-head); font-weight: 700; }
+    .cart-summary { margin-top: var(--space-4); }
+    .cart-summary__row { display: flex; justify-content: space-between; font-size: var(--text-sm); padding-block: var(--space-2); }
+    .cart-summary__total { font-family: var(--font-head); font-weight: 800; font-size: var(--text-lg); border-top: 2px solid var(--color-line); padding-top: var(--space-3); margin-top: var(--space-2); }
+    .cart-summary .btn { margin-top: var(--space-4); }
+    .cart-fab { display: none; position: fixed; bottom: 1rem; left: 1rem; right: 1rem; background: var(--color-accent); color: white; padding: 0.875rem 1.25rem; font-family: var(--font-body); font-weight: 600; font-size: 1rem; align-items: center; justify-content: space-between; z-index: 150; border-radius: 10px; box-shadow: 0 4px 20px rgba(192,57,43,0.4); min-height: 54px; border: none; cursor: pointer; }
+    .cart-fab.visible { display: flex; }
+    .cart-fab__count { background: white; color: var(--color-accent); font-weight: 800; font-size: 0.8rem; padding: 0.15rem 0.5rem; border-radius: 999px; }
+    @media (min-width: 1024px) { .cart-fab { display: none !important; } }
+    .cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+    .cart-overlay.active { display: block; }
+    .cart-drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-bg-soft); z-index: 201; max-height: 80vh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform 0.3s ease; border-radius: 12px 12px 0 0; }
+    .cart-drawer.active { transform: translateY(0); }
+    .cart-drawer__header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--color-line); }
+    .cart-drawer__header h3 { font-family: var(--font-head); font-weight: 800; }
+    .cart-drawer__close { font-size: 1.25rem; color: var(--color-muted); min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .cart-drawer__body { flex: 1; overflow-y: auto; padding: 1rem 1.25rem; }
+    .cart-drawer__footer { padding: 1rem 1.25rem; border-top: 1px solid var(--color-line); }
+    @media (min-width: 1024px) { .cart-drawer, .cart-overlay { display: none !important; } }
+    /* Allergen */
+    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color-line); color: var(--color-muted); font-size: 0.6rem; font-weight: 700; font-style: normal; border: none; cursor: pointer; margin-left: 6px; flex-shrink: 0; transition: background 0.15s ease; position: relative; vertical-align: middle; line-height: 1; }
+    .allergen-btn::before { content: 'i'; font-style: italic; }
+    .allergen-btn:hover { background: var(--color-accent); color: #fff; }
+    .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1A1A1A; color: #fff; font-size: 0.75rem; padding: 0.4rem 0.7rem; border-radius: 6px; white-space: nowrap; z-index: 9999; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+    .allergen-btn:hover .allergen-tooltip { display: block; }
+    /* Footer */
+    .footer { background: var(--color-dark); color: var(--color-on-dark); padding-top: var(--space-7); padding-bottom: var(--space-6); margin-top: var(--space-7); }
+    .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+    .footer__brand { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-on-dark); margin-bottom: var(--space-2); }
+    .footer__claim { opacity: 0.6; font-size: var(--text-sm); color: var(--color-on-dark); margin-bottom: var(--space-5); }
+    .footer__contact { font-style: normal; font-size: var(--text-sm); line-height: 1.9; color: var(--color-on-dark); opacity: 0.8; }
+    .footer__contact a { color: var(--color-on-dark); }
+    .footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer__links a { color: var(--color-on-dark); opacity: 0.6; font-size: var(--text-sm); }
+    .footer__divider { border-top: 1px solid rgba(255,255,255,0.12); margin-block: var(--space-5); }
+    .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); color: var(--color-on-dark); }
+    @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">Asia Garden</a>
+      <a href="reservieren.html" class="btn btn--outline btn--sm" style="margin-left:auto;margin-right:var(--space-3)">🪑 Reservieren</a>
+      <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">🛒 <span class="cart-badge" id="cart-count">0</span></button>
+    </div>
+  </header>
+
+  <div class="order-mode">
+    <div class="container">
+      <div class="order-mode-toggle">
+        <button class="mode-card mode-card--active" data-mode="lieferung">
+          <span class="mode-card__emoji">🛵</span>
+          <span class="mode-card__title">Lieferung</span>
+          <span class="mode-card__info">~40 Min · ab 2,50 €</span>
+        </button>
+        <button class="mode-card" data-mode="abholung">
+          <span class="mode-card__emoji">🏃</span>
+          <span class="mode-card__title">Abholung</span>
+          <span class="mode-card__info">~15 Min · kostenlos</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="category-nav">
+    <div class="container">
+      <a class="cat-link cat-link--active" href="#sushi">🍣 Sushi</a>
+      <a class="cat-link" href="#wok">🥢 Wok</a>
+      <a class="cat-link" href="#vorspeisen">🥟 Vorspeisen</a>
+      <a class="cat-link" href="#suppen">🍜 Suppen</a>
+      <a class="cat-link" href="#curry">🍛 Curry</a>
+      <a class="cat-link" href="#bento">🍱 Bento</a>
+      <a class="cat-link" href="#desserts">🍡 Desserts</a>
+      <a class="cat-link" href="#getraenke">🧋 Getränke</a>
+    </div>
+  </nav>
+
+  <div class="order-layout">
+    <main class="menu-area">
+
+      <!-- SUSHI -->
+      <section class="menu-section" id="sushi">
+        <h2 class="menu-section__title">🍣 Sushi</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="California Roll" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">California Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Krabben, Avocado, Gurke, Sesam</p>
+            <div class="menu-card__footer"><span class="menu-card__price">8,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="California Roll" data-price="8.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Lachs Nigiri" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Lachs Nigiri (6 Stück)</h3>
+            <p class="menu-card__desc">Frischer Lachs auf Sushireis</p>
+            <div class="menu-card__footer"><span class="menu-card__price">9,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s2" data-name="Lachs Nigiri" data-price="9.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Dragon Roll" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Dragon Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Garnelen, Avocado, Thunfisch, Spicy Mayo</p>
+            <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s3" data-name="Dragon Roll" data-price="12.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Thunfisch Maki" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Thunfisch Maki (6 Stück)</h3>
+            <p class="menu-card__desc">Roter Thunfisch, Sushireis, Nori</p>
+            <div class="menu-card__footer"><span class="menu-card__price">7,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s4" data-name="Thunfisch Maki" data-price="7.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Veggie Roll" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Veggie Roll (8 Stück)</h3>
+            <p class="menu-card__desc">Gurke, Avocado, Paprika, Karotte</p>
+            <div class="menu-card__footer"><span class="menu-card__price">7,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s5" data-name="Veggie Roll" data-price="7.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- WOK -->
+      <section class="menu-section" id="wok">
+        <h2 class="menu-section__title">🥢 Wok-Gerichte</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Rindfleisch Wok" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Rindfleisch Wok <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Zartes Rindfleisch, Gemüse, Austernsoße, Ingwer</p>
+            <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w1" data-name="Rindfleisch Wok" data-price="13.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Garnelen Wok" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Garnelen Wok</h3>
+            <p class="menu-card__desc">Riesengarnelen, Pak Choi, Bambussprossen, Chili</p>
+            <div class="menu-card__footer"><span class="menu-card__price">14,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w2" data-name="Garnelen Wok" data-price="14.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Pad Thai" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pad Thai <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Reisnudeln, Hähnchen, Ei, Erdnüsse, Tamarinde</p>
+            <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w3" data-name="Pad Thai" data-price="12.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Tofu Wok" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Tofu Wok (vegan)</h3>
+            <p class="menu-card__desc">Knuspriger Tofu, Broccoli, Karotten, Sojasoße</p>
+            <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w4" data-name="Tofu Wok" data-price="11.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- VORSPEISEN -->
+      <section class="menu-section" id="vorspeisen">
+        <h2 class="menu-section__title">🥟 Vorspeisen</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Gyoza" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Gyoza (6 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Japanische Teigtaschen mit Schweinefleisch und Kohl, Dip</p>
+            <div class="menu-card__footer"><span class="menu-card__price">6,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Gyoza" data-price="6.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Frühlingsrollen" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Frühlingsrollen (4 Stück)</h3>
+            <p class="menu-card__desc">Knusprig, gefüllt mit Gemüse und Glasnudeln</p>
+            <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v2" data-name="Frühlingsrollen" data-price="5.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Edamame" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Edamame</h3>
+            <p class="menu-card__desc">Gedämpfte Sojabohnen mit Meersalz</p>
+            <div class="menu-card__footer"><span class="menu-card__price">4,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v3" data-name="Edamame" data-price="4.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Dim Sum" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Dim Sum (4 Stück)</h3>
+            <p class="menu-card__desc">Gedämpfte Reisteigtaschen mit Garnelen</p>
+            <div class="menu-card__footer"><span class="menu-card__price">7,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v4" data-name="Dim Sum" data-price="7.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- SUPPEN -->
+      <section class="menu-section" id="suppen">
+        <h2 class="menu-section__title">🍜 Suppen & Nudelgerichte</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Ramen" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Tonkotsu Ramen <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Reichhaltige Schweinebrühe, Chashu Pork, Ei, Bambussprossen, Nori</p>
+            <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su1" data-name="Tonkotsu Ramen" data-price="13.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Pho" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pho Bo</h3>
+            <p class="menu-card__desc">Vietnamesische Rindfleischsuppe, Reisnudeln, Kräuter, Limette</p>
+            <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su2" data-name="Pho Bo" data-price="11.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Miso Suppe" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Miso Suppe</h3>
+            <p class="menu-card__desc">Klassische japanische Miso-Suppe mit Tofu und Wakame</p>
+            <div class="menu-card__footer"><span class="menu-card__price">3,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su3" data-name="Miso Suppe" data-price="3.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- CURRY -->
+      <section class="menu-section" id="curry">
+        <h2 class="menu-section__title">🍛 Curry</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Thai Green Curry" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Thai Green Curry <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Hähnchen, Kokosmilch, Aubergine, Basilikum, Jasminreis</p>
+            <div class="menu-card__footer"><span class="menu-card__price">13,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Thai Green Curry" data-price="13.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Massaman Curry" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Massaman Curry</h3>
+            <p class="menu-card__desc">Rind, Kartoffeln, Kokosmilch, Erdnüsse, Jasminreis</p>
+            <div class="menu-card__footer"><span class="menu-card__price">14,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c2" data-name="Massaman Curry" data-price="14.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Veggie Curry" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Veggie Curry (vegan)</h3>
+            <p class="menu-card__desc">Tofu, Gemüse, rotes Curry, Kokosmilch, Jasminreis</p>
+            <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c3" data-name="Veggie Curry" data-price="11.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- BENTO -->
+      <section class="menu-section" id="bento">
+        <h2 class="menu-section__title">🍱 Bento Boxen</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=300" alt="Lachs Bento" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Lachs Bento <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">6x Lachs Nigiri, California Roll, Miso Suppe, Edamame, Salat</p>
+            <div class="menu-card__footer"><span class="menu-card__price">18,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b1" data-name="Lachs Bento" data-price="18.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=300" alt="Wok Bento" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Wok Bento</h3>
+            <p class="menu-card__desc">Rindfleisch Wok, Jasminreis, Gyoza, Miso Suppe</p>
+            <div class="menu-card__footer"><span class="menu-card__price">17,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b2" data-name="Wok Bento" data-price="17.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- DESSERTS -->
+      <section class="menu-section" id="desserts">
+        <h2 class="menu-section__title">🍡 Desserts</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300" alt="Mochi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Mochi Ice Cream (3 Stück)</h3>
+            <p class="menu-card__desc">Japanisches Reiskuchen-Eis — Matcha, Mango, Erdbeere</p>
+            <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="d1" data-name="Mochi Ice Cream" data-price="5.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300" alt="Matcha Cheesecake" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Matcha Cheesecake</h3>
+            <p class="menu-card__desc">Cremiger Käsekuchen mit japanischem Matcha</p>
+            <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="d2" data-name="Matcha Cheesecake" data-price="4.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- GETRÄNKE -->
+      <section class="menu-section" id="getraenke">
+        <h2 class="menu-section__title">🧋 Getränke</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300" alt="Bubble Tea" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Bubble Tea <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Taro, Matcha, Mango oder Erdbeere — mit Tapioka Pearls</p>
+            <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Bubble Tea" data-price="4.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300" alt="Matcha Latte" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Matcha Latte</h3>
+            <p class="menu-card__desc">Japanischer Matcha mit Milch, warm oder kalt</p>
+            <div class="menu-card__footer"><span class="menu-card__price">3,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Matcha Latte" data-price="3.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=300" alt="Jasmin Tee" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Jasmin Tee</h3>
+            <p class="menu-card__desc">Chinesischer Jasmin-Grüntee, 0,5l Kanne</p>
+            <div class="menu-card__footer"><span class="menu-card__price">2,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g3" data-name="Jasmin Tee" data-price="2.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300" alt="Cola" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cola 0,5l</h3>
+            <p class="menu-card__desc">Klassisch</p>
+            <div class="menu-card__footer"><span class="menu-card__price">2,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g4" data-name="Cola 0,5l" data-price="2.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <aside class="cart-sidebar">
+      <div class="cart-sidebar__inner">
+        <h3 class="cart-sidebar__title">Deine Bestellung</h3>
+        <div id="cart-items"></div>
+        <div class="cart-empty" id="cart-empty">Noch keine Artikel im Warenkorb.</div>
+        <div class="cart-summary" id="cart-summary" style="display:none">
+          <div class="cart-summary__row"><span>Zwischensumme</span><span id="cart-subtotal">0,00 €</span></div>
+          <div class="cart-summary__row"><span>Lieferung</span><span>2,50 €</span></div>
+          <div class="cart-summary__row cart-summary__total"><span>Gesamt</span><span id="cart-total">0,00 €</span></div>
+          <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header"><h3>Deine Bestellung</h3><button class="cart-drawer__close" id="cart-close">✕</button></div>
+    <div class="cart-drawer__body">
+      <div id="cart-items-mobile"></div>
+      <div class="cart-empty" id="cart-empty-mobile">Noch keine Artikel im Warenkorb.</div>
+    </div>
+    <div class="cart-drawer__footer" id="cart-summary-mobile" style="display:none">
+      <div class="cart-summary__row"><span>Zwischensumme</span><span id="cart-subtotal-mobile">0,00 €</span></div>
+      <div class="cart-summary__row"><span>Lieferung</span><span>2,50 €</span></div>
+      <div class="cart-summary__row cart-summary__total"><span>Gesamt</span><span id="cart-total-mobile">0,00 €</span></div>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cart-fab">🛒 Warenkorb <span class="cart-fab__count" id="cart-fab-count">0</span><span id="cart-fab-price">0,00 €</span></button>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div>
+          <p class="footer__brand">Asia Garden</p>
+          <p class="footer__claim">Wok & Sushi — Authentische asiatische Küche.</p>
+          <address class="footer__contact">Musterstraße 1, 12345 Musterstadt<br>Tel: <a href="tel:000000000">000 / 000 000</a></address>
+        </div>
+        <nav class="footer__links">
+          <a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">Allergene &amp; Zusatzstoffe</a>
+        </nav>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Asia Garden — Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { addToCart, getCart, getCartTotal, getCartCount, updateQty, removeFromCart } from './js/cart.js';
+    function fmt(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
+    function cartItemHTML(i) { return `<div class="cart-item" data-id="${i.id}"><span class="cart-item__name">${i.name}</span><div class="cart-item__controls"><input class="cart-item__qty-input" type="number" min="0" value="${i.qty}" data-id="${i.id}"><button class="cart-item__remove" data-id="${i.id}">✕</button></div><span class="cart-item__price">${fmt(i.price*i.qty)}</span></div>`; }
+    function render() {
+      const cart = getCart(), n = getCartCount(), sub = getCartTotal();
+      const badge = document.getElementById('cart-count'); if(badge){badge.textContent=n;badge.style.display=n>0?'flex':'none';}
+      const fab = document.getElementById('cart-fab'); if(fab) fab.classList.toggle('visible', n>0);
+      const fc = document.getElementById('cart-fab-count'); if(fc) fc.textContent=n;
+      const fp = document.getElementById('cart-fab-price'); if(fp) fp.textContent=fmt(sub+2.5);
+      ['','−mobile'].forEach(s=>{
+        const suf = s.replace('−','-');
+        const items=document.getElementById('cart-items'+suf), empty=document.getElementById('cart-empty'+suf), summary=document.getElementById('cart-summary'+suf);
+        const subt=document.getElementById('cart-subtotal'+suf), tot=document.getElementById('cart-total'+suf);
+        if(!items) return;
+        if(!cart.length){items.innerHTML='';if(empty)empty.style.display='block';if(summary)summary.style.display='none';return;}
+        if(empty)empty.style.display='none';if(summary)summary.style.display='block';
+        if(subt)subt.textContent=fmt(sub);if(tot)tot.textContent=fmt(sub+2.5);
+        items.innerHTML=cart.map(cartItemHTML).join('');
+      });
+    }
+    function bind(el){if(!el)return;el.addEventListener('change',e=>{if(e.target.classList.contains('cart-item__qty-input')){const q=parseInt(e.target.value);if(q<=0)removeFromCart(e.target.dataset.id);else updateQty(e.target.dataset.id,q);render();}});el.addEventListener('click',e=>{if(e.target.classList.contains('cart-item__remove')){removeFromCart(e.target.dataset.id);render();}});}
+    bind(document.getElementById('cart-items'));bind(document.getElementById('cart-items-mobile'));
+    document.querySelectorAll('.add-to-cart').forEach(btn=>btn.addEventListener('click',()=>{addToCart({id:btn.dataset.id,name:btn.dataset.name,price:parseFloat(btn.dataset.price)});render();btn.textContent='✓ Hinzugefügt';btn.style.background='#2a9d4e';btn.style.borderColor='#2a9d4e';setTimeout(()=>{btn.textContent='+ Hinzufügen';btn.style.background='';btn.style.borderColor='';},1000);}));
+    document.querySelectorAll('.mode-card').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.mode-card').forEach(b=>b.classList.remove('mode-card--active'));btn.classList.add('mode-card--active');}));
+    const open=()=>{document.getElementById('cart-drawer').classList.add('active');document.getElementById('cart-overlay').classList.add('active');document.body.style.overflow='hidden';render();};
+    const close=()=>{document.getElementById('cart-drawer').classList.remove('active');document.getElementById('cart-overlay').classList.remove('active');document.body.style.overflow='';};
+    document.getElementById('cart-toggle')?.addEventListener('click',open);document.getElementById('cart-fab')?.addEventListener('click',open);document.getElementById('cart-close')?.addEventListener('click',close);document.getElementById('cart-overlay')?.addEventListener('click',close);
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.cat-link').forEach(l=>l.classList.remove('cat-link--active'));const a=document.querySelector(`.cat-link[href="#${e.target.id}"]`);if(a)a.classList.add('cat-link--active');}});},{rootMargin:'-50% 0px -50% 0px'});
+    document.querySelectorAll('.menu-section').forEach(s=>obs.observe(s));
+    const nav=document.querySelector('.nav');window.addEventListener('scroll',()=>nav?.classList.toggle('scrolled',window.scrollY>10));
+    render();
+  </script>
+</body>
+</html>
