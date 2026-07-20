@@ -42,6 +42,21 @@
     @media (min-width: 1024px) { .order-layout { padding-inline: var(--container-pad-desktop); } }
     .menu-area { flex: 1; min-width: 0; }
     .menu-section { margin-bottom: var(--space-7); }
+    .reviews-section { margin-bottom: var(--space-7); }
+    .reviews-section__title { font-size: var(--text-2xl); margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-accent); }
+    .reviews-overview { display: flex; flex-direction: column; gap: var(--space-4); }
+    @media (min-width: 768px) { .reviews-overview { flex-direction: row; align-items: stretch; } }
+    .reviews-score { text-align: center; flex-shrink: 0; padding: var(--space-5); background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    @media (min-width: 768px) { .reviews-score { min-width: 160px; } }
+    .reviews-score__num { font-family: var(--font-head); font-weight: 800; font-size: 2.5rem; color: var(--color-ink); line-height: 1; }
+    .reviews-score__stars { color: var(--color-accent); font-size: 1.1rem; letter-spacing: 2px; margin: 0.4rem 0; }
+    .reviews-score__count { font-size: var(--text-xs); color: var(--color-muted); }
+    .reviews-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-3); flex: 1; }
+    @media (min-width: 640px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+    .review-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: var(--space-4); }
+    .review-card__stars { color: var(--color-accent); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .review-card__quote { font-size: var(--text-sm); color: var(--color-ink); line-height: 1.5; margin-bottom: 0.75rem; }
+    .review-card__author { font-size: var(--text-xs); color: var(--color-muted); }
     .menu-section__title { font-size: var(--text-2xl); margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-accent); display: flex; align-items: center; gap: 0.5rem; }
     .menu-card { display: flex; gap: var(--space-3); padding-block: var(--space-4); border-bottom: 1px solid var(--color-line); overflow: visible; }
     .menu-card:last-child { border-bottom: none; }
@@ -189,6 +204,35 @@
             <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su1" data-name="Tonkotsu Ramen" data-price="13.90">+ Hinzufügen</button></div>
           </div>
         </article>
+      </section>
+
+      <!-- BEWERTUNGEN -->
+      <section class="reviews-section">
+        <h2 class="reviews-section__title">Bewertungen und Rezensionen</h2>
+        <div class="reviews-overview">
+          <div class="reviews-score">
+            <div class="reviews-score__num">4,8</div>
+            <div class="reviews-score__stars">★★★★★</div>
+            <div class="reviews-score__count">600+ Bewertungen</div>
+          </div>
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="review-card__stars">★★★★★</div>
+              <p class="review-card__quote">„Die California Roll war unglaublich frisch, und die Lieferung ging viel schneller als erwartet.“</p>
+              <p class="review-card__author">Nina K. · 03.06.26</p>
+            </div>
+            <div class="review-card">
+              <div class="review-card__stars">★★★★★</div>
+              <p class="review-card__quote">„Endlich ein Pad Thai, das wirklich nach Thailand schmeckt. Kommt bei uns jetzt jede Woche auf den Tisch.“</p>
+              <p class="review-card__author">Marcel H. · 21.05.26</p>
+            </div>
+            <div class="review-card">
+              <div class="review-card__stars">★★★★☆</div>
+              <p class="review-card__quote">„Die Empfohlen-Auswahl macht die Entscheidung so viel leichter. Tonkotsu Ramen war der Favorit vom Tisch.“</p>
+              <p class="review-card__author">Sophie L. · 09.04.26</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- SUSHI -->
