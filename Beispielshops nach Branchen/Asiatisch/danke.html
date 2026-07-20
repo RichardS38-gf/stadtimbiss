@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vielen Dank · Asia Garden</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4A017' stroke-width='2' stroke-linecap='round'><line x1='6' y1='3' x2='15' y2='19'/><line x1='11' y1='3' x2='20' y2='19'/></svg>">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid #2A2A2A; }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: #D4A017; }
+    .icon-gold { width: 1.1em; height: 1.1em; color: var(--color-accent); flex-shrink: 0; vertical-align: -0.15em; }
+    .danke-main { max-width: 560px; text-align: center; padding-block: var(--space-8); }
+    .danke-icon { width: 4rem; height: 4rem; margin: 0 auto var(--space-5); }
+    .danke-icon .icon-gold { width: 100%; height: 100%; }
+    .danke-main h1 { margin-bottom: var(--space-3); }
+    .danke-main > p { color: var(--color-muted); margin-bottom: var(--space-6); }
+    .danke-info { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: var(--space-5); margin-bottom: var(--space-6); text-align: left; }
+    .danke-info__item { display: flex; justify-content: space-between; padding-block: var(--space-3); border-bottom: 1px solid var(--color-line); font-size: var(--text-sm); }
+    .danke-info__item:last-child { border-bottom: none; }
+    .danke-info__item strong { color: var(--color-ink); }
+    .danke-info__item span { color: var(--color-accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <svg width="175" height="30" viewBox="0 0 175 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="24" font-family="serif" font-size="24" font-weight="700" fill="#D4A017">食</text>
+          <text x="30" y="24" font-family="'Noto Serif JP', serif" font-size="22" font-weight="900" fill="#D4A017">Asia</text>
+          <text x="88" y="24" font-family="'Noto Serif JP', serif" font-size="22" font-weight="700" fill="#F0EAD6">Garden</text>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <main class="danke-main container">
+    <div class="danke-icon"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7 12 10.5 15.5 17 9"/></svg></div>
+    <h1>Vielen Dank!</h1>
+    <p>Deine Bestellung wurde aufgenommen. Wir bereiten dein Essen vor.</p>
+    <div class="danke-info">
+      <div class="danke-info__item">
+        <strong>Bestellnummer</strong>
+        <span>#2026-0417</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Voraussichtliche Lieferzeit</strong>
+        <span>ca. 40 Minuten</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Zahlungsart</strong>
+        <span>Bar bei Lieferung</span>
+      </div>
+    </div>
+    <a href="index.html" class="btn btn--outline">← Zurück zur Startseite</a>
+  </main>
+
+  <script type="module">
+    import { clearCart } from './js/cart.js';
+    clearCart();
+
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
+</body>
+</html>
