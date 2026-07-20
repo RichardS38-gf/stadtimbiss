@@ -85,7 +85,8 @@
     .about__body { color: var(--color-muted); margin-bottom: var(--space-4); }
     .about__label { color: var(--color-accent) !important; margin-bottom: 0; }
     .about__btn { margin-top: var(--space-2); }
-    .about__stack-img { width: 100%; height: 420px; background-size: cover; background-position: center; background-attachment: fixed; filter: brightness(0.85); }
+    .about__stack-img { width: 100%; height: 420px; background-size: cover; background-position: center; background-attachment: scroll; filter: brightness(0.85); }
+    @media (min-width: 768px) { .about__stack-img { background-attachment: fixed; } }
 
     /* Kategorien */
     .categories { background: var(--color-bg); }
