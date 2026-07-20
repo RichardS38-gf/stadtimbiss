@@ -53,8 +53,8 @@
     .info-banner__inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; max-width: var(--max-content-width); margin-inline: auto; padding-inline: var(--container-pad-mobile); }
     .info-banner__item { font-family: var(--font-body); font-weight: 600; font-size: var(--text-base); display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-accent); }
     .info-banner__item strong { color: var(--color-accent); }
-    .info-banner__sep { display: none; color: var(--color-line); }
-    @media (min-width: 768px) { .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline; } }
+    .info-banner__sep { display: none; width: 1px; height: 1.1em; background: var(--color-accent); }
+    @media (min-width: 768px) { .info-banner__inner { flex-direction: row; justify-content: space-between; } .info-banner__sep { display: inline-block; } }
 
     /* Über uns — zentriert gestapelt */
     .about { overflow: hidden; background: #111; padding-block: var(--space-8); }
@@ -180,9 +180,9 @@
   <section class="info-banner">
     <div class="container info-banner__inner">
       <span class="info-banner__item"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg> <strong>Mo–So</strong> 11:30–22:30 Uhr</span>
-      <span class="info-banner__sep">·</span>
+      <span class="info-banner__sep"></span>
       <span class="info-banner__item"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M6 18V9h3l4 5h4l2 4M9 9V6h3"/></svg> Lieferung ab <strong>2,50 €</strong></span>
-      <span class="info-banner__sep">·</span>
+      <span class="info-banner__sep"></span>
       <span class="info-banner__item"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"/><polyline points="12 10 12 13 14 14"/><path d="M9 3h6M11 3v2M13 3v2"/></svg> <strong>30–45 Min</strong> Lieferzeit</span>
     </div>
   </section>
