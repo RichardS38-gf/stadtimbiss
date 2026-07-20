@@ -134,7 +134,8 @@
 
   <nav class="category-nav">
     <div class="container">
-      <a class="cat-link cat-link--active" href="#sushi"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg> Sushi</a>
+      <a class="cat-link cat-link--active" href="#empfohlen"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 14.7 9.2 21.5 9.8 16.3 14.3 17.8 21 12 17.4 6.2 21 7.7 14.3 2.5 9.8 9.3 9.2 12 3"/></svg> Empfohlen</a>
+      <a class="cat-link" href="#sushi"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg> Sushi</a>
       <a class="cat-link" href="#wok"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="12" r="7"/><line x1="17" y1="12" x2="22" y2="12"/></svg> Wok</a>
       <a class="cat-link" href="#vorspeisen"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="6" rx="3"/><line x1="7.5" y1="9" x2="7.5" y2="15"/><line x1="16.5" y1="9" x2="16.5" y2="15"/></svg> Vorspeisen</a>
       <a class="cat-link" href="#suppen"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16l-1 5a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/><path d="M9 4c0 1.5-1.5 1.5-1.5 3M13 4c0 1.5-1.5 1.5-1.5 3"/></svg> Suppen</a>
@@ -147,6 +148,83 @@
 
   <div class="order-layout">
     <main class="menu-area">
+
+      <!-- EMPFOHLEN -->
+      <section class="menu-section" id="empfohlen">
+        <h2 class="menu-section__title"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 14.7 9.2 21.5 9.8 16.3 14.3 17.8 21 12 17.4 6.2 21 7.7 14.3 2.5 9.8 9.3 9.2 12 3"/></svg> Empfohlen</h2>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="California Roll" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">California Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Krabben, Avocado, Gurke, Sesam</p>
+            <div class="menu-card__footer"><span class="menu-card__price">8,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="California Roll" data-price="8.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=300" alt="Dragon Roll" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Dragon Roll (8 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Garnelen, Avocado, Thunfisch, Spicy Mayo</p>
+            <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s3" data-name="Dragon Roll" data-price="12.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Rindfleisch Wok" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Rindfleisch Wok <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Zartes Rindfleisch, Gemüse, Austernsöße, Ingwer</p>
+            <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w1" data-name="Rindfleisch Wok" data-price="13.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=300" alt="Pad Thai" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pad Thai <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Reisnudeln, Hähnchen, Ei, Erdnüsse, Tamarinde</p>
+            <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w3" data-name="Pad Thai" data-price="12.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=300" alt="Gyoza" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Gyoza (6 Stück) <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Japanische Teigtaschen mit Schweinefleisch und Kohl, Dip</p>
+            <div class="menu-card__footer"><span class="menu-card__price">6,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Gyoza" data-price="6.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300" alt="Ramen" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Tonkotsu Ramen <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Reichhaltige Schweinebrühe, Chashu Pork, Ei, Bambussprossen, Nori</p>
+            <div class="menu-card__footer"><span class="menu-card__price">13,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="su1" data-name="Tonkotsu Ramen" data-price="13.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300" alt="Thai Green Curry" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Thai Green Curry <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Hähnchen, Kokosmilch, Aubergine, Basilikum, Jasminreis</p>
+            <div class="menu-card__footer"><span class="menu-card__price">13,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Thai Green Curry" data-price="13.50">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=300" alt="Lachs Bento" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Lachs Bento <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">6x Lachs Nigiri, California Roll, Miso Suppe, Edamame, Salat</p>
+            <div class="menu-card__footer"><span class="menu-card__price">18,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b1" data-name="Lachs Bento" data-price="18.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+        <article class="menu-card">
+          <img class="menu-card__img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300" alt="Bubble Tea" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Bubble Tea <span class="menu-card__badge">Beliebt</span></h3>
+            <p class="menu-card__desc">Taro, Matcha, Mango oder Erdbeere — mit Tapioka Pearls</p>
+            <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Bubble Tea" data-price="4.90">+ Hinzufügen</button></div>
+          </div>
+        </article>
+      </section>
 
       <!-- SUSHI -->
       <section class="menu-section" id="sushi">
