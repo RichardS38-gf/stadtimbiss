@@ -56,15 +56,22 @@
     .nav-banner { width: 100%; height: 60px; background-image: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%); background-size: 40px 40px; display: block; }
 
     /* ── HERO ── */
-    .hero { position: relative; min-height: 75vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--fg-black); }
-    .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-    .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.1) 70%); }
-    .hero__content { position: relative; z-index: 1; padding-block: var(--space-7); width: 100%; }
+    .hero { position: relative; background: var(--fg-red); overflow: hidden; display: flex; align-items: center; min-height: 640px; }
+    .hero__inner { display: grid; grid-template-columns: 1fr; align-items: center; gap: var(--space-6); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; padding-block: var(--space-7); width: 100%; }
+    @media (min-width: 768px) { .hero__inner { grid-template-columns: 1.05fr 1fr; gap: var(--space-7); } }
+    .hero__img-wrap { display: flex; justify-content: center; }
+    @media (min-width: 768px) { .hero__img-wrap { justify-content: flex-start; margin-left: -1.5rem; } }
+    .hero__burger-img { width: 100%; max-width: 420px; display: block; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.35)); }
+    @media (min-width: 768px) { .hero__burger-img { max-width: 560px; } }
+    .hero__content { text-align: center; }
+    @media (min-width: 768px) { .hero__content { text-align: left; } }
     .hero__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--fg-red); background: white; display: inline-block; padding: 4px 12px; margin-bottom: var(--space-4); }
-    .hero__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 10rem); color: white; line-height: 0.9; margin-bottom: var(--space-5); }
-    .hero__title em { color: var(--fg-red); font-style: normal; display: block; }
-    .hero__sub { font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 480px; margin-bottom: var(--space-6); line-height: 1.6; }
-    .hero__btns { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .hero__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 9vw, 6.5rem); color: white; line-height: 0.95; margin-bottom: var(--space-5); }
+    .hero__title em { color: white; font-style: normal; display: block; }
+    .hero__sub { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 480px; margin-bottom: var(--space-6); line-height: 1.6; margin-inline: auto; }
+    @media (min-width: 768px) { .hero__sub { margin-inline: 0; } }
+    .hero__btns { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; }
+    @media (min-width: 768px) { .hero__btns { justify-content: flex-start; } }
     .hero__btn-primary { background: white; color: #d21033; font-family: 'Black Han Sans', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; border: 3px solid #d21033; transition: all 0.2s ease; }
     .hero__btn-primary:hover { background: #d21033; color: white; opacity: 1; }
     .hero__btn-outline { background: white; color: #d21033; border: 3px solid #d21033; font-family: 'Black Han Sans', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; transition: all 0.2s ease; }
@@ -199,13 +206,14 @@
 
   <!-- HERO -->
   <section class="hero">
-    <img class="hero__img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600" alt="Burger Joint">
-    <div class="hero__overlay"></div>
-    <div class="container">
+    <div class="hero__inner">
+      <div class="hero__img-wrap">
+        <img class="hero__burger-img" src="Bilder/maneri_A_perfect_juicy_cheeseburger_thick_smash_patty_melted__ddad92e4-62c1-4cce-9a17-337d6ab72535_1-removebg-preview.png" alt="Echter Burger">
+      </div>
       <div class="hero__content">
         <div class="hero__eyebrow">🔥 Täglich frisch gegrillt</div>
         <h1 class="hero__title">ECHTER<em>BURGER.</em></h1>
-        <p class="hero__sub">Handgemachte Smash Burgers mit frischen Zutaten — keine Kompromisse, keine Tiefkühlware.</p>
+        <p class="hero__sub">Handgemachte Smash Burgers mit frischen Zutaten, keine Kompromisse, keine Tiefkühlware.</p>
         <div class="hero__btns">
           <a href="bestellen.html" class="hero__btn-primary">Jetzt bestellen</a>
           <a href="reservieren.html" class="hero__btn-outline">Tisch reservieren</a>
