@@ -16,21 +16,23 @@
   <style>
     /* Nav */
     .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid var(--color-line); }
-    @media (min-width: 768px) { .nav__links { display: flex; } }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
     .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--color-accent); line-height: 1.1; }
     .nav__logo span { display: block; font-size: 0.6rem; font-family: var(--font-body); font-weight: 400; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.12em; }
     .nav__links { display: none; gap: var(--space-5); }
     .nav__links a { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--color-accent); }
     .nav__links a:hover { color: var(--color-ink); opacity: 1; }
-    /* Nav Mobile Hamburger */
+    .nav-btn-desktop { display: none; }
     .nav__hamburger { display: flex; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; background: none; border: none; }
     .nav__hamburger span { display: block; width: 22px; height: 2px; background: var(--color-accent); border-radius: 2px; transition: all 0.3s ease; }
     .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav__hamburger.open span:nth-child(2) { opacity: 0; }
     .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .nav-btn-desktop { display: none; }
-    @media (min-width: 768px) { .nav__hamburger { display: none; } .nav-btn-desktop { display: inline-flex; } }
+    @media (min-width: 768px) {
+      .nav__links { display: flex; }
+      .nav-btn-desktop { display: inline-flex; }
+      .nav__hamburger { display: none; }
+    }
 
     .nav__mobile-menu { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #0D0D0D; border-bottom: 1px solid var(--color-line); padding: var(--space-5) var(--space-5) var(--space-6); flex-direction: column; gap: var(--space-4); z-index: 99; }
     .nav__mobile-menu.open { display: flex; }
