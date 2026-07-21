@@ -115,7 +115,8 @@
     .about__img { width: 100%; height: 380px; object-fit: cover; border-radius: 20px; display: block; }
     @media (min-width: 768px) { .about__img { height: 620px; } }
     .about__text { position: relative; background: white; border-radius: 20px; padding: var(--space-7) var(--space-6); }
-    .about__badge { position: absolute; top: -22px; left: -22px; width: 56px; height: 56px; border-radius: 50%; background: white; border: 2px solid var(--fg-red); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .about__badge { position: absolute; top: -22px; left: -22px; width: 56px; height: 56px; border-radius: 50%; background: white; border: 2px solid var(--fg-red); color: var(--fg-red); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .about__badge svg { width: 28px; height: 28px; }
     .about__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-muted); margin-bottom: var(--space-3); }
     .about__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: 0.02em; line-height: 1.05; color: var(--fg-red); margin-bottom: var(--space-4); }
     .about__body { color: var(--fg-text); font-size: 1rem; line-height: 1.8; margin-bottom: var(--space-4); }
@@ -230,7 +231,7 @@
   <section class="about" id="ueber-uns">
     <div class="about__grid">
       <div class="about__text">
-        <div class="about__badge">🍔</div>
+        <div class="about__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9c0-3.5 4-6 9-6s9 2.5 9 6"/><line x1="2.5" y1="12" x2="21.5" y2="12"/><line x1="3" y1="15" x2="21" y2="15"/><path d="M2.5 18c0 1.5 1.5 3 3.5 3h12c2 0 3.5-1.5 3.5-3"/><path d="M2.5 18h19"/></svg></div>
         <div class="about__eyebrow">Unsere Geschichte</div>
         <h2 class="about__title">Mehr als ein Burger</h2>
         <p class="about__body">Burger Joint wurde 2018 mit einer einzigen Mission gegründet: den besten Smash Burger der Stadt zu machen. Keine Kompromisse bei den Zutaten. Keine Tiefkühlware. Kein Schnickschnack.</p>
