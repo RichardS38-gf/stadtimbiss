@@ -65,9 +65,9 @@
     .hero__title em { color: var(--fg-red); font-style: normal; display: block; }
     .hero__sub { font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 480px; margin-bottom: var(--space-6); line-height: 1.6; }
     .hero__btns { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-    .hero__btn-primary { background: white; color: #d21033; font-family: var(--font-head); font-weight: 400; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; border-top: 6px solid #d21033; border-left: 6px solid #d21033; border-bottom: 2px solid #d21033; border-right: 2px solid #d21033; transition: all 0.2s ease; }
+    .hero__btn-primary { background: white; color: #d21033; font-family: var(--font-head); font-weight: 400; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; border-top: 3px solid #d21033; border-left: 3px solid #d21033; border-bottom: 6px solid #d21033; border-right: 6px solid #d21033; transition: all 0.2s ease; }
     .hero__btn-primary:hover { background: #d21033; color: white; opacity: 1; }
-    .hero__btn-outline { background: white; color: #d21033; border-top: 6px solid #d21033; border-left: 6px solid #d21033; border-bottom: 2px solid #d21033; border-right: 2px solid #d21033; font-family: var(--font-head); font-weight: 400; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; transition: all 0.2s ease; }
+    .hero__btn-outline { background: white; color: #d21033; border-top: 3px solid #d21033; border-left: 3px solid #d21033; border-bottom: 6px solid #d21033; border-right: 6px solid #d21033; font-family: var(--font-head); font-weight: 400; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; transition: all 0.2s ease; }
     .hero__btn-outline:hover { background: #d21033; color: white; opacity: 1; }
 
     /* ── MENU GRID (Five Guys style) ── */
@@ -169,17 +169,20 @@
   <!-- NAV -->
   <header class="nav">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">BURGER<span>JOINT</span></a>
+      <a href="index.html" class="nav__logo">🍔 BURGER<span>JOINT</span></a>
       <nav class="nav__links">
         <a href="#ueber-uns">Willkommen</a>
         <a href="#speisekarte">Speisekarte</a>
         <a href="#bewertungen">Bewertungen</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <a href="bestellen.html" class="nav__cta">Jetzt bestellen</a>
-      <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <a href="reservieren.html" class="nav__cta">Reservieren</a>
+        <a href="bestellen.html" class="nav__cta">Bestellen</a>
+        <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
     <div class="nav__mobile-menu" id="nav-mobile-menu">
       <a href="#speisekarte">Speisekarte</a>

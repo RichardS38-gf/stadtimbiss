@@ -7,7 +7,7 @@
   padding: 0.75rem 1.75rem;
   min-height: 48px;
   font-family: var(--font-head);
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   letter-spacing: 0.05em;
   font-weight: 400;
   line-height: 1;
@@ -18,52 +18,20 @@
   border-radius: 20px;
   background: white;
   color: #d21033;
-  border-top: 6px solid #d21033;
-  border-left: 6px solid #d21033;
-  border-bottom: 2px solid #d21033;
-  border-right: 2px solid #d21033;
+  border-top: 3px solid #d21033;
+  border-left: 3px solid #d21033;
+  border-bottom: 6px solid #d21033;
+  border-right: 6px solid #d21033;
 }
-.btn:hover {
-  background: #d21033;
-  color: white;
-  opacity: 1;
-}
-.btn--primary {
-  background: white;
-  color: #d21033;
-}
-.btn--primary:hover {
-  background: #d21033;
-  color: white;
-  opacity: 1;
-}
-.btn--yellow {
-  background: white;
-  color: #d21033;
-}
-.btn--yellow:hover {
-  background: #d21033;
-  color: white;
-  opacity: 1;
-}
-.btn--outline {
-  background: white;
-  color: #d21033;
-}
-.btn--outline:hover {
-  background: #d21033;
-  color: white;
-  opacity: 1;
-}
-.btn--outline-light {
-  background: white;
-  color: #d21033;
-}
-.btn--outline-light:hover {
-  background: #d21033;
-  color: white;
-  opacity: 1;
-}
+.btn:hover { background: #d21033; color: white; opacity: 1; }
+.btn--primary { background: white; color: #d21033; }
+.btn--primary:hover { background: #d21033; color: white; opacity: 1; }
+.btn--yellow { background: white; color: #d21033; }
+.btn--yellow:hover { background: #d21033; color: white; opacity: 1; }
+.btn--outline { background: white; color: #d21033; }
+.btn--outline:hover { background: #d21033; color: white; opacity: 1; }
+.btn--outline-light { background: white; color: #d21033; }
+.btn--outline-light:hover { background: #d21033; color: white; opacity: 1; }
 .btn--full { width: 100%; }
-.btn--sm { padding: 0.5rem 1rem; font-size: 0.9rem; min-height: 38px; }
+.btn--sm { padding: 0.4rem 0.9rem; font-size: 1rem; min-height: 36px; }
 .link-accent { color: #d21033; font-weight: 700; font-size: var(--text-sm); font-family: var(--font-head); letter-spacing: 0.05em; text-transform: uppercase; }
