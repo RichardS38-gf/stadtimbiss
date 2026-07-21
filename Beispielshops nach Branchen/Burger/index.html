@@ -28,7 +28,7 @@
     body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; }
 
     /* ── NAV ── */
-    .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-white); border-bottom: 2px solid var(--fg-red); }
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-white); border-bottom: none; }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: var(--space-5); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; }
     .nav__logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--fg-red); letter-spacing: 0.05em; line-height: 1; }
     .nav__logo span { color: var(--fg-black); }
@@ -54,7 +54,7 @@
 
     /* ── BANNER ── */
     .nav-banner { width: 100%; display: block; line-height: 0; }
-    .nav-banner img { width: 100%; height: auto; display: block; }
+    .nav-banner img { width: 100%; height: 60px; object-fit: cover; object-position: center; display: block; }
 
     /* ── HERO ── */
     .hero { position: relative; min-height: 75vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--fg-black); }
