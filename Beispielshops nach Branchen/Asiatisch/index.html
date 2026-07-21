@@ -29,7 +29,8 @@
     .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav__hamburger.open span:nth-child(2) { opacity: 0; }
     .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    @media (min-width: 768px) { .nav__hamburger { display: none; } }
+    .nav-btn-desktop { display: none; }
+    @media (min-width: 768px) { .nav__hamburger { display: none; } .nav-btn-desktop { display: inline-flex; } }
 
     .nav__mobile-menu { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #0D0D0D; border-bottom: 1px solid var(--color-line); padding: var(--space-5) var(--space-5) var(--space-6); flex-direction: column; gap: var(--space-4); z-index: 99; }
     .nav__mobile-menu.open { display: flex; }
@@ -377,12 +378,6 @@
   </footer>
 
   <script>
-    // Desktop: Buttons einblenden
-    if (window.innerWidth >= 768) {
-      document.getElementById('nav-btn-reservieren').style.display = '';
-      document.getElementById('nav-btn-bestellen').style.display = '';
-    }
-
     // Hamburger
     const hamburger = document.getElementById('nav-hamburger');
     const mobileMenu = document.getElementById('nav-mobile-menu');
