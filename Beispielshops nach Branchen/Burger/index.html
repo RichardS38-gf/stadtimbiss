@@ -57,7 +57,7 @@
 
     /* ── HERO ── */
     .hero { position: relative; background: var(--fg-red); overflow: hidden; display: flex; align-items: center; min-height: 80vh; }
-    .hero__bull { position: absolute; left: -8%; bottom: -8%; width: 62vw; max-width: 950px; opacity: 0.14; z-index: 0; pointer-events: none; user-select: none; }
+    .hero__bull { position: absolute; left: -8%; bottom: -8%; width: 62vw; max-width: 950px; opacity: 0.14; z-index: 0; pointer-events: none; user-select: none; transform: scaleX(-1); }
     .hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; align-items: center; gap: var(--space-6); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; padding-block: var(--space-7); width: 100%; }
     @media (min-width: 768px) { .hero__inner { grid-template-columns: 1.05fr 1fr; gap: var(--space-7); } }
     .hero__img-wrap { display: flex; justify-content: center; }
