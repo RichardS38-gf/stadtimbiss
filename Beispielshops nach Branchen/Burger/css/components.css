@@ -1,13 +1,69 @@
 /* components.css — Burger Joint */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: 0.75rem 1.75rem; min-height: 48px; font-family: var(--font-head); font-size: 1.1rem; letter-spacing: 0.05em; font-weight: 400; line-height: 1; border: 3px solid transparent; cursor: pointer; transition: all var(--transition); white-space: nowrap; text-transform: uppercase; }
-.btn--primary { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
-.btn--primary:hover { background: var(--color-accent-dk); border-color: var(--color-accent-dk); opacity: 1; }
-.btn--yellow { background: var(--color-yellow); color: var(--color-ink); border-color: var(--color-yellow); }
-.btn--yellow:hover { background: #e0b010; border-color: #e0b010; opacity: 1; }
-.btn--outline { background: transparent; color: var(--color-accent); border-color: var(--color-accent); }
-.btn--outline:hover { background: var(--color-accent); color: white; opacity: 1; }
-.btn--outline-light { background: transparent; color: white; border-color: white; }
-.btn--outline-light:hover { background: white; color: var(--color-ink); opacity: 1; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.75rem;
+  min-height: 48px;
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+  border-radius: 20px;
+  background: white;
+  color: #d21033;
+  border-top: 6px solid #d21033;
+  border-left: 6px solid #d21033;
+  border-bottom: 2px solid #d21033;
+  border-right: 2px solid #d21033;
+}
+.btn:hover {
+  background: #d21033;
+  color: white;
+  opacity: 1;
+}
+.btn--primary {
+  background: white;
+  color: #d21033;
+}
+.btn--primary:hover {
+  background: #d21033;
+  color: white;
+  opacity: 1;
+}
+.btn--yellow {
+  background: white;
+  color: #d21033;
+}
+.btn--yellow:hover {
+  background: #d21033;
+  color: white;
+  opacity: 1;
+}
+.btn--outline {
+  background: white;
+  color: #d21033;
+}
+.btn--outline:hover {
+  background: #d21033;
+  color: white;
+  opacity: 1;
+}
+.btn--outline-light {
+  background: white;
+  color: #d21033;
+}
+.btn--outline-light:hover {
+  background: #d21033;
+  color: white;
+  opacity: 1;
+}
 .btn--full { width: 100%; }
 .btn--sm { padding: 0.5rem 1rem; font-size: 0.9rem; min-height: 38px; }
-.link-accent { color: var(--color-accent); font-weight: 700; font-size: var(--text-sm); font-family: var(--font-head); letter-spacing: 0.05em; text-transform: uppercase; }
+.link-accent { color: #d21033; font-weight: 700; font-size: var(--text-sm); font-family: var(--font-head); letter-spacing: 0.05em; text-transform: uppercase; }
