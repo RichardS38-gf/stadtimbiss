@@ -109,18 +109,16 @@
     .statement__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
 
     /* ── ÜBER UNS ── */
-    .about { background: var(--fg-cream); }
-    .about__grid { display: grid; grid-template-columns: 1fr; }
-    @media (min-width: 768px) { .about__grid { grid-template-columns: 1fr 1fr; min-height: 520px; } }
-    .about__img { width: 100%; height: 360px; object-fit: cover; }
-    @media (min-width: 768px) { .about__img { height: 100%; } }
-    .about__text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
-    @media (min-width: 768px) { .about__text { padding: var(--space-8) var(--space-6); } }
-    .about__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-red); margin-bottom: var(--space-3); }
-    .about__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; line-height: 1; margin-bottom: var(--space-4); }
-    .about__body { color: var(--fg-muted); font-size: 1rem; line-height: 1.8; margin-bottom: var(--space-5); }
-    .about__cta { background: white; color: #d21033; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 12px 24px; align-self: flex-start; display: inline-block; border-radius: 20px; border: 2px solid #d21033; transition: all 0.2s ease; }
-    .about__cta:hover { background: #d21033; color: white; opacity: 1; }
+    .about { background: var(--fg-grey); padding-block: var(--space-8); }
+    .about__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-6); align-items: center; max-width: 1140px; margin-inline: auto; padding-inline: 2rem; }
+    @media (min-width: 768px) { .about__grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-7); } }
+    .about__img { width: 100%; height: 320px; object-fit: cover; border-radius: 20px; display: block; }
+    @media (min-width: 768px) { .about__img { height: 480px; } }
+    .about__text { background: white; border-radius: 20px; padding: var(--space-7) var(--space-6); }
+    .about__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-muted); margin-bottom: var(--space-3); }
+    .about__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: 0.02em; line-height: 1.05; color: var(--fg-red); margin-bottom: var(--space-4); }
+    .about__body { color: var(--fg-text); font-size: 1rem; line-height: 1.8; margin-bottom: var(--space-4); }
+    .about__body:last-of-type { margin-bottom: 0; }
 
     /* ── FACTS STRIP ── */
     .facts { background: var(--fg-red); padding-block: var(--space-6); }
@@ -228,14 +226,13 @@
   <!-- ÜBER UNS / WILLKOMMEN -->
   <section class="about" id="ueber-uns">
     <div class="about__grid">
-      <img class="about__img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800" alt="Burger Joint Küche" loading="lazy">
       <div class="about__text">
         <div class="about__eyebrow">Unsere Geschichte</div>
         <h2 class="about__title">Mehr als ein Burger</h2>
         <p class="about__body">Burger Joint wurde 2018 mit einer einzigen Mission gegründet: den besten Smash Burger der Stadt zu machen. Keine Kompromisse bei den Zutaten. Keine Tiefkühlware. Kein Schnickschnack.</p>
-        <p class="about__body">Wir verwenden frisches Rindfleisch, täglich geliefert — und drücken jeden Patty direkt auf der heißen Platte flach. Das Ergebnis spricht für sich.</p>
-        <a href="bestellen.html" class="about__cta">Zur Speisekarte →</a>
+        <p class="about__body">Wir verwenden frisches Rindfleisch, täglich geliefert, und drücken jeden Patty direkt auf der heißen Platte flach. Das Ergebnis spricht für sich.</p>
       </div>
+      <img class="about__img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800" alt="Burger Joint Küche" loading="lazy">
     </div>
   </section>
 
