@@ -56,7 +56,7 @@
     .nav-banner { width: 100%; height: 60px; background-image: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%); background-size: 40px 40px; display: block; }
 
     /* ── HERO ── */
-    .hero { position: relative; background: var(--fg-red); overflow: hidden; display: flex; align-items: center; min-height: 640px; }
+    .hero { position: relative; background: var(--fg-red); overflow: hidden; display: flex; align-items: center; min-height: 90vh; }
     .hero__inner { display: grid; grid-template-columns: 1fr; align-items: center; gap: var(--space-6); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; padding-block: var(--space-7); width: 100%; }
     @media (min-width: 768px) { .hero__inner { grid-template-columns: 1.05fr 1fr; gap: var(--space-7); } }
     .hero__img-wrap { display: flex; justify-content: center; }
@@ -65,16 +65,15 @@
     @media (min-width: 768px) { .hero__burger-img { max-width: 560px; } }
     .hero__content { text-align: center; }
     @media (min-width: 768px) { .hero__content { text-align: left; } }
-    .hero__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--fg-red); background: white; display: inline-block; padding: 4px 12px; margin-bottom: var(--space-4); }
-    .hero__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 9vw, 6.5rem); color: white; line-height: 0.95; margin-bottom: var(--space-5); }
+    .hero__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4.5rem, 11vw, 8.5rem); color: white; line-height: 0.95; margin-bottom: var(--space-5); }
     .hero__title em { color: white; font-style: normal; display: block; }
-    .hero__sub { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 480px; margin-bottom: var(--space-6); line-height: 1.6; margin-inline: auto; }
+    .hero__sub { font-size: 1.15rem; font-weight: 500; color: rgba(255,255,255,0.95); max-width: 480px; margin-bottom: var(--space-6); line-height: 1.6; margin-inline: auto; }
     @media (min-width: 768px) { .hero__sub { margin-inline: 0; } }
     .hero__btns { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; }
     @media (min-width: 768px) { .hero__btns { justify-content: flex-start; } }
-    .hero__btn-primary { background: white; color: #d21033; font-family: 'Black Han Sans', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; border: 3px solid #d21033; transition: all 0.2s ease; }
+    .hero__btn-primary { background: white; color: #d21033; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 14px 32px; display: inline-block; border-radius: 20px; border: 2px solid #d21033; transition: all 0.2s ease; }
     .hero__btn-primary:hover { background: #d21033; color: white; opacity: 1; }
-    .hero__btn-outline { background: white; color: #d21033; border: 3px solid #d21033; font-family: 'Black Han Sans', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; border-radius: 20px; transition: all 0.2s ease; }
+    .hero__btn-outline { background: white; color: #d21033; border: 2px solid #d21033; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 14px 32px; display: inline-block; border-radius: 20px; transition: all 0.2s ease; }
     .hero__btn-outline:hover { background: #d21033; color: white; opacity: 1; }
 
     /* ── MENU GRID (Five Guys style) ── */
@@ -116,7 +115,7 @@
     .about__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-red); margin-bottom: var(--space-3); }
     .about__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; line-height: 1; margin-bottom: var(--space-4); }
     .about__body { color: var(--fg-muted); font-size: 1rem; line-height: 1.8; margin-bottom: var(--space-5); }
-    .about__cta { background: white; color: #d21033; font-family: 'Black Han Sans', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 12px 24px; align-self: flex-start; display: inline-block; border-radius: 20px; border: 3px solid #d21033; transition: all 0.2s ease; }
+    .about__cta { background: white; color: #d21033; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 12px 24px; align-self: flex-start; display: inline-block; border-radius: 20px; border: 2px solid #d21033; transition: all 0.2s ease; }
     .about__cta:hover { background: #d21033; color: white; opacity: 1; }
 
     /* ── FACTS STRIP ── */
@@ -150,7 +149,7 @@
     .contact__item-label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-red); margin-bottom: 4px; }
     .contact__item-value { font-size: 1rem; color: var(--fg-text); line-height: 1.6; }
     .contact__item-value a { color: var(--fg-text); text-decoration: underline; }
-    .contact__cta { background: white; color: #d21033; font-family: 'Black Han Sans', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 12px 24px; align-self: flex-start; display: inline-block; margin-top: var(--space-5); border-radius: 20px; border: 3px solid #d21033; transition: all 0.2s ease; }
+    .contact__cta { background: white; color: #d21033; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 12px 24px; align-self: flex-start; display: inline-block; margin-top: var(--space-5); border-radius: 20px; border: 2px solid #d21033; transition: all 0.2s ease; }
     .contact__cta:hover { background: #d21033; color: white; opacity: 1; }
     .contact__map { min-height: 300px; }
     .contact__map iframe { width: 100%; height: 100%; min-height: 300px; border: 0; display: block; }
@@ -211,7 +210,6 @@
         <img class="hero__burger-img" src="Bilder/maneri_A_perfect_juicy_cheeseburger_thick_smash_patty_melted__ddad92e4-62c1-4cce-9a17-337d6ab72535_1-removebg-preview.png" alt="Echter Burger">
       </div>
       <div class="hero__content">
-        <div class="hero__eyebrow">🔥 Täglich frisch gegrillt</div>
         <h1 class="hero__title">ECHTER<em>BURGER.</em></h1>
         <p class="hero__sub">Handgemachte Smash Burgers mit frischen Zutaten, keine Kompromisse, keine Tiefkühlware.</p>
         <div class="hero__btns">
