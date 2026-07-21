@@ -28,29 +28,33 @@
     body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; }
 
     /* ── NAV ── */
-    .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-red); }
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-white); border-bottom: 2px solid var(--fg-red); }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: var(--space-5); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; }
-    .nav__logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: white; letter-spacing: 0.05em; line-height: 1; }
+    .nav__logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--fg-red); letter-spacing: 0.05em; line-height: 1; }
     .nav__logo span { color: var(--fg-black); }
     .nav__links { display: none; gap: var(--space-5); }
-    .nav__links a { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.06em; }
-    .nav__links a:hover { color: white; opacity: 1; }
+    .nav__links a { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; color: var(--fg-red); text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav__links a:hover { color: var(--fg-black); opacity: 1; }
     @media (min-width: 768px) { .nav__links { display: flex; } }
-    .nav__cta { background: white; color: var(--fg-red); font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 20px; white-space: nowrap; display: none; }
+    .nav__cta { background: var(--fg-red); color: white; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 20px; white-space: nowrap; display: none; }
     .nav__cta:hover { background: var(--fg-black); color: white; opacity: 1; }
     @media (min-width: 768px) { .nav__cta { display: block; } }
     .nav__hamburger { display: flex; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; background: none; border: none; }
-    .nav__hamburger span { display: block; width: 22px; height: 2px; background: white; transition: all 0.3s; }
+    .nav__hamburger span { display: block; width: 22px; height: 2px; background: var(--fg-red); transition: all 0.3s; }
     .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav__hamburger.open span:nth-child(2) { opacity: 0; }
     .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     @media (min-width: 768px) { .nav__hamburger { display: none; } }
-    .nav__mobile-menu { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--fg-red); padding: var(--space-5); flex-direction: column; gap: var(--space-3); z-index: 99; }
+    .nav__mobile-menu { display: none; position: absolute; top: 62px; left: 0; right: 0; background: var(--fg-white); border-bottom: 2px solid var(--fg-red); padding: var(--space-5); flex-direction: column; gap: var(--space-3); z-index: 99; }
     .nav__mobile-menu.open { display: flex; }
-    .nav__mobile-menu a { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: white; text-transform: uppercase; letter-spacing: 0.06em; padding-block: var(--space-3); border-bottom: 1px solid rgba(255,255,255,0.2); }
+    .nav__mobile-menu a { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: var(--fg-red); text-transform: uppercase; letter-spacing: 0.06em; padding-block: var(--space-3); border-bottom: 1px solid rgba(210,16,51,0.15); }
     .nav__mobile-menu a:last-child { border-bottom: none; }
-    .nav__mobile-cta { background: white; color: var(--fg-red); text-align: center; padding: 14px; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: var(--space-3); }
+    .nav__mobile-cta { background: var(--fg-red); color: white; text-align: center; padding: 14px; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: var(--space-3); }
     @media (min-width: 768px) { .nav__mobile-menu { display: none !important; } }
+
+    /* ── BANNER ── */
+    .nav-banner { width: 100%; display: block; line-height: 0; }
+    .nav-banner img { width: 100%; height: auto; display: block; }
 
     /* ── HERO ── */
     .hero { position: relative; min-height: 75vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--fg-black); }
@@ -187,6 +191,11 @@
       <a href="bestellen.html" class="nav__mobile-cta">Jetzt bestellen →</a>
     </div>
   </header>
+
+  <!-- BANNER -->
+  <div class="nav-banner">
+    <img src="Bilder/Group 635924.png" alt="Burger Joint Banner">
+  </div>
 
   <!-- HERO -->
   <section class="hero">
