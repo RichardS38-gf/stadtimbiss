@@ -1,0 +1,33 @@
+/* tokens.css — Burger Joint */
+:root {
+  --color-accent:     #C0392B;   /* Diner-Rot */
+  --color-accent-dk:  #A93226;
+  --color-yellow:     #F5C518;   /* Mustard Yellow */
+  --color-bg:         #FFF8F0;   /* Warmes Creme */
+  --color-bg-soft:    #FFFFFF;
+  --color-bg-dark:    #1A1A1A;   /* Fast Schwarz */
+  --color-ink:        #1A1A1A;
+  --color-muted:      #6B6B6B;
+  --color-line:       #E8DDD0;
+  --color-dark:       #111111;
+  --color-on-dark:    #FFF8F0;
+  --color-on-accent:  #FFFFFF;
+
+  --font-head: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.5rem; --space-6: 2rem;
+  --space-7: 3rem; --space-8: 5rem;
+
+  --container-pad-mobile:  1rem;
+  --container-pad-tablet:  1.5rem;
+  --container-pad-desktop: 2rem;
+  --max-content-width: 1140px;
+
+  --text-xs:   0.75rem; --text-sm: 0.875rem; --text-base: 1rem;
+  --text-lg:   1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
+  --text-3xl:  2rem; --text-4xl: 2.5rem; --text-5xl: 3.5rem;
+
+  --transition: 0.2s ease;
+}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burger Joint — Smash Burgers & More</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    /* ── TOKENS OVERRIDE: Five Guys palette ── */
+    :root {
+      --fg-red:    #d21033;
+      --fg-red-dk: #a80d27;
+      --fg-black:  #111111;
+      --fg-white:  #ffffff;
+      --fg-cream:  #f9f6f1;
+      --fg-grey:   #f2f2f2;
+      --fg-text:   #111111;
+      --fg-muted:  #666666;
+    }
+    body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; }
+
+    /* ── NAV ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-red); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: var(--space-5); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; }
+    .nav__logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: white; letter-spacing: 0.05em; line-height: 1; }
+    .nav__logo span { color: var(--fg-black); }
+    .nav__links { display: none; gap: var(--space-5); }
+    .nav__links a { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav__links a:hover { color: white; opacity: 1; }
+    @media (min-width: 768px) { .nav__links { display: flex; } }
+    .nav__cta { background: white; color: var(--fg-red); font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 20px; white-space: nowrap; display: none; }
+    .nav__cta:hover { background: var(--fg-black); color: white; opacity: 1; }
+    @media (min-width: 768px) { .nav__cta { display: block; } }
+    .nav__hamburger { display: flex; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; background: none; border: none; }
+    .nav__hamburger span { display: block; width: 22px; height: 2px; background: white; transition: all 0.3s; }
+    .nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    @media (min-width: 768px) { .nav__hamburger { display: none; } }
+    .nav__mobile-menu { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--fg-red); padding: var(--space-5); flex-direction: column; gap: var(--space-3); z-index: 99; }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: white; text-transform: uppercase; letter-spacing: 0.06em; padding-block: var(--space-3); border-bottom: 1px solid rgba(255,255,255,0.2); }
+    .nav__mobile-menu a:last-child { border-bottom: none; }
+    .nav__mobile-cta { background: white; color: var(--fg-red); text-align: center; padding: 14px; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: var(--space-3); }
+    @media (min-width: 768px) { .nav__mobile-menu { display: none !important; } }
+
+    /* ── HERO ── */
+    .hero { position: relative; min-height: 75vh; display: flex; align-items: flex-end; overflow: hidden; background: var(--fg-black); }
+    .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+    .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.1) 70%); }
+    .hero__content { position: relative; z-index: 1; padding-block: var(--space-7); width: 100%; }
+    .hero__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--fg-red); background: white; display: inline-block; padding: 4px 12px; margin-bottom: var(--space-4); }
+    .hero__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 10rem); color: white; line-height: 0.9; margin-bottom: var(--space-5); }
+    .hero__title em { color: var(--fg-red); font-style: normal; display: block; }
+    .hero__sub { font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 480px; margin-bottom: var(--space-6); line-height: 1.6; }
+    .hero__btns { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .hero__btn-primary { background: var(--fg-red); color: white; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 16px 32px; display: inline-block; }
+    .hero__btn-primary:hover { background: var(--fg-red-dk); opacity: 1; }
+    .hero__btn-outline { background: transparent; color: white; border: 2px solid white; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 32px; display: inline-block; }
+    .hero__btn-outline:hover { background: white; color: var(--fg-black); opacity: 1; }
+
+    /* ── MENU GRID (Five Guys style) ── */
+    .menu-grid-section { background: var(--fg-white); padding-block: var(--space-7); }
+    @media (min-width: 768px) { .menu-grid-section { padding-block: var(--space-8); } }
+    .menu-grid-section__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.03em; margin-bottom: var(--space-7); }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); background: var(--fg-white); width: 100%; }
+    @media (min-width: 768px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
+    .menu-grid__discover { grid-column: 1 / -1; background: var(--fg-red); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: var(--space-5); text-decoration: none; min-height: 160px; border-radius: 20px; }
+    @media (min-width: 768px) { .menu-grid__discover { grid-column: span 2; min-height: 280px; } }
+    .menu-grid__item { background: var(--fg-white); display: flex; flex-direction: column; text-decoration: none; overflow: hidden; border-radius: 20px; border-top: 4px solid var(--fg-red); border-left: 4px solid var(--fg-red); border-bottom: 2px solid var(--fg-red); border-right: 2px solid var(--fg-red); }
+    .menu-grid__img-wrap { background: var(--fg-white); overflow: hidden; }
+    .menu-grid__img-wrap img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .menu-grid__item:hover .menu-grid__img-wrap img { transform: scale(1.04); }
+    .menu-grid__body { padding: var(--space-4); background: var(--fg-white); display: flex; justify-content: center; }
+    .menu-grid__name { display: inline-block; background: var(--fg-red); color: white; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; padding: 8px 16px; border-radius: 6px; }
+    /* "Entdecken" tile */
+    .menu-grid__discover-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.03em; color: white; line-height: 1; margin-bottom: var(--space-3); }
+    .menu-grid__discover-link { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: white; text-decoration: underline; }
+
+    /* ── STATEMENT SECTION ── */
+    .statement { background: var(--fg-black); padding-block: var(--space-8); }
+    .statement__inner { display: grid; grid-template-columns: 1fr; gap: var(--space-7); align-items: center; }
+    @media (min-width: 768px) { .statement__inner { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
+    .statement__text {}
+    .statement__num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 15vw, 12rem); color: var(--fg-red); line-height: 0.85; }
+    .statement__label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); color: white; line-height: 1; margin-bottom: var(--space-4); }
+    .statement__desc { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 420px; }
+    .statement__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+    /* ── ÜBER UNS ── */
+    .about { background: var(--fg-cream); }
+    .about__grid { display: grid; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .about__grid { grid-template-columns: 1fr 1fr; min-height: 520px; } }
+    .about__img { width: 100%; height: 360px; object-fit: cover; }
+    @media (min-width: 768px) { .about__img { height: 100%; } }
+    .about__text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
+    @media (min-width: 768px) { .about__text { padding: var(--space-8) var(--space-6); } }
+    .about__eyebrow { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-red); margin-bottom: var(--space-3); }
+    .about__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; line-height: 1; margin-bottom: var(--space-4); }
+    .about__body { color: var(--fg-muted); font-size: 1rem; line-height: 1.8; margin-bottom: var(--space-5); }
+    .about__cta { background: var(--fg-red); color: white; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 28px; align-self: flex-start; display: inline-block; }
+    .about__cta:hover { background: var(--fg-red-dk); opacity: 1; }
+
+    /* ── FACTS STRIP ── */
+    .facts { background: var(--fg-red); padding-block: var(--space-6); }
+    .facts__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); text-align: center; }
+    @media (min-width: 768px) { .facts__grid { grid-template-columns: repeat(3, 1fr); } }
+    .facts__item {}
+    .facts__num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: white; line-height: 1; }
+    .facts__label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.85); margin-top: 4px; }
+
+    /* ── BEWERTUNGEN ── */
+    .reviews { background: var(--fg-white); padding-block: var(--space-8); }
+    .reviews__header { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-7); }
+    .reviews__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; }
+    .reviews__link { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-red); text-decoration: underline; }
+    .review-stars { color: var(--fg-red); font-size: 1.5rem; margin-bottom: var(--space-4); letter-spacing: 4px; }
+    .review-quote { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 0.02em; color: var(--fg-text); line-height: 1.05; margin-bottom: var(--space-4); min-height: 4rem; transition: opacity 0.3s; }
+    .review-author { font-size: 0.875rem; color: var(--fg-muted); margin-bottom: var(--space-5); transition: opacity 0.3s; }
+    .review-dots { display: flex; gap: 10px; }
+    .review-dot { width: 10px; height: 10px; background: #ddd; border: none; cursor: pointer; padding: 0; }
+    .review-dot--active { background: var(--fg-red); }
+
+    /* ── KONTAKT ── */
+    .contact { background: var(--fg-grey); }
+    .contact__grid { display: grid; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .contact__grid { grid-template-columns: 1fr 1fr; min-height: 480px; } }
+    .contact__text { padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; justify-content: center; }
+    @media (min-width: 1024px) { .contact__text { padding: var(--space-8) var(--space-7); padding-left: max(2rem, calc((100vw - 1140px) / 2 + 2rem)); } }
+    .contact__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; margin-bottom: var(--space-5); }
+    .contact__item { margin-bottom: var(--space-4); }
+    .contact__item-label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-red); margin-bottom: 4px; }
+    .contact__item-value { font-size: 1rem; color: var(--fg-text); line-height: 1.6; }
+    .contact__item-value a { color: var(--fg-text); text-decoration: underline; }
+    .contact__cta { background: var(--fg-red); color: white; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 28px; align-self: flex-start; display: inline-block; margin-top: var(--space-5); }
+    .contact__cta:hover { background: var(--fg-red-dk); opacity: 1; }
+    .contact__map { min-height: 300px; }
+    .contact__map iframe { width: 100%; height: 100%; min-height: 300px; border: 0; display: block; }
+    @media (min-width: 768px) { .contact__map { min-height: unset; } .contact__map iframe { min-height: unset; } }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--fg-black); color: white; padding-top: var(--space-7); padding-bottom: var(--space-6); }
+    .footer__top { display: grid; grid-template-columns: 1fr; gap: var(--space-6); margin-bottom: var(--space-6); }
+    @media (min-width: 768px) { .footer__top { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer__brand { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: white; letter-spacing: 0.05em; margin-bottom: var(--space-2); }
+    .footer__brand span { color: var(--fg-red); }
+    .footer__claim { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 300px; }
+    .footer__heading { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: var(--space-3); }
+    .footer__links { display: flex; flex-direction: column; gap: var(--space-2); }
+    .footer__links a { font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+    .footer__links a:hover { color: white; opacity: 1; }
+    .footer__divider { border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: var(--space-4); }
+    .footer__copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">BURGER<span>JOINT</span></a>
+      <nav class="nav__links">
+        <a href="#speisekarte">Speisekarte</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#bewertungen">Bewertungen</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <a href="bestellen.html" class="nav__cta">Jetzt bestellen</a>
+      <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile-menu" id="nav-mobile-menu">
+      <a href="#speisekarte">Speisekarte</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="reservieren.html">Tisch reservieren</a>
+      <a href="bestellen.html" class="nav__mobile-cta">Jetzt bestellen →</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero__img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600" alt="Burger Joint">
+    <div class="hero__overlay"></div>
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__eyebrow">🔥 Täglich frisch gegrillt</div>
+        <h1 class="hero__title">ECHTER<em>BURGER.</em></h1>
+        <p class="hero__sub">Handgemachte Smash Burgers mit frischen Zutaten — keine Kompromisse, keine Tiefkühlware.</p>
+        <div class="hero__btns">
+          <a href="bestellen.html" class="hero__btn-primary">Jetzt bestellen</a>
+          <a href="reservieren.html" class="hero__btn-outline">Tisch reservieren</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU GRID -->
+  <section class="menu-grid-section" id="speisekarte">
+    <div class="container">
+      <h2 class="menu-grid-section__title">Das Angebot</h2>
+      <div class="menu-grid">
+      <a href="bestellen.html#burger" class="menu-grid__item">
+        <div class="menu-grid__img-wrap">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500" alt="Burger" loading="lazy">
+        </div>
+        <div class="menu-grid__body"><div class="menu-grid__name">Burger</div></div>
+      </a>
+      <a href="bestellen.html#chicken" class="menu-grid__item">
+        <div class="menu-grid__img-wrap">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500" alt="Chicken" loading="lazy">
+        </div>
+        <div class="menu-grid__body"><div class="menu-grid__name">Chicken</div></div>
+      </a>
+      <a href="bestellen.html#sides" class="menu-grid__item">
+        <div class="menu-grid__img-wrap">
+          <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=500" alt="Fries" loading="lazy">
+        </div>
+        <div class="menu-grid__body"><div class="menu-grid__name">Fries & Sides</div></div>
+      </a>
+      <a href="bestellen.html#shakes" class="menu-grid__item">
+        <div class="menu-grid__img-wrap">
+          <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500" alt="Shakes" loading="lazy">
+        </div>
+        <div class="menu-grid__body"><div class="menu-grid__name">Shakes</div></div>
+      </a>
+      <a href="bestellen.html#veggie" class="menu-grid__item">
+        <div class="menu-grid__img-wrap">
+          <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?w=500" alt="Veggie" loading="lazy">
+        </div>
+        <div class="menu-grid__body"><div class="menu-grid__name">Veggie</div></div>
+      </a>
+      <a href="bestellen.html#getraenke" class="menu-grid__item">
+        <div class="menu-grid__img-wrap">
+          <img src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=500" alt="Getränke" loading="lazy">
+        </div>
+        <div class="menu-grid__body"><div class="menu-grid__name">Getränke</div></div>
+      </a>
+      <a href="bestellen.html#sides" class="menu-grid__item">
+        <div class="menu-grid__img-wrap">
+          <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=500" alt="Onion Rings" loading="lazy">
+        </div>
+        <div class="menu-grid__body"><div class="menu-grid__name">Onion Rings</div></div>
+      </a>
+      <a href="bestellen.html" class="menu-grid__discover">
+        <div class="menu-grid__discover-label">Vollständige Karte</div>
+        <div class="menu-grid__discover-link">Alle Gerichte →</div>
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="statement">
+    <div class="container">
+      <div class="statement__inner">
+        <div class="statement__text">
+          <div class="statement__num">100%</div>
+          <div class="statement__label">Frisches Rindfleisch —<br>Niemals tiefgekühlt</div>
+          <p class="statement__desc">Jeder Patty wird täglich frisch geliefert und direkt auf der heißen Platte zu einem perfekten Smash Burger verarbeitet. Das gibt ihm seine unverwechselbare Kruste.</p>
+        </div>
+        <img class="statement__img" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=800" alt="Frische Zutaten" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ÜBER UNS -->
+  <section class="about" id="ueber-uns">
+    <div class="about__grid">
+      <img class="about__img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800" alt="Burger Joint Küche" loading="lazy">
+      <div class="about__text">
+        <div class="about__eyebrow">Unsere Geschichte</div>
+        <h2 class="about__title">Mehr als ein Burger</h2>
+        <p class="about__body">Burger Joint wurde 2018 mit einer einzigen Mission gegründet: den besten Smash Burger der Stadt zu machen. Keine Kompromisse bei den Zutaten. Keine Tiefkühlware. Kein Schnickschnack.</p>
+        <p class="about__body">Wir verwenden frisches Rindfleisch, täglich geliefert — und drücken jeden Patty direkt auf der heißen Platte flach. Das Ergebnis spricht für sich.</p>
+        <a href="bestellen.html" class="about__cta">Zur Speisekarte →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTS -->
+  <div class="facts">
+    <div class="container">
+      <div class="facts__grid">
+        <div class="facts__item">
+          <div class="facts__num">100%</div>
+          <div class="facts__label">Frisches Fleisch</div>
+        </div>
+        <div class="facts__item">
+          <div class="facts__num">20<span style="font-size:2.5rem">min</span></div>
+          <div class="facts__label">Lieferzeit</div>
+        </div>
+        <div class="facts__item">
+          <div class="facts__num">15+</div>
+          <div class="facts__label">Toppings zur Auswahl</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEWERTUNGEN -->
+  <section class="reviews" id="bewertungen">
+    <div class="container">
+      <div class="reviews__header">
+        <h2 class="reviews__title">Was Gäste sagen</h2>
+        <a href="#" class="reviews__link">Alle Bewertungen</a>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-quote" id="review-quote">„DER BESTE BURGER DER STADT. PUNKT."</p>
+      <p class="review-author" id="review-author">Max K. · vor 3 Tagen · Google · 4,8 ⭐ aus 620 Bewertungen</p>
+      <div class="review-dots">
+        <button class="review-dot review-dot--active" data-i="0"></button>
+        <button class="review-dot" data-i="1"></button>
+        <button class="review-dot" data-i="2"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="contact" id="kontakt">
+    <div class="contact__grid">
+      <div class="contact__text">
+        <h2 class="contact__title">Komm vorbei</h2>
+        <div class="contact__item">
+          <div class="contact__item-label">Adresse</div>
+          <div class="contact__item-value">Musterstraße 1<br>12345 Musterstadt</div>
+        </div>
+        <div class="contact__item">
+          <div class="contact__item-label">Öffnungszeiten</div>
+          <div class="contact__item-value">Mo–So 11:00–23:00 Uhr</div>
+        </div>
+        <div class="contact__item">
+          <div class="contact__item-label">Telefon</div>
+          <div class="contact__item-value"><a href="tel:000000000">000 / 000 000</a></div>
+        </div>
+        <div class="contact__item">
+          <div class="contact__item-label">E-Mail</div>
+          <div class="contact__item-value"><a href="mailto:info@burgerjoint.de">info@burgerjoint.de</a></div>
+        </div>
+        <a href="bestellen.html" class="contact__cta">Jetzt bestellen →</a>
+      </div>
+      <div class="contact__map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d77946.0!2d10.5268!3d52.2689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a5be3d6eba8a91%3A0x425ac6d94ac4720!2sBraunschweig!5e0!3m2!1sde!2sde" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand">BURGER<span>JOINT</span></div>
+          <p class="footer__claim">Handgemachte Smash Burgers mit frischen Zutaten. Täglich frisch — niemals tiefgekühlt.</p>
+        </div>
+        <div>
+          <div class="footer__heading">Menü</div>
+          <nav class="footer__links">
+            <a href="bestellen.html#burger">Burger</a>
+            <a href="bestellen.html#chicken">Chicken</a>
+            <a href="bestellen.html#sides">Fries & Sides</a>
+            <a href="bestellen.html#shakes">Shakes</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer__heading">Info</div>
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Allergene</a>
+            <a href="reservieren.html">Reservieren</a>
+          </nav>
+        </div>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Burger Joint — Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }));
+
+    const reviews = [
+      { q: '„DER BESTE BURGER DER STADT. PUNKT."', a: 'Max K. · vor 3 Tagen · Google · 4,8 ⭐ aus 620 Bewertungen' },
+      { q: '„Endlich mal ein Burger der wirklich schmeckt. Die Fries sind auch der Hammer."', a: 'Sarah M. · vor 1 Woche · Google' },
+      { q: '„Super schnell geliefert, noch warm. Definitiv mein neuer Lieblingsladen!"', a: 'Tom B. · vor 2 Wochen · Google' }
+    ];
+    let current = 0;
+    const quoteEl = document.getElementById('review-quote');
+    const authorEl = document.getElementById('review-author');
+    const dots = document.querySelectorAll('.review-dot');
+    function showReview(i) {
+      quoteEl.style.opacity = '0'; authorEl.style.opacity = '0';
+      setTimeout(() => {
+        current = i;
+        quoteEl.textContent = reviews[i].q;
+        authorEl.textContent = reviews[i].a;
+        quoteEl.style.opacity = '1'; authorEl.style.opacity = '1';
+        dots.forEach((d, j) => d.classList.toggle('review-dot--active', j === i));
+      }, 300);
+    }
+    dots.forEach(d => d.addEventListener('click', () => showReview(parseInt(d.dataset.i))));
+    setInterval(() => showReview((current + 1) % reviews.length), 4500);
+  </script>
+</body>
+</html>

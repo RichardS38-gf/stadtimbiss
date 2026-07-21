@@ -1,0 +1,10 @@
+/* layout.css — Burger Joint */
+.container { width: 100%; max-width: 1140px; margin-inline: auto; padding-inline: 1rem; }
+@media (min-width: 768px) { .container { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .container { padding-inline: 2rem; } }
+.section { padding-block: var(--space-7); }
+@media (min-width: 768px) { .section { padding-block: var(--space-8); } }
+.grid-2 { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+.grid-3 { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+.grid-4 { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--space-4); }
+@media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2,1fr); } .grid-3 { grid-template-columns: repeat(3,1fr); } .grid-4 { grid-template-columns: repeat(4,1fr); } }
