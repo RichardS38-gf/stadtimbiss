@@ -86,7 +86,9 @@
     .menu-grid-section__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.03em; margin-bottom: var(--space-7); }
     .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); background: var(--fg-white); width: 100%; }
     @media (min-width: 768px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
-    .menu-grid__discover { grid-column: 1 / -1; background: var(--fg-red); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: var(--space-5); text-decoration: none; min-height: 160px; border-radius: 20px; }
+    .menu-grid__discover { position: relative; overflow: hidden; grid-column: 1 / -1; background: var(--fg-red); display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: var(--space-5); text-decoration: none; min-height: 160px; border-radius: 20px; }
+    .menu-grid__discover-bull { position: absolute; right: -4%; bottom: -12%; height: 135%; pointer-events: none; user-select: none; z-index: 0; }
+    .menu-grid__discover-label, .menu-grid__discover-link { position: relative; z-index: 1; }
     @media (min-width: 768px) { .menu-grid__discover { grid-column: span 2; min-height: 280px; } }
     .menu-grid__item { background: var(--fg-white); display: flex; flex-direction: column; text-decoration: none; overflow: hidden; border-radius: 20px; border-top: 4px solid var(--fg-red); border-left: 4px solid var(--fg-red); border-bottom: 2px solid var(--fg-red); border-right: 2px solid var(--fg-red); }
     .menu-grid__img-wrap { background: var(--fg-white); overflow: hidden; aspect-ratio: 4/3; padding: 16px; }
@@ -290,6 +292,7 @@
         <div class="menu-grid__body"><div class="menu-grid__name">Wraps</div></div>
       </a>
       <a href="bestellen.html" class="menu-grid__discover">
+        <img class="menu-grid__discover-bull" src="Bilder/burger%20bull.png" alt="">
         <div class="menu-grid__discover-label">Vollständige Karte</div>
         <div class="menu-grid__discover-link">Alle Gerichte →</div>
       </a>
