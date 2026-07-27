@@ -46,15 +46,14 @@
     .icon-badge--lg { width: 40px; height: 40px; margin-bottom: 6px; }
     .icon-badge--lg svg { width: 20px; height: 20px; }
 
-    .order-mode { background: var(--fg-grey); border-bottom: 1px solid #e4e4e4; padding-block: var(--space-4); }
+    .order-mode { background: var(--fg-red); border-bottom: 1px solid var(--fg-red-dk); padding-block: var(--space-4); }
     .order-mode-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); max-width: 500px; margin-inline: auto; }
-    .mode-card { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4); background: white; border: 2px solid #e4e4e4; border-radius: 14px; cursor: pointer; text-align: left; transition: all var(--transition); }
-    .mode-card--active { background: var(--fg-red); border-color: var(--fg-red); }
-    .mode-card--active .icon-badge { background: white; border-color: white; color: var(--fg-red); }
+    .mode-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 2px; padding: var(--space-4); background: white; border: none; border-radius: 14px; cursor: pointer; text-align: left; transition: all var(--transition); }
+    .mode-card__bull { position: absolute; right: -8%; bottom: -25%; width: 65%; opacity: 0.12; pointer-events: none; user-select: none; z-index: 0; display: none; }
+    .mode-card--active .mode-card__bull { display: block; }
+    .icon-badge, .mode-card__title, .mode-card__info { position: relative; z-index: 1; }
     .mode-card__title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.03em; color: var(--fg-text); }
-    .mode-card--active .mode-card__title { color: white; }
     .mode-card__info { font-size: 0.8rem; color: var(--fg-muted); }
-    .mode-card--active .mode-card__info { color: rgba(255,255,255,0.8); }
 
     .category-nav { position: sticky; top: 60px; z-index: 90; background: var(--fg-white); border-bottom: 2px solid var(--fg-grey); }
     .category-nav .container { overflow-x: auto; white-space: nowrap; display: flex; scrollbar-width: none; }
@@ -161,11 +160,13 @@
     <div class="container">
       <div class="order-mode-toggle">
         <button class="mode-card mode-card--active" data-mode="lieferung">
+          <img class="mode-card__bull" src="Bilder/burger%20bull.png" alt="">
           <span class="icon-badge icon-badge--lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2.3"/><circle cx="18" cy="18" r="2.3"/><path d="M8 18h5l2-6h3"/><path d="M13 12l-2-4H8"/><path d="M4 18H2"/></svg></span>
           <span class="mode-card__title">Lieferung</span>
           <span class="mode-card__info">~20 Min · ab 1,99 €</span>
         </button>
         <button class="mode-card" data-mode="abholung">
+          <img class="mode-card__bull" src="Bilder/burger%20bull.png" alt="">
           <span class="icon-badge icon-badge--lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12l-1 11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 9z"/><path d="M9 9V7a3 3 0 0 1 6 0v2"/></svg></span>
           <span class="mode-card__title">Abholung</span>
           <span class="mode-card__info">~10 Min · kostenlos</span>
