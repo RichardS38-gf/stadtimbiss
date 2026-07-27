@@ -67,7 +67,11 @@
 
     .res-info { display: flex; flex-direction: column; gap: var(--space-4); }
     .res-info-card { background: white; border-radius: 20px; padding: var(--space-5); }
-    .res-info-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.02em; margin-bottom: var(--space-4); color: var(--fg-text); display: flex; align-items: center; gap: 10px; }
+    .res-info-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.02em; margin-bottom: var(--space-4); color: var(--fg-red); display: flex; align-items: center; gap: 10px; }
+    .res-info-item { display: flex; gap: var(--space-2); margin-bottom: var(--space-3); font-size: 0.9rem; line-height: 1.6; }
+    .res-info-item:last-child { margin-bottom: 0; }
+    .res-info-item strong { font-weight: 700; color: var(--fg-text); }
+    .res-info-item a { color: var(--fg-text); }
     .res-icon { width: 36px; height: 36px; border-radius: 50%; background: white; border: 2px solid var(--fg-red); color: var(--fg-red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .res-icon svg { width: 18px; height: 18px; }
     .res-note { background: rgba(210,16,51,0.06); border: 2px solid var(--fg-red); border-radius: 16px; padding: var(--space-4); font-size: 0.9rem; line-height: 1.6; color: var(--fg-text); font-weight: 500; display: flex; align-items: center; gap: var(--space-3); }
@@ -161,16 +165,16 @@
       <div class="res-info">
         <div class="res-info-card">
           <h3><span class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-11.5A7 7 0 0 1 19 9.5C19 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span> Wo wir sind</h3>
-          <div class="res-info-item"><div><strong>Adresse</strong>Musterstraße 1, 12345 Musterstadt</div></div>
-          <div class="res-info-item"><div><strong>Öffnungszeiten</strong>Mo–So 11:00–23:00 Uhr</div></div>
-          <div class="res-info-item"><div><strong>Telefon</strong><a href="tel:000000000">000 / 000 000</a></div></div>
+          <div class="res-info-item"><div><strong>Adresse:</strong> Musterstraße 1, 12345 Musterstadt</div></div>
+          <div class="res-info-item"><div><strong>Öffnungszeiten:</strong> Mo–So 11:00–23:00 Uhr</div></div>
+          <div class="res-info-item"><div><strong>Telefon:</strong> <a href="tel:000000000">000 / 000 000</a></div></div>
         </div>
 
         <div class="res-info-card">
           <h3><span class="res-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.8" r="0.9" fill="currentColor" stroke="none"/></svg></span> Hinweise</h3>
-          <div class="res-info-item"><div><strong>Tischdauer</strong>Tische werden für 90 Minuten reserviert.</div></div>
-          <div class="res-info-item"><div><strong>Große Gruppen</strong>Ab 8 Personen bitte direkt anrufen.</div></div>
-          <div class="res-info-item"><div><strong>Bestätigung</strong>Per Telefon oder E-Mail.</div></div>
+          <div class="res-info-item"><div><strong>Tischdauer:</strong> Tische werden für 90 Minuten reserviert.</div></div>
+          <div class="res-info-item"><div><strong>Große Gruppen:</strong> Ab 8 Personen bitte direkt anrufen.</div></div>
+          <div class="res-info-item"><div><strong>Bestätigung:</strong> Per Telefon oder E-Mail.</div></div>
         </div>
 
         <div class="res-note">
