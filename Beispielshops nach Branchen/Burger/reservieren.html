@@ -39,6 +39,7 @@
 
     /* Hero Banner */
     .res-hero { background: var(--fg-red); padding: var(--space-8) 0; text-align: center; position: relative; overflow: hidden; }
+    .res-hero__bull { position: absolute; right: -6%; bottom: -25%; width: 42%; max-width: 480px; opacity: 0.16; z-index: 0; pointer-events: none; user-select: none; }
     .res-hero__content { position: relative; z-index: 1; }
     .res-hero h1 { font-family: 'Bebas Neue', sans-serif; color: white; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: var(--space-3); }
     .res-hero p { color: rgba(255,255,255,0.9); font-size: 1.15rem; font-weight: 500; }
@@ -99,6 +100,7 @@
   </header>
 
   <div class="res-hero">
+    <img class="res-hero__bull" src="Bilder/burger%20bull.png" alt="">
     <div class="res-hero__content">
       <h1>TISCH RESERVIEREN</h1>
       <p>Sichere dir deinen Platz, wir freuen uns auf dich.</p>
