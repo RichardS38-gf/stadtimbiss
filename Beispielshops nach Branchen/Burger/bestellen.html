@@ -497,8 +497,9 @@
     const open=()=>{document.getElementById('cart-drawer').classList.add('active');document.getElementById('cart-overlay').classList.add('active');document.body.style.overflow='hidden';render();};
     const close=()=>{document.getElementById('cart-drawer').classList.remove('active');document.getElementById('cart-overlay').classList.remove('active');document.body.style.overflow='';};
     document.getElementById('cart-toggle')?.addEventListener('click',open);document.getElementById('cart-fab')?.addEventListener('click',open);document.getElementById('cart-close')?.addEventListener('click',close);document.getElementById('cart-overlay')?.addEventListener('click',close);
-    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.cat-link').forEach(l=>l.classList.remove('cat-link--active'));const a=document.querySelector(`.cat-link[href="#${e.target.id}"]`);if(a)a.classList.add('cat-link--active');}});},{rootMargin:'-50% 0px -50% 0px'});
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.cat-link').forEach(l=>l.classList.remove('cat-link--active'));const a=document.querySelector(`.cat-link[href="#${e.target.id}"]`);if(a)a.classList.add('cat-link--active');}});},{rootMargin:'-110px 0px -70% 0px'});
     document.querySelectorAll('.menu-section').forEach(s=>obs.observe(s));
+    document.querySelectorAll('.cat-link').forEach(link=>link.addEventListener('click',()=>{document.querySelectorAll('.cat-link').forEach(l=>l.classList.remove('cat-link--active'));link.classList.add('cat-link--active');}));
     render();
   </script>
 </body>
