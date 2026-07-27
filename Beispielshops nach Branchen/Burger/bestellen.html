@@ -123,6 +123,21 @@
     .cart-drawer__footer { padding: 1rem 1.25rem; border-top: 1px solid #eee; }
     @media (min-width: 1024px) { .cart-drawer, .cart-overlay { display: none !important; } }
 
+    /* ── BEWERTUNGEN ── */
+    .reviews-order { padding-block: var(--space-8); background: var(--fg-white); }
+    .reviews-order .container { max-width: 1140px; }
+    .reviews-order__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.02em; border-bottom: 3px solid var(--fg-red); padding-bottom: var(--space-3); margin-bottom: var(--space-6); color: var(--fg-text); }
+    .reviews-order__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+    @media (min-width: 768px) { .reviews-order__grid { grid-template-columns: repeat(4, 1fr); } }
+    .review-summary { background: var(--fg-grey); border-radius: 16px; padding: var(--space-5); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .review-summary__num { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; color: var(--fg-red); line-height: 1; }
+    .review-summary__stars { color: var(--fg-red); font-size: 1.1rem; letter-spacing: 2px; margin-block: 6px; }
+    .review-summary__count { font-size: 0.8rem; color: var(--fg-muted); }
+    .review-order-card { background: var(--fg-grey); border-radius: 16px; padding: var(--space-5); display: flex; flex-direction: column; }
+    .review-order-card__stars { color: var(--fg-red); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: var(--space-3); }
+    .review-order-card__text { font-size: 0.9rem; color: var(--fg-text); line-height: 1.6; margin-bottom: var(--space-4); flex: 1; }
+    .review-order-card__author { font-size: 0.8rem; color: var(--fg-muted); }
+
     /* ── FOOTER ── */
     .footer { background: var(--fg-black); color: white; padding-top: var(--space-7); padding-bottom: var(--space-6); margin-top: var(--space-7); }
     .footer__top { display: grid; grid-template-columns: 1fr; gap: var(--space-6); margin-bottom: var(--space-6); }
@@ -402,6 +417,34 @@
   </div>
 
   <button class="cart-fab" id="cart-fab">🛒 Warenkorb <span class="cart-fab__count" id="cart-fab-count">0</span><span id="cart-fab-price">0,00 €</span></button>
+
+  <section class="reviews-order">
+    <div class="container">
+      <h2 class="reviews-order__title">Bewertungen und Rezensionen</h2>
+      <div class="reviews-order__grid">
+        <div class="review-summary">
+          <div class="review-summary__num">4,8</div>
+          <div class="review-summary__stars">★★★★★</div>
+          <div class="review-summary__count">600+ Bewertungen</div>
+        </div>
+        <div class="review-order-card">
+          <div class="review-order-card__stars">★★★★★</div>
+          <p class="review-order-card__text">„Der beste Smash Burger der Stadt. Die Fries sind auch der Hammer, kam noch warm an.“</p>
+          <div class="review-order-card__author">Nina K. · 03.06.26</div>
+        </div>
+        <div class="review-order-card">
+          <div class="review-order-card__stars">★★★★★</div>
+          <p class="review-order-card__text">„Endlich mal ein Burger der wirklich schmeckt. Kommt bei uns jetzt jede Woche auf den Tisch.“</p>
+          <div class="review-order-card__author">Marcel H. · 21.05.26</div>
+        </div>
+        <div class="review-order-card">
+          <div class="review-order-card__stars">★★★★☆</div>
+          <p class="review-order-card__text">„Super schnell geliefert, die Auswahl macht die Entscheidung schwer. Der Double Smash war der Favorit vom Tisch.“</p>
+          <div class="review-order-card__author">Sophie L. · 09.04.26</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="container">
