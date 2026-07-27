@@ -107,13 +107,12 @@
     .statement__track { display: flex; width: max-content; white-space: nowrap; animation: statement-scroll 16s linear infinite; }
     .statement__track span { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 3rem); color: var(--fg-red); letter-spacing: 0.03em; padding-inline: var(--space-6); }
     @keyframes statement-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .statement__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: var(--space-7); align-items: center; }
-    @media (min-width: 768px) { .statement__inner { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
-    .statement__text {}
-    .statement__num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 15vw, 12rem); color: var(--fg-red); line-height: 0.85; }
+    .statement__inner { position: relative; z-index: 1; display: flex; justify-content: center; }
+    @media (min-width: 768px) { .statement__inner { justify-content: flex-end; } }
+    .statement__text { max-width: 480px; text-align: center; }
+    @media (min-width: 768px) { .statement__text { text-align: left; } }
     .statement__label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); color: white; line-height: 1; margin-bottom: var(--space-4); }
     .statement__desc { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 420px; }
-    .statement__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
 
     /* ── ÜBER UNS ── */
     .about { background: var(--fg-grey); padding-block: var(--space-8); }
@@ -131,13 +130,6 @@
     .about__cta { background: white; color: #d21033; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 12px 24px; align-self: flex-start; display: inline-block; border-radius: 20px; border: 2px solid #d21033; transition: all 0.2s ease; }
     .about__cta:hover { background: #d21033; color: white; opacity: 1; }
 
-    /* ── FACTS STRIP ── */
-    .facts { background: var(--fg-red); padding-block: var(--space-6); }
-    .facts__grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); text-align: center; }
-    @media (min-width: 768px) { .facts__grid { grid-template-columns: repeat(3, 1fr); } }
-    .facts__item {}
-    .facts__num { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: white; line-height: 1; }
-    .facts__label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.85); margin-top: 4px; }
 
     /* ── BEWERTUNGEN ── */
     .reviews { background: var(--fg-white); padding-block: var(--space-8); }
@@ -316,34 +308,13 @@
     <div class="container">
       <div class="statement__inner">
         <div class="statement__text">
-          <div class="statement__num">100%</div>
           <div class="statement__label">Frisches Rindfleisch —<br>Niemals tiefgekühlt</div>
           <p class="statement__desc">Jeder Patty wird täglich frisch geliefert und direkt auf der heißen Platte zu einem perfekten Smash Burger verarbeitet. Das gibt ihm seine unverwechselbare Kruste.</p>
         </div>
-        <img class="statement__img" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=800" alt="Frische Zutaten" loading="lazy">
       </div>
     </div>
   </section>
 
-  <!-- FACTS -->
-  <div class="facts">
-    <div class="container">
-      <div class="facts__grid">
-        <div class="facts__item">
-          <div class="facts__num">100%</div>
-          <div class="facts__label">Frisches Fleisch</div>
-        </div>
-        <div class="facts__item">
-          <div class="facts__num">20<span style="font-size:2.5rem">min</span></div>
-          <div class="facts__label">Lieferzeit</div>
-        </div>
-        <div class="facts__item">
-          <div class="facts__num">15+</div>
-          <div class="facts__label">Toppings zur Auswahl</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- BEWERTUNGEN -->
   <section class="reviews" id="bewertungen">
