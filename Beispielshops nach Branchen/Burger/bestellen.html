@@ -84,8 +84,8 @@
     @media (min-width: 768px) { .menu-card__img { width: 130px; height: 130px; } }
 
     /* Allergen */
-    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: white; border: 1.5px solid var(--fg-red); color: var(--fg-red); font-size: 0.62rem; font-style: italic; font-weight: 700; cursor: pointer; margin-left: 2px; flex-shrink: 0; position: relative; transition: all var(--transition); }
-    .allergen-btn::before { content: 'i'; }
+    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 19px; height: 19px; border-radius: 50%; background: white; border: 1.6px solid var(--fg-red); color: var(--fg-red); padding: 0; cursor: pointer; margin-left: 2px; flex-shrink: 0; position: relative; transition: all var(--transition); }
+    .allergen-btn svg { width: 11px; height: 11px; display: block; }
     .allergen-btn:hover { background: var(--fg-red); color: white; }
     .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--fg-black); color: white; font-size: 0.75rem; font-style: normal; font-weight: 500; padding: 0.4rem 0.7rem; border-radius: 8px; white-space: nowrap; z-index: 9999; pointer-events: none; }
     .allergen-btn:hover .allergen-tooltip { display: block; }
@@ -196,7 +196,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="Classic Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Classic Smash <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Senf</span></button></h3>
+            <h3 class="menu-card__name">Classic Smash <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch, Senf</span></button></h3>
             <p class="menu-card__desc">180g Beef Patty, Cheddar, Salat, Tomate, Zwiebel, Burger-Sauce, Brioche Bun</p>
             <div class="menu-card__footer"><span class="menu-card__price">8,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b1" data-name="Classic Smash" data-price="8.90">+ Hinzufügen</button></div>
           </div>
@@ -205,7 +205,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="Double Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Double Smash <span class="menu-card__badge">Beliebt</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Senf</span></button></h3>
+            <h3 class="menu-card__name">Double Smash <span class="menu-card__badge">Beliebt</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch, Senf</span></button></h3>
             <p class="menu-card__desc">2x 180g Beef Patty, doppelt Cheddar, karamellisierte Zwiebeln, Pickles, Special Sauce</p>
             <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b2" data-name="Double Smash" data-price="12.90">+ Hinzufügen</button></div>
           </div>
@@ -214,7 +214,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="BBQ Bacon Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">BBQ Bacon Smash<button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Senf, Sulfite</span></button></h3>
+            <h3 class="menu-card__name">BBQ Bacon Smash<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch, Senf, Sulfite</span></button></h3>
             <p class="menu-card__desc">180g Beef Patty, knuspriger Bacon, Cheddar, BBQ-Sauce, Röstzwiebeln, Jalapeños</p>
             <div class="menu-card__footer"><span class="menu-card__price">11,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b3" data-name="BBQ Bacon Smash" data-price="11.50">+ Hinzufügen</button></div>
           </div>
@@ -223,7 +223,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="Mushroom Swiss" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Mushroom Swiss <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
+            <h3 class="menu-card__name">Mushroom Swiss <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
             <p class="menu-card__desc">180g Beef Patty, Champignons, Schweizer Käse, Thymian-Aioli, Rucola</p>
             <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b4" data-name="Mushroom Swiss" data-price="11.90">+ Hinzufügen</button></div>
           </div>
@@ -237,7 +237,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/chicken.png" alt="Crispy Chicken" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Crispy Chicken <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Ei, Milch</span></button></h3>
+            <h3 class="menu-card__name">Crispy Chicken <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Ei, Milch</span></button></h3>
             <p class="menu-card__desc">Knuspriges Hähnchenbrustfilet, Coleslaw, Pickles, Honey-Mustard, Brioche Bun</p>
             <div class="menu-card__footer"><span class="menu-card__price">9,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Crispy Chicken" data-price="9.90">+ Hinzufügen</button></div>
           </div>
@@ -246,7 +246,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/chicken.png" alt="Spicy Chicken" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Spicy Chicken 🌶<button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Ei, Milch</span></button></h3>
+            <h3 class="menu-card__name">Spicy Chicken 🌶<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Ei, Milch</span></button></h3>
             <p class="menu-card__desc">Scharfes Hähnchenbrustfilet, Jalapeños, Hot-Sauce, Eisberg, Cheddar</p>
             <div class="menu-card__footer"><span class="menu-card__price">10,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c2" data-name="Spicy Chicken" data-price="10.50">+ Hinzufügen</button></div>
           </div>
@@ -260,7 +260,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/veggie.png" alt="Veggie Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Smash <span class="menu-card__badge">Vegan möglich</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Soja, Senf</span></button></h3>
+            <h3 class="menu-card__name">Veggie Smash <span class="menu-card__badge">Vegan möglich</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Soja, Senf</span></button></h3>
             <p class="menu-card__desc">Plant-Based Patty, Avocado, Tomate, Rucola, Chipotle-Mayo, Brioche Bun</p>
             <div class="menu-card__footer"><span class="menu-card__price">10,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Veggie Smash" data-price="10.90">+ Hinzufügen</button></div>
           </div>
@@ -274,7 +274,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="Chicken Wrap" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Chicken Wrap <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
+            <h3 class="menu-card__name">Chicken Wrap <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
             <p class="menu-card__desc">Gegrilltes Hähnchenbrustfilet, Salat, Tomate, Chipotle-Sauce, weiche Tortilla</p>
             <div class="menu-card__footer"><span class="menu-card__price">7,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w1" data-name="Chicken Wrap" data-price="7.90">+ Hinzufügen</button></div>
           </div>
@@ -283,7 +283,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="BBQ Chicken Wrap" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">BBQ Chicken Wrap <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Sulfite</span></button></h3>
+            <h3 class="menu-card__name">BBQ Chicken Wrap <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch, Sulfite</span></button></h3>
             <p class="menu-card__desc">Knuspriges Hähnchen, BBQ-Sauce, Cheddar, Röstzwiebeln, Coleslaw</p>
             <div class="menu-card__footer"><span class="menu-card__price">8,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w2" data-name="BBQ Chicken Wrap" data-price="8.50">+ Hinzufügen</button></div>
           </div>
@@ -292,7 +292,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="Veggie Wrap" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Wrap <span class="menu-card__badge">Vegan möglich</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Sesam, Milch</span></button></h3>
+            <h3 class="menu-card__name">Veggie Wrap <span class="menu-card__badge">Vegan möglich</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Sesam, Milch</span></button></h3>
             <p class="menu-card__desc">Falafel, Hummus, Rucola, Tomate, Gurke, Joghurt-Minz-Sauce</p>
             <div class="menu-card__footer"><span class="menu-card__price">7,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w3" data-name="Veggie Wrap" data-price="7.50">+ Hinzufügen</button></div>
           </div>
@@ -306,7 +306,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/fries.png" alt="Crispy Fries" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Crispy Fries <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Kann Spuren von Gluten enthalten</span></button></h3>
+            <h3 class="menu-card__name">Crispy Fries <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Kann Spuren von Gluten enthalten</span></button></h3>
             <p class="menu-card__desc">Knusprige Pommes mit Fleur de Sel, Regular oder Large</p>
             <div class="menu-card__footer"><span class="menu-card__price">3,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="Crispy Fries" data-price="3.90">+ Hinzufügen</button></div>
           </div>
@@ -315,7 +315,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="Onion Rings" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Onion Rings<button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Ei</span></button></h3>
+            <h3 class="menu-card__name">Onion Rings<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch, Ei</span></button></h3>
             <p class="menu-card__desc">Knusprig panierte Zwiebelringe mit Dip nach Wahl</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s2" data-name="Onion Rings" data-price="4.50">+ Hinzufügen</button></div>
           </div>
@@ -324,7 +324,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/fries.png" alt="Chili Cheese Fries" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Chili Cheese Fries <span class="menu-card__badge">Beliebt</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
+            <h3 class="menu-card__name">Chili Cheese Fries <span class="menu-card__badge">Beliebt</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
             <p class="menu-card__desc">Pommes mit Chili-Beef, geschmolzenem Cheddar, Jalapeños und Sour Cream</p>
             <div class="menu-card__footer"><span class="menu-card__price">6,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s3" data-name="Chili Cheese Fries" data-price="6.90">+ Hinzufügen</button></div>
           </div>
@@ -333,7 +333,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/fries.png" alt="Sweet Potato Fries" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Sweet Potato Fries<button class="allergen-btn" type="button"><span class="allergen-tooltip">Kann Spuren von Gluten enthalten</span></button></h3>
+            <h3 class="menu-card__name">Sweet Potato Fries<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Kann Spuren von Gluten enthalten</span></button></h3>
             <p class="menu-card__desc">Süßkartoffel-Pommes mit Zimt-Dip</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s4" data-name="Sweet Potato Fries" data-price="4.90">+ Hinzufügen</button></div>
           </div>
@@ -347,7 +347,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/shakes.png" alt="Vanilla Shake" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Vanilla Shake <span class="menu-card__badge">Klassiker</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Milch, Ei</span></button></h3>
+            <h3 class="menu-card__name">Vanilla Shake <span class="menu-card__badge">Klassiker</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Milch, Ei</span></button></h3>
             <p class="menu-card__desc">Cremiger Vanille-Milchshake mit Schlagsahne</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="sh1" data-name="Vanilla Shake" data-price="5.50">+ Hinzufügen</button></div>
           </div>
@@ -356,7 +356,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/shakes.png" alt="Chocolate Shake" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Chocolate Shake<button class="allergen-btn" type="button"><span class="allergen-tooltip">Milch, Gluten, Soja</span></button></h3>
+            <h3 class="menu-card__name">Chocolate Shake<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Milch, Gluten, Soja</span></button></h3>
             <p class="menu-card__desc">Schokoladen-Milchshake mit Oreo-Krümeln und Schlagsahne</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="sh2" data-name="Chocolate Shake" data-price="5.90">+ Hinzufügen</button></div>
           </div>
@@ -365,7 +365,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/shakes.png" alt="Strawberry Shake" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Strawberry Shake <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Milch</span></button></h3>
+            <h3 class="menu-card__name">Strawberry Shake <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Milch</span></button></h3>
             <p class="menu-card__desc">Frische Erdbeeren, Vanilleeis, Schlagsahne</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="sh3" data-name="Strawberry Shake" data-price="5.90">+ Hinzufügen</button></div>
           </div>
@@ -379,7 +379,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/cola.png" alt="Cola" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Cola 0,5l<button class="allergen-btn" type="button"><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
+            <h3 class="menu-card__name">Cola 0,5l<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
             <p class="menu-card__desc">Klassisch oder Zero</p>
             <div class="menu-card__footer"><span class="menu-card__price">2,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Cola 0,5l" data-price="2.90">+ Hinzufügen</button></div>
           </div>
@@ -388,7 +388,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/cola.png" alt="Lemonade" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Hausgemachte Lemonade<button class="allergen-btn" type="button"><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
+            <h3 class="menu-card__name">Hausgemachte Lemonade<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
             <p class="menu-card__desc">Frisch gepresste Zitrone, Minze, Zucker, 0,4l</p>
             <div class="menu-card__footer"><span class="menu-card__price">3,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Lemonade" data-price="3.50">+ Hinzufügen</button></div>
           </div>
@@ -397,7 +397,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/cola.png" alt="Wasser" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Wasser 0,5l<button class="allergen-btn" type="button"><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
+            <h3 class="menu-card__name">Wasser 0,5l<button class="allergen-btn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.6" r="1" fill="currentColor" stroke="none"/></svg><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
             <p class="menu-card__desc">Still oder Sprudel</p>
             <div class="menu-card__footer"><span class="menu-card__price">1,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g3" data-name="Wasser 0,5l" data-price="1.90">+ Hinzufügen</button></div>
           </div>
