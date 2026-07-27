@@ -33,14 +33,24 @@
     .nav__logo { display: flex; align-items: center; gap: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--fg-red); letter-spacing: 0.05em; line-height: 1; }
     .nav__logo-icon { font-size: 1.4rem; }
     .nav__logo-text span { color: var(--fg-black); }
-    .cart-btn { display: flex; align-items: center; gap: 0.4rem; font-size: 1.3rem; position: relative; padding: 0.5rem; min-height: 44px; color: var(--fg-text); }
+    .cart-btn { display: flex; align-items: center; gap: 0.4rem; font-size: 1.3rem; position: relative; padding: 0.5rem; min-height: 44px; color: var(--fg-red); }
+    .cart-btn svg { width: 22px; height: 22px; }
     .cart-badge { display: none; position: absolute; top: 0; right: 0; background: var(--fg-red); color: white; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; align-items: center; justify-content: center; }
+
+    /* ── ICON BADGES (reused across mode-cards / category-nav / section titles) ── */
+    .icon-badge { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: white; border: 2px solid var(--fg-red); color: var(--fg-red); flex-shrink: 0; }
+    .icon-badge--sm { width: 24px; height: 24px; margin-right: 6px; }
+    .icon-badge--sm svg { width: 13px; height: 13px; }
+    .icon-badge--md { width: 34px; height: 34px; margin-right: 10px; }
+    .icon-badge--md svg { width: 18px; height: 18px; }
+    .icon-badge--lg { width: 40px; height: 40px; margin-bottom: 6px; }
+    .icon-badge--lg svg { width: 20px; height: 20px; }
 
     .order-mode { background: var(--fg-grey); border-bottom: 1px solid #e4e4e4; padding-block: var(--space-4); }
     .order-mode-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); max-width: 500px; margin-inline: auto; }
     .mode-card { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4); background: white; border: 2px solid #e4e4e4; border-radius: 14px; cursor: pointer; text-align: left; transition: all var(--transition); }
     .mode-card--active { background: var(--fg-red); border-color: var(--fg-red); }
-    .mode-card__emoji { font-size: 1.6rem; margin-bottom: 4px; }
+    .mode-card--active .icon-badge { background: white; border-color: white; color: var(--fg-red); }
     .mode-card__title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.03em; color: var(--fg-text); }
     .mode-card--active .mode-card__title { color: white; }
     .mode-card__info { font-size: 0.8rem; color: var(--fg-muted); }
@@ -51,20 +61,22 @@
     .category-nav .container::-webkit-scrollbar { display: none; }
     .cat-link { display: inline-flex; align-items: center; padding: 0.875rem 1.25rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; color: var(--fg-muted); min-height: 48px; border-bottom: 3px solid transparent; transition: all var(--transition); }
     .cat-link--active { color: var(--fg-red); border-bottom-color: var(--fg-red); }
+    .cat-link .icon-badge { color: var(--fg-muted); border-color: #ddd; }
+    .cat-link--active .icon-badge { color: var(--fg-red); border-color: var(--fg-red); }
 
     .order-layout { display: flex; gap: var(--space-6); max-width: 1140px; margin-inline: auto; padding-inline: 1rem; padding-block: var(--space-6); }
     @media (min-width: 1024px) { .order-layout { padding-inline: 2rem; } }
     .menu-area { flex: 1; min-width: 0; }
 
     .menu-section { margin-bottom: var(--space-7); }
-    .menu-section__title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 0.03em; margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 3px solid var(--fg-red); color: var(--fg-text); }
+    .menu-section__title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 0.03em; margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 3px solid var(--fg-red); color: var(--fg-text); display: flex; align-items: center; }
 
     .menu-card { display: flex; gap: var(--space-4); padding-block: var(--space-4); border-bottom: 1px solid #eee; overflow: visible; }
     .menu-card:last-child { border-bottom: none; }
     .menu-card__img { width: 110px; height: 110px; object-fit: cover; border-radius: 14px; flex-shrink: 0; }
     .menu-card__body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; overflow: visible; }
     .menu-card__name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.02em; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; overflow: visible; }
-    .menu-card__badge { font-size: 0.65rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; background: var(--fg-red); color: white; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.04em; }
+    .menu-card__badge { font-size: 0.72rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; background: var(--fg-red); color: white; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.04em; }
     .menu-card__badge--new { background: var(--fg-black); color: white; }
     .menu-card__desc { font-size: 0.875rem; color: var(--fg-muted); margin-bottom: var(--space-3); line-height: 1.5; }
     .menu-card__footer { display: flex; align-items: center; justify-content: space-between; }
@@ -72,10 +84,10 @@
     @media (min-width: 768px) { .menu-card__img { width: 130px; height: 130px; } }
 
     /* Allergen */
-    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: #e4e4e4; color: var(--fg-muted); font-size: 0.6rem; font-style: italic; font-weight: 700; border: none; cursor: pointer; margin-left: 4px; flex-shrink: 0; position: relative; }
+    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: white; border: 1.5px solid var(--fg-red); color: var(--fg-red); font-size: 0.62rem; font-style: italic; font-weight: 700; cursor: pointer; margin-left: 2px; flex-shrink: 0; position: relative; transition: all var(--transition); }
     .allergen-btn::before { content: 'i'; }
     .allergen-btn:hover { background: var(--fg-red); color: white; }
-    .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--fg-black); color: white; font-size: 0.75rem; font-style: normal; padding: 0.4rem 0.7rem; border-radius: 8px; white-space: nowrap; z-index: 9999; pointer-events: none; }
+    .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--fg-black); color: white; font-size: 0.75rem; font-style: normal; font-weight: 500; padding: 0.4rem 0.7rem; border-radius: 8px; white-space: nowrap; z-index: 9999; pointer-events: none; }
     .allergen-btn:hover .allergen-tooltip { display: block; }
 
     /* Cart Sidebar */
@@ -137,7 +149,10 @@
       </a>
       <div style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
         <a href="reservieren.html" class="btn btn--outline btn--sm">Reservieren</a>
-        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">🛒 <span class="cart-badge" id="cart-count">0</span></button>
+        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg>
+          <span class="cart-badge" id="cart-count">0</span>
+        </button>
       </div>
     </div>
   </header>
@@ -146,12 +161,12 @@
     <div class="container">
       <div class="order-mode-toggle">
         <button class="mode-card mode-card--active" data-mode="lieferung">
-          <span class="mode-card__emoji">🛵</span>
+          <span class="icon-badge icon-badge--lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2.3"/><circle cx="18" cy="18" r="2.3"/><path d="M8 18h5l2-6h3"/><path d="M13 12l-2-4H8"/><path d="M4 18H2"/></svg></span>
           <span class="mode-card__title">Lieferung</span>
           <span class="mode-card__info">~20 Min · ab 1,99 €</span>
         </button>
         <button class="mode-card" data-mode="abholung">
-          <span class="mode-card__emoji">🏃</span>
+          <span class="icon-badge icon-badge--lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12l-1 11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 9z"/><path d="M9 9V7a3 3 0 0 1 6 0v2"/></svg></span>
           <span class="mode-card__title">Abholung</span>
           <span class="mode-card__info">~10 Min · kostenlos</span>
         </button>
@@ -161,13 +176,13 @@
 
   <nav class="category-nav">
     <div class="container">
-      <a class="cat-link cat-link--active" href="#burger">🍔 Burger</a>
-      <a class="cat-link" href="#chicken">🍗 Chicken</a>
-      <a class="cat-link" href="#veggie">🥦 Veggie</a>
-      <a class="cat-link" href="#wraps">🌯 Wraps</a>
-      <a class="cat-link" href="#sides">🍟 Sides</a>
-      <a class="cat-link" href="#shakes">🥤 Shakes</a>
-      <a class="cat-link" href="#getraenke">🧃 Getränke</a>
+      <a class="cat-link cat-link--active" href="#burger"><span class="icon-badge icon-badge--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9c0-3.5 4-6 9-6s9 2.5 9 6"/><line x1="2.5" y1="12" x2="21.5" y2="12"/><line x1="3" y1="15" x2="21" y2="15"/><path d="M2.5 18c0 1.5 1.5 3 3.5 3h12c2 0 3.5-1.5 3.5-3"/><path d="M2.5 18h19"/></svg></span>Burger</a>
+      <a class="cat-link" href="#chicken"><span class="icon-badge icon-badge--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15L16 8c1.5-1.5 4-1.5 5.5 0s1.5 4 0 5.5L14 20c-2 2-5 2-7 0l-1-1c-1-1-1-2.5 0-3.5z"/><circle cx="7" cy="17" r="2"/></svg></span>Chicken</a>
+      <a class="cat-link" href="#veggie"><span class="icon-badge icon-badge--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-9 6-15 15-15 0 9-6 15-15 15z"/><path d="M4 20c3-3 7-6 11-11"/></svg></span>Veggie</a>
+      <a class="cat-link" href="#wraps"><span class="icon-badge icon-badge--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="10" rx="5"/><line x1="9" y1="7" x2="9" y2="17"/><line x1="15" y1="7" x2="15" y2="17"/></svg></span>Wraps</a>
+      <a class="cat-link" href="#sides"><span class="icon-badge icon-badge--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12l-1.5 11a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8L6 9z"/><line x1="9" y1="4" x2="9" y2="9"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="15" y1="4" x2="15" y2="9"/></svg></span>Sides</a>
+      <a class="cat-link" href="#shakes"><span class="icon-badge icon-badge--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10l-1 12a1.5 1.5 0 0 1-1.5 1.3h-5A1.5 1.5 0 0 1 8 20L7 8z"/><path d="M7 8a5 5 0 0 1 10 0"/><line x1="13" y1="3" x2="13" y2="8"/></svg></span>Shakes</a>
+      <a class="cat-link" href="#getraenke"><span class="icon-badge icon-badge--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7h8l-1 13a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1L8 7z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="14" y1="4" x2="12" y2="7"/></svg></span>Getränke</a>
     </div>
   </nav>
 
@@ -176,12 +191,12 @@
 
       <!-- BURGER -->
       <section class="menu-section" id="burger">
-        <h2 class="menu-section__title">🍔 Burger</h2>
+        <h2 class="menu-section__title"><span class="icon-badge icon-badge--md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9c0-3.5 4-6 9-6s9 2.5 9 6"/><line x1="2.5" y1="12" x2="21.5" y2="12"/><line x1="3" y1="15" x2="21" y2="15"/><path d="M2.5 18c0 1.5 1.5 3 3.5 3h12c2 0 3.5-1.5 3.5-3"/><path d="M2.5 18h19"/></svg></span>Burger</h2>
 
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="Classic Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Classic Smash <span class="menu-card__badge">Bestseller</span></h3>
+            <h3 class="menu-card__name">Classic Smash <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Senf</span></button></h3>
             <p class="menu-card__desc">180g Beef Patty, Cheddar, Salat, Tomate, Zwiebel, Burger-Sauce, Brioche Bun</p>
             <div class="menu-card__footer"><span class="menu-card__price">8,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b1" data-name="Classic Smash" data-price="8.90">+ Hinzufügen</button></div>
           </div>
@@ -190,7 +205,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="Double Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Double Smash <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Double Smash <span class="menu-card__badge">Beliebt</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Senf</span></button></h3>
             <p class="menu-card__desc">2x 180g Beef Patty, doppelt Cheddar, karamellisierte Zwiebeln, Pickles, Special Sauce</p>
             <div class="menu-card__footer"><span class="menu-card__price">12,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b2" data-name="Double Smash" data-price="12.90">+ Hinzufügen</button></div>
           </div>
@@ -199,7 +214,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="BBQ Bacon Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">BBQ Bacon Smash</h3>
+            <h3 class="menu-card__name">BBQ Bacon Smash<button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Senf, Sulfite</span></button></h3>
             <p class="menu-card__desc">180g Beef Patty, knuspriger Bacon, Cheddar, BBQ-Sauce, Röstzwiebeln, Jalapeños</p>
             <div class="menu-card__footer"><span class="menu-card__price">11,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b3" data-name="BBQ Bacon Smash" data-price="11.50">+ Hinzufügen</button></div>
           </div>
@@ -208,7 +223,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/burger.png" alt="Mushroom Swiss" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Mushroom Swiss <span class="menu-card__badge menu-card__badge--new">Neu</span></h3>
+            <h3 class="menu-card__name">Mushroom Swiss <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
             <p class="menu-card__desc">180g Beef Patty, Champignons, Schweizer Käse, Thymian-Aioli, Rucola</p>
             <div class="menu-card__footer"><span class="menu-card__price">11,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="b4" data-name="Mushroom Swiss" data-price="11.90">+ Hinzufügen</button></div>
           </div>
@@ -217,12 +232,12 @@
 
       <!-- CHICKEN -->
       <section class="menu-section" id="chicken">
-        <h2 class="menu-section__title">🍗 Chicken</h2>
+        <h2 class="menu-section__title"><span class="icon-badge icon-badge--md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15L16 8c1.5-1.5 4-1.5 5.5 0s1.5 4 0 5.5L14 20c-2 2-5 2-7 0l-1-1c-1-1-1-2.5 0-3.5z"/><circle cx="7" cy="17" r="2"/></svg></span>Chicken</h2>
 
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/chicken.png" alt="Crispy Chicken" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Crispy Chicken <span class="menu-card__badge">Bestseller</span></h3>
+            <h3 class="menu-card__name">Crispy Chicken <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Ei, Milch</span></button></h3>
             <p class="menu-card__desc">Knuspriges Hähnchenbrustfilet, Coleslaw, Pickles, Honey-Mustard, Brioche Bun</p>
             <div class="menu-card__footer"><span class="menu-card__price">9,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Crispy Chicken" data-price="9.90">+ Hinzufügen</button></div>
           </div>
@@ -231,7 +246,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/chicken.png" alt="Spicy Chicken" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Spicy Chicken 🌶</h3>
+            <h3 class="menu-card__name">Spicy Chicken 🌶<button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Ei, Milch</span></button></h3>
             <p class="menu-card__desc">Scharfes Hähnchenbrustfilet, Jalapeños, Hot-Sauce, Eisberg, Cheddar</p>
             <div class="menu-card__footer"><span class="menu-card__price">10,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="c2" data-name="Spicy Chicken" data-price="10.50">+ Hinzufügen</button></div>
           </div>
@@ -240,12 +255,12 @@
 
       <!-- VEGGIE -->
       <section class="menu-section" id="veggie">
-        <h2 class="menu-section__title">🥦 Veggie</h2>
+        <h2 class="menu-section__title"><span class="icon-badge icon-badge--md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-9 6-15 15-15 0 9-6 15-15 15z"/><path d="M4 20c3-3 7-6 11-11"/></svg></span>Veggie</h2>
 
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/veggie.png" alt="Veggie Smash" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Smash <span class="menu-card__badge">Vegan möglich</span></h3>
+            <h3 class="menu-card__name">Veggie Smash <span class="menu-card__badge">Vegan möglich</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Soja, Senf</span></button></h3>
             <p class="menu-card__desc">Plant-Based Patty, Avocado, Tomate, Rucola, Chipotle-Mayo, Brioche Bun</p>
             <div class="menu-card__footer"><span class="menu-card__price">10,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Veggie Smash" data-price="10.90">+ Hinzufügen</button></div>
           </div>
@@ -254,12 +269,12 @@
 
       <!-- WRAPS -->
       <section class="menu-section" id="wraps">
-        <h2 class="menu-section__title">🌯 Wraps</h2>
+        <h2 class="menu-section__title"><span class="icon-badge icon-badge--md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="10" rx="5"/><line x1="9" y1="7" x2="9" y2="17"/><line x1="15" y1="7" x2="15" y2="17"/></svg></span>Wraps</h2>
 
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="Chicken Wrap" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Chicken Wrap <span class="menu-card__badge">Bestseller</span></h3>
+            <h3 class="menu-card__name">Chicken Wrap <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
             <p class="menu-card__desc">Gegrilltes Hähnchenbrustfilet, Salat, Tomate, Chipotle-Sauce, weiche Tortilla</p>
             <div class="menu-card__footer"><span class="menu-card__price">7,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w1" data-name="Chicken Wrap" data-price="7.90">+ Hinzufügen</button></div>
           </div>
@@ -268,7 +283,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="BBQ Chicken Wrap" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">BBQ Chicken Wrap <span class="menu-card__badge menu-card__badge--new">Neu</span></h3>
+            <h3 class="menu-card__name">BBQ Chicken Wrap <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Sulfite</span></button></h3>
             <p class="menu-card__desc">Knuspriges Hähnchen, BBQ-Sauce, Cheddar, Röstzwiebeln, Coleslaw</p>
             <div class="menu-card__footer"><span class="menu-card__price">8,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w2" data-name="BBQ Chicken Wrap" data-price="8.50">+ Hinzufügen</button></div>
           </div>
@@ -277,7 +292,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="Veggie Wrap" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Wrap <span class="menu-card__badge">Vegan möglich</span></h3>
+            <h3 class="menu-card__name">Veggie Wrap <span class="menu-card__badge">Vegan möglich</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Sesam, Milch</span></button></h3>
             <p class="menu-card__desc">Falafel, Hummus, Rucola, Tomate, Gurke, Joghurt-Minz-Sauce</p>
             <div class="menu-card__footer"><span class="menu-card__price">7,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="w3" data-name="Veggie Wrap" data-price="7.50">+ Hinzufügen</button></div>
           </div>
@@ -286,12 +301,12 @@
 
       <!-- SIDES -->
       <section class="menu-section" id="sides">
-        <h2 class="menu-section__title">🍟 Sides</h2>
+        <h2 class="menu-section__title"><span class="icon-badge icon-badge--md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12l-1.5 11a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8L6 9z"/><line x1="9" y1="4" x2="9" y2="9"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="15" y1="4" x2="15" y2="9"/></svg></span>Sides</h2>
 
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/fries.png" alt="Crispy Fries" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Crispy Fries <span class="menu-card__badge">Bestseller</span></h3>
+            <h3 class="menu-card__name">Crispy Fries <span class="menu-card__badge">Bestseller</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Kann Spuren von Gluten enthalten</span></button></h3>
             <p class="menu-card__desc">Knusprige Pommes mit Fleur de Sel, Regular oder Large</p>
             <div class="menu-card__footer"><span class="menu-card__price">3,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="Crispy Fries" data-price="3.90">+ Hinzufügen</button></div>
           </div>
@@ -300,7 +315,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/wraps.png" alt="Onion Rings" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Onion Rings</h3>
+            <h3 class="menu-card__name">Onion Rings<button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch, Ei</span></button></h3>
             <p class="menu-card__desc">Knusprig panierte Zwiebelringe mit Dip nach Wahl</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s2" data-name="Onion Rings" data-price="4.50">+ Hinzufügen</button></div>
           </div>
@@ -309,7 +324,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/fries.png" alt="Chili Cheese Fries" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Chili Cheese Fries <span class="menu-card__badge">Beliebt</span></h3>
+            <h3 class="menu-card__name">Chili Cheese Fries <span class="menu-card__badge">Beliebt</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Gluten, Milch</span></button></h3>
             <p class="menu-card__desc">Pommes mit Chili-Beef, geschmolzenem Cheddar, Jalapeños und Sour Cream</p>
             <div class="menu-card__footer"><span class="menu-card__price">6,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s3" data-name="Chili Cheese Fries" data-price="6.90">+ Hinzufügen</button></div>
           </div>
@@ -318,7 +333,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/fries.png" alt="Sweet Potato Fries" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Sweet Potato Fries</h3>
+            <h3 class="menu-card__name">Sweet Potato Fries<button class="allergen-btn" type="button"><span class="allergen-tooltip">Kann Spuren von Gluten enthalten</span></button></h3>
             <p class="menu-card__desc">Süßkartoffel-Pommes mit Zimt-Dip</p>
             <div class="menu-card__footer"><span class="menu-card__price">4,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="s4" data-name="Sweet Potato Fries" data-price="4.90">+ Hinzufügen</button></div>
           </div>
@@ -327,12 +342,12 @@
 
       <!-- SHAKES -->
       <section class="menu-section" id="shakes">
-        <h2 class="menu-section__title">🥤 Milkshakes</h2>
+        <h2 class="menu-section__title"><span class="icon-badge icon-badge--md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10l-1 12a1.5 1.5 0 0 1-1.5 1.3h-5A1.5 1.5 0 0 1 8 20L7 8z"/><path d="M7 8a5 5 0 0 1 10 0"/><line x1="13" y1="3" x2="13" y2="8"/></svg></span>Milkshakes</h2>
 
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/shakes.png" alt="Vanilla Shake" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Vanilla Shake <span class="menu-card__badge">Klassiker</span></h3>
+            <h3 class="menu-card__name">Vanilla Shake <span class="menu-card__badge">Klassiker</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Milch, Ei</span></button></h3>
             <p class="menu-card__desc">Cremiger Vanille-Milchshake mit Schlagsahne</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="sh1" data-name="Vanilla Shake" data-price="5.50">+ Hinzufügen</button></div>
           </div>
@@ -341,7 +356,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/shakes.png" alt="Chocolate Shake" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Chocolate Shake</h3>
+            <h3 class="menu-card__name">Chocolate Shake<button class="allergen-btn" type="button"><span class="allergen-tooltip">Milch, Gluten, Soja</span></button></h3>
             <p class="menu-card__desc">Schokoladen-Milchshake mit Oreo-Krümeln und Schlagsahne</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="sh2" data-name="Chocolate Shake" data-price="5.90">+ Hinzufügen</button></div>
           </div>
@@ -350,7 +365,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/shakes.png" alt="Strawberry Shake" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Strawberry Shake <span class="menu-card__badge menu-card__badge--new">Neu</span></h3>
+            <h3 class="menu-card__name">Strawberry Shake <span class="menu-card__badge menu-card__badge--new">Neu</span><button class="allergen-btn" type="button"><span class="allergen-tooltip">Milch</span></button></h3>
             <p class="menu-card__desc">Frische Erdbeeren, Vanilleeis, Schlagsahne</p>
             <div class="menu-card__footer"><span class="menu-card__price">5,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="sh3" data-name="Strawberry Shake" data-price="5.90">+ Hinzufügen</button></div>
           </div>
@@ -359,12 +374,12 @@
 
       <!-- GETRÄNKE -->
       <section class="menu-section" id="getraenke">
-        <h2 class="menu-section__title">🧃 Getränke</h2>
+        <h2 class="menu-section__title"><span class="icon-badge icon-badge--md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7h8l-1 13a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1L8 7z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="14" y1="4" x2="12" y2="7"/></svg></span>Getränke</h2>
 
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/cola.png" alt="Cola" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Cola 0,5l</h3>
+            <h3 class="menu-card__name">Cola 0,5l<button class="allergen-btn" type="button"><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
             <p class="menu-card__desc">Klassisch oder Zero</p>
             <div class="menu-card__footer"><span class="menu-card__price">2,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Cola 0,5l" data-price="2.90">+ Hinzufügen</button></div>
           </div>
@@ -373,7 +388,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/cola.png" alt="Lemonade" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Hausgemachte Lemonade</h3>
+            <h3 class="menu-card__name">Hausgemachte Lemonade<button class="allergen-btn" type="button"><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
             <p class="menu-card__desc">Frisch gepresste Zitrone, Minze, Zucker, 0,4l</p>
             <div class="menu-card__footer"><span class="menu-card__price">3,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Lemonade" data-price="3.50">+ Hinzufügen</button></div>
           </div>
@@ -382,7 +397,7 @@
         <article class="menu-card">
           <img class="menu-card__img" src="Bilder/cola.png" alt="Wasser" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Wasser 0,5l</h3>
+            <h3 class="menu-card__name">Wasser 0,5l<button class="allergen-btn" type="button"><span class="allergen-tooltip">Keine bekannten Allergene</span></button></h3>
             <p class="menu-card__desc">Still oder Sprudel</p>
             <div class="menu-card__footer"><span class="menu-card__price">1,90 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g3" data-name="Wasser 0,5l" data-price="1.90">+ Hinzufügen</button></div>
           </div>
