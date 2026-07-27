@@ -101,8 +101,12 @@
     .menu-grid__discover-link { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: white; text-decoration: underline; }
 
     /* ── STATEMENT SECTION ── */
-    .statement { position: relative; overflow: hidden; background: var(--fg-black); padding-block: var(--space-8); }
+    .statement { position: relative; overflow: hidden; background: var(--fg-black); padding-block: var(--space-8); padding-top: calc(var(--space-8) + 70px); }
     .statement::before { content: ""; position: absolute; inset: 0; background-image: repeating-conic-gradient(#fff 0% 25%, transparent 0% 50%); background-size: 40px 40px; opacity: 0.07; pointer-events: none; }
+    .statement__marquee { position: absolute; top: 5%; left: 50%; transform: translateX(-50%) rotate(-4deg); width: 145%; overflow: hidden; background: var(--fg-cream); padding-block: var(--space-3); z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .statement__track { display: flex; width: max-content; white-space: nowrap; animation: statement-scroll 16s linear infinite; }
+    .statement__track span { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 3rem); color: var(--fg-red); letter-spacing: 0.03em; padding-inline: var(--space-6); }
+    @keyframes statement-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .statement__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: var(--space-7); align-items: center; }
     @media (min-width: 768px) { .statement__inner { grid-template-columns: 1fr 1fr; gap: var(--space-8); } }
     .statement__text {}
@@ -110,19 +114,6 @@
     .statement__label { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); color: white; line-height: 1; margin-bottom: var(--space-4); }
     .statement__desc { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 420px; }
     .statement__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-
-    /* ── UNWRAPPED / MARQUEE SECTION ── */
-    .unwrapped { position: relative; overflow: hidden; background: var(--fg-black); min-height: 620px; display: flex; align-items: flex-end; padding-block: var(--space-8); }
-    /* TODO: Hintergrundbild einsetzen, sobald vorhanden – z.B. background: var(--fg-black) url('Bilder/unwrapped-bg.jpg') center/cover no-repeat; */
-    .unwrapped::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.35)); z-index: 1; }
-    .unwrapped__marquee { position: absolute; top: 14%; left: 50%; transform: translateX(-50%) rotate(-4deg); width: 145%; overflow: hidden; background: var(--fg-cream); padding-block: var(--space-3); z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-    .unwrapped__track { display: flex; width: max-content; white-space: nowrap; animation: unwrapped-scroll 16s linear infinite; }
-    .unwrapped__track span { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 4rem); color: var(--fg-red); letter-spacing: 0.03em; padding-inline: var(--space-6); }
-    @keyframes unwrapped-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .unwrapped__content { position: relative; z-index: 3; max-width: 620px; margin-left: auto; text-align: right; padding-inline: 2rem; }
-    .unwrapped__title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); color: white; line-height: 1; margin-bottom: var(--space-5); }
-    .unwrapped__desc { color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.7; }
-    @media (max-width: 767px) { .unwrapped__content { text-align: left; margin-left: 0; margin-right: auto; } }
 
     /* ── ÜBER UNS ── */
     .about { background: var(--fg-grey); padding-block: var(--space-8); }
@@ -243,20 +234,6 @@
     </div>
   </section>
 
-  <!-- UNWRAPPED / MARQUEE -->
-  <section class="unwrapped">
-    <div class="unwrapped__marquee">
-      <div class="unwrapped__track">
-        <span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span>
-        <span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span>
-      </div>
-    </div>
-    <div class="unwrapped__content">
-      <h2 class="unwrapped__title">Burger Joint<br>ausgepackt</h2>
-      <p class="unwrapped__desc">Wirf einen Blick in unsere Küche und sieh, wie wir mit den frischesten Zutaten echte Burger-Magie erschaffen. Kein Tiefkühlfleisch, keine Kompromisse.</p>
-    </div>
-  </section>
-
   <!-- ÜBER UNS / WILLKOMMEN -->
   <section class="about" id="ueber-uns">
     <div class="about__grid">
@@ -330,6 +307,12 @@
 
   <!-- STATEMENT -->
   <section class="statement">
+    <div class="statement__marquee">
+      <div class="statement__track">
+        <span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span>
+        <span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span><span>100% RINDFLEISCH</span>
+      </div>
+    </div>
     <div class="container">
       <div class="statement__inner">
         <div class="statement__text">
