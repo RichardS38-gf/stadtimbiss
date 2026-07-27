@@ -14,116 +14,131 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <style>
-    .nav { position: sticky; top: 0; z-index: 100; background: var(--color-dark); border-bottom: 4px solid var(--color-accent); }
-    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
-    .nav__logo { display: flex; align-items: center; gap: 10px; }
-    .nav__logo-icon { font-size: 1.8rem; line-height: 1; }
-    .nav__logo-text { font-family: var(--font-head); font-size: 1.6rem; color: white; letter-spacing: 0.05em; line-height: 1; }
-    .nav__logo-text span { color: var(--color-yellow); }
-    .cart-btn { display: flex; align-items: center; gap: 0.4rem; font-size: 1.4rem; position: relative; padding: 0.5rem; min-height: 44px; color: white; }
-    .cart-badge { display: none; position: absolute; top: 0; right: 0; background: var(--color-yellow); color: var(--color-ink); font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; align-items: center; justify-content: center; }
+    /* ── TOKENS OVERRIDE: Five Guys palette ── */
+    :root {
+      --fg-red:    #d21033;
+      --fg-red-dk: #a80d27;
+      --fg-black:  #111111;
+      --fg-white:  #ffffff;
+      --fg-cream:  #f9f6f1;
+      --fg-grey:   #f2f2f2;
+      --fg-text:   #111111;
+      --fg-muted:  #666666;
+    }
+    body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; }
 
-    .order-mode { background: #111; border-bottom: 1px solid #333; padding-block: var(--space-4); }
+    /* ── NAV ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-white); border-bottom: none; }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: var(--space-5); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; }
+    .nav__logo { display: flex; align-items: center; gap: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--fg-red); letter-spacing: 0.05em; line-height: 1; }
+    .nav__logo-icon { font-size: 1.4rem; }
+    .nav__logo-text span { color: var(--fg-black); }
+    .cart-btn { display: flex; align-items: center; gap: 0.4rem; font-size: 1.3rem; position: relative; padding: 0.5rem; min-height: 44px; color: var(--fg-text); }
+    .cart-badge { display: none; position: absolute; top: 0; right: 0; background: var(--fg-red); color: white; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; align-items: center; justify-content: center; }
+
+    .order-mode { background: var(--fg-grey); border-bottom: 1px solid #e4e4e4; padding-block: var(--space-4); }
     .order-mode-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); max-width: 500px; margin-inline: auto; }
-    .mode-card { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4); background: #1A1A1A; border: 2px solid #333; cursor: pointer; text-align: left; transition: all var(--transition); }
-    .mode-card--active { background: var(--color-yellow); border-color: var(--color-yellow); }
+    .mode-card { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4); background: white; border: 2px solid #e4e4e4; border-radius: 14px; cursor: pointer; text-align: left; transition: all var(--transition); }
+    .mode-card--active { background: var(--fg-red); border-color: var(--fg-red); }
     .mode-card__emoji { font-size: 1.6rem; margin-bottom: 4px; }
-    .mode-card__title { font-family: var(--font-head); font-size: 1.2rem; letter-spacing: 0.05em; color: white; }
-    .mode-card--active .mode-card__title { color: var(--color-ink); }
-    .mode-card__info { font-size: var(--text-xs); color: rgba(255,255,255,0.5); }
-    .mode-card--active .mode-card__info { color: rgba(0,0,0,0.6); }
+    .mode-card__title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.03em; color: var(--fg-text); }
+    .mode-card--active .mode-card__title { color: white; }
+    .mode-card__info { font-size: 0.8rem; color: var(--fg-muted); }
+    .mode-card--active .mode-card__info { color: rgba(255,255,255,0.8); }
 
-    .category-nav { position: sticky; top: 68px; z-index: 90; background: var(--color-dark); border-bottom: 2px solid #333; }
+    .category-nav { position: sticky; top: 60px; z-index: 90; background: var(--fg-white); border-bottom: 2px solid var(--fg-grey); }
     .category-nav .container { overflow-x: auto; white-space: nowrap; display: flex; scrollbar-width: none; }
     .category-nav .container::-webkit-scrollbar { display: none; }
-    .cat-link { display: inline-flex; align-items: center; padding: 0.875rem 1.25rem; font-family: var(--font-head); font-size: 1rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.5); min-height: 48px; border-bottom: 3px solid transparent; transition: all var(--transition); }
-    .cat-link--active { color: var(--color-yellow); border-bottom-color: var(--color-yellow); }
+    .cat-link { display: inline-flex; align-items: center; padding: 0.875rem 1.25rem; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; color: var(--fg-muted); min-height: 48px; border-bottom: 3px solid transparent; transition: all var(--transition); }
+    .cat-link--active { color: var(--fg-red); border-bottom-color: var(--fg-red); }
 
     .order-layout { display: flex; gap: var(--space-6); max-width: 1140px; margin-inline: auto; padding-inline: 1rem; padding-block: var(--space-6); }
     @media (min-width: 1024px) { .order-layout { padding-inline: 2rem; } }
     .menu-area { flex: 1; min-width: 0; }
 
     .menu-section { margin-bottom: var(--space-7); }
-    .menu-section__title { font-family: var(--font-head); font-size: 2.5rem; letter-spacing: 0.05em; margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 3px solid var(--color-accent); color: var(--color-ink); }
+    .menu-section__title { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 0.03em; margin-bottom: var(--space-5); padding-bottom: var(--space-3); border-bottom: 3px solid var(--fg-red); color: var(--fg-text); }
 
-    .menu-card { display: flex; gap: var(--space-4); padding-block: var(--space-4); border-bottom: 1px solid var(--color-line); overflow: visible; }
+    .menu-card { display: flex; gap: var(--space-4); padding-block: var(--space-4); border-bottom: 1px solid #eee; overflow: visible; }
     .menu-card:last-child { border-bottom: none; }
-    .menu-card__img { width: 110px; height: 110px; object-fit: cover; flex-shrink: 0; }
+    .menu-card__img { width: 110px; height: 110px; object-fit: cover; border-radius: 14px; flex-shrink: 0; }
     .menu-card__body { flex: 1; display: flex; flex-direction: column; justify-content: space-between; overflow: visible; }
-    .menu-card__name { font-family: var(--font-head); font-size: 1.4rem; letter-spacing: 0.03em; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; overflow: visible; }
-    .menu-card__badge { font-size: 0.65rem; font-family: var(--font-body); font-weight: 700; text-transform: uppercase; background: var(--color-accent); color: white; padding: 2px 6px; letter-spacing: 0.05em; }
-    .menu-card__badge--new { background: var(--color-yellow); color: var(--color-ink); }
-    .menu-card__desc { font-size: var(--text-sm); color: var(--color-muted); margin-bottom: var(--space-3); line-height: 1.5; }
+    .menu-card__name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.02em; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; overflow: visible; }
+    .menu-card__badge { font-size: 0.65rem; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; background: var(--fg-red); color: white; padding: 2px 8px; border-radius: 20px; letter-spacing: 0.04em; }
+    .menu-card__badge--new { background: var(--fg-black); color: white; }
+    .menu-card__desc { font-size: 0.875rem; color: var(--fg-muted); margin-bottom: var(--space-3); line-height: 1.5; }
     .menu-card__footer { display: flex; align-items: center; justify-content: space-between; }
-    .menu-card__price { font-family: var(--font-head); font-size: 1.6rem; letter-spacing: 0.03em; color: var(--color-accent); }
+    .menu-card__price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.02em; color: var(--fg-red); }
     @media (min-width: 768px) { .menu-card__img { width: 130px; height: 130px; } }
 
     /* Allergen */
-    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--color-line); color: var(--color-muted); font-size: 0.6rem; font-style: italic; font-weight: 700; border: none; cursor: pointer; margin-left: 4px; flex-shrink: 0; position: relative; }
+    .allergen-btn { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: #e4e4e4; color: var(--fg-muted); font-size: 0.6rem; font-style: italic; font-weight: 700; border: none; cursor: pointer; margin-left: 4px; flex-shrink: 0; position: relative; }
     .allergen-btn::before { content: 'i'; }
-    .allergen-btn:hover { background: var(--color-accent); color: white; }
-    .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1A1A1A; color: white; font-size: 0.75rem; font-style: normal; padding: 0.4rem 0.7rem; white-space: nowrap; z-index: 9999; pointer-events: none; }
+    .allergen-btn:hover { background: var(--fg-red); color: white; }
+    .allergen-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--fg-black); color: white; font-size: 0.75rem; font-style: normal; padding: 0.4rem 0.7rem; border-radius: 8px; white-space: nowrap; z-index: 9999; pointer-events: none; }
     .allergen-btn:hover .allergen-tooltip { display: block; }
 
     /* Cart Sidebar */
     .cart-sidebar { width: 320px; flex-shrink: 0; display: none; }
     @media (min-width: 1024px) { .cart-sidebar { display: block; } }
-    .cart-sidebar__inner { position: sticky; top: 140px; background: var(--color-bg-soft); border: 2px solid var(--color-line); padding: var(--space-5); }
-    .cart-sidebar__title { font-family: var(--font-head); font-size: 1.8rem; letter-spacing: 0.05em; margin-bottom: var(--space-4); }
-    .cart-empty { color: var(--color-muted); font-size: var(--text-sm); padding: var(--space-4) 0; }
-    .cart-item { display: flex; align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid var(--color-line); font-size: var(--text-sm); }
+    .cart-sidebar__inner { position: sticky; top: 140px; background: var(--fg-grey); border-radius: 20px; padding: var(--space-5); }
+    .cart-sidebar__title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.03em; margin-bottom: var(--space-4); }
+    .cart-empty { color: var(--fg-muted); font-size: 0.875rem; padding: var(--space-4) 0; }
+    .cart-item { display: flex; align-items: center; gap: var(--space-2); padding-block: var(--space-3); border-bottom: 1px solid #e4e4e4; font-size: 0.875rem; }
     .cart-item__name { flex: 1; font-weight: 600; }
-    .cart-item__qty-input { width: 40px; height: 28px; text-align: center; border: 1px solid var(--color-line); font-size: var(--text-sm); font-weight: 700; -moz-appearance: textfield; }
+    .cart-item__qty-input { width: 40px; height: 28px; text-align: center; border: 1px solid #e4e4e4; border-radius: 6px; font-size: 0.875rem; font-weight: 700; -moz-appearance: textfield; }
     .cart-item__qty-input::-webkit-inner-spin-button, .cart-item__qty-input::-webkit-outer-spin-button { -webkit-appearance: none; }
-    .cart-item__remove { width: 24px; height: 24px; font-size: 0.7rem; color: var(--color-muted); display: flex; align-items: center; justify-content: center; }
-    .cart-item__price { font-family: var(--font-head); font-size: 1.1rem; }
+    .cart-item__remove { width: 24px; height: 24px; font-size: 0.7rem; color: var(--fg-muted); display: flex; align-items: center; justify-content: center; }
+    .cart-item__price { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
     .cart-summary { margin-top: var(--space-4); }
-    .cart-summary__row { display: flex; justify-content: space-between; font-size: var(--text-sm); padding-block: var(--space-2); }
-    .cart-summary__total { font-family: var(--font-head); font-size: 1.5rem; border-top: 2px solid var(--color-ink); padding-top: var(--space-3); margin-top: var(--space-2); }
+    .cart-summary__row { display: flex; justify-content: space-between; font-size: 0.875rem; padding-block: var(--space-2); }
+    .cart-summary__total { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; border-top: 2px solid var(--fg-text); padding-top: var(--space-3); margin-top: var(--space-2); }
     .cart-summary .btn { margin-top: var(--space-4); }
 
     /* Mobile Cart FAB */
-    .cart-fab { display: none; position: fixed; bottom: 1rem; left: 1rem; right: 1rem; background: var(--color-accent); color: white; padding: 0.875rem 1.25rem; font-family: var(--font-head); font-size: 1.1rem; letter-spacing: 0.05em; align-items: center; justify-content: space-between; z-index: 150; box-shadow: 0 4px 20px rgba(192,57,43,0.5); min-height: 54px; border: none; cursor: pointer; }
+    .cart-fab { display: none; position: fixed; bottom: 1rem; left: 1rem; right: 1rem; background: var(--fg-red); color: white; padding: 0.875rem 1.25rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.03em; align-items: center; justify-content: space-between; z-index: 150; box-shadow: 0 4px 20px rgba(210,16,51,0.4); min-height: 54px; border: none; border-radius: 20px; cursor: pointer; }
     .cart-fab.visible { display: flex; }
-    .cart-fab__count { background: white; color: var(--color-accent); font-weight: 800; font-size: 0.8rem; padding: 0.15rem 0.5rem; border-radius: 999px; }
+    .cart-fab__count { background: white; color: var(--fg-red); font-weight: 800; font-size: 0.8rem; padding: 0.15rem 0.5rem; border-radius: 999px; }
     @media (min-width: 1024px) { .cart-fab { display: none !important; } }
 
     .cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; }
     .cart-overlay.active { display: block; }
-    .cart-drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-bg-soft); z-index: 201; max-height: 80vh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform 0.3s ease; border-top: 3px solid var(--color-accent); }
+    .cart-drawer { position: fixed; bottom: 0; left: 0; right: 0; background: white; z-index: 201; max-height: 80vh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform 0.3s ease; border-top: 3px solid var(--fg-red); border-radius: 20px 20px 0 0; }
     .cart-drawer.active { transform: translateY(0); }
-    .cart-drawer__header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--color-line); }
-    .cart-drawer__header h3 { font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 0.05em; }
-    .cart-drawer__close { font-size: 1.25rem; color: var(--color-muted); min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .cart-drawer__header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid #eee; }
+    .cart-drawer__header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.03em; }
+    .cart-drawer__close { font-size: 1.25rem; color: var(--fg-muted); min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .cart-drawer__body { flex: 1; overflow-y: auto; padding: 1rem 1.25rem; }
-    .cart-drawer__footer { padding: 1rem 1.25rem; border-top: 1px solid var(--color-line); }
+    .cart-drawer__footer { padding: 1rem 1.25rem; border-top: 1px solid #eee; }
     @media (min-width: 1024px) { .cart-drawer, .cart-overlay { display: none !important; } }
 
-    /* Footer */
-    .footer { background: var(--color-dark); color: white; padding-top: var(--space-7); padding-bottom: var(--space-5); border-top: 4px solid var(--color-accent); margin-top: var(--space-7); }
-    .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
-    @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
-    .footer__brand { font-family: var(--font-head); font-size: 1.8rem; color: white; margin-bottom: var(--space-2); }
-    .footer__brand span { color: var(--color-yellow); }
-    .footer__claim { color: rgba(255,255,255,0.5); font-size: var(--text-sm); margin-bottom: var(--space-5); }
-    .footer__contact { font-style: normal; font-size: var(--text-sm); line-height: 2; color: rgba(255,255,255,0.7); }
-    .footer__contact a { color: white; }
-    .footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
-    .footer__links a { color: rgba(255,255,255,0.5); font-size: var(--text-sm); }
-    .footer__divider { border-top: 1px solid rgba(255,255,255,0.1); margin-block: var(--space-5); }
-    .footer__copy { text-align: center; color: rgba(255,255,255,0.3); font-size: var(--text-sm); }
+    /* ── FOOTER ── */
+    .footer { background: var(--fg-black); color: white; padding-top: var(--space-7); padding-bottom: var(--space-6); margin-top: var(--space-7); }
+    .footer__top { display: grid; grid-template-columns: 1fr; gap: var(--space-6); margin-bottom: var(--space-6); }
+    @media (min-width: 768px) { .footer__top { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer__brand { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: white; letter-spacing: 0.05em; margin-bottom: var(--space-2); }
+    .footer__brand span { color: var(--fg-red); }
+    .footer__claim { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 300px; }
+    .footer__heading { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: var(--space-3); }
+    .footer__links { display: flex; flex-direction: column; gap: var(--space-2); }
+    .footer__links a { font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+    .footer__links a:hover { color: white; opacity: 1; }
+    .footer__divider { border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: var(--space-4); }
+    .footer__copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
   </style>
 </head>
 <body>
 
   <header class="nav">
-    <div class="container nav__inner">
+    <div class="nav__inner">
       <a href="index.html" class="nav__logo">
         <span class="nav__logo-icon">🍔</span>
         <span class="nav__logo-text">BURGER<span>JOINT</span></span>
       </a>
-      <a href="reservieren.html" class="btn btn--outline-light btn--sm" style="margin-left:auto;margin-right:var(--space-3)">Reservieren</a>
-      <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">🛒 <span class="cart-badge" id="cart-count">0</span></button>
+      <div style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <a href="reservieren.html" class="btn btn--outline btn--sm">Reservieren</a>
+        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">🛒 <span class="cart-badge" id="cart-count">0</span></button>
+      </div>
     </div>
   </header>
 
@@ -164,7 +179,7 @@
         <h2 class="menu-section__title">🍔 Burger</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Classic Smash" loading="lazy">
+          <img class="menu-card__img" src="Bilder/burger.png" alt="Classic Smash" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Classic Smash <span class="menu-card__badge">Bestseller</span></h3>
             <p class="menu-card__desc">180g Beef Patty, Cheddar, Salat, Tomate, Zwiebel, Burger-Sauce, Brioche Bun</p>
@@ -173,7 +188,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300" alt="Double Smash" loading="lazy">
+          <img class="menu-card__img" src="Bilder/burger.png" alt="Double Smash" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Double Smash <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">2x 180g Beef Patty, doppelt Cheddar, karamellisierte Zwiebeln, Pickles, Special Sauce</p>
@@ -182,7 +197,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="BBQ Bacon Smash" loading="lazy">
+          <img class="menu-card__img" src="Bilder/burger.png" alt="BBQ Bacon Smash" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">BBQ Bacon Smash</h3>
             <p class="menu-card__desc">180g Beef Patty, knuspriger Bacon, Cheddar, BBQ-Sauce, Röstzwiebeln, Jalapeños</p>
@@ -191,7 +206,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Mushroom Swiss" loading="lazy">
+          <img class="menu-card__img" src="Bilder/burger.png" alt="Mushroom Swiss" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Mushroom Swiss <span class="menu-card__badge menu-card__badge--new">Neu</span></h3>
             <p class="menu-card__desc">180g Beef Patty, Champignons, Schweizer Käse, Thymian-Aioli, Rucola</p>
@@ -205,7 +220,7 @@
         <h2 class="menu-section__title">🍗 Chicken</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=300" alt="Crispy Chicken" loading="lazy">
+          <img class="menu-card__img" src="Bilder/chicken.png" alt="Crispy Chicken" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Crispy Chicken <span class="menu-card__badge">Bestseller</span></h3>
             <p class="menu-card__desc">Knuspriges Hähnchenbrustfilet, Coleslaw, Pickles, Honey-Mustard, Brioche Bun</p>
@@ -214,7 +229,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=300" alt="Spicy Chicken" loading="lazy">
+          <img class="menu-card__img" src="Bilder/chicken.png" alt="Spicy Chicken" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Spicy Chicken 🌶</h3>
             <p class="menu-card__desc">Scharfes Hähnchenbrustfilet, Jalapeños, Hot-Sauce, Eisberg, Cheddar</p>
@@ -228,7 +243,7 @@
         <h2 class="menu-section__title">🥦 Veggie</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Veggie Smash" loading="lazy">
+          <img class="menu-card__img" src="Bilder/veggie.png" alt="Veggie Smash" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Veggie Smash <span class="menu-card__badge">Vegan möglich</span></h3>
             <p class="menu-card__desc">Plant-Based Patty, Avocado, Tomate, Rucola, Chipotle-Mayo, Brioche Bun</p>
@@ -242,7 +257,7 @@
         <h2 class="menu-section__title">🌯 Wraps</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=300" alt="Chicken Wrap" loading="lazy">
+          <img class="menu-card__img" src="Bilder/wraps.png" alt="Chicken Wrap" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Chicken Wrap <span class="menu-card__badge">Bestseller</span></h3>
             <p class="menu-card__desc">Gegrilltes Hähnchenbrustfilet, Salat, Tomate, Chipotle-Sauce, weiche Tortilla</p>
@@ -251,7 +266,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1626700051177-defa3f0f5c26?w=300" alt="BBQ Chicken Wrap" loading="lazy">
+          <img class="menu-card__img" src="Bilder/wraps.png" alt="BBQ Chicken Wrap" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">BBQ Chicken Wrap <span class="menu-card__badge menu-card__badge--new">Neu</span></h3>
             <p class="menu-card__desc">Knuspriges Hähnchen, BBQ-Sauce, Cheddar, Röstzwiebeln, Coleslaw</p>
@@ -260,7 +275,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=300" alt="Veggie Wrap" loading="lazy">
+          <img class="menu-card__img" src="Bilder/wraps.png" alt="Veggie Wrap" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Veggie Wrap <span class="menu-card__badge">Vegan möglich</span></h3>
             <p class="menu-card__desc">Falafel, Hummus, Rucola, Tomate, Gurke, Joghurt-Minz-Sauce</p>
@@ -274,7 +289,7 @@
         <h2 class="menu-section__title">🍟 Sides</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" alt="Crispy Fries" loading="lazy">
+          <img class="menu-card__img" src="Bilder/fries.png" alt="Crispy Fries" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Crispy Fries <span class="menu-card__badge">Bestseller</span></h3>
             <p class="menu-card__desc">Knusprige Pommes mit Fleur de Sel, Regular oder Large</p>
@@ -283,7 +298,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=300" alt="Onion Rings" loading="lazy">
+          <img class="menu-card__img" src="Bilder/wraps.png" alt="Onion Rings" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Onion Rings</h3>
             <p class="menu-card__desc">Knusprig panierte Zwiebelringe mit Dip nach Wahl</p>
@@ -292,7 +307,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" alt="Chili Cheese Fries" loading="lazy">
+          <img class="menu-card__img" src="Bilder/fries.png" alt="Chili Cheese Fries" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Chili Cheese Fries <span class="menu-card__badge">Beliebt</span></h3>
             <p class="menu-card__desc">Pommes mit Chili-Beef, geschmolzenem Cheddar, Jalapeños und Sour Cream</p>
@@ -301,7 +316,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" alt="Sweet Potato Fries" loading="lazy">
+          <img class="menu-card__img" src="Bilder/fries.png" alt="Sweet Potato Fries" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Sweet Potato Fries</h3>
             <p class="menu-card__desc">Süßkartoffel-Pommes mit Zimt-Dip</p>
@@ -315,7 +330,7 @@
         <h2 class="menu-section__title">🥤 Milkshakes</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300" alt="Vanilla Shake" loading="lazy">
+          <img class="menu-card__img" src="Bilder/shakes.png" alt="Vanilla Shake" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Vanilla Shake <span class="menu-card__badge">Klassiker</span></h3>
             <p class="menu-card__desc">Cremiger Vanille-Milchshake mit Schlagsahne</p>
@@ -324,7 +339,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300" alt="Chocolate Shake" loading="lazy">
+          <img class="menu-card__img" src="Bilder/shakes.png" alt="Chocolate Shake" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Chocolate Shake</h3>
             <p class="menu-card__desc">Schokoladen-Milchshake mit Oreo-Krümeln und Schlagsahne</p>
@@ -333,7 +348,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=300" alt="Strawberry Shake" loading="lazy">
+          <img class="menu-card__img" src="Bilder/shakes.png" alt="Strawberry Shake" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Strawberry Shake <span class="menu-card__badge menu-card__badge--new">Neu</span></h3>
             <p class="menu-card__desc">Frische Erdbeeren, Vanilleeis, Schlagsahne</p>
@@ -347,7 +362,7 @@
         <h2 class="menu-section__title">🧃 Getränke</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300" alt="Cola" loading="lazy">
+          <img class="menu-card__img" src="Bilder/cola.png" alt="Cola" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Cola 0,5l</h3>
             <p class="menu-card__desc">Klassisch oder Zero</p>
@@ -356,16 +371,16 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=300" alt="Lemonade" loading="lazy">
+          <img class="menu-card__img" src="Bilder/cola.png" alt="Lemonade" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Hausgemachte Lemonade</h3>
-            <p class="menu-card__desc">Frisch gepresste Zitrone, Minze, Zucker — 0,4l</p>
+            <p class="menu-card__desc">Frisch gepresste Zitrone, Minze, Zucker, 0,4l</p>
             <div class="menu-card__footer"><span class="menu-card__price">3,50 €</span><button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Lemonade" data-price="3.50">+ Hinzufügen</button></div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300" alt="Wasser" loading="lazy">
+          <img class="menu-card__img" src="Bilder/cola.png" alt="Wasser" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Wasser 0,5l</h3>
             <p class="menu-card__desc">Still oder Sprudel</p>
@@ -385,7 +400,7 @@
           <div class="cart-summary__row"><span>Zwischensumme</span><span id="cart-subtotal">0,00 €</span></div>
           <div class="cart-summary__row"><span>Lieferung</span><span>1,99 €</span></div>
           <div class="cart-summary__row cart-summary__total"><span>Gesamt</span><span id="cart-total">0,00 €</span></div>
-          <a href="checkout.html" class="btn btn--yellow btn--full">Zur Kasse →</a>
+          <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
         </div>
       </div>
     </aside>
@@ -402,7 +417,7 @@
       <div class="cart-summary__row"><span>Zwischensumme</span><span id="cart-subtotal-mobile">0,00 €</span></div>
       <div class="cart-summary__row"><span>Lieferung</span><span>1,99 €</span></div>
       <div class="cart-summary__row cart-summary__total"><span>Gesamt</span><span id="cart-total-mobile">0,00 €</span></div>
-      <a href="checkout.html" class="btn btn--yellow btn--full">Zur Kasse →</a>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
     </div>
   </div>
 
@@ -410,13 +425,29 @@
 
   <footer class="footer">
     <div class="container">
-      <div class="footer__cols">
+      <div class="footer__top">
         <div>
-          <p class="footer__brand">BURGER<span>JOINT</span></p>
-          <p class="footer__claim">Kein Schnickschnack. Nur Burger.</p>
-          <address class="footer__contact">Musterstraße 1, 12345 Musterstadt<br>Tel: <a href="tel:000000000">000 / 000 000</a></address>
+          <div class="footer__brand">BURGER<span>JOINT</span></div>
+          <p class="footer__claim">Handgemachte Smash Burgers mit frischen Zutaten. Täglich frisch, niemals tiefgekühlt.</p>
         </div>
-        <nav class="footer__links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">Allergene</a></nav>
+        <div>
+          <div class="footer__heading">Menü</div>
+          <nav class="footer__links">
+            <a href="bestellen.html#burger">Burger</a>
+            <a href="bestellen.html#chicken">Chicken</a>
+            <a href="bestellen.html#sides">Fries & Sides</a>
+            <a href="bestellen.html#shakes">Shakes</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer__heading">Info</div>
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Allergene</a>
+            <a href="reservieren.html">Reservieren</a>
+          </nav>
+        </div>
       </div>
       <hr class="footer__divider">
       <p class="footer__copy">© 2025 Burger Joint — Alle Rechte vorbehalten</p>
@@ -446,7 +477,7 @@
     }
     function bind(el){if(!el)return;el.addEventListener('change',e=>{if(e.target.classList.contains('cart-item__qty-input')){const q=parseInt(e.target.value);if(q<=0)removeFromCart(e.target.dataset.id);else updateQty(e.target.dataset.id,q);render();}});el.addEventListener('click',e=>{if(e.target.classList.contains('cart-item__remove')){removeFromCart(e.target.dataset.id);render();}});}
     bind(document.getElementById('cart-items'));bind(document.getElementById('cart-items-mobile'));
-    document.querySelectorAll('.add-to-cart').forEach(btn=>btn.addEventListener('click',()=>{addToCart({id:btn.dataset.id,name:btn.dataset.name,price:parseFloat(btn.dataset.price)});render();btn.textContent='✓ Hinzugefügt';btn.style.background='#2a9d4e';btn.style.borderColor='#2a9d4e';setTimeout(()=>{btn.textContent='+ Hinzufügen';btn.style.background='';btn.style.borderColor='';},1000);}));
+    document.querySelectorAll('.add-to-cart').forEach(btn=>btn.addEventListener('click',()=>{addToCart({id:btn.dataset.id,name:btn.dataset.name,price:parseFloat(btn.dataset.price)});render();btn.textContent='✓ Hinzugefügt';btn.style.background='#2a9d4e';btn.style.borderColor='#2a9d4e';btn.style.color='white';setTimeout(()=>{btn.textContent='+ Hinzufügen';btn.style.background='';btn.style.borderColor='';btn.style.color='';},1000);}));
     document.querySelectorAll('.mode-card').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.mode-card').forEach(b=>b.classList.remove('mode-card--active'));btn.classList.add('mode-card--active');}));
     const open=()=>{document.getElementById('cart-drawer').classList.add('active');document.getElementById('cart-overlay').classList.add('active');document.body.style.overflow='hidden';render();};
     const close=()=>{document.getElementById('cart-drawer').classList.remove('active');document.getElementById('cart-overlay').classList.remove('active');document.body.style.overflow='';};

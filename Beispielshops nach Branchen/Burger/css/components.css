@@ -6,10 +6,10 @@
   gap: var(--space-2);
   padding: 0.75rem 1.75rem;
   min-height: 48px;
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
   line-height: 1;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -18,7 +18,7 @@
   border-radius: 20px;
   background: white;
   color: #d21033;
-  border: 3px solid #d21033;
+  border: 2px solid #d21033;
 }
 .btn:hover { background: #d21033; color: white; opacity: 1; }
 .btn--primary { background: white; color: #d21033; }
@@ -30,5 +30,5 @@
 .btn--outline-light { background: white; color: #d21033; }
 .btn--outline-light:hover { background: #d21033; color: white; opacity: 1; }
 .btn--full { width: 100%; }
-.btn--sm { padding: 0.4rem 0.9rem; font-size: 0.9rem; min-height: 36px; }
-.link-accent { color: #d21033; font-weight: 700; font-size: var(--text-sm); font-family: 'Black Han Sans', sans-serif; letter-spacing: 0.05em; text-transform: uppercase; }
+.btn--sm { padding: 0.4rem 0.9rem; font-size: 0.85rem; min-height: 36px; }
+.link-accent { color: #d21033; font-weight: 700; font-size: var(--text-sm); font-family: 'Inter', sans-serif; letter-spacing: 0.04em; text-transform: uppercase; }
