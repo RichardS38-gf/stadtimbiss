@@ -25,7 +25,7 @@
       --fg-text:   #111111;
       --fg-muted:  #666666;
     }
-    body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; }
+    body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
     /* ── NAV ── */
     .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-white); border-bottom: none; }
@@ -101,7 +101,7 @@
     .menu-grid__discover-link { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: white; text-decoration: underline; }
 
     /* ── STATEMENT SECTION ── */
-    .statement { position: relative; overflow: hidden; background: var(--fg-black) url('Bilder/Burger_weitbild.png') center 80%/cover no-repeat; padding-block: var(--space-8); padding-top: calc(var(--space-8) + 70px); min-height: 85vh; display: flex; align-items: center; }
+    .statement { position: relative; overflow: visible; background: var(--fg-black) url('Bilder/Burger_weitbild.png') center 80%/cover no-repeat; padding-block: var(--space-8); padding-top: calc(var(--space-8) + 70px); min-height: 85vh; display: flex; align-items: center; }
     .statement::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.8), rgba(0,0,0,0.25)); pointer-events: none; z-index: 0; }
     .statement__marquee { position: absolute; top: 5%; left: 50%; transform: translateX(-50%) rotate(-4deg); width: 145%; overflow: hidden; background: var(--fg-cream); padding-block: var(--space-3); z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
     .statement__track { display: flex; width: max-content; white-space: nowrap; animation: statement-scroll 16s linear infinite; }
