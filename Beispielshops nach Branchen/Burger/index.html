@@ -58,13 +58,13 @@
     /* ── HERO ── */
     .hero { position: relative; background: var(--fg-red); overflow: hidden; display: flex; align-items: center; min-height: 80vh; }
     .hero__bull { position: absolute; left: -8%; bottom: -8%; width: 62vw; max-width: 950px; opacity: 0.14; z-index: 0; pointer-events: none; user-select: none; transform: scaleX(-1); }
-    .hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; align-items: center; gap: var(--space-6); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; padding-block: var(--space-7); width: 100%; }
-    @media (min-width: 768px) { .hero__inner { grid-template-columns: 1.05fr 1fr; gap: var(--space-7); } }
-    .hero__img-wrap { display: flex; justify-content: center; }
+    .hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; grid-template-areas: "content" "image" "btns"; align-items: center; gap: var(--space-6); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; padding-block: var(--space-7); width: 100%; }
+    @media (min-width: 768px) { .hero__inner { grid-template-columns: 1.05fr 1fr; grid-template-areas: "image content" "image btns"; gap: var(--space-7); } }
+    .hero__img-wrap { grid-area: image; display: flex; justify-content: center; }
     @media (min-width: 768px) { .hero__img-wrap { justify-content: flex-start; margin-left: -1.5rem; } }
     .hero__burger-img { width: 100%; max-width: 420px; display: block; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.35)); }
     @media (min-width: 768px) { .hero__burger-img { max-width: 560px; } }
-    .hero__content { text-align: center; }
+    .hero__content { grid-area: content; text-align: center; }
     @media (min-width: 768px) { .hero__content { text-align: left; } }
     .hero__title { display: flex; flex-direction: column; align-items: center; gap: 0.25em; margin-bottom: var(--space-5); }
     @media (min-width: 768px) { .hero__title { align-items: flex-start; } }
@@ -73,7 +73,7 @@
     .hero__title-line--2 { transform: rotate(1.5deg); }
     .hero__sub { font-size: 1.35rem; font-weight: 500; color: rgba(255,255,255,0.95); max-width: 480px; margin-bottom: var(--space-6); line-height: 1.6; margin-inline: auto; }
     @media (min-width: 768px) { .hero__sub { margin-inline: 0; } }
-    .hero__btns { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; }
+    .hero__btns { grid-area: btns; display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; }
     @media (min-width: 768px) { .hero__btns { justify-content: flex-start; } }
     .hero__btn-primary { background: white; color: #d21033; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 14px 32px; display: inline-block; border-radius: 20px; border: 2px solid #d21033; transition: all 0.2s ease; }
     .hero__btn-primary:hover { background: #d21033; color: white; border-color: white; opacity: 1; }
@@ -219,10 +219,10 @@
       <div class="hero__content">
         <h1 class="hero__title"><span class="hero__title-line hero__title-line--1">ECHTER</span><span class="hero__title-line hero__title-line--2">BURGER.</span></h1>
         <p class="hero__sub">Handgemachte Smash Burgers mit frischen Zutaten, keine Kompromisse, keine Tiefkühlware.</p>
-        <div class="hero__btns">
-          <a href="bestellen.html" class="hero__btn-primary">Jetzt bestellen</a>
-          <a href="reservieren.html" class="hero__btn-outline">Tisch reservieren</a>
-        </div>
+      </div>
+      <div class="hero__btns">
+        <a href="bestellen.html" class="hero__btn-primary">Jetzt bestellen</a>
+        <a href="reservieren.html" class="hero__btn-outline">Tisch reservieren</a>
       </div>
     </div>
   </section>
