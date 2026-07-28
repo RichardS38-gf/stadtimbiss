@@ -25,11 +25,13 @@
       --fg-text:   #111111;
       --fg-muted:  #666666;
     }
-    body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; }
+    body { background: var(--fg-white); color: var(--fg-text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
     /* ── NAV ── */
     .nav { position: sticky; top: 0; z-index: 100; background: var(--fg-white); border-bottom: none; }
-    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: var(--space-5); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: var(--space-3); max-width: 1140px; margin-inline: auto; padding-inline: 2rem; flex-wrap: wrap; }
+    .nav__cta-group { display: flex; gap: 0.5rem; align-items: center; }
+    @media (max-width: 480px) { .nav__cta-group { width: 100%; flex-direction: column; } .nav__cta-group .nav__cta { width: 100%; text-align: center; box-sizing: border-box; } }
     .nav__logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--fg-red); letter-spacing: 0.05em; line-height: 1; }
     .nav__logo span { color: var(--fg-black); }
     .nav__cta { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 18px; white-space: nowrap; border-radius: 20px; background: white; color: #d21033; border: 2px solid #d21033; cursor: pointer; transition: all 0.2s ease; }
@@ -52,9 +54,9 @@
     .res-form h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.02em; margin-bottom: var(--space-5); color: var(--fg-text); }
     .form-row { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-4); }
     @media (min-width: 480px) { .form-row--2 { grid-template-columns: 1fr 1fr; } }
-    .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+    .form-group { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
     .form-group label { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; color: var(--fg-text); }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 2px solid #e4e4e4; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--fg-text); background: white; transition: border-color 0.15s; min-height: 44px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; min-width: 0; padding: 0.75rem 1rem; border: 2px solid #e4e4e4; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--fg-text); background: white; transition: border-color 0.15s; min-height: 44px; }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--fg-red); }
     .form-group textarea { resize: vertical; min-height: 100px; }
     .form-submit { margin-top: var(--space-5); }
@@ -96,7 +98,7 @@
   <header class="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">🍔 BURGER<span>JOINT</span></a>
-      <div style="display:flex;gap:0.5rem;align-items:center;">
+      <div class="nav__cta-group">
         <a href="reservieren.html" class="nav__cta">Reservieren</a>
         <a href="bestellen.html" class="nav__cta nav__cta--filled">Jetzt bestellen →</a>
       </div>
