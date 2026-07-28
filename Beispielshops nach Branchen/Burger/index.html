@@ -47,9 +47,12 @@
     @media (min-width: 768px) { .nav__hamburger { display: none; } }
     .nav__mobile-menu { display: none; position: absolute; top: 62px; left: 0; right: 0; background: var(--fg-white); border-bottom: 2px solid var(--fg-red); padding: var(--space-5); flex-direction: column; gap: var(--space-3); z-index: 99; }
     .nav__mobile-menu.open { display: flex; }
-    .nav__mobile-menu a { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: var(--fg-red); text-transform: uppercase; letter-spacing: 0.06em; padding-block: var(--space-3); border-bottom: 1px solid rgba(210,16,51,0.15); }
-    .nav__mobile-menu a:last-child { border-bottom: none; }
-    .nav__mobile-cta { background: var(--fg-red); color: white; text-align: center; padding: 14px; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: var(--space-3); }
+    .nav__mobile-menu a.nav__mobile-link { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: var(--fg-red); text-transform: uppercase; letter-spacing: 0.06em; padding-block: var(--space-3); border-bottom: 1px solid rgba(210,16,51,0.15); }
+    .nav__mobile-menu a.nav__mobile-link:last-of-type { border-bottom: none; }
+    .nav__mobile-btns { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-4); }
+    .nav__mobile-btn { display: block; text-align: center; padding: 14px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.04em; border-radius: 20px; border: 2px solid var(--fg-red); }
+    .nav__mobile-btn--outline { background: white; color: var(--fg-red); }
+    .nav__mobile-btn--primary { background: var(--fg-red); color: white; }
     @media (min-width: 768px) { .nav__mobile-menu { display: none !important; } }
 
     /* ── BANNER ── */
@@ -198,12 +201,14 @@
       </div>
     </div>
     <div class="nav__mobile-menu" id="nav-mobile-menu">
-      <a href="#speisekarte">Speisekarte</a>
-      <a href="#ueber-uns">Willkommen</a>
-      <a href="#bewertungen">Bewertungen</a>
-      <a href="#kontakt">Kontakt</a>
-      <a href="reservieren.html">Tisch reservieren</a>
-      <a href="bestellen.html" class="nav__mobile-cta">Jetzt bestellen →</a>
+      <a href="#speisekarte" class="nav__mobile-link">Speisekarte</a>
+      <a href="#ueber-uns" class="nav__mobile-link">Willkommen</a>
+      <a href="#bewertungen" class="nav__mobile-link">Bewertungen</a>
+      <a href="#kontakt" class="nav__mobile-link">Kontakt</a>
+      <div class="nav__mobile-btns">
+        <a href="reservieren.html" class="nav__mobile-btn nav__mobile-btn--outline">Tisch reservieren</a>
+        <a href="bestellen.html" class="nav__mobile-btn nav__mobile-btn--primary">Jetzt bestellen →</a>
+      </div>
     </div>
   </header>
 
