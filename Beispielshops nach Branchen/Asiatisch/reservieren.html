@@ -35,9 +35,10 @@
     @media (min-width: 480px) { .form-row--2 { grid-template-columns: 1fr 1fr; } }
     .form-group { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
     .form-group label { font-weight: 600; font-size: var(--text-sm); color: var(--color-ink); }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; min-width: 0; padding: 0.75rem 1rem; border: 1.5px solid #2A2A2A; border-radius: 6px; font-family: var(--font-body); font-size: var(--text-base); color: var(--color-ink); background: #111; transition: border-color 0.15s; min-height: 44px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; min-width: 0; padding: 0.75rem 1rem; border: 1.5px solid #2A2A2A; border-radius: 6px; font-family: var(--font-body); font-size: var(--text-base); color: var(--color-ink); background: #111; transition: border-color 0.15s; height: 48px; -webkit-appearance: none; appearance: none; }
+    .form-group input[type="date"] { line-height: 1.2; }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--color-accent); }
-    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group textarea { resize: vertical; height: auto; min-height: 100px; }
     .form-submit { margin-top: var(--space-5); }
     .res-success { display: none; text-align: center; padding: var(--space-7) var(--space-5); }
     .res-success__icon { margin-bottom: var(--space-4); }
@@ -105,8 +106,10 @@
               <div class="form-group"><label for="name">Name *</label><input type="text" id="name" name="name" placeholder="Dein Name" required></div>
               <div class="form-group"><label for="telefon">Telefon *</label><input type="tel" id="telefon" name="telefon" placeholder="000 / ..." required></div>
             </div>
-            <div class="form-row form-row--2">
+            <div class="form-row">
               <div class="form-group"><label for="datum">Datum *</label><input type="date" id="datum" name="datum" required></div>
+            </div>
+            <div class="form-row">
               <div class="form-group"><label for="uhrzeit">Uhrzeit *</label>
                 <select id="uhrzeit" name="uhrzeit" required>
                   <option value="" disabled selected>Bitte wählen</option>
