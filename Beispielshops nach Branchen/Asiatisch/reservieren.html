@@ -11,8 +11,11 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <style>
+    html, body { overflow-x: hidden; max-width: 100%; }
     .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid #2A2A2A; }
-    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; flex-wrap: wrap; gap: 0.5rem; padding-block: 8px; }
+    .nav__logo svg { max-width: 140px; height: auto; }
+    @media (min-width: 400px) { .nav__logo svg { max-width: 175px; } }
     .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: #D4A017; }
     .nav__links { display: none; gap: var(--space-5); }
     .nav__links a { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--color-accent); }
@@ -57,6 +60,7 @@
     .footer__links a { color: var(--color-on-dark); opacity: 0.6; font-size: var(--text-sm); }
     .footer__divider { border-top: 1px solid rgba(255,255,255,0.12); margin-block: var(--space-5); }
     .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); color: var(--color-on-dark); }
+    @media (max-width: 400px) { .btn--sm { padding: 0.5rem 0.7rem; font-size: 0.8rem; } }
     @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
   </style>
 </head>
