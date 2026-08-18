@@ -1,0 +1,352 @@
+/* shop.css — Burger Joint
+   Gemeinsame Nav-, Footer- und Checkout-Stile fuer die neuen Seiten
+   (konto, anmelden, checkout, danke). Die bestehenden Seiten bringen
+   diese Regeln weiterhin in ihrem eigenen inline style-Block mit. */
+
+body {
+  background: var(--fg-white);
+  color: var(--fg-text);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--fg-white);
+  border-bottom: none;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+  gap: var(--space-5);
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+.nav__logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.7rem;
+  color: var(--fg-red);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.nav__logo span {
+  color: var(--fg-black);
+}
+
+.nav__links {
+  display: none;
+  gap: var(--space-5);
+}
+
+.nav__links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--fg-black);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.nav__links a:hover {
+  color: var(--fg-red);
+  opacity: 1;
+}
+
+@media (min-width: 901px) {
+  .nav__links { display: flex; }
+}
+
+/* ── BANNER ── */
+.nav-banner {
+  width: 100%;
+  height: 60px;
+  background-image: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%);
+  background-size: 40px 40px;
+  display: block;
+}
+
+/* ── SEITENKOPF ── */
+.seiten-hero {
+  background: var(--fg-grey);
+  padding-block: var(--space-7);
+  text-align: center;
+}
+
+.seiten-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  letter-spacing: 0.02em;
+  color: var(--fg-text);
+}
+
+.seiten-hero p {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+  margin-top: var(--space-2);
+}
+
+/* ── CHECKOUT ── */
+.checkout-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin-block: var(--space-5);
+}
+
+.checkout-steps .step {
+  background: white;
+  border: 2px solid var(--fg-grey);
+  border-radius: var(--radius-md, 20px);
+  padding: var(--space-3);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+.checkout-steps .step--active {
+  background: var(--fg-red);
+  border-color: var(--fg-red);
+  color: white;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+  padding-bottom: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .checkout-layout { grid-template-columns: 1fr 360px; }
+}
+
+.form-section {
+  border: none;
+  padding: 0;
+  margin-bottom: var(--space-6);
+  min-width: 0;
+}
+
+.form-section__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+  color: var(--fg-text);
+  padding: 0;
+  margin-bottom: var(--space-4);
+}
+
+.checkout-summary {
+  background: var(--fg-grey);
+  border-radius: var(--radius-md, 20px);
+  padding: var(--space-5);
+  min-width: 0;
+}
+
+.checkout-summary__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-4);
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--space-3);
+  font-size: 0.9rem;
+  padding-block: var(--space-2);
+  min-width: 0;
+}
+
+.cart-item__name { overflow-wrap: anywhere; }
+.cart-item__qty { color: var(--fg-muted); white-space: nowrap; }
+.cart-item__price { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.cart-summary__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  padding-block: var(--space-2);
+}
+
+.cart-summary__total {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  border-top: 2px solid var(--fg-text);
+  padding-top: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: white;
+  border: 2px solid var(--fg-grey);
+  border-radius: var(--radius-md, 20px);
+  cursor: pointer;
+  min-height: 48px;
+}
+
+.payment-option:has(input:checked) {
+  border-color: var(--fg-red);
+}
+
+.payment-option--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.payment-option input {
+  accent-color: var(--fg-red);
+  width: 20px;
+  height: 20px;
+}
+
+.payment-option__label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ── DANKE ── */
+.danke-main {
+  text-align: center;
+  padding-block: var(--space-8);
+}
+
+.danke-icon {
+  width: 88px;
+  height: 88px;
+  margin-inline: auto;
+  margin-bottom: var(--space-5);
+  border-radius: 50%;
+  background: var(--fg-red);
+  color: white;
+  font-size: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.danke-main h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.danke-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  max-width: 620px;
+  margin: var(--space-6) auto;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .danke-info { grid-template-columns: repeat(3, 1fr); }
+}
+
+.danke-info__item {
+  background: var(--fg-grey);
+  border-radius: var(--radius-md, 20px);
+  padding: var(--space-4);
+  font-size: 0.9rem;
+}
+
+.danke-info__item strong {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  margin-bottom: var(--space-2);
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--fg-black);
+  color: white;
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+  margin-top: var(--space-7);
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .footer__top { grid-template-columns: 2fr 1fr 1fr; }
+}
+
+.footer__brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: white;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.footer__brand span { color: var(--fg-red); }
+
+.footer__claim {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  max-width: 300px;
+}
+
+.footer__heading {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: var(--space-3);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer__links a {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.7);
+}
+
+.footer__links a:hover { color: white; opacity: 1; }
+
+.footer__divider {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: var(--space-4);
+}
+
+.footer__copy {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+}

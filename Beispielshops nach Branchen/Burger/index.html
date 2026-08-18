@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/konto.css?v=1">
   <style>
     /* ── TOKENS OVERRIDE: Five Guys palette ── */
     :root {
@@ -203,30 +204,20 @@
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo">🍔 BURGER<span>JOINT</span></a>
       <nav class="nav__links">
-        <a href="#ueber-uns">Willkommen</a>
-        <a href="#speisekarte">Speisekarte</a>
-        <a href="#bewertungen">Bewertungen</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="index.html#ueber-uns">Willkommen</a>
+        <a href="bestellen.html">Speisekarte</a>
+        <a href="index.html#bewertungen">Bewertungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
       </nav>
-      <div style="display:flex;gap:0.5rem;align-items:center;">
-        <a href="reservieren.html" class="nav__cta">Reservieren</a>
-        <a href="bestellen.html" class="nav__cta">Bestellen</a>
-        <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-    <div class="nav__mobile-menu" id="nav-mobile-menu">
-      <a href="#speisekarte" class="nav__mobile-link">Speisekarte</a>
-      <a href="#ueber-uns" class="nav__mobile-link">Willkommen</a>
-      <a href="#bewertungen" class="nav__mobile-link">Bewertungen</a>
-      <a href="#kontakt" class="nav__mobile-link">Kontakt</a>
-      <div class="nav__mobile-btns">
-        <a href="reservieren.html" class="nav__mobile-btn nav__mobile-btn--outline">Tisch reservieren</a>
-        <a href="bestellen.html" class="nav__mobile-btn nav__mobile-btn--primary">Jetzt bestellen →</a>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 <span class="btn__text">Reservieren</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">🛒 <span class="btn__text">Bestellen</span></a>
       </div>
     </div>
   </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
 
   <!-- BANNER -->
   <div class="nav-banner"></div>
@@ -418,18 +409,12 @@
     </div>
   </footer>
 
-  <script>
-    const hamburger = document.getElementById('nav-hamburger');
-    const mobileMenu = document.getElementById('nav-mobile-menu');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    }));
+  <script type="module">
+    import { setupSeite } from './js/auth.js';
+    setupSeite();
+  </script>
 
+  <script>
     const reviews = [
       { q: '„DER BESTE BURGER DER STADT. PUNKT."', a: 'Max K. · vor 3 Tagen · Google · 4,8 ⭐ aus 620 Bewertungen' },
       { q: '„Endlich mal ein Burger der wirklich schmeckt. Die Fries sind auch der Hammer."', a: 'Sarah M. · vor 1 Woche · Google' },

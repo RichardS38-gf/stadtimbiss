@@ -28,7 +28,7 @@ export const TREUE = {
   active: true
 };
 
-export const LIEFERKOSTEN = 2.50;
+export const LIEFERKOSTEN = 1.99;
 
 // ---------------------------------------------------------------
 // Adapter: einzige Stelle mit Speicherzugriff
