@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/index.css?v=41">
+  <link rel="stylesheet" href="css/konto.css?v=3">
   <style>
     .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
@@ -173,12 +174,15 @@
         <a href="index.html#bewertungen">Bewertungen</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
-      <div style="display:flex;gap:0.5rem;">
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <span id="nav-konto"></span>
         <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 Reservieren</a>
         <a href="bestellen.html" class="btn btn--primary btn--sm">Jetzt bestellen →</a>
       </div>
     </div>
   </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
 
   <!-- Page Hero -->
   <div class="res-hero">
@@ -356,6 +360,42 @@
     </div>
   </footer>
 
+  <script type="module">
+    import { setupSeite, getProfile, getSession, createReservation } from './js/auth.js';
+
+    await setupSeite();
+
+    // Formular mit den Kontodaten vorbefuellen
+    const profil = await getProfile();
+    if (await getSession() && profil) {
+      const setz = (id, wert) => {
+        const el = document.getElementById(id);
+        if (el && wert && !el.value) el.value = wert;
+      };
+      setz('name', `${profil.first_name} ${profil.last_name}`.trim());
+      setz('telefon', profil.phone);
+      setz('email', profil.email);
+    }
+
+    // Reservierung im Konto ablegen, damit sie im Tab Reservierungen auftaucht
+    const resForm = document.getElementById('reservation-form');
+    resForm.addEventListener('demo-gespeichert', () => {});
+    window.__resSpeichern = async () => {
+      const f = resForm;
+      const name = (f.elements.name?.value || '').trim().split(' ');
+      await createReservation({
+        reservation_date: f.elements.datum?.value || '',
+        reservation_time: (f.elements.uhrzeit?.value || '').replace(' Uhr', ''),
+        guests: f.elements.personen?.value || 2,
+        first_name: name[0] || '',
+        last_name: name.slice(1).join(' '),
+        phone: f.elements.telefon?.value || '',
+        email: f.elements.email?.value || '',
+        note: f.elements.anmerkungen?.value || null
+      });
+    };
+  </script>
+
   <script>
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
@@ -366,31 +406,28 @@
     datumInput.setAttribute('min', today);
 
     // Formular absenden
+    // Demo-Betrieb: es wird kein Formspree-Versand ausgeloest, weil dort nur
+    // ein Platzhalter hinterlegt ist. Die Reservierung landet stattdessen im
+    // Kundenkonto. Fuer den Echtbetrieb hier den Fetch wieder aktivieren.
     const form = document.getElementById('reservation-form');
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       const btn = form.querySelector('[type="submit"]');
       btn.textContent = 'Wird gesendet...';
       btn.disabled = true;
 
       try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          form.style.display = 'none';
-          document.getElementById('res-success').style.display = 'block';
-        } else {
-          btn.textContent = 'Fehler — bitte erneut versuchen';
-          btn.disabled = false;
-        }
-      } catch {
-        btn.textContent = 'Fehler — bitte erneut versuchen';
-        btn.disabled = false;
+        if (window.__resSpeichern) await window.__resSpeichern();
+      } catch (err) {
+        console.error('Reservierung konnte nicht gespeichert werden', err);
       }
+
+      form.style.display = 'none';
+      document.getElementById('res-success').style.display = 'block';
     });
   </script>
 
