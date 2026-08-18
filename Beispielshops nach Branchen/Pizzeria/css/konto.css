@@ -70,6 +70,21 @@
 }
 
 /* ---------------------------------------------------------------
+   Navigation auf der Kontoseite
+   Eigene Klasse, damit die Startseite unveraendert bleibt.
+   --------------------------------------------------------------- */
+.nav--konto .nav__links {
+  margin-left: var(--space-7);
+  gap: var(--space-5);
+}
+
+@media (max-width: 900px) {
+  .nav--konto .nav__links {
+    margin-left: var(--space-5);
+  }
+}
+
+/* ---------------------------------------------------------------
    Konto-Link in der Navigation
    --------------------------------------------------------------- */
 .nav__konto {
