@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vielen Dank — Burger Joint</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/shop.css?v=1">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">🍔 BURGER<span>JOINT</span></a>
+      <nav class="nav__links">
+        <a href="index.html#ueber-uns">Willkommen</a>
+        <a href="bestellen.html">Speisekarte</a>
+        <a href="index.html#bewertungen">Bewertungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 <span class="btn__text">Reservieren</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">🛒 <span class="btn__text">Bestellen</span></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
+  <div class="nav-banner"></div>
+
+  <main class="danke-main container">
+    <div class="danke-icon">✓</div>
+    <h1>Vielen Dank!</h1>
+    <p>Deine Bestellung wurde aufgenommen. Wir werfen die Patties auf den Grill.</p>
+
+    <div class="danke-info">
+      <div class="danke-info__item">
+        <strong>Bestellnummer</strong>
+        <span id="danke-nummer">BJ-0000</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Lieferzeit</strong>
+        <span>ca. 20 Minuten</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Gesamtbetrag</strong>
+        <span id="danke-summe">0,00 €</span>
+      </div>
+    </div>
+
+    <div id="danke-stempel" style="max-width:520px;margin-inline:auto"></div>
+
+    <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;margin-top:var(--space-5)">
+      <a href="konto.html#stempelkarte" class="btn btn--primary">Meine Stempelkarte</a>
+      <a href="index.html" class="btn btn--outline">Zur Startseite</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand">BURGER<span>JOINT</span></div>
+          <p class="footer__claim">Handgemachte Smash Burgers mit frischen Zutaten. Täglich frisch, niemals tiefgekühlt.</p>
+        </div>
+        <div>
+          <div class="footer__heading">Menü</div>
+          <nav class="footer__links">
+            <a href="bestellen.html#burger">Burger</a>
+            <a href="bestellen.html#chicken">Chicken</a>
+            <a href="bestellen.html#sides">Fries &amp; Sides</a>
+            <a href="bestellen.html#shakes">Shakes</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer__heading">Info</div>
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Allergene</a>
+            <a href="reservieren.html">Reservieren</a>
+          </nav>
+        </div>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Burger Joint, Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { setupSeite, getStampCard, TREUE } from './js/auth.js';
+
+    await setupSeite();
+
+    const fmt = n => Number(n).toFixed(2).replace('.', ',') + ' €';
+
+    let daten = null;
+    try {
+      daten = JSON.parse(sessionStorage.getItem('si_letzte_bestellung'));
+    } catch { daten = null; }
+
+    if (daten) {
+      document.getElementById('danke-nummer').textContent = daten.order_number;
+      document.getElementById('danke-summe').textContent = fmt(daten.total);
+      sessionStorage.removeItem('si_letzte_bestellung');
+    }
+
+    const el = document.getElementById('danke-stempel');
+    const stempel = daten ? daten.stempel : null;
+    const karte = await getStampCard();
+
+    if (stempel && stempel.vergeben && stempel.karte_voll) {
+      el.innerHTML = `<div class="stamp-hint" style="border-style:solid">
+        <span class="stamp-hint__zahl">${TREUE.target_stamps}/${TREUE.target_stamps}</span>
+        <span>Deine Stempelkarte ist <strong>voll</strong>.
+        Der Gutschein über ${TREUE.reward_description.toLowerCase()} liegt in deinem Konto.</span></div>`;
+    } else if (stempel && stempel.vergeben) {
+      el.innerHTML = `<div class="stamp-hint" style="border-style:solid">
+        <span class="stamp-hint__zahl">${stempel.stempel_stand}/${TREUE.target_stamps}</span>
+        <span>Stempel <strong>${stempel.stempel_stand} von ${TREUE.target_stamps}</strong> gesammelt.
+        Noch ${stempel.verbleibend} bis zu deiner Belohnung.</span></div>`;
+    } else if (stempel && stempel.grund === 'unter_mindestwert') {
+      el.innerHTML = `<div class="stamp-hint">
+        <span class="stamp-hint__zahl">${karte ? karte.stamps_count : 0}/${TREUE.target_stamps}</span>
+        <span>Für einen Stempel hätten ${fmt(stempel.fehlbetrag)} mehr Warenwert gefehlt.
+        Beim nächsten Mal klappt es.</span></div>`;
+    } else if (stempel && stempel.grund === 'rabatt_kombiniert') {
+      el.innerHTML = `<div class="stamp-hint">
+        <span class="stamp-hint__zahl">!</span>
+        <span>Für Bestellungen mit eingelöstem Gutschein gibt es keinen Stempel.</span></div>`;
+    }
+  </script>
+
+</body>
+</html>

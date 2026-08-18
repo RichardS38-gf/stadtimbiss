@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kasse — Burger Joint</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/shop.css?v=1">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">🍔 BURGER<span>JOINT</span></a>
+      <nav class="nav__links">
+        <a href="index.html#ueber-uns">Willkommen</a>
+        <a href="bestellen.html">Speisekarte</a>
+        <a href="index.html#bewertungen">Bewertungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <span id="nav-konto"></span>
+        <a href="bestellen.html" class="btn btn--outline btn--sm">← <span class="btn__text">Weiter einkaufen</span></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
+  <div class="nav-banner"></div>
+
+  <div class="container">
+    <div class="checkout-steps">
+      <div class="step step--active">
+        <span class="step__nr">1</span>
+        <span class="step__label">Adresse</span>
+      </div>
+      <div class="step">
+        <span class="step__nr">2</span>
+        <span class="step__label">Zahlung</span>
+      </div>
+      <div class="step">
+        <span class="step__nr">3</span>
+        <span class="step__label">Bestätigung</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container checkout-layout">
+
+    <form class="checkout-form" id="checkout-form" novalidate>
+
+      <fieldset class="form-section" id="adresswahl-block" style="display:none">
+        <legend class="form-section__title">Gespeicherte Adresse</legend>
+        <div class="konto-feld">
+          <label for="adresswahl">Lieferadresse wählen</label>
+          <select id="adresswahl"></select>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend class="form-section__title">Lieferadresse</legend>
+        <div class="konto-form konto-form--2">
+          <div class="konto-feld">
+            <label for="vorname">Vorname</label>
+            <input type="text" id="vorname" name="vorname" required autocomplete="given-name">
+          </div>
+          <div class="konto-feld">
+            <label for="nachname">Nachname</label>
+            <input type="text" id="nachname" name="nachname" required autocomplete="family-name">
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <label for="strasse">Straße und Hausnummer</label>
+            <input type="text" id="strasse" name="strasse" required autocomplete="street-address">
+          </div>
+          <div class="konto-feld">
+            <label for="plz">PLZ</label>
+            <input type="text" id="plz" name="plz" required maxlength="5" inputmode="numeric" autocomplete="postal-code">
+          </div>
+          <div class="konto-feld">
+            <label for="stadt">Stadt</label>
+            <input type="text" id="stadt" name="stadt" required autocomplete="address-level2">
+          </div>
+          <div class="konto-feld">
+            <label for="telefon">Telefon</label>
+            <input type="tel" id="telefon" name="telefon" required autocomplete="tel">
+          </div>
+          <div class="konto-feld">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <label for="anmerkungen">Anmerkungen (optional)</label>
+            <textarea id="anmerkungen" name="anmerkungen" rows="3"
+                      placeholder="z. B. Klingel defekt, bitte anrufen"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend class="form-section__title">Gutscheincode</legend>
+        <div class="konto-feld">
+          <label for="gutschein-code">Code eingeben</label>
+          <div style="display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap">
+            <input type="text" id="gutschein-code" placeholder="z. B. TREUE-AB12CD"
+                   style="flex:1 1 200px;min-width:0">
+            <button type="button" class="btn btn--outline btn--sm" id="gutschein-pruefen">Einlösen</button>
+          </div>
+          <p class="konto-hinweis" id="gutschein-status"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend class="form-section__title">Zahlungsart</legend>
+        <div class="payment-options">
+          <label class="payment-option">
+            <input type="radio" name="zahlung" value="bar" checked>
+            <span class="payment-option__label">Bar bei Lieferung</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="zahlung" value="ec">
+            <span class="payment-option__label">EC-Karte bei Lieferung</span>
+          </label>
+          <label class="payment-option payment-option--disabled">
+            <input type="radio" name="zahlung" value="paypal" disabled>
+            <span class="payment-option__label">PayPal</span>
+            <span class="badge badge--dark">Bald verfügbar</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn btn--primary btn--full">Jetzt bestellen</button>
+    </form>
+
+    <aside class="checkout-summary">
+      <h3 class="checkout-summary__title">Deine Bestellung</h3>
+      <div id="checkout-items"></div>
+      <div id="checkout-empty">
+        <p class="konto-leer">Dein Warenkorb ist leer.
+          <a href="bestellen.html" class="link-accent">Jetzt bestellen</a></p>
+      </div>
+      <div id="checkout-totals">
+        <div class="cart-summary__row">
+          <span>Zwischensumme</span><span id="checkout-subtotal">0,00 €</span>
+        </div>
+        <div class="cart-summary__row">
+          <span>Lieferung</span><span>1,99 €</span>
+        </div>
+        <div class="cart-summary__row" id="rabatt-zeile" style="display:none">
+          <span>Rabatt</span><span id="checkout-rabatt">0,00 €</span>
+        </div>
+        <div class="cart-summary__row cart-summary__total">
+          <span>Gesamt</span><span id="checkout-total">0,00 €</span>
+        </div>
+      </div>
+      <div id="stempel-hinweis"></div>
+    </aside>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand">BURGER<span>JOINT</span></div>
+          <p class="footer__claim">Handgemachte Smash Burgers mit frischen Zutaten. Täglich frisch, niemals tiefgekühlt.</p>
+        </div>
+        <div>
+          <div class="footer__heading">Menü</div>
+          <nav class="footer__links">
+            <a href="bestellen.html#burger">Burger</a>
+            <a href="bestellen.html#chicken">Chicken</a>
+            <a href="bestellen.html#sides">Fries &amp; Sides</a>
+            <a href="bestellen.html#shakes">Shakes</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer__heading">Info</div>
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Allergene</a>
+            <a href="reservieren.html">Reservieren</a>
+          </nav>
+        </div>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Burger Joint, Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { getCart, getCartTotal, clearCart } from './js/cart.js';
+    import {
+      setupSeite, getSession, getProfile, getAddresses, getDefaultAddress,
+      getDefaultPaymentMethod, getStampPreview, checkVoucher, createOrder,
+      LIEFERKOSTEN, TREUE
+    } from './js/auth.js';
+
+    await setupSeite();
+
+    const cart = getCart();
+    const itemsEl = document.getElementById('checkout-items');
+    const emptyEl = document.getElementById('checkout-empty');
+    const totalsEl = document.getElementById('checkout-totals');
+    const subtotalEl = document.getElementById('checkout-subtotal');
+    const totalEl = document.getElementById('checkout-total');
+    const rabattZeile = document.getElementById('rabatt-zeile');
+    const rabattEl = document.getElementById('checkout-rabatt');
+
+    let rabatt = 0;
+    let gutschein = null;
+
+    const fmt = n => n.toFixed(2).replace('.', ',') + ' €';
+
+    function summenRendern() {
+      const subtotal = getCartTotal();
+      subtotalEl.textContent = fmt(subtotal);
+      rabattZeile.style.display = rabatt > 0 ? 'flex' : 'none';
+      rabattEl.textContent = '- ' + fmt(rabatt);
+      totalEl.textContent = fmt(Math.max(0, subtotal + LIEFERKOSTEN - rabatt));
+    }
+
+    if (cart.length === 0) {
+      emptyEl.style.display = 'block';
+      totalsEl.style.display = 'none';
+    } else {
+      emptyEl.style.display = 'none';
+      totalsEl.style.display = 'block';
+      itemsEl.innerHTML = cart.map(i => `
+        <div class="cart-item">
+          <span class="cart-item__name">${i.name}</span>
+          <span class="cart-item__qty">×${i.qty}</span>
+          <span class="cart-item__price">${fmt(i.price * i.qty)}</span>
+        </div>`).join('');
+      summenRendern();
+    }
+
+    const form = document.getElementById('checkout-form');
+    let adressen = [];
+
+    function adresseEinsetzen(a) {
+      if (!a) return;
+      form.vorname.value = a.first_name || '';
+      form.nachname.value = a.last_name || '';
+      form.strasse.value = a.street || '';
+      form.plz.value = a.postal_code || '';
+      form.stadt.value = a.city || '';
+      form.telefon.value = a.phone || '';
+      if (a.delivery_note && !form.anmerkungen.value) form.anmerkungen.value = a.delivery_note;
+    }
+
+    if (await getSession()) {
+      const profil = await getProfile();
+      adressen = await getAddresses();
+      if (profil) form.email.value = profil.email || '';
+      adresseEinsetzen(await getDefaultAddress());
+
+      if (adressen.length > 1) {
+        const block = document.getElementById('adresswahl-block');
+        const select = document.getElementById('adresswahl');
+        block.style.display = 'block';
+        select.innerHTML = adressen.map(a =>
+          `<option value="${a.id}" ${a.is_default ? 'selected' : ''}>
+             ${a.label}: ${a.street}, ${a.postal_code} ${a.city}</option>`).join('');
+        select.addEventListener('change', () => {
+          adresseEinsetzen(adressen.find(a => a.id === select.value));
+        });
+      }
+
+      const zahlung = await getDefaultPaymentMethod();
+      if (zahlung) {
+        const radio = form.querySelector(`input[name="zahlung"][value="${zahlung.type}"]`);
+        if (radio) radio.checked = true;
+      }
+    }
+
+    async function stempelHinweisRendern() {
+      const el = document.getElementById('stempel-hinweis');
+      const v = await getStampPreview(getCartTotal());
+      if (!el || !v || cart.length === 0) return;
+      if (rabatt > 0) {
+        el.innerHTML = `<div class="stamp-hint">
+          <span class="stamp-hint__zahl">!</span>
+          <span>Bei eingelöstem Gutschein gibt es keinen Stempel.</span></div>`;
+        return;
+      }
+      el.innerHTML = v.qualifiziert
+        ? `<div class="stamp-hint">
+             <span class="stamp-hint__zahl">${v.naechster_stempel}/${v.target_stamps}</span>
+             <span>Diese Bestellung bringt dir Stempel
+             <strong>${v.naechster_stempel} von ${v.target_stamps}</strong></span></div>`
+        : `<div class="stamp-hint">
+             <span class="stamp-hint__zahl">${v.stempel_stand}/${v.target_stamps}</span>
+             <span>Noch <strong>${fmt(v.fehlbetrag)}</strong> bis zum nächsten Stempel</span></div>`;
+    }
+    await stempelHinweisRendern();
+
+    document.getElementById('gutschein-pruefen').addEventListener('click', async () => {
+      const code = document.getElementById('gutschein-code').value;
+      const status = document.getElementById('gutschein-status');
+      if (!code.trim()) return;
+
+      const e = await checkVoucher(code);
+      if (!e.gueltig) {
+        const texte = {
+          unbekannt: 'Diesen Code kennen wir nicht.',
+          bereits_eingeloest: 'Dieser Gutschein wurde bereits eingelöst.',
+          verfallen: 'Dieser Gutschein ist abgelaufen.'
+        };
+        status.textContent = texte[e.grund] || 'Code ungültig.';
+        rabatt = 0;
+        gutschein = null;
+      } else {
+        gutschein = e.gutschein;
+        rabatt = gutschein.type === 'amount' ? Number(gutschein.value)
+          : gutschein.type === 'percent' ? getCartTotal() * Number(gutschein.value) / 100
+          : 0;
+        status.textContent = gutschein.type === 'free_item'
+          ? `${gutschein.description} wird an der Kasse abgezogen.`
+          : `${gutschein.description} angerechnet.`;
+      }
+      summenRendern();
+      await stempelHinweisRendern();
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const ergebnis = await createOrder({
+        mode: 'lieferung',
+        address_id: adressen.length ? (document.getElementById('adresswahl')?.value || adressen[0].id) : null,
+        address_snapshot: {
+          street: form.strasse.value,
+          postal_code: form.plz.value,
+          city: form.stadt.value
+        },
+        payment_type: form.querySelector('input[name="zahlung"]:checked')?.value || 'bar',
+        discount: rabatt,
+        voucher_id: gutschein ? gutschein.id : null,
+        note: form.anmerkungen.value || null,
+        items: cart.map(i => ({
+          product_id: i.id, name: i.name, unit_price: i.price, qty: i.qty
+        }))
+      });
+
+      sessionStorage.setItem('si_letzte_bestellung', JSON.stringify({
+        order_number: ergebnis.order.order_number,
+        total: ergebnis.order.total,
+        stempel: ergebnis.stempel
+      }));
+
+      clearCart();
+      window.location.href = 'danke.html';
+    });
+  </script>
+
+</body>
+</html>

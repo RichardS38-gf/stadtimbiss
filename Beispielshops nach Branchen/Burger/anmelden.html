@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anmelden — Burger Joint</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/shop.css?v=1">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">🍔 BURGER<span>JOINT</span></a>
+      <nav class="nav__links">
+        <a href="index.html#ueber-uns">Willkommen</a>
+        <a href="bestellen.html">Speisekarte</a>
+        <a href="index.html#bewertungen">Bewertungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 <span class="btn__text">Reservieren</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">🛒 <span class="btn__text">Bestellen</span></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
+  <div class="nav-banner"></div>
+
+  <main class="container">
+    <div class="auth-wrap">
+
+      <div class="auth-box" id="box-login">
+        <h1 class="auth-box__titel">Anmelden</h1>
+        <p class="auth-box__sub">
+          Mit deinem Konto sind Adresse und Zahlungsart schon hinterlegt,
+          und deine Stempelkarte sammelt automatisch weiter.
+        </p>
+
+        <form class="konto-form" id="login-form" novalidate>
+          <div class="konto-feld">
+            <label for="l-email">E-Mail</label>
+            <input type="email" id="l-email" name="email" autocomplete="email"
+                   value="max.mustermann@example.de" required>
+          </div>
+          <div class="konto-feld">
+            <label for="l-passwort">Passwort</label>
+            <input type="password" id="l-passwort" name="password"
+                   autocomplete="current-password" value="demo1234" required>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Anmelden</button>
+        </form>
+
+        <p class="konto-hinweis" style="text-align:center;margin-top:var(--space-3)">
+          Demo-Zugang, die Felder sind bereits ausgefüllt.
+          Jede Eingabe führt zum Beispielkunden.
+        </p>
+
+        <p class="auth-wechsel">
+          Noch kein Konto?
+          <button class="link-btn" id="zu-register">Jetzt registrieren</button>
+        </p>
+        <p class="auth-wechsel">
+          <button class="link-btn link-btn--still" id="passwort-vergessen">Passwort vergessen</button>
+        </p>
+      </div>
+
+      <div class="auth-box" id="box-register" style="display:none">
+        <h1 class="auth-box__titel">Konto erstellen</h1>
+        <p class="auth-box__sub">
+          Adresse und Zahlungsart einmal hinterlegen, danach mit zwei Klicks bestellen.
+        </p>
+
+        <form class="konto-form konto-form--2" id="register-form" novalidate>
+          <div class="konto-feld">
+            <label for="r-vorname">Vorname</label>
+            <input type="text" id="r-vorname" name="first_name" autocomplete="given-name" required>
+          </div>
+          <div class="konto-feld">
+            <label for="r-nachname">Nachname</label>
+            <input type="text" id="r-nachname" name="last_name" autocomplete="family-name" required>
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <label for="r-email">E-Mail</label>
+            <input type="email" id="r-email" name="email" autocomplete="email" required>
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <label for="r-telefon">Telefon</label>
+            <input type="tel" id="r-telefon" name="phone" autocomplete="tel">
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <label for="r-passwort">Passwort</label>
+            <input type="password" id="r-passwort" name="password"
+                   autocomplete="new-password" minlength="8" required>
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <label class="konto-check">
+              <input type="checkbox" id="r-treue" checked>
+              <span>Ich möchte am Treueprogramm teilnehmen und Stempel sammeln.</span>
+            </label>
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <label class="konto-check">
+              <input type="checkbox" id="r-marketing">
+              <span>
+                Ich möchte Angebote und Neuigkeiten per E-Mail erhalten.
+                Jederzeit widerrufbar.
+              </span>
+            </label>
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <button type="submit" class="btn btn--primary btn--full">Konto erstellen</button>
+          </div>
+        </form>
+
+        <p class="konto-hinweis" style="text-align:center">
+          Du kannst auch ohne Konto bestellen. Ein Konto ist keine Voraussetzung.
+        </p>
+
+        <p class="auth-wechsel">
+          Schon ein Konto?
+          <button class="link-btn" id="zu-login">Zur Anmeldung</button>
+        </p>
+      </div>
+
+      <p class="auth-wechsel" style="margin-top:var(--space-5)">
+        <a href="bestellen.html" class="link-accent">Ohne Konto bestellen</a>
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand">BURGER<span>JOINT</span></div>
+          <p class="footer__claim">Handgemachte Smash Burgers mit frischen Zutaten. Täglich frisch, niemals tiefgekühlt.</p>
+        </div>
+        <div>
+          <div class="footer__heading">Menü</div>
+          <nav class="footer__links">
+            <a href="bestellen.html#burger">Burger</a>
+            <a href="bestellen.html#chicken">Chicken</a>
+            <a href="bestellen.html#sides">Fries &amp; Sides</a>
+            <a href="bestellen.html#shakes">Shakes</a>
+          </nav>
+        </div>
+        <div>
+          <div class="footer__heading">Info</div>
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Allergene</a>
+            <a href="reservieren.html">Reservieren</a>
+          </nav>
+        </div>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Burger Joint, Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { setupSeite, login, register, getSession } from './js/auth.js';
+
+    await setupSeite();
+
+    if (await getSession()) {
+      window.location.replace('konto.html');
+    }
+
+    const boxLogin = document.getElementById('box-login');
+    const boxRegister = document.getElementById('box-register');
+
+    document.getElementById('zu-register').addEventListener('click', () => {
+      boxLogin.style.display = 'none';
+      boxRegister.style.display = 'block';
+    });
+    document.getElementById('zu-login').addEventListener('click', () => {
+      boxRegister.style.display = 'none';
+      boxLogin.style.display = 'block';
+    });
+    document.getElementById('passwort-vergessen').addEventListener('click', () => {
+      alert('In der Demo nicht hinterlegt. Im Echtbetrieb geht hier eine E-Mail mit Rücksetzlink raus.');
+    });
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!e.target.checkValidity()) { e.target.reportValidity(); return; }
+      await login(e.target.elements.email.value, e.target.elements.password.value);
+      window.location.href = 'konto.html';
+    });
+
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!e.target.checkValidity()) { e.target.reportValidity(); return; }
+      const f = e.target.elements;
+      await register({
+        first_name: f.first_name.value,
+        last_name: f.last_name.value,
+        email: f.email.value,
+        phone: f.phone.value
+      });
+      window.location.href = 'konto.html';
+    });
+  </script>
+
+</body>
+</html>
