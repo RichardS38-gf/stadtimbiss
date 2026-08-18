@@ -1,19 +1,33 @@
 /* tokens.css — Burger Joint */
 :root {
-  --color-accent:     #C0392B;   /* Diner-Rot */
-  --color-accent-dk:  #A93226;
-  --color-yellow:     #F5C518;   /* Mustard Yellow */
-  --color-bg:         #FFF8F0;   /* Warmes Creme */
-  --color-bg-soft:    #FFFFFF;
-  --color-bg-dark:    #1A1A1A;   /* Fast Schwarz */
-  --color-ink:        #1A1A1A;
-  --color-muted:      #6B6B6B;
-  --color-line:       #E8DDD0;
+  /* Farben
+     Die Seiten nutzen die --fg-* Variablen aus dem inline Override.
+     Diese --color-* Tokens sind darauf abgestimmt, damit gemeinsam
+     genutzte Stylesheets wie konto.css automatisch passen. */
+  --color-accent:     #d21033;   /* Five Guys Rot */
+  --color-accent-dk:  #a80d27;
+  --color-on-accent:  #ffffff;
+  --color-yellow:     #F5C518;
+  --color-bg:         #ffffff;   /* Seitenhintergrund */
+  --color-bg-soft:    #f9f6f1;   /* Karten, warmes Creme */
+  --color-bg-dark:    #111111;
+  --color-ink:        #111111;
+  --color-muted:      #666666;
+  --color-line:       #e4ddd3;
   --color-dark:       #111111;
-  --color-on-dark:    #FFF8F0;
-  --color-on-accent:  #FFFFFF;
+  --color-on-dark:    #ffffff;
 
-  --font-head: 'Black Han Sans', 'Bebas Neue', 'Arial Black', sans-serif;
+  /* Five Guys Palette, von den Seiten direkt genutzt */
+  --fg-red:    #d21033;
+  --fg-red-dk: #a80d27;
+  --fg-black:  #111111;
+  --fg-white:  #ffffff;
+  --fg-cream:  #f9f6f1;
+  --fg-grey:   #f2f2f2;
+  --fg-text:   #111111;
+  --fg-muted:  #666666;
+
+  --font-head: 'Bebas Neue', 'Arial Black', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
   --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
@@ -28,6 +42,10 @@
   --text-xs:   0.75rem; --text-sm: 0.875rem; --text-base: 1rem;
   --text-lg:   1.125rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
   --text-3xl:  2rem; --text-4xl: 2.5rem; --text-5xl: 3.5rem;
+
+  /* Runde Kacheln, passend zum Button-Radius */
+  --radius-sm: 10px;
+  --radius-md: 20px;
 
   --transition: 0.2s ease;
 }
