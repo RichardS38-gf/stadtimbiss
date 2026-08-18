@@ -70,6 +70,37 @@
 }
 
 /* ---------------------------------------------------------------
+   Fortschrittsanzeige im Checkout
+   Alle drei Schritte zweizeilig, damit die Ziffern auf einer Hoehe
+   sitzen und der laengste Text keinen Sonderfall erzeugt.
+   --------------------------------------------------------------- */
+.checkout-steps .step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.step__nr {
+  font-weight: 700;
+  font-size: var(--text-base);
+}
+
+.step__label {
+  font-size: var(--text-sm);
+  hyphens: auto;
+}
+
+@media (max-width: 480px) {
+  .step__label {
+    font-size: var(--text-xs);
+  }
+}
+
+/* ---------------------------------------------------------------
    Burger-Menue auf Mobile
    Die Elemente bleiben im DOM und werden nur ein- und ausgeblendet.
    Selektoren bewusst mit hoher Spezifitaet, weil einige Seiten
