@@ -42,22 +42,7 @@ body {
 }
 
 .nav__links {
-  display: none;
   gap: var(--space-5);
-}
-
-.nav__links a {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--fg-black);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.nav__links a:hover {
-  color: var(--fg-red);
-  opacity: 1;
 }
 
 @media (min-width: 901px) {

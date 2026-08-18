@@ -32,3 +32,26 @@
 .btn--full { width: 100%; }
 .btn--sm { padding: 0.4rem 0.9rem; font-size: 0.85rem; min-height: 36px; }
 .link-accent { color: #d21033; font-weight: 700; font-size: var(--text-sm); font-family: 'Inter', sans-serif; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* Navigation: Textlinks
+   Liegt hier und nicht im inline style-Block einzelner Seiten,
+   damit die Kopfzeile auf allen Seiten identisch aussieht. */
+.nav__links {
+  display: none;
+  gap: var(--space-5);
+}
+.nav__links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111111;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.nav__links a:hover {
+  color: #d21033;
+  opacity: 1;
+}
+@media (min-width: 901px) {
+  .nav__links { display: flex; }
+}
