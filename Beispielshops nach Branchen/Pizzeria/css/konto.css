@@ -282,6 +282,44 @@
   flex-wrap: wrap;
 }
 
+/* Favoriten-Herz an den Produktkarten auf bestellen.html */
+.menu-card {
+  position: relative;
+}
+
+.fav-herz {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition), border-color var(--transition);
+  z-index: 2;
+}
+
+.fav-herz:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.fav-herz--aktiv {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.fav-herz--aktiv svg {
+  fill: var(--color-accent);
+}
+
 /* Reservierungszeile */
 .res-row {
   display: grid;

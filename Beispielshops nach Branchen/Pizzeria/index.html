@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/index.css?v=41">
+  <link rel="stylesheet" href="css/konto.css?v=3">
 
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
@@ -44,12 +45,15 @@
         <a href="#bewertungen">Bewertungen</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <div style="display:flex;gap:0.5rem;">
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <span id="nav-konto"></span>
         <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 Reservieren</a>
         <a href="bestellen.html" class="btn btn--primary btn--sm">Jetzt bestellen →</a>
       </div>
     </div>
   </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
 
   <!-- Sektion 1 — Hero -->
   <section class="hero">
@@ -264,6 +268,11 @@
       <p class="footer__copy">© 2025 Stadtimbiss — Alle Rechte vorbehalten</p>
     </div>
   </footer>
+
+  <script type="module">
+    import { setupSeite } from './js/auth.js';
+    setupSeite();
+  </script>
 
   <script>
     const nav = document.querySelector('.nav');

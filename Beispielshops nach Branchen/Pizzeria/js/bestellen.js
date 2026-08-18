@@ -1,6 +1,7 @@
 // bestellen.js — Stadtimbiss Bestellseite
 
 import { addToCart, getCart, getCartTotal, getCartCount, updateQty, removeFromCart } from './cart.js';
+import { setupSeite, getStampPreview, isFavorite, toggleFavorite, TREUE } from './auth.js';
 
 // ---------- Cart-Item HTML ----------
 function cartItemHTML(item) {
@@ -218,6 +219,77 @@ function closeCartDrawer() {
   document.body.style.overflow = '';
 }
 
+// ---------- Stempel-Hinweis im Warenkorb ----------
+// Zeigt an, was die aktuelle Bestellung fuer die Stempelkarte bedeutet.
+// Unter dem Mindestbestellwert der staerkere Anreiz: was noch fehlt.
+async function renderStempelHinweis() {
+  const vorschau = await getStampPreview(getCartTotal());
+  const ziele = [
+    document.getElementById('stempel-hinweis'),
+    document.getElementById('stempel-hinweis-mobile')
+  ];
+
+  ziele.forEach(el => {
+    if (!el) return;
+    if (!vorschau || getCartCount() === 0) {
+      el.innerHTML = '';
+      return;
+    }
+    if (!vorschau.qualifiziert) {
+      el.innerHTML = `
+        <div class="stamp-hint">
+          <span class="stamp-hint__zahl">${vorschau.stempel_stand}/${vorschau.target_stamps}</span>
+          <span>Noch <strong>${vorschau.fehlbetrag.toFixed(2).replace('.', ',')} €</strong>
+          bis zum nächsten Stempel</span>
+        </div>`;
+      return;
+    }
+    el.innerHTML = vorschau.karte_wird_voll
+      ? `<div class="stamp-hint">
+           <span class="stamp-hint__zahl">${vorschau.target_stamps}/${vorschau.target_stamps}</span>
+           <span>Diese Bestellung macht deine Karte <strong>voll</strong>.
+           ${TREUE.reward_description} wartet danach auf dich.</span>
+         </div>`
+      : `<div class="stamp-hint">
+           <span class="stamp-hint__zahl">${vorschau.naechster_stempel}/${vorschau.target_stamps}</span>
+           <span>Diese Bestellung bringt dir Stempel
+           <strong>${vorschau.naechster_stempel} von ${vorschau.target_stamps}</strong></span>
+         </div>`;
+  });
+}
+
+// ---------- Favoriten-Herz an den Produktkarten ----------
+async function herzenAufbauen() {
+  const karten = document.querySelectorAll('.menu-card');
+
+  for (const karte of karten) {
+    const btn = karte.querySelector('.add-to-cart');
+    if (!btn) continue;
+    const id = btn.dataset.id;
+    const aktiv = await isFavorite(id);
+
+    const herz = document.createElement('button');
+    herz.className = 'fav-herz' + (aktiv ? ' fav-herz--aktiv' : '');
+    herz.type = 'button';
+    herz.dataset.fav = id;
+    herz.setAttribute('aria-label', aktiv ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+    herz.innerHTML = `
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round" aria-hidden="true">
+        <path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
+      </svg>`;
+
+    herz.addEventListener('click', async () => {
+      const jetztAktiv = await toggleFavorite(id);
+      herz.classList.toggle('fav-herz--aktiv', jetztAktiv);
+      herz.setAttribute('aria-label', jetztAktiv ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+    });
+
+    karte.appendChild(herz);
+  }
+}
+
 // ---------- Sticky Nav Shadow ----------
 const nav = document.querySelector('.nav');
 window.addEventListener('scroll', () => {
@@ -227,3 +299,13 @@ window.addEventListener('scroll', () => {
 // ---------- Initial ----------
 renderCart();
 renderCartMobile();
+
+// Kundenkonto: Auto-Login, Demo-Banner, Konto-Link, Favoriten, Stempel
+setupSeite().then(() => {
+  herzenAufbauen();
+  renderStempelHinweis();
+});
+
+// Stempel-Hinweis bei jeder Warenkorb-Aenderung neu berechnen
+document.addEventListener('click', () => setTimeout(renderStempelHinweis, 50));
+document.addEventListener('change', () => setTimeout(renderStempelHinweis, 50));
