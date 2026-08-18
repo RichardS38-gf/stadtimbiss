@@ -69,6 +69,14 @@
   }
 }
 
+/* Icon in Buttons, z.B. in der Navigation */
+.btn__icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: block;
+}
+
 /* ---------------------------------------------------------------
    Fortschrittsanzeige im Checkout
    Alle drei Schritte zweizeilig, damit die Ziffern auf einer Hoehe
