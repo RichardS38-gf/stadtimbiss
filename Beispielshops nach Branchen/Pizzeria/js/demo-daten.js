@@ -223,6 +223,29 @@ export const DEMO_RESERVATIONS = [
   }
 ];
 
+// Artikelkatalog: wird fuer Favoriten und Warenkorb-Anzeige gebraucht.
+// Muss exakt zu den data-Attributen der .add-to-cart Buttons in
+// bestellen.html passen.
+export const KATALOG = {
+  'burger-1': { name: 'Double Smash Burger', price: 8.90, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300' },
+  'burger-2': { name: 'Classic Cheeseburger', price: 6.90, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300' },
+  'burger-3': { name: 'BBQ Bacon Burger', price: 9.50, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300' },
+  'burger-4': { name: 'Crispy Chicken Burger', price: 7.90, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=300' },
+  'burger-5': { name: 'Veggie Burger', price: 7.50, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=300' },
+  'doener-1': { name: 'Döner', price: 6.50, kategorie: 'Döner', img: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300' },
+  'doener-3': { name: 'Dürüm', price: 7.00, kategorie: 'Döner', img: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300' },
+  'doener-4': { name: 'Lahmacun', price: 5.50, kategorie: 'Döner', img: 'https://images.unsplash.com/photo-1600628421055-4d30de868b8f?w=300' },
+  'beilage-1': { name: 'Pommes Frites', price: 2.50, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300' },
+  'beilage-2': { name: 'Süßkartoffel-Pommes', price: 3.50, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300' },
+  'beilage-3': { name: 'Onion Rings', price: 3.00, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1639024471283-03518883512d?w=300' },
+  'beilage-4': { name: 'Coleslaw', price: 2.00, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300' },
+  'getraenk-1': { name: 'Cola 0,5l', price: 2.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300' },
+  'getraenk-2': { name: 'Cola Zero 0,5l', price: 2.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300' },
+  'getraenk-3': { name: 'Sprite 0,5l', price: 2.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300' },
+  'getraenk-4': { name: 'Wasser 0,5l', price: 1.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=300' },
+  'getraenk-5': { name: 'Ayran 0,25l', price: 1.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300' }
+};
+
 // Wird von auth.js beim Auto-Login eingespielt
 export function demoDatenSatz() {
   return {

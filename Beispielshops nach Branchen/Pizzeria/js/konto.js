@@ -6,16 +6,32 @@ import {
   setupSeite,
   getSession,
   getProfile,
+  updateProfile,
+  deleteAccount,
+  exportData,
   getOrders,
   getLastOrder,
   getStampCard,
   getOpenVouchers,
   getVouchers,
+  getAddresses,
+  addAddress,
+  updateAddress,
+  deleteAddress,
+  setDefaultAddress,
   getDefaultAddress,
+  getPaymentMethods,
+  setDefaultPaymentMethod,
   getDefaultPaymentMethod,
+  getFavorites,
+  toggleFavorite,
+  getReservations,
+  cancelReservation,
   reorder,
   TREUE
 } from './auth.js';
+import { addToCart } from './cart.js';
+import { KATALOG } from './demo-daten.js';
 
 // ---------------------------------------------------------------
 // Formatierung
@@ -294,6 +310,343 @@ async function bestellungenRendern() {
 }
 
 // ---------------------------------------------------------------
+// Stempelkarte, grosse Ansicht plus Regeln
+// ---------------------------------------------------------------
+const TREUE_REGELN = [
+  'Ein Stempel je abgeschlossener Bestellung.',
+  `Die Zwischensumme muss mindestens ${'MINDESTWERT'} betragen, Lieferkosten zählen nicht mit.`,
+  'Der Betrag der Bestellung spielt sonst keine Rolle, es gibt immer genau einen Stempel.',
+  'Auf Bestellungen mit bereits eingelöstem Rabatt oder Gutschein gibt es keinen Stempel.',
+  'Wird eine Bestellung storniert, wird der Stempel wieder abgezogen.',
+  'Gutscheine sind an das Konto gebunden und nicht übertragbar.',
+  `Gutscheine verfallen nach ${'GUELTIGKEIT'} Tagen.`,
+  'Wir können das Programm beenden, ausgegebene Gutscheine bleiben bis zum Ablauf gültig.'
+];
+
+async function stempelkarteRendern() {
+  const karte = await getStampCard();
+  document.getElementById('stempel-gross').innerHTML = stempelkarteHTML(karte);
+
+  const alle = await getVouchers();
+  document.getElementById('stempel-gutscheine').innerHTML = alle.length
+    ? alle.map(gutscheinHTML).join('')
+    : '<p class="konto-leer">Noch keine Gutscheine.</p>';
+
+  document.getElementById('stempel-regeln').innerHTML = TREUE_REGELN
+    .map(r => r
+      .replace('MINDESTWERT', euro(TREUE.min_order_value))
+      .replace('GUELTIGKEIT', TREUE.voucher_validity_days))
+    .map(r => `<li>${r}</li>`)
+    .join('');
+}
+
+// ---------------------------------------------------------------
+// Adressen
+// ---------------------------------------------------------------
+function adresseHTML(adresse) {
+  return `
+    <div class="address-card ${adresse.is_default ? 'address-card--default' : ''}">
+      <div class="address-card__label">
+        ${sicher(adresse.label)}
+        ${adresse.is_default ? '<span class="badge">Standard</span>' : ''}
+      </div>
+      <p class="address-card__text">
+        ${sicher(adresse.first_name)} ${sicher(adresse.last_name)}<br>
+        ${sicher(adresse.street)}<br>
+        ${sicher(adresse.postal_code)} ${sicher(adresse.city)}
+        ${adresse.phone ? '<br>' + sicher(adresse.phone) : ''}
+        ${adresse.delivery_note ? '<br><em>' + sicher(adresse.delivery_note) + '</em>' : ''}
+      </p>
+      <div class="address-card__aktionen">
+        <button class="link-btn" data-adr-edit="${adresse.id}">Bearbeiten</button>
+        ${!adresse.is_default
+          ? `<button class="link-btn" data-adr-default="${adresse.id}">Als Standard</button>
+             <button class="link-btn link-btn--still" data-adr-del="${adresse.id}">Löschen</button>`
+          : ''}
+      </div>
+    </div>`;
+}
+
+async function adressenRendern() {
+  const liste = await getAddresses();
+  const el = document.getElementById('adressen-liste');
+  el.innerHTML = liste.length
+    ? liste.map(adresseHTML).join('')
+    : '<p class="konto-leer">Noch keine Adresse hinterlegt.</p>';
+}
+
+function modalOeffnen(adresse = null) {
+  const modal = document.getElementById('adress-modal');
+  const form = document.getElementById('adress-form');
+  form.reset();
+  form.elements.id.value = adresse ? adresse.id : '';
+  document.getElementById('adress-modal-titel').textContent =
+    adresse ? 'Adresse bearbeiten' : 'Neue Adresse';
+  if (adresse) {
+    form.elements.label.value = adresse.label || '';
+    form.elements.first_name.value = adresse.first_name || '';
+    form.elements.last_name.value = adresse.last_name || '';
+    form.elements.street.value = adresse.street || '';
+    form.elements.postal_code.value = adresse.postal_code || '';
+    form.elements.city.value = adresse.city || '';
+    form.elements.phone.value = adresse.phone || '';
+    form.elements.delivery_note.value = adresse.delivery_note || '';
+  }
+  modal.classList.add('konto-modal--offen');
+  document.body.style.overflow = 'hidden';
+}
+
+function modalSchliessen() {
+  document.getElementById('adress-modal').classList.remove('konto-modal--offen');
+  document.body.style.overflow = '';
+}
+
+function adressEventsBinden() {
+  const liste = document.getElementById('adressen-liste');
+
+  document.getElementById('adresse-neu')
+    .addEventListener('click', () => modalOeffnen(null));
+  document.getElementById('adress-modal-close')
+    .addEventListener('click', modalSchliessen);
+  document.getElementById('adress-modal-abbrechen')
+    .addEventListener('click', modalSchliessen);
+  document.getElementById('adress-modal')
+    .addEventListener('click', (e) => {
+      if (e.target.id === 'adress-modal') modalSchliessen();
+    });
+
+  liste.addEventListener('click', async (e) => {
+    const edit = e.target.closest('[data-adr-edit]');
+    if (edit) {
+      const alle = await getAddresses();
+      modalOeffnen(alle.find(a => a.id === edit.dataset.adrEdit));
+      return;
+    }
+    const std = e.target.closest('[data-adr-default]');
+    if (std) {
+      await setDefaultAddress(std.dataset.adrDefault);
+      await adressenRendern();
+      await uebersichtRendern();
+      return;
+    }
+    const del = e.target.closest('[data-adr-del]');
+    if (del) {
+      if (!confirm('Diese Adresse wirklich löschen?')) return;
+      await deleteAddress(del.dataset.adrDel);
+      await adressenRendern();
+      await uebersichtRendern();
+    }
+  });
+
+  document.getElementById('adress-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const daten = Object.fromEntries(new FormData(form).entries());
+    if (daten.id) {
+      await updateAddress(daten.id, daten);
+    } else {
+      delete daten.id;
+      await addAddress(daten);
+    }
+    modalSchliessen();
+    await adressenRendern();
+    await uebersichtRendern();
+  });
+}
+
+// ---------------------------------------------------------------
+// Zahlungsarten
+// ---------------------------------------------------------------
+async function zahlungRendern() {
+  const liste = await getPaymentMethods();
+  const el = document.getElementById('zahlung-liste');
+  el.innerHTML = liste.length
+    ? liste.map(p => `
+      <div class="address-card ${p.is_default ? 'address-card--default' : ''}">
+        <div class="address-card__label">
+          ${ZAHLART_TEXT[p.type] || sicher(p.type)}
+          ${p.is_default ? '<span class="badge">Standard</span>' : ''}
+        </div>
+        <p class="address-card__text">
+          ${p.last4 ? sicher(p.brand) + ' ' + sicher(p.last4) : 'Zahlung bei Übergabe'}
+        </p>
+        ${!p.is_default
+          ? `<div class="address-card__aktionen">
+               <button class="link-btn" data-pay-default="${p.id}">Als Standard</button>
+             </div>`
+          : ''}
+      </div>`).join('')
+    : '<p class="konto-leer">Keine Zahlungsart hinterlegt.</p>';
+
+  el.onclick = async (e) => {
+    const btn = e.target.closest('[data-pay-default]');
+    if (!btn) return;
+    await setDefaultPaymentMethod(btn.dataset.payDefault);
+    await zahlungRendern();
+    await uebersichtRendern();
+  };
+}
+
+// ---------------------------------------------------------------
+// Favoriten
+// ---------------------------------------------------------------
+async function favoritenRendern() {
+  const liste = await getFavorites();
+  const el = document.getElementById('favoriten-liste');
+
+  const vorhanden = liste.filter(f => KATALOG[f.product_id]);
+
+  el.innerHTML = vorhanden.length
+    ? vorhanden.map(f => {
+        const artikel = KATALOG[f.product_id];
+        return `
+          <div class="fav-card">
+            <img class="fav-card__img" src="${artikel.img}" alt="${sicher(artikel.name)}" loading="lazy">
+            <div class="fav-card__body">
+              <div class="fav-card__name">${sicher(artikel.name)}</div>
+              <div class="fav-card__preis">${euro(artikel.price)}</div>
+              <div class="fav-card__aktionen">
+                <button class="btn btn--primary btn--sm" data-fav-cart="${f.product_id}">
+                  In den Warenkorb
+                </button>
+                <button class="link-btn link-btn--still" data-fav-del="${f.product_id}">
+                  Entfernen
+                </button>
+              </div>
+            </div>
+          </div>`;
+      }).join('')
+    : '<p class="konto-leer">Noch keine Favoriten. Tippe beim Bestellen auf das Herz.</p>';
+
+  el.onclick = async (e) => {
+    const cart = e.target.closest('[data-fav-cart]');
+    if (cart) {
+      const id = cart.dataset.favCart;
+      const artikel = KATALOG[id];
+      addToCart({ id, name: artikel.name, price: artikel.price });
+      cart.textContent = 'Hinzugefügt';
+      setTimeout(() => { cart.textContent = 'In den Warenkorb'; }, 1200);
+      return;
+    }
+    const del = e.target.closest('[data-fav-del]');
+    if (del) {
+      await toggleFavorite(del.dataset.favDel);
+      await favoritenRendern();
+    }
+  };
+}
+
+// ---------------------------------------------------------------
+// Reservierungen
+// ---------------------------------------------------------------
+const RES_STATUS = {
+  angefragt: 'Angefragt',
+  bestaetigt: 'Bestätigt',
+  abgelehnt: 'Abgelehnt',
+  storniert: 'Storniert'
+};
+
+async function reservierungenRendern() {
+  const liste = await getReservations();
+  const el = document.getElementById('reservierungen-liste');
+  const heute = new Date().toISOString().slice(0, 10);
+
+  el.innerHTML = liste.length
+    ? liste.map(r => {
+        const vergangen = r.reservation_date < heute;
+        const stornierbar = !vergangen && r.status !== 'storniert';
+        return `
+          <div class="res-row ${vergangen ? 'res-row--vergangen' : ''}">
+            <div>
+              <div class="res-row__datum">
+                ${datum(r.reservation_date)} um ${sicher(r.reservation_time)} Uhr
+              </div>
+              <div class="res-row__meta">
+                ${r.guests} ${r.guests === 1 ? 'Person' : 'Personen'}
+                ${r.note ? ' · ' + sicher(r.note) : ''}
+              </div>
+            </div>
+            <div class="res-row__status">
+              <span class="order-badge">${RES_STATUS[r.status] || sicher(r.status)}</span>
+              ${stornierbar
+                ? `<div style="margin-top:var(--space-2)">
+                     <button class="link-btn link-btn--still" data-res-cancel="${r.id}">Stornieren</button>
+                   </div>`
+                : ''}
+            </div>
+          </div>`;
+      }).join('')
+    : '<p class="konto-leer">Noch keine Reservierungen.</p>';
+
+  el.onclick = async (e) => {
+    const btn = e.target.closest('[data-res-cancel]');
+    if (!btn) return;
+    if (!confirm('Reservierung wirklich stornieren?')) return;
+    await cancelReservation(btn.dataset.resCancel);
+    await reservierungenRendern();
+  };
+}
+
+// ---------------------------------------------------------------
+// Einstellungen
+// ---------------------------------------------------------------
+async function einstellungenRendern() {
+  const profil = await getProfile();
+  if (!profil) return;
+
+  const form = document.getElementById('profil-form');
+  form.elements.first_name.value = profil.first_name || '';
+  form.elements.last_name.value = profil.last_name || '';
+  form.elements.email.value = profil.email || '';
+  form.elements.phone.value = profil.phone || '';
+  form.elements.birth_date.value = profil.birth_date || '';
+  document.getElementById('p-marketing').checked = !!profil.marketing_consent;
+
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const daten = Object.fromEntries(new FormData(form).entries());
+    await updateProfile(daten);
+    const status = document.getElementById('profil-status');
+    status.textContent = 'Gespeichert.';
+    setTimeout(() => { status.textContent = ''; }, 2500);
+    const neu = await getProfile();
+    document.getElementById('konto-gruss').textContent = `Hallo ${neu.first_name}`;
+  };
+
+  document.getElementById('p-marketing').onchange = async (e) => {
+    await updateProfile({ marketing_consent: e.target.checked });
+  };
+
+  document.getElementById('daten-export').onclick = async () => {
+    const daten = await exportData();
+    const blob = new Blob([JSON.stringify(daten, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'meine-daten.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  document.getElementById('konto-loeschen').onclick = async () => {
+    const sicherheit = confirm(
+      'Konto wirklich löschen? Profil, Adressen, Bestellhistorie und Stempelkarte werden entfernt.'
+    );
+    if (!sicherheit) return;
+    await deleteAccount();
+    window.location.href = 'index.html';
+  };
+}
+
+// ---------------------------------------------------------------
 // Start
 // ---------------------------------------------------------------
 async function start() {
@@ -320,6 +673,13 @@ async function start() {
   tabsAktivieren();
   await uebersichtRendern();
   await bestellungenRendern();
+  await stempelkarteRendern();
+  await adressenRendern();
+  adressEventsBinden();
+  await zahlungRendern();
+  await favoritenRendern();
+  await reservierungenRendern();
+  await einstellungenRendern();
 
   // Sticky Nav Shadow
   const nav = document.querySelector('.nav');

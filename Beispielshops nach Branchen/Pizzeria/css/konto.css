@@ -212,6 +212,107 @@
   margin-bottom: var(--space-4);
 }
 
+.konto-panel__kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.konto-panel__kopf .konto-panel__titel {
+  margin-bottom: 0;
+}
+
+.konto-regeln {
+  list-style: decimal;
+  padding-left: 1.2rem;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+
+.konto-regeln li {
+  margin-bottom: var(--space-1);
+}
+
+/* Favoritenkarte */
+.fav-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: var(--space-4);
+  align-items: center;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3);
+  min-width: 0;
+}
+
+.fav-card__img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-md, 8px);
+  background: var(--color-line);
+}
+
+.fav-card__body {
+  min-width: 0;
+}
+
+.fav-card__name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.fav-card__preis {
+  font-family: var(--font-head);
+  font-weight: 800;
+  color: var(--color-accent);
+  font-size: var(--text-lg);
+}
+
+.fav-card__aktionen {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Reservierungszeile */
+.res-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-3);
+  align-items: center;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+  min-width: 0;
+}
+
+.res-row--vergangen {
+  opacity: 0.6;
+}
+
+.res-row__datum {
+  font-weight: 600;
+}
+
+.res-row__meta {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.res-row__status {
+  text-align: right;
+}
+
 .konto-grid {
   display: grid;
   grid-template-columns: 1fr;

@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/index.css?v=41">
-  <link rel="stylesheet" href="css/konto.css?v=2">
+  <link rel="stylesheet" href="css/konto.css?v=3">
   <script type="module" src="js/konto.js"></script>
 </head>
 <body>
@@ -94,37 +94,127 @@
     <!-- Stempelkarte -->
     <section class="konto-panel" data-panel="stempelkarte">
       <h2 class="konto-panel__titel">Stempelkarte</h2>
-      <p class="konto-leer">Wird im nächsten Schritt gebaut.</p>
+      <div id="stempel-gross"></div>
+
+      <div class="konto-card" style="margin-top:var(--space-5)">
+        <p class="konto-card__titel">Meine Gutscheine</p>
+        <div id="stempel-gutscheine"></div>
+      </div>
+
+      <div class="konto-card" style="margin-top:var(--space-5)">
+        <p class="konto-card__titel">Teilnahmebedingungen</p>
+        <ol class="konto-regeln" id="stempel-regeln"></ol>
+      </div>
     </section>
 
     <!-- Adressen -->
     <section class="konto-panel" data-panel="adressen">
-      <h2 class="konto-panel__titel">Meine Adressen</h2>
-      <p class="konto-leer">Wird im nächsten Schritt gebaut.</p>
+      <div class="konto-panel__kopf">
+        <h2 class="konto-panel__titel">Meine Adressen</h2>
+        <button class="btn btn--outline btn--sm" id="adresse-neu">Neue Adresse</button>
+      </div>
+      <div class="konto-grid konto-grid--2" id="adressen-liste"></div>
     </section>
 
     <!-- Zahlung -->
     <section class="konto-panel" data-panel="zahlung">
       <h2 class="konto-panel__titel">Zahlungsarten</h2>
-      <p class="konto-leer">Wird im nächsten Schritt gebaut.</p>
+      <div class="konto-grid konto-grid--2" id="zahlung-liste"></div>
+
+      <div class="konto-card" style="margin-top:var(--space-5)">
+        <p class="konto-card__titel">Kartenzahlung</p>
+        <p class="address-card__text">
+          Kreditkarte online hinterlegen und bei jeder Bestellung mit einem Klick bezahlen.
+        </p>
+        <div style="margin-top:var(--space-3);display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap">
+          <button class="btn btn--outline btn--sm" disabled>Karte hinterlegen</button>
+          <span class="badge badge--dark">Bald verfügbar</span>
+        </div>
+        <p class="konto-hinweis">
+          Kartendaten werden niemals bei uns gespeichert, sondern ausschließlich
+          beim Zahlungsdienstleister. Wir sehen nur Kartenart und die letzten vier Ziffern.
+        </p>
+      </div>
     </section>
 
     <!-- Favoriten -->
     <section class="konto-panel" data-panel="favoriten">
       <h2 class="konto-panel__titel">Meine Favoriten</h2>
-      <p class="konto-leer">Wird im nächsten Schritt gebaut.</p>
+      <div class="konto-grid konto-grid--2" id="favoriten-liste"></div>
     </section>
 
     <!-- Reservierungen -->
     <section class="konto-panel" data-panel="reservierungen">
-      <h2 class="konto-panel__titel">Meine Reservierungen</h2>
-      <p class="konto-leer">Wird im nächsten Schritt gebaut.</p>
+      <div class="konto-panel__kopf">
+        <h2 class="konto-panel__titel">Meine Reservierungen</h2>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">Neue Reservierung</a>
+      </div>
+      <div id="reservierungen-liste"></div>
     </section>
 
     <!-- Einstellungen -->
     <section class="konto-panel" data-panel="einstellungen">
       <h2 class="konto-panel__titel">Einstellungen</h2>
-      <p class="konto-leer">Wird im nächsten Schritt gebaut.</p>
+
+      <div class="konto-card">
+        <p class="konto-card__titel">Persönliche Daten</p>
+        <form class="konto-form konto-form--2" id="profil-form" novalidate>
+          <div class="konto-feld">
+            <label for="p-vorname">Vorname</label>
+            <input type="text" id="p-vorname" name="first_name" autocomplete="given-name">
+          </div>
+          <div class="konto-feld">
+            <label for="p-nachname">Nachname</label>
+            <input type="text" id="p-nachname" name="last_name" autocomplete="family-name">
+          </div>
+          <div class="konto-feld">
+            <label for="p-email">E-Mail</label>
+            <input type="email" id="p-email" name="email" autocomplete="email">
+          </div>
+          <div class="konto-feld">
+            <label for="p-telefon">Telefon</label>
+            <input type="tel" id="p-telefon" name="phone" autocomplete="tel">
+          </div>
+          <div class="konto-feld">
+            <label for="p-geburtstag">Geburtsdatum (optional)</label>
+            <input type="date" id="p-geburtstag" name="birth_date">
+          </div>
+          <div class="konto-feld konto-feld--voll">
+            <button type="submit" class="btn btn--primary" style="justify-self:start">Speichern</button>
+            <span class="konto-hinweis" id="profil-status"></span>
+          </div>
+        </form>
+        <p class="konto-hinweis">
+          Wir nutzen dein Geburtsdatum nur, um dir einen Gutschein zum Geburtstag zu schicken.
+        </p>
+      </div>
+
+      <div class="konto-card" style="margin-top:var(--space-5)">
+        <p class="konto-card__titel">Benachrichtigungen</p>
+        <label class="konto-check">
+          <input type="checkbox" id="p-marketing">
+          <span>
+            Ich möchte Angebote und Neuigkeiten per E-Mail erhalten.
+            Die Einwilligung kann jederzeit widerrufen werden.
+          </span>
+        </label>
+        <p class="konto-hinweis">
+          Unabhängig davon erhältst du immer Bestätigungen zu deinen Bestellungen
+          und deiner Stempelkarte.
+        </p>
+      </div>
+
+      <div class="konto-card" style="margin-top:var(--space-5)">
+        <p class="konto-card__titel">Meine Daten</p>
+        <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
+          <button class="btn btn--outline btn--sm" id="daten-export">Daten exportieren</button>
+          <button class="btn btn--outline btn--sm" id="konto-loeschen">Konto löschen</button>
+        </div>
+        <p class="konto-hinweis">
+          Der Export enthält alle zu deinem Konto gespeicherten Daten als JSON-Datei.
+          Beim Löschen werden Profil, Adressen, Bestellhistorie und Stempelkarte entfernt.
+        </p>
+      </div>
     </section>
 
     <!-- Ausgeloggter Zustand -->
@@ -141,6 +231,56 @@
     </section>
 
   </main>
+
+  <!-- Adress-Modal -->
+  <div class="konto-modal" id="adress-modal">
+    <div class="konto-modal__box">
+      <div class="konto-modal__kopf">
+        <h3 id="adress-modal-titel">Neue Adresse</h3>
+        <button class="konto-modal__close" id="adress-modal-close" aria-label="Schließen">✕</button>
+      </div>
+      <form class="konto-form konto-form--2" id="adress-form" novalidate>
+        <input type="hidden" name="id">
+        <div class="konto-feld konto-feld--voll">
+          <label for="a-label">Bezeichnung</label>
+          <input type="text" id="a-label" name="label" placeholder="Zuhause" required>
+        </div>
+        <div class="konto-feld">
+          <label for="a-vorname">Vorname</label>
+          <input type="text" id="a-vorname" name="first_name" autocomplete="given-name" required>
+        </div>
+        <div class="konto-feld">
+          <label for="a-nachname">Nachname</label>
+          <input type="text" id="a-nachname" name="last_name" autocomplete="family-name" required>
+        </div>
+        <div class="konto-feld konto-feld--voll">
+          <label for="a-strasse">Straße und Hausnummer</label>
+          <input type="text" id="a-strasse" name="street" autocomplete="street-address" required>
+        </div>
+        <div class="konto-feld">
+          <label for="a-plz">PLZ</label>
+          <input type="text" id="a-plz" name="postal_code" maxlength="5" inputmode="numeric" autocomplete="postal-code" required>
+        </div>
+        <div class="konto-feld">
+          <label for="a-stadt">Stadt</label>
+          <input type="text" id="a-stadt" name="city" autocomplete="address-level2" required>
+        </div>
+        <div class="konto-feld konto-feld--voll">
+          <label for="a-telefon">Telefon</label>
+          <input type="tel" id="a-telefon" name="phone" autocomplete="tel">
+        </div>
+        <div class="konto-feld konto-feld--voll">
+          <label for="a-hinweis">Hinweis für den Fahrer (optional)</label>
+          <textarea id="a-hinweis" name="delivery_note" rows="2"
+                    placeholder="z. B. Klingel defekt, bitte anrufen"></textarea>
+        </div>
+        <div class="konto-modal__aktionen konto-feld--voll">
+          <button type="submit" class="btn btn--primary">Speichern</button>
+          <button type="button" class="btn btn--outline" id="adress-modal-abbrechen">Abbrechen</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
