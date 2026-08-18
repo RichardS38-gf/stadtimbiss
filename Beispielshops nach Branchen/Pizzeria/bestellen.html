@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/bestellen.css?v=8">
   <link rel="stylesheet" href="css/index.css?v=3">
-  <link rel="stylesheet" href="css/konto.css?v=3">
+  <link rel="stylesheet" href="css/konto.css?v=4">
   <script type="module" src="js/bestellen.js"></script>
   <style>
     /* Allergen Tooltip */
@@ -126,8 +126,10 @@
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo">Stadtimbiss</a>
-      <span id="nav-konto" style="margin-left:auto;margin-right:var(--space-3)"></span>
-      <a href="reservieren.html" class="btn btn--outline btn--sm" style="margin-right:var(--space-3)">🪑 Reservieren</a>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;margin-right:var(--space-3)">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 Reservieren</a>
+      </div>
       <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">🛒 <span class="cart-badge" id="cart-count">0</span></button>
     </div>
   </header>

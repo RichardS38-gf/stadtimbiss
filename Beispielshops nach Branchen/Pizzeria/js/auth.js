@@ -728,9 +728,52 @@ export async function renderAccountNav(zielId = 'nav-konto') {
   }
 }
 
+// Baut auf Mobile ein Burger-Menue. Die Nav-Elemente bleiben im DOM,
+// sie werden nur per CSS ein- und ausgeblendet. Damit funktioniert es
+// auf allen Seiten, unabhaengig von deren Nav-Aufbau.
+export function renderBurger() {
+  const inner = document.querySelector('.nav__inner');
+  const nav = document.querySelector('.nav');
+  if (!inner || !nav || inner.querySelector('.nav__burger')) return;
+
+  // Nichts zu tun, wenn es weder Links noch Aktionen gibt
+  const hatInhalt = inner.querySelector('.nav__links') || inner.querySelector('.nav__aktionen');
+  if (!hatInhalt) return;
+
+  const btn = document.createElement('button');
+  btn.className = 'nav__burger';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Menü öffnen');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = `
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>`;
+
+  btn.addEventListener('click', () => {
+    const offen = nav.classList.toggle('nav--offen');
+    btn.setAttribute('aria-expanded', offen ? 'true' : 'false');
+    btn.setAttribute('aria-label', offen ? 'Menü schließen' : 'Menü öffnen');
+  });
+
+  // Beim Klick auf einen Link im Panel wieder schliessen
+  inner.addEventListener('click', (e) => {
+    if (e.target.closest('.nav__links a, .nav__aktionen a')) {
+      nav.classList.remove('nav--offen');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  inner.appendChild(btn);
+}
+
 // Bequemer Sammelaufruf fuer jede Seite
 export async function setupSeite() {
   await initAuth();
   await renderDemoBanner();
   await renderAccountNav();
+  renderBurger();
 }

@@ -70,6 +70,86 @@
 }
 
 /* ---------------------------------------------------------------
+   Burger-Menue auf Mobile
+   Die Elemente bleiben im DOM und werden nur ein- und ausgeblendet.
+   Selektoren bewusst mit hoher Spezifitaet, weil einige Seiten
+   eigene Nav-Regeln in einem inline style-Block mitbringen.
+   --------------------------------------------------------------- */
+.nav__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--color-ink);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 900px) {
+  .nav .nav__inner {
+    flex-wrap: wrap;
+    row-gap: var(--space-3);
+  }
+
+  .nav .nav__burger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  /* Geschlossen: Links und Aktionen ausblenden */
+  .nav:not(.nav--offen) .nav__links,
+  .nav:not(.nav--offen) .nav__aktionen {
+    display: none;
+  }
+
+  /* Offen: als volle Spalte unter dem Logo */
+  .nav.nav--offen .nav__links,
+  .nav.nav--offen .nav__aktionen {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+    flex-basis: 100%;
+    width: 100%;
+    margin: 0;
+    padding-bottom: var(--space-3);
+  }
+
+  .nav.nav--offen .nav__links {
+    border-top: 1px solid var(--color-line);
+    padding-top: var(--space-3);
+  }
+
+  .nav.nav--offen .nav__links a {
+    padding-block: var(--space-2);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav.nav--offen .nav__aktionen .btn,
+  .nav.nav--offen .nav__aktionen .nav__konto {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+  }
+
+  /* Im aufgeklappten Menue hat der Name wieder Platz */
+  .nav.nav--offen .nav__konto-name {
+    display: inline;
+  }
+
+  /* Reservieren-Button auf bestellen.html liegt ausserhalb der Gruppe */
+  .nav:not(.nav--offen) .nav__inner > .btn--outline {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------
    Navigation auf der Kontoseite
    Eigene Klasse, damit die Startseite unveraendert bleibt.
    --------------------------------------------------------------- */
