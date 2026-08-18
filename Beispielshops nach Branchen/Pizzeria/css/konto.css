@@ -123,60 +123,72 @@
 @media (max-width: 900px) {
   .nav .nav__inner {
     flex-wrap: wrap;
-    row-gap: var(--space-3);
+    row-gap: 0;
+    gap: var(--space-2);
   }
 
-  .nav .nav__burger {
+  .nav .nav__logo { order: 0; }
+  .nav .nav__burger { order: 1; display: flex; }
+  .nav .nav__aktionen { order: 2; margin-left: auto; }
+  .nav .cart-btn { order: 3; }
+  .nav .nav__links { order: 4; }
+
+  /* Aktionen bleiben immer sichtbar und statisch */
+  .nav .nav__aktionen {
     display: flex;
-    margin-left: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 0 0 auto;
   }
 
-  /* Geschlossen: Links und Aktionen ausblenden */
-  .nav:not(.nav--offen) .nav__links,
-  .nav:not(.nav--offen) .nav__aktionen {
+  /* Nur die Textlinks klappen auf und zu */
+  .nav:not(.nav--offen) .nav__links {
     display: none;
-  }
-
-  /* Offen: als volle Spalte unter dem Logo */
-  .nav.nav--offen .nav__links,
-  .nav.nav--offen .nav__aktionen {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--space-3);
-    flex-basis: 100%;
-    width: 100%;
-    margin: 0;
-    padding-bottom: var(--space-3);
   }
 
   .nav.nav--offen .nav__links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    flex-basis: 100%;
+    width: 100%;
+    margin: 0;
     border-top: 1px solid var(--color-line);
-    padding-top: var(--space-3);
+    padding-block: var(--space-2);
   }
 
   .nav.nav--offen .nav__links a {
-    padding-block: var(--space-2);
-    min-height: 44px;
     display: flex;
     align-items: center;
+    min-height: 44px;
+    padding-block: var(--space-2);
   }
 
-  .nav.nav--offen .nav__aktionen .btn,
-  .nav.nav--offen .nav__aktionen .nav__konto {
-    width: 100%;
-    justify-content: center;
-    margin: 0;
+  .nav .nav__logo {
+    font-size: 1.2rem;
   }
+}
 
-  /* Im aufgeklappten Menue hat der Name wieder Platz */
-  .nav.nav--offen .nav__konto-name {
-    display: inline;
-  }
-
-  /* Reservieren-Button auf bestellen.html liegt ausserhalb der Gruppe */
-  .nav:not(.nav--offen) .nav__inner > .btn--outline {
+/* Unter 640px zeigen die Buttons nur noch ihr Icon */
+@media (max-width: 640px) {
+  .nav .btn__text,
+  .nav .nav__konto-name {
     display: none;
+  }
+
+  .nav .nav__aktionen .btn {
+    padding-inline: 0.6rem;
+    gap: 0;
+  }
+
+  .nav .nav__konto {
+    padding: 0.5rem;
+  }
+
+  .nav .nav__logo {
+    font-size: 1.05rem;
   }
 }
 
