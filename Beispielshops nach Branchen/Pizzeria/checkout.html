@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/checkout.css?v=2">
+  <link rel="stylesheet" href="css/index.css?v=41">
+  <link rel="stylesheet" href="css/konto.css?v=3">
 
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
@@ -37,9 +39,12 @@
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo">Stadtimbiss</a>
-      <a href="bestellen.html" class="nav__back">← Weiter einkaufen</a>
+      <a href="bestellen.html" class="nav__back" style="margin-left:auto;margin-right:var(--space-3)">← Weiter einkaufen</a>
+      <span id="nav-konto"></span>
     </div>
   </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
 
   <!-- Fortschrittsanzeige -->
   <div class="container">
@@ -55,6 +60,15 @@
 
     <!-- Linke Spalte: Formular -->
     <form class="checkout-form" id="checkout-form" novalidate>
+
+      <!-- Adressauswahl fuer angemeldete Kunden -->
+      <fieldset class="form-section" id="adresswahl-block" style="display:none">
+        <legend class="form-section__title">Gespeicherte Adresse</legend>
+        <div class="konto-feld">
+          <label for="adresswahl">Lieferadresse wählen</label>
+          <select id="adresswahl"></select>
+        </div>
+      </fieldset>
 
       <fieldset class="form-section">
         <legend class="form-section__title">Lieferadresse</legend>
@@ -99,6 +113,21 @@
       </fieldset>
 
       <fieldset class="form-section">
+        <legend class="form-section__title">Gutscheincode</legend>
+        <div class="konto-feld">
+          <label for="gutschein-code">Code eingeben</label>
+          <div style="display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap">
+            <input type="text" id="gutschein-code" placeholder="z. B. TREUE-AB12CD"
+                   style="flex:1 1 200px;min-width:0">
+            <button type="button" class="btn btn--outline btn--sm" id="gutschein-pruefen">
+              Einlösen
+            </button>
+          </div>
+          <p class="konto-hinweis" id="gutschein-status"></p>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
         <legend class="form-section__title">Zahlungsart</legend>
         <div class="payment-options">
           <label class="payment-option">
@@ -136,18 +165,30 @@
           <span>Lieferung</span>
           <span>2,50 €</span>
         </div>
+        <div class="cart-summary__row" id="rabatt-zeile" style="display:none">
+          <span>Rabatt</span>
+          <span id="checkout-rabatt">0,00 €</span>
+        </div>
         <div class="cart-summary__row cart-summary__total">
           <span>Gesamt</span>
           <span id="checkout-total">0,00 €</span>
         </div>
       </div>
+      <div id="stempel-hinweis"></div>
       <p class="checkout-summary__hint">Bezahlung bei Lieferung</p>
     </aside>
 
   </div>
 
   <script type="module">
-    import { getCart, getCartTotal } from './js/cart.js';
+    import { getCart, getCartTotal, clearCart } from './js/cart.js';
+    import {
+      setupSeite, getSession, getProfile, getAddresses, getDefaultAddress,
+      getDefaultPaymentMethod, getStampPreview, checkVoucher, createOrder,
+      LIEFERKOSTEN, TREUE
+    } from './js/auth.js';
+
+    await setupSeite();
 
     const cart = getCart();
     const itemsEl = document.getElementById('checkout-items');
@@ -155,9 +196,22 @@
     const totalsEl = document.getElementById('checkout-totals');
     const subtotalEl = document.getElementById('checkout-subtotal');
     const totalEl = document.getElementById('checkout-total');
+    const rabattZeile = document.getElementById('rabatt-zeile');
+    const rabattEl = document.getElementById('checkout-rabatt');
+
+    let rabatt = 0;
+    let gutschein = null;
 
     function fmt(n) {
       return n.toFixed(2).replace('.', ',') + ' €';
+    }
+
+    function summenRendern() {
+      const subtotal = getCartTotal();
+      subtotalEl.textContent = fmt(subtotal);
+      rabattZeile.style.display = rabatt > 0 ? 'flex' : 'none';
+      rabattEl.textContent = '- ' + fmt(rabatt);
+      totalEl.textContent = fmt(Math.max(0, subtotal + LIEFERKOSTEN - rabatt));
     }
 
     if (cart.length === 0) {
@@ -166,9 +220,6 @@
     } else {
       emptyEl.style.display = 'none';
       totalsEl.style.display = 'block';
-      const subtotal = getCartTotal();
-      subtotalEl.textContent = fmt(subtotal);
-      totalEl.textContent = fmt(subtotal + 2.50);
       itemsEl.innerHTML = cart.map(item => `
         <div class="cart-item">
           <span class="cart-item__name">${item.name}</span>
@@ -176,15 +227,149 @@
           <span class="cart-item__price">${fmt(item.price * item.qty)}</span>
         </div>
       `).join('');
+      summenRendern();
     }
 
-    // Formular: kein echtes Absenden — nach Validierung zur Danke-Seite
-    document.getElementById('checkout-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!e.target.checkValidity()) {
-        e.target.reportValidity();
+    // ---------- Adresse und Zahlungsart vorbefuellen ----------
+    const form = document.getElementById('checkout-form');
+    let adressen = [];
+
+    function adresseEinsetzen(adresse) {
+      if (!adresse) return;
+      form.vorname.value = adresse.first_name || '';
+      form.nachname.value = adresse.last_name || '';
+      form.strasse.value = adresse.street || '';
+      form.plz.value = adresse.postal_code || '';
+      form.stadt.value = adresse.city || '';
+      form.telefon.value = adresse.phone || '';
+      if (adresse.delivery_note && !form.anmerkungen.value) {
+        form.anmerkungen.value = adresse.delivery_note;
+      }
+    }
+
+    if (await getSession()) {
+      const profil = await getProfile();
+      adressen = await getAddresses();
+      const standard = await getDefaultAddress();
+
+      if (profil) form.email.value = profil.email || '';
+      adresseEinsetzen(standard);
+
+      if (adressen.length > 1) {
+        const block = document.getElementById('adresswahl-block');
+        const select = document.getElementById('adresswahl');
+        block.style.display = 'block';
+        select.innerHTML = adressen.map(a =>
+          `<option value="${a.id}" ${a.is_default ? 'selected' : ''}>
+             ${a.label}: ${a.street}, ${a.postal_code} ${a.city}
+           </option>`).join('');
+        select.addEventListener('change', () => {
+          adresseEinsetzen(adressen.find(a => a.id === select.value));
+        });
+      }
+
+      const zahlung = await getDefaultPaymentMethod();
+      if (zahlung) {
+        const radio = form.querySelector(`input[name="zahlung"][value="${zahlung.type}"]`);
+        if (radio) radio.checked = true;
+      }
+    }
+
+    // ---------- Stempel-Hinweis ----------
+    async function stempelHinweisRendern() {
+      const el = document.getElementById('stempel-hinweis');
+      const vorschau = await getStampPreview(getCartTotal());
+      if (!el || !vorschau || cart.length === 0) return;
+
+      if (rabatt > 0) {
+        el.innerHTML = `
+          <div class="stamp-hint">
+            <span class="stamp-hint__zahl">!</span>
+            <span>Bei eingelöstem Gutschein gibt es keinen Stempel.</span>
+          </div>`;
         return;
       }
+      el.innerHTML = vorschau.qualifiziert
+        ? `<div class="stamp-hint">
+             <span class="stamp-hint__zahl">${vorschau.naechster_stempel}/${vorschau.target_stamps}</span>
+             <span>Diese Bestellung bringt dir Stempel
+             <strong>${vorschau.naechster_stempel} von ${vorschau.target_stamps}</strong></span>
+           </div>`
+        : `<div class="stamp-hint">
+             <span class="stamp-hint__zahl">${vorschau.stempel_stand}/${vorschau.target_stamps}</span>
+             <span>Noch <strong>${fmt(vorschau.fehlbetrag)}</strong>
+             bis zum nächsten Stempel</span>
+           </div>`;
+    }
+    await stempelHinweisRendern();
+
+    // ---------- Gutschein ----------
+    document.getElementById('gutschein-pruefen').addEventListener('click', async () => {
+      const code = document.getElementById('gutschein-code').value;
+      const status = document.getElementById('gutschein-status');
+      if (!code.trim()) return;
+
+      const ergebnis = await checkVoucher(code);
+      if (!ergebnis.gueltig) {
+        const texte = {
+          unbekannt: 'Diesen Code kennen wir nicht.',
+          bereits_eingeloest: 'Dieser Gutschein wurde bereits eingelöst.',
+          verfallen: 'Dieser Gutschein ist abgelaufen.'
+        };
+        status.textContent = texte[ergebnis.grund] || 'Code ungültig.';
+        rabatt = 0;
+        gutschein = null;
+      } else {
+        gutschein = ergebnis.gutschein;
+        rabatt = gutschein.type === 'amount'
+          ? Number(gutschein.value)
+          : gutschein.type === 'percent'
+            ? getCartTotal() * Number(gutschein.value) / 100
+            : 0;
+        status.textContent = gutschein.type === 'free_item'
+          ? `${gutschein.description} wird an der Kasse abgezogen.`
+          : `${gutschein.description} angerechnet.`;
+      }
+      summenRendern();
+      await stempelHinweisRendern();
+    });
+
+    // ---------- Absenden ----------
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const ergebnis = await createOrder({
+        mode: 'lieferung',
+        address_id: adressen.length ? (document.getElementById('adresswahl')?.value || adressen[0].id) : null,
+        address_snapshot: {
+          street: form.strasse.value,
+          postal_code: form.plz.value,
+          city: form.stadt.value
+        },
+        payment_type: form.querySelector('input[name="zahlung"]:checked')?.value || 'bar',
+        discount: rabatt,
+        voucher_id: gutschein ? gutschein.id : null,
+        note: form.anmerkungen.value || null,
+        items: cart.map(i => ({
+          product_id: i.id,
+          name: i.name,
+          unit_price: i.price,
+          qty: i.qty
+        }))
+      });
+
+      // Ergebnis fuer die Danke-Seite merken
+      sessionStorage.setItem('si_letzte_bestellung', JSON.stringify({
+        order_number: ergebnis.order.order_number,
+        total: ergebnis.order.total,
+        stempel: ergebnis.stempel
+      }));
+
+      clearCart();
       window.location.href = 'danke.html';
     });
 
