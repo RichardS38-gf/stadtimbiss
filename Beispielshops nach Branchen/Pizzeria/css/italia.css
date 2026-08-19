@@ -160,6 +160,14 @@ button:hover .ic-badge,
   margin-top: var(--space-2);
 }
 
+/* Handschriftlicher Gruss im Hero, etwas groesser als sonst */
+.hero__content .script {
+  display: block;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-3);
+}
+
 /* ── SPLIT-SEKTIONEN ──
    Halbe Breite Bild, halbe Breite Text, Bild randlos bis zur
    Bildschirmkante. Auf Mobile steht das Bild immer oben. */
