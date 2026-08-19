@@ -201,6 +201,18 @@ button:hover .ic-badge,
   margin-bottom: var(--space-3);
 }
 
+/* Icons im Kontaktbereich in der Akzentfarbe */
+.contact-card__icon {
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+}
+
+.contact-card__icon .ic {
+  width: 22px;
+  height: 22px;
+}
+
 /* Statushinweis im Mittagstisch-Banner */
 .pranzo-status {
   font-weight: 600;

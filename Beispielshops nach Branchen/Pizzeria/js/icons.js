@@ -130,6 +130,13 @@ const PFADE = {
     <path d="m4.4 12.3 5 5L19.6 6.7"/>
     <path d="m4.4 14.6 5 5"/>`,
 
+  // Briefumschlag
+  brief: `
+    <rect x="2.8" y="5.2" width="18.4" height="13.6" rx="1.6"/>
+    <path d="M3.4 6.4 12 13l8.6-6.6"/>
+    <path d="M3.6 17.8 9.4 12"/>
+    <path d="M20.4 17.8 14.6 12"/>`,
+
   // Teigkugel auf der Arbeitsplatte
   teig: `
     <ellipse cx="12" cy="14.4" rx="8.4" ry="5.3"/>
