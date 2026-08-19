@@ -160,6 +160,36 @@ button:hover .ic-badge,
   margin-top: var(--space-2);
 }
 
+/* Unterstrich, der wie auf einer Schreibmaschine gezogen wird
+   und danach wieder verschwindet. Endlosschleife. */
+.unterstrich {
+  position: relative;
+  display: inline-block;
+}
+
+.unterstrich::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.12em;
+  height: 3px;
+  width: 0;
+  background: var(--color-accent);
+  animation: strich-tippen 5s linear infinite;
+}
+
+@keyframes strich-tippen {
+  0%   { width: 0; }
+  25%  { width: 100%; }
+  65%  { width: 100%; }
+  90%  { width: 0; }
+  100% { width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .unterstrich::after { animation: none; width: 100%; }
+}
+
 /* Handschriftlicher Gruss im Hero, etwas groesser als sonst */
 .hero__content .script {
   display: block;
