@@ -13,10 +13,11 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/konto.css?v=1">
   <style>
     /* Nav */
     .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid var(--color-line); }
-    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: var(--space-4); flex-wrap: nowrap; }
     .nav__logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--color-accent); line-height: 1.1; }
     .nav__logo span { display: block; font-size: 0.6rem; font-family: var(--font-body); font-weight: 400; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.12em; }
     .nav__links { display: none; gap: var(--space-5); }
@@ -212,25 +213,15 @@
         <a href="#bewertungen">Bewertungen</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <div style="display:flex;gap:0.5rem;align-items:center;">
-        <a href="reservieren.html" class="btn btn--outline btn--sm nav-btn-desktop"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> Reservieren</a>
-        <a href="bestellen.html" class="btn btn--primary btn--sm nav-btn-desktop">Jetzt bestellen →</a>
-        <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-    <div class="nav__mobile-menu" id="nav-mobile-menu">
-      <a href="#ueber-uns" class="nav__mobile-link">Willkommen</a>
-      <a href="#speisekarte" class="nav__mobile-link">Speisekarte</a>
-      <a href="#bewertungen" class="nav__mobile-link">Bewertungen</a>
-      <a href="#kontakt" class="nav__mobile-link">Kontakt</a>
-      <div class="nav__mobile-btns">
-        <a href="reservieren.html" class="btn btn--outline btn--full">🪑 Tisch reservieren</a>
-        <a href="bestellen.html" class="btn btn--primary btn--full">Jetzt bestellen →</a>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> <span class="btn__text">Reservieren</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg> <span class="btn__text">Bestellen</span></a>
       </div>
     </div>
   </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
 
   <!-- Hero Variante C -->
   <section class="hero">
@@ -395,19 +386,12 @@
     </div>
   </footer>
 
-  <script>
-    // Hamburger
-    const hamburger = document.getElementById('nav-hamburger');
-    const mobileMenu = document.getElementById('nav-mobile-menu');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    }));
+  <script type="module">
+    import { setupSeite } from './js/auth.js';
+    setupSeite();
+  </script>
 
+  <script>
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
     const reviews = [

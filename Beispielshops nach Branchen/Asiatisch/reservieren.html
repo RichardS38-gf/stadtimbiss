@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/konto.css?v=1">
   <style>
     html, body { overflow-x: hidden; max-width: 100%; }
     .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid #2A2A2A; }
@@ -97,12 +98,15 @@
         <a href="index.html#bewertungen">Bewertungen</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
-      <div style="display:flex;gap:0.5rem;">
-        <a href="reservieren.html" class="btn btn--outline btn--sm"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> Reservieren</a>
-        <a href="bestellen.html" class="btn btn--primary btn--sm">Jetzt bestellen →</a>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5"/><rect x="4" y="12" width="16" height="6" rx="1"/><line x1="6" y1="18" x2="6" y2="21"/><line x1="18" y1="18" x2="18" y2="21"/></svg> <span class="btn__text">Reservieren</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg> <span class="btn__text">Bestellen</span></a>
       </div>
     </div>
   </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
 
   <div class="res-hero">
     <div class="container">
@@ -195,18 +199,57 @@
     </div>
   </footer>
 
+  <script type="module">
+    import { setupSeite, getProfile, getSession, createReservation } from './js/auth.js';
+
+    await setupSeite();
+
+    const profil = await getProfile();
+    if (await getSession() && profil) {
+      const setz = (id, wert) => {
+        const el = document.getElementById(id);
+        if (el && wert && !el.value) el.value = wert;
+      };
+      setz('name', `${profil.first_name} ${profil.last_name}`.trim());
+      setz('telefon', profil.phone);
+      setz('email', profil.email);
+    }
+
+    const resForm = document.getElementById('reservation-form');
+    window.__resSpeichern = async () => {
+      const f = resForm;
+      const name = (f.elements.name?.value || '').trim().split(' ');
+      await createReservation({
+        reservation_date: f.elements.datum?.value || '',
+        reservation_time: (f.elements.uhrzeit?.value || '').replace(' Uhr', ''),
+        guests: f.elements.personen?.value || 2,
+        first_name: name[0] || '',
+        last_name: name.slice(1).join(' '),
+        phone: f.elements.telefon?.value || '',
+        email: f.elements.email?.value || '',
+        note: f.elements.anmerkungen?.value || null
+      });
+    };
+  </script>
+
   <script>
     document.getElementById('datum').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+    // Demo-Betrieb: kein Formspree-Versand, die Reservierung landet im
+    // Kundenkonto. Fuer den Echtbetrieb hier den Fetch wieder aktivieren.
     const form = document.getElementById('reservation-form');
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
       const btn = form.querySelector('[type="submit"]');
       btn.textContent = 'Wird gesendet...'; btn.disabled = true;
       try {
-        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-        if (res.ok) { form.style.display = 'none'; document.getElementById('res-success').style.display = 'block'; }
-        else { btn.textContent = 'Fehler, bitte erneut versuchen'; btn.disabled = false; }
-      } catch { btn.textContent = 'Fehler, bitte erneut versuchen'; btn.disabled = false; }
+        if (window.__resSpeichern) await window.__resSpeichern();
+      } catch (err) {
+        console.error('Reservierung konnte nicht gespeichert werden', err);
+      }
+      form.style.display = 'none';
+      document.getElementById('res-success').style.display = 'block';
     });
   </script>
 </body>

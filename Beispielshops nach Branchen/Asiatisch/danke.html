@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/konto.css?v=1">
   <style>
     .nav { position: sticky; top: 0; z-index: 100; background: #0D0D0D; border-bottom: 1px solid #2A2A2A; }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; }
@@ -55,8 +56,13 @@
           <text x="88" y="24" font-family="'Noto Serif JP', serif" font-size="22" font-weight="700" fill="#F0EAD6">Garden</text>
         </svg>
       </a>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;">
+        <span id="nav-konto"></span>
+      </div>
     </div>
   </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
 
   <main class="danke-main container">
     <div class="danke-icon"><svg class="icon-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7 12 10.5 15.5 17 9"/></svg></div>
@@ -65,23 +71,68 @@
     <div class="danke-info">
       <div class="danke-info__item">
         <strong>Bestellnummer</strong>
-        <span>#2026-0417</span>
+        <span id="danke-nummer">AG-0000</span>
       </div>
       <div class="danke-info__item">
         <strong>Voraussichtliche Lieferzeit</strong>
         <span>ca. 40 Minuten</span>
       </div>
       <div class="danke-info__item">
-        <strong>Zahlungsart</strong>
-        <span>Bar bei Lieferung</span>
+        <strong>Gesamtbetrag</strong>
+        <span id="danke-summe">0,00 €</span>
       </div>
     </div>
-    <a href="index.html" class="btn btn--outline">← Zurück zur Startseite</a>
+
+    <div id="danke-stempel" style="max-width:520px;margin-inline:auto"></div>
+
+    <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;margin-top:var(--space-5)">
+      <a href="konto.html#stempelkarte" class="btn btn--primary">Meine Stempelkarte</a>
+      <a href="index.html" class="btn btn--outline">Zur Startseite</a>
+    </div>
   </main>
 
   <script type="module">
-    import { clearCart } from './js/cart.js';
-    clearCart();
+    import { setupSeite, getStampCard, TREUE } from './js/auth.js';
+
+    await setupSeite();
+
+    const fmt = n => Number(n).toFixed(2).replace('.', ',') + ' €';
+
+    let daten = null;
+    try {
+      daten = JSON.parse(sessionStorage.getItem('si_letzte_bestellung'));
+    } catch { daten = null; }
+
+    if (daten) {
+      document.getElementById('danke-nummer').textContent = daten.order_number;
+      document.getElementById('danke-summe').textContent = fmt(daten.total);
+      sessionStorage.removeItem('si_letzte_bestellung');
+    }
+
+    const el = document.getElementById('danke-stempel');
+    const stempel = daten ? daten.stempel : null;
+    const karte = await getStampCard();
+
+    if (stempel && stempel.vergeben && stempel.karte_voll) {
+      el.innerHTML = `<div class="stamp-hint" style="border-style:solid">
+        <span class="stamp-hint__zahl">${TREUE.target_stamps}/${TREUE.target_stamps}</span>
+        <span>Deine Stempelkarte ist <strong>voll</strong>.
+        Der Gutschein über ${TREUE.reward_description.toLowerCase()} liegt in deinem Konto.</span></div>`;
+    } else if (stempel && stempel.vergeben) {
+      el.innerHTML = `<div class="stamp-hint" style="border-style:solid">
+        <span class="stamp-hint__zahl">${stempel.stempel_stand}/${TREUE.target_stamps}</span>
+        <span>Stempel <strong>${stempel.stempel_stand} von ${TREUE.target_stamps}</strong> gesammelt.
+        Noch ${stempel.verbleibend} bis zu deiner Belohnung.</span></div>`;
+    } else if (stempel && stempel.grund === 'unter_mindestwert') {
+      el.innerHTML = `<div class="stamp-hint">
+        <span class="stamp-hint__zahl">${karte ? karte.stamps_count : 0}/${TREUE.target_stamps}</span>
+        <span>Für einen Stempel hätten ${fmt(stempel.fehlbetrag)} mehr Warenwert gefehlt.
+        Beim nächsten Mal klappt es.</span></div>`;
+    } else if (stempel && stempel.grund === 'rabatt_kombiniert') {
+      el.innerHTML = `<div class="stamp-hint">
+        <span class="stamp-hint__zahl">!</span>
+        <span>Für Bestellungen mit eingelöstem Gutschein gibt es keinen Stempel.</span></div>`;
+    }
 
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => {
