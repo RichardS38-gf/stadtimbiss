@@ -1,6 +1,6 @@
-// cart.js — Stadtimbiss Warenkorb-Logik
+// cart.js — Pizzeria Napoli Warenkorb-Logik
 
-const CART_KEY = 'stadtimbiss_cart';
+const CART_KEY = 'napoli_cart';
 
 export function getCart() {
   try {

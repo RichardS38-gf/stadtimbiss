@@ -148,24 +148,8 @@
     .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); }
     @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
   </style>
-
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
-<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Richard Schilling</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
-<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
-<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
-<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Richard Schilling</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
-<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
-<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
-<mso:ContentTypeId msdt:dt="string">0x0101009D6AE205030FF4479FD76DDB3CDFCF78</mso:ContentTypeId>
-<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
-<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
-<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
 </head>
-<body>
+<body class="paper">
 
   <!-- Navigation -->
   <header class="nav">
@@ -201,8 +185,8 @@
   <!-- Page Hero -->
   <div class="res-hero">
     <div class="container">
-      <h1>🪑 Tisch reservieren</h1>
-      <p>Wir freuen uns auf deinen Besuch — reserviere jetzt deinen Tisch.</p>
+      <h1><span data-icon="tisch" data-icon-class="ic ic--lg"></span> Tisch reservieren</h1>
+      <p>Ti aspettiamo. Reserviere deinen Tisch bei uns.</p>
     </div>
   </div>
 
@@ -216,7 +200,7 @@
           <h2>Deine Reservierung</h2>
 
           <form id="reservation-form" action="https://formspree.io/f/PLATZHALTER" method="POST">
-            <input type="hidden" name="_subject" value="Neue Tischreservierung — Stadtimbiss">
+            <input type="hidden" name="_subject" value="Neue Tischreservierung — Pizzeria Napoli">
             <input type="hidden" name="_language" value="de">
 
             <div class="form-row form-row--2">
@@ -298,8 +282,8 @@
 
           <!-- Erfolgs-Meldung -->
           <div class="res-success" id="res-success">
-            <div class="res-success__icon">✅</div>
-            <h3>Anfrage gesendet!</h3>
+            <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
+            <h3>Grazie!</h3>
             <p>Wir haben deine Reservierungsanfrage erhalten und melden uns in Kürze zur Bestätigung.</p>
             <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
           </div>
@@ -308,40 +292,40 @@
         <!-- Info Box -->
         <div class="res-info">
           <div class="res-info-card">
-            <h3>📍 Wo wir sind</h3>
+            <h3><span data-icon="ort"></span> Wo wir sind</h3>
             <div class="res-info-item">
-              <span>📌</span>
+              <span data-icon="ort"></span>
               <div>Musterstraße 1<br>38100 Braunschweig</div>
             </div>
             <div class="res-info-item">
-              <span>🕐</span>
-              <div>Mo–Fr 11:00–23:00 Uhr<br>Sa–So 10:00–23:00 Uhr</div>
+              <span data-icon="uhr"></span>
+              <div>Di–Fr 11:30–23:00 Uhr<br>Sa–So 12:00–23:00 Uhr<br>Montags Ruhetag</div>
             </div>
             <div class="res-info-item">
-              <span>📞</span>
+              <span data-icon="telefon"></span>
               <div><a href="tel:0531000000">0531 / 000 000</a></div>
             </div>
           </div>
 
           <div class="res-info-card">
-            <h3>ℹ️ Hinweise</h3>
+            <h3><span data-icon="blatt"></span> Hinweise</h3>
             <div class="res-info-item">
-              <span>⏱</span>
+              <span data-icon="uhr"></span>
               <div>Tische werden für <strong>90 Minuten</strong> reserviert.</div>
             </div>
             <div class="res-info-item">
-              <span>👥</span>
+              <span data-icon="person"></span>
               <div>Für Gruppen ab 8 Personen ruf uns bitte direkt an.</div>
             </div>
             <div class="res-info-item">
-              <span>✉️</span>
+              <span data-icon="haken"></span>
               <div>Du erhältst eine Bestätigung per Telefon oder E-Mail.</div>
             </div>
           </div>
 
           <div class="res-note">
-            💡 <strong>Keine Lust zu warten?</strong><br>
-            Du kannst auch spontan vorbeikommen — wir tun unser Bestes einen Tisch zu finden!
+            <strong>Keine Lust zu warten?</strong><br>
+            Komm einfach vorbei, wir finden fast immer einen Platz. <span class="script">A presto!</span>
           </div>
         </div>
 
@@ -354,12 +338,12 @@
     <div class="container">
       <div class="footer__cols">
         <div>
-          <p class="footer__brand">Stadtimbiss</p>
-          <p class="footer__claim">Frisch aus der Küche — direkt zu dir.</p>
+          <p class="footer__brand">Pizzeria Napoli</p>
+          <p class="footer__claim">Forno a legna, dal 1962. Buon appetito.</p>
           <address class="footer__contact">
             Musterstraße 1, 38100 Braunschweig<br>
             Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
-            E-Mail: <a href="mailto:info@stadtimbiss.de">info@stadtimbiss.de</a>
+            E-Mail: <a href="mailto:ciao@pizzeria-napoli.de">ciao@pizzeria-napoli.de</a>
           </address>
         </div>
         <nav class="footer__links">
@@ -370,7 +354,7 @@
         </nav>
       </div>
       <hr class="footer__divider">
-      <p class="footer__copy">© 2025 Stadtimbiss — Alle Rechte vorbehalten</p>
+      <p class="footer__copy">© 2025 Pizzeria Napoli, alle Rechte vorbehalten</p>
     </div>
   </footer>
 
