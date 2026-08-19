@@ -67,7 +67,7 @@
 .hero__title {
   font-size: 5rem;
   color: var(--color-on-dark);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-6);
   line-height: 1.0;
 }
 
