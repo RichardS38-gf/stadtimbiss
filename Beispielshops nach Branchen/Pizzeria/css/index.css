@@ -44,7 +44,7 @@
   min-height: 60vh;
   display: flex;
   align-items: center;
-  background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200');
+  background-image: url('../Bilder/Steinofen.png');
   background-size: cover;
   background-position: center;
 }
@@ -72,7 +72,7 @@
 }
 
 .hero__accent {
-  color: var(--color-accent);
+  color: var(--color-on-dark);
 }
 
 .hero__subline {
