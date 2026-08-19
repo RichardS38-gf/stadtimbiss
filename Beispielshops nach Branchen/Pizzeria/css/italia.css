@@ -1,0 +1,167 @@
+/* italia.css — Pizzeria Napoli
+   Gestaltungselemente mit italienischem Bezug und die
+   Linien-Icons im Stil dünner Outline-Zeichnungen.
+   Wird auf allen Seiten nach components.css geladen. */
+
+/* ── LOGO ── */
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--color-ink);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.nav__logo-mark {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.nav__logo-text small {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-top: 3px;
+}
+
+/* ── LINIEN-ICONS ──
+   Dünne Outline-Zeichnungen, Farbe immer über currentColor. */
+.ic {
+  width: 1.15em;
+  height: 1.15em;
+  flex-shrink: 0;
+  vertical-align: -0.15em;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ic--lg { width: 2.2em; height: 2.2em; }
+.ic--xl { width: 3.2em; height: 3.2em; }
+
+/* Icon im Kreis, für Wegweiser und Kategorien */
+.ic-badge {
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-soft);
+  color: var(--color-accent);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.ic-badge .ic { width: 30px; height: 30px; }
+
+a:hover .ic-badge,
+button:hover .ic-badge,
+.ic-badge:hover {
+  border-color: var(--color-accent);
+}
+
+.ic-badge--basil { color: var(--color-basil); }
+.ic-badge--dark  { background: var(--color-dark); border-color: var(--color-dark); color: var(--color-bg); }
+
+/* Icons in gefüllten Buttons folgen der Textfarbe */
+.btn--primary .ic { color: currentColor; }
+
+/* ── TRICOLORE ──
+   Schmaler Zierstreifen, sparsam einsetzen. */
+.tricolore {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--it-green) 0 33.33%,
+    var(--it-white) 33.33% 66.66%,
+    var(--it-red) 66.66% 100%
+  );
+}
+
+.tricolore--kurz {
+  width: 72px;
+  height: 3px;
+  margin-inline: auto;
+  margin-bottom: var(--space-4);
+}
+
+/* ── HANDSCHRIFTLICHE AKZENTE ── */
+.script {
+  font-family: var(--font-script);
+  font-size: 1.6em;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.script--basil { color: var(--color-basil); }
+
+/* Kleine Auszeichnung über einer Überschrift, z. B. "Dal 1962" */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+/* ── PAPIER- UND HOLZOFEN-TEXTUR ──
+   Sehr dezent, damit der Hintergrund nicht unruhig wird. */
+.paper {
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(193,39,45,0.035) 0, transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(75,107,60,0.035) 0, transparent 45%);
+}
+
+/* Karierte Tischdecke, nur für schmale Trennbänder */
+.tovaglia {
+  height: 22px;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(193,39,45,0.16) 0 11px, transparent 11px 22px),
+    repeating-linear-gradient(90deg, rgba(193,39,45,0.16) 0 11px, transparent 11px 22px);
+  background-color: var(--color-bg-soft);
+  border-block: 1px solid var(--color-line);
+}
+
+/* ── ABSCHNITTSTITEL MIT ZIERLINIE ── */
+.titel-mitte {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.titel-mitte h2 {
+  font-family: var(--font-head);
+  font-weight: 900;
+}
+
+.titel-mitte__sub {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  max-width: 56ch;
+  margin-inline: auto;
+  margin-top: var(--space-2);
+}
+
+/* ── BOGEN, wie ein Ofeneingang ── */
+.bogen {
+  border-radius: 999px 999px var(--radius-md) var(--radius-md);
+  overflow: hidden;
+}

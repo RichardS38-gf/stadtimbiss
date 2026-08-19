@@ -1,19 +1,36 @@
-/* tokens.css — Stadtimbiss */
+/* tokens.css — Pizzeria Napoli
+   Hell und rustikal: Papierton, Tomatenrot, Basilikumgrün.
+   Bewusst warm gehalten, damit sich der Shop klar von den
+   anderen Demos unterscheidet. */
 :root {
   /* Farben */
-  --color-accent:     #E63946;
-  --color-accent-dk:  #C1121F;
-  --color-bg:         #F8F8F8;
-  --color-bg-soft:    #FFFFFF;
-  --color-ink:        #1A1A1A;
-  --color-muted:      #888888;
-  --color-line:       #E0E0E0;
-  --color-dark:       #1A1A1A;
-  --color-on-dark:    #FFFFFF;
+  --color-accent:     #C1272D;   /* Pomodoro */
+  --color-accent-dk:  #96201F;
+  --color-on-accent:  #FFFFFF;
+  --color-basil:      #4B6B3C;   /* Basilikum, zweiter Akzent */
+  --color-basil-dk:   #3A5430;
+  --color-gold:       #C9A227;   /* Sterne, Auszeichnungen */
 
-  /* Typografie */
-  --font-head: 'Poppins', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --color-bg:         #FBF6EC;   /* Papier */
+  --color-bg-soft:    #FFFFFF;   /* Karten */
+  --color-ink:        #241C15;   /* Espresso */
+  --color-muted:      #7A6C5D;
+  --color-line:       #E3D8C6;
+  --color-dark:       #241C15;
+  --color-on-dark:    #FBF6EC;
+
+  /* Tricolore, sparsam als Zierstreifen einsetzen */
+  --it-green: #4B6B3C;
+  --it-white: #FBF6EC;
+  --it-red:   #C1272D;
+
+  /* Typografie
+     Playfair fuer Ueberschriften gibt den Trattoria-Charakter,
+     Inter bleibt fuer Fliesstext und Bedienelemente,
+     Caveat nur fuer handschriftliche Akzente wie "Buon appetito". */
+  --font-head:   'Playfair Display', Georgia, serif;
+  --font-body:   'Inter', system-ui, sans-serif;
+  --font-script: 'Caveat', cursive;
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -42,10 +59,9 @@
   --text-4xl:  2.5rem;
   --text-5xl:  3.5rem;
 
-  /* Transitions */
   --transition: 0.2s ease;
 
-  /* Keine border-radius auf primären Elementen */
+  /* Weiche, aber nicht verspielte Kanten */
   --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-md: 10px;
 }
