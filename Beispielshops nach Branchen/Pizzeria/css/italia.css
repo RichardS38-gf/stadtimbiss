@@ -214,9 +214,14 @@ button:hover .ic-badge,
 }
 
 @media (min-width: 900px) {
-  .split { grid-template-columns: 1fr 1fr; }
-  .split__media { min-height: 520px; }
-  .split__text { padding: var(--space-8) var(--space-7); }
+  .split {
+    grid-template-columns: 1fr 1fr;
+    /* Feste Mindesthoehe, damit beide Split-Sektionen gleich hoch
+       sind, unabhaengig davon wie viel Text darin steht. */
+    min-height: 600px;
+  }
+  .split__media { min-height: 100%; }
+  .split__text { padding: var(--space-7); }
 
   /* Bild links, Text rechts */
   .split--links .split__media { order: 1; }
