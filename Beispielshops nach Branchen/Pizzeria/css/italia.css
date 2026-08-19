@@ -18,10 +18,11 @@
 }
 
 .nav__logo-mark {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   flex-shrink: 0;
   color: var(--color-accent);
+  stroke-width: 0.9;
 }
 
 .nav__logo-text small {
@@ -38,24 +39,26 @@
 /* ── LINIEN-ICONS ──
    Dünne Outline-Zeichnungen, Farbe immer über currentColor. */
 .ic {
-  width: 1.15em;
-  height: 1.15em;
+  width: 1.3em;
+  height: 1.3em;
   flex-shrink: 0;
-  vertical-align: -0.15em;
+  vertical-align: -0.2em;
   stroke: currentColor;
   fill: none;
-  stroke-width: 1.2;
+  stroke-width: 0.9;
   stroke-linecap: round;
   stroke-linejoin: round;
+  /* Strichstaerke bleibt beim Skalieren gleich fein */
+  vector-effect: non-scaling-stroke;
 }
 
-.ic--lg { width: 2.2em; height: 2.2em; }
-.ic--xl { width: 3.2em; height: 3.2em; }
+.ic--lg { width: 2.6em; height: 2.6em; }
+.ic--xl { width: 3.6em; height: 3.6em; }
 
 /* Icon im Kreis, für Wegweiser und Kategorien */
 .ic-badge {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +69,7 @@
   transition: border-color var(--transition), color var(--transition);
 }
 
-.ic-badge .ic { width: 30px; height: 30px; }
+.ic-badge .ic { width: 38px; height: 38px; }
 
 a:hover .ic-badge,
 button:hover .ic-badge,
