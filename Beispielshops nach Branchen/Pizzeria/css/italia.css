@@ -245,6 +245,11 @@ button:hover .ic-badge,
 
 .split__text p:last-of-type { margin-bottom: var(--space-5); }
 
+/* Das handschriftliche Zitat behaelt seine Akzentfarbe.
+   Ohne diese Regel gewinnt .split__text p mit dem Grauton. */
+.split__text p.script { color: var(--color-accent); }
+.split__text p.script--basil { color: var(--color-basil); }
+
 .split__aktionen {
   display: flex;
   gap: var(--space-3);
