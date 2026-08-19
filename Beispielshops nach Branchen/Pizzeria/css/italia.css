@@ -160,6 +160,73 @@ button:hover .ic-badge,
   margin-top: var(--space-2);
 }
 
+/* ── SPLIT-SEKTIONEN ──
+   Halbe Breite Bild, halbe Breite Text, Bild randlos bis zur
+   Bildschirmkante. Auf Mobile steht das Bild immer oben. */
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.split__media {
+  min-height: 260px;
+  background-size: cover;
+  background-position: center;
+}
+
+.split__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-7) var(--space-5);
+  background: var(--color-bg-soft);
+}
+
+.split__text--paper { background: var(--color-bg); }
+
+.split__inner {
+  max-width: 46ch;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.split__text h2 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+}
+
+.split__text p {
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin-bottom: var(--space-4);
+}
+
+.split__text p:last-of-type { margin-bottom: var(--space-5); }
+
+.split__aktionen {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+@media (min-width: 900px) {
+  .split { grid-template-columns: 1fr 1fr; }
+  .split__media { min-height: 520px; }
+  .split__text { padding: var(--space-8) var(--space-7); }
+
+  /* Bild links, Text rechts */
+  .split--links .split__media { order: 1; }
+  .split--links .split__text  { order: 2; }
+
+  /* Bild rechts, Text links */
+  .split--rechts .split__media { order: 2; }
+  .split--rechts .split__text  { order: 1; }
+}
+
 /* ── BOGEN, wie ein Ofeneingang ── */
 .bogen {
   border-radius: 999px 999px var(--radius-md) var(--radius-md);
