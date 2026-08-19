@@ -1,5 +1,5 @@
 // demo-daten.js — Beispieldaten fuer den Demo-Kundenbereich
-// Shop: Burger Joint
+// Shop: Asia Garden
 //
 // Diese Datei ist die EINZIGE, die sich zwischen den Shops unterscheidet.
 // auth.js, konto.js und konto.css sind shop-neutral.
@@ -10,7 +10,7 @@
 // Lieferkosten dieses Shops. Liegt hier und nicht in auth.js, damit
 // auth.js in allen Shops byte-identisch bleibt und ohne Nacharbeit
 // kopiert werden kann.
-export const LIEFERKOSTEN = 1.99;
+export const LIEFERKOSTEN = 2.50;
 
 const TAG = 24 * 60 * 60 * 1000;
 const vorTagen = (n) => new Date(Date.now() - n * TAG).toISOString();
@@ -82,7 +82,7 @@ export const DEMO_PAYMENT_METHODS = [
 
 function bestellung(id, nummer, tage, mode, positionen, extras = {}) {
   const subtotal = positionen.reduce((s, p) => s + p.unit_price * p.qty, 0);
-  const delivery_fee = mode === 'lieferung' ? 1.99 : 0;
+  const delivery_fee = mode === 'lieferung' ? 2.50 : 0;
   const discount = extras.discount || 0;
   return {
     id,
@@ -116,41 +116,40 @@ function bestellung(id, nummer, tage, mode, positionen, extras = {}) {
 }
 
 // 7 Bestellungen, davon 6 ueber dem Mindestbestellwert von 15 Euro.
-// Die Bestellung BJ-2266 liegt darunter und hat deshalb bewusst keinen
+// Die Bestellung AG-2266 liegt darunter und hat deshalb bewusst keinen
 // Stempel ergeben. Das laesst sich beim Kundengespraech gut zeigen.
 export const DEMO_ORDERS = [
-  bestellung('ord-7', 'BJ-2418', 6, 'lieferung', [
-    { product_id: 'b2', name: 'Double Smash', unit_price: 12.90, qty: 1 },
-    { product_id: 's1', name: 'Crispy Fries', unit_price: 3.90, qty: 1 },
-    { product_id: 'sh2', name: 'Chocolate Shake', unit_price: 5.90, qty: 1 }
+  bestellung('ord-7', 'AG-2418', 6, 'lieferung', [
+    { product_id: 'su1', name: 'Tonkotsu Ramen', unit_price: 13.90, qty: 1 },
+    { product_id: 'v1', name: 'Gyoza', unit_price: 6.90, qty: 1 },
+    { product_id: 'g2', name: 'Matcha Latte', unit_price: 3.90, qty: 1 }
   ]),
-  bestellung('ord-6', 'BJ-2377', 15, 'abholung', [
-    { product_id: 'b1', name: 'Classic Smash', unit_price: 8.90, qty: 2 },
-    { product_id: 's2', name: 'Onion Rings', unit_price: 4.50, qty: 1 }
+  bestellung('ord-6', 'AG-2377', 15, 'abholung', [
+    { product_id: 's1', name: 'California Roll', unit_price: 8.90, qty: 1 },
+    { product_id: 's4', name: 'Thunfisch Maki', unit_price: 7.90, qty: 1 },
+    { product_id: 'v3', name: 'Edamame', unit_price: 4.50, qty: 1 }
   ]),
-  bestellung('ord-5', 'BJ-2301', 24, 'lieferung', [
-    { product_id: 'c1', name: 'Crispy Chicken', unit_price: 9.90, qty: 1 },
-    { product_id: 'c2', name: 'Spicy Chicken', unit_price: 10.50, qty: 1 },
-    { product_id: 'g1', name: 'Cola 0,5l', unit_price: 2.90, qty: 2 }
+  bestellung('ord-5', 'AG-2301', 24, 'lieferung', [
+    { product_id: 'c1', name: 'Thai Green Curry', unit_price: 13.50, qty: 1 },
+    { product_id: 'v2', name: 'Frühlingsrollen', unit_price: 5.90, qty: 1 },
+    { product_id: 'g3', name: 'Jasmin Tee', unit_price: 2.90, qty: 2 }
   ]),
-  bestellung('ord-4', 'BJ-2266', 33, 'abholung', [
-    { product_id: 'w1', name: 'Chicken Wrap', unit_price: 7.90, qty: 1 },
-    { product_id: 'g3', name: 'Wasser 0,5l', unit_price: 1.90, qty: 1 }
+  bestellung('ord-4', 'AG-2266', 33, 'abholung', [
+    { product_id: 'v1', name: 'Gyoza', unit_price: 6.90, qty: 1 },
+    { product_id: 'su3', name: 'Miso Suppe', unit_price: 3.90, qty: 1 }
   ], { payment_type: 'bar' }),
-  bestellung('ord-3', 'BJ-2198', 45, 'lieferung', [
-    { product_id: 'b3', name: 'BBQ Bacon Smash', unit_price: 11.50, qty: 1 },
-    { product_id: 's4', name: 'Sweet Potato Fries', unit_price: 4.90, qty: 1 },
-    { product_id: 'sh1', name: 'Vanilla Shake', unit_price: 5.50, qty: 1 }
+  bestellung('ord-3', 'AG-2198', 45, 'lieferung', [
+    { product_id: 'b1', name: 'Lachs Bento', unit_price: 18.90, qty: 1 },
+    { product_id: 'd2', name: 'Mochi Variationen', unit_price: 4.90, qty: 1 }
   ]),
-  bestellung('ord-2', 'BJ-2104', 58, 'lieferung', [
-    { product_id: 'v1', name: 'Veggie Smash', unit_price: 10.90, qty: 1 },
-    { product_id: 'w3', name: 'Veggie Wrap', unit_price: 7.50, qty: 1 },
-    { product_id: 'g2', name: 'Lemonade', unit_price: 3.50, qty: 1 }
+  bestellung('ord-2', 'AG-2104', 58, 'lieferung', [
+    { product_id: 'w3', name: 'Pad Thai', unit_price: 12.90, qty: 1 },
+    { product_id: 'w1', name: 'Rindfleisch Wok', unit_price: 13.90, qty: 1 },
+    { product_id: 'g4', name: 'Cola 0,5l', unit_price: 2.50, qty: 2 }
   ]),
-  bestellung('ord-1', 'BJ-2011', 72, 'abholung', [
-    { product_id: 'b1', name: 'Classic Smash', unit_price: 8.90, qty: 1 },
-    { product_id: 'b2', name: 'Double Smash', unit_price: 12.90, qty: 1 },
-    { product_id: 's1', name: 'Crispy Fries', unit_price: 3.90, qty: 1 }
+  bestellung('ord-1', 'AG-2011', 72, 'abholung', [
+    { product_id: 's2', name: 'Lachs Sashimi Platte', unit_price: 10.90, qty: 1 },
+    { product_id: 'c2', name: 'Massaman Curry', unit_price: 14.50, qty: 1 }
   ], { payment_type: 'bar' })
 ];
 
@@ -181,9 +180,9 @@ export const DEMO_VOUCHERS = [
 ];
 
 export const DEMO_FAVORITES = [
-  { id: 'fav-1', profile_id: 'demo-kunde-0001', product_id: 'b2', created_at: vorTagen(58) },
-  { id: 'fav-2', profile_id: 'demo-kunde-0001', product_id: 's4', created_at: vorTagen(45) },
-  { id: 'fav-3', profile_id: 'demo-kunde-0001', product_id: 'sh2', created_at: vorTagen(15) }
+  { id: 'fav-1', profile_id: 'demo-kunde-0001', product_id: 'su1', created_at: vorTagen(58) },
+  { id: 'fav-2', profile_id: 'demo-kunde-0001', product_id: 'v1', created_at: vorTagen(45) },
+  { id: 'fav-3', profile_id: 'demo-kunde-0001', product_id: 's1', created_at: vorTagen(15) }
 ];
 
 export const DEMO_RESERVATIONS = [
@@ -221,22 +220,23 @@ export const DEMO_RESERVATIONS = [
 // Bilddateien liegen lokal in Bilder/, Leerzeichen und Umlaute
 // muessen URL-encoded werden.
 export const KATALOG = {
-  'b1':  { name: 'Classic Smash',      price: 8.90,  kategorie: 'Burger',   img: 'Bilder/burger.png' },
-  'b2':  { name: 'Double Smash',       price: 12.90, kategorie: 'Burger',   img: 'Bilder/doubleburger.png' },
-  'b3':  { name: 'BBQ Bacon Smash',    price: 11.50, kategorie: 'Burger',   img: 'Bilder/baconburger.png' },
-  'c1':  { name: 'Crispy Chicken',     price: 9.90,  kategorie: 'Chicken',  img: 'Bilder/crispychicken.png' },
-  'c2':  { name: 'Spicy Chicken',      price: 10.50, kategorie: 'Chicken',  img: 'Bilder/chicken.png' },
-  'v1':  { name: 'Veggie Smash',       price: 10.90, kategorie: 'Veggie',   img: 'Bilder/veggie.png' },
-  'w1':  { name: 'Chicken Wrap',       price: 7.90,  kategorie: 'Wraps',    img: 'Bilder/wraps.png' },
-  'w3':  { name: 'Veggie Wrap',        price: 7.50,  kategorie: 'Wraps',    img: 'Bilder/veggiewrap.png' },
-  's1':  { name: 'Crispy Fries',       price: 3.90,  kategorie: 'Sides',    img: 'Bilder/fries.png' },
-  's2':  { name: 'Onion Rings',        price: 4.50,  kategorie: 'Sides',    img: 'Bilder/onion.png' },
-  's4':  { name: 'Sweet Potato Fries', price: 4.90,  kategorie: 'Sides',    img: 'Bilder/s%C3%BC%C3%9Fkartoffel.png' },
-  'sh1': { name: 'Vanilla Shake',      price: 5.50,  kategorie: 'Shakes',   img: 'Bilder/vanille.png' },
-  'sh2': { name: 'Chocolate Shake',    price: 5.90,  kategorie: 'Shakes',   img: 'Bilder/shakes.png' },
-  'g1':  { name: 'Cola 0,5l',          price: 2.90,  kategorie: 'Getränke', img: 'Bilder/cola.png' },
-  'g2':  { name: 'Lemonade',           price: 3.50,  kategorie: 'Getränke', img: 'Bilder/lemon.png' },
-  'g3':  { name: 'Wasser 0,5l',        price: 1.90,  kategorie: 'Getränke', img: 'Bilder/wasser.png' }
+  's1':  { name: 'California Roll',        price: 8.90,  kategorie: 'Sushi',     img: 'Bilder/California%20Roll.png' },
+  's2':  { name: 'Lachs Sashimi Platte',   price: 10.90, kategorie: 'Sushi',     img: 'Bilder/Lachs%20Sashimi%20Platte.png' },
+  's4':  { name: 'Thunfisch Maki',         price: 7.90,  kategorie: 'Sushi',     img: 'Bilder/Thunfisch%20Maki.png' },
+  'w1':  { name: 'Rindfleisch Wok',        price: 13.90, kategorie: 'Wok',       img: 'Bilder/Rindfleisch%20Wok.png' },
+  'w3':  { name: 'Pad Thai',               price: 12.90, kategorie: 'Wok',       img: 'Bilder/Pad%20Thai.png' },
+  'v1':  { name: 'Gyoza',                  price: 6.90,  kategorie: 'Vorspeisen', img: 'Bilder/Gyoza.png' },
+  'v2':  { name: 'Frühlingsrollen',        price: 5.90,  kategorie: 'Vorspeisen', img: 'Bilder/Fr%C3%BChlingsrolle.png' },
+  'v3':  { name: 'Edamame',                price: 4.50,  kategorie: 'Vorspeisen', img: 'Bilder/Edamame.png' },
+  'su1': { name: 'Tonkotsu Ramen',         price: 13.90, kategorie: 'Suppen',    img: 'Bilder/Tonkotsu%20Ramen.png' },
+  'su3': { name: 'Miso Suppe',             price: 3.90,  kategorie: 'Suppen',    img: 'Bilder/Miso%20Suppe.png' },
+  'c1':  { name: 'Thai Green Curry',       price: 13.50, kategorie: 'Curry',     img: 'Bilder/Thai%20Green%20Curry.png' },
+  'c2':  { name: 'Massaman Curry',         price: 14.50, kategorie: 'Curry',     img: 'Bilder/Massaman%20Curry.png' },
+  'b1':  { name: 'Lachs Bento',            price: 18.90, kategorie: 'Bento',     img: 'Bilder/Lachs%20Bento.png' },
+  'd2':  { name: 'Mochi Variationen',      price: 4.90,  kategorie: 'Dessert',   img: 'Bilder/Mochi%20Variationen.png' },
+  'g2':  { name: 'Matcha Latte',           price: 3.90,  kategorie: 'Getränke',  img: 'Bilder/Matcha%20Latte.png' },
+  'g3':  { name: 'Jasmin Tee',             price: 2.90,  kategorie: 'Getränke',  img: 'Bilder/Jasmin%20Tee.png' },
+  'g4':  { name: 'Cola 0,5l',              price: 2.50,  kategorie: 'Getränke',  img: 'Bilder/Cola.png' }
 };
 
 export function demoDatenSatz() {

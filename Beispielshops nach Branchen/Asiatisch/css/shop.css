@@ -1,0 +1,126 @@
+/* shop.css — Asia Garden
+   Gemeinsame Nav- und Footer-Stile fuer die neuen Seiten
+   (konto, anmelden). Die bestehenden Seiten bringen diese Regeln
+   weiterhin in ihrem eigenen inline style-Block mit. */
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0D0D0D;
+  border-bottom: 1px solid #2A2A2A;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+}
+
+.nav__logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #D4A017;
+  white-space: nowrap;
+}
+
+.nav__links {
+  gap: var(--space-5);
+}
+
+.nav__links a {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.nav__links a:hover {
+  color: var(--color-ink);
+  opacity: 1;
+}
+
+@media (min-width: 901px) {
+  .nav__links { display: flex; }
+}
+
+.icon-gold {
+  width: 1.1em;
+  height: 1.1em;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  vertical-align: -0.15em;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+  margin-top: var(--space-7);
+}
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .footer__cols { grid-template-columns: 2fr 1fr; }
+}
+
+.footer__brand {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-2);
+}
+
+.footer__claim {
+  opacity: 0.6;
+  font-size: var(--text-sm);
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-5);
+}
+
+.footer__contact {
+  font-style: normal;
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  color: var(--color-on-dark);
+  opacity: 0.8;
+}
+
+.footer__contact a { color: var(--color-on-dark); }
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__links a {
+  color: var(--color-on-dark);
+  opacity: 0.6;
+  font-size: var(--text-sm);
+}
+
+.footer__divider {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  margin-block: var(--space-5);
+}
+
+.footer__copy {
+  text-align: center;
+  opacity: 0.4;
+  font-size: var(--text-sm);
+  color: var(--color-on-dark);
+}

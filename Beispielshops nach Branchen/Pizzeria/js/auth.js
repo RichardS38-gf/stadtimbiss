@@ -12,7 +12,12 @@
 // Siehe Specs/datenmodell.md
 
 import { addToCart, updateQty, clearCart } from './cart.js';
-import { demoDatenSatz } from './demo-daten.js';
+import { demoDatenSatz, LIEFERKOSTEN } from './demo-daten.js';
+
+// Lieferkosten kommen aus demo-daten.js, weil sie sich je Shop
+// unterscheiden. Hier nur durchgereicht, damit aufrufende Seiten
+// weiterhin aus auth.js importieren koennen.
+export { LIEFERKOSTEN };
 
 // ---------------------------------------------------------------
 // Konfiguration Treueprogramm
@@ -27,8 +32,6 @@ export const TREUE = {
   combinable_with_discounts: false,
   active: true
 };
-
-export const LIEFERKOSTEN = 2.50;
 
 // ---------------------------------------------------------------
 // Adapter: einzige Stelle mit Speicherzugriff

@@ -8,6 +8,11 @@
 // der .add-to-cart Buttons in bestellen.html passen. Sonst legt
 // "Nochmal bestellen" Artikel in den Warenkorb, die es nicht gibt.
 
+// Lieferkosten dieses Shops. Liegt hier und nicht in auth.js, damit
+// auth.js in allen Shops byte-identisch bleibt und ohne Nacharbeit
+// kopiert werden kann.
+export const LIEFERKOSTEN = 2.50;
+
 // Datumshilfen: relativ zu heute, damit die Demo nicht veraltet
 const TAG = 24 * 60 * 60 * 1000;
 const vorTagen = (n) => new Date(Date.now() - n * TAG).toISOString();
