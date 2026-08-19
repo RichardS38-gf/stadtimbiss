@@ -1,98 +1,61 @@
 <!DOCTYPE html>
-<html lang="de" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stadtimbiss — Bestellen</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
-  <meta property="og:title" content="Stadtimbiss — Jetzt online bestellen">
-  <meta property="og:description" content="Frisch. Schnell. Lecker. Jetzt online bestellen und liefern lassen.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600">
-  <meta name="description" content="Bestelle bei Stadtimbiss — Burger, Döner, Beilagen und Getränke. Lieferung oder Abholung in Braunschweig.">
+  <title>Pizzeria Napoli — Bestellen</title>
+  <meta name="description" content="Bestelle bei Pizzeria Napoli: Pizza aus dem Holzofen, frische Pasta, Antipasti und Dolci. Lieferung oder Abholung in Braunschweig.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C1272D' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3.2 3.8 19.2c-.3.6.2 1.3.9 1.2l14.6-2.6c.6-.1.9-.8.6-1.3z'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/tokens.css?v=2">
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/bestellen.css?v=8">
-  <link rel="stylesheet" href="css/index.css?v=3">
-  <link rel="stylesheet" href="css/konto.css?v=5">
+  <link rel="stylesheet" href="css/bestellen.css?v=9">
+  <link rel="stylesheet" href="css/index.css?v=42">
+  <link rel="stylesheet" href="css/italia.css?v=1">
+  <link rel="stylesheet" href="css/konto.css?v=6">
   <script type="module" src="js/bestellen.js"></script>
   <style>
-    /* Allergen Tooltip */
     .allergen-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--color-line);
-      color: var(--color-muted);
-      font-size: 0.6rem;
-      font-weight: 700;
-      font-family: var(--font-body);
-      font-style: normal;
-      border: none;
-      cursor: pointer;
-      margin-left: 6px;
-      flex-shrink: 0;
-      transition: background 0.15s ease, color 0.15s ease;
-      position: relative;
-      vertical-align: middle;
-      line-height: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--color-line); color: var(--color-muted);
+      font-size: 0.6rem; font-weight: 700; font-family: var(--font-body);
+      font-style: normal; border: none; cursor: pointer; margin-left: 6px;
+      flex-shrink: 0; transition: background 0.15s ease, color 0.15s ease;
+      position: relative; vertical-align: middle; line-height: 1;
     }
-    .allergen-btn::before {
-      content: 'i';
-      font-style: italic;
-    }
-    .allergen-btn:hover {
-      background: var(--color-accent);
-      color: #fff;
-    }
+    .allergen-btn::before { content: 'i'; font-style: italic; }
+    .allergen-btn:hover { background: var(--color-accent); color: #fff; }
     .allergen-tooltip {
-      display: none;
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1A1A1A;
-      color: #fff;
-      font-size: 0.75rem;
-      font-family: var(--font-body);
-      font-weight: 400;
-      line-height: 1.5;
-      padding: 0.4rem 0.7rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      z-index: 9999;
-      pointer-events: none;
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); background: var(--color-dark); color: #fff;
+      font-size: 0.75rem; font-family: var(--font-body); font-weight: 400;
+      line-height: 1.5; padding: 0.4rem 0.7rem; border-radius: 6px;
+      white-space: nowrap; z-index: 9999; pointer-events: none;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
-    .allergen-btn:hover .allergen-tooltip {
-      display: block;
+    .allergen-btn:hover .allergen-tooltip { display: block; }
+    @media (hover: none) { .allergen-btn.active .allergen-tooltip { display: block; } }
+    .menu-card__name { display: flex; align-items: center; gap: 4px; overflow: visible; }
+    .menu-card__body { overflow: visible; }
+    .menu-card { overflow: visible; }
+
+    .menu-section__title { display: flex; align-items: center; gap: 0.5rem; }
+    .menu-section__sub {
+      font-family: var(--font-script); font-size: 1.35rem;
+      color: var(--color-basil); margin-top: -0.4rem; margin-bottom: var(--space-4);
     }
-    @media (hover: none) {
-      .allergen-btn.active .allergen-tooltip {
-        display: block;
-      }
-    }
-    .menu-card__name {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      overflow: visible;
-    }
-    .menu-card__body {
-      overflow: visible;
-    }
-    .menu-card {
-      overflow: visible;
-    }
-    /* Footer weiß */
+
     .footer { background: var(--color-dark); color: var(--color-on-dark); padding-top: var(--space-7); padding-bottom: var(--space-6); }
     .footer__cols { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
-    .footer__brand { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-on-dark); margin-bottom: var(--space-2); }
+    .footer__brand { font-family: var(--font-head); font-weight: 900; font-size: 1.3rem; color: var(--color-on-dark); margin-bottom: var(--space-2); }
     .footer__claim { opacity: 0.6; font-size: var(--text-sm); color: var(--color-on-dark); margin-bottom: var(--space-5); }
     .footer__contact { font-style: normal; font-size: var(--text-sm); line-height: 1.9; color: var(--color-on-dark); opacity: 0.8; }
     .footer__contact a { color: var(--color-on-dark); }
@@ -103,311 +66,353 @@
     .footer__copy { text-align: center; opacity: 0.4; font-size: var(--text-sm); color: var(--color-on-dark); }
     @media (min-width: 768px) { .footer__cols { grid-template-columns: 2fr 1fr; } }
   </style>
-
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
-<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Richard Schilling</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
-<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
-<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
-<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Richard Schilling</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
-<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
-<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
-<mso:ContentTypeId msdt:dt="string">0x0101009D6AE205030FF4479FD76DDB3CDFCF78</mso:ContentTypeId>
-<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
-<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
-<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
 </head>
-<body>
+<body class="paper">
 
-  <!-- 1. Navigation -->
   <header class="nav">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">Stadtimbiss</a>
+      <a href="index.html" class="nav__logo">
+        <svg class="nav__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3.4 20.4V12a8.6 8.6 0 0 1 17.2 0v8.4z"/>
+          <path d="M7.6 20.4v-4.2a4.4 4.4 0 0 1 8.8 0v4.2"/>
+          <path d="M2 20.4h20"/>
+          <path d="M12 4.4V2.6"/>
+        </svg>
+        <span class="nav__logo-text">Pizzeria Napoli<small>Forno a legna &middot; dal 1962</small></span>
+      </a>
       <nav class="nav__links">
         <a href="index.html#ueber-uns">Über uns</a>
         <a href="bestellen.html">Speisekarte</a>
         <a href="index.html#bewertungen">Bewertungen</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
-      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;margin-right:var(--space-2)">
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-right:var(--space-2)">
         <span id="nav-konto"></span>
-        <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 <span class="btn__text">Reservieren</span></a>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">
+          <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
+        </a>
       </div>
-      <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">🛒 <span class="cart-badge" id="cart-count">0</span></button>
+      <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
+        <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
+      </button>
     </div>
   </header>
 
+  <div class="tricolore"></div>
   <div class="demo-banner" id="demo-banner"></div>
 
-  <!-- 2. Lieferung/Abholung-Toggle -->
   <div class="order-mode">
     <div class="container">
       <div class="order-mode-toggle order-mode-toggle--cards">
-
         <button class="mode-card mode-card--active" data-mode="lieferung">
-          <span class="mode-card__emoji">🛵</span>
+          <span class="mode-card__emoji"><span data-icon="roller" data-icon-class="ic ic--lg"></span></span>
           <span class="mode-card__title">Lieferung</span>
           <span class="mode-card__info">~35 Min &middot; ab 2,50 &euro;</span>
-          <span class="mode-card__sub">Mindest. 8,00 &euro;</span>
-          <span class="mode-card__bg-emoji" aria-hidden="true">🛵</span>
+          <span class="mode-card__sub">Mindest. 12,00 &euro;</span>
         </button>
-
         <button class="mode-card" data-mode="abholung">
-          <span class="mode-card__emoji">🏃</span>
+          <span class="mode-card__emoji"><span data-icon="ofen" data-icon-class="ic ic--lg"></span></span>
           <span class="mode-card__title">Abholung</span>
           <span class="mode-card__info">~15 Min &middot; kostenlos</span>
           <span class="mode-card__sub">Musterstra&szlig;e 1</span>
-          <span class="mode-card__bg-emoji" aria-hidden="true">🏃</span>
         </button>
-
       </div>
     </div>
   </div>
 
-  <!-- 4. Sticky Kategorienleiste -->
   <nav class="category-nav" id="category-nav">
     <div class="container">
       <div class="category-nav__inner">
-      <a class="cat-link cat-link--active" href="#burger">🍔 Burger</a>
-      <a class="cat-link" href="#doener">🥙 Döner</a>
-      <a class="cat-link" href="#beilagen">🍟 Beilagen</a>
-      <a class="cat-link" href="#getraenke">🥤 Getränke</a>
+        <a class="cat-link cat-link--active" href="#pizza"><span data-icon="pizza"></span> Pizza</a>
+        <a class="cat-link" href="#pasta"><span data-icon="teig"></span> Pasta</a>
+        <a class="cat-link" href="#antipasti"><span data-icon="blatt"></span> Antipasti</a>
+        <a class="cat-link" href="#dolci"><span data-icon="wein"></span> Dolci &amp; Bevande</a>
       </div>
     </div>
   </nav>
 
-  <!-- 5. Hauptbereich -->
   <div class="container order-layout">
 
     <main class="menu">
 
-      <!-- 🍔 Burger -->
-      <section class="menu-section" id="burger">
-        <h2 class="menu-section__title">🍔 Burger</h2>
+      <section class="menu-section" id="pizza">
+        <h2 class="menu-section__title"><span data-icon="pizza"></span> Pizza</h2>
+        <p class="menu-section__sub">90 Sekunden bei 450 Grad im Holzofen</p>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300" alt="Double Smash Burger" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Margherita" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Double Smash Burger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Senf (N)</span></button></h3>
-            <p class="menu-card__desc">Zwei Patties, Cheddar, Soße, Gewürzgurken</p>
-            <div class="menu-card__footer">
-              <span class="menu-card__price">8,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="burger-1" data-name="Double Smash Burger" data-price="8.90">+ Hinzufügen</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300" alt="Classic Cheeseburger" loading="lazy">
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">Classic Cheeseburger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Senf (N)</span></button></h3>
-            <p class="menu-card__desc">Rindfleisch-Patty, Cheddar, Zwiebeln, Senf</p>
-            <div class="menu-card__footer">
-              <span class="menu-card__price">6,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="burger-2" data-name="Classic Cheeseburger" data-price="6.90">+ Hinzufügen</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300" alt="BBQ Bacon Burger" loading="lazy">
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">BBQ Bacon Burger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
-            <p class="menu-card__desc">Bacon, BBQ-Soße, Ringe, Cheddar</p>
+            <h3 class="menu-card__name">Margherita <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">San Marzano, Fior di Latte, Basilikum</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">9,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="burger-3" data-name="BBQ Bacon Burger" data-price="9.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p1" data-name="Margherita" data-price="9.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=300" alt="Crispy Chicken Burger" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Marinara" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Crispy Chicken Burger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G), Senf (N)</span></button></h3>
-            <p class="menu-card__desc">Knuspriges Hähnchenfilet, Coleslaw, Soße</p>
+            <h3 class="menu-card__name">Marinara <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Tomate, Knoblauch, Oregano, natives Olivenöl</p>
             <div class="menu-card__footer">
-              <span class="menu-card__price">7,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="burger-4" data-name="Crispy Chicken Burger" data-price="7.90">+ Hinzufügen</button>
+              <span class="menu-card__price">8,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p2" data-name="Marinara" data-price="8.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=300" alt="Veggie Burger" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Diavola" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Veggie Burger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Soja (F)</span></button></h3>
-            <p class="menu-card__desc">Gemüse-Patty, Salat, Tomate, Avocado-Creme</p>
+            <h3 class="menu-card__name">Diavola <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Scharfe Salami, Chili, Mozzarella</p>
             <div class="menu-card__footer">
-              <span class="menu-card__price">7,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="burger-5" data-name="Veggie Burger" data-price="7.50">+ Hinzufügen</button>
+              <span class="menu-card__price">12,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p3" data-name="Diavola" data-price="12.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Quattro Formaggi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Quattro Formaggi <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Gorgonzola, Fontina, Parmesan, Mozzarella</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p4" data-name="Quattro Formaggi" data-price="13.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Prosciutto e Funghi" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Prosciutto e Funghi <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Kochschinken, Champignons, Mozzarella</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,00 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p5" data-name="Prosciutto e Funghi" data-price="13.00">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Bufala" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Bufala <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Büffelmozzarella, Kirschtomaten, Rucola</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">14,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p8" data-name="Bufala" data-price="14.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Tartufo" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Tartufo <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Trüffelcreme, Steinpilze, Mozzarella</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">16,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p11" data-name="Tartufo" data-price="16.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Calzone" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Calzone <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Gefüllt mit Ricotta, Schinken, Mozzarella</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,00 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="p12" data-name="Calzone" data-price="13.00">+ Hinzufügen</button>
             </div>
           </div>
         </article>
       </section>
 
-      <!-- Promo-Banner dunkel -->
-      <div class="promo-banner promo-banner--dark">
-        🥤 Gratis Getränk ab 15 € Bestellwert!
-      </div>
-
-      <!-- 🥙 Döner -->
-      <section class="menu-section" id="doener">
-        <h2 class="menu-section__title">🥙 Döner</h2>
+      <section class="menu-section" id="pasta">
+        <h2 class="menu-section__title"><span data-icon="teig"></span> Pasta</h2>
+        <p class="menu-section__sub">Jeden Morgen frisch gemacht</p>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300" alt="Döner" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Spaghetti Carbonara" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Döner <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
-            <p class="menu-card__desc">Hähnchen, Salat, Tomaten, Knoblauchsoße</p>
+            <h3 class="menu-card__name">Spaghetti Carbonara <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Guanciale, Pecorino, Eigelb, schwarzer Pfeffer</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="pa1" data-name="Spaghetti Carbonara" data-price="13.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Penne all'Arrabbiata" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Penne all'Arrabbiata <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Tomate, Knoblauch, Chili, Petersilie</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="pa2" data-name="Penne all'Arrabbiata" data-price="11.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Tagliatelle al Ragù" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Tagliatelle al Ragù <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Rinderragout, vier Stunden geschmort</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">14,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="pa3" data-name="Tagliatelle al Ragù" data-price="14.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Lasagne al Forno" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Lasagne al Forno <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Béchamel, Ragout, Parmesan</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">14,00 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="pa4" data-name="Lasagne al Forno" data-price="14.00">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="antipasti">
+        <h2 class="menu-section__title"><span data-icon="blatt"></span> Antipasti</h2>
+        <p class="menu-section__sub">Zum Teilen oder als Vorspeise</p>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Bruschetta al Pomodoro" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Bruschetta al Pomodoro <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Geröstetes Brot, Tomate, Basilikum, Knoblauch</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">6,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="doener-1" data-name="Döner" data-price="6.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="a1" data-name="Bruschetta al Pomodoro" data-price="6.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300" alt="Dürüm" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Insalata Caprese" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Dürüm <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Sellerie (R)</span></button></h3>
-            <p class="menu-card__desc">Wrap-Version, extra knusprig</p>
+            <h3 class="menu-card__name">Insalata Caprese <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Büffelmozzarella, Tomate, Basilikum</p>
             <div class="menu-card__footer">
-              <span class="menu-card__price">7,00 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="doener-3" data-name="Dürüm" data-price="7.00">+ Hinzufügen</button>
+              <span class="menu-card__price">9,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="a3" data-name="Insalata Caprese" data-price="9.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1600628421055-4d30de868b8f?w=300" alt="Lahmacun" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Focaccia al Rosmarino" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Lahmacun <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Sellerie (R)</span></button></h3>
-            <p class="menu-card__desc">Türkische Fladenbrot-Pizza, mit Salat</p>
+            <h3 class="menu-card__name">Focaccia al Rosmarino <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Aus dem Holzofen, Rosmarin, Meersalz</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">5,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="doener-4" data-name="Lahmacun" data-price="5.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="a4" data-name="Focaccia al Rosmarino" data-price="5.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
       </section>
 
-      <!-- 🍟 Beilagen -->
-      <section class="menu-section" id="beilagen">
-        <h2 class="menu-section__title">🍟 Beilagen</h2>
+      <section class="menu-section" id="dolci">
+        <h2 class="menu-section__title"><span data-icon="wein"></span> Dolci &amp; Bevande</h2>
+        <p class="menu-section__sub">Der schöne Abschluss</p>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300" alt="Pommes Frites" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Tiramisu" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Pommes Frites <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Kann Spuren von Gluten (A) enthalten</span></button></h3>
-            <p class="menu-card__desc">Klassisch, mit Ketchup</p>
+            <h3 class="menu-card__name">Tiramisu <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Hausgemacht, mit Mascarpone und Espresso</p>
             <div class="menu-card__footer">
-              <span class="menu-card__price">2,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="beilage-1" data-name="Pommes Frites" data-price="2.50">+ Hinzufügen</button>
+              <span class="menu-card__price">6,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d1" data-name="Tiramisu" data-price="6.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300" alt="Süßkartoffel-Pommes" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Panna Cotta" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Süßkartoffel-Pommes <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Kann Spuren von Gluten (A) enthalten</span></button></h3>
-            <p class="menu-card__desc">Mit Dip</p>
+            <h3 class="menu-card__name">Panna Cotta <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Mit Waldbeeren</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">5,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d2" data-name="Panna Cotta" data-price="5.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Acqua Panna 0,75l" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Acqua Panna 0,75l</h3>
+            <p class="menu-card__desc">Stilles Mineralwasser</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">3,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="beilage-2" data-name="Süßkartoffel-Pommes" data-price="3.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Acqua Panna 0,75l" data-price="3.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1639024471283-03518883512d?w=300" alt="Onion Rings" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Coca-Cola 0,33l" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Onion Rings <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
-            <p class="menu-card__desc">8 Stück, knusprig</p>
+            <h3 class="menu-card__name">Coca-Cola 0,33l</h3>
             <div class="menu-card__footer">
-              <span class="menu-card__price">3,00 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="beilage-3" data-name="Onion Rings" data-price="3.00">+ Hinzufügen</button>
+              <span class="menu-card__price">2,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g3" data-name="Coca-Cola 0,33l" data-price="2.90">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300" alt="Coleslaw" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Birra Moretti 0,33l" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Coleslaw <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Senf (N), Sellerie (R)</span></button></h3>
-            <p class="menu-card__desc">Hausgemachter Krautsalat</p>
+            <h3 class="menu-card__name">Birra Moretti 0,33l <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Italienisches Lagerbier</p>
             <div class="menu-card__footer">
-              <span class="menu-card__price">2,00 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="beilage-4" data-name="Coleslaw" data-price="2.00">+ Hinzufügen</button>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <!-- 🥤 Getränke -->
-      <section class="menu-section" id="getraenke">
-        <h2 class="menu-section__title">🥤 Getränke</h2>
-
-        <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300" alt="Cola 0,5l" loading="lazy">
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">Cola 0,5l</h3>
-            <p class="menu-card__desc">Klassisch</p>
-            <div class="menu-card__footer">
-              <span class="menu-card__price">2,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="getraenk-1" data-name="Cola 0,5l" data-price="2.50">+ Hinzufügen</button>
+              <span class="menu-card__price">3,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g5" data-name="Birra Moretti 0,33l" data-price="3.90">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300" alt="Cola Zero 0,5l" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Chianti 0,2l" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Cola Zero 0,5l</h3>
-            <p class="menu-card__desc">Ohne Zucker</p>
+            <h3 class="menu-card__name">Chianti 0,2l <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sulfite (L)</span></button></h3>
+            <p class="menu-card__desc">Rotwein aus der Toskana</p>
             <div class="menu-card__footer">
-              <span class="menu-card__price">2,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="getraenk-2" data-name="Cola Zero 0,5l" data-price="2.50">+ Hinzufügen</button>
+              <span class="menu-card__price">5,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g6" data-name="Chianti 0,2l" data-price="5.50">+ Hinzufügen</button>
             </div>
           </div>
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300" alt="Sprite 0,5l" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Espresso" loading="lazy">
           <div class="menu-card__body">
-            <h3 class="menu-card__name">Sprite 0,5l</h3>
-            <p class="menu-card__desc">Zitrone-Limette</p>
+            <h3 class="menu-card__name">Espresso</h3>
             <div class="menu-card__footer">
-              <span class="menu-card__price">2,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="getraenk-3" data-name="Sprite 0,5l" data-price="2.50">+ Hinzufügen</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=300" alt="Wasser 0,5l" loading="lazy">
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">Wasser 0,5l</h3>
-            <p class="menu-card__desc">Still</p>
-            <div class="menu-card__footer">
-              <span class="menu-card__price">1,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="getraenk-4" data-name="Wasser 0,5l" data-price="1.50">+ Hinzufügen</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300" alt="Ayran 0,25l" loading="lazy">
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">Ayran 0,25l</h3>
-            <p class="menu-card__desc">Türkisches Joghurtgetränk</p>
-            <div class="menu-card__footer">
-              <span class="menu-card__price">1,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="getraenk-5" data-name="Ayran 0,25l" data-price="1.50">+ Hinzufügen</button>
+              <span class="menu-card__price">2,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g7" data-name="Espresso" data-price="2.20">+ Hinzufügen</button>
             </div>
           </div>
         </article>
@@ -415,7 +420,6 @@
 
     </main>
 
-    <!-- 6. Desktop Warenkorb-Sidebar -->
     <aside class="cart-sidebar" id="cart-sidebar">
       <h3 class="cart-sidebar__title">Deine Bestellung</h3>
       <div class="cart-items" id="cart-items"></div>
@@ -436,13 +440,12 @@
           <span id="cart-total">0,00 €</span>
         </div>
         <div id="stempel-hinweis"></div>
-        <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
+        <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
       </div>
     </aside>
 
   </div>
 
-  <!-- Warenkorb Slide-in (Mobile) -->
   <div class="cart-overlay" id="cart-overlay"></div>
   <div class="cart-drawer" id="cart-drawer">
     <div class="cart-drawer__header">
@@ -469,28 +472,26 @@
         <span id="cart-total-mobile">0,00 €</span>
       </div>
       <div id="stempel-hinweis-mobile"></div>
-      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse →</a>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
     </div>
   </div>
 
-  <!-- Floating Cart Button (Mobile only) -->
   <button class="cart-fab" id="cart-fab">
-    🛒 Warenkorb
+    Warenkorb
     <span class="cart-fab__count" id="cart-fab-count">0</span>
     <span class="cart-fab__price" id="cart-fab-price">0,00 €</span>
   </button>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer__cols">
         <div class="footer__col">
-          <p class="footer__brand">Stadtimbiss</p>
-          <p class="footer__claim">Frisch aus der Küche — direkt zu dir.</p>
+          <p class="footer__brand">Pizzeria Napoli</p>
+          <p class="footer__claim">Forno a legna, dal 1962. Buon appetito.</p>
           <address class="footer__contact">
             Musterstraße 1, 38100 Braunschweig<br>
             Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
-            E-Mail: <a href="mailto:info@stadtimbiss.de">info@stadtimbiss.de</a>
+            E-Mail: <a href="mailto:ciao@pizzeria-napoli.de">ciao@pizzeria-napoli.de</a>
           </address>
         </div>
         <nav class="footer__col footer__links">
@@ -501,24 +502,17 @@
         </nav>
       </div>
       <hr class="footer__divider">
-      <p class="footer__copy">&copy; 2025 Stadtimbiss — Alle Rechte vorbehalten</p>
+      <p class="footer__copy">&copy; 2025 Pizzeria Napoli, alle Rechte vorbehalten</p>
     </div>
   </footer>
 
   <script>
-    // Allergen Tooltip
     document.querySelectorAll('.allergen-btn').forEach(btn => {
       btn.addEventListener('click', e => {
         e.stopPropagation();
         const isActive = btn.classList.contains('active');
         document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
-        if (!isActive) {
-          btn.classList.add('active');
-          const tooltip = btn.querySelector('.allergen-tooltip');
-          const rect = btn.getBoundingClientRect();
-          tooltip.style.left = (rect.left + rect.width / 2) + 'px';
-          tooltip.style.top = (rect.top - 8) + 'px';
-        }
+        if (!isActive) btn.classList.add('active');
       });
     });
     document.addEventListener('click', () => {
