@@ -1,22 +1,19 @@
 // demo-daten.js — Beispieldaten fuer den Demo-Kundenbereich
-// Shop: Stadtimbiss (Pizzeria-Ordner, noch Burger- und Doener-Karte)
+// Shop: Pizzeria Napoli
 //
 // Diese Datei ist die EINZIGE, die sich zwischen den Shops unterscheidet.
-// Beim Rollout auf Burger und Asiatisch nur die Artikel und Adressen tauschen.
+// auth.js, konto.js und konto.css sind shop-neutral.
 //
 // Alle Artikel-IDs, Namen und Preise muessen exakt zu den data-Attributen
-// der .add-to-cart Buttons in bestellen.html passen. Sonst legt
-// "Nochmal bestellen" Artikel in den Warenkorb, die es nicht gibt.
+// der .add-to-cart Buttons in bestellen.html passen.
 
 // Lieferkosten dieses Shops. Liegt hier und nicht in auth.js, damit
-// auth.js in allen Shops byte-identisch bleibt und ohne Nacharbeit
-// kopiert werden kann.
+// auth.js in allen Shops byte-identisch bleibt.
 export const LIEFERKOSTEN = 2.50;
 
 // Datumshilfen: relativ zu heute, damit die Demo nicht veraltet
 const TAG = 24 * 60 * 60 * 1000;
 const vorTagen = (n) => new Date(Date.now() - n * TAG).toISOString();
-const inTagen = (n) => new Date(Date.now() + n * TAG).toISOString();
 const datumIn = (n) => new Date(Date.now() + n * TAG).toISOString().slice(0, 10);
 
 export const DEMO_PROFILE = {
@@ -64,35 +61,20 @@ export const DEMO_ADDRESSES = [
 
 export const DEMO_PAYMENT_METHODS = [
   {
-    id: 'pay-1',
-    profile_id: 'demo-kunde-0001',
-    type: 'ec',
-    stripe_payment_method_id: null,
-    brand: null,
-    last4: null,
-    exp_month: null,
-    exp_year: null,
-    is_default: true,
-    created_at: vorTagen(214)
+    id: 'pay-1', profile_id: 'demo-kunde-0001', type: 'ec',
+    stripe_payment_method_id: null, brand: null, last4: null,
+    exp_month: null, exp_year: null, is_default: true, created_at: vorTagen(214)
   },
   {
-    id: 'pay-2',
-    profile_id: 'demo-kunde-0001',
-    type: 'bar',
-    stripe_payment_method_id: null,
-    brand: null,
-    last4: null,
-    exp_month: null,
-    exp_year: null,
-    is_default: false,
-    created_at: vorTagen(214)
+    id: 'pay-2', profile_id: 'demo-kunde-0001', type: 'bar',
+    stripe_payment_method_id: null, brand: null, last4: null,
+    exp_month: null, exp_year: null, is_default: false, created_at: vorTagen(214)
   }
 ];
 
-// Hilfsfunktion, damit die Bestellungen unten kurz bleiben
 function bestellung(id, nummer, tage, mode, positionen, extras = {}) {
   const subtotal = positionen.reduce((s, p) => s + p.unit_price * p.qty, 0);
-  const delivery_fee = mode === 'lieferung' ? 2.50 : 0;
+  const delivery_fee = mode === 'lieferung' ? LIEFERKOSTEN : 0;
   const discount = extras.discount || 0;
   return {
     id,
@@ -126,42 +108,41 @@ function bestellung(id, nummer, tage, mode, positionen, extras = {}) {
 }
 
 // 7 Bestellungen, davon 6 ueber dem Mindestbestellwert von 15 Euro.
-// Die Bestellung ord-4 liegt darunter und hat deshalb bewusst keinen
+// Die Bestellung NA-2266 liegt darunter und hat deshalb bewusst keinen
 // Stempel ergeben. Das laesst sich beim Kundengespraech gut zeigen.
 export const DEMO_ORDERS = [
-  bestellung('ord-7', 'SI-2418', 6, 'lieferung', [
-    { product_id: 'burger-1', name: 'Double Smash Burger', unit_price: 8.90, qty: 2 },
-    { product_id: 'beilage-2', name: 'Süßkartoffel-Pommes', unit_price: 3.50, qty: 1 },
-    { product_id: 'getraenk-1', name: 'Cola 0,5l', unit_price: 2.50, qty: 2 }
+  bestellung('ord-7', 'NA-2418', 6, 'lieferung', [
+    { product_id: 'p3', name: 'Diavola', unit_price: 12.50, qty: 1 },
+    { product_id: 'p1', name: 'Margherita', unit_price: 9.50, qty: 1 },
+    { product_id: 'd1', name: 'Tiramisu', unit_price: 6.50, qty: 1 }
   ]),
-  bestellung('ord-6', 'SI-2377', 15, 'abholung', [
-    { product_id: 'doener-1', name: 'Döner', unit_price: 6.50, qty: 2 },
-    { product_id: 'doener-3', name: 'Dürüm', unit_price: 7.00, qty: 1 },
-    { product_id: 'getraenk-5', name: 'Ayran 0,25l', unit_price: 1.50, qty: 2 }
+  bestellung('ord-6', 'NA-2377', 15, 'abholung', [
+    { product_id: 'p8', name: 'Bufala', unit_price: 14.50, qty: 1 },
+    { product_id: 'a1', name: 'Bruschetta al Pomodoro', unit_price: 6.50, qty: 1 },
+    { product_id: 'g6', name: 'Chianti 0,2l', unit_price: 5.50, qty: 1 }
   ]),
-  bestellung('ord-5', 'SI-2301', 24, 'lieferung', [
-    { product_id: 'burger-3', name: 'BBQ Bacon Burger', unit_price: 9.50, qty: 1 },
-    { product_id: 'burger-4', name: 'Crispy Chicken Burger', unit_price: 7.90, qty: 1 },
-    { product_id: 'beilage-3', name: 'Onion Rings', unit_price: 3.00, qty: 1 }
+  bestellung('ord-5', 'NA-2301', 24, 'lieferung', [
+    { product_id: 'pa1', name: 'Spaghetti Carbonara', unit_price: 13.50, qty: 1 },
+    { product_id: 'pa3', name: 'Tagliatelle al Ragù', unit_price: 14.50, qty: 1 },
+    { product_id: 'g1', name: 'Acqua Panna 0,75l', unit_price: 3.50, qty: 1 }
   ]),
-  bestellung('ord-4', 'SI-2266', 33, 'abholung', [
-    { product_id: 'doener-1', name: 'Döner', unit_price: 6.50, qty: 1 },
-    { product_id: 'beilage-1', name: 'Pommes Frites', unit_price: 2.50, qty: 1 }
+  bestellung('ord-4', 'NA-2266', 33, 'abholung', [
+    { product_id: 'p2', name: 'Marinara', unit_price: 8.50, qty: 1 },
+    { product_id: 'g3', name: 'Coca-Cola 0,33l', unit_price: 2.90, qty: 1 }
   ], { payment_type: 'bar' }),
-  bestellung('ord-3', 'SI-2198', 45, 'lieferung', [
-    { product_id: 'burger-2', name: 'Classic Cheeseburger', unit_price: 6.90, qty: 2 },
-    { product_id: 'beilage-1', name: 'Pommes Frites', unit_price: 2.50, qty: 2 },
-    { product_id: 'getraenk-3', name: 'Sprite 0,5l', unit_price: 2.50, qty: 1 }
+  bestellung('ord-3', 'NA-2198', 45, 'lieferung', [
+    { product_id: 'p11', name: 'Tartufo', unit_price: 16.50, qty: 1 },
+    { product_id: 'a3', name: 'Insalata Caprese', unit_price: 9.50, qty: 1 }
   ]),
-  bestellung('ord-2', 'SI-2104', 58, 'lieferung', [
-    { product_id: 'burger-5', name: 'Veggie Burger', unit_price: 7.50, qty: 2 },
-    { product_id: 'beilage-4', name: 'Coleslaw', unit_price: 2.00, qty: 1 },
-    { product_id: 'getraenk-4', name: 'Wasser 0,5l', unit_price: 1.50, qty: 2 }
+  bestellung('ord-2', 'NA-2104', 58, 'lieferung', [
+    { product_id: 'p12', name: 'Calzone', unit_price: 13.00, qty: 1 },
+    { product_id: 'p5', name: 'Prosciutto e Funghi', unit_price: 13.00, qty: 1 },
+    { product_id: 'g5', name: 'Birra Moretti 0,33l', unit_price: 3.90, qty: 2 }
   ]),
-  bestellung('ord-1', 'SI-2011', 72, 'abholung', [
-    { product_id: 'doener-4', name: 'Lahmacun', unit_price: 5.50, qty: 2 },
-    { product_id: 'doener-1', name: 'Döner', unit_price: 6.50, qty: 1 },
-    { product_id: 'getraenk-1', name: 'Cola 0,5l', unit_price: 2.50, qty: 1 }
+  bestellung('ord-1', 'NA-2011', 72, 'abholung', [
+    { product_id: 'pa4', name: 'Lasagne al Forno', unit_price: 14.00, qty: 1 },
+    { product_id: 'a4', name: 'Focaccia al Rosmarino', unit_price: 5.50, qty: 1 },
+    { product_id: 'g7', name: 'Espresso', unit_price: 2.20, qty: 2 }
   ], { payment_type: 'bar' })
 ];
 
@@ -192,9 +173,9 @@ export const DEMO_VOUCHERS = [
 ];
 
 export const DEMO_FAVORITES = [
-  { id: 'fav-1', profile_id: 'demo-kunde-0001', product_id: 'burger-1', created_at: vorTagen(58) },
-  { id: 'fav-2', profile_id: 'demo-kunde-0001', product_id: 'doener-1', created_at: vorTagen(45) },
-  { id: 'fav-3', profile_id: 'demo-kunde-0001', product_id: 'beilage-2', created_at: vorTagen(15) }
+  { id: 'fav-1', profile_id: 'demo-kunde-0001', product_id: 'p3',  created_at: vorTagen(58) },
+  { id: 'fav-2', profile_id: 'demo-kunde-0001', product_id: 'p8',  created_at: vorTagen(45) },
+  { id: 'fav-3', profile_id: 'demo-kunde-0001', product_id: 'd1',  created_at: vorTagen(15) }
 ];
 
 export const DEMO_RESERVATIONS = [
@@ -228,30 +209,46 @@ export const DEMO_RESERVATIONS = [
   }
 ];
 
-// Artikelkatalog: wird fuer Favoriten und Warenkorb-Anzeige gebraucht.
-// Muss exakt zu den data-Attributen der .add-to-cart Buttons in
-// bestellen.html passen.
+// Artikelkatalog fuer die Favoriten-Ansicht.
+// Die Bildpfade zeigen vorerst auf einen Platzhalter, bis die
+// echten Produktbilder erstellt sind.
 export const KATALOG = {
-  'burger-1': { name: 'Double Smash Burger', price: 8.90, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300' },
-  'burger-2': { name: 'Classic Cheeseburger', price: 6.90, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300' },
-  'burger-3': { name: 'BBQ Bacon Burger', price: 9.50, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300' },
-  'burger-4': { name: 'Crispy Chicken Burger', price: 7.90, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=300' },
-  'burger-5': { name: 'Veggie Burger', price: 7.50, kategorie: 'Burger', img: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=300' },
-  'doener-1': { name: 'Döner', price: 6.50, kategorie: 'Döner', img: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300' },
-  'doener-3': { name: 'Dürüm', price: 7.00, kategorie: 'Döner', img: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=300' },
-  'doener-4': { name: 'Lahmacun', price: 5.50, kategorie: 'Döner', img: 'https://images.unsplash.com/photo-1600628421055-4d30de868b8f?w=300' },
-  'beilage-1': { name: 'Pommes Frites', price: 2.50, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300' },
-  'beilage-2': { name: 'Süßkartoffel-Pommes', price: 3.50, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=300' },
-  'beilage-3': { name: 'Onion Rings', price: 3.00, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1639024471283-03518883512d?w=300' },
-  'beilage-4': { name: 'Coleslaw', price: 2.00, kategorie: 'Beilagen', img: 'https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=300' },
-  'getraenk-1': { name: 'Cola 0,5l', price: 2.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300' },
-  'getraenk-2': { name: 'Cola Zero 0,5l', price: 2.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=300' },
-  'getraenk-3': { name: 'Sprite 0,5l', price: 2.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300' },
-  'getraenk-4': { name: 'Wasser 0,5l', price: 1.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=300' },
-  'getraenk-5': { name: 'Ayran 0,25l', price: 1.50, kategorie: 'Getränke', img: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300' }
+  'p1': { name: "Margherita", price: 9.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p2': { name: "Marinara", price: 8.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p3': { name: "Diavola", price: 12.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p4': { name: "Quattro Formaggi", price: 13.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p5': { name: "Prosciutto e Funghi", price: 13.00, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p6': { name: "Capricciosa", price: 14.00, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p7': { name: "Napoli", price: 12.00, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p8': { name: "Bufala", price: 14.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p9': { name: "Salsiccia e Friarielli", price: 14.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p10': { name: "Ortolana", price: 12.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p11': { name: "Tartufo", price: 16.50, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'p12': { name: "Calzone", price: 13.00, kategorie: 'Pizza', img: 'Bilder/platzhalter.svg' },
+  'pa1': { name: "Spaghetti Carbonara", price: 13.50, kategorie: 'Pasta', img: 'Bilder/platzhalter.svg' },
+  'pa2': { name: "Penne all'Arrabbiata", price: 11.50, kategorie: 'Pasta', img: 'Bilder/platzhalter.svg' },
+  'pa3': { name: "Tagliatelle al Ragù", price: 14.50, kategorie: 'Pasta', img: 'Bilder/platzhalter.svg' },
+  'pa4': { name: "Lasagne al Forno", price: 14.00, kategorie: 'Pasta', img: 'Bilder/platzhalter.svg' },
+  'pa5': { name: "Gnocchi al Gorgonzola", price: 13.50, kategorie: 'Pasta', img: 'Bilder/platzhalter.svg' },
+  'pa6': { name: "Spaghetti Aglio e Olio", price: 10.50, kategorie: 'Pasta', img: 'Bilder/platzhalter.svg' },
+  'a1': { name: "Bruschetta al Pomodoro", price: 6.50, kategorie: 'Antipasti', img: 'Bilder/platzhalter.svg' },
+  'a2': { name: "Antipasto Misto", price: 11.50, kategorie: 'Antipasti', img: 'Bilder/platzhalter.svg' },
+  'a3': { name: "Insalata Caprese", price: 9.50, kategorie: 'Antipasti', img: 'Bilder/platzhalter.svg' },
+  'a4': { name: "Focaccia al Rosmarino", price: 5.50, kategorie: 'Antipasti', img: 'Bilder/platzhalter.svg' },
+  'a5': { name: "Olive Ascolane", price: 7.00, kategorie: 'Antipasti', img: 'Bilder/platzhalter.svg' },
+  'd1': { name: "Tiramisu", price: 6.50, kategorie: 'Dolci', img: 'Bilder/platzhalter.svg' },
+  'd2': { name: "Panna Cotta", price: 5.50, kategorie: 'Dolci', img: 'Bilder/platzhalter.svg' },
+  'd3': { name: "Cannolo Siciliano", price: 5.00, kategorie: 'Dolci', img: 'Bilder/platzhalter.svg' },
+  'g1': { name: "Acqua Panna 0,75l", price: 3.50, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' },
+  'g2': { name: "San Pellegrino 0,75l", price: 3.90, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' },
+  'g3': { name: "Coca-Cola 0,33l", price: 2.90, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' },
+  'g4': { name: "Limonata 0,33l", price: 3.20, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' },
+  'g5': { name: "Birra Moretti 0,33l", price: 3.90, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' },
+  'g6': { name: "Chianti 0,2l", price: 5.50, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' },
+  'g7': { name: "Espresso", price: 2.20, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' },
+  'g8': { name: "Cappuccino", price: 3.20, kategorie: 'Bevande', img: 'Bilder/platzhalter.svg' }
 };
 
-// Wird von auth.js beim Auto-Login eingespielt
 export function demoDatenSatz() {
   return {
     profile: structuredClone(DEMO_PROFILE),
