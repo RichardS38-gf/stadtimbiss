@@ -17,13 +17,14 @@ const PFADE = {
     <path d="M17.4 3c-1.5 1.1-2.3 3-2.3 5.2 0 1.7.9 2.9 2.3 3.2V3z"/>
     <path d="M17.4 11.4V21"/>`,
 
-  // Pizzastück
+  // Runde Pizza mit Rand und Belag
   pizza: `
-    <path d="M12 3.2 3.8 19.2c-.3.6.2 1.3.9 1.2l14.6-2.6c.6-.1.9-.8.6-1.3z"/>
-    <path d="M6.6 14.2h.01"/>
-    <path d="M10.4 10.6h.01"/>
-    <path d="M11 16.4h.01"/>
-    <path d="M14.8 14.6h.01"/>`,
+    <circle cx="12" cy="12" r="9"/>
+    <circle cx="12" cy="12" r="6.6"/>
+    <path d="M9.9 10.3h.01"/>
+    <path d="M14.2 10.9h.01"/>
+    <path d="M11.5 14.3h.01"/>
+    <path d="M14.7 14.1h.01"/>`,
 
   // Holzofen
   ofen: `
