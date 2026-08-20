@@ -210,8 +210,6 @@ export const DEMO_RESERVATIONS = [
 ];
 
 // Artikelkatalog fuer die Favoriten-Ansicht.
-// Die Bildpfade zeigen vorerst auf einen Platzhalter, bis die
-// echten Produktbilder erstellt sind.
 export const KATALOG = {
   'p1':  { name: 'Margherita',            price: 9.50,  kategorie: 'Pizza',     img: 'Bilder/Margherita.png' },
   'p2':  { name: 'Marinara',              price: 8.50,  kategorie: 'Pizza',     img: 'Bilder/Marinara.png' },
@@ -228,13 +226,13 @@ export const KATALOG = {
   'a1':  { name: 'Bruschetta al Pomodoro', price: 6.50, kategorie: 'Antipasti', img: 'Bilder/bruschetta.png' },
   'a3':  { name: 'Insalata Caprese',      price: 9.50,  kategorie: 'Antipasti', img: 'Bilder/insalata.png' },
   'a4':  { name: 'Focaccia al Rosmarino', price: 5.50,  kategorie: 'Antipasti', img: 'Bilder/Focaccia.png' },
-  'd1':  { name: 'Tiramisu',              price: 6.50,  kategorie: 'Dolci',     img: 'Bilder/platzhalter.svg' },
-  'd2':  { name: 'Panna Cotta',           price: 5.50,  kategorie: 'Dolci',     img: 'Bilder/platzhalter.svg' },
-  'g1':  { name: 'Acqua Panna 0,75l',     price: 3.50,  kategorie: 'Bevande',   img: 'Bilder/platzhalter.svg' },
-  'g3':  { name: 'Coca-Cola 0,33l',       price: 2.90,  kategorie: 'Bevande',   img: 'Bilder/platzhalter.svg' },
-  'g5':  { name: 'Birra Moretti 0,33l',   price: 3.90,  kategorie: 'Bevande',   img: 'Bilder/platzhalter.svg' },
-  'g6':  { name: 'Chianti 0,2l',          price: 5.50,  kategorie: 'Bevande',   img: 'Bilder/platzhalter.svg' },
-  'g7':  { name: 'Espresso',              price: 2.20,  kategorie: 'Bevande',   img: 'Bilder/platzhalter.svg' }
+  'd1':  { name: 'Tiramisu',              price: 6.50,  kategorie: 'Dolci',     img: 'Bilder/tiramisu.png' },
+  'd2':  { name: 'Panna Cotta',           price: 5.50,  kategorie: 'Dolci',     img: 'Bilder/pannacotta.png' },
+  'g1':  { name: 'Acqua Panna 0,75l',     price: 3.50,  kategorie: 'Bevande',   img: 'Bilder/Acqua%20Panna.png' },
+  'g3':  { name: 'Coca-Cola 0,33l',       price: 2.90,  kategorie: 'Bevande',   img: 'Bilder/Cola.png' },
+  'g5':  { name: 'Birra Moretti 0,33l',   price: 3.90,  kategorie: 'Bevande',   img: 'Bilder/Birra%20Moretti.png' },
+  'g6':  { name: 'Chianti 0,2l',          price: 5.50,  kategorie: 'Bevande',   img: 'Bilder/Chianti.png' },
+  'g7':  { name: 'Espresso',              price: 2.20,  kategorie: 'Bevande',   img: 'Bilder/esspresso.png' }
 };
 
 export function demoDatenSatz() {
