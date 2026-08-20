@@ -201,6 +201,19 @@ button:hover .ic-badge,
   margin-bottom: var(--space-3);
 }
 
+/* Icons auf der Reservierungsseite in der Akzentfarbe */
+.res-info-card h3 .ic,
+.res-info-item .ic,
+.res-hero .ic,
+.res-success__icon .ic {
+  color: var(--color-accent);
+}
+
+.res-info-item .ic {
+  width: 20px;
+  height: 20px;
+}
+
 /* Icons im Kontaktbereich in der Akzentfarbe */
 .contact-card__icon {
   color: var(--color-accent);
