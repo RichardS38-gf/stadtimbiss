@@ -181,7 +181,7 @@
       <div class="wm-banner__text">
         <p class="wm-banner__label">Pranzo &middot; Mittagstisch</p>
         <p class="wm-banner__headline">Pizza deiner Wahl plus Getränk für 11,90 €</p>
-        <p class="wm-banner__sub">Montag bis Freitag, 11:30 bis 14:30 Uhr <span id="pranzo-status"></span></p>
+        <p class="wm-banner__sub">Montag bis Freitag, 11:30 bis 14:30 Uhr</p>
       </div>
       <a href="bestellen.html" class="btn btn--primary wm-banner__btn">Jetzt bestellen</a>
     </div>
@@ -286,29 +286,6 @@
   <script>
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
-
-    // Mittagstisch: zeigt an, ob das Angebot gerade gilt.
-    // Bewusst ohne festes Enddatum, damit es nicht veraltet.
-    (function pranzoStatus() {
-      const el = document.getElementById('pranzo-status');
-      if (!el) return;
-      const jetzt = new Date();
-      const tag = jetzt.getDay();            // 0 = Sonntag
-      const minuten = jetzt.getHours() * 60 + jetzt.getMinutes();
-      const werktag = tag >= 1 && tag <= 5;
-      const imFenster = minuten >= 690 && minuten <= 870;  // 11:30 bis 14:30
-
-      if (werktag && imFenster) {
-        el.textContent = '· jetzt gültig';
-        el.className = 'pranzo-status pranzo-status--aktiv';
-      } else if (werktag && minuten < 690) {
-        el.textContent = '· heute ab 11:30 Uhr';
-        el.className = 'pranzo-status';
-      } else {
-        el.textContent = '';
-        el.className = 'pranzo-status';
-      }
-    })();
 
     const reviews = [
       { q: '„Der Teig ist ein Gedicht. Rand luftig, Boden dünn, leicht angekokelt. So schmeckt Pizza in Neapel und sonst nirgends in Braunschweig."', a: 'Mehmet K. · vor 2 Wochen · Google' },
