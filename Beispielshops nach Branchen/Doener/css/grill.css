@@ -42,18 +42,36 @@
 .hero {
   display: grid;
   grid-template-columns: 1fr;
-  min-height: 100svh;
 }
 
 .hero__panel {
   position: relative;
   overflow: hidden;
-  background: var(--color-bg);
-  padding: var(--space-7) var(--container-pad-mobile) var(--space-6);
+  background-color: var(--color-bg);
+  /* Wasserzeichen als Hintergrund, damit es die Hoehe niemals
+     beeinflussen kann. */
+  background-image: url('../Bilder/Logo.png');
+  background-repeat: no-repeat;
+  background-position: center 58%;
+  background-size: min(78%, 540px);
+  padding: var(--space-8) var(--container-pad-mobile) var(--space-7);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 82svh;
 }
+
+/* Blasse Ueberlagerung, damit das Wasserzeichen zurueckfaellt */
+.hero__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg);
+  opacity: 0.955;
+  pointer-events: none;
+}
+
+.hero__panel > * { position: relative; z-index: 1; }
 
 /* Marke oben links, aus dem Fluss genommen, damit der Textblock
    in der Flaeche wirklich mittig sitzt. */
@@ -91,19 +109,7 @@
   margin-top: 2px;
 }
 
-/* Dasselbe Logo gross und blass hinter dem Textblock */
-.hero__wasserzeichen {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 132%;
-  max-width: none;
-  opacity: 0.035;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-}
+/* Wasserzeichen liegt jetzt als Hintergrund auf .hero__panel */
 
 .hero__inhalt {
   position: relative;
@@ -156,7 +162,7 @@
 /* Rechte Spalte: Bild bis zur Oberkante */
 .hero__bild {
   position: relative;
-  min-height: 46vh;
+  min-height: 42svh;
   background-size: cover;
   background-position: center;
   background-color: var(--color-dark);
@@ -225,12 +231,18 @@
   .hero {
     grid-template-columns: 1fr 1fr;
     height: 100svh;
-    min-height: 620px;
+    min-height: 600px;
+    max-height: 900px;
   }
-  .hero__panel { padding: var(--space-7); }
+  .hero__panel {
+    padding: var(--space-7);
+    min-height: 0;
+    background-position: center 55%;
+    background-size: min(70%, 460px);
+  }
   .hero__marke { top: var(--space-6); left: var(--space-7); }
   .hero__logo { width: 84px; }
-  .hero__bild { order: 0; min-height: 100%; }
+  .hero__bild { order: 0; min-height: 0; }
   .hero-nav { padding-inline: var(--space-6); }
   .hero-nav__links { display: flex; }
 }
