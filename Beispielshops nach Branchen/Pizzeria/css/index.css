@@ -65,10 +65,11 @@
 }
 
 .hero__title {
-  font-size: 5rem;
+  font-size: clamp(2.4rem, 9vw, 5rem);
   color: var(--color-on-dark);
   margin-bottom: var(--space-6);
-  line-height: 1.0;
+  line-height: 1.05;
+  hyphens: none;
 }
 
 .hero__accent {
@@ -102,7 +103,7 @@
     min-height: 85vh;
   }
   .hero__title {
-    font-size: 7rem;
+    font-size: clamp(3.4rem, 7vw, 6rem);
   }
   .hero__actions {
     flex-direction: row;
