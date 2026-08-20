@@ -287,6 +287,20 @@
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
 
+    // Info-Banner: auf Mobile laufen die drei Angaben nacheinander durch,
+    // auf Desktop stehen sie ohnehin alle nebeneinander.
+    (function infoSlider() {
+      const items = document.querySelectorAll('.info-banner__item');
+      if (!items.length) return;
+      let i = 0;
+      items[0].classList.add('active');
+      setInterval(() => {
+        items[i].classList.remove('active');
+        i = (i + 1) % items.length;
+        items[i].classList.add('active');
+      }, 3200);
+    })();
+
     const reviews = [
       { q: '„Der Teig ist ein Gedicht. Rand luftig, Boden dünn, leicht angekokelt. So schmeckt Pizza in Neapel und sonst nirgends in Braunschweig."', a: 'Mehmet K. · vor 2 Wochen · Google' },
       { q: '„Wir bestellen seit Jahren jeden Freitag. Die Diavola ist scharf wie sie sein soll und kommt immer heiß an."', a: 'Sandra B. · vor 1 Monat · Google' },
