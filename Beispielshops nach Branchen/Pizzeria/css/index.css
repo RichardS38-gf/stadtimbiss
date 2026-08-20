@@ -400,15 +400,24 @@
   background-image: url('../Bilder/banner.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
-  padding-block: var(--space-6);
+  /* Parallax nur auf Desktop. iOS ignoriert fixed und zoomt
+     das Bild stattdessen stark hinein. */
+  background-attachment: scroll;
+  padding-block: var(--space-5);
+}
+
+@media (min-width: 900px) {
+  .wm-banner {
+    background-attachment: fixed;
+    padding-block: var(--space-6);
+  }
 }
 
 .wm-banner::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.45);
   z-index: 0;
 }
 
@@ -421,10 +430,15 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-4);
-  min-height: 160px;
+  gap: var(--space-3);
+  min-height: 0;
   justify-content: center;
   color: var(--color-on-dark);
+}
+
+.wm-banner__label .ic {
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 .wm-banner__flag {
@@ -439,26 +453,30 @@
 .wm-banner__label {
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   color: var(--color-on-dark);
   margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .wm-banner__headline {
   font-family: var(--font-head);
   font-weight: 800;
-  font-size: var(--text-sm);
+  font-size: var(--text-xl);
   color: var(--color-on-dark);
   line-height: 1.2;
   margin-bottom: var(--space-1);
 }
 
 .wm-banner__sub {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: var(--text-lg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-sm);
   color: var(--color-on-dark);
-  line-height: 1.1;
+  line-height: 1.4;
+  opacity: 0.85;
 }
 
 .wm-banner__btn {
