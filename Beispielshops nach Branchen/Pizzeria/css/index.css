@@ -417,8 +417,16 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  /* Auf Mobile etwas dunkler, weil der Text dort direkt auf dem
+     Bild steht und weniger Raum drumherum hat. */
+  background: rgba(0, 0, 0, 0.55);
   z-index: 0;
+}
+
+@media (min-width: 900px) {
+  .wm-banner::after {
+    background: rgba(0, 0, 0, 0.45);
+  }
 }
 
 .wm-banner__inner {
