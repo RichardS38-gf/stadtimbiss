@@ -322,6 +322,13 @@ button:hover .ic-badge,
   background-position: center;
 }
 
+/* Auf Mobile steht immer erst der Text, dann das Bild.
+   Auf Desktop regelt die Reihenfolge das Raster weiter unten. */
+@media (max-width: 899px) {
+  .split__text  { order: 1; }
+  .split__media { order: 2; }
+}
+
 .split__text {
   display: flex;
   flex-direction: column;
