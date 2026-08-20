@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Produktbild folgt">
+  <rect width="120" height="120" fill="#F5EFE3"/>
+  <rect x="0.5" y="0.5" width="119" height="119" fill="none" stroke="#E2D8C6"/>
+  <g fill="none" stroke="#1F6E73" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"
+     transform="translate(36 30) scale(2)">
+    <path d="M12 2.6v18.8"/>
+    <path d="M8.4 20.6h7.2"/>
+    <path d="M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z"/>
+    <path d="M8.1 8.4h7.8"/>
+    <path d="M7.6 11.6h8.8"/>
+    <path d="M8.4 14.8h7.2"/>
+  </g>
+  <text x="60" y="106" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+        font-size="9" fill="#7C7365">Foto folgt</text>
+</svg>

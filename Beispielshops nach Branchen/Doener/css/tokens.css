@@ -1,0 +1,62 @@
+/* tokens.css — Bosporus Grill
+   Petrol und Kupfer auf warmem Sand.
+   Petrol stammt von Iznik-Keramik und Moscheekacheln, Kupfer von
+   Teekannen und Grillgerät. Bewusst anders als die roten Shops
+   und als das dunkle Asia Garden. */
+:root {
+  /* Farben */
+  --color-accent:     #1F6E73;   /* Petrol, Iznik */
+  --color-accent-dk:  #16545A;
+  --color-on-accent:  #FFFDF8;
+  --color-copper:     #B87333;   /* Kupfer, zweiter Akzent */
+  --color-copper-dk:  #96551F;
+  --color-saffron:    #D9A441;   /* Sterne, Auszeichnungen */
+
+  --color-bg:         #F5EFE3;   /* Sand */
+  --color-bg-soft:    #FFFDF8;   /* Karten */
+  --color-ink:        #22201C;   /* warmes Schwarz */
+  --color-muted:      #7C7365;
+  --color-line:       #E2D8C6;
+  --color-dark:       #1A2C2E;   /* dunkles Petrol fuer Footer */
+  --color-on-dark:    #F5EFE3;
+
+  /* Typografie
+     Rubik traegt die Ueberschriften, kraeftig aber nicht plump,
+     in nahoestlicher Markengestaltung weit verbreitet.
+     Inter bleibt fuer Fliesstext und Bedienelemente. */
+  --font-head:   'Rubik', system-ui, sans-serif;
+  --font-body:   'Inter', system-ui, sans-serif;
+  --font-script: 'Caveat', cursive;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* Container */
+  --container-pad-mobile:  1rem;
+  --container-pad-tablet:  1.5rem;
+  --container-pad-desktop: 2rem;
+  --max-content-width:     1200px;
+
+  /* Typografische Skala */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.5rem;
+  --text-5xl:  3.5rem;
+
+  --transition: 0.2s ease;
+
+  --radius-sm: 4px;
+  --radius-md: 12px;
+}
