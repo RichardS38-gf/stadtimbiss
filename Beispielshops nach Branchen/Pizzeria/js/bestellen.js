@@ -2,6 +2,7 @@
 
 import { addToCart, getCart, getCartTotal, getCartCount, updateQty, removeFromCart } from './cart.js';
 import { setupSeite, getStampPreview, isFavorite, toggleFavorite, TREUE } from './auth.js';
+import { iconsEinsetzen } from './icons.js';
 
 // ---------- Cart-Item HTML ----------
 function cartItemHTML(item) {
@@ -302,6 +303,7 @@ renderCartMobile();
 
 // Kundenkonto: Auto-Login, Demo-Banner, Konto-Link, Favoriten, Stempel
 setupSeite().then(() => {
+  iconsEinsetzen();
   herzenAufbauen();
   renderStempelHinweis();
 });
