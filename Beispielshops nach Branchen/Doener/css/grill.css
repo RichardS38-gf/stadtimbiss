@@ -49,37 +49,47 @@
   position: relative;
   overflow: hidden;
   background: var(--color-bg);
-  padding: var(--space-6) var(--container-pad-mobile) var(--space-7);
+  padding: var(--space-7) var(--container-pad-mobile) var(--space-6);
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-/* Marke oben links: Zeichen und Schriftzug nebeneinander */
+/* Marke oben links, aus dem Fluss genommen, damit der Textblock
+   in der Flaeche wirklich mittig sitzt. */
 .hero__marke {
-  position: relative;
+  position: absolute;
+  top: var(--space-5);
+  left: var(--container-pad-mobile);
   z-index: 2;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  gap: var(--space-3);
 }
 
 .hero__logo {
   display: block;
-  width: 92px;
-  max-width: 22vw;
+  width: 74px;
+  max-width: 18vw;
 }
 
 .hero__wortmarke {
-  font-family: var(--font-head);
+  font-family: 'Reem Kufi', var(--font-head);
   font-weight: 600;
-  font-size: clamp(1.05rem, 2.4vw, 1.45rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
   color: var(--color-accent);
 }
 
 .hero__wortmarke span { display: block; }
+.hero__wortmarke span + span {
+  font-size: 0.62em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-top: 2px;
+}
 
 /* Dasselbe Logo gross und blass hinter dem Textblock */
 .hero__wasserzeichen {
@@ -98,8 +108,6 @@
 .hero__inhalt {
   position: relative;
   z-index: 1;
-  margin-top: auto;
-  margin-bottom: auto;
   max-width: 52ch;
 }
 
@@ -118,11 +126,11 @@
 .hero__title {
   font-family: var(--font-head);
   font-weight: 500;
-  font-size: clamp(2.8rem, 7.4vw, 5rem);
+  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
   line-height: 1.03;
   letter-spacing: -0.025em;
   color: var(--color-ink);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-4);
 }
 
 .hero__title em {
@@ -214,9 +222,14 @@
 .hero-nav .nav__konto-icon { color: #fff; }
 
 @media (min-width: 900px) {
-  .hero { grid-template-columns: 1fr 1fr; }
-  .hero__panel { padding: var(--space-5) var(--space-7) var(--space-8); }
-  .hero__logo { width: 108px; }
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    height: 100svh;
+    min-height: 620px;
+  }
+  .hero__panel { padding: var(--space-7); }
+  .hero__marke { top: var(--space-6); left: var(--space-7); }
+  .hero__logo { width: 84px; }
   .hero__bild { order: 0; min-height: 100%; }
   .hero-nav { padding-inline: var(--space-6); }
   .hero-nav__links { display: flex; }
