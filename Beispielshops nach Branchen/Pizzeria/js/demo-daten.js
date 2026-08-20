@@ -226,7 +226,7 @@ export const KATALOG = {
   'a1':  { name: 'Bruschetta al Pomodoro', price: 6.50, kategorie: 'Antipasti', img: 'Bilder/bruschetta.png' },
   'a3':  { name: 'Insalata Caprese',      price: 9.50,  kategorie: 'Antipasti', img: 'Bilder/insalata.png' },
   'a4':  { name: 'Focaccia al Rosmarino', price: 5.50,  kategorie: 'Antipasti', img: 'Bilder/Focaccia.png' },
-  'd1':  { name: 'Tiramisu',              price: 6.50,  kategorie: 'Dolci',     img: 'Bilder/tiramisu.png' },
+  'd1':  { name: 'Tiramisu',              price: 6.50,  kategorie: 'Dolci',     img: 'Bilder/tiramisu_produkt.png' },
   'd2':  { name: 'Panna Cotta',           price: 5.50,  kategorie: 'Dolci',     img: 'Bilder/pannacotta.png' },
   'g1':  { name: 'Acqua Panna 0,75l',     price: 3.50,  kategorie: 'Bevande',   img: 'Bilder/Acqua%20Panna.png' },
   'g3':  { name: 'Coca-Cola 0,33l',       price: 2.90,  kategorie: 'Bevande',   img: 'Bilder/Cola.png' },
