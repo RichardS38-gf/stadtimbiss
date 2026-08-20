@@ -36,67 +36,84 @@
 
 @media (min-width: 901px) { .nav__links { display: flex; } }
 
-/* ── HERO: zweigeteilt, Farbfläche links, Bild rechts ── */
+/* ── HERO: Farbfläche links, randloses Bild rechts ──
+   Kein durchlaufender Header. Die Navigation liegt oben rechts
+   über dem Bild, das bis an die obere Bildschirmkante reicht. */
 .hero {
   display: grid;
   grid-template-columns: 1fr;
-  background: var(--color-dark);
+  min-height: 100svh;
 }
 
 .hero__panel {
-  padding: var(--space-8) var(--container-pad-mobile);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: var(--color-on-dark);
   position: relative;
   overflow: hidden;
+  background: var(--color-bg);
+  padding: var(--space-6) var(--container-pad-mobile) var(--space-7);
+  display: flex;
+  flex-direction: column;
 }
 
-/* Diagonale Streifen als Textur, angelehnt an Grillrost */
-.hero__panel::before {
-  content: '';
+/* Logo oben links */
+.hero__logo {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 128px;
+  max-width: 40vw;
+  margin-bottom: var(--space-7);
+}
+
+/* Dasselbe Logo gross und blass hinter dem Text */
+.hero__wasserzeichen {
   position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    -60deg,
-    rgba(184,115,51,0.10) 0 2px,
-    transparent 2px 22px);
+  left: -12%;
+  bottom: -14%;
+  width: 92%;
+  max-width: 620px;
+  opacity: 0.06;
   pointer-events: none;
+  user-select: none;
+  z-index: 0;
 }
 
-.hero__panel > * { position: relative; z-index: 1; }
+.hero__inhalt {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 34ch;
+}
 
 .hero__nummer {
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.3em;
+  text-transform: uppercase;
   color: var(--color-copper);
   margin-bottom: var(--space-4);
 }
 
 .hero__title {
   font-family: var(--font-head);
-  font-weight: 800;
-  font-size: clamp(2.6rem, 8vw, 4.6rem);
-  line-height: 0.98;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6.4vw, 4.2rem);
+  line-height: 1.05;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
+  color: var(--color-ink);
   margin-bottom: var(--space-5);
 }
 
 .hero__title em {
   font-style: normal;
-  color: var(--color-copper);
   display: block;
 }
 
 .hero__sub {
   font-size: var(--text-lg);
-  line-height: 1.6;
-  opacity: 0.75;
-  max-width: 38ch;
+  line-height: 1.7;
+  color: var(--color-muted);
   margin-bottom: var(--space-6);
 }
 
@@ -106,17 +123,81 @@
   flex-wrap: wrap;
 }
 
+/* Rechte Spalte: Bild bis zur Oberkante */
 .hero__bild {
-  min-height: 300px;
+  position: relative;
+  min-height: 46vh;
   background-size: cover;
   background-position: center;
-  background-color: var(--color-accent-dk);
+  background-color: var(--color-dark);
+  order: -1;
 }
 
+/* Navigation liegt ueber dem Bild */
+.hero-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--container-pad-mobile);
+}
+
+.hero-nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(26,44,46,0.65), transparent);
+  pointer-events: none;
+}
+
+.hero-nav > * { position: relative; }
+
+.hero-nav__links {
+  display: none;
+  gap: var(--space-5);
+}
+
+.hero-nav__links a {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.hero-nav__links a:hover { color: var(--color-copper); opacity: 1; }
+
+.hero-nav__aktionen {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Konto-Button auf dem Bild hell umrandet */
+.hero-nav .nav__konto {
+  color: #fff;
+  border-color: rgba(255,255,255,0.55);
+}
+
+.hero-nav .nav__konto:hover {
+  color: var(--color-copper);
+  border-color: var(--color-copper);
+}
+
+.hero-nav .nav__konto-icon { color: #fff; }
+
 @media (min-width: 900px) {
-  .hero { grid-template-columns: 1fr 1fr; min-height: 78vh; }
-  .hero__panel { padding: var(--space-8) var(--space-7); }
-  .hero__bild { min-height: 100%; }
+  .hero { grid-template-columns: 1fr 1fr; }
+  .hero__panel { padding: var(--space-7) var(--space-7) var(--space-8); }
+  .hero__logo { width: 150px; }
+  .hero__bild { order: 0; min-height: 100%; }
+  .hero-nav { padding-inline: var(--space-6); }
+  .hero-nav__links { display: flex; }
 }
 
 /* ── LAUFBAND ──

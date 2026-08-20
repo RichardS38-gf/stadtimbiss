@@ -22,57 +22,47 @@
 </head>
 <body>
 
-  <header class="nav">
-    <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">
-        <svg class="nav__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 2.6v18.8"/>
-          <path d="M8.4 20.6h7.2"/>
-          <path d="M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z"/>
-          <path d="M8.1 8.4h7.8"/>
-          <path d="M7.6 11.6h8.8"/>
-          <path d="M8.4 14.8h7.2"/>
-        </svg>
-        <span class="nav__logo-text">Bosporus Grill<small>Döner &middot; Kebab &middot; Meze</small></span>
-      </a>
-      <nav class="nav__links">
-        <a href="#herkunft">Über uns</a>
-        <a href="#karte">Karte</a>
-        <a href="#stimmen">Stimmen</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
-      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;">
-        <span id="nav-konto"></span>
-        <a href="reservieren.html" class="btn btn--outline btn--sm">
-          <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
-        </a>
-        <a href="bestellen.html" class="btn btn--primary btn--sm">
-          <span data-icon="korb"></span> <span class="btn__text">Bestellen</span>
-        </a>
+  <!-- Hero: Fläche links, randloses Bild rechts, Navigation darüber -->
+  <section class="hero">
+
+    <div class="hero__panel">
+      <img class="hero__wasserzeichen" src="Bilder/Logo.png" alt="" aria-hidden="true">
+      <a href="index.html"><img class="hero__logo" src="Bilder/Logo.png" alt="Bosporus Grill"></a>
+
+      <div class="hero__inhalt">
+        <p class="hero__nummer">Braunschweig &middot; seit 1988</p>
+        <h1 class="hero__title">Bosporus<em>Grillrestaurant</em></h1>
+        <p class="hero__sub">Döner vom Spieß, den wir jeden Morgen selbst stecken. Kebab über Holzkohle, nicht über Gas. Mehr Geheimnis steckt nicht dahinter.</p>
+        <div class="hero__actions">
+          <a href="bestellen.html" class="btn btn--primary">
+            <span data-icon="korb"></span> Jetzt bestellen
+          </a>
+          <a href="reservieren.html" class="btn btn--outline">
+            <span data-icon="tisch"></span> Tisch reservieren
+          </a>
+        </div>
       </div>
     </div>
-  </header>
+
+    <div class="hero__bild" style="background-image:url('Bilder/platzhalter.svg')" role="img" aria-label="Gastraum und Grill">
+      <div class="hero-nav nav">
+        <div class="nav__inner" style="display:contents">
+          <nav class="hero-nav__links nav__links">
+            <a href="#herkunft">Über uns</a>
+            <a href="#karte">Karte</a>
+            <a href="#stimmen">Stimmen</a>
+            <a href="#kontakt">Kontakt</a>
+          </nav>
+          <div class="hero-nav__aktionen nav__aktionen">
+            <span id="nav-konto"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <div class="demo-banner" id="demo-banner"></div>
-
-  <!-- Hero: Farbfläche links, Bild rechts -->
-  <section class="hero">
-    <div class="hero__panel">
-      <p class="hero__nummer">Braunschweig · seit 1988</p>
-      <h1 class="hero__title">Döner vom Spieß<em>Kebab vom Feuer</em></h1>
-      <p class="hero__sub">Kalbfleisch, das wir jeden Morgen selbst stecken. Grillgut über Holzkohle, nicht über Gas. Mehr Geheimnis steckt nicht dahinter.</p>
-      <div class="hero__actions">
-        <a href="bestellen.html" class="btn btn--primary">
-          <span data-icon="korb"></span> Jetzt bestellen
-        </a>
-        <a href="reservieren.html" class="btn btn--outline-light">
-          <span data-icon="tisch"></span> Tisch reservieren
-        </a>
-      </div>
-    </div>
-    <div class="hero__bild" style="background-image:url('Bilder/platzhalter.svg')" role="img" aria-label="Drehspieß und Grill"></div>
-  </section>
 
   <!-- Laufband -->
   <div class="ticker">
