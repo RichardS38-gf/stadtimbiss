@@ -106,6 +106,66 @@ button { color: inherit; }
 .mode-card--active { color: var(--color-on-accent, #fff); }
 .cat-link { color: var(--color-ink); }
 
+/* ── BUTTONS MIT VERSETZTEM RAHMEN ──
+   Ein zweiter Rahmen liegt um 5px versetzt hinter dem Button und
+   fährt beim Überfahren darauf zu. Gilt auf allen Seiten. */
+.btn {
+  position: relative;
+  border-radius: 6px;
+  isolation: isolate;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--color-copper);
+  border-radius: 6px;
+  transform: translate(5px, 5px);
+  transition: transform var(--transition);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  transform: translate(0, 0);
+}
+
+/* Umrandete Buttons bekommen den Schatten in Petrol,
+   damit sich die beiden Varianten unterscheiden. */
+.btn--outline::after,
+.btn--outline-light::after {
+  border-color: var(--color-accent);
+}
+
+/* Auf dunklem Grund muss der versetzte Rahmen hell sein */
+.hero-nav .btn::after,
+.streifen .btn::after,
+.zahlen .btn::after,
+.gutschein--dunkel .btn::after,
+.footer .btn::after {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Kleine Buttons mit geringerem Versatz, sonst wird es unruhig */
+.btn--sm::after { transform: translate(3px, 3px); }
+
+/* Buttons in Listen und Karten ohne Rahmen, dort sind es zu viele */
+.gericht .btn::after,
+.menu-card .btn::after,
+.cart-item .btn::after,
+.konto-panel .btn--sm::after {
+  display: none;
+}
+
+/* Volle Breite: Rahmen darf nicht über den Rand hinauslaufen */
+.btn--full { margin-right: 5px; margin-bottom: 5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn::after { transition: none; }
+}
+
 /* ── ORNAMENTBAND ──
    Geometrisches Muster statt eines Farbstreifens, angelehnt an
    Kachelornamente. Ersetzt die Tricolore aus dem Pizzeria-Shop. */
