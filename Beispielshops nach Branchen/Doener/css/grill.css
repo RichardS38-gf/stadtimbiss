@@ -598,6 +598,150 @@
   .gericht__aktion { grid-column: 2; justify-content: flex-start; }
 }
 
+/* ── KENNZAHLEN ── */
+.zahlen {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  padding-block: var(--space-7);
+}
+
+.zahlen__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.zahl__wert {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1;
+  color: var(--color-copper);
+}
+
+.zahl__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: var(--space-2);
+}
+
+/* ── GALERIE-STREIFEN ── */
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+@media (min-width: 760px) {
+  .galerie { grid-template-columns: repeat(4, 1fr); }
+}
+
+.galerie__bild {
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition);
+}
+
+.galerie__bild:hover { transform: scale(1.02); }
+
+/* ── TEAM ── */
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 700px) {
+  .team-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.team-karte {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.team-karte__bild {
+  aspect-ratio: 4 / 5;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+}
+
+.team-karte__body { padding: var(--space-4); }
+
+.team-karte__name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+}
+
+.team-karte__rolle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-block: var(--space-1) var(--space-2);
+}
+
+.team-karte__text {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+/* ── ANFRAGEFORMULAR ── */
+.anfrage {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-5);
+}
+
+.anfrage__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .anfrage__grid { grid-template-columns: 1fr 1fr; }
+  .anfrage__voll { grid-column: 1 / -1; }
+}
+
+/* ── FOOTER-BILDERSTREIFEN ── */
+.footer-streifen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+@media (min-width: 760px) {
+  .footer-streifen { grid-template-columns: repeat(6, 1fr); }
+}
+
+.footer-streifen__bild {
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  filter: grayscale(0.3);
+  transition: filter var(--transition);
+}
+
+.footer-streifen__bild:hover { filter: grayscale(0); }
+
 /* ── FOOTER ── */
 .footer {
   background: var(--color-dark);
