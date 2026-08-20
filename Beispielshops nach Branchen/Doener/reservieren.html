@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tisch reservieren — Pizzeria Napoli</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C1272D' stroke-width='1.6' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><circle cx='12' cy='12' r='6.6'/><path d='M9.9 10.3h.01'/><path d='M14.2 10.9h.01'/><path d='M11.5 14.3h.01'/></svg>">
+  <title>Tisch reservieren — Bosporus Grill</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F6E73' stroke-width='1.6' stroke-linecap='round'><path d='M12 2.6v18.8'/><path d='M8.4 20.6h7.2'/><path d='M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/tokens.css?v=2">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/index.css?v=42">
-  <link rel="stylesheet" href="css/italia.css?v=12">
-  <link rel="stylesheet" href="css/konto.css?v=6">
+  <link rel="stylesheet" href="css/index.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=1">
+  <link rel="stylesheet" href="css/konto.css?v=1">
   <style>
     .nav { position: sticky; top: 0; z-index: 100; background: var(--color-bg-soft); border-bottom: 1px solid var(--color-line); }
     .nav__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: var(--space-4); flex-wrap: nowrap; }
@@ -156,17 +156,19 @@
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo">
         <svg class="nav__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3.4 20.4V12a8.6 8.6 0 0 1 17.2 0v8.4z"/>
-          <path d="M7.6 20.4v-4.2a4.4 4.4 0 0 1 8.8 0v4.2"/>
-          <path d="M2 20.4h20"/>
-          <path d="M12 4.4V2.6"/>
+             stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2.6v18.8"/>
+          <path d="M8.4 20.6h7.2"/>
+          <path d="M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z"/>
+          <path d="M8.1 8.4h7.8"/>
+          <path d="M7.6 11.6h8.8"/>
+          <path d="M8.4 14.8h7.2"/>
         </svg>
-        <span class="nav__logo-text">Pizzeria Napoli<small>Forno a legna &middot; dal 1962</small></span>
+        <span class="nav__logo-text">Bosporus Grill<small>Döner &middot; Kebab &middot; Meze</small></span>
       </a>
       <nav class="nav__links">
         <a href="index.html#ueber-uns">Über uns</a>
-        <a href="index.html#la-carta">Speisekarte</a>
+        <a href="index.html#karte">Speisekarte</a>
         <a href="index.html#bewertungen">Bewertungen</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
@@ -178,7 +180,7 @@
     </div>
   </header>
 
-  <div class="tricolore"></div>
+  <div class="ornament"></div>
 
   <div class="demo-banner" id="demo-banner"></div>
 
@@ -186,7 +188,7 @@
   <div class="res-hero">
     <div class="container">
       <h1><span data-icon="tisch" data-icon-class="ic ic--lg"></span> Tisch reservieren</h1>
-      <p>Ti aspettiamo. Reserviere deinen Tisch bei uns.</p>
+      <p>Hoş geldiniz. Reserviere deinen Tisch bei uns.</p>
     </div>
   </div>
 
@@ -200,7 +202,7 @@
           <h2>Deine Reservierung</h2>
 
           <form id="reservation-form" action="https://formspree.io/f/PLATZHALTER" method="POST">
-            <input type="hidden" name="_subject" value="Neue Tischreservierung — Pizzeria Napoli">
+            <input type="hidden" name="_subject" value="Neue Tischreservierung — Bosporus Grill">
             <input type="hidden" name="_language" value="de">
 
             <div class="form-row form-row--2">
@@ -283,7 +285,7 @@
           <!-- Erfolgs-Meldung -->
           <div class="res-success" id="res-success">
             <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
-            <h3>Grazie!</h3>
+            <h3>Teşekkürler!</h3>
             <p>Wir haben deine Reservierungsanfrage erhalten und melden uns in Kürze zur Bestätigung.</p>
             <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
           </div>
@@ -299,7 +301,7 @@
             </div>
             <div class="res-info-item">
               <span data-icon="uhr"></span>
-              <div>Di–Fr 11:30–23:00 Uhr<br>Sa–So 12:00–23:00 Uhr<br>Montags Ruhetag</div>
+              <div>Täglich 11:00–23:00 Uhr<br>Fr und Sa bis 01:00 Uhr</div>
             </div>
             <div class="res-info-item">
               <span data-icon="telefon"></span>
@@ -325,7 +327,7 @@
 
           <div class="res-note">
             <strong>Keine Lust zu warten?</strong><br>
-            Komm einfach vorbei, wir finden fast immer einen Platz. <span class="script">A presto!</span>
+            Komm einfach vorbei, wir finden fast immer einen Platz. <span class="script">Afiyet olsun!</span>
           </div>
         </div>
 
@@ -338,12 +340,12 @@
     <div class="container">
       <div class="footer__cols">
         <div>
-          <p class="footer__brand">Pizzeria Napoli</p>
-          <p class="footer__claim">Forno a legna, dal 1962. Buon appetito.</p>
+          <p class="footer__brand">Bosporus Grill</p>
+          <p class="footer__claim">Döner, Kebab und Meze. Seit 1988 in Braunschweig.</p>
           <address class="footer__contact">
             Musterstraße 1, 38100 Braunschweig<br>
             Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
-            E-Mail: <a href="mailto:ciao@pizzeria-napoli.de">ciao@pizzeria-napoli.de</a>
+            E-Mail: <a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a>
           </address>
         </div>
         <nav class="footer__links">
@@ -354,7 +356,7 @@
         </nav>
       </div>
       <hr class="footer__divider">
-      <p class="footer__copy">© 2025 Pizzeria Napoli, alle Rechte vorbehalten</p>
+      <p class="footer__copy">© 2025 Bosporus Grill, alle Rechte vorbehalten</p>
     </div>
   </footer>
 
