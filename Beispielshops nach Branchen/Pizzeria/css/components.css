@@ -1,4 +1,4 @@
-/* components.css — Stadtimbiss */
+/* components.css — Pizzeria Napoli */
 
 /* Buttons */
 .btn {
@@ -40,14 +40,17 @@
   opacity: 1;
 }
 
+/* Heller Button auf dunklem Grund: gefuellt in Creme,
+   beim Hover wechselt nur die Schriftfarbe auf Rot. */
 .btn--outline-light {
-  background: transparent;
-  color: var(--color-on-dark);
+  background: var(--color-on-dark);
+  color: var(--color-ink);
   border-color: var(--color-on-dark);
 }
 .btn--outline-light:hover {
   background: var(--color-on-dark);
-  color: var(--color-ink);
+  color: var(--color-accent);
+  border-color: var(--color-on-dark);
   opacity: 1;
 }
 
