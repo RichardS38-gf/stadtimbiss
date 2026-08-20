@@ -44,7 +44,7 @@
   min-height: 80vh;
   display: flex;
   align-items: center;
-  background-image: url('../Bilder/Steinofen.png');
+  background-image: linear-gradient(135deg, #1A2C2E 0%, #1F6E73 55%, #B87333 130%);
   background-size: cover;
   background-position: center;
 }
@@ -397,7 +397,7 @@
 .wm-banner {
   position: relative;
   overflow: hidden;
-  background-image: url('../Bilder/banner.png');
+  background-image: linear-gradient(135deg, #1A2C2E 0%, #1F6E73 100%);
   background-size: cover;
   background-position: center;
   /* Parallax nur auf Desktop. iOS ignoriert fixed und zoomt

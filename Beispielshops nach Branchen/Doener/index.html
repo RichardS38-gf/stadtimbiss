@@ -3,40 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizzeria Napoli — Echte Pizza aus dem Steinofen</title>
-  <meta name="description" content="Neapolitanische Pizza aus dem Steinofen. Frischer Teig, 24 Stunden geführt. Jetzt online bestellen oder Tisch reservieren.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C1272D' stroke-width='1.6' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><circle cx='12' cy='12' r='6.6'/><path d='M9.9 10.3h.01'/><path d='M14.2 10.9h.01'/><path d='M11.5 14.3h.01'/></svg>">
+  <title>Bosporus Grill — Döner und Grillspezialitäten</title>
+  <meta name="description" content="Döner vom Drehspieß und Kebab vom Holzkohlegrill. Frisch, ehrlich, jeden Tag. Jetzt online bestellen oder Tisch reservieren.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F6E73' stroke-width='1.6' stroke-linecap='round'><path d='M12 2.6v18.8'/><path d='M8.4 20.6h7.2'/><path d='M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z'/></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/tokens.css?v=2">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
-  <link rel="stylesheet" href="css/components.css?v=2">
-  <link rel="stylesheet" href="css/index.css?v=50">
-  <link rel="stylesheet" href="css/italia.css?v=15">
-  <link rel="stylesheet" href="css/konto.css?v=6">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/index.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=1">
+  <link rel="stylesheet" href="css/konto.css?v=1">
 </head>
-<body class="paper">
+<body class="sand">
 
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo">
         <svg class="nav__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M3.4 20.4V12a8.6 8.6 0 0 1 17.2 0v8.4z"/>
-          <path d="M7.6 20.4v-4.2a4.4 4.4 0 0 1 8.8 0v4.2"/>
-          <path d="M2 20.4h20"/>
-          <path d="M12 4.4V2.6"/>
+             stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2.6v18.8"/>
+          <path d="M8.4 20.6h7.2"/>
+          <path d="M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z"/>
+          <path d="M8.1 8.4h7.8"/>
+          <path d="M7.6 11.6h8.8"/>
+          <path d="M8.4 14.8h7.2"/>
         </svg>
-        <span class="nav__logo-text">Pizzeria Napoli<small>Forno a legna · dal 1962</small></span>
+        <span class="nav__logo-text">Bosporus Grill<small>Döner &middot; Kebab &middot; Meze</small></span>
       </a>
       <nav class="nav__links">
         <a href="#ueber-uns">Über uns</a>
-        <a href="#la-carta">Speisekarte</a>
+        <a href="#karte">Speisekarte</a>
         <a href="#bewertungen">Bewertungen</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
@@ -52,7 +54,7 @@
     </div>
   </header>
 
-  <div class="tricolore"></div>
+  <div class="ornament"></div>
   <div class="demo-banner" id="demo-banner"></div>
 
   <!-- Sektion 1 — Hero -->
@@ -60,8 +62,8 @@
     <div class="hero__overlay"></div>
     <div class="container">
       <div class="hero__content">
-        <span class="script" style="color:var(--color-on-dark);opacity:.85">Benvenuti a Napoli</span>
-        <h1 class="hero__title">Aus dem Steinofen.<br><span class="hero__accent">Original italienisch.</span></h1>
+        <span class="script">Hoş geldiniz</span>
+        <h1 class="hero__title">Vom Spieß.<br><span class="hero__accent">Vom Holzkohlegrill.</span></h1>
         <div class="hero__actions">
           <a href="bestellen.html" class="btn btn--primary btn--full">
             <span data-icon="korb"></span> Jetzt bestellen
@@ -77,23 +79,23 @@
   <!-- Sektion 2 — Info-Banner -->
   <section class="info-banner">
     <div class="container info-banner__inner">
-      <span class="info-banner__item"><span data-icon="uhr"></span> Di–So 11:30–23 Uhr</span>
+      <span class="info-banner__item"><span data-icon="uhr"></span> Täglich 11–23 Uhr</span>
       <span class="info-banner__sep">|</span>
-      <span class="info-banner__item"><span data-icon="roller"></span> Lieferung ab 2,50 €</span>
+      <span class="info-banner__item"><span data-icon="roller"></span> Lieferung ab 2,00 €</span>
       <span class="info-banner__sep">|</span>
-      <span class="info-banner__item"><span data-icon="ofen"></span> Steinofen, 450 Grad</span>
+      <span class="info-banner__item"><span data-icon="grill"></span> Holzkohlegrill</span>
     </div>
   </section>
 
   <!-- Sektion 3 — Über uns, Bild rechts -->
   <section class="split split--rechts" id="ueber-uns">
-    <div class="split__media" style="background-image:url('Bilder/ofen.png')" role="img" aria-label="Steinofen der Pizzeria"></div>
+    <div class="split__media" style="background-image:url('Bilder/platzhalter.svg')" role="img" aria-label="Drehspieß am Grill"></div>
     <div class="split__text">
       <div class="split__inner">
-        <span class="eyebrow">La nostra storia</span>
-        <h2><span class="unterstrich">Seit 1962</span> am selben Ofen</h2>
-        <p>Nonno Vincenzo kam 1962 aus Neapel nach Braunschweig und brachte zwei Dinge mit: ein Rezept und eine Menge Geduld. Beides geben wir bis heute weiter.</p>
-        <p>Wir sind kein Lieferdienst mit Ofen. Wir sind eine Familie mit einer Pizzeria. Und wir freuen uns, wenn du wiederkommst.</p>
+        <span class="eyebrow">Bizim hikayemiz</span>
+        <h2><span class="unterstrich">Seit 1988</span> am selben Spieß</h2>
+        <p>Mein Vater kam 1988 aus Adana nach Braunschweig und stellte den ersten Spieß auf. Er hat ihn jeden Morgen selbst gesteckt, und daran hat sich bis heute nichts geändert.</p>
+        <p>Kein Fertigspieß aus der Kühlung, kein Gasgrill. Kalbfleisch vom Metzger unseres Vertrauens, Gemüse vom Markt und Holzkohle, die man riecht, bevor man die Tür aufmacht.</p>
         <div class="split__aktionen">
           <a href="bestellen.html" class="btn btn--primary">Zur Speisekarte</a>
         </div>
@@ -101,16 +103,16 @@
     </div>
   </section>
 
-  <!-- Sektion 4 — Zutaten und Küche, Bild links -->
-  <section class="split split--links" id="kueche">
-    <div class="split__media" style="background-image:url('Bilder/Zutaten.png')" role="img" aria-label="Pizza und Pasta auf einem Holztisch"></div>
-    <div class="split__text split__text--paper">
+  <!-- Sektion 4 — Grill, Bild links -->
+  <section class="split split--links" id="grill">
+    <div class="split__media" style="background-image:url('Bilder/platzhalter.svg')" role="img" aria-label="Kebab auf dem Holzkohlegrill"></div>
+    <div class="split__text split__text--sand">
       <div class="split__inner">
-        <span class="eyebrow">Materie prime</span>
-        <h2>Wenige Zutaten, aber die richtigen</h2>
-        <p>Eine gute Pizza braucht keine lange Liste. Sie braucht Tomaten aus San Marzano, Fior di Latte vom selben Händler seit zwanzig Jahren und Basilikum, der morgens noch am Strauch war.</p>
-        <p>Unser Teig ruht 24 Stunden, bevor er in den Ofen kommt. Das lässt sich nicht abkürzen, und man schmeckt es sofort. Klassische italienische Küche, ohne Fertigprodukte und ohne Schnickschnack.</p>
-        <p class="script">La semplicità è la vera raffinatezza.</p>
+        <span class="eyebrow">Mangal</span>
+        <h2>Über Holzkohle, nicht über Gas</h2>
+        <p>Adana, Şiş, Köfte und Lammkotelett kommen bei uns auf den offenen Holzkohlegrill. Das dauert länger und macht mehr Arbeit, schmeckt aber nach etwas.</p>
+        <p>Das Hackfleisch für den Adana wird von Hand gehackt, nicht gewolft. Der Joghurt für den Cacık ist hausgemacht, das Fladenbrot backen wir mehrmals am Tag frisch.</p>
+        <p class="script">Afiyet olsun.</p>
       </div>
     </div>
   </section>
@@ -122,85 +124,81 @@
         <h2 class="offers__title">Aktuelle Angebote</h2>
       </div>
       <div class="grid-2">
-        <article class="offer-card offer-card--accent offer-card--with-img">
-          <img src="Bilder/Pizzen.png" alt="Zwei Pizzen auf dem Tisch" class="offer-card__bg-img" loading="lazy">
-          <div class="offer-card__overlay offer-card__overlay--accent"></div>
+        <article class="offer-card offer-card--accent">
           <div class="offer-card__content">
-            <h3 class="offer-card__title">Martedì: 2 für 1</h3>
-            <p class="offer-card__text">Jeden Dienstag auf alle Pizzen aus dem Steinofen</p>
+            <h3 class="offer-card__title">Familienplatte</h3>
+            <p class="offer-card__text">Grillteller für vier Personen mit Beilagen für 59 €</p>
           </div>
         </article>
-        <article class="offer-card offer-card--dark offer-card--with-img">
-          <img src="Bilder/Tiramisu_werbebanner.png" alt="Hausgemachtes Tiramisu" class="offer-card__bg-img" loading="lazy">
-          <div class="offer-card__overlay"></div>
+        <article class="offer-card offer-card--dark">
           <div class="offer-card__content">
-            <h3 class="offer-card__title">Dolce gratis</h3>
-            <p class="offer-card__text">Ein hausgemachtes Tiramisu ab 25 € Bestellwert</p>
+            <h3 class="offer-card__title">Çay geht aufs Haus</h3>
+            <p class="offer-card__text">Zu jedem Grillteller ein türkischer Tee gratis</p>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Sektion 7 — Speisekarte-Kategorien -->
-  <section class="section categories" id="la-carta">
+  <!-- Sektion 6 — Kategorien -->
+  <section class="section categories" id="karte">
     <div class="container">
       <div class="section-header">
-        <h2>La carta</h2>
+        <h2>Unsere Karte</h2>
         <a href="bestellen.html" class="link-accent">Alle ansehen</a>
       </div>
       <div class="grid-4">
-        <a href="bestellen.html#pizza" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="pizza"></span></span></span>
-          <span class="category-card__name">Pizza</span>
-          <span class="category-card__count">8 Sorten</span>
+        <a href="bestellen.html#doener" class="category-card">
+          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="drehspiess"></span></span></span>
+          <span class="category-card__name">Döner &amp; Dürüm</span>
+          <span class="category-card__count">6 Gerichte</span>
         </a>
-        <a href="bestellen.html#pasta" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="teig"></span></span></span>
-          <span class="category-card__name">Pasta</span>
-          <span class="category-card__count">4 Gerichte</span>
+        <a href="bestellen.html#grill" class="category-card">
+          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="grill"></span></span></span>
+          <span class="category-card__name">Vom Grill</span>
+          <span class="category-card__count">5 Gerichte</span>
         </a>
-        <a href="bestellen.html#antipasti" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="blatt"></span></span></span>
-          <span class="category-card__name">Antipasti</span>
-          <span class="category-card__count">3 Vorspeisen</span>
+        <a href="bestellen.html#meze" class="category-card">
+          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="meze"></span></span></span>
+          <span class="category-card__name">Meze &amp; Beilagen</span>
+          <span class="category-card__count">5 Artikel</span>
         </a>
-        <a href="bestellen.html#dolci" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="wein"></span></span></span>
-          <span class="category-card__name">Dolci &amp; Bevande</span>
-          <span class="category-card__count">6 Artikel</span>
+        <a href="bestellen.html#suesses" class="category-card">
+          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="teekanne"></span></span></span>
+          <span class="category-card__name">Süßes &amp; Getränke</span>
+          <span class="category-card__count">5 Artikel</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Mittagstisch-Banner -->
+  <!-- Mittagsangebot -->
   <section class="wm-banner">
     <div class="wm-banner__inner">
       <div class="wm-banner__text">
-        <p class="wm-banner__label"><span data-icon="uhr"></span> Pranzo &middot; Mittagstisch</p>
-        <p class="wm-banner__headline">Pizza deiner Wahl plus Getränk für 11,90 €</p>
-        <p class="wm-banner__sub">Montag bis Freitag, 11:30 bis 14:30 Uhr</p>
+        <p class="wm-banner__label"><span data-icon="uhr"></span> Öğle yemeği &middot; Mittagstisch</p>
+        <p class="wm-banner__headline">Döner mit Getränk für 9,90 €</p>
+        <p class="wm-banner__sub">Montag bis Freitag, 11:00 bis 15:00 Uhr</p>
       </div>
       <a href="bestellen.html" class="btn btn--primary wm-banner__btn">Jetzt bestellen</a>
     </div>
   </section>
 
-  <!-- Sektion 8 — Bewertungen -->
+  <!-- Sektion 7 — Bewertungen -->
   <section class="section reviews" id="bewertungen">
     <div class="container">
       <div class="section-intro" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.5rem">
         <div>
           <h2>Was unsere Gäste sagen</h2>
-          <p class="section-sub">4,8 Sterne auf Google · über 320 Bewertungen</p>
+          <p class="section-sub">4,7 Sterne auf Google · über 480 Bewertungen</p>
         </div>
         <a href="#" class="link-accent" style="white-space:nowrap;margin-bottom:0.25rem">Alle Bewertungen auf Google</a>
       </div>
 
       <div class="review-slider">
         <div class="review-slider__stars">★★★★★</div>
-        <p class="review-slider__quote" id="review-quote">„Der Teig ist ein Gedicht. Rand luftig, Boden dünn, leicht angekokelt. So schmeckt Pizza in Neapel und sonst nirgends in Braunschweig."</p>
-        <p class="review-slider__author" id="review-author">Mehmet K. · vor 2 Wochen · Google</p>
+        <p class="review-slider__quote" id="review-quote">„Der beste Adana in Braunschweig, und ich habe wirklich alle durch. Man schmeckt sofort, dass das Fleisch von Hand gehackt ist."</p>
+        <p class="review-slider__author" id="review-author">Kevin B. · vor 2 Wochen · Google</p>
         <div class="review-slider__dots">
           <button class="review-dot review-dot--active" data-i="0" aria-label="Bewertung 1"></button>
           <button class="review-dot" data-i="1" aria-label="Bewertung 2"></button>
@@ -210,7 +208,7 @@
     </div>
   </section>
 
-  <!-- Sektion 9 — Kontakt -->
+  <!-- Sektion 8 — Kontakt -->
   <section class="contact" id="kontakt">
     <div class="contact-grid">
       <div class="contact-text">
@@ -221,7 +219,7 @@
         </div>
         <div class="contact-card__item">
           <span class="contact-card__icon"><span data-icon="uhr"></span></span>
-          <div><strong>Öffnungszeiten</strong><br>Di–Fr 11:30–23:00 Uhr<br>Sa–So 12:00–23:00 Uhr<br>Montags Ruhetag</div>
+          <div><strong>Öffnungszeiten</strong><br>Täglich 11:00–23:00 Uhr<br>Freitag und Samstag bis 01:00 Uhr</div>
         </div>
         <div class="contact-card__item">
           <span class="contact-card__icon"><span data-icon="telefon"></span></span>
@@ -229,20 +227,17 @@
         </div>
         <div class="contact-card__item">
           <span class="contact-card__icon"><span data-icon="brief"></span></span>
-          <div><strong>E-Mail</strong><br><a href="mailto:ciao@pizzeria-napoli.de">ciao@pizzeria-napoli.de</a></div>
+          <div><strong>E-Mail</strong><br><a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a></div>
         </div>
         <a href="bestellen.html" class="btn btn--primary contact-card__btn">Jetzt bestellen</a>
       </div>
       <div class="contact-map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d77946.0!2d10.5268!3d52.2689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a5be3d6eba8a91%3A0x425ac6d94ac4720!2sBraunschweig!5e0!3m2!1sde!2sde"
-          width="100%"
-          height="100%"
-          style="border:0;display:block;"
-          allowfullscreen=""
-          loading="lazy"
+          width="100%" height="100%" style="border:0;display:block;"
+          allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Pizzeria Napoli Standort">
+          title="Bosporus Grill Standort">
         </iframe>
       </div>
     </div>
@@ -253,12 +248,12 @@
     <div class="container">
       <div class="footer__cols">
         <div class="footer__col">
-          <p class="footer__brand">Pizzeria Napoli</p>
-          <p class="footer__claim">Forno a legna, dal 1962. Buon appetito.</p>
+          <p class="footer__brand">Bosporus Grill</p>
+          <p class="footer__claim">Döner, Kebab und Meze. Seit 1988 in Braunschweig.</p>
           <address class="footer__contact">
             Musterstraße 1, 38100 Braunschweig<br>
             Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
-            E-Mail: <a href="mailto:ciao@pizzeria-napoli.de">ciao@pizzeria-napoli.de</a>
+            E-Mail: <a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a>
           </address>
         </div>
         <nav class="footer__col footer__links">
@@ -269,7 +264,7 @@
         </nav>
       </div>
       <hr class="footer__divider">
-      <p class="footer__copy">© 2025 Pizzeria Napoli, alle Rechte vorbehalten</p>
+      <p class="footer__copy">© 2025 Bosporus Grill, alle Rechte vorbehalten</p>
     </div>
   </footer>
 
@@ -286,8 +281,7 @@
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
 
-    // Info-Banner: auf Mobile laufen die drei Angaben nacheinander durch,
-    // auf Desktop stehen sie ohnehin alle nebeneinander.
+    // Info-Banner: auf Mobile laufen die drei Angaben nacheinander durch
     (function infoSlider() {
       const items = document.querySelectorAll('.info-banner__item');
       if (!items.length) return;
@@ -301,9 +295,9 @@
     })();
 
     const reviews = [
-      { q: '„Der Teig ist ein Gedicht. Rand luftig, Boden dünn, leicht angekokelt. So schmeckt Pizza in Neapel und sonst nirgends in Braunschweig."', a: 'Mehmet K. · vor 2 Wochen · Google' },
-      { q: '„Wir bestellen seit Jahren jeden Freitag. Die Diavola ist scharf wie sie sein soll und kommt immer heiß an."', a: 'Sandra B. · vor 1 Monat · Google' },
-      { q: '„Kleines Lokal, große Küche. Der Chef kommt noch selbst an den Tisch. Das Tiramisu ist hausgemacht, man schmeckt es."', a: 'Julia R. · vor 3 Wochen · Google' }
+      { q: '„Der beste Adana in Braunschweig, und ich habe wirklich alle durch. Man schmeckt sofort, dass das Fleisch von Hand gehackt ist."', a: 'Kevin B. · vor 2 Wochen · Google' },
+      { q: '„Wir holen hier seit Jahren freitags für die ganze Familie. Immer freundlich, immer heiß, immer gleich gut."', a: 'Sandra M. · vor 1 Monat · Google' },
+      { q: '„Das Fladenbrot kommt frisch aus dem Ofen und der Cacık ist selbstgemacht. Man merkt den Unterschied sofort."', a: 'Tobias L. · vor 3 Wochen · Google' }
     ];
     let idx = 0;
     const quoteEl = document.getElementById('review-quote');
