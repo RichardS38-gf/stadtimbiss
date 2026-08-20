@@ -9,18 +9,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=1">
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/index.css?v=1">
-  <link rel="stylesheet" href="css/orient.css?v=1">
+  <link rel="stylesheet" href="css/grill.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=2">
   <link rel="stylesheet" href="css/konto.css?v=1">
 </head>
-<body class="sand">
+<body>
 
   <header class="nav">
     <div class="container nav__inner">
@@ -37,9 +37,9 @@
         <span class="nav__logo-text">Bosporus Grill<small>Döner &middot; Kebab &middot; Meze</small></span>
       </a>
       <nav class="nav__links">
-        <a href="#ueber-uns">Über uns</a>
-        <a href="#karte">Speisekarte</a>
-        <a href="#bewertungen">Bewertungen</a>
+        <a href="#herkunft">Über uns</a>
+        <a href="#karte">Karte</a>
+        <a href="#stimmen">Stimmen</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
       <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;">
@@ -54,187 +54,214 @@
     </div>
   </header>
 
-  <div class="ornament"></div>
   <div class="demo-banner" id="demo-banner"></div>
 
-  <!-- Sektion 1 — Hero -->
+  <!-- Hero: Farbfläche links, Bild rechts -->
   <section class="hero">
-    <div class="hero__overlay"></div>
-    <div class="container">
-      <div class="hero__content">
-        <span class="script">Hoş geldiniz</span>
-        <h1 class="hero__title">Vom Spieß.<br><span class="hero__accent">Vom Holzkohlegrill.</span></h1>
-        <div class="hero__actions">
-          <a href="bestellen.html" class="btn btn--primary btn--full">
-            <span data-icon="korb"></span> Jetzt bestellen
-          </a>
-          <a href="reservieren.html" class="btn btn--outline-light btn--full">
-            <span data-icon="tisch"></span> Tisch reservieren
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sektion 2 — Info-Banner -->
-  <section class="info-banner">
-    <div class="container info-banner__inner">
-      <span class="info-banner__item"><span data-icon="uhr"></span> Täglich 11–23 Uhr</span>
-      <span class="info-banner__sep">|</span>
-      <span class="info-banner__item"><span data-icon="roller"></span> Lieferung ab 2,00 €</span>
-      <span class="info-banner__sep">|</span>
-      <span class="info-banner__item"><span data-icon="grill"></span> Holzkohlegrill</span>
-    </div>
-  </section>
-
-  <!-- Sektion 3 — Über uns, Bild rechts -->
-  <section class="split split--rechts" id="ueber-uns">
-    <div class="split__media" style="background-image:url('Bilder/platzhalter.svg')" role="img" aria-label="Drehspieß am Grill"></div>
-    <div class="split__text">
-      <div class="split__inner">
-        <span class="eyebrow">Bizim hikayemiz</span>
-        <h2><span class="unterstrich">Seit 1988</span> am selben Spieß</h2>
-        <p>Mein Vater kam 1988 aus Adana nach Braunschweig und stellte den ersten Spieß auf. Er hat ihn jeden Morgen selbst gesteckt, und daran hat sich bis heute nichts geändert.</p>
-        <p>Kein Fertigspieß aus der Kühlung, kein Gasgrill. Kalbfleisch vom Metzger unseres Vertrauens, Gemüse vom Markt und Holzkohle, die man riecht, bevor man die Tür aufmacht.</p>
-        <div class="split__aktionen">
-          <a href="bestellen.html" class="btn btn--primary">Zur Speisekarte</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sektion 4 — Grill, Bild links -->
-  <section class="split split--links" id="grill">
-    <div class="split__media" style="background-image:url('Bilder/platzhalter.svg')" role="img" aria-label="Kebab auf dem Holzkohlegrill"></div>
-    <div class="split__text split__text--sand">
-      <div class="split__inner">
-        <span class="eyebrow">Mangal</span>
-        <h2>Über Holzkohle, nicht über Gas</h2>
-        <p>Adana, Şiş, Köfte und Lammkotelett kommen bei uns auf den offenen Holzkohlegrill. Das dauert länger und macht mehr Arbeit, schmeckt aber nach etwas.</p>
-        <p>Das Hackfleisch für den Adana wird von Hand gehackt, nicht gewolft. Der Joghurt für den Cacık ist hausgemacht, das Fladenbrot backen wir mehrmals am Tag frisch.</p>
-        <p class="script">Afiyet olsun.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sektion 5 — Angebote -->
-  <section class="section offers">
-    <div class="container">
-      <div class="titel-mitte">
-        <h2 class="offers__title">Aktuelle Angebote</h2>
-      </div>
-      <div class="grid-2">
-        <article class="offer-card offer-card--accent">
-          <div class="offer-card__content">
-            <h3 class="offer-card__title">Familienplatte</h3>
-            <p class="offer-card__text">Grillteller für vier Personen mit Beilagen für 59 €</p>
-          </div>
-        </article>
-        <article class="offer-card offer-card--dark">
-          <div class="offer-card__content">
-            <h3 class="offer-card__title">Çay geht aufs Haus</h3>
-            <p class="offer-card__text">Zu jedem Grillteller ein türkischer Tee gratis</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sektion 6 — Kategorien -->
-  <section class="section categories" id="karte">
-    <div class="container">
-      <div class="section-header">
-        <h2>Unsere Karte</h2>
-        <a href="bestellen.html" class="link-accent">Alle ansehen</a>
-      </div>
-      <div class="grid-4">
-        <a href="bestellen.html#doener" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="drehspiess"></span></span></span>
-          <span class="category-card__name">Döner &amp; Dürüm</span>
-          <span class="category-card__count">6 Gerichte</span>
+    <div class="hero__panel">
+      <p class="hero__nummer">Braunschweig · seit 1988</p>
+      <h1 class="hero__title">Döner vom Spieß<em>Kebab vom Feuer</em></h1>
+      <p class="hero__sub">Kalbfleisch, das wir jeden Morgen selbst stecken. Grillgut über Holzkohle, nicht über Gas. Mehr Geheimnis steckt nicht dahinter.</p>
+      <div class="hero__actions">
+        <a href="bestellen.html" class="btn btn--primary">
+          <span data-icon="korb"></span> Jetzt bestellen
         </a>
-        <a href="bestellen.html#grill" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="grill"></span></span></span>
-          <span class="category-card__name">Vom Grill</span>
-          <span class="category-card__count">5 Gerichte</span>
-        </a>
-        <a href="bestellen.html#meze" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="meze"></span></span></span>
-          <span class="category-card__name">Meze &amp; Beilagen</span>
-          <span class="category-card__count">5 Artikel</span>
-        </a>
-        <a href="bestellen.html#suesses" class="category-card">
-          <span class="category-card__emoji"><span class="ic-badge"><span data-icon="teekanne"></span></span></span>
-          <span class="category-card__name">Süßes &amp; Getränke</span>
-          <span class="category-card__count">5 Artikel</span>
+        <a href="reservieren.html" class="btn btn--outline-light">
+          <span data-icon="tisch"></span> Tisch reservieren
         </a>
       </div>
     </div>
+    <div class="hero__bild" style="background-image:url('Bilder/platzhalter.svg')" role="img" aria-label="Drehspieß und Grill"></div>
   </section>
 
-  <!-- Mittagsangebot -->
-  <section class="wm-banner">
-    <div class="wm-banner__inner">
-      <div class="wm-banner__text">
-        <p class="wm-banner__label"><span data-icon="uhr"></span> Öğle yemeği &middot; Mittagstisch</p>
-        <p class="wm-banner__headline">Döner mit Getränk für 9,90 €</p>
-        <p class="wm-banner__sub">Montag bis Freitag, 11:00 bis 15:00 Uhr</p>
+  <!-- Laufband -->
+  <div class="ticker">
+    <div class="ticker__track">
+      <span class="ticker__item">Täglich 11 bis 23 Uhr</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Lieferung ab 2,00 Euro</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Holzkohlegrill</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Fleisch vom Metzger nebenan</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Fladenbrot täglich frisch</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Täglich 11 bis 23 Uhr</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Lieferung ab 2,00 Euro</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Holzkohlegrill</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Fleisch vom Metzger nebenan</span>
+      <span class="ticker__punkt">●</span>
+      <span class="ticker__item">Fladenbrot täglich frisch</span>
+      <span class="ticker__punkt">●</span>
+    </div>
+  </div>
+
+  <!-- Drei nummerierte Werte -->
+  <section class="werte container" id="herkunft">
+    <div class="kopf">
+      <div>
+        <span class="kopf__nr">01 — Herkunft</span>
+        <h2>Worauf es uns ankommt</h2>
       </div>
-      <a href="bestellen.html" class="btn btn--primary wm-banner__btn">Jetzt bestellen</a>
+    </div>
+    <div class="werte__grid">
+      <article class="wert">
+        <div class="wert__nr">01</div>
+        <h3 class="wert__titel">Der Spieß</h3>
+        <p class="wert__text">Mein Vater kam 1988 aus Adana nach Braunschweig und hat den ersten Spieß aufgestellt. Gesteckt wird bis heute morgens von Hand, Schicht für Schicht, kein Fertigspieß aus der Kühlung.</p>
+      </article>
+      <article class="wert">
+        <div class="wert__nr">02</div>
+        <h3 class="wert__titel">Das Feuer</h3>
+        <p class="wert__text">Adana, Şiş und Köfte kommen auf den offenen Holzkohlegrill. Das macht mehr Arbeit als Gas und dauert länger, aber man schmeckt den Unterschied im ersten Bissen.</p>
+      </article>
+      <article class="wert">
+        <div class="wert__nr">03</div>
+        <h3 class="wert__titel">Die Beilagen</h3>
+        <p class="wert__text">Joghurt für den Cacık rühren wir selbst an, das Fladenbrot backen wir mehrmals am Tag. Gemüse kommt vom Markt, nicht aus dem Großgebinde.</p>
+      </article>
     </div>
   </section>
 
-  <!-- Sektion 7 — Bewertungen -->
-  <section class="section reviews" id="bewertungen">
-    <div class="container">
-      <div class="section-intro" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:0.5rem">
-        <div>
-          <h2>Was unsere Gäste sagen</h2>
-          <p class="section-sub">4,7 Sterne auf Google · über 480 Bewertungen</p>
-        </div>
-        <a href="#" class="link-accent" style="white-space:nowrap;margin-bottom:0.25rem">Alle Bewertungen auf Google</a>
-      </div>
-
-      <div class="review-slider">
-        <div class="review-slider__stars">★★★★★</div>
-        <p class="review-slider__quote" id="review-quote">„Der beste Adana in Braunschweig, und ich habe wirklich alle durch. Man schmeckt sofort, dass das Fleisch von Hand gehackt ist."</p>
-        <p class="review-slider__author" id="review-author">Kevin B. · vor 2 Wochen · Google</p>
-        <div class="review-slider__dots">
-          <button class="review-dot review-dot--active" data-i="0" aria-label="Bewertung 1"></button>
-          <button class="review-dot" data-i="1" aria-label="Bewertung 2"></button>
-          <button class="review-dot" data-i="2" aria-label="Bewertung 3"></button>
-        </div>
-      </div>
+  <!-- Bildstreifen über volle Breite -->
+  <section class="streifen" style="background-image:url('Bilder/platzhalter.svg')">
+    <div class="container streifen__inhalt">
+      <span class="streifen__nr">02 — Am Grill</span>
+      <h2 class="streifen__titel">Zwölf Stunden am Tag brennt bei uns Holzkohle</h2>
+      <p class="streifen__text">Das Hackfleisch für den Adana wird von Hand gehackt, nicht gewolft. Lammkoteletts liegen so lange auf dem Rost, wie sie brauchen, und keine Minute kürzer.</p>
     </div>
   </section>
 
-  <!-- Sektion 8 — Kontakt -->
-  <section class="contact" id="kontakt">
-    <div class="contact-grid">
-      <div class="contact-text">
+  <!-- Karte als Indexliste -->
+  <section class="abschnitt container" id="karte">
+    <div class="kopf">
+      <div>
+        <span class="kopf__nr">03 — Die Karte</span>
+        <h2>Was auf den Tisch kommt</h2>
+      </div>
+      <a href="bestellen.html" class="link-accent">Alles ansehen</a>
+    </div>
+
+    <div class="index-liste">
+      <a href="bestellen.html#doener" class="index-zeile">
+        <span class="index-zeile__nr">01</span>
+        <span class="index-zeile__name">Döner &amp; Dürüm</span>
+        <span class="index-zeile__meta">6 Gerichte · ab 5,50 €</span>
+        <span class="index-zeile__pfeil" data-icon="haken"></span>
+      </a>
+      <a href="bestellen.html#grill" class="index-zeile">
+        <span class="index-zeile__nr">02</span>
+        <span class="index-zeile__name">Vom Grill</span>
+        <span class="index-zeile__meta">5 Gerichte · ab 13,90 €</span>
+        <span class="index-zeile__pfeil" data-icon="haken"></span>
+      </a>
+      <a href="bestellen.html#meze" class="index-zeile">
+        <span class="index-zeile__nr">03</span>
+        <span class="index-zeile__name">Meze &amp; Beilagen</span>
+        <span class="index-zeile__meta">5 Artikel · ab 3,50 €</span>
+        <span class="index-zeile__pfeil" data-icon="haken"></span>
+      </a>
+      <a href="bestellen.html#suesses" class="index-zeile">
+        <span class="index-zeile__nr">04</span>
+        <span class="index-zeile__name">Süßes &amp; Getränke</span>
+        <span class="index-zeile__meta">5 Artikel · ab 1,90 €</span>
+        <span class="index-zeile__pfeil" data-icon="haken"></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Gutscheine -->
+  <section class="abschnitt--eng container">
+    <div class="kopf">
+      <div>
+        <span class="kopf__nr">04 — Angebote</span>
+        <h2>Zum Mitnehmen</h2>
+      </div>
+    </div>
+
+    <div class="gutschein-grid">
+      <article class="gutschein">
+        <span class="gutschein__label">Montag bis Freitag, 11 bis 15 Uhr</span>
+        <h3 class="gutschein__titel">Mittagsteller 9,90 €</h3>
+        <p class="gutschein__text">Döner deiner Wahl mit einem Getränk, zum Mitnehmen oder im Laden.</p>
+        <p class="gutschein__code">Ohne Code, gilt automatisch</p>
+      </article>
+      <article class="gutschein gutschein--dunkel">
+        <span class="gutschein__label">Ab 40 Euro Bestellwert</span>
+        <h3 class="gutschein__titel">Familienplatte</h3>
+        <p class="gutschein__text">Grillteller für vier Personen mit Beilagen, Fladenbrot und Salat für 59 Euro.</p>
+        <p class="gutschein__code">Code: FAMILIE</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Stimmen -->
+  <section class="abschnitt container" id="stimmen">
+    <div class="kopf">
+      <div>
+        <span class="kopf__nr">05 — Stimmen</span>
+        <h2>4,7 Sterne, über 480 Bewertungen</h2>
+      </div>
+      <a href="#" class="link-accent">Auf Google ansehen</a>
+    </div>
+
+    <div class="stimmen-grid">
+      <article class="stimme">
+        <div class="stimme__sterne">★★★★★</div>
+        <p class="stimme__text">Der beste Adana in Braunschweig, und ich habe wirklich alle durch. Man schmeckt sofort, dass das Fleisch von Hand gehackt ist.</p>
+        <p class="stimme__autor">Kevin B. · vor 2 Wochen</p>
+      </article>
+      <article class="stimme">
+        <div class="stimme__sterne">★★★★★</div>
+        <p class="stimme__text">Wir holen hier seit Jahren freitags für die ganze Familie. Immer freundlich, immer heiß, immer gleich gut.</p>
+        <p class="stimme__autor">Sandra M. · vor 1 Monat</p>
+      </article>
+      <article class="stimme">
+        <div class="stimme__sterne">★★★★★</div>
+        <p class="stimme__text">Das Fladenbrot kommt frisch aus dem Ofen und der Cacık ist selbstgemacht. Man merkt den Unterschied sofort.</p>
+        <p class="stimme__autor">Tobias L. · vor 3 Wochen</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section class="abschnitt container" id="kontakt">
+    <div class="kopf">
+      <div>
+        <span class="kopf__nr">06 — Kontakt</span>
         <h2>So findest du uns</h2>
-        <div class="contact-card__item">
-          <span class="contact-card__icon"><span data-icon="ort"></span></span>
-          <div><strong>Adresse</strong><br>Musterstraße 1, 38100 Braunschweig</div>
-        </div>
-        <div class="contact-card__item">
-          <span class="contact-card__icon"><span data-icon="uhr"></span></span>
-          <div><strong>Öffnungszeiten</strong><br>Täglich 11:00–23:00 Uhr<br>Freitag und Samstag bis 01:00 Uhr</div>
-        </div>
-        <div class="contact-card__item">
-          <span class="contact-card__icon"><span data-icon="telefon"></span></span>
-          <div><strong>Telefon</strong><br><a href="tel:0531000000">0531 / 000 000</a></div>
-        </div>
-        <div class="contact-card__item">
-          <span class="contact-card__icon"><span data-icon="brief"></span></span>
-          <div><strong>E-Mail</strong><br><a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a></div>
-        </div>
-        <a href="bestellen.html" class="btn btn--primary contact-card__btn">Jetzt bestellen</a>
       </div>
-      <div class="contact-map">
+    </div>
+
+    <div class="kontakt-grid">
+      <div class="kontakt-liste">
+        <div class="kontakt-zeile">
+          <span class="contact-card__icon"><span data-icon="ort"></span></span>
+          <div><strong>Adresse</strong>Musterstraße 1, 38100 Braunschweig</div>
+        </div>
+        <div class="kontakt-zeile">
+          <span class="contact-card__icon"><span data-icon="uhr"></span></span>
+          <div><strong>Öffnungszeiten</strong>Täglich 11:00 bis 23:00 Uhr<br>Freitag und Samstag bis 01:00 Uhr</div>
+        </div>
+        <div class="kontakt-zeile">
+          <span class="contact-card__icon"><span data-icon="telefon"></span></span>
+          <div><strong>Telefon</strong><a href="tel:0531000000">0531 / 000 000</a></div>
+        </div>
+        <div class="kontakt-zeile">
+          <span class="contact-card__icon"><span data-icon="brief"></span></span>
+          <div><strong>E-Mail</strong><a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a></div>
+        </div>
+        <div style="margin-top:var(--space-2)">
+          <a href="bestellen.html" class="btn btn--primary">Jetzt bestellen</a>
+        </div>
+      </div>
+      <div class="kontakt-karte">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d77946.0!2d10.5268!3d52.2689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a5be3d6eba8a91%3A0x425ac6d94ac4720!2sBraunschweig!5e0!3m2!1sde!2sde"
-          width="100%" height="100%" style="border:0;display:block;"
           allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           title="Bosporus Grill Standort">
@@ -243,11 +270,10 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer__cols">
-        <div class="footer__col">
+        <div>
           <p class="footer__brand">Bosporus Grill</p>
           <p class="footer__claim">Döner, Kebab und Meze. Seit 1988 in Braunschweig.</p>
           <address class="footer__contact">
@@ -256,7 +282,7 @@
             E-Mail: <a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a>
           </address>
         </div>
-        <nav class="footer__col footer__links">
+        <nav class="footer__links">
           <a href="#">Impressum</a>
           <a href="#">Datenschutz</a>
           <a href="#">Kontakt</a>
@@ -275,43 +301,6 @@
     iconsEinsetzen();
     await setupSeite();
     iconsEinsetzen();
-  </script>
-
-  <script>
-    const nav = document.querySelector('.nav');
-    window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
-
-    // Info-Banner: auf Mobile laufen die drei Angaben nacheinander durch
-    (function infoSlider() {
-      const items = document.querySelectorAll('.info-banner__item');
-      if (!items.length) return;
-      let i = 0;
-      items[0].classList.add('active');
-      setInterval(() => {
-        items[i].classList.remove('active');
-        i = (i + 1) % items.length;
-        items[i].classList.add('active');
-      }, 3200);
-    })();
-
-    const reviews = [
-      { q: '„Der beste Adana in Braunschweig, und ich habe wirklich alle durch. Man schmeckt sofort, dass das Fleisch von Hand gehackt ist."', a: 'Kevin B. · vor 2 Wochen · Google' },
-      { q: '„Wir holen hier seit Jahren freitags für die ganze Familie. Immer freundlich, immer heiß, immer gleich gut."', a: 'Sandra M. · vor 1 Monat · Google' },
-      { q: '„Das Fladenbrot kommt frisch aus dem Ofen und der Cacık ist selbstgemacht. Man merkt den Unterschied sofort."', a: 'Tobias L. · vor 3 Wochen · Google' }
-    ];
-    let idx = 0;
-    const quoteEl = document.getElementById('review-quote');
-    const authorEl = document.getElementById('review-author');
-    const dots = document.querySelectorAll('.review-dot');
-
-    function zeige(i) {
-      idx = i;
-      quoteEl.textContent = reviews[i].q;
-      authorEl.textContent = reviews[i].a;
-      dots.forEach((d, n) => d.classList.toggle('review-dot--active', n === i));
-    }
-    dots.forEach(d => d.addEventListener('click', () => zeige(Number(d.dataset.i))));
-    setInterval(() => zeige((idx + 1) % reviews.length), 7000);
   </script>
 
 </body>

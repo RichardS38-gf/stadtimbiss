@@ -1,0 +1,662 @@
+/* grill.css — Bosporus Grill
+   Eigenes Seiten-Stylesheet. Ersetzt index.css vollständig, damit
+   der Shop nicht die Struktur der Pizzeria mitschleppt.
+   Jede Sektion ist im Aufbau anders gelöst als dort. */
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-soft);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 66px;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+}
+
+.nav__links { display: none; gap: var(--space-5); }
+
+.nav__links a {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.nav__links a:hover { color: var(--color-accent); opacity: 1; }
+
+@media (min-width: 901px) { .nav__links { display: flex; } }
+
+/* ── HERO: zweigeteilt, Farbfläche links, Bild rechts ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--color-dark);
+}
+
+.hero__panel {
+  padding: var(--space-8) var(--container-pad-mobile);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--color-on-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Diagonale Streifen als Textur, angelehnt an Grillrost */
+.hero__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -60deg,
+    rgba(184,115,51,0.10) 0 2px,
+    transparent 2px 22px);
+  pointer-events: none;
+}
+
+.hero__panel > * { position: relative; z-index: 1; }
+
+.hero__nummer {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--color-copper);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-5);
+}
+
+.hero__title em {
+  font-style: normal;
+  color: var(--color-copper);
+  display: block;
+}
+
+.hero__sub {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  opacity: 0.75;
+  max-width: 38ch;
+  margin-bottom: var(--space-6);
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.hero__bild {
+  min-height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-accent-dk);
+}
+
+@media (min-width: 900px) {
+  .hero { grid-template-columns: 1fr 1fr; min-height: 78vh; }
+  .hero__panel { padding: var(--space-8) var(--space-7); }
+  .hero__bild { min-height: 100%; }
+}
+
+/* ── LAUFBAND ──
+   Durchlaufende Zeile statt statischer Info-Leiste. */
+.ticker {
+  background: var(--color-copper);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-block: var(--space-3);
+  border-block: 1px solid rgba(0,0,0,0.12);
+}
+
+.ticker__track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  animation: ticker-lauf 28s linear infinite;
+}
+
+.ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ticker__punkt { opacity: 0.5; }
+
+@keyframes ticker-lauf {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+}
+
+/* ── NUMMERIERTE BLÖCKE ──
+   Dreispaltig, große Ziffern. Ersetzt die Bild-Text-Wechsel. */
+.werte {
+  padding-block: var(--space-8);
+}
+
+.werte__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 820px) {
+  .werte__grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-7); }
+}
+
+.wert {
+  border-top: 3px solid var(--color-accent);
+  padding-top: var(--space-4);
+}
+
+.wert__nr {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-line);
+  margin-bottom: var(--space-3);
+}
+
+.wert__titel {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.wert__text {
+  color: var(--color-muted);
+  line-height: 1.8;
+  font-size: var(--text-sm);
+}
+
+/* ── GROSSER BILDSTREIFEN ──
+   Volle Breite, Text unten links, ohne Split. */
+.streifen {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+}
+
+.streifen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,44,46,0.92) 0%, rgba(26,44,46,0.15) 70%);
+}
+
+.streifen__inhalt {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-7) var(--container-pad-mobile);
+  color: var(--color-on-dark);
+  max-width: 62ch;
+}
+
+.streifen__nr {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--color-copper);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.streifen__titel {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.4vw, 2.8rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: var(--space-3);
+}
+
+.streifen__text { opacity: 0.82; line-height: 1.8; }
+
+@media (min-width: 900px) {
+  .streifen { min-height: 520px; }
+  .streifen__inhalt { padding: var(--space-8) var(--space-7); }
+}
+
+/* ── INDEXLISTE STATT KACHELN ── */
+.index-liste {
+  border-top: 1px solid var(--color-line);
+}
+
+.index-zeile {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--color-line);
+  transition: background var(--transition), padding-inline var(--transition);
+}
+
+.index-zeile:hover {
+  background: var(--color-bg-soft);
+  padding-inline: var(--space-4);
+}
+
+.index-zeile__nr {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-copper);
+}
+
+.index-zeile__name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 3vw, 1.9rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  min-width: 0;
+}
+
+.index-zeile__meta {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  white-space: nowrap;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .index-zeile__meta { display: block; }
+}
+
+.index-zeile__pfeil {
+  color: var(--color-accent);
+  display: inline-flex;
+  transition: transform var(--transition);
+}
+
+.index-zeile:hover .index-zeile__pfeil { transform: translateX(6px); }
+
+/* ── GUTSCHEINKARTEN ── */
+.gutschein-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 760px) {
+  .gutschein-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.gutschein {
+  position: relative;
+  background: var(--color-bg-soft);
+  border: 2px dashed var(--color-accent);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-5);
+  overflow: hidden;
+}
+
+.gutschein--dunkel {
+  background: var(--color-dark);
+  border-color: var(--color-copper);
+  color: var(--color-on-dark);
+}
+
+/* Perforation an den Seiten, wie bei einem abtrennbaren Coupon */
+.gutschein::before,
+.gutschein::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  transform: translateY(-50%);
+}
+
+.gutschein::before { left: -14px; }
+.gutschein::after  { right: -14px; }
+
+.gutschein__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.gutschein__titel {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: var(--space-3);
+}
+
+.gutschein__text {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.gutschein--dunkel .gutschein__text { color: rgba(245,239,227,0.75); }
+
+.gutschein__code {
+  margin-top: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-top: 1px dashed var(--color-line);
+  padding-top: var(--space-3);
+}
+
+/* ── BEWERTUNGEN: drei feste Karten ── */
+.stimmen-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 820px) {
+  .stimmen-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.stimme {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+}
+
+.stimme__sterne {
+  color: var(--color-saffron);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-3);
+}
+
+.stimme__text {
+  line-height: 1.8;
+  margin-bottom: var(--space-4);
+  flex: 1;
+}
+
+.stimme__autor {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-line);
+  padding-top: var(--space-3);
+}
+
+/* ── ABSCHNITTSKOPF ── */
+.kopf {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.kopf h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.kopf__nr {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--color-copper);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.abschnitt { padding-block: var(--space-8); }
+.abschnitt--eng { padding-block: var(--space-7); }
+
+/* ── KONTAKT ── */
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .kontakt-grid { grid-template-columns: 1fr 1.1fr; align-items: stretch; }
+}
+
+.kontakt-liste { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.kontakt-zeile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: start;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.kontakt-zeile strong {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-1);
+}
+
+.kontakt-karte {
+  min-height: 320px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+}
+
+.kontakt-karte iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* ── SPEISEKARTE ALS PREISLISTE ── */
+.karte-abschnitt { margin-bottom: var(--space-7); }
+
+.karte-abschnitt__kopf {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  border-bottom: 3px solid var(--color-ink);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.karte-abschnitt__nr {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--color-copper);
+}
+
+.karte-abschnitt__titel {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+}
+
+.gericht {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+  min-width: 0;
+}
+
+.gericht__bild {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+}
+
+.gericht__body { min-width: 0; }
+
+.gericht__zeile {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.gericht__name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Punktlinie zwischen Name und Preis, wie auf einer Wandkarte */
+.gericht__linie {
+  flex: 1;
+  border-bottom: 1px dotted var(--color-line);
+  transform: translateY(-3px);
+  min-width: 12px;
+}
+
+.gericht__preis {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.gericht__desc {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+
+.gericht__aktion { display: flex; align-items: center; }
+
+@media (max-width: 560px) {
+  .gericht { grid-template-columns: 48px 1fr; row-gap: var(--space-3); }
+  .gericht__bild { width: 48px; height: 48px; }
+  .gericht__aktion { grid-column: 2; justify-content: flex-start; }
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+}
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .footer__cols { grid-template-columns: 2fr 1fr; }
+}
+
+.footer__brand {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.footer__claim {
+  opacity: 0.6;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-5);
+}
+
+.footer__contact {
+  font-style: normal;
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  opacity: 0.8;
+}
+
+.footer__contact a { color: var(--color-on-dark); }
+
+.footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.footer__links a {
+  color: var(--color-on-dark);
+  opacity: 0.6;
+  font-size: var(--text-sm);
+}
+
+.footer__links a:hover { opacity: 1; }
+
+.footer__divider {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  margin-block: var(--space-5);
+}
+
+.footer__copy {
+  text-align: center;
+  opacity: 0.4;
+  font-size: var(--text-sm);
+}
