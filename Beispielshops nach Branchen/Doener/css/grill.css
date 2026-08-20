@@ -54,24 +54,42 @@
   flex-direction: column;
 }
 
-/* Logo oben links */
-.hero__logo {
+/* Marke oben links: Zeichen und Schriftzug nebeneinander */
+.hero__marke {
   position: relative;
   z-index: 2;
-  display: block;
-  width: 128px;
-  max-width: 40vw;
-  margin-bottom: var(--space-7);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
 }
 
-/* Dasselbe Logo gross und blass hinter dem Text */
+.hero__logo {
+  display: block;
+  width: 92px;
+  max-width: 22vw;
+}
+
+.hero__wortmarke {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-accent);
+}
+
+.hero__wortmarke span { display: block; }
+
+/* Dasselbe Logo gross und blass hinter dem Textblock */
 .hero__wasserzeichen {
   position: absolute;
-  left: -12%;
-  bottom: -14%;
-  width: 92%;
-  max-width: 620px;
-  opacity: 0.06;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 132%;
+  max-width: none;
+  opacity: 0.035;
   pointer-events: none;
   user-select: none;
   z-index: 0;
@@ -82,14 +100,16 @@
   z-index: 1;
   margin-top: auto;
   margin-bottom: auto;
-  max-width: 34ch;
+  max-width: 52ch;
 }
+
+.hero__inhalt > * { position: relative; z-index: 1; }
 
 .hero__nummer {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-copper);
   margin-bottom: var(--space-4);
@@ -97,10 +117,10 @@
 
 .hero__title {
   font-family: var(--font-head);
-  font-weight: 700;
-  font-size: clamp(2.4rem, 6.4vw, 4.2rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-size: clamp(2.8rem, 7.4vw, 5rem);
+  line-height: 1.03;
+  letter-spacing: -0.025em;
   color: var(--color-ink);
   margin-bottom: var(--space-5);
 }
@@ -115,12 +135,14 @@
   line-height: 1.7;
   color: var(--color-muted);
   margin-bottom: var(--space-6);
+  max-width: 46ch;
 }
 
 .hero__actions {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-4);
   flex-wrap: wrap;
+  align-items: center;
 }
 
 /* Rechte Spalte: Bild bis zur Oberkante */
@@ -193,8 +215,8 @@
 
 @media (min-width: 900px) {
   .hero { grid-template-columns: 1fr 1fr; }
-  .hero__panel { padding: var(--space-7) var(--space-7) var(--space-8); }
-  .hero__logo { width: 150px; }
+  .hero__panel { padding: var(--space-5) var(--space-7) var(--space-8); }
+  .hero__logo { width: 108px; }
   .hero__bild { order: 0; min-height: 100%; }
   .hero-nav { padding-inline: var(--space-6); }
   .hero-nav__links { display: flex; }
