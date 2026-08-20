@@ -213,14 +213,14 @@ export const DEMO_RESERVATIONS = [
 // Die Bildpfade zeigen vorerst auf einen Platzhalter, bis die
 // echten Produktbilder erstellt sind.
 export const KATALOG = {
-  'p1':  { name: 'Margherita',            price: 9.50,  kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
-  'p2':  { name: 'Marinara',              price: 8.50,  kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
-  'p3':  { name: 'Diavola',               price: 12.50, kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
-  'p4':  { name: 'Quattro Formaggi',      price: 13.50, kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
-  'p5':  { name: 'Prosciutto e Funghi',   price: 13.00, kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
-  'p8':  { name: 'Bufala',                price: 14.50, kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
-  'p11': { name: 'Tartufo',               price: 16.50, kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
-  'p12': { name: 'Calzone',               price: 13.00, kategorie: 'Pizza',     img: 'Bilder/platzhalter.svg' },
+  'p1':  { name: 'Margherita',            price: 9.50,  kategorie: 'Pizza',     img: 'Bilder/Margherita.png' },
+  'p2':  { name: 'Marinara',              price: 8.50,  kategorie: 'Pizza',     img: 'Bilder/Marinara.png' },
+  'p3':  { name: 'Diavola',               price: 12.50, kategorie: 'Pizza',     img: 'Bilder/Diavola.png' },
+  'p4':  { name: 'Quattro Formaggi',      price: 13.50, kategorie: 'Pizza',     img: 'Bilder/Quattro%20Formaggi.png' },
+  'p5':  { name: 'Prosciutto e Funghi',   price: 13.00, kategorie: 'Pizza',     img: 'Bilder/Prosciutto%20e%20Funghi.png' },
+  'p8':  { name: 'Bufala',                price: 14.50, kategorie: 'Pizza',     img: 'Bilder/Bufala.png' },
+  'p11': { name: 'Tartufo',               price: 16.50, kategorie: 'Pizza',     img: 'Bilder/Tartufo.png' },
+  'p12': { name: 'Calzone',               price: 13.00, kategorie: 'Pizza',     img: 'Bilder/Calzone.png' },
   'pa1': { name: 'Spaghetti Carbonara',   price: 13.50, kategorie: 'Pasta',     img: 'Bilder/platzhalter.svg' },
   'pa2': { name: "Penne all'Arrabbiata",  price: 11.50, kategorie: 'Pasta',     img: 'Bilder/platzhalter.svg' },
   'pa3': { name: 'Tagliatelle al Ragù',   price: 14.50, kategorie: 'Pasta',     img: 'Bilder/platzhalter.svg' },
