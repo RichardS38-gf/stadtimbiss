@@ -48,27 +48,11 @@
   position: relative;
   overflow: hidden;
   background-color: var(--color-bg);
-  /* Wasserzeichen als Hintergrund, damit es die Hoehe niemals
-     beeinflussen kann. */
-  background-image: url('../Bilder/Logo.png');
-  background-repeat: no-repeat;
-  background-position: center 58%;
-  background-size: min(78%, 540px);
   padding: var(--space-8) var(--container-pad-mobile) var(--space-7);
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 82svh;
-}
-
-/* Blasse Ueberlagerung, damit das Wasserzeichen zurueckfaellt */
-.hero__panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--color-bg);
-  opacity: 0.955;
-  pointer-events: none;
 }
 
 .hero__panel > * { position: relative; z-index: 1; }
@@ -109,12 +93,29 @@
   margin-top: 2px;
 }
 
-/* Wasserzeichen liegt jetzt als Hintergrund auf .hero__panel */
-
+/* Wasserzeichen als Pseudo-Element, damit es die Hoehe niemals
+   beeinflussen kann und automatisch mittig auf dem Text sitzt. */
 .hero__inhalt {
   position: relative;
   z-index: 1;
   max-width: 52ch;
+}
+
+.hero__inhalt::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(150%, 820px);
+  aspect-ratio: 1;
+  background-image: url('../Bilder/Logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero__inhalt > * { position: relative; z-index: 1; }
@@ -234,13 +235,18 @@
     min-height: 600px;
     max-height: 900px;
   }
+  /* Linker Innenabstand richtet sich nach der Inhaltsbreite der
+     Seite, damit Hero-Text und Sektionen buendig stehen. */
   .hero__panel {
-    padding: var(--space-7);
     min-height: 0;
-    background-position: center 55%;
-    background-size: min(70%, 460px);
+    padding-block: var(--space-7);
+    padding-right: var(--space-6);
+    padding-left: max(var(--space-7), calc((100vw - var(--max-content-width)) / 2));
   }
-  .hero__marke { top: var(--space-6); left: var(--space-7); }
+  .hero__marke {
+    top: var(--space-6);
+    left: max(var(--space-7), calc((100vw - var(--max-content-width)) / 2));
+  }
   .hero__logo { width: 84px; }
   .hero__bild { order: 0; min-height: 0; }
   .hero-nav { padding-inline: var(--space-6); }
