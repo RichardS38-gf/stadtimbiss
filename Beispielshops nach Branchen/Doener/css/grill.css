@@ -291,7 +291,8 @@
 }
 
 /* ── LAUFBAND ──
-   Durchlaufende Zeile statt statischer Info-Leiste. */
+   Zwei identische Gruppen nebeneinander, die Animation verschiebt
+   um genau eine Gruppenbreite. Dadurch entsteht keine Luecke. */
 .ticker {
   background: var(--color-copper);
   color: #fff;
@@ -302,24 +303,35 @@
 }
 
 .ticker__track {
-  display: inline-flex;
+  display: flex;
+  width: max-content;
+  animation: ticker-lauf 34s linear infinite;
+}
+
+.ticker__gruppe {
+  display: flex;
   align-items: center;
   gap: var(--space-6);
-  animation: ticker-lauf 28s linear infinite;
+  padding-right: var(--space-6);
+  flex: 0 0 auto;
 }
 
 .ticker__item {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-family: 'Lalezar', var(--font-head);
+  font-size: 1.32rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  line-height: 1;
 }
 
-.ticker__punkt { opacity: 0.5; }
+.ticker__punkt {
+  opacity: 0.55;
+  font-size: 0.8rem;
+}
 
 @keyframes ticker-lauf {
   from { transform: translateX(0); }
