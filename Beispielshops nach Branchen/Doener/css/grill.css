@@ -781,6 +781,122 @@
   .gericht__aktion { grid-column: 2; justify-content: flex-start; }
 }
 
+/* ── ÜBER UNS ──
+   Zwei überlappende Bilder links, Text rechts. Bewusst asymmetrisch
+   und damit anders als die 50/50-Splits der anderen Shops. */
+.ueber {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8) var(--space-7);
+  align-items: center;
+  padding-block: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .ueber { grid-template-columns: 0.95fr 1fr; }
+}
+
+.ueber__bilder {
+  position: relative;
+  padding-bottom: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.ueber__bild-gross {
+  aspect-ratio: 4 / 5;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.ueber__bild-klein {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 52%;
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  border: 10px solid var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+/* Störer mit der Jahreszahl */
+.ueber__stoerer {
+  position: absolute;
+  top: var(--space-5);
+  left: calc(var(--space-5) * -1);
+  background: var(--color-copper);
+  color: #fff;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  transform: rotate(-4deg);
+  font-family: 'Lalezar', var(--font-head);
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-align: center;
+  z-index: 2;
+}
+
+.ueber__stoerer small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.ueber__text h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+}
+
+.ueber__lead {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+
+.ueber__text p {
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin-bottom: var(--space-4);
+}
+
+/* Zitat mit Kupferbalken */
+.ueber__zitat {
+  border-left: 3px solid var(--color-copper);
+  padding-left: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.ueber__zitat p {
+  font-family: 'Reem Kufi', var(--font-head);
+  font-size: var(--text-xl);
+  line-height: 1.5;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.ueber__zitat cite {
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
 /* ── KENNZAHLEN ── */
 .zahlen {
   background: var(--color-dark);
