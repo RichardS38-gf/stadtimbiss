@@ -781,6 +781,118 @@
   .gericht__aktion { grid-column: 2; justify-content: flex-start; }
 }
 
+/* ── SERVICE ──
+   Bild links, vier Kacheln rechts. Der Fließtext erscheint erst
+   beim Überfahren. Auf Mobile gibt es kein Hover, dort steht der
+   Text deshalb dauerhaft. */
+.service {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 900px) {
+  .service { grid-template-columns: 0.82fr 1.18fr; }
+}
+
+.service__bild {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+  min-height: 260px;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-5);
+}
+
+.service__bild::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,32,34,0.88) 0%, rgba(20,32,34,0.15) 65%);
+}
+
+.service__bild-inhalt {
+  position: relative;
+  z-index: 1;
+  color: var(--color-on-dark);
+}
+
+.service__bild-titel {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  line-height: 1.2;
+  margin-bottom: var(--space-3);
+}
+
+.service__kacheln {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 560px) {
+  .service__kacheln { grid-template-columns: 1fr 1fr; }
+}
+
+.service-kachel {
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  background: transparent;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.service-kachel:hover,
+.service-kachel:focus-within {
+  border-style: solid;
+  border-color: var(--color-copper);
+  background: var(--color-bg-soft);
+}
+
+.service-kachel__nr {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+}
+
+.service-kachel__titel {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  margin-top: var(--space-2);
+}
+
+.service-kachel__text {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+}
+
+/* Hover-Aufklappen nur dort, wo es ein Hover gibt */
+@media (hover: hover) and (min-width: 900px) {
+  .service-kachel__text {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  }
+  .service-kachel:hover .service-kachel__text,
+  .service-kachel:focus-within .service-kachel__text {
+    max-height: 8rem;
+    opacity: 1;
+    margin-top: var(--space-2);
+  }
+}
+
 /* ── ÜBER UNS ──
    Zwei überlappende Bilder links, Text rechts. Bewusst asymmetrisch
    und damit anders als die 50/50-Splits der anderen Shops. */
