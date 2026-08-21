@@ -170,12 +170,19 @@
   order: -1;
 }
 
-/* Navigation liegt ueber dem Bild */
-.hero-nav {
+/* Navigation liegt ueber dem Bild.
+   Die Klasse nav bleibt fuer das Burger-Menue erhalten, ihre
+   Flaechen- und Positionsregeln werden hier aber aufgehoben,
+   sonst liegt ein weisser Streifen ueber dem Bild. */
+.hero-nav.nav {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  min-height: 0;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -184,11 +191,19 @@
   padding: var(--space-4) var(--container-pad-mobile);
 }
 
+.hero-nav.nav.scrolled {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Weicher dunkler Verlauf, damit die weisse Schrift auf hellen
+   Bildstellen lesbar bleibt. */
 .hero-nav::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(26,44,46,0.65), transparent);
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(20,32,34,0.72) 0%, rgba(20,32,34,0.28) 55%, transparent 100%);
   pointer-events: none;
 }
 
@@ -199,14 +214,17 @@
   gap: var(--space-5);
 }
 
+.hero-nav .nav__links a,
 .hero-nav__links a {
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: #fff;
 }
 
+.hero-nav .nav__links a:hover,
 .hero-nav__links a:hover { color: var(--color-copper); opacity: 1; }
 
 .hero-nav__aktionen {
