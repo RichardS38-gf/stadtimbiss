@@ -911,12 +911,18 @@
   text-align: center;
 }
 
+/* Senkrechte Trenner zwischen den drei Werten */
+.zahlen__grid > * + * {
+  border-left: 1px solid rgba(245, 239, 227, 0.28);
+}
+
 .zahl__wert {
   font-family: var(--font-head);
   font-weight: 800;
   font-size: clamp(2.2rem, 6vw, 3.6rem);
   line-height: 1;
   color: var(--color-copper);
+  font-variant-numeric: tabular-nums;
 }
 
 .zahl__label {

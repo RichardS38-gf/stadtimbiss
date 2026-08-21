@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/grill.css?v=11">
+  <link rel="stylesheet" href="css/grill.css?v=12">
   <link rel="stylesheet" href="css/orient.css?v=4">
   <link rel="stylesheet" href="css/konto.css?v=1">
 </head>
@@ -133,15 +133,15 @@
   <section class="zahlen">
     <div class="container zahlen__grid">
       <div>
-        <div class="zahl__wert">37</div>
+        <div class="zahl__wert" data-ziel="37">0</div>
         <div class="zahl__label">Jahre Grilltradition</div>
       </div>
       <div>
-        <div class="zahl__wert">480+</div>
+        <div class="zahl__wert" data-ziel="480" data-suffix="+">0</div>
         <div class="zahl__label">Google Bewertungen</div>
       </div>
       <div>
-        <div class="zahl__wert">4,7</div>
+        <div class="zahl__wert" data-ziel="4,7">0</div>
         <div class="zahl__label">Sterne im Schnitt</div>
       </div>
     </div>
@@ -382,6 +382,53 @@
     iconsEinsetzen();
     await setupSeite();
     iconsEinsetzen();
+  </script>
+
+  <script>
+    // Kennzahlen zaehlen hoch, sobald sie ins Bild scrollen.
+    // Laeuft nur einmal je Zahl.
+    (function zahlenHochzaehlen() {
+      const zahlen = document.querySelectorAll('.zahl__wert[data-ziel]');
+      if (!zahlen.length) return;
+
+      const reduziert = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function zaehle(el) {
+        const roh = el.dataset.ziel;
+        const suffix = el.dataset.suffix || '';
+        const dezimal = roh.includes(',');
+        const ziel = parseFloat(roh.replace(',', '.'));
+        const dauer = 1400;
+
+        if (reduziert) {
+          el.textContent = roh + suffix;
+          return;
+        }
+
+        const start = performance.now();
+        function schritt(jetzt) {
+          const t = Math.min((jetzt - start) / dauer, 1);
+          const p = 1 - Math.pow(1 - t, 3);   // weiches Auslaufen
+          const wert = ziel * p;
+          el.textContent = (dezimal
+            ? wert.toFixed(1).replace('.', ',')
+            : Math.round(wert).toString()) + suffix;
+          if (t < 1) requestAnimationFrame(schritt);
+        }
+        requestAnimationFrame(schritt);
+      }
+
+      const beobachter = new IntersectionObserver((eintraege) => {
+        eintraege.forEach(e => {
+          if (e.isIntersecting) {
+            zaehle(e.target);
+            beobachter.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      zahlen.forEach(z => beobachter.observe(z));
+    })();
   </script>
 
 </body>
