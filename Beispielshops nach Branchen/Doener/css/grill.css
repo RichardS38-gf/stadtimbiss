@@ -44,6 +44,46 @@
   scroll-margin-top: 90px;
 }
 
+/* ── KUNDENKONTO ──
+   Ueberschriften und Bedienelemente in derselben Versalienschrift
+   wie auf der Speisekarte. konto.css bleibt shop-neutral, deshalb
+   stehen die Anpassungen hier. */
+.konto-head__gruss,
+.konto-panel__titel,
+.konto-card__titel,
+.auth-box__titel,
+.stamp-card__titel,
+.konto-modal__kopf h3 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.konto-tab {
+  font-family: var(--font-head);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.konto-tab--active { font-weight: 800; }
+
+/* Kleinere Beschriftungen gesperrt und gedaempft, damit sie
+   nicht mit den Titeln konkurrieren */
+.konto-feld label,
+.konto-card__label,
+.address-card__label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+}
+
+.konto-feld label span { text-transform: none; letter-spacing: 0; }
+
 /* ── MENUE ALS AUSKLAPPER ──
    Auf den Unterseiten steht Bestellen im Vordergrund. Die
    Seitenlinks liegen hinter einem Klick. */
