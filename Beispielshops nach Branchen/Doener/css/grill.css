@@ -202,6 +202,17 @@
   }
 }
 
+/* Die Kopfzeile der Unterseiten bleibt einzeilig. Die
+   Beschriftungen der Buttons verschwinden dafuer frueher,
+   uebrig bleiben die Icon-Pillen. */
+@media (max-width: 900px) {
+  .nav:not(.hero-nav) .nav__inner { flex-wrap: nowrap; }
+  .nav:not(.hero-nav) .btn__text,
+  .nav:not(.hero-nav) .nav__konto-name { display: none; }
+  .nav:not(.hero-nav) .nav__aktionen .btn { padding-inline: 0.5rem; gap: 0; }
+  .nav:not(.hero-nav) .nav__konto { padding: 0.45rem; }
+}
+
 /* ── UMSCHALTER LIEFERUNG / ABHOLUNG ──
    Zwei Haelften ueber die volle Breite, beide Konditionen immer
    sichtbar. Der aktive Teil ist dunkel hinterlegt. */
