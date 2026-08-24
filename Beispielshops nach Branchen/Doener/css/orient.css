@@ -47,8 +47,6 @@
   .nav .nav__burger { width: 38px; }
   .nav .cart-btn { min-width: 38px; }
   .nav .ic { width: 1.15em; height: 1.15em; }
-
-  .nav__inner:has(.cart-btn) .nav__aktionen .btn--outline { display: none; }
 }
 
 @media (max-width: 420px) {

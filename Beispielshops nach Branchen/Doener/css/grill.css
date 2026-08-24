@@ -278,6 +278,24 @@
   opacity: 0.75;
 }
 
+/* Auf schmalen Bildschirmen stehen die beiden als getrennte
+   Karten untereinander, mit Abstand dazwischen. */
+@media (max-width: 559px) {
+  .modus {
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    gap: var(--space-3);
+  }
+
+  .modus__option {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-soft);
+  }
+}
+
 /* ── KOPFZEILE DER UNTERSEITEN ──
    Die Startseite hat ihre Navigation im Hero. Alle anderen Seiten
    nutzen diese Kopfzeile mit demselben Logo und derselben Schrift. */
