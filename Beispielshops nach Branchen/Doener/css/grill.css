@@ -36,6 +36,82 @@
 
 @media (min-width: 901px) { .nav__links { display: flex; } }
 
+/* ── UMSCHALTER LIEFERUNG / ABHOLUNG ──
+   Zwei Haelften ueber die volle Breite, beide Konditionen immer
+   sichtbar. Der aktive Teil ist dunkel hinterlegt. */
+.modus {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-soft);
+}
+
+@media (min-width: 560px) {
+  .modus { grid-template-columns: 1fr 1fr; }
+}
+
+.modus__option {
+  padding: var(--space-4) var(--space-5);
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  font: inherit;
+}
+
+.modus__option:first-child { border-top: 0; }
+
+@media (min-width: 560px) {
+  .modus__option { border-top: 0; border-left: 1px solid var(--color-line); }
+  .modus__option:first-child { border-left: 0; }
+}
+
+.modus__option:hover { background: var(--color-bg); }
+
+/* Die Zustandsklasse kommt aus bestellen.js und heisst dort
+   mode-card--active. Deshalb beide Selektoren. */
+.modus__option--aktiv,
+.modus .mode-card--active,
+.modus__option--aktiv:hover,
+.modus .mode-card--active:hover {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  border-color: var(--color-dark);
+}
+
+.modus__kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.modus__name {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.modus__preis {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-copper);
+  white-space: nowrap;
+}
+
+.modus__sub {
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+  opacity: 0.75;
+}
+
 /* ── KOPFZEILE DER UNTERSEITEN ──
    Die Startseite hat ihre Navigation im Hero. Alle anderen Seiten
    nutzen diese Kopfzeile mit demselben Logo und derselben Schrift. */

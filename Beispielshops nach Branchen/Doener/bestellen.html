@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
-  <link rel="stylesheet" href="css/grill.css?v=27">
+  <link rel="stylesheet" href="css/grill.css?v=29">
   <link rel="stylesheet" href="css/orient.css?v=4">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/bestellen.js"></script>
@@ -103,18 +103,20 @@
 
   <div class="order-mode">
     <div class="container">
-      <div class="order-mode-toggle order-mode-toggle--cards">
-        <button class="mode-card mode-card--active" data-mode="lieferung">
-          <span class="mode-card__emoji"><span data-icon="roller" data-icon-class="ic ic--lg"></span></span>
-          <span class="mode-card__title">Lieferung</span>
-          <span class="mode-card__info">~30 Min &middot; ab 2,00 &euro;</span>
-          <span class="mode-card__sub">Mindest. 10,00 &euro;</span>
+      <div class="modus">
+        <button class="modus__option mode-card mode-card--active" data-mode="lieferung">
+          <span class="modus__kopf">
+            <span class="modus__name">Lieferung</span>
+            <span class="modus__preis">ab 2,00 &euro;</span>
+          </span>
+          <span class="modus__sub">ca. 30 Min &middot; Mindestbestellwert 10,00 &euro;</span>
         </button>
-        <button class="mode-card" data-mode="abholung">
-          <span class="mode-card__emoji"><span data-icon="grill" data-icon-class="ic ic--lg"></span></span>
-          <span class="mode-card__title">Abholung</span>
-          <span class="mode-card__info">~10 Min &middot; kostenlos</span>
-          <span class="mode-card__sub">Musterstra&szlig;e 1</span>
+        <button class="modus__option mode-card" data-mode="abholung">
+          <span class="modus__kopf">
+            <span class="modus__name">Abholung</span>
+            <span class="modus__preis">kostenlos</span>
+          </span>
+          <span class="modus__sub">ca. 10 Min &middot; Musterstra&szlig;e 1</span>
         </button>
       </div>
     </div>
