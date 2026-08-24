@@ -334,7 +334,19 @@
   border-color: var(--color-copper);
 }
 
-.hero-nav .nav__konto-icon { color: #fff; }
+.hero-nav .nav__konto-icon,
+.hero-nav .nav__konto .ic {
+  color: #fff;
+  transition: color var(--transition);
+}
+
+/* Icon faerbt sich beim Hover mit */
+.hero-nav .nav__konto:hover .nav__konto-icon,
+.hero-nav .nav__konto:hover .ic,
+.hero-nav .nav__konto:hover svg {
+  color: var(--color-copper);
+  stroke: var(--color-copper);
+}
 
 @media (min-width: 900px) {
   .hero {
