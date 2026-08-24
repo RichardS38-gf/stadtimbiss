@@ -15,9 +15,10 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/checkout.css?v=2">
-  <link rel="stylesheet" href="css/grill.css?v=27">
+  <link rel="stylesheet" href="css/grill.css?v=30">
   <link rel="stylesheet" href="css/orient.css?v=4">
   <link rel="stylesheet" href="css/konto.css?v=1">
+  <script type="module" src="js/menue.js"></script>
 </head>
 <body class="sand">
 
@@ -35,9 +36,12 @@
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
       <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <button class="nav__menue-btn" type="button" aria-label="Menü">
+          <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
+        </button>
         <span id="nav-konto"></span>
-        <a href="reservieren.html" class="btn btn--outline btn--sm">🪑 <span class="btn__text">Reservieren</span></a>
-        <a href="bestellen.html" class="btn btn--primary btn--sm">🛒 <span class="btn__text">Jetzt bestellen</span></a>
+        <a href="reservieren.html" class="btn btn--outline btn--sm"><span data-icon="tisch"></span> <span class="btn__text">Reservieren</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm"><span data-icon="korb"></span> <span class="btn__text">Bestellen</span></a>
       </div>
     </div>
   </header>
