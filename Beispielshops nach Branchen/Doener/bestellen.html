@@ -47,11 +47,28 @@
     .menu-card__body { overflow: visible; }
     .menu-card { overflow: visible; }
 
-    .menu-section__title { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-head); font-weight: 800; text-transform: uppercase; }
+    .menu-section__title { font-family: var(--font-head); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; }
     .menu-section__sub {
       font-family: 'Lalezar', var(--font-head); font-size: 1.25rem;
       color: var(--color-copper); letter-spacing: 0.04em;
       margin-top: -0.2rem; margin-bottom: var(--space-4);
+    }
+
+    /* Kategorienleiste und Gerichtnamen in derselben Schrift
+       wie die Abschnittstitel */
+    .cat-link {
+      font-family: var(--font-head);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      font-size: var(--text-base);
+    }
+
+    .menu-card__name {
+      font-family: var(--font-head);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
     }
   </style>
 </head>
@@ -106,10 +123,10 @@
   <nav class="category-nav" id="category-nav">
     <div class="container">
       <div class="category-nav__inner">
-        <a class="cat-link cat-link--active" href="#doener"><span data-icon="drehspiess"></span> Döner &amp; Dürüm</a>
-        <a class="cat-link" href="#grill"><span data-icon="grill"></span> Vom Grill</a>
-        <a class="cat-link" href="#meze"><span data-icon="meze"></span> Meze</a>
-        <a class="cat-link" href="#suesses"><span data-icon="teekanne"></span> Süßes &amp; Getränke</a>
+        <a class="cat-link cat-link--active" href="#doener">Döner &amp; Dürüm</a>
+        <a class="cat-link" href="#grill">Vom Grill</a>
+        <a class="cat-link" href="#meze">Meze</a>
+        <a class="cat-link" href="#suesses">Süßes &amp; Getränke</a>
       </div>
     </div>
   </nav>
@@ -119,7 +136,7 @@
     <main class="menu">
 
       <section class="menu-section" id="doener">
-        <h2 class="menu-section__title"><span data-icon="drehspiess"></span> Döner &amp; Dürüm</h2>
+        <h2 class="menu-section__title">Döner &amp; Dürüm</h2>
         <p class="menu-section__sub">Vom Spieß, jeden Morgen frisch gesteckt</p>
 
         <article class="menu-card">
@@ -196,7 +213,7 @@
       </section>
 
       <section class="menu-section" id="grill">
-        <h2 class="menu-section__title"><span data-icon="grill"></span> Vom Grill</h2>
+        <h2 class="menu-section__title">Vom Grill</h2>
         <p class="menu-section__sub">Über Holzkohle, nicht über Gas</p>
 
         <article class="menu-card">
@@ -261,7 +278,7 @@
       </section>
 
       <section class="menu-section" id="meze">
-        <h2 class="menu-section__title"><span data-icon="meze"></span> Meze &amp; Beilagen</h2>
+        <h2 class="menu-section__title">Meze &amp; Beilagen</h2>
         <p class="menu-section__sub">Zum Teilen, wie es sich gehört</p>
 
         <article class="menu-card">
@@ -326,7 +343,7 @@
       </section>
 
       <section class="menu-section" id="suesses">
-        <h2 class="menu-section__title"><span data-icon="teekanne"></span> Süßes &amp; Getränke</h2>
+        <h2 class="menu-section__title">Süßes &amp; Getränke</h2>
         <p class="menu-section__sub">Zum Abschluss ein Çay</p>
 
         <article class="menu-card">
