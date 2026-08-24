@@ -180,27 +180,27 @@ export const DEMO_RESERVATIONS = [
 
 // Artikelkatalog fuer die Favoriten-Ansicht
 export const KATALOG = {
-  'k1': { name: 'Döner Kebab',        price: 7.50,  kategorie: 'Döner',    img: 'Bilder/platzhalter.svg' },
-  'k2': { name: 'Dürüm Döner',        price: 8.50,  kategorie: 'Döner',    img: 'Bilder/platzhalter.svg' },
-  'k3': { name: 'Döner Teller',       price: 13.50, kategorie: 'Döner',    img: 'Bilder/platzhalter.svg' },
-  'k4': { name: 'Yufka Chicken',      price: 8.50,  kategorie: 'Döner',    img: 'Bilder/platzhalter.svg' },
-  'k5': { name: 'Lahmacun',           price: 5.50,  kategorie: 'Döner',    img: 'Bilder/platzhalter.svg' },
-  'k6': { name: 'Pide mit Käse',      price: 8.90,  kategorie: 'Döner',    img: 'Bilder/platzhalter.svg' },
-  'g1': { name: 'Adana Kebab',        price: 15.90, kategorie: 'Grill',    img: 'Bilder/platzhalter.svg' },
-  'g2': { name: 'Şiş Kebab',          price: 14.90, kategorie: 'Grill',    img: 'Bilder/platzhalter.svg' },
-  'g3': { name: 'Köfte',              price: 13.90, kategorie: 'Grill',    img: 'Bilder/platzhalter.svg' },
-  'g4': { name: 'Lammkotelett',       price: 18.90, kategorie: 'Grill',    img: 'Bilder/platzhalter.svg' },
-  'g5': { name: 'Mixed Grill Teller', price: 21.90, kategorie: 'Grill',    img: 'Bilder/platzhalter.svg' },
-  'm1': { name: 'Hummus',             price: 5.50,  kategorie: 'Meze',     img: 'Bilder/platzhalter.svg' },
-  'm2': { name: 'Cacık',              price: 4.50,  kategorie: 'Meze',     img: 'Bilder/platzhalter.svg' },
-  'm3': { name: 'Sucuk',              price: 6.90,  kategorie: 'Meze',     img: 'Bilder/platzhalter.svg' },
-  'm4': { name: 'Falafel',            price: 6.50,  kategorie: 'Meze',     img: 'Bilder/platzhalter.svg' },
-  'm5': { name: 'Pommes',             price: 3.50,  kategorie: 'Meze',     img: 'Bilder/platzhalter.svg' },
-  's1': { name: 'Baklava',            price: 4.90,  kategorie: 'Süßes',    img: 'Bilder/platzhalter.svg' },
-  's2': { name: 'Künefe',             price: 6.50,  kategorie: 'Süßes',    img: 'Bilder/platzhalter.svg' },
-  't1': { name: 'Ayran 0,25l',        price: 1.90,  kategorie: 'Getränke', img: 'Bilder/platzhalter.svg' },
-  't2': { name: 'Çay',                price: 2.00,  kategorie: 'Getränke', img: 'Bilder/platzhalter.svg' },
-  't3': { name: 'Cola 0,33l',         price: 2.90,  kategorie: 'Getränke', img: 'Bilder/platzhalter.svg' }
+  'k1': { name: 'Döner Kebab',        price: 7.50,  kategorie: 'Döner',    img: 'Bilder/doenerkebap.png' },
+  'k2': { name: 'Dürüm Döner',        price: 8.50,  kategorie: 'Döner',    img: 'Bilder/dueruemdoener.png' },
+  'k3': { name: 'Döner Teller',       price: 13.50, kategorie: 'Döner',    img: 'Bilder/doenerteller.png' },
+  'k4': { name: 'Yufka Chicken',      price: 8.50,  kategorie: 'Döner',    img: 'Bilder/yufkachicken.png' },
+  'k5': { name: 'Lahmacun',           price: 5.50,  kategorie: 'Döner',    img: 'Bilder/lahmacun.png' },
+  'k6': { name: 'Pide mit Käse',      price: 8.90,  kategorie: 'Döner',    img: 'Bilder/pide.png' },
+  'g1': { name: 'Adana Kebab',        price: 15.90, kategorie: 'Grill',    img: 'Bilder/adanakebab.png' },
+  'g2': { name: 'Şiş Kebab',          price: 14.90, kategorie: 'Grill',    img: 'Bilder/siskebab.png' },
+  'g3': { name: 'Köfte',              price: 13.90, kategorie: 'Grill',    img: 'Bilder/k%C3%B6fte.png' },
+  'g4': { name: 'Lammkotelett',       price: 18.90, kategorie: 'Grill',    img: 'Bilder/lammkotelett.png' },
+  'g5': { name: 'Mixed Grill Teller', price: 21.90, kategorie: 'Grill',    img: 'Bilder/mixedgrillteller.png' },
+  'm1': { name: 'Hummus',             price: 5.50,  kategorie: 'Meze',     img: 'Bilder/hummus.png' },
+  'm2': { name: 'Cacık',              price: 4.50,  kategorie: 'Meze',     img: 'Bilder/cacik.png' },
+  'm3': { name: 'Sucuk',              price: 6.90,  kategorie: 'Meze',     img: 'Bilder/sucuk.png' },
+  'm4': { name: 'Falafel',            price: 6.50,  kategorie: 'Meze',     img: 'Bilder/falafel.png' },
+  'm5': { name: 'Pommes',             price: 3.50,  kategorie: 'Meze',     img: 'Bilder/pommes.png' },
+  's1': { name: 'Baklava',            price: 4.90,  kategorie: 'Süßes',    img: 'Bilder/baklava.png' },
+  's2': { name: 'Künefe',             price: 6.50,  kategorie: 'Süßes',    img: 'Bilder/kuenefe.png' },
+  't1': { name: 'Ayran 0,25l',        price: 1.90,  kategorie: 'Getränke', img: 'Bilder/ayran.png' },
+  't2': { name: 'Çay',                price: 2.00,  kategorie: 'Getränke', img: 'Bilder/cay.png' },
+  't3': { name: 'Cola 0,33l',         price: 2.90,  kategorie: 'Getränke', img: 'Bilder/cola.png' }
 };
 
 export function demoDatenSatz() {
