@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/base.css?v=1">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/grill.css?v=41">
+  <link rel="stylesheet" href="css/grill.css?v=42">
   <link rel="stylesheet" href="css/orient.css?v=5">
   <script type="module" src="js/menue.js"></script>
   <link rel="stylesheet" href="css/konto.css?v=1">
@@ -260,15 +260,17 @@
     <div class="aktion__inner">
       <div>
         <p class="aktion__kicker">Jeden Dienstag</p>
-        <h2 class="aktion__titel">Döner-Tag</h2>
+        <div class="aktion__titelzeile">
+          <h2 class="aktion__titel">Döner-Tag</h2>
+          <div class="aktion__preis">
+            <b>5,50 €</b>
+            <span>statt 7,50</span>
+          </div>
+        </div>
         <p class="aktion__text">Jeder Döner Kebab den ganzen Tag für 5,50 Euro, im Laden und zum Mitnehmen. Ohne Code, ohne Mindestbestellwert.</p>
         <a href="bestellen.html" class="btn btn--primary">
           <span data-icon="korb"></span> Jetzt bestellen
         </a>
-      </div>
-      <div class="aktion__preis">
-        <b>5,50 €</b>
-        <span>statt 7,50</span>
       </div>
     </div>
   </section>
