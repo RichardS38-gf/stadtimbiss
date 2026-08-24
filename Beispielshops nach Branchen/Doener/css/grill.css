@@ -116,6 +116,11 @@
   color: transparent;
 }
 
+/* auth.js fuegt auf schmalen Bildschirmen einen eigenen Hamburger
+   ein. Auf den Unterseiten gibt es aber schon den Menue-Knopf,
+   sonst staenden dort zwei Menues nebeneinander. */
+.nav:not(.hero-nav) .nav__burger { display: none !important; }
+
 /* ── MENUE ALS AUSKLAPPER ──
    Auf den Unterseiten steht Bestellen im Vordergrund. Die
    Seitenlinks liegen hinter einem Klick. */
@@ -183,6 +188,16 @@
 @media (max-width: 640px) {
   .nav__menue-btn__text { display: none; }
   .nav__menue-btn { padding: 0.45rem 0.6rem; }
+}
+
+/* Auf schmalen Bildschirmen darf das Ausklappmenue nicht ueber
+   den Rand hinauslaufen. */
+@media (max-width: 480px) {
+  .nav:not(.hero-nav) .nav__links {
+    left: 0;
+    right: 0;
+    min-width: 0;
+  }
 }
 
 /* ── UMSCHALTER LIEFERUNG / ABHOLUNG ──
