@@ -84,9 +84,11 @@
 
 .konto-feld label span { text-transform: none; letter-spacing: 0; }
 
-/* Artikelnamen in Favoriten und Listen */
-.fav-card__name,
-.order-item__name {
+/* Artikelnamen in Favoriten und Listen.
+   Hoehere Spezifitaet, weil konto.css spaeter geladen wird. */
+.fav-card .fav-card__name,
+.order-detail .order-item__name,
+.konto-panel .fav-card__name {
   font-family: var(--font-head);
   font-weight: 800;
   text-transform: uppercase;
@@ -95,20 +97,20 @@
 
 /* ── STEMPELKARTE ──
    Gefuellte Stempel zeigen das Logo statt einer Farbflaeche.
-   Das Haekchen wird ausgeblendet, sonst liegt es darueber. */
-.stamp-slot--filled {
+   konto.css setzt background als Kurzform und wird spaeter
+   geladen, deshalb hier mit hoeherer Spezifitaet. */
+.stamp-card .stamp-grid .stamp-slot--filled {
   background-color: var(--color-bg-soft);
   background-image: url('../Bilder/Logo.png');
-  background-size: 78%;
+  background-size: 76%;
   background-position: center;
   background-repeat: no-repeat;
   border: 2px solid var(--color-accent);
   color: transparent;
 }
 
-/* Auf der vollen Karte steht die Flaeche hell, das Logo bleibt
-   dadurch gut lesbar. */
-.stamp-card--voll .stamp-slot--filled {
+/* Auf der vollen Karte steht die Flaeche hell ohne Rand */
+.stamp-card--voll .stamp-grid .stamp-slot--filled {
   background-color: var(--color-bg-soft);
   border-color: var(--color-bg-soft);
   color: transparent;
