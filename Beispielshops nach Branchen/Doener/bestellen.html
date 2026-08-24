@@ -88,7 +88,7 @@
         <a href="index.html#stimmen">Bewertungen</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
-      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;margin-right:var(--space-4)">
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
         <button class="nav__menue-btn" type="button" aria-label="Menü">
           <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
         </button>
@@ -96,10 +96,10 @@
         <a href="reservieren.html" class="btn btn--outline btn--sm">
           <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
         </a>
+        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
+          <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
+        </button>
       </div>
-      <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
-        <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
-      </button>
     </div>
   </header>
 
