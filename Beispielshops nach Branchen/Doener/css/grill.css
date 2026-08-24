@@ -34,6 +34,16 @@
 
 .nav__links a:hover { color: var(--color-accent); opacity: 1; }
 
+/* Sprungmarken nicht unter die Kopfzeile rutschen lassen */
+.ueber,
+.abschnitt,
+.abschnitt--eng,
+.zahlen,
+.aktion,
+[id] {
+  scroll-margin-top: 90px;
+}
+
 /* ── MENUE ALS AUSKLAPPER ──
    Auf den Unterseiten steht Bestellen im Vordergrund. Die
    Seitenlinks liegen hinter einem Klick. */
