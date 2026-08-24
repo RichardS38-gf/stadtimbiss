@@ -883,9 +883,19 @@
 
 .index-zeile:hover .index-zeile__pfeil { transform: translateX(6px); }
 
-/* Auf Mobile gibt es kein Hover, der Pfeil hat dort keine
+/* iconsEinsetzen ersetzt den Span samt Klasse durch das SVG,
+   uebrig bleibt nur .ic. Deshalb hier darauf zielen. */
+.index-zeile .ic {
+  color: var(--color-accent);
+  transition: transform var(--transition);
+}
+
+.index-zeile:hover .ic { transform: translateX(6px); }
+
+/* Auf Mobile gibt es kein Hover, das Zeichen hat dort keine
    Funktion und wird ausgeblendet. */
 @media (max-width: 640px) {
+  .index-zeile .ic,
   .index-zeile__pfeil { display: none; }
   .index-zeile { grid-template-columns: auto 1fr; }
 }
