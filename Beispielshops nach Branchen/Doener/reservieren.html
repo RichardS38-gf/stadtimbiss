@@ -20,6 +20,22 @@
   <style>
     /* Nav-Regeln kommen aus grill.css, hier nur Seitenspezifisches */
 
+    /* Ueberschriften in derselben Schrift wie auf der Speisekarte */
+    .res-hero h1,
+    .res-form__title,
+    .res-info-card h3,
+    .res-success h3 {
+      font-family: var(--font-head);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    .res-form label,
+    .res-info-item strong {
+      font-family: var(--font-body);
+    }
+
     /* Page Hero */
     .res-hero {
       background: var(--color-bg);
@@ -171,8 +187,6 @@
     </div>
   </header>
 
-  <div class="ornament"></div>
-
   <div class="demo-banner" id="demo-banner"></div>
 
   <!-- Page Hero -->
@@ -314,11 +328,6 @@
               <span data-icon="haken"></span>
               <div>Du erhältst eine Bestätigung per Telefon oder E-Mail.</div>
             </div>
-          </div>
-
-          <div class="res-note">
-            <strong>Keine Lust zu warten?</strong><br>
-            Komm einfach vorbei, wir finden fast immer einen Platz. <span class="script">Afiyet olsun!</span>
           </div>
         </div>
 
