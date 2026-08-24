@@ -1158,6 +1158,28 @@
 .abschnitt { padding-block: var(--space-8); }
 .abschnitt--eng { padding-block: var(--space-7); }
 
+/* Auf Mobile bekommen alle Sektionen denselben Innenabstand.
+   Da sich die Abstaende zweier Sektionen addieren, ergibt das
+   durchgehend denselben Zwischenraum. */
+@media (max-width: 899px) {
+  .abschnitt,
+  .abschnitt--eng,
+  .ueber,
+  .zahlen {
+    padding-block: var(--space-6);
+  }
+
+  .ueber { gap: var(--space-6); }
+
+  /* Der Werbebanner braucht keinen zusaetzlichen Abstand, die
+     Sektion darueber bringt ihn bereits mit. */
+  .aktion { margin-top: 0; }
+
+  .aktion__inner { padding-block: var(--space-6); }
+
+  .kopf { margin-bottom: var(--space-5); }
+}
+
 /* ── KONTAKT ──
    Vier Kacheln nebeneinander, Karte darunter über volle Breite.
    Die erste Kachel ist dunkel und setzt den Akzent. */
