@@ -1244,6 +1244,55 @@
 
 .kontakt-karte iframe { width: 100%; height: 100%; min-height: 440px; border: 0; display: block; }
 
+/* Auf Mobile werden die vier Kacheln zum Wisch-Slider.
+   Die naechste Kachel schaut am Rand hervor, dazu ein feiner
+   Fortschrittsbalken statt eines Texthinweises. */
+@media (max-width: 899px) {
+  .kontakt-kacheln {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-copper) var(--color-line);
+    padding-bottom: var(--space-3);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+  }
+
+  .kontakt-kachel {
+    flex: 0 0 74%;
+    scroll-snap-align: start;
+  }
+
+  /* Balken sichtbar lassen, er zeigt an, dass es weitergeht */
+  .kontakt-kacheln::-webkit-scrollbar { height: 4px; }
+  .kontakt-kacheln::-webkit-scrollbar-track {
+    background: var(--color-line);
+    border-radius: 2px;
+  }
+  .kontakt-kacheln::-webkit-scrollbar-thumb {
+    background: var(--color-copper);
+    border-radius: 2px;
+  }
+
+  /* Ohne Hover keine Farbumkehr, sonst bleibt eine Kachel
+     nach dem Antippen dunkel stehen. */
+  .kontakt-kachel:hover,
+  .kontakt-kachel:focus-within {
+    background: var(--color-bg-soft);
+    border-color: var(--color-line);
+  }
+  .kontakt-kachel:hover .kontakt-kachel__wert,
+  .kontakt-kachel:focus-within .kontakt-kachel__wert { color: var(--color-ink); }
+  .kontakt-kachel:hover .kontakt-kachel__label,
+  .kontakt-kachel:focus-within .kontakt-kachel__label { color: var(--color-muted); }
+  .kontakt-kachel:hover .ic,
+  .kontakt-kachel:focus-within .ic { color: var(--color-accent); }
+}
+
 /* ── SPEISEKARTE ALS PREISLISTE ── */
 .karte-abschnitt { margin-bottom: var(--space-7); }
 
