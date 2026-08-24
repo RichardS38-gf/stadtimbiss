@@ -1460,6 +1460,61 @@
   }
 }
 
+/* Hinweis auf den Slider, nur auf Mobile sichtbar.
+   Die Grundregel muss vor der Media Query stehen. */
+.slider-hinweis { display: none; }
+
+/* Auf Mobile werden die Kacheln zum Wisch-Slider.
+   Die naechste Karte schaut am Rand hervor, damit erkennbar ist,
+   dass es weitergeht. */
+@media (max-width: 899px) {
+  .service__kacheln {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: var(--space-3);
+    /* randlos scrollen, Inhalt bleibt trotzdem eingerueckt */
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+  }
+
+  .service-kachel {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    background: var(--color-bg-soft);
+  }
+
+  .service__kacheln::-webkit-scrollbar { height: 4px; }
+  .service__kacheln::-webkit-scrollbar-track { background: transparent; }
+  .service__kacheln::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border-radius: 2px;
+  }
+
+  .slider-hinweis {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-copper);
+    margin-top: var(--space-2);
+  }
+
+  .slider-hinweis::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-line);
+  }
+}
+
 /* ── ÜBER UNS ──
    Zwei überlappende Bilder links, Text rechts. Bewusst asymmetrisch
    und damit anders als die 50/50-Splits der anderen Shops. */
