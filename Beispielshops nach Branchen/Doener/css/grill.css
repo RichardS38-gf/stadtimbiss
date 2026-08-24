@@ -117,9 +117,9 @@
 }
 
 /* auth.js fuegt auf schmalen Bildschirmen einen eigenen Hamburger
-   ein. Auf den Unterseiten gibt es aber schon den Menue-Knopf,
-   sonst staenden dort zwei Menues nebeneinander. */
-.nav:not(.hero-nav) .nav__burger { display: none !important; }
+   ein. Wir haben ueberall einen eigenen Menue-Knopf, sonst
+   staenden zwei Menues nebeneinander. */
+.nav__burger { display: none !important; }
 
 /* ── MENUE ALS AUSKLAPPER ──
    Auf den Unterseiten steht Bestellen im Vordergrund. Die
@@ -586,6 +586,64 @@
 .hero-nav .nav__konto:hover svg {
   color: var(--color-copper);
   stroke: var(--color-copper);
+}
+
+/* Menue-Knopf im Hero: nur auf schmalen Bildschirmen, hell auf
+   dem Bild und ganz links in der Leiste. */
+.hero-nav .nav__menue-btn {
+  display: none;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-nav .nav__menue-btn:hover {
+  border-color: var(--color-copper);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 899px) {
+  .hero-nav .nav__menue-btn {
+    display: inline-flex;
+    margin-right: auto;
+  }
+
+  /* Aufgeklappt erscheinen die Sektionen als helles Feld
+     unter der Leiste. */
+  .hero-nav.nav--offen .nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: var(--container-pad-mobile);
+    right: var(--container-pad-mobile);
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    box-shadow: 0 14px 34px rgba(20, 32, 34, 0.3);
+    z-index: 300;
+  }
+
+  .hero-nav.nav--offen .nav__links a {
+    color: var(--color-ink);
+    text-shadow: none;
+    padding: 0.7rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-nav.nav--offen .nav__links a:hover {
+    color: var(--color-accent);
+    background: var(--color-bg);
+    text-decoration: none;
+  }
 }
 
 @media (min-width: 900px) {
