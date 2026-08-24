@@ -100,8 +100,8 @@ button:hover .ic-badge,
 
 /* iOS Safari faerbt Buttons ohne gesetzte Textfarbe in Systemblau. */
 button { color: inherit; }
-.cart-btn { color: var(--color-ink); }
-.cart-btn:hover { color: var(--color-accent); }
+.cart-btn { color: var(--color-accent); }
+.cart-btn:hover { color: var(--color-accent-dk); }
 .mode-card { color: var(--color-ink); }
 .mode-card--active { color: var(--color-on-accent, #fff); }
 .cat-link { color: var(--color-ink); }
