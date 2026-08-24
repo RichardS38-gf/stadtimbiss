@@ -22,7 +22,7 @@
 
     /* Ueberschriften in derselben Schrift wie auf der Speisekarte */
     .res-hero h1,
-    .res-form__title,
+    .res-form h2,
     .res-info-card h3,
     .res-success h3 {
       font-family: var(--font-head);
@@ -31,9 +31,20 @@
       letter-spacing: -0.01em;
     }
 
-    .res-form label,
-    .res-info-item strong {
-      font-family: var(--font-body);
+    /* Feldbeschriftungen ebenfalls in Versalien, aber kleiner
+       und gesperrt, damit sie nicht mit den Titeln konkurrieren */
+    .form-group label {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--color-muted);
+    }
+
+    .form-group label span {
+      text-transform: none;
+      letter-spacing: 0;
     }
 
     /* Page Hero: dunkles Band ueber die volle Breite */
