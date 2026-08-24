@@ -62,7 +62,9 @@
 
 .nav__menue-btn span { display: block; line-height: 1; }
 
-.nav .nav__links {
+/* Gilt nur auf den Unterseiten. Die Startseite hat ihre
+   Navigation im Hero und bleibt unveraendert. */
+.nav:not(.hero-nav) .nav__links {
   display: none;
   position: absolute;
   top: calc(100% + 8px);
@@ -78,9 +80,9 @@
   z-index: 200;
 }
 
-.nav.nav--offen .nav__links { display: flex; }
+.nav:not(.hero-nav).nav--offen .nav__links { display: flex; }
 
-.nav .nav__links a {
+.nav:not(.hero-nav) .nav__links a {
   padding: 0.6rem 0.8rem;
   border-radius: var(--radius-sm);
   font-size: 0.85rem;
@@ -91,7 +93,10 @@
   white-space: nowrap;
 }
 
-.nav .nav__links a:hover { background: var(--color-bg); color: var(--color-accent); }
+.nav:not(.hero-nav) .nav__links a:hover {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
 
 @media (max-width: 640px) {
   .nav__menue-btn__text { display: none; }
