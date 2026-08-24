@@ -84,6 +84,36 @@
 
 .konto-feld label span { text-transform: none; letter-spacing: 0; }
 
+/* Artikelnamen in Favoriten und Listen */
+.fav-card__name,
+.order-item__name {
+  font-family: var(--font-head);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+/* ── STEMPELKARTE ──
+   Gefuellte Stempel zeigen das Logo statt einer Farbflaeche.
+   Das Haekchen wird ausgeblendet, sonst liegt es darueber. */
+.stamp-slot--filled {
+  background-color: var(--color-bg-soft);
+  background-image: url('../Bilder/Logo.png');
+  background-size: 78%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid var(--color-accent);
+  color: transparent;
+}
+
+/* Auf der vollen Karte steht die Flaeche hell, das Logo bleibt
+   dadurch gut lesbar. */
+.stamp-card--voll .stamp-slot--filled {
+  background-color: var(--color-bg-soft);
+  border-color: var(--color-bg-soft);
+  color: transparent;
+}
+
 /* ── MENUE ALS AUSKLAPPER ──
    Auf den Unterseiten steht Bestellen im Vordergrund. Die
    Seitenlinks liegen hinter einem Klick. */
