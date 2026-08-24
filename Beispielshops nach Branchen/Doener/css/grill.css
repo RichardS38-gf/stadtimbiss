@@ -883,6 +883,13 @@
 
 .index-zeile:hover .index-zeile__pfeil { transform: translateX(6px); }
 
+/* Auf Mobile gibt es kein Hover, der Pfeil hat dort keine
+   Funktion und wird ausgeblendet. */
+@media (max-width: 640px) {
+  .index-zeile__pfeil { display: none; }
+  .index-zeile { grid-template-columns: auto 1fr; }
+}
+
 /* ── GUTSCHEINKARTEN ── */
 .gutschein-grid {
   display: grid;
