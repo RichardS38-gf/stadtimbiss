@@ -331,6 +331,17 @@
   gap: var(--space-2);
 }
 
+/* Konto-Knopf im Hero. Die Kopfzeile liegt dort auf dem Foto,
+   deshalb Symbol und Name in vollem Weiss statt in Ink. Auf den
+   Unterseiten bleibt es dunkel, dort ist die Kopfzeile hell. */
+.hero-top__aktionen .nav__konto,
+.hero-top__aktionen .nav__konto:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+.hero-top__aktionen .nav__konto-name { color: #fff; }
+
 /* Menuepunkte unter der Marke */
 .hero-menue {
   display: flex;

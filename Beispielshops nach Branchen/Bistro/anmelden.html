@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/bistro.css?v=34">
+  <link rel="stylesheet" href="css/bistro.css?v=35">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/menue.js"></script>
 </head>
@@ -39,8 +39,8 @@
           <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
         </button>
         <span id="nav-konto"></span>
-        <a href="reservieren.html" class="btn btn--outline btn--sm"><span data-icon="tisch"></span> <span class="btn__text">Reservieren</span></a>
-        <a href="bestellen.html" class="btn btn--primary btn--sm"><span data-icon="korb"></span> <span class="btn__text">Bestellen</span></a>
+        <a href="reservieren.html" class="btn btn--outline btn--sm"><span data-icon="kalender"></span> <span class="btn__text">Reservieren</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm"><span data-icon="speisekarte"></span> <span class="btn__text">Bestellen</span></a>
       </div>
     </div>
   </header>
@@ -164,28 +164,35 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
+      <a href="index.html" class="footer-marke">
+        <span class="footer-marke__linie"></span>
+        <span class="footer-marke__mitte">
+          <img class="footer-marke__logo" src="Bilder/logo.png" alt="">
+          <span class="footer-marke__name">Café <em>Marlene</em></span>
+        </span>
+        <span class="footer-marke__linie"></span>
+      </a>
+
       <div class="footer__cols">
-        <div>
-          <a href="index.html" class="footer__marke">Café <em>Marlene</em></a>
-          <div class="zierlinie"><span></span></div>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="telefon"></span></span>
+          <p class="footer-block__titel">Abholen oder liefern lassen</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
           <p class="footer__text">
-            Coffee, Bar &amp; Bistro<br>
+            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder
+            online bestellen.
+          </p>
+          <p class="footer-block__adresse">
+            Café Marlene<br>
             Musterstraße 1<br>
             38100 Braunschweig
           </p>
+          <p class="footer__text">Durchgehend warme Küche ab 11:30 Uhr.</p>
         </div>
-        <div>
-          <p class="footer__kicker">Bestellen und abholen</p>
-          <div class="zierlinie"><span></span></div>
-          <p class="footer__text">
-            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen und
-            zur vereinbarten Zeit abholen.<br>
-            Durchgehend warme Küche ab 11:30 Uhr.
-          </p>
-        </div>
-        <div>
-          <p class="footer__kicker">Öffnungszeiten</p>
-          <div class="zierlinie"><span></span></div>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="uhr"></span></span>
+          <p class="footer-block__titel">Öffnungszeiten</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
           <div class="footer__zeiten">
             <div class="footer__zeit"><b>Montag bis Donnerstag</b><span>08:00 – 21:00</span></div>
             <div class="footer__zeit"><b>Freitag und Samstag</b><span>08:00 – 23:00</span></div>

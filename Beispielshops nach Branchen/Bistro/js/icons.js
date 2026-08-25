@@ -103,6 +103,26 @@ const PFADE = {
     <path d="M8.2 10.2V6.3a1.6 1.6 0 0 1 1.6-1.6h4.4a1.6 1.6 0 0 1 1.6 1.6v3.9"/>
     <path d="M9.6 10.2V6.6h4.8v3.6"/>`,
 
+  // Kalenderblatt, fuer die Reservierung
+  kalender: `
+    <rect x="3.2" y="5.2" width="17.6" height="15.6" rx="1.8"/>
+    <path d="M3.4 9.8h17.2"/>
+    <path d="M8.2 3.2v4"/>
+    <path d="M15.8 3.2v4"/>
+    <path d="M7.6 13.4h1.6"/>
+    <path d="M11.2 13.4h1.6"/>
+    <path d="M14.8 13.4h1.6"/>
+    <path d="M7.6 17h1.6"/>
+    <path d="M11.2 17h1.6"/>`,
+
+  // Aufgeschlagene Speisekarte
+  speisekarte: `
+    <rect x="4" y="3" width="16" height="18" rx="1.6"/>
+    <path d="M7.8 7.2h8.4"/>
+    <path d="M7.8 10.8h8.4"/>
+    <path d="M7.8 14.4h5.4"/>
+    <path d="M7.8 17.8h3.2"/>`,
+
   korb: `
     <path d="M3.2 4.6h2.2l2.5 10.9a1.8 1.8 0 0 0 1.8 1.4h7.5a1.8 1.8 0 0 0 1.8-1.4L20.6 8.4H6.1"/>
     <path d="M6.6 10.6h13.3"/>

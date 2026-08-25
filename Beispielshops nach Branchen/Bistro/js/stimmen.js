@@ -16,7 +16,7 @@
    Skript selbst setzt. Laeuft es nicht, etwa ueber file://, stehen
    alle drei Zitate normal lesbar da. */
 
-const TAKT_MS = 7000;
+const TAKT_MS = 4500;
 
 export function stimmenRotieren() {
   const liste = document.querySelector('.stimmen');

@@ -10,22 +10,24 @@
       Richtung ueber data-dreh am Bild: 1 im Uhrzeigersinn
       (Vorgabe), -1 dagegen.
 
-   2. Einflug von rechts, einmalig, sobald das Bild weit genug im
-      Viewport steht. Nur bei Bildern mit data-einflug="rechts".
-      Ausgeloest ueber einen IntersectionObserver, der Ablauf
-      selbst laeuft ueber die Zeit, nicht ueber den Scroll.
+   2. Einflug von rechts, einmalig, sobald die Oberkante des Bildes
+      weit genug im Viewport steht. Nur bei data-einflug="rechts".
 
-   Bewusst kein animation-timeline: view() und keine CSS-Transition
-   auf einer @property-Variablen. Beides koennen noch nicht alle
-   Browser, und die Demos laufen auch auf fremden Rechnern.
+   Der Ausloeser haengt bewusst NICHT an einem IntersectionObserver.
+   Diese Bilder ragen weit ueber den rechten Fensterrand hinaus und
+   sind hoeher als viele Bildschirme. Der sichtbare Anteil erreicht
+   deshalb keine verlaessliche Schwelle, der Beobachter feuerte nie
+   und das Bild blieb dauerhaft auf opacity 0 stehen. Jetzt genuegt
+   es, dass die Oberkante die untere Fensterkante erreicht.
 
    Ohne Server passiert gar nichts, weil ES-Module ueber file://
-   blockiert werden. Die Bilder stehen dann einfach still und
-   sichtbar da, das ist der gewollte Rueckfall. */
+   blockiert werden. Die Bilder stehen dann still und sichtbar da,
+   das ist der gewollte Rueckfall. */
 
 const MAX_GRAD = 55;          // Ausschlag der Drehung in Grad
 const EINFLUG_MS = 900;       // Dauer des Einflugs
 const EINFLUG_WEG = 130;      // Startversatz in Prozent der Bildbreite
+const AUSLOESER = 0.9;        // Anteil der Fensterhoehe, ab dem es startet
 
 /* Weich auslaufend, startet schnell und wird zum Ende hin langsamer. */
 function weichAus(t) {
@@ -36,13 +38,9 @@ export function dekoDrehen() {
   const bilder = Array.from(document.querySelectorAll('.zeit__deko'));
   if (bilder.length === 0) return;
 
-  const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   /* Wer Bewegung reduziert haben moechte, bekommt die Bilder gerade
-     und sofort sichtbar. Wichtig: die Startwerte setzt das Skript,
-     nicht das Stylesheet. Sonst waeren die Bilder ohne laufendes
-     JavaScript dauerhaft unsichtbar. */
-  if (ruhig) return;
+     und sichtbar. Wichtig: hier wird nichts auf opacity 0 gesetzt. */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const zustand = new Map();
 
@@ -68,9 +66,12 @@ export function dekoDrehen() {
 
       const z = zustand.get(bild);
 
-      // Einflug: 0 bis der Observer ausloest, dann bis 1 ueber die Zeit
       let e = 1;
       if (z.fliegt) {
+        // Startschuss: Oberkante hat die untere Fensterkante erreicht
+        if (z.start === 0 && kasten.top < fensterhoehe * AUSLOESER) {
+          z.start = jetzt;
+        }
         if (z.start === 0) {
           e = 0;
         } else {
@@ -100,30 +101,6 @@ export function dekoDrehen() {
     if (angefordert) return;
     angefordert = true;
     requestAnimationFrame(zeichnen);
-  }
-
-  /* Startschuss fuer den Einflug, sobald ein Drittel des Bildes
-     im Viewport steht. Danach wird nicht mehr beobachtet, der
-     Effekt laeuft nur ein einziges Mal. */
-  const fliegende = bilder.filter((b) => zustand.get(b).fliegt);
-
-  if (fliegende.length > 0) {
-    const beobachter = new IntersectionObserver(
-      (eintraege) => {
-        for (const eintrag of eintraege) {
-          if (!eintrag.isIntersecting) continue;
-          const z = zustand.get(eintrag.target);
-          if (z.start === 0) {
-            z.start = performance.now();
-            anfordern();
-          }
-          beobachter.unobserve(eintrag.target);
-        }
-      },
-      { threshold: 0.33 }
-    );
-
-    for (const bild of fliegende) beobachter.observe(bild);
   }
 
   window.addEventListener('scroll', anfordern, { passive: true });
