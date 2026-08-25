@@ -333,14 +333,24 @@
 
 /* Konto-Knopf im Hero. Die Kopfzeile liegt dort auf dem Foto,
    deshalb Symbol und Name in vollem Weiss statt in Ink. Auf den
-   Unterseiten bleibt es dunkel, dort ist die Kopfzeile hell. */
+   Unterseiten bleibt es dunkel, dort ist die Kopfzeile hell.
+   Das Symbol traegt in konto.css eine eigene Farbe, es braucht
+   deshalb einen eigenen Selektor und wird nicht mitvererbt. */
 .hero-top__aktionen .nav__konto,
 .hero-top__aktionen .nav__konto:hover {
   color: #fff;
   opacity: 1;
 }
 
-.hero-top__aktionen .nav__konto-name { color: #fff; }
+.hero-top__aktionen .nav__konto-name,
+.hero-top__aktionen .nav__konto-icon {
+  color: #fff;
+  transition: color var(--transition);
+}
+
+.hero-top__aktionen .nav__konto:hover .nav__konto-icon {
+  color: var(--color-accent);
+}
 
 /* Menuepunkte unter der Marke */
 .hero-menue {
