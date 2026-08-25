@@ -1015,6 +1015,34 @@ html { overflow-x: hidden; }
   .stimmen-band .zierlinie { justify-content: center; }
 }
 
+/* ── STEMPELKARTE ──
+   Ein eingeloester Stempel zeigt das Logo statt eines Hakens.
+   Bewusst hier und nicht in konto.js: die Kontodateien sind
+   shop-neutral und werden unveraendert in die anderen Shops
+   kopiert. Der Haken aus konto.js bleibt im Markup und wird
+   nur ausgeblendet.
+
+   Die Spezifitaet mit drei Klassen ist noetig, weil konto.css
+   nach diesem Stylesheet geladen wird und dort .stamp-slot--filled
+   sowie .stamp-card--voll .stamp-slot--filled stehen. */
+.stamp-card .stamp-grid .stamp-slot--filled {
+  background-color: var(--color-rose-hell);
+  background-image: url('../Bilder/logo.png');
+  background-size: 66%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid var(--color-accent);
+}
+
+.stamp-card .stamp-grid .stamp-slot--filled svg { display: none; }
+
+/* Volle Karte steht auf Altrosa, dort braucht der Stempel
+   einen hellen Grund, damit das Logo nicht darin untergeht. */
+.stamp-card--voll .stamp-grid .stamp-slot--filled {
+  background-color: var(--color-bg-soft);
+  border-color: var(--color-bg-soft);
+}
+
 /* ── KONTAKT ──
    Randlose Karte ueber die volle Breite, darauf schwebt links die
    Infokarte. Die Karte ist damit Flaeche statt Kasten neben dem
