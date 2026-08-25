@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/bistro.css?v=19">
+  <link rel="stylesheet" href="css/bistro.css?v=34">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/bestellen.js"></script>
   <script type="module" src="js/menue.js"></script>
@@ -47,6 +47,134 @@
     .menu-card__name { display: flex; align-items: center; gap: 4px; overflow: visible; }
     .menu-card__body { overflow: visible; }
     .menu-card { overflow: visible; }
+
+    /* Kopfbereich: quer liegendes Bildband, der Modus-Umschalter
+       liegt mit darauf. So bekommt die Seite einen Auftritt, ohne
+       dass vor dem ersten Produkt zusaetzliche Hoehe entsteht. */
+    .order-head {
+      position: relative;
+      background-color: var(--color-dark);
+      background-image: url('Bilder/bestellen.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .order-head::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(24, 18, 15, 0.8);
+    }
+
+    .order-head__inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-content-width);
+      margin-inline: auto;
+      padding-block: var(--space-7);
+      padding-inline: var(--container-pad-mobile);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      .order-head__inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .order-head__inner { padding-inline: var(--container-pad-desktop); }
+    }
+
+    .order-head__kicker {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--color-rose);
+      margin-bottom: var(--space-3);
+    }
+
+    .order-head__titel {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-variation-settings: 'SOFT' 40, 'WONK' 1;
+      font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 0;
+    }
+
+    .order-head__text .zierlinie::before,
+    .order-head__text .zierlinie::after { background: rgba(255, 255, 255, 0.4); }
+    .order-head__text .zierlinie span { background: var(--color-rose); }
+
+    .order-head__text p {
+      color: #fff;
+      line-height: 1.75;
+      max-width: 46ch;
+    }
+
+    .order-head .modus {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    @media (max-width: 520px) {
+      .order-head .modus { grid-template-columns: 1fr; }
+    }
+
+    /* Die Kachelfarben kommen aus bestellen.css (.mode-card und
+       .mode-card--active), hier nur Innenaufbau und Typografie. */
+    .order-head .mode-card {
+      padding: var(--space-4) var(--space-5);
+      border-radius: 12px;
+      gap: 0;
+    }
+
+    .order-head .modus__kopf {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-3);
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .order-head .modus__name {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-variation-settings: 'SOFT' 40, 'WONK' 1;
+      font-size: 1.15rem;
+      color: var(--color-ink);
+      line-height: 1.2;
+    }
+
+    .order-head .modus__preis {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+
+    .order-head .modus__sub {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      line-height: 1.5;
+    }
+
+    .order-head .mode-card--active .modus__name,
+    .order-head .mode-card--active .modus__preis,
+    .order-head .mode-card--active .modus__sub {
+      color: var(--color-on-accent);
+    }
   </style>
 </head>
 <body>
@@ -60,9 +188,7 @@
         <span class="nav__zusatz">Coffee · Bar · Bistro</span>
       </a>
       <nav class="nav__links">
-        <a href="index.html#fruehstueck">Frühstück</a>
-        <a href="index.html#lunch">Lunch</a>
-        <a href="index.html#afterwork">After-Work</a>
+        <a href="index.html#fruehstueck">Unser Angebot</a>
         <a href="reservieren.html">Reservieren</a>
         <a href="index.html#stimmen">Bewertungen</a>
         <a href="index.html#kontakt">Kontakt</a>
@@ -82,15 +208,22 @@
     </div>
   </header>
 
-  <div class="order-mode">
-    <div class="container">
+  <section class="order-head">
+    <div class="order-head__inner">
+      <div class="order-head__text">
+        <span class="order-head__kicker">Speisekarte</span>
+        <h1 class="order-head__titel">Alles frisch gemacht</h1>
+        <div class="zierlinie"><span></span></div>
+        <p>Kaffee aus eigener Röstung, Küche aus frischen Zutaten, Cocktails am Abend.</p>
+      </div>
+
       <div class="modus">
         <button class="modus__option mode-card mode-card--active" data-mode="lieferung">
           <span class="modus__kopf">
             <span class="modus__name">Lieferung</span>
             <span class="modus__preis">ab 2,50 &euro;</span>
           </span>
-          <span class="modus__sub">ca. 35 Min &middot; Mindestbestellwert 15,00 &euro;</span>
+          <span class="modus__sub">ca. 35 Min &middot; ab 15,00 &euro;</span>
         </button>
         <button class="modus__option mode-card" data-mode="abholung">
           <span class="modus__kopf">
@@ -101,7 +234,7 @@
         </button>
       </div>
     </div>
-  </div>
+  </section>
 
   <nav class="category-nav" id="category-nav">
     <div class="container">
@@ -122,7 +255,7 @@
         <h2 class="menu-section__title">Kaffee</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Cappuccino" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/cappuccino.png" alt="Cappuccino" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Cappuccino <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Doppelter Espresso mit fein aufgeschäumter Milch</p>
@@ -134,7 +267,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Flat White" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/flatwhite.png" alt="Flat White" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Flat White <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Zwei Ristretti, samtige Milch, wenig Schaum</p>
@@ -146,7 +279,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Espresso" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/espresso.png" alt="Espresso" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Espresso</h3>
             <p class="menu-card__desc">Aus eigener Röstung, wahlweise doppelt</p>
@@ -158,7 +291,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Latte Macchiato" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/lattemacchiato.png" alt="Latte Macchiato" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Latte Macchiato <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Im Glas geschichtet, auf Wunsch mit Hafermilch</p>
@@ -170,7 +303,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Chai Latte" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/chailatte.png" alt="Chai Latte" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Chai Latte <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
             <p class="menu-card__desc">Schwarztee mit Kardamom, Zimt und Ingwer</p>
@@ -180,13 +313,24 @@
             </div>
           </div>
         </article>
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/matchalatte.png" alt="Matcha Latte" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Matcha Latte <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Zeremonieller Matcha, aufgeschlagen, mit warmer Milch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,80 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k6" data-name="Matcha Latte" data-price="4.80">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
       </section>
 
       <section class="menu-section" id="kueche">
         <h2 class="menu-section__title">Aus der Küche</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Frühstücksteller" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/fruehstuecksteller.png" alt="Frühstücksteller" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Frühstücksteller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
             <p class="menu-card__desc">Croissant, Käse, Schinken, Ei, Obst und Marmelade</p>
@@ -198,7 +342,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Croque Marlene" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/croquemarlene.png" alt="Croque Marlene" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Croque Marlene <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Sauerteigbrot, Bergkäse, Kochschinken, Béchamel</p>
@@ -210,7 +354,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Pasta al Limone" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/pastaallimone.png" alt="Pasta al Limone" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Pasta al Limone <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Linguine, Zitrone, Parmesan, schwarzer Pfeffer</p>
@@ -222,7 +366,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Flammkuchen" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/flammkuchen.png" alt="Flammkuchen" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Flammkuchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
             <p class="menu-card__desc">Crème fraîche, Speck, rote Zwiebeln, Schnittlauch</p>
@@ -234,7 +378,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Bowl mit Falafel" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/bowlfalafel.png" alt="Bowl mit Falafel" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Bowl mit Falafel <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sesam (K)</span></button></h3>
             <p class="menu-card__desc">Quinoa, Hummus, Rotkohl, Avocado, Tahinsoße</p>
@@ -246,7 +390,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Rührei mit Lachs" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/ruehreilachs.png" alt="Rührei mit Lachs" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Rührei mit Lachs <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Fisch (D), Gluten (A)</span></button></h3>
             <p class="menu-card__desc">Drei Eier, Räucherlachs, Dill, Sauerteigbrot</p>
@@ -262,7 +406,7 @@
         <h2 class="menu-section__title">Cocktails</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Aperol Spritz" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/aperolspritz.png" alt="Aperol Spritz" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Aperol Spritz <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sulfite (L)</span></button></h3>
             <p class="menu-card__desc">Aperol, Prosecco, Soda, Orangenscheibe</p>
@@ -274,7 +418,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Espresso Martini" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/espressomartini.png" alt="Espresso Martini" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Espresso Martini</h3>
             <p class="menu-card__desc">Wodka, Kaffeelikör, frischer Espresso aus dem Haus</p>
@@ -286,7 +430,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Gin Basil Smash" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/ginbasilsmash.png" alt="Gin Basil Smash" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Gin Basil Smash</h3>
             <p class="menu-card__desc">Gin, Basilikum, Zitrone, Zuckersirup</p>
@@ -298,7 +442,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Moscow Mule" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/moscowmule.png" alt="Moscow Mule" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Moscow Mule</h3>
             <p class="menu-card__desc">Wodka, Ginger Beer, Limette, im Kupferbecher</p>
@@ -310,7 +454,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Hugo" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/hugo.png" alt="Hugo" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Hugo <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sulfite (L)</span></button></h3>
             <p class="menu-card__desc">Prosecco, Holunderblüte, Minze, Limette</p>
@@ -326,19 +470,7 @@
         <h2 class="menu-section__title">Süßes</h2>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Croissant" loading="lazy">
-          <div class="menu-card__body">
-            <h3 class="menu-card__name">Croissant <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
-            <p class="menu-card__desc">Aus der eigenen Backstube, morgens frisch</p>
-            <div class="menu-card__footer">
-              <span class="menu-card__price">2,80 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="Croissant" data-price="2.80">+ Hinzufügen</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Käsekuchen" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/kaesekuchen.png" alt="Käsekuchen" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Käsekuchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
             <p class="menu-card__desc">Cremig, mit Vanille und einem Hauch Zitrone</p>
@@ -350,7 +482,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Zimtschnecke" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/zimtschnecke.png" alt="Zimtschnecke" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Zimtschnecke <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
             <p class="menu-card__desc">Mit Kardamom im Teig und Zuckerguss</p>
@@ -362,7 +494,7 @@
         </article>
 
         <article class="menu-card">
-          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Schokotarte" loading="lazy">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/schokotarte.png" alt="Schokotarte" loading="lazy">
           <div class="menu-card__body">
             <h3 class="menu-card__name">Schokotarte <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Schalenfrüchte (H)</span></button></h3>
             <p class="menu-card__desc">Dunkle Schokolade, Meersalz, Haselnussboden</p>
@@ -440,28 +572,35 @@
 
   <footer class="footer">
     <div class="container">
+      <a href="index.html" class="footer-marke">
+        <span class="footer-marke__linie"></span>
+        <span class="footer-marke__mitte">
+          <img class="footer-marke__logo" src="Bilder/logo.png" alt="">
+          <span class="footer-marke__name">Café <em>Marlene</em></span>
+        </span>
+        <span class="footer-marke__linie"></span>
+      </a>
+
       <div class="footer__cols">
-        <div>
-          <a href="index.html" class="footer__marke">Café <em>Marlene</em></a>
-          <div class="zierlinie"><span></span></div>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="telefon"></span></span>
+          <p class="footer-block__titel">Abholen oder liefern lassen</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
           <p class="footer__text">
-            Coffee, Bar &amp; Bistro<br>
+            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder
+            online bestellen.
+          </p>
+          <p class="footer-block__adresse">
+            Café Marlene<br>
             Musterstraße 1<br>
             38100 Braunschweig
           </p>
+          <p class="footer__text">Durchgehend warme Küche ab 11:30 Uhr.</p>
         </div>
-        <div>
-          <p class="footer__kicker">Bestellen und abholen</p>
-          <div class="zierlinie"><span></span></div>
-          <p class="footer__text">
-            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen und
-            zur vereinbarten Zeit abholen.<br>
-            Durchgehend warme Küche ab 11:30 Uhr.
-          </p>
-        </div>
-        <div>
-          <p class="footer__kicker">Öffnungszeiten</p>
-          <div class="zierlinie"><span></span></div>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="uhr"></span></span>
+          <p class="footer-block__titel">Öffnungszeiten</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
           <div class="footer__zeiten">
             <div class="footer__zeit"><b>Montag bis Donnerstag</b><span>08:00 – 21:00</span></div>
             <div class="footer__zeit"><b>Freitag und Samstag</b><span>08:00 – 23:00</span></div>

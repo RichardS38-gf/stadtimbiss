@@ -14,16 +14,15 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/bistro.css?v=19">
+  <link rel="stylesheet" href="css/bistro.css?v=34">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/menue.js"></script>
   <style>
     /* Nav-Regeln kommen aus bistro.css, hier nur Seitenspezifisches */
 
     /* Ueberschriften in derselben Schrift wie auf der Karte */
-    .res-hero h1,
-    .res-form h2,
-    .res-info-card h3,
+    .res-split__titel,
+    .res-split__form h2,
     .res-success h3 {
       font-family: var(--font-head);
       font-weight: 600;
@@ -47,54 +46,126 @@
       letter-spacing: 0;
     }
 
-    /* Page Hero: dunkles Band ueber die volle Breite */
-    .res-hero {
-      background: var(--color-dark);
-      color: var(--color-on-dark);
-      padding: var(--space-7) 0;
-      text-align: left;
-    }
-    .res-hero__kicker {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      display: block;
-      margin-bottom: var(--space-3);
-    }
-    .res-hero h1 {
-      color: var(--color-on-dark);
-      font-size: clamp(1.8rem, 4.4vw, 2.6rem);
-      margin-bottom: var(--space-3);
-    }
-    .res-hero p {
-      color: var(--color-on-dark);
-      opacity: 0.78;
-      font-size: var(--text-lg);
-      max-width: 52ch;
-    }
-
-    /* Form */
-    .res-section { padding-block: var(--space-7); }
-    .res-grid {
+    /* Geteilter Schirm: Bild links, Formular rechts.
+       Die Hoehe orientiert sich am Fenster minus Kopfzeile, damit
+       beide Haelften randlos nebeneinander stehen. */
+    .res-split {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--space-7);
-      max-width: 900px;
-      margin-inline: auto;
-    }
-    @media (min-width: 768px) {
-      .res-grid { grid-template-columns: 3fr 2fr; }
     }
 
-    .res-form {
-      background: var(--color-bg-soft);
-      border: 1px solid var(--color-line);
-      border-radius: var(--radius-md);
-      padding: var(--space-6);
+    @media (min-width: 900px) {
+      .res-split {
+        grid-template-columns: 0.85fr 1.15fr;
+        min-height: calc(100svh - 72px);
+      }
     }
-    .res-form h2 { margin-bottom: var(--space-5); font-size: var(--text-2xl); }
+
+    .res-split__bild {
+      position: relative;
+      background-color: var(--color-mokka);
+      background-image: url('Bilder/reservieren.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding-block: var(--space-8);
+      padding-inline: max(var(--space-6), calc((100vw - var(--max-content-width)) / 2)) var(--space-7);
+    }
+
+    /* Schleier, damit die Schrift auf jedem Motiv sitzt */
+    .res-split__bild::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(24, 18, 15, 0.8);
+    }
+
+    .res-split__text {
+      position: relative;
+      z-index: 1;
+      max-width: 40ch;
+      color: var(--color-on-dark);
+    }
+
+    .res-split__kicker {
+      display: block;
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.5vw, 1.12rem);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-rose);
+      margin-bottom: var(--space-4);
+    }
+
+    .res-split__titel {
+      color: #fff;
+      font-size: clamp(2rem, 4.4vw, 3rem);
+      margin-bottom: 0;
+    }
+
+    .res-split__text .zierlinie::before,
+    .res-split__text .zierlinie::after { background: rgba(247, 243, 238, 0.4); }
+    .res-split__text .zierlinie span { background: var(--color-rose); }
+
+    /* Volles Weiss ohne Transparenz: auf dem abgedunkelten Foto
+       traegt jede Absenkung sofort Lesbarkeit ab. */
+    .res-split__text p {
+      color: #fff;
+      line-height: 1.8;
+    }
+
+    .res-split__kontakt {
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: 1px solid rgba(255, 255, 255, 0.28);
+      font-size: var(--text-sm);
+      line-height: 1.95;
+      color: #fff;
+    }
+
+    .res-split__kontakt a { color: inherit; }
+    .res-split__kontakt a:hover { color: var(--color-rose); opacity: 1; }
+
+    /* Beide Haelften laufen bis an den Bildschirmrand, der Inhalt
+       darin bleibt aber in der Inhaltsbreite von 1140px. Dafuer
+       bekommt die aussen liegende Seite den Abstand zwischen
+       Fensterrand und Inhaltsbreite als Innenabstand. */
+    .res-split__form {
+      background: var(--color-bg);
+      padding-block: var(--space-8);
+      padding-inline: var(--space-7) max(var(--space-6), calc((100vw - var(--max-content-width)) / 2));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media (max-width: 899px) {
+      .res-split__bild,
+      .res-split__form {
+        padding-inline: var(--container-pad-mobile);
+      }
+    }
+
+    .res-split__form > * {
+      width: 100%;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    .res-split__form h2 {
+      margin-bottom: var(--space-5);
+      font-size: var(--text-2xl);
+    }
+
+    .res-hinweis {
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      margin-top: var(--space-4);
+      line-height: 1.7;
+    }
 
     .form-row {
       display: grid;
@@ -147,25 +218,62 @@
     .res-success h3 { margin-bottom: var(--space-3); }
     .res-success p { color: var(--color-muted); margin-bottom: var(--space-5); }
 
-    /* Info Box */
-    .res-info { display: flex; flex-direction: column; gap: var(--space-4); }
-    .res-info-card {
-      background: var(--color-bg-soft);
-      border: 1px solid var(--color-line);
-      border-radius: var(--radius-md);
-      padding: var(--space-5);
-    }
-    .res-info-card h3 { font-size: var(--text-lg); margin-bottom: var(--space-3); }
-    .res-info-item {
-      display: flex;
-      gap: var(--space-3);
+    /* Uhrzeit als Kacheln statt Auswahlliste. Die Radios liegen
+       unsichtbar darunter, das Label ist die sichtbare Kachel.
+       Eigener Block statt .form-group, weil dessen Label-Regel
+       sonst Versalien und Sperrung auf die Kacheln legen wuerde. */
+    .zeit-block { margin-bottom: var(--space-4); }
+
+    .zeit-block__label {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--color-muted);
       margin-bottom: var(--space-3);
-      font-size: var(--text-sm);
-      line-height: 1.6;
-      align-items: flex-start;
     }
-    .res-info-item:last-child { margin-bottom: 0; }
-    .res-info-item span:first-child { flex-shrink: 0; }
+
+    .zeit-wahl { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+    .zeit-wahl input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .zeit-wahl label {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 1rem;
+      border: 1.5px solid var(--color-line);
+      border-radius: 999px;
+      background: var(--color-bg-soft);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .zeit-wahl label:hover {
+      border-color: var(--color-accent);
+      color: var(--color-ink);
+    }
+
+    .zeit-wahl input:checked + label {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-on-accent);
+    }
+
+    .zeit-wahl input:focus-visible + label {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
@@ -178,9 +286,7 @@
         <span class="nav__zusatz">Coffee · Bar · Bistro</span>
       </a>
       <nav class="nav__links">
-        <a href="index.html#fruehstueck">Frühstück</a>
-        <a href="index.html#lunch">Lunch</a>
-        <a href="index.html#afterwork">After-Work</a>
+        <a href="index.html#fruehstueck">Unser Angebot</a>
         <a href="bestellen.html">Karte</a>
         <a href="index.html#stimmen">Bewertungen</a>
         <a href="index.html#kontakt">Kontakt</a>
@@ -198,23 +304,25 @@
 
   <div class="demo-banner" id="demo-banner"></div>
 
-  <!-- Page Hero -->
-  <div class="res-hero">
-    <div class="container">
-      <span class="res-hero__kicker">Reservierung</span>
-      <h1>Tisch reservieren</h1>
-      <p>Sag uns Tag, Uhrzeit und Personenzahl. Wir melden uns kurz zur Bestätigung.</p>
+  <!-- Geteilter Schirm: links Bild mit Kopf und Kontakt, rechts das Formular -->
+  <section class="res-split">
+
+    <div class="res-split__bild">
+      <div class="res-split__text">
+        <span class="res-split__kicker">Reservierung</span>
+        <h1 class="res-split__titel">Ein Tisch für dich</h1>
+        <div class="zierlinie"><span></span></div>
+        <p>Sag uns Tag, Uhrzeit und Personenzahl. Wir melden uns kurz zur Bestätigung.</p>
+        <div class="res-split__kontakt">
+          Musterstraße 1, 38100 Braunschweig<br>
+          Montag bis Samstag 8:00–23:00 Uhr, Sonntag geschlossen<br>
+          <a href="tel:0531000000">0531 / 000 000</a>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- Form Section -->
-  <section class="res-section">
-    <div class="container">
-      <div class="res-grid">
-
-        <!-- Formular -->
-        <div class="res-form">
-          <h2>Deine Reservierung</h2>
+    <div class="res-split__form">
+      <h2>Deine Reservierung</h2>
 
           <form id="reservation-form" action="https://formspree.io/f/PLATZHALTER" method="POST">
             <input type="hidden" name="_subject" value="Neue Tischreservierung — Café Marlene">
@@ -237,38 +345,6 @@
                 <input type="date" id="datum" name="datum" required>
               </div>
               <div class="form-group">
-                <label for="uhrzeit">Uhrzeit *</label>
-                <select id="uhrzeit" name="uhrzeit" required>
-                  <option value="" disabled selected>Bitte wählen</option>
-                  <option>11:00 Uhr</option>
-                  <option>11:30 Uhr</option>
-                  <option>12:00 Uhr</option>
-                  <option>12:30 Uhr</option>
-                  <option>13:00 Uhr</option>
-                  <option>13:30 Uhr</option>
-                  <option>14:00 Uhr</option>
-                  <option>14:30 Uhr</option>
-                  <option>15:00 Uhr</option>
-                  <option>15:30 Uhr</option>
-                  <option>16:00 Uhr</option>
-                  <option>16:30 Uhr</option>
-                  <option>17:00 Uhr</option>
-                  <option>17:30 Uhr</option>
-                  <option>18:00 Uhr</option>
-                  <option>18:30 Uhr</option>
-                  <option>19:00 Uhr</option>
-                  <option>19:30 Uhr</option>
-                  <option>20:00 Uhr</option>
-                  <option>20:30 Uhr</option>
-                  <option>21:00 Uhr</option>
-                  <option>21:30 Uhr</option>
-                  <option>22:00 Uhr</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
                 <label for="personen">Personenanzahl *</label>
                 <select id="personen" name="personen" required>
                   <option value="" disabled selected>Bitte wählen</option>
@@ -285,6 +361,29 @@
               </div>
             </div>
 
+            <div class="zeit-block">
+              <span class="zeit-block__label">Uhrzeit *</span>
+              <div class="zeit-wahl">
+                <input type="radio" id="z1130" name="uhrzeit" value="11:30" required><label for="z1130">11:30</label>
+                <input type="radio" id="z1200" name="uhrzeit" value="12:00"><label for="z1200">12:00</label>
+                <input type="radio" id="z1230" name="uhrzeit" value="12:30"><label for="z1230">12:30</label>
+                <input type="radio" id="z1300" name="uhrzeit" value="13:00"><label for="z1300">13:00</label>
+                <input type="radio" id="z1400" name="uhrzeit" value="14:00"><label for="z1400">14:00</label>
+                <input type="radio" id="z1500" name="uhrzeit" value="15:00"><label for="z1500">15:00</label>
+                <input type="radio" id="z1600" name="uhrzeit" value="16:00"><label for="z1600">16:00</label>
+                <input type="radio" id="z1700" name="uhrzeit" value="17:00"><label for="z1700">17:00</label>
+                <input type="radio" id="z1730" name="uhrzeit" value="17:30"><label for="z1730">17:30</label>
+                <input type="radio" id="z1800" name="uhrzeit" value="18:00"><label for="z1800">18:00</label>
+                <input type="radio" id="z1830" name="uhrzeit" value="18:30"><label for="z1830">18:30</label>
+                <input type="radio" id="z1900" name="uhrzeit" value="19:00"><label for="z1900">19:00</label>
+                <input type="radio" id="z1930" name="uhrzeit" value="19:30"><label for="z1930">19:30</label>
+                <input type="radio" id="z2000" name="uhrzeit" value="20:00"><label for="z2000">20:00</label>
+                <input type="radio" id="z2030" name="uhrzeit" value="20:30"><label for="z2030">20:30</label>
+                <input type="radio" id="z2100" name="uhrzeit" value="21:00"><label for="z2100">21:00</label>
+                <input type="radio" id="z2200" name="uhrzeit" value="22:00"><label for="z2200">22:00</label>
+              </div>
+            </div>
+
             <div class="form-row">
               <div class="form-group">
                 <label for="nachricht">Anmerkungen <span style="font-weight:400;color:var(--color-muted)">(optional)</span></label>
@@ -297,77 +396,68 @@
             </div>
           </form>
 
-          <!-- Erfolgs-Meldung -->
-          <div class="res-success" id="res-success">
-            <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
-            <h3>Vielen Dank!</h3>
-            <p>Wir haben deine Reservierungsanfrage erhalten und melden uns in Kürze zur Bestätigung.</p>
-            <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
-          </div>
+        <!-- Erfolgs-Meldung -->
+        <div class="res-success" id="res-success">
+          <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
+          <h3>Vielen Dank!</h3>
+          <p>Wir haben deine Reservierungsanfrage erhalten und melden uns in Kürze zur Bestätigung.</p>
+          <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
         </div>
 
-        <!-- Info Box -->
-        <div class="res-info">
-          <div class="res-info-card">
-            <h3><span data-icon="ort"></span> Wo wir sind</h3>
-            <div class="res-info-item">
-              <span data-icon="ort"></span>
-              <div>Musterstraße 1<br>38100 Braunschweig</div>
-            </div>
-            <div class="res-info-item">
-              <span data-icon="uhr"></span>
-              <div>Montag bis Samstag 8:00–23:00 Uhr<br>Sonntag geschlossen</div>
-            </div>
-            <div class="res-info-item">
-              <span data-icon="telefon"></span>
-              <div><a href="tel:0531000000">0531 / 000 000</a></div>
-            </div>
-          </div>
+        <p class="res-hinweis">
+          Tische werden für 120 Minuten reserviert. Für Gruppen ab 8 Personen
+          ruf uns bitte direkt an. Du erhältst eine Bestätigung per Telefon
+          oder E-Mail.
+        </p>
 
-          <div class="res-info-card">
-            <h3><span data-icon="tasse"></span> Hinweise</h3>
-            <div class="res-info-item">
-              <span data-icon="uhr"></span>
-              <div>Tische werden für <strong>120 Minuten</strong> reserviert.</div>
-            </div>
-            <div class="res-info-item">
-              <span data-icon="person"></span>
-              <div>Für Gruppen ab 8 Personen ruf uns bitte direkt an.</div>
-            </div>
-            <div class="res-info-item">
-              <span data-icon="haken"></span>
-              <div>Du erhältst eine Bestätigung per Telefon oder E-Mail.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
+      <a href="index.html" class="footer-marke">
+        <span class="footer-marke__linie"></span>
+        <span class="footer-marke__mitte">
+          <img class="footer-marke__logo" src="Bilder/logo.png" alt="">
+          <span class="footer-marke__name">Café <em>Marlene</em></span>
+        </span>
+        <span class="footer-marke__linie"></span>
+      </a>
+
       <div class="footer__cols">
-        <div>
-          <a href="index.html" class="footer__marke">
-            <img class="footer__logo" src="Bilder/Logo.png" alt="">
-            <span class="footer__wortmarke"><span>Bosporus</span><span>Grillrestaurant</span></span>
-          </a>
-          <p class="footer__claim">Döner, Kebab und Meze. Seit 1988 in Braunschweig.</p>
-          <address class="footer__contact">
-            Musterstraße 1, 38100 Braunschweig<br>
-            Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
-            E-Mail: <a href="mailto:hallo@cafe-marlene.de">hallo@cafe-marlene.de</a>
-          </address>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="telefon"></span></span>
+          <p class="footer-block__titel">Abholen oder liefern lassen</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
+          <p class="footer__text">
+            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder
+            online bestellen.
+          </p>
+          <p class="footer-block__adresse">
+            Café Marlene<br>
+            Musterstraße 1<br>
+            38100 Braunschweig
+          </p>
+          <p class="footer__text">Durchgehend warme Küche ab 11:30 Uhr.</p>
         </div>
-        <nav class="footer__links">
-          <a href="#">Impressum</a>
-          <a href="#">Datenschutz</a>
-          <a href="#">Kontakt</a>
-          <a href="#">Allergene &amp; Zusatzstoffe</a>
-        </nav>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="uhr"></span></span>
+          <p class="footer-block__titel">Öffnungszeiten</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
+          <div class="footer__zeiten">
+            <div class="footer__zeit"><b>Montag bis Donnerstag</b><span>08:00 – 21:00</span></div>
+            <div class="footer__zeit"><b>Freitag und Samstag</b><span>08:00 – 23:00</span></div>
+            <div class="footer__zeit"><b>Sonntag</b><span>Geschlossen</span></div>
+          </div>
+        </div>
       </div>
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
       <hr class="footer__divider">
       <p class="footer__copy">© 2025 Café Marlene, alle Rechte vorbehalten</p>
     </div>

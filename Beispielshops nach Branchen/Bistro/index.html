@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/bistro.css?v=19">
+  <link rel="stylesheet" href="css/bistro.css?v=34">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/menue.js"></script>
 </head>
@@ -55,7 +55,7 @@
 
     <nav class="hero-menue">
       <a href="#fruehstueck">Unser Angebot</a>
-      <a href="bestellen.html">Karte</a>
+      <a href="#karte">Karte</a>
       <a href="#stimmen">Bewertungen</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
@@ -67,7 +67,7 @@
         <a href="reservieren.html" class="btn btn--primary">
           <span data-icon="tisch"></span> Tisch reservieren
         </a>
-        <a href="bestellen.html" class="btn btn--outline">
+        <a href="#karte" class="btn btn--outline">
           <span data-icon="korb"></span> Speisekarte
         </a>
       </div>
@@ -116,13 +116,25 @@
 
   <!-- After-Work -->
   <section class="zeit container" id="afterwork">
-    <img class="zeit__deko" src="Bilder/cocktailabove.png" alt="" aria-hidden="true">
+    <img class="zeit__deko" src="Bilder/cocktailabove.png" alt="" aria-hidden="true" data-dreh="-1" data-einflug="rechts">
     <div class="zeit__bild" style="background-image:url('Bilder/afterwork.png')" role="img" aria-label="After-Work"></div>
     <div class="zeit__text">
       <h2 class="titel">After-Work</h2>
       <div class="zierlinie"><span></span></div>
       <p>Ab dem späten Nachmittag wechseln wir von der Mühle an die Bar. Cocktails, Longdrinks, Wein und alles ohne Alkohol, was genauso gut schmeckt.</p>
       <p>Lass den Arbeitstag hier ausklingen, drinnen am Tresen oder draußen, solange es das Wetter zulässt.</p>
+    </div>
+  </section>
+
+  <!-- Werbebanner -->
+  <section class="aktion" style="background-image:url('Bilder/banner.png')">
+    <div class="aktion__inner">
+      <p class="aktion__kicker">Montag bis Freitag, 8 bis 11 Uhr</p>
+      <h2 class="aktion__titel">Frühstück für 9,90 €</h2>
+      <p class="aktion__text">Ein Heißgetränk deiner Wahl, ein frisches Croissant und ein kleiner Frühstücksteller. Ohne Anmeldung, einfach vorbeikommen.</p>
+      <a href="reservieren.html" class="btn btn--primary">
+        <span data-icon="tisch"></span> Tisch reservieren
+      </a>
     </div>
   </section>
 
@@ -158,67 +170,65 @@
     </div>
   </section>
 
-  <!-- Werbebanner -->
-  <section class="aktion" style="background-image:url('Bilder/banner.png')">
-    <div class="aktion__inner">
-      <p class="aktion__kicker">Montag bis Freitag, 8 bis 11 Uhr</p>
-      <h2 class="aktion__titel">Frühstück für 9,90 €</h2>
-      <p class="aktion__text">Ein Heißgetränk deiner Wahl, ein frisches Croissant und ein kleiner Frühstücksteller. Ohne Anmeldung, einfach vorbeikommen.</p>
-      <a href="bestellen.html" class="btn btn--primary">
-        <span data-icon="korb"></span> Jetzt bestellen
-      </a>
-    </div>
-  </section>
 
-  <!-- Bewertungen -->
-  <section class="abschnitt container" id="stimmen">
-    <div class="abschnitt__kopf abschnitt__kopf--mitte">
-      <span class="kicker">Was Gäste sagen</span>
-      <h2 class="titel">4,8 Sterne auf Google</h2>
-      <div class="zierlinie zierlinie--mitte"><span></span></div>
-    </div>
+  <!-- Bewertungen, auf dunklem Band. Risskante nur oben: unten
+       folgt direkt die Karte, dort waere die Kante entweder ein
+       heller Streifen oder wuerde die Ortskarte von Google
+       anschneiden. -->
+  <div class="stimmen-band" id="stimmen">
+    <svg class="riss riss--oben" viewBox="0 0 1440 46" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,24.3 L10.7,22.8 L19.8,30.7 L23.9,23.7 L30.4,38.1 L40.9,25.5 L45.5,22.8 L54.7,24.4 L67.5,30.9 L78.6,37.2 L83.8,31.4 L90.8,18.2 L95.1,28.4 L107.6,24.7 L117,27.2 L125.2,28.5 L131.9,28.7 L139.1,25.8 L151,17.7 L163.3,26.5 L169.5,17.8 L180.4,32.1 L191,26.5 L203.7,33.3 L213.4,40 L225.1,29.9 L230.6,32.9 L242.2,30.2 L251.3,32.7 L260.8,18.7 L273.7,30.5 L280.7,28.9 L286.6,26.8 L295.5,39.4 L299.7,22 L304.4,29.6 L309.6,27.7 L316.5,31.2 L329.4,23.3 L338.6,28.5 L350.7,30.9 L363.1,26.4 L370.6,27.6 L375.6,33.3 L381.6,27.6 L387.8,30 L397.2,30.8 L405.5,37.7 L417.8,26.9 L422.2,32.5 L427.5,19.1 L440.3,31.8 L445.3,31.1 L452.1,19.7 L462.3,27.9 L466.9,25.6 L479.8,21.3 L489.9,31.1 L494.7,31.1 L504.4,32.2 L517,31.6 L529.4,27.4 L540,31 L548.6,25.1 L553,35.5 L559.1,25.7 L565.1,30.1 L570.5,26.3 L576.5,23.5 L585.8,24.7 L596.8,27.2 L601.3,26.3 L609.7,26.2 L619.3,23.8 L630.3,29.4 L638.4,27.6 L642.9,18.8 L653.1,24.7 L664.8,28.7 L675.6,24.6 L685.6,26.3 L692.2,26.3 L697.1,24.9 L704.4,26.1 L717.4,24.9 L724.1,32.3 L729.7,26.5 L737.6,32 L743.9,23.1 L756.6,23.3 L767.4,24.4 L777.8,25 L788,24.3 L796.2,22 L802.1,25 L812.3,25.2 L822.5,27 L832.5,21 L844.3,21.3 L855.8,24.5 L864.8,20.8 L875.6,25.7 L883.8,20 L893.1,28.1 L899.1,20.5 L903.5,24 L909.8,21.3 L916.1,27.3 L926.7,27.4 L933.2,24.9 L937.7,26.1 L944.2,24.9 L951.2,15 L960.9,27.3 L973.4,23.1 L985,24.1 L991.5,20.6 L1002.5,27.9 L1013.8,12.5 L1023.4,21.5 L1028.4,21.6 L1040.2,25.9 L1047.2,24.3 L1054.3,23.3 L1060.8,33.9 L1065.3,27.5 L1075.5,28.3 L1082.6,22.2 L1090.3,34.8 L1100.1,22.8 L1106.9,33.8 L1113.3,36.3 L1124.8,25.7 L1132,28.6 L1138.4,24.1 L1144.5,22 L1153,23.9 L1157.5,23.3 L1168.5,25.1 L1178.7,29.2 L1183,25.9 L1192.3,25.4 L1198.8,23 L1210.6,27.9 L1219,26 L1231.9,29.2 L1241.9,13.2 L1250.4,20.8 L1259.9,22.8 L1267.6,28.6 L1274.9,24.2 L1286.1,23.3 L1296.9,20.2 L1307,28.1 L1316.8,21.1 L1327.9,26.7 L1336,25.5 L1345.7,14.1 L1351.8,19.8 L1356.1,22.9 L1360.4,20 L1364.4,27.7 L1377.1,26.8 L1387.3,24.1 L1396.9,20.8 L1409.1,22.3 L1413.5,26.3 L1426.3,24.2 L1431.5,23.1 L1440,22.3 L1440,46 L0,46 Z"/>
+    </svg>
 
-    <div class="stimmen">
-      <article class="stimme">
-        <div class="stimme__sterne">★★★★★</div>
-        <p class="stimme__text">Bester Flat White in Braunschweig, und das Personal merkt sich tatsächlich, wie man ihn mag. Ich komme seit zwei Jahren fast täglich.</p>
-        <p class="stimme__autor">Lena K. · vor 2 Wochen</p>
-      </article>
-      <article class="stimme">
-        <div class="stimme__sterne">★★★★★</div>
-        <p class="stimme__text">Wir waren zum Frühstück da und sind bis mittags geblieben. Die Küche ist ehrlich, die Preise fair, die Atmosphäre stimmt einfach.</p>
-        <p class="stimme__autor">Jonas M. · vor 1 Monat</p>
-      </article>
-      <article class="stimme">
-        <div class="stimme__sterne">★★★★★</div>
-        <p class="stimme__text">Abends ist es eine richtig gute Bar. Der Espresso Martini wird mit dem eigenen Kaffee gemacht, das schmeckt man deutlich.</p>
-        <p class="stimme__autor">Sarah B. · vor 3 Wochen</p>
-      </article>
-    </div>
-  </section>
+    <div class="stimmen-inner">
+      <div class="bewertung">
+        <span class="kicker">Was Gäste sagen</span>
+        <p class="bewertung__zahl">4,8</p>
+        <p class="bewertung__sterne">★★★★★</p>
+        <p class="bewertung__text">von 214 Gästen auf Google bewertet</p>
+        <div class="zierlinie"><span></span></div>
+      </div>
 
-  <!-- Kontakt -->
-  <section class="abschnitt container" id="kontakt">
-    <div class="abschnitt__kopf">
-      <span class="kicker">Kontakt</span>
-      <h2 class="titel">So findest du uns</h2>
-      <div class="zierlinie"><span></span></div>
+      <div class="stimmen">
+        <article class="stimme">
+          <p class="stimme__text">Bester Flat White in Braunschweig, und das Personal merkt sich tatsächlich, wie man ihn mag. Ich komme seit zwei Jahren fast täglich.</p>
+          <p class="stimme__autor">Lena K. · vor 2 Wochen</p>
+        </article>
+        <article class="stimme">
+          <p class="stimme__text">Wir waren zum Frühstück da und sind bis mittags geblieben. Die Küche ist ehrlich, die Preise fair, die Atmosphäre stimmt einfach.</p>
+          <p class="stimme__autor">Jonas M. · vor 1 Monat</p>
+        </article>
+        <article class="stimme">
+          <p class="stimme__text">Abends ist es eine richtig gute Bar. Der Espresso Martini wird mit dem eigenen Kaffee gemacht, das schmeckt man deutlich.</p>
+          <p class="stimme__autor">Sarah B. · vor 3 Wochen</p>
+        </article>
+      </div>
     </div>
 
-    <div class="kontakt">
-      <div class="kontakt__liste">
+  </div>
+
+  <!-- Kontakt: randlose Karte, Infokarte schwebt darauf -->
+  <section class="kontakt-bereich" id="kontakt">
+    <div class="kontakt-bereich__karte">
+      <iframe
+        src="https://www.google.com/maps?q=Braunschweig,+Deutschland&output=embed&z=14"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Café Marlene Standort">
+      </iframe>
+    </div>
+
+    <div class="kontakt-bereich__inner">
+      <div class="kontakt-panel">
+        <span class="kicker">Kontakt</span>
+        <h2 class="titel">So findest du uns</h2>
+        <div class="zierlinie"><span></span></div>
+
         <div class="kontakt__zeile">
           <span data-icon="ort"></span>
           <div>
             <span class="kontakt__label">Adresse</span>
             <p class="kontakt__wert">Musterstraße 1<br>38100 Braunschweig</p>
-          </div>
-        </div>
-        <div class="kontakt__zeile">
-          <span data-icon="uhr"></span>
-          <div>
-            <span class="kontakt__label">Öffnungszeiten</span>
-            <p class="kontakt__wert">Montag bis Samstag 8 bis 23 Uhr<br>Sonntag geschlossen</p>
           </div>
         </div>
         <div class="kontakt__zeile">
@@ -235,15 +245,10 @@
             <p class="kontakt__wert"><a href="mailto:hallo@cafe-marlene.de">hallo@cafe-marlene.de</a></p>
           </div>
         </div>
-      </div>
 
-      <div class="kontakt__karte">
-        <iframe
-          src="https://www.google.com/maps?q=Braunschweig,+Deutschland&output=embed&z=13"
-          allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Café Marlene Standort">
-        </iframe>
+        <a href="reservieren.html" class="btn btn--primary btn--full">
+          <span data-icon="tisch"></span> Tisch reservieren
+        </a>
       </div>
     </div>
   </section>
@@ -251,31 +256,37 @@
   <!-- Fußzeile -->
   <footer class="footer">
     <div class="container">
+      <a href="index.html" class="footer-marke">
+        <span class="footer-marke__linie"></span>
+        <span class="footer-marke__mitte">
+          <img class="footer-marke__logo" src="Bilder/logo.png" alt="">
+          <span class="footer-marke__name">Café <em>Marlene</em></span>
+        </span>
+        <span class="footer-marke__linie"></span>
+      </a>
+
       <div class="footer__cols">
 
-        <div>
-          <a href="index.html" class="footer__marke">Café <em>Marlene</em></a>
-          <div class="zierlinie"><span></span></div>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="telefon"></span></span>
+          <p class="footer-block__titel">Abholen oder liefern lassen</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
           <p class="footer__text">
-            Coffee, Bar &amp; Bistro<br>
+            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder
+            online bestellen.
+          </p>
+          <p class="footer-block__adresse">
+            Café Marlene<br>
             Musterstraße 1<br>
             38100 Braunschweig
           </p>
+          <p class="footer__text">Durchgehend warme Küche ab 11:30 Uhr.</p>
         </div>
 
-        <div>
-          <p class="footer__kicker">Bestellen und abholen</p>
-          <div class="zierlinie"><span></span></div>
-          <p class="footer__text">
-            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen und
-            zur vereinbarten Zeit abholen.<br>
-            Durchgehend warme Küche ab 11:30 Uhr.
-          </p>
-        </div>
-
-        <div>
-          <p class="footer__kicker">Öffnungszeiten</p>
-          <div class="zierlinie"><span></span></div>
+        <div class="footer-block">
+          <span class="footer-block__icon"><span data-icon="uhr"></span></span>
+          <p class="footer-block__titel">Öffnungszeiten</p>
+          <div class="zierlinie zierlinie--mitte"><span></span></div>
           <div class="footer__zeiten">
             <div class="footer__zeit"><b>Montag bis Donnerstag</b><span>08:00 – 21:00</span></div>
             <div class="footer__zeit"><b>Freitag und Samstag</b><span>08:00 – 23:00</span></div>
@@ -300,10 +311,14 @@
   <script type="module">
     import { setupSeite } from './js/auth.js';
     import { iconsEinsetzen } from './js/icons.js';
+    import { dekoDrehen } from './js/deko.js';
+    import { stimmenRotieren } from './js/stimmen.js';
 
     iconsEinsetzen();
     await setupSeite();
     iconsEinsetzen();
+    dekoDrehen();
+    stimmenRotieren();
   </script>
 
 </body>

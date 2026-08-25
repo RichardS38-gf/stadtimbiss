@@ -374,9 +374,9 @@
 
 .hero__kicker {
   font-family: var(--font-body);
-  font-size: clamp(0.86rem, 1.5vw, 1.05rem);
+  font-size: clamp(1rem, 1.9vw, 1.32rem);
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-rose);
   margin-bottom: var(--space-5);
@@ -613,6 +613,11 @@
   z-index: 1;
   pointer-events: none;
   user-select: none;
+  /* Drehung setzt js/deko.js beim Scrollen. transform-origin bleibt
+     die Bildmitte, damit die Tasse sich um sich selbst dreht und
+     nicht wegwandert. */
+  transform-origin: 50% 50%;
+  will-change: transform;
 }
 
 .zeit__deko--links {
@@ -627,11 +632,32 @@ html { overflow-x: hidden; }
   .zeit__deko { display: none; }
 }
 
-/* Der erste Block braucht deutlich mehr Luft zur Risskante */
-.zeit:first-of-type { padding-top: 20rem; }
+/* Das Cocktailglas ist deutlich hochformatiger als die Kaffeetasse
+   und haengt deshalb bei top: 20% unten aus der Sektion heraus.
+   Hier eigener Wert, damit nur dieses Bild hoeher sitzt. Weiter
+   als etwa -70px sollte es nicht nach oben, sonst ragt es sichtbar
+   in das dunkle Lunch-Band darueber. */
+#afterwork .zeit__deko { top: -20px; }
+
+/* Mehr Luft zwischen After-Work und dem Werbebanner, damit die
+   dunkle Flaeche nicht direkt an den Textblock stoesst. */
+#afterwork { padding-bottom: 8rem; }
 
 @media (max-width: 899px) {
-  .zeit:first-of-type { padding-top: 11rem; }
+  #afterwork { padding-bottom: 5rem; }
+}
+
+/* Der Fruehstuecksblock braucht Luft zur Risskante des Hero.
+   Vorher stand hier .zeit:first-of-type. Diese Regel griff nie:
+   im body ist die erste <section> der Hero, nicht der Fruehstuecks-
+   block. Im Band wiederum haette sie gegriffen, wurde dort aber
+   von .zeit-band .zeit { padding-block: 0 } wieder ueberschrieben,
+   gleiche Spezifitaet und weiter unten im Stylesheet.
+   Deshalb jetzt direkt ueber die ID. */
+#fruehstueck { padding-top: 8rem; }
+
+@media (max-width: 899px) {
+  #fruehstueck { padding-top: 4rem; }
 }
 
 @media (min-width: 900px) {
@@ -808,12 +834,12 @@ html { overflow-x: hidden; }
 
 .aktion__kicker {
   font-family: var(--font-body);
-  font-size: 0.74rem;
+  font-size: clamp(0.86rem, 1.4vw, 1.02rem);
   font-weight: 700;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-rose);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .aktion__titel {
@@ -835,52 +861,121 @@ html { overflow-x: hidden; }
   margin-bottom: var(--space-6);
 }
 
-/* ── BEWERTUNGEN ── */
-.stimmen {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
+/* ── BEWERTUNGEN ──
+   Dunkles Mokka-Band mit Risskante oben und unten, wie beim Lunch.
+   Links traegt die grosse Zahl den Blick, rechts stehen die Zitate
+   als Liste ohne Kartenrahmen. Bewusst kein Kastenwerk: drei gleich
+   schwere Kacheln nebeneinander hatten keine Hierarchie. */
+.stimmen-band {
+  position: relative;
+  background: var(--color-mokka);
+  padding-block: 7rem;
 }
 
-@media (min-width: 820px) {
-  .stimmen { grid-template-columns: repeat(3, 1fr); }
+.stimmen-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-mobile);
 }
+
+@media (min-width: 1024px) {
+  .stimmen-inner { padding-inline: var(--container-pad-desktop); }
+}
+
+@media (min-width: 900px) {
+  .stimmen-inner {
+    grid-template-columns: 0.85fr 1.3fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+}
+
+/* Linke Spalte: die Zahl ist der Blickfang der Sektion */
+.bewertung__zahl {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-size: clamp(5rem, 11vw, 8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-on-dark);
+}
+
+.bewertung__sterne {
+  color: var(--color-gold);
+  letter-spacing: 0.14em;
+  font-size: 1.15rem;
+  margin-block: var(--space-3) var(--space-3);
+}
+
+.bewertung__text {
+  font-size: var(--text-sm);
+  line-height: 1.8;
+  color: var(--color-on-dark);
+  opacity: 0.72;
+}
+
+/* Kicker und Zierlinie im hellen Ton, base.css faerbt sonst dunkel.
+   Der Kicker steht hier groesser als sonst, weil er in dieser
+   Sektion die Rolle der Ueberschrift uebernimmt. */
+.stimmen-band .kicker {
+  color: var(--color-rose);
+  font-size: 0.92rem;
+  letter-spacing: 0.24em;
+  margin-bottom: var(--space-4);
+}
+.stimmen-band .zierlinie { margin-block: var(--space-5) 0; }
+.stimmen-band .zierlinie::before,
+.stimmen-band .zierlinie::after { background: rgba(247, 243, 238, 0.4); }
+.stimmen-band .zierlinie span { background: var(--color-rose); }
+
+/* Rechte Spalte: Zitate als Liste, getrennt durch feine Punktlinien */
+.stimmen { display: grid; }
 
 .stimme {
   position: relative;
-  background: var(--color-bg-soft);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
-  padding: var(--space-6) var(--space-5) var(--space-5);
-  display: flex;
-  flex-direction: column;
+  padding-block: var(--space-5);
+  padding-left: var(--space-5);
+  border-bottom: 1px dotted rgba(247, 243, 238, 0.22);
+  transition: opacity 0.6s ease;
 }
 
-/* Grosses Anfuehrungszeichen als Zierrat */
+/* Markierungsstrich links, faehrt beim aktiven Zitat auf */
 .stimme::before {
-  content: '\201C';
+  content: '';
   position: absolute;
-  top: 0.2rem;
-  left: var(--space-5);
-  font-family: var(--font-head);
-  font-size: 4.4rem;
-  line-height: 1;
-  color: var(--color-rose);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-rose);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.55s ease;
   pointer-events: none;
 }
 
-.stimme__sterne {
-  color: var(--color-gold);
-  letter-spacing: 0.12em;
-  margin-bottom: var(--space-3);
-  position: relative;
+/* Abdunkeln nur, wenn js/stimmen.js laeuft. Ohne das Skript
+   stehen alle drei Zitate normal lesbar da. */
+.stimmen--rotiert .stimme { opacity: 0.45; }
+.stimmen--rotiert .stimme--aktiv { opacity: 1; }
+.stimme--aktiv::before { transform: scaleY(1); }
+
+.stimme:first-child { padding-top: 0; }
+
+.stimme:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .stimme__text {
-  line-height: 1.8;
-  color: var(--color-ink);
-  margin-bottom: var(--space-4);
-  flex: 1;
+  line-height: 1.85;
+  color: var(--color-on-dark);
+  opacity: 0.9;
+  margin-bottom: var(--space-3);
 }
 
 .stimme__autor {
@@ -889,45 +984,108 @@ html { overflow-x: hidden; }
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-muted);
-  border-top: 1px solid var(--color-line);
-  padding-top: var(--space-3);
+  color: var(--color-rose);
 }
 
-/* Auf Mobile als Wisch-Slider */
-@media (max-width: 819px) {
-  .stimmen {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-accent) var(--color-line);
-    gap: var(--space-4);
-    padding-bottom: var(--space-3);
-    margin-inline: calc(var(--container-pad-mobile) * -1);
-    padding-inline: var(--container-pad-mobile);
-    scroll-padding-inline: var(--container-pad-mobile);
+@media (max-width: 899px) {
+  .stimmen-band { padding-block: 5rem; }
+  .bewertung { text-align: center; }
+  .bewertung__sterne { font-size: 1rem; }
+  .stimmen-band .zierlinie { justify-content: center; }
+}
+
+/* ── KONTAKT ──
+   Randlose Karte ueber die volle Breite, darauf schwebt links die
+   Infokarte. Die Karte ist damit Flaeche statt Kasten neben dem
+   Text, und die Sektion bekommt einen Handlungsaufruf. */
+.kontakt-bereich {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 620px;
+  background: var(--color-line);
+}
+
+.kontakt-bereich__karte {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Google blendet oben links eine Ortskarte ein, die von der
+   Risskante angeschnitten wurde. Das iframe wird deshalb um den
+   Betrag KARTENVERSATZ nach oben geschoben und um genau denselben
+   Betrag hoeher gemacht. Die Ortskarte wandert damit aus dem
+   sichtbaren Bereich heraus, die untere Kante bleibt buendig.
+   Das ist wichtig: Logo und Nutzungsbedingungen von Google sitzen
+   unten und duerfen nicht weggeschnitten werden. */
+.kontakt-bereich__karte iframe {
+  position: absolute;
+  left: 0;
+  top: -80px;
+  width: 100%;
+  height: calc(100% + 80px);
+  border: 0;
+  display: block;
+}
+
+.kontakt-bereich__inner {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-mobile);
+}
+
+@media (min-width: 1024px) {
+  .kontakt-bereich__inner { padding-inline: var(--container-pad-desktop); }
+}
+
+/* WICHTIG: Hintergrund und z-index gehoeren auf dieses Element,
+   nicht auf eine Huelle darum. z-index 1 macht die Infokarte zum
+   Stapelkontext, dann liegt das ::before der Buttons mit z-index -1
+   ueber diesem Hintergrund. Sitzt der Hintergrund stattdessen auf
+   einem Kind der Huelle, verschwindet die versetzte zweite Ebene
+   der Buttons dahinter. */
+.kontakt-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 400px);
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: 0 18px 44px rgba(46, 38, 32, 0.18);
+}
+
+.kontakt-panel .titel { font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
+.kontakt-panel .zierlinie { margin-block: var(--space-3) var(--space-4); }
+
+.kontakt-panel .kontakt__zeile { margin-bottom: var(--space-4); }
+
+.kontakt-panel .kontakt__zeile:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.kontakt-panel .btn { margin-top: var(--space-5); }
+
+/* Auf schmalen Schirmen kein Ueberlagern: Karte oben, Infokarte
+   darunter, leicht darueber geschoben. */
+@media (max-width: 899px) {
+  .kontakt-bereich {
+    display: block;
+    min-height: 0;
   }
-  .stimme { flex: 0 0 82%; scroll-snap-align: start; }
-  .stimmen::-webkit-scrollbar { height: 4px; }
-  .stimmen::-webkit-scrollbar-track { background: var(--color-line); border-radius: 2px; }
-  .stimmen::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
-}
-
-/* ── KONTAKT ── */
-.kontakt {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-}
-
-@media (min-width: 900px) {
-  .kontakt { grid-template-columns: 1fr 1fr; }
-}
-
-.kontakt__liste {
-  display: grid;
-  gap: var(--space-4);
+  .kontakt-bereich__karte {
+    position: relative;
+    inset: auto;
+    height: 300px;
+  }
+  .kontakt-bereich__inner { padding-bottom: var(--space-7); }
+  .kontakt-panel {
+    width: 100%;
+    margin-top: calc(var(--space-6) * -1);
+  }
 }
 
 .kontakt__zeile {
@@ -964,21 +1122,6 @@ html { overflow-x: hidden; }
 .kontakt__wert a { color: inherit; }
 .kontakt__wert a:hover { color: var(--color-accent); }
 
-.kontakt__karte {
-  min-height: 380px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid var(--color-line);
-}
-
-.kontakt__karte iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 380px;
-  border: 0;
-  display: block;
-}
-
 /* ── SPEISEKARTE ── */
 .menu-section__title {
   font-family: var(--font-head);
@@ -1002,14 +1145,55 @@ html { overflow-x: hidden; }
 }
 
 /* ── FUSSZEILE ──
-   Dreispaltig wie in der Referenz: Marke, Abholhinweis,
-   Oeffnungszeiten. */
+   Marke gross und mittig, eine feine Linie laeuft links und rechts
+   durch. Darunter zwei Bloecke mit Symbol, Ueberschrift und
+   Zierlinie, getrennt durch einen senkrechten Strich. */
 .footer {
   background: var(--color-dark);
   color: var(--color-on-dark);
   padding-top: var(--space-8);
   padding-bottom: var(--space-6);
 }
+
+.footer-marke {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.footer-marke:hover { opacity: 1; }
+
+.footer-marke__linie {
+  flex: 1;
+  height: 1px;
+  background: rgba(216, 175, 166, 0.35);
+}
+
+.footer-marke__mitte {
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.footer-marke__logo {
+  display: block;
+  width: 104px;
+  height: auto;
+  margin: 0 auto var(--space-3);
+}
+
+.footer-marke__name {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  letter-spacing: -0.02em;
+  color: var(--color-on-dark);
+}
+
+.footer-marke__name em { font-style: normal; color: var(--color-rose); }
 
 .footer__cols {
   display: grid;
@@ -1019,30 +1203,56 @@ html { overflow-x: hidden; }
 }
 
 @media (min-width: 820px) {
-  .footer__cols { grid-template-columns: repeat(3, 1fr); text-align: left; }
+  .footer__cols { grid-template-columns: 1fr 1fr; gap: 0; }
+  .footer-block + .footer-block {
+    border-left: 1px solid rgba(247, 243, 238, 0.14);
+  }
+  .footer-block { padding-inline: var(--space-7); }
 }
 
-.footer__marke {
+/* iconsEinsetzen() ersetzt das innere span per outerHTML, dabei
+   geht dessen Klasse verloren. Deshalb sitzt die Klasse auf der
+   Huelle und das CSS zielt auf .ic darin. */
+.footer-block__icon .ic {
+  width: 34px;
+  height: 34px;
+  color: var(--color-rose);
+  margin-bottom: var(--space-4);
+}
+
+.footer-block__titel {
   font-family: var(--font-head);
   font-weight: 600;
   font-variation-settings: 'SOFT' 40, 'WONK' 1;
-  font-size: 1.7rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
   color: var(--color-on-dark);
-  margin-bottom: var(--space-2);
-  display: inline-block;
 }
 
-.footer__marke em { font-style: normal; color: var(--color-rose); }
+.footer-block .zierlinie { margin-block: var(--space-3) var(--space-5); }
 
-.footer__kicker {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--color-rose);
-  margin-bottom: var(--space-3);
+.footer-block__adresse {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--color-on-dark);
+  margin-block: var(--space-5);
 }
+
+/* Zeiten gestapelt statt in zwei Spalten: im mittigen Satz wirkt
+   das Auseinanderziehen unruhig. */
+.footer-block .footer__zeit {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: var(--space-4);
+}
+
+.footer-block .footer__zeit:last-child { margin-bottom: 0; }
+.footer-block .footer__zeit b { font-size: 1.05rem; opacity: 1; }
 
 .footer .zierlinie { margin-block: var(--space-3) var(--space-4); }
 .footer .zierlinie::before,
