@@ -26,9 +26,21 @@
 /* Marke mit Wortmarke in Fraunces */
 .nav__marke {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.6rem;
   flex-shrink: 0;
+}
+
+/* Logo links neben der Wortmarke, wie im Hero der Startseite */
+.nav__logo-bild {
+  display: block;
+  width: 38px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .nav__logo-bild { width: 30px; }
 }
 
 .nav__wortmarke {
@@ -269,8 +281,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--color-accent);
-  color: #fff;
+  background: var(--color-bg-soft);
+  color: var(--color-accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
