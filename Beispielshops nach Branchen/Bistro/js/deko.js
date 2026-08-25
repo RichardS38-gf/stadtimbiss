@@ -8,7 +8,7 @@
       Beim Auftauchen unten -MAX_GRAD, in der Bildschirmmitte 0,
       beim Verlassen oben +MAX_GRAD.
       Richtung ueber data-dreh am Bild: 1 im Uhrzeigersinn
-      (Vorgabe), -1 dagegen.
+      (Vorgabe), -1 dagegen, 0 schaltet die Drehung ab.
 
    2. Einflug von rechts, einmalig, sobald die Oberkante des Bildes
       weit genug im Viewport steht. Nur bei data-einflug="rechts".
@@ -81,10 +81,16 @@ export function dekoDrehen() {
         }
       }
 
-      // Drehung: 0 = Bild taucht unten auf, 1 = Bild ist oben raus
+      // Drehung: 0 = Bild taucht unten auf, 1 = Bild ist oben raus.
+      // data-dreh="0" schaltet die Drehung ganz ab, dann bleibt nur
+      // der Einflug. Bewusst keine Kurzschreibweise mit ||, weil die
+      // Null sonst als fehlender Wert gelesen und zu 1 wuerde.
+      const rohDreh = bild.dataset.dreh;
+      let richtung = (rohDreh === undefined || rohDreh === '') ? 1 : Number(rohDreh);
+      if (Number.isNaN(richtung)) richtung = 1;
+
       let anteil = (fensterhoehe - kasten.top) / (fensterhoehe + kasten.height);
       anteil = Math.min(1, Math.max(0, anteil));
-      const richtung = Number(bild.dataset.dreh) || 1;
       const grad = (anteil - 0.5) * 2 * MAX_GRAD * richtung;
 
       const versatz = (1 - e) * EINFLUG_WEG;
