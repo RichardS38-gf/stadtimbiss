@@ -1,0 +1,1114 @@
+/* bistro.css — Café Marlene
+   Eigenes Seiten-Stylesheet. Ersetzt grill.css vollständig.
+   Aufbau angelehnt an die Cappu-Referenz: Kicker über jeder
+   Überschrift, Zierlinie darunter, abwechselnde Bild-Text-Blöcke,
+   drei Kategoriekacheln, Reservierung, dreispaltige Fußzeile. */
+
+/* ── KOPFZEILE ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-soft);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.nav__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+}
+
+/* Marke mit Wortmarke in Fraunces */
+.nav__marke {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.nav__wortmarke {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav__wortmarke em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+
+.nav__zusatz {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .nav__wortmarke { font-size: 1.2rem; }
+  .nav__zusatz { display: none; }
+}
+
+/* Menue als Ausklapper */
+.nav__menue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.nav__menue-btn:hover {
+  border-color: var(--color-accent);
+  background: var(--color-rose-hell);
+}
+
+.nav__links {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  flex-direction: column;
+  gap: 0;
+  min-width: 230px;
+  padding: var(--space-2);
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 14px 34px rgba(46, 38, 32, 0.14);
+  z-index: 200;
+}
+
+.nav.nav--offen .nav__links { display: flex; }
+
+.nav__links a {
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.nav__links a:hover {
+  background: var(--color-rose-hell);
+  color: var(--color-accent);
+  opacity: 1;
+}
+
+/* auth.js wuerde einen eigenen Hamburger einsetzen */
+.nav__burger { display: none !important; }
+
+@media (max-width: 900px) {
+  .nav__inner { flex-wrap: nowrap; }
+  .nav .btn__text,
+  .nav .nav__konto-name { display: none; }
+  .nav .nav__aktionen .btn { padding-inline: 0.5rem; gap: 0; }
+  .nav .nav__konto { padding: 0.45rem; }
+  .nav__menue-btn__text { display: none; }
+  .nav__menue-btn { padding: 0.45rem 0.62rem; }
+}
+
+@media (max-width: 480px) {
+  .nav__links { left: 0; right: 0; min-width: 0; width: auto; }
+}
+
+/* Sprungmarken nicht unter die Kopfzeile schieben */
+[id] { scroll-margin-top: 92px; }
+
+/* ── KICKER UND ZIERLINIE ──
+   Das wiederkehrende Muster der Referenz: kleine Vorzeile,
+   grosse Ueberschrift, darunter eine feine Bohnenlinie. */
+.kicker {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.titel {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-size: clamp(1.9rem, 4.6vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+/* Zierlinie mit Raute in der Mitte */
+.zierlinie {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block: var(--space-4) var(--space-5);
+}
+
+.zierlinie::before,
+.zierlinie::after {
+  content: '';
+  height: 1px;
+  width: 34px;
+  background: var(--color-rose);
+}
+
+.zierlinie span {
+  width: 7px;
+  height: 7px;
+  background: var(--color-accent);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.zierlinie--mitte { justify-content: center; }
+.zierlinie--mitte::before,
+.zierlinie--mitte::after { width: 54px; }
+
+/* ── ABSCHNITTE ── */
+.abschnitt { padding-block: var(--space-8); }
+.abschnitt--eng { padding-block: var(--space-7); }
+
+.abschnitt__kopf { margin-bottom: var(--space-6); }
+.abschnitt__kopf--mitte { text-align: center; }
+
+.abschnitt__text {
+  color: var(--color-muted);
+  line-height: 1.8;
+  max-width: 62ch;
+}
+
+.abschnitt__kopf--mitte .abschnitt__text { margin-inline: auto; }
+
+@media (max-width: 899px) {
+  .abschnitt,
+  .abschnitt--eng { padding-block: var(--space-6); }
+  .abschnitt__kopf { margin-bottom: var(--space-5); }
+}
+
+/* ── HERO ──
+   Kopfbereich liegt im Hero: links Telefon, mittig die Marke,
+   rechts die Aktionen, darunter die Menuepunkte. Inhalt mittig.
+   Unten schliesst eine gerissene Papierkante ab. */
+.hero {
+  position: relative;
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+  padding-bottom: 48px;
+}
+
+/* Leichte Abdunklung, damit Schrift auf jedem Motiv sitzt */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(32, 25, 21, 0.34);
+  pointer-events: none;
+}
+
+.hero > * { position: relative; z-index: 2; }
+
+/* Obere Leiste, dreigeteilt */
+.hero-top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-5) var(--space-3);
+}
+
+.hero-top__tel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.hero-top__tel:hover { color: var(--color-rose); opacity: 1; }
+
+.hero-top__tel-kreis {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-top__tel-kreis .ic { width: 20px; height: 20px; }
+
+/* Marke mittig, Logo links daneben */
+.hero-marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: left;
+  line-height: 1;
+}
+
+.hero-marke__logo {
+  display: block;
+  width: 76px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 899px) {
+  .hero-marke { gap: var(--space-3); }
+  .hero-marke__logo { width: 52px; }
+}
+
+.hero-marke__zusatz {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: lowercase;
+  color: var(--color-rose);
+  margin-bottom: var(--space-2);
+}
+
+.hero-marke__name {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.hero-marke__name em { font-style: normal; color: var(--color-rose); }
+
+/* Aktionen rechts */
+.hero-top__aktionen {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* Menuepunkte unter der Marke */
+.hero-menue {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-4);
+}
+
+.hero-menue a {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.hero-menue a:hover { color: var(--color-rose); opacity: 1; }
+
+@media (max-width: 899px) {
+  .hero-menue { display: none; }
+  .hero-top { grid-template-columns: auto 1fr auto; }
+  .hero-top__tel span:not(.hero-top__tel-kreis) { display: none; }
+  .hero-marke__zusatz { font-size: 0.6rem; letter-spacing: 0.24em; }
+}
+
+/* Mittiger Inhalt */
+.hero__inhalt {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-inline: var(--container-pad-mobile);
+  padding-block: var(--space-7);
+  color: var(--color-on-dark);
+}
+
+.hero__kicker {
+  font-family: var(--font-body);
+  font-size: clamp(0.86rem, 1.5vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-rose);
+  margin-bottom: var(--space-5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero__titel {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  font-size: clamp(2.9rem, 8.4vw, 5.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: var(--space-7);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Groessere Buttons im Hero */
+.hero__actions .btn {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  font-weight: 600;
+}
+
+.hero__actions .btn:has(.ic) { padding: 9px 30px 9px 9px; }
+.hero__actions .btn .ic { width: 40px; height: 40px; padding: 9px; }
+
+/* ── BUTTONS: versetzte zweite Ebene ──
+   Hinter jedem Button liegt eine Flaeche in hellem Rosé, um
+   6px versetzt. Beim Überfahren faehrt sie heran.
+
+   WICHTIG: kein isolation: isolate. Das erzeugt einen eigenen
+   Stapelkontext, dann liegt das Pseudo-Element mit z-index -1
+   UEBER dem Hintergrund des Buttons statt dahinter. */
+.btn {
+  position: relative;
+  border-radius: 999px;
+  overflow: visible;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--color-rose);
+  transform: translate(6px, 6px);
+  transition: transform var(--transition);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: translate(0, 0);
+}
+
+/* Fuellfarben explizit setzen, damit nichts durchscheint */
+.btn--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.btn--primary:hover {
+  background: var(--color-accent-dk);
+  border-color: var(--color-accent-dk);
+  opacity: 1;
+}
+
+/* Zweite Variante in Creme mit dunkler Kontur. Mokka war dem
+   Braunton des Hero-Fotos zu aehnlich, Creme hebt sich auf
+   jedem Untergrund ab. */
+.btn--outline,
+.btn--outline-light {
+  background: var(--color-bg-soft);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-ink);
+}
+
+.btn--outline:hover,
+.btn--outline-light:hover {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-bg-soft);
+  opacity: 1;
+}
+
+/* Icon im hellen Kreis, hier explizit, damit es nicht von
+   orient.css abhaengt. */
+.btn .ic {
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--color-bg-soft);
+  color: var(--color-accent);
+  position: relative;
+  z-index: 1;
+}
+
+.btn--outline .ic,
+.btn--outline-light .ic {
+  background: var(--color-ink);
+  color: var(--color-bg-soft);
+}
+
+.btn--outline:hover .ic,
+.btn--outline-light:hover .ic {
+  background: var(--color-bg-soft);
+  color: var(--color-ink);
+}
+
+.btn--sm .ic { width: 28px; height: 28px; padding: 6px; }
+
+/* Kleine Buttons mit geringerem Versatz */
+.btn--sm::before { transform: translate(4px, 4px); }
+
+/* Auf dunklem Grund eine hellere zweite Ebene */
+.hero .btn::before,
+.aktion .btn::before,
+.footer .btn::before {
+  background: rgba(240, 220, 214, 0.5);
+}
+
+/* In Listen und Karten ohne zweite Ebene, dort waeren es zu viele */
+.menu-card .btn::before,
+.cart-item .btn::before,
+.cart-sidebar .btn::before,
+.cart-drawer .btn::before,
+.konto-panel .btn--sm::before,
+.modus .btn::before {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn::before { transition: none; }
+}
+
+/* ── GERISSENE PAPIERKANTE ──
+   Flach und feinzackig wie echtes Papier. Die Hoehe muss niedrig
+   bleiben, sonst wird die feine Zackung hochgezogen und plump. */
+.riss {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 44px;
+  z-index: 3;
+  pointer-events: none;
+  display: block;
+}
+
+.riss path { fill: var(--color-bg); }
+
+@media (max-width: 700px) {
+  .riss { height: 26px; }
+  .hero { padding-bottom: 30px; }
+}
+
+/* ── ÖFFNUNGSZEITEN-BAND ── */
+.band {
+  background: var(--color-mokka);
+  color: var(--color-on-dark);
+  padding-block: var(--space-5);
+}
+
+.band__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4) var(--space-6);
+  text-align: center;
+}
+
+.band__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.band__item .ic { color: var(--color-rose); }
+
+.band__trenner {
+  width: 6px;
+  height: 6px;
+  background: var(--color-rose);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .band__trenner { display: none; }
+  .band__inner { flex-direction: column; gap: var(--space-3); }
+}
+
+/* ── TAGESZEITEN ──
+   Drei abwechselnde Bild-Text-Blöcke für Frühstück, Lunch
+   und After-Work. */
+.zeit {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--space-6);
+  padding-block: var(--space-7);
+}
+
+/* Freigestelltes Deko-Bild, ragt über den Inhaltsbereich hinaus
+   und wird vom Bildschirmrand angeschnitten. Der Text soll
+   frei bleiben, deshalb weit nach rechts und tiefer gesetzt. */
+.zeit__deko {
+  position: absolute;
+  right: -22vw;
+  top: 20%;
+  width: min(31vw, 400px);
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.zeit__deko--links {
+  right: auto;
+  left: -22vw;
+}
+
+/* Verhindert die waagerechte Scrollleiste durch die Deko */
+html { overflow-x: hidden; }
+
+@media (max-width: 1100px) {
+  .zeit__deko { display: none; }
+}
+
+/* Der erste Block braucht deutlich mehr Luft zur Risskante */
+.zeit:first-of-type { padding-top: 20rem; }
+
+@media (max-width: 899px) {
+  .zeit:first-of-type { padding-top: 11rem; }
+}
+
+@media (min-width: 900px) {
+  .zeit { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+  .zeit--gedreht .zeit__bild { order: 2; }
+  .zeit--gedreht .zeit__text { order: 1; }
+}
+
+.zeit__bild {
+  aspect-ratio: 16 / 10;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.zeit__text p {
+  color: var(--color-muted);
+  line-height: 1.85;
+  margin-bottom: var(--space-5);
+}
+
+/* Dunkle Variante mit Risskante oben und unten.
+   Die Sektion laeuft randlos durch, der Inhalt bleibt in der
+   Inhaltsbreite. */
+.zeit-band {
+  position: relative;
+  background: var(--color-mokka);
+  padding-block: 7rem;
+  margin-block: var(--space-7);
+}
+
+.zeit-band .zeit {
+  padding-block: 0;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-mobile);
+}
+
+@media (min-width: 1024px) {
+  .zeit-band .zeit { padding-inline: var(--container-pad-desktop); }
+}
+
+.zeit-band .titel,
+.zeit-band .zeit__text p {
+  color: var(--color-on-dark);
+}
+
+.zeit-band .zeit__text p { opacity: 0.86; }
+
+/* Zierlinie im hellen Ton */
+.zeit-band .zierlinie::before,
+.zeit-band .zierlinie::after { background: rgba(247, 243, 238, 0.45); }
+.zeit-band .zierlinie span { background: var(--color-rose); }
+
+/* Risskante oben, gespiegelt */
+.riss--oben {
+  top: -1px;
+  bottom: auto;
+  transform: scaleY(-1);
+}
+
+/* ── KATEGORIEKACHELN ── */
+.kategorien {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .kategorien { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1000px) {
+  .kategorien { grid-template-columns: repeat(4, 1fr); }
+}
+
+.kategorie {
+  text-align: center;
+  padding: var(--space-6) var(--space-5);
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: block;
+}
+
+.kategorie:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(46, 38, 32, 0.1);
+  opacity: 1;
+}
+
+/* Runder Bildkreis über dem Namen. Nimmt wahlweise ein Icon
+   oder ein Foto auf, das als Hintergrund gesetzt wird. */
+.kategorie__kreis {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto var(--space-4);
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--color-rose-hell);
+  background-size: cover;
+  background-position: center;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.kategorie:hover .kategorie__kreis {
+  background-color: var(--color-rose);
+  transform: scale(1.04);
+}
+
+.kategorie__kreis .ic { width: 56px; height: 56px; }
+
+@media (max-width: 999px) {
+  .kategorie__kreis { width: 170px; height: 170px; }
+}
+
+.kategorie__name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-size: var(--text-xl);
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+.kategorie__text {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+/* ── WERBEBANNER ── */
+.aktion {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+}
+
+/* Parallax: das Bild bleibt beim Scrollen stehen, der Inhalt
+   wandert darüber. Nur auf Zeigegeraeten, iOS Safari kann
+   background-attachment fixed nicht und wuerde springen. */
+@media (min-width: 900px) and (hover: hover) {
+  .aktion {
+    background-attachment: fixed;
+    background-size: cover;
+  }
+}
+
+.aktion::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(32, 25, 21, 0.72);
+}
+
+.aktion__inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding: var(--space-8) var(--container-pad-mobile);
+  text-align: center;
+  color: var(--color-on-dark);
+}
+
+.aktion__kicker {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-rose);
+  margin-bottom: var(--space-3);
+}
+
+.aktion__titel {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  font-size: clamp(2rem, 5.4vw, 3.4rem);
+  line-height: 1.1;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-4);
+}
+
+.aktion__text {
+  color: var(--color-on-dark);
+  opacity: 0.86;
+  line-height: 1.7;
+  max-width: 48ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+}
+
+/* ── BEWERTUNGEN ── */
+.stimmen {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 820px) {
+  .stimmen { grid-template-columns: repeat(3, 1fr); }
+}
+
+.stimme {
+  position: relative;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grosses Anfuehrungszeichen als Zierrat */
+.stimme::before {
+  content: '\201C';
+  position: absolute;
+  top: 0.2rem;
+  left: var(--space-5);
+  font-family: var(--font-head);
+  font-size: 4.4rem;
+  line-height: 1;
+  color: var(--color-rose);
+  pointer-events: none;
+}
+
+.stimme__sterne {
+  color: var(--color-gold);
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-3);
+  position: relative;
+}
+
+.stimme__text {
+  line-height: 1.8;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+  flex: 1;
+}
+
+.stimme__autor {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-line);
+  padding-top: var(--space-3);
+}
+
+/* Auf Mobile als Wisch-Slider */
+@media (max-width: 819px) {
+  .stimmen {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) var(--color-line);
+    gap: var(--space-4);
+    padding-bottom: var(--space-3);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+  }
+  .stimme { flex: 0 0 82%; scroll-snap-align: start; }
+  .stimmen::-webkit-scrollbar { height: 4px; }
+  .stimmen::-webkit-scrollbar-track { background: var(--color-line); border-radius: 2px; }
+  .stimmen::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
+}
+
+/* ── KONTAKT ── */
+.kontakt {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .kontakt { grid-template-columns: 1fr 1fr; }
+}
+
+.kontakt__liste {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.kontakt__zeile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: start;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.kontakt__zeile .ic {
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent);
+}
+
+.kontakt__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-1);
+}
+
+.kontakt__wert {
+  color: var(--color-ink);
+  line-height: 1.7;
+}
+
+.kontakt__wert a { color: inherit; }
+.kontakt__wert a:hover { color: var(--color-accent); }
+
+.kontakt__karte {
+  min-height: 380px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+}
+
+.kontakt__karte iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
+  display: block;
+}
+
+/* ── SPEISEKARTE ── */
+.menu-section__title {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  letter-spacing: -0.01em;
+}
+
+.menu-card__name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cat-link {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── FUSSZEILE ──
+   Dreispaltig wie in der Referenz: Marke, Abholhinweis,
+   Oeffnungszeiten. */
+.footer {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-6);
+}
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+  text-align: center;
+}
+
+@media (min-width: 820px) {
+  .footer__cols { grid-template-columns: repeat(3, 1fr); text-align: left; }
+}
+
+.footer__marke {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 40, 'WONK' 1;
+  font-size: 1.7rem;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-2);
+  display: inline-block;
+}
+
+.footer__marke em { font-style: normal; color: var(--color-rose); }
+
+.footer__kicker {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-rose);
+  margin-bottom: var(--space-3);
+}
+
+.footer .zierlinie { margin-block: var(--space-3) var(--space-4); }
+.footer .zierlinie::before,
+.footer .zierlinie::after { background: rgba(216, 175, 166, 0.45); }
+.footer .zierlinie span { background: var(--color-rose); }
+
+@media (max-width: 819px) {
+  .footer .zierlinie { justify-content: center; }
+}
+
+.footer__text {
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  color: var(--color-on-dark);
+  opacity: 0.82;
+}
+
+.footer__text a { color: var(--color-on-dark); }
+.footer__text a:hover { color: var(--color-rose); }
+
+.footer__zeiten {
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.footer__zeit {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  color: var(--color-on-dark);
+  opacity: 0.82;
+  border-bottom: 1px dotted rgba(247, 243, 238, 0.2);
+  padding-bottom: var(--space-2);
+}
+
+@media (max-width: 819px) {
+  .footer__zeit { justify-content: center; gap: var(--space-3); }
+}
+
+.footer__zeit b { font-weight: 600; }
+
+.footer__links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+.footer__links a {
+  font-size: var(--text-sm);
+  color: var(--color-on-dark);
+  opacity: 0.6;
+}
+
+.footer__links a:hover { opacity: 1; color: var(--color-rose); }
+
+.footer__divider {
+  border-top: 1px solid rgba(247, 243, 238, 0.14);
+  margin-block: var(--space-6) var(--space-5);
+}
+
+.footer__copy {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-on-dark);
+  opacity: 0.45;
+}

@@ -1,0 +1,2166 @@
+/* grill.css — Bosporus Grill
+   Eigenes Seiten-Stylesheet. Ersetzt index.css vollständig, damit
+   der Shop nicht die Struktur der Pizzeria mitschleppt.
+   Jede Sektion ist im Aufbau anders gelöst als dort. */
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-soft);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 66px;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+}
+
+.nav__links { display: none; gap: var(--space-5); }
+
+.nav__links a {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.nav__links a:hover { color: var(--color-accent); opacity: 1; }
+
+/* Sprungmarken nicht unter die Kopfzeile rutschen lassen */
+.ueber,
+.abschnitt,
+.abschnitt--eng,
+.zahlen,
+.aktion,
+[id] {
+  scroll-margin-top: 90px;
+}
+
+/* ── KUNDENKONTO ──
+   Ueberschriften und Bedienelemente in derselben Versalienschrift
+   wie auf der Speisekarte. konto.css bleibt shop-neutral, deshalb
+   stehen die Anpassungen hier. */
+.konto-head__gruss,
+.konto-panel__titel,
+.konto-card__titel,
+.auth-box__titel,
+.stamp-card__titel,
+.konto-modal__kopf h3 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.konto-tab {
+  font-family: var(--font-head);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.konto-tab--active { font-weight: 800; }
+
+/* Kleinere Beschriftungen gesperrt und gedaempft, damit sie
+   nicht mit den Titeln konkurrieren */
+.konto-feld label,
+.konto-card__label,
+.address-card__label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+}
+
+.konto-feld label span { text-transform: none; letter-spacing: 0; }
+
+/* Artikelnamen in Favoriten und Listen.
+   Hoehere Spezifitaet, weil konto.css spaeter geladen wird. */
+.fav-card .fav-card__name,
+.order-detail .order-item__name,
+.konto-panel .fav-card__name {
+  font-family: var(--font-head);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+/* ── STEMPELKARTE ──
+   Gefuellte Stempel zeigen das Logo statt einer Farbflaeche.
+   konto.css setzt background als Kurzform und wird spaeter
+   geladen, deshalb hier mit hoeherer Spezifitaet. */
+.stamp-card .stamp-grid .stamp-slot--filled {
+  background-color: var(--color-bg-soft);
+  background-image: url('../Bilder/Logo.png');
+  background-size: 76%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid var(--color-accent);
+  color: transparent;
+}
+
+/* Auf der vollen Karte steht die Flaeche hell ohne Rand */
+.stamp-card--voll .stamp-grid .stamp-slot--filled {
+  background-color: var(--color-bg-soft);
+  border-color: var(--color-bg-soft);
+  color: transparent;
+}
+
+/* auth.js fuegt auf schmalen Bildschirmen einen eigenen Hamburger
+   ein. Wir haben ueberall einen eigenen Menue-Knopf, sonst
+   staenden zwei Menues nebeneinander. */
+.nav__burger { display: none !important; }
+
+/* ── MENUE ALS AUSKLAPPER ──
+   Auf den Unterseiten steht Bestellen im Vordergrund. Die
+   Seitenlinks liegen hinter einem Klick. */
+.nav__inner { position: relative; }
+
+.nav__menue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.nav__menue-btn:hover { border-color: var(--color-accent); background: var(--color-bg); }
+
+.nav__menue-btn span { display: block; line-height: 1; }
+
+/* Gilt nur auf den Unterseiten. Die Startseite hat ihre
+   Navigation im Hero und bleibt unveraendert. */
+.nav:not(.hero-nav) .nav__links {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  flex-direction: column;
+  gap: 0;
+  min-width: 230px;
+  padding: var(--space-2);
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(26, 44, 46, 0.14);
+  z-index: 200;
+}
+
+.nav:not(.hero-nav).nav--offen .nav__links { display: flex; }
+
+.nav:not(.hero-nav) .nav__links a {
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.nav:not(.hero-nav) .nav__links a:hover {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .nav__menue-btn__text { display: none; }
+  .nav__menue-btn { padding: 0.45rem 0.6rem; }
+}
+
+/* Auf schmalen Bildschirmen darf das Ausklappmenue nicht ueber
+   den Rand hinauslaufen. */
+@media (max-width: 480px) {
+  .nav:not(.hero-nav) .nav__links {
+    left: 0;
+    right: 0;
+    min-width: 0;
+    width: auto;
+    flex-basis: auto;
+  }
+}
+
+/* Die Kopfzeile der Unterseiten bleibt einzeilig. Die
+   Beschriftungen der Buttons verschwinden dafuer frueher,
+   uebrig bleiben die Icon-Pillen. */
+@media (max-width: 900px) {
+  .nav:not(.hero-nav) .nav__inner { flex-wrap: nowrap; }
+  .nav:not(.hero-nav) .btn__text,
+  .nav:not(.hero-nav) .nav__konto-name { display: none; }
+  .nav:not(.hero-nav) .nav__aktionen .btn { padding-inline: 0.5rem; gap: 0; }
+  .nav:not(.hero-nav) .nav__konto { padding: 0.45rem; }
+}
+
+/* ── UMSCHALTER LIEFERUNG / ABHOLUNG ──
+   Zwei Haelften ueber die volle Breite, beide Konditionen immer
+   sichtbar. Der aktive Teil ist dunkel hinterlegt. */
+.modus {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-soft);
+}
+
+@media (min-width: 560px) {
+  .modus { grid-template-columns: 1fr 1fr; }
+}
+
+.modus__option {
+  padding: var(--space-4) var(--space-5);
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  font: inherit;
+}
+
+.modus__option:first-child { border-top: 0; }
+
+@media (min-width: 560px) {
+  .modus__option { border-top: 0; border-left: 1px solid var(--color-line); }
+  .modus__option:first-child { border-left: 0; }
+}
+
+.modus__option:hover { background: var(--color-bg); }
+
+/* Die Zustandsklasse kommt aus bestellen.js und heisst dort
+   mode-card--active. Deshalb beide Selektoren. */
+.modus__option--aktiv,
+.modus .mode-card--active,
+.modus__option--aktiv:hover,
+.modus .mode-card--active:hover {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  border-color: var(--color-dark);
+}
+
+.modus__kopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.modus__name {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.modus__preis {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-copper);
+  white-space: nowrap;
+}
+
+.modus__sub {
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+  opacity: 0.75;
+}
+
+/* Auf schmalen Bildschirmen stehen die beiden als getrennte
+   Karten untereinander, mit Abstand dazwischen. */
+@media (max-width: 559px) {
+  .modus {
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    overflow: visible;
+    gap: var(--space-3);
+  }
+
+  .modus__option {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-soft);
+  }
+}
+
+/* ── KOPFZEILE DER UNTERSEITEN ──
+   Die Startseite hat ihre Navigation im Hero. Alle anderen Seiten
+   nutzen diese Kopfzeile mit demselben Logo und derselben Schrift. */
+.nav__marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.nav__logo-bild {
+  display: block;
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.nav__wortmarke {
+  font-family: 'Reem Kufi', var(--font-head);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.nav__wortmarke span { display: block; }
+
+.nav__wortmarke span + span {
+  font-size: 0.58em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .nav__logo-bild { width: 40px; }
+  .nav__wortmarke { font-size: 1rem; }
+  .nav__wortmarke span + span { display: none; }
+}
+
+@media (max-width: 480px) {
+  .nav__logo-bild { width: 34px; }
+  .nav__wortmarke { font-size: 0.9rem; }
+}
+
+/* Seitentitel auf den Unterseiten */
+.seitenkopf {
+  padding-block: var(--space-7) var(--space-5);
+}
+
+.seitenkopf__nr {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.seitenkopf h1 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+/* ── HERO: Farbfläche links, randloses Bild rechts ──
+   Kein durchlaufender Header. Die Navigation liegt oben rechts
+   über dem Bild, das bis an die obere Bildschirmkante reicht. */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.hero__panel {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  padding: var(--space-8) var(--container-pad-mobile) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 82svh;
+}
+
+.hero__panel > * { position: relative; z-index: 1; }
+
+/* Marke oben links, aus dem Fluss genommen, damit der Textblock
+   in der Flaeche wirklich mittig sitzt. */
+.hero__marke {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--container-pad-mobile);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hero__logo {
+  display: block;
+  width: 74px;
+  max-width: 18vw;
+}
+
+.hero__wortmarke {
+  font-family: 'Reem Kufi', var(--font-head);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+}
+
+.hero__wortmarke span { display: block; }
+.hero__wortmarke span + span {
+  font-size: 0.62em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-top: 2px;
+}
+
+/* Wasserzeichen als Pseudo-Element, damit es die Hoehe niemals
+   beeinflussen kann und automatisch mittig auf dem Text sitzt. */
+.hero__inhalt {
+  position: relative;
+  z-index: 1;
+  max-width: 52ch;
+}
+
+.hero__inhalt::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(150%, 820px);
+  aspect-ratio: 1;
+  background-image: url('../Bilder/Logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__inhalt > * { position: relative; z-index: 1; }
+
+.hero__nummer {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title em {
+  font-style: normal;
+  display: block;
+}
+
+.hero__sub {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--color-muted);
+  margin-bottom: var(--space-6);
+  max-width: 46ch;
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Rechte Spalte: Bild bis zur Oberkante */
+.hero__bild {
+  position: relative;
+  min-height: 42svh;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+  order: -1;
+}
+
+/* Navigation liegt ueber dem Bild.
+   Die Klasse nav bleibt fuer das Burger-Menue erhalten, ihre
+   Flaechen- und Positionsregeln werden hier aber aufgehoben,
+   sonst liegt ein weisser Streifen ueber dem Bild. */
+.hero-nav.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  min-height: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--container-pad-mobile);
+}
+
+.hero-nav.nav.scrolled {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Verlauf haengt am Bild, nicht an der Kopfzeile. Dadurch liegt
+   die komplette Kopfzeile mit z-index 6 sicher darueber. */
+.hero__bild::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 190px;
+  background: linear-gradient(to bottom, rgba(14,24,26,0.78) 0%, rgba(14,24,26,0.38) 55%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Alles in der Kopfzeile eigenstaendig positionieren, damit es
+   zuverlaessig ueber dem Verlauf liegt. */
+.hero-nav .nav__links,
+.hero-nav .nav__aktionen,
+.hero-nav .btn,
+.hero-nav .nav__konto {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-nav__links {
+  display: none;
+  gap: var(--space-5);
+}
+
+.hero-nav .nav__links a,
+.hero-nav__links a {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
+}
+
+/* Kein Farbwechsel beim Hover, nur ein feiner Unterstrich */
+.hero-nav .nav__links a:hover,
+.hero-nav__links a:hover {
+  color: #ffffff;
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.hero-nav__aktionen {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Konto-Button auf dem Bild hell umrandet */
+.hero-nav .nav__konto {
+  color: #fff;
+  border-color: rgba(255,255,255,0.55);
+}
+
+.hero-nav .nav__konto:hover {
+  color: var(--color-copper);
+  border-color: var(--color-copper);
+}
+
+.hero-nav .nav__konto-icon,
+.hero-nav .nav__konto .ic {
+  color: #fff;
+  transition: color var(--transition);
+}
+
+/* Icon faerbt sich beim Hover mit */
+.hero-nav .nav__konto:hover .nav__konto-icon,
+.hero-nav .nav__konto:hover .ic,
+.hero-nav .nav__konto:hover svg {
+  color: var(--color-copper);
+  stroke: var(--color-copper);
+}
+
+/* Menue-Knopf im Hero: nur auf schmalen Bildschirmen, hell auf
+   dem Bild und ganz links in der Leiste. */
+.hero-nav .nav__menue-btn {
+  display: none;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-nav .nav__menue-btn:hover {
+  border-color: var(--color-copper);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 899px) {
+  .hero-nav .nav__menue-btn {
+    display: inline-flex;
+    margin-right: auto;
+  }
+
+  /* Aufgeklappt erscheinen die Sektionen als helles Feld
+     unter der Leiste. */
+  .hero-nav.nav--offen .nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    /* orient.css setzt hier width 100%, dadurch wuerde das Feld
+       rechts aus dem Bild laufen. */
+    width: auto;
+    flex-basis: auto;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    box-shadow: 0 14px 34px rgba(20, 32, 34, 0.3);
+    z-index: 300;
+  }
+
+  .hero-nav.nav--offen .nav__links a {
+    color: var(--color-ink);
+    text-shadow: none;
+    padding: 0.7rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-nav.nav--offen .nav__links a:hover {
+    color: var(--color-accent);
+    background: var(--color-bg);
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    height: 100svh;
+    min-height: 600px;
+    max-height: 900px;
+  }
+  /* Linker Innenabstand richtet sich nach der Inhaltsbreite der
+     Seite, damit Hero-Text und Sektionen buendig stehen. */
+  .hero__panel {
+    min-height: 0;
+    padding-block: var(--space-7);
+    padding-right: var(--space-6);
+    padding-left: max(var(--space-7), calc((100vw - var(--max-content-width)) / 2));
+  }
+  .hero__marke {
+    top: var(--space-6);
+    left: max(var(--space-7), calc((100vw - var(--max-content-width)) / 2));
+  }
+  .hero__logo { width: 84px; }
+  .hero__bild { order: 0; min-height: 0; }
+  .hero-nav { padding-inline: var(--space-6); }
+  .hero-nav__links { display: flex; }
+}
+
+/* ── LAUFBAND ──
+   Zwei identische Gruppen nebeneinander, die Animation verschiebt
+   um genau eine Gruppenbreite. Dadurch entsteht keine Luecke. */
+.ticker {
+  background: var(--color-copper);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-block: var(--space-5);
+  border-block: 1px solid rgba(0,0,0,0.12);
+}
+
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: ticker-lauf 34s linear infinite;
+}
+
+.ticker__gruppe {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding-right: var(--space-6);
+  flex: 0 0 auto;
+}
+
+.ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: 'Lalezar', var(--font-head);
+  font-size: 1.55rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.ticker__punkt {
+  opacity: 0.55;
+  font-size: 0.8rem;
+}
+
+@keyframes ticker-lauf {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+}
+
+/* ── NUMMERIERTE BLÖCKE ──
+   Dreispaltig, große Ziffern. Ersetzt die Bild-Text-Wechsel. */
+.werte {
+  padding-block: var(--space-8);
+}
+
+.werte__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 820px) {
+  .werte__grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-7); }
+}
+
+.wert {
+  border-top: 3px solid var(--color-accent);
+  padding-top: var(--space-4);
+}
+
+.wert__nr {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-line);
+  margin-bottom: var(--space-3);
+}
+
+.wert__titel {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.wert__text {
+  color: var(--color-muted);
+  line-height: 1.8;
+  font-size: var(--text-sm);
+}
+
+/* ── GROSSER BILDSTREIFEN ──
+   Volle Breite, Text unten links, ohne Split. */
+.streifen {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+}
+
+.streifen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,44,46,0.92) 0%, rgba(26,44,46,0.15) 70%);
+}
+
+.streifen__inhalt {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-7) var(--container-pad-mobile);
+  color: var(--color-on-dark);
+  max-width: 62ch;
+}
+
+.streifen__nr {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--color-copper);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.streifen__titel {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4.4vw, 2.8rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: var(--space-3);
+}
+
+.streifen__text { opacity: 0.82; line-height: 1.8; }
+
+@media (min-width: 900px) {
+  .streifen { min-height: 520px; }
+  .streifen__inhalt { padding: var(--space-8) var(--space-7); }
+}
+
+/* ── INDEXLISTE STATT KACHELN ── */
+.index-liste {
+  border-top: 1px solid var(--color-line);
+}
+
+.index-zeile {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--color-line);
+  transition: background var(--transition), padding-inline var(--transition);
+}
+
+.index-zeile:hover {
+  background: var(--color-bg-soft);
+  padding-inline: var(--space-4);
+}
+
+.index-zeile__nr {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-copper);
+}
+
+.index-zeile__name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 3vw, 1.9rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  min-width: 0;
+}
+
+.index-zeile__meta {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  white-space: nowrap;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .index-zeile__meta { display: block; }
+}
+
+.index-zeile__pfeil {
+  color: var(--color-accent);
+  display: inline-flex;
+  transition: transform var(--transition);
+}
+
+.index-zeile:hover .index-zeile__pfeil { transform: translateX(6px); }
+
+/* iconsEinsetzen ersetzt den Span samt Klasse durch das SVG,
+   uebrig bleibt nur .ic. Deshalb hier darauf zielen. */
+.index-zeile .ic {
+  color: var(--color-accent);
+  transition: transform var(--transition);
+}
+
+.index-zeile:hover .ic { transform: translateX(6px); }
+
+/* Auf Mobile gibt es kein Hover, das Zeichen hat dort keine
+   Funktion und wird ausgeblendet. */
+@media (max-width: 640px) {
+  .index-zeile .ic,
+  .index-zeile__pfeil { display: none; }
+  .index-zeile { grid-template-columns: auto 1fr; }
+}
+
+/* ── GUTSCHEINKARTEN ── */
+.gutschein-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 760px) {
+  .gutschein-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.gutschein {
+  position: relative;
+  background: var(--color-bg-soft);
+  border: 2px dashed var(--color-accent);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-5);
+  overflow: hidden;
+}
+
+.gutschein--dunkel {
+  background: var(--color-dark);
+  border-color: var(--color-copper);
+  color: var(--color-on-dark);
+}
+
+/* Perforation an den Seiten, wie bei einem abtrennbaren Coupon */
+.gutschein::before,
+.gutschein::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  transform: translateY(-50%);
+}
+
+.gutschein::before { left: -14px; }
+.gutschein::after  { right: -14px; }
+
+.gutschein__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.gutschein__titel {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: var(--space-3);
+}
+
+.gutschein__text {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.gutschein--dunkel .gutschein__text { color: rgba(245,239,227,0.75); }
+
+.gutschein__code {
+  margin-top: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-top: 1px dashed var(--color-line);
+  padding-top: var(--space-3);
+}
+
+/* ── BEWERTUNGEN: drei feste Karten ── */
+.stimmen-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 820px) {
+  .stimmen-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.stimme {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+}
+
+.stimme__sterne {
+  color: var(--color-saffron);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-3);
+}
+
+.stimme__text {
+  line-height: 1.8;
+  margin-bottom: var(--space-4);
+  flex: 1;
+}
+
+.stimme__autor {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-line);
+  padding-top: var(--space-3);
+}
+
+/* ── STIMMEN ──
+   Ein grosses Zitat auf dunklem Grund, das von selbst wechselt.
+   Der Balken zeigt an, wann der naechste Wechsel kommt. */
+.stimmen {
+  position: relative;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-7) var(--space-6);
+  overflow: hidden;
+}
+
+.stimmen__zeichen {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.8rem;
+  font-family: Georgia, serif;
+  font-size: 11rem;
+  line-height: 0.7;
+  color: rgba(184, 115, 51, 0.26);
+  pointer-events: none;
+  user-select: none;
+}
+
+.stimmen__buehne {
+  position: relative;
+  min-height: 12rem;
+}
+
+@media (min-width: 700px) {
+  .stimmen__buehne { min-height: 10rem; }
+}
+
+.stimme-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: stimme-zyklus 15s infinite;
+}
+
+.stimme-slide:nth-child(2) { animation-delay: 5s; }
+.stimme-slide:nth-child(3) { animation-delay: 10s; }
+
+@keyframes stimme-zyklus {
+  0%   { opacity: 0; transform: translateY(10px); }
+  3%   { opacity: 1; transform: translateY(0); }
+  30%  { opacity: 1; transform: translateY(0); }
+  35%  { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+.stimme-slide__sterne {
+  color: var(--color-saffron);
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-3);
+}
+
+.stimme-slide__text {
+  font-family: 'Reem Kufi', var(--font-head);
+  font-size: clamp(1.2rem, 2.6vw, 1.75rem);
+  line-height: 1.5;
+  color: var(--color-on-dark);
+  max-width: 46ch;
+}
+
+.stimme-slide__autor {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-top: var(--space-4);
+}
+
+.stimmen__balken {
+  height: 3px;
+  background: rgba(245, 239, 227, 0.18);
+  border-radius: 2px;
+  margin-top: var(--space-7);
+  overflow: hidden;
+}
+
+.stimmen__balken i {
+  display: block;
+  height: 100%;
+  background: var(--color-copper);
+  animation: stimmen-fortschritt 5s linear infinite;
+}
+
+@keyframes stimmen-fortschritt {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Ohne Bewegung: alle Zitate untereinander sichtbar */
+@media (prefers-reduced-motion: reduce) {
+  .stimmen__buehne { min-height: 0; }
+  .stimme-slide {
+    position: static;
+    opacity: 1;
+    transform: none;
+    animation: none;
+    margin-bottom: var(--space-5);
+  }
+  .stimmen__balken { display: none; }
+}
+
+/* ── ABSCHNITTSKOPF ── */
+.kopf {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.kopf h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.kopf__nr {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--color-copper);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.abschnitt { padding-block: var(--space-8); }
+.abschnitt--eng { padding-block: var(--space-7); }
+
+/* Auf Mobile bekommen alle Sektionen denselben Innenabstand.
+   Da sich die Abstaende zweier Sektionen addieren, ergibt das
+   durchgehend denselben Zwischenraum. */
+@media (max-width: 899px) {
+  .abschnitt,
+  .abschnitt--eng,
+  .ueber,
+  .zahlen {
+    padding-block: var(--space-6);
+  }
+
+  .ueber { gap: var(--space-6); }
+
+  /* Der Werbebanner braucht keinen zusaetzlichen Abstand, die
+     Sektion darueber bringt ihn bereits mit. */
+  .aktion { margin-top: 0; }
+
+  .aktion__inner { padding-block: var(--space-6); }
+
+  .kopf { margin-bottom: var(--space-5); }
+}
+
+/* ── KONTAKT ──
+   Vier Kacheln nebeneinander, Karte darunter über volle Breite.
+   Die erste Kachel ist dunkel und setzt den Akzent. */
+.kontakt-kacheln {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 560px) {
+  .kontakt-kacheln { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 900px) {
+  .kontakt-kacheln { grid-template-columns: repeat(4, 1fr); }
+}
+
+.kontakt-kachel {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+/* Beim Ueberfahren wird die Kachel dunkel, Schrift und Icon hell */
+.kontakt-kachel:hover,
+.kontakt-kachel:focus-within {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+}
+
+.kontakt-kachel__kopf {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.kontakt-kachel__kopf .ic {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.3;
+  color: var(--color-accent);
+  transition: color var(--transition);
+}
+
+.kontakt-kachel:hover .ic,
+.kontakt-kachel:focus-within .ic { color: var(--color-copper); }
+
+.kontakt-kachel__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition: color var(--transition);
+}
+
+.kontakt-kachel:hover .kontakt-kachel__label,
+.kontakt-kachel:focus-within .kontakt-kachel__label { color: var(--color-copper); }
+
+/* Farbe explizit setzen, base.css faerbt Absaetze sonst dunkel */
+.kontakt-kachel__wert {
+  font-size: var(--text-base);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  color: var(--color-ink);
+  transition: color var(--transition);
+}
+
+.kontakt-kachel__wert a { color: inherit; }
+
+.kontakt-kachel:hover .kontakt-kachel__wert,
+.kontakt-kachel:focus-within .kontakt-kachel__wert { color: var(--color-on-dark); }
+
+.kontakt-karte {
+  min-height: 440px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+}
+
+.kontakt-karte iframe { width: 100%; height: 100%; min-height: 440px; border: 0; display: block; }
+
+/* Auf Mobile werden die vier Kacheln zum Wisch-Slider.
+   Die naechste Kachel schaut am Rand hervor, dazu ein feiner
+   Fortschrittsbalken statt eines Texthinweises. */
+@media (max-width: 899px) {
+  .kontakt-kacheln {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-copper) var(--color-line);
+    padding-bottom: var(--space-3);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+  }
+
+  .kontakt-kachel {
+    flex: 0 0 74%;
+    scroll-snap-align: start;
+  }
+
+  /* Balken sichtbar lassen, er zeigt an, dass es weitergeht */
+  .kontakt-kacheln::-webkit-scrollbar { height: 4px; }
+  .kontakt-kacheln::-webkit-scrollbar-track {
+    background: var(--color-line);
+    border-radius: 2px;
+  }
+  .kontakt-kacheln::-webkit-scrollbar-thumb {
+    background: var(--color-copper);
+    border-radius: 2px;
+  }
+
+  /* Ohne Hover keine Farbumkehr, sonst bleibt eine Kachel
+     nach dem Antippen dunkel stehen. */
+  .kontakt-kachel:hover,
+  .kontakt-kachel:focus-within {
+    background: var(--color-bg-soft);
+    border-color: var(--color-line);
+  }
+  .kontakt-kachel:hover .kontakt-kachel__wert,
+  .kontakt-kachel:focus-within .kontakt-kachel__wert { color: var(--color-ink); }
+  .kontakt-kachel:hover .kontakt-kachel__label,
+  .kontakt-kachel:focus-within .kontakt-kachel__label { color: var(--color-muted); }
+  .kontakt-kachel:hover .ic,
+  .kontakt-kachel:focus-within .ic { color: var(--color-accent); }
+}
+
+/* ── SPEISEKARTE ALS PREISLISTE ── */
+.karte-abschnitt { margin-bottom: var(--space-7); }
+
+.karte-abschnitt__kopf {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  border-bottom: 3px solid var(--color-ink);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.karte-abschnitt__nr {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--color-copper);
+}
+
+.karte-abschnitt__titel {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+}
+
+.gericht {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+  min-width: 0;
+}
+
+.gericht__bild {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+}
+
+.gericht__body { min-width: 0; }
+
+.gericht__zeile {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.gericht__name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Punktlinie zwischen Name und Preis, wie auf einer Wandkarte */
+.gericht__linie {
+  flex: 1;
+  border-bottom: 1px dotted var(--color-line);
+  transform: translateY(-3px);
+  min-width: 12px;
+}
+
+.gericht__preis {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.gericht__desc {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+
+.gericht__aktion { display: flex; align-items: center; }
+
+@media (max-width: 560px) {
+  .gericht { grid-template-columns: 48px 1fr; row-gap: var(--space-3); }
+  .gericht__bild { width: 48px; height: 48px; }
+  .gericht__aktion { grid-column: 2; justify-content: flex-start; }
+}
+
+/* ── SERVICE ──
+   Bild links, vier Kacheln rechts. Der Fließtext erscheint erst
+   beim Überfahren. Auf Mobile gibt es kein Hover, dort steht der
+   Text deshalb dauerhaft. */
+.service {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 900px) {
+  .service { grid-template-columns: 0.82fr 1.18fr; }
+}
+
+.service__bild {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-6) var(--space-5);
+}
+
+.service__bild::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,32,34,0.88) 0%, rgba(20,32,34,0.15) 65%);
+}
+
+.service__bild-inhalt {
+  position: relative;
+  z-index: 1;
+  color: var(--color-on-dark);
+}
+
+.service__bild-titel {
+  font-family: 'Lalezar', var(--font-head);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  margin-bottom: var(--space-4);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+}
+
+/* Kacheln füllen die Hoehe des Bildes aus */
+.service__kacheln {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+@media (min-width: 560px) {
+  .service__kacheln { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 900px) {
+  .service__kacheln { grid-template-rows: 1fr 1fr; }
+}
+
+.service-kachel {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.service-kachel:hover,
+.service-kachel:focus-within {
+  background: var(--color-bg-soft);
+}
+
+.service-kachel__nr {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+}
+
+.service-kachel__titel {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  line-height: 1.2;
+  margin-top: var(--space-2);
+}
+
+.service-kachel__text {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+}
+
+/* Hover-Aufklappen nur dort, wo es ein Hover gibt */
+@media (hover: hover) and (min-width: 900px) {
+  .service-kachel__text {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  }
+  .service-kachel:hover .service-kachel__text,
+  .service-kachel:focus-within .service-kachel__text {
+    max-height: 8rem;
+    opacity: 1;
+    margin-top: var(--space-2);
+  }
+}
+
+/* Hinweis auf den Slider, nur auf Mobile sichtbar.
+   Die Grundregel muss vor der Media Query stehen. */
+.slider-hinweis { display: none; }
+
+/* Auf Mobile werden die Kacheln zum Wisch-Slider.
+   Die naechste Karte schaut am Rand hervor, damit erkennbar ist,
+   dass es weitergeht. */
+@media (max-width: 899px) {
+  .service__kacheln {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: var(--space-3);
+    /* randlos scrollen, Inhalt bleibt trotzdem eingerueckt */
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+  }
+
+  .service-kachel {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    background: var(--color-bg-soft);
+  }
+
+  .service__kacheln::-webkit-scrollbar { height: 4px; }
+  .service__kacheln::-webkit-scrollbar-track { background: transparent; }
+  .service__kacheln::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border-radius: 2px;
+  }
+
+  .slider-hinweis {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-copper);
+    margin-top: var(--space-2);
+  }
+
+  .slider-hinweis::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-line);
+  }
+}
+
+/* ── ÜBER UNS ──
+   Zwei überlappende Bilder links, Text rechts. Bewusst asymmetrisch
+   und damit anders als die 50/50-Splits der anderen Shops. */
+.ueber {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8) var(--space-7);
+  align-items: center;
+  padding-block: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .ueber { grid-template-columns: 0.95fr 1fr; }
+}
+
+.ueber__bilder {
+  position: relative;
+  padding-bottom: var(--space-6);
+  padding-right: var(--space-6);
+}
+
+.ueber__bild-gross {
+  aspect-ratio: 4 / 5;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.ueber__bild-klein {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 52%;
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  border: 10px solid var(--color-bg);
+  border-radius: var(--radius-md);
+}
+
+/* Störer mit der Jahreszahl */
+.ueber__stoerer {
+  position: absolute;
+  top: var(--space-5);
+  left: calc(var(--space-5) * -1);
+  background: var(--color-copper);
+  color: #fff;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  transform: rotate(-4deg);
+  font-family: 'Lalezar', var(--font-head);
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-align: center;
+  z-index: 2;
+}
+
+.ueber__stoerer small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.ueber__text h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+}
+
+.ueber__lead {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+
+.ueber__text p {
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin-bottom: var(--space-4);
+}
+
+/* Zitat mit Kupferbalken */
+.ueber__zitat {
+  border-left: 3px solid var(--color-copper);
+  padding-left: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.ueber__zitat p {
+  font-family: 'Reem Kufi', var(--font-head);
+  font-size: var(--text-xl);
+  line-height: 1.5;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.ueber__zitat cite {
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* ── KENNZAHLEN ── */
+.zahlen {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  padding-block: var(--space-7);
+}
+
+.zahlen__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  text-align: center;
+}
+
+/* Senkrechte Trenner zwischen den drei Werten */
+.zahlen__grid > * + * {
+  border-left: 1px solid rgba(245, 239, 227, 0.28);
+}
+
+.zahl__wert {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1;
+  color: var(--color-copper);
+  font-variant-numeric: tabular-nums;
+}
+
+.zahl__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: var(--space-2);
+}
+
+/* ── WERBEBANNER ──
+   Band laeuft randlos durch, der Inhalt sitzt in der
+   Inhaltsbreite von 1140px. */
+.aktion {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-dark);
+  margin-top: var(--space-8);
+}
+
+.aktion::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(14,24,26,0.92) 0%, rgba(14,24,26,0.72) 45%, rgba(14,24,26,0.35) 100%);
+}
+
+.aktion__inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding: var(--space-7) var(--container-pad-mobile);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  color: var(--color-on-dark);
+}
+
+@media (min-width: 900px) {
+  .aktion__inner { padding-inline: var(--space-6); }
+}
+
+.aktion__kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-saffron);
+  margin-bottom: var(--space-3);
+}
+
+/* Titel und Preisschild nebeneinander */
+.aktion__titelzeile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.aktion__titel {
+  font-family: 'Lalezar', var(--font-head);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
+  /* h2 erbt sonst die dunkle Textfarbe aus base.css */
+  color: var(--color-on-dark);
+}
+
+.aktion__text {
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-on-dark);
+  opacity: 0.85;
+  max-width: 46ch;
+  margin-bottom: var(--space-5);
+}
+
+/* Schraeger Preisstoerer mit leichtem Wackeln und Lichtreflex */
+.aktion__preis {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-copper);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  transform: rotate(-3deg);
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  animation: stoerer-wackeln 3.6s ease-in-out infinite;
+}
+
+@keyframes stoerer-wackeln {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  50%      { transform: rotate(-1deg) scale(1.03); }
+}
+
+/* Lichtreflex wandert alle paar Sekunden schraeg darueber */
+.aktion__preis::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -70%;
+  width: 45%;
+  height: 140%;
+  background: linear-gradient(100deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.42) 50%,
+    rgba(255,255,255,0) 100%);
+  transform: skewX(-18deg);
+  animation: stoerer-glanz 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes stoerer-glanz {
+  0%, 62%  { left: -70%; }
+  88%, 100% { left: 130%; }
+}
+
+.aktion__preis > * { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .aktion__preis { animation: none; }
+  .aktion__preis::before { animation: none; opacity: 0; }
+}
+
+.aktion__preis b {
+  display: block;
+  font-family: 'Lalezar', var(--font-head);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  line-height: 1;
+}
+
+.aktion__preis span {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* ── GALERIE-STREIFEN ── */
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+@media (min-width: 760px) {
+  .galerie { grid-template-columns: repeat(4, 1fr); }
+}
+
+.galerie__bild {
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition);
+}
+
+.galerie__bild:hover { transform: scale(1.02); }
+
+/* ── TEAM ── */
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 700px) {
+  .team-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.team-karte {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.team-karte__bild {
+  aspect-ratio: 4 / 5;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+}
+
+.team-karte__body { padding: var(--space-4); }
+
+.team-karte__name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+}
+
+.team-karte__rolle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-block: var(--space-1) var(--space-2);
+}
+
+.team-karte__text {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+/* ── ANFRAGEFORMULAR ── */
+.anfrage {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-5);
+}
+
+.anfrage__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .anfrage__grid { grid-template-columns: 1fr 1fr; }
+  .anfrage__voll { grid-column: 1 / -1; }
+}
+
+/* ── FOOTER-BILDERSTREIFEN ── */
+.footer-streifen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+@media (min-width: 760px) {
+  .footer-streifen { grid-template-columns: repeat(6, 1fr); }
+}
+
+.footer-streifen__bild {
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  filter: grayscale(0.3);
+  transition: filter var(--transition);
+}
+
+.footer-streifen__bild:hover { filter: grayscale(0); }
+
+/* ── BILDERBAND ÜBER DEM FOOTER ──
+   Laeuft dauerhaft nach links. Zwei identische Gruppen sorgen
+   fuer den nahtlosen Uebergang, die Animation verschiebt um
+   genau eine Gruppenbreite. */
+.bilderband {
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.bilderband__track {
+  display: flex;
+  width: max-content;
+  animation: bilderband-lauf 60s linear infinite;
+}
+
+.bilderband:hover .bilderband__track {
+  animation-play-state: paused;
+}
+
+.bilderband__gruppe {
+  display: flex;
+  gap: 4px;
+  padding-right: 4px;
+  flex: 0 0 auto;
+}
+
+.bilderband__bild {
+  width: 300px;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-line);
+  filter: grayscale(0.25);
+  transition: filter var(--transition), transform var(--transition);
+}
+
+.bilderband__bild:hover {
+  filter: grayscale(0);
+  transform: scale(1.03);
+}
+
+@media (max-width: 700px) {
+  .bilderband__bild { width: 200px; }
+}
+
+@keyframes bilderband-lauf {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bilderband__track { animation: none; }
+}
+
+/* ── FOOTER ──
+   Heller Grund wie die Seite, Logo wie in der Kopfzeile. */
+.footer {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  border-top: 1px solid var(--color-line);
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+}
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .footer__cols { grid-template-columns: 2fr 1fr; }
+}
+
+/* Marke wie im Hero: Zeichen und Schriftzug nebeneinander */
+.footer__marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.footer__logo {
+  display: block;
+  width: 62px;
+  flex-shrink: 0;
+}
+
+.footer__wortmarke {
+  font-family: 'Reem Kufi', var(--font-head);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+}
+
+.footer__wortmarke span { display: block; }
+
+.footer__wortmarke span + span {
+  font-size: 0.6em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-top: 2px;
+}
+
+.footer__claim {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-5);
+}
+
+.footer__contact {
+  font-style: normal;
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  color: var(--color-ink);
+}
+
+.footer__contact a { color: var(--color-ink); }
+.footer__contact a:hover { color: var(--color-accent); }
+
+.footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.footer__links a {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.footer__links a:hover { color: var(--color-accent); }
+
+.footer__divider {
+  border-top: 1px solid var(--color-line);
+  margin-block: var(--space-5);
+}
+
+.footer__copy {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}

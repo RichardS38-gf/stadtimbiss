@@ -1,0 +1,64 @@
+/* tokens.css — Café Marlene
+   Mokka und Altrosa auf warmem Grauweiß.
+   Bewusst weich und zurückhaltend, damit sich das Bistro klar
+   von den anderen Demos unterscheidet. */
+:root {
+  /* Farben */
+  --color-accent:     #A9645B;   /* Altrosa, kräftig genug für weiße Schrift */
+  --color-accent-dk:  #8A4E46;
+  --color-on-accent:  #FFFDFB;
+  --color-rose:       #D8AFA6;   /* helles Altrosa für Flächen */
+  --color-rose-hell:  #F0DCD6;
+  --color-mokka:      #4A3B32;   /* zweiter Akzent */
+  --color-gold:       #C9A227;   /* Sterne */
+
+  --color-bg:         #F7F3EE;   /* warmes Grauweiß */
+  --color-bg-soft:    #FFFFFF;   /* Karten */
+  --color-ink:        #2E2620;   /* dunkles Mokka */
+  --color-muted:      #7A6C63;
+  --color-line:       #E5DCD3;
+  --color-dark:       #3A2E27;   /* Footer und dunkle Bänder */
+  --color-on-dark:    #F7F3EE;
+
+  /* Typografie
+     Fraunces traegt die Ueberschriften. Die Schrift hat eine
+     eigene Achse namens Wonk, die Buchstaben leicht schief
+     stellt, das wirkt handgemacht und passt zum Cafe.
+     Familjen Grotesk fuer Fliesstext und Bedienelemente,
+     kantiger als Inter und in keinem anderen Shop im Einsatz. */
+  --font-head:   'Fraunces', Georgia, serif;
+  --font-body:   'Familjen Grotesk', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* Container */
+  --container-pad-mobile:  1rem;
+  --container-pad-tablet:  1.5rem;
+  --container-pad-desktop: 2rem;
+  --max-content-width:     1140px;
+
+  /* Typografische Skala */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.5rem;
+  --text-5xl:  3.5rem;
+
+  --transition: 0.2s ease;
+
+  /* Weiche Kanten, passend zum Cafe-Charakter */
+  --radius-sm: 6px;
+  --radius-md: 16px;
+}

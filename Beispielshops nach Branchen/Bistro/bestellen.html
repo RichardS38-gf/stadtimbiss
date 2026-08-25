@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Café Marlene — Bestellen</title>
+  <meta name="description" content="Bestelle im Café Marlene: Kaffee aus eigener Röstung, Küche aus frischen Zutaten, Cocktails und Süßes. Lieferung oder Abholung in Braunschweig.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A9645B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M4.2 7.4h12.4v6.2a4.4 4.4 0 0 1-4.4 4.4H8.6a4.4 4.4 0 0 1-4.4-4.4z'/><path d='M16.6 8.8h1.8a2.6 2.6 0 0 1 0 5.2h-1.8'/><path d='M2.6 20.4h15.6'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/bestellen.css?v=9">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/bistro.css?v=19">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <script type="module" src="js/bestellen.js"></script>
+  <script type="module" src="js/menue.js"></script>
+  <style>
+    .allergen-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--color-line); color: var(--color-muted);
+      font-size: 0.6rem; font-weight: 700; font-family: var(--font-body);
+      font-style: normal; border: none; cursor: pointer; margin-left: 6px;
+      flex-shrink: 0; transition: background 0.15s ease, color 0.15s ease;
+      position: relative; vertical-align: middle; line-height: 1;
+    }
+    .allergen-btn::before { content: 'i'; font-style: italic; }
+    .allergen-btn:hover { background: var(--color-accent); color: #fff; }
+    .allergen-tooltip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); background: var(--color-dark); color: #fff;
+      font-size: 0.75rem; font-family: var(--font-body); font-weight: 400;
+      line-height: 1.5; padding: 0.4rem 0.7rem; border-radius: 6px;
+      white-space: nowrap; z-index: 9999; pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .allergen-btn:hover .allergen-tooltip { display: block; }
+    @media (hover: none) { .allergen-btn.active .allergen-tooltip { display: block; } }
+    .menu-card__name { display: flex; align-items: center; gap: 4px; overflow: visible; }
+    .menu-card__body { overflow: visible; }
+    .menu-card { overflow: visible; }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <span class="nav__wortmarke">Café <em>Marlene</em></span>
+        <span class="nav__zusatz">Coffee · Bar · Bistro</span>
+      </a>
+      <nav class="nav__links">
+        <a href="index.html#fruehstueck">Frühstück</a>
+        <a href="index.html#lunch">Lunch</a>
+        <a href="index.html#afterwork">After-Work</a>
+        <a href="reservieren.html">Reservieren</a>
+        <a href="index.html#stimmen">Bewertungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <button class="nav__menue-btn" type="button" aria-label="Menü">
+          <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
+        </button>
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">
+          <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
+        </a>
+        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
+          <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="order-mode">
+    <div class="container">
+      <div class="modus">
+        <button class="modus__option mode-card mode-card--active" data-mode="lieferung">
+          <span class="modus__kopf">
+            <span class="modus__name">Lieferung</span>
+            <span class="modus__preis">ab 2,50 &euro;</span>
+          </span>
+          <span class="modus__sub">ca. 35 Min &middot; Mindestbestellwert 15,00 &euro;</span>
+        </button>
+        <button class="modus__option mode-card" data-mode="abholung">
+          <span class="modus__kopf">
+            <span class="modus__name">Abholung</span>
+            <span class="modus__preis">kostenlos</span>
+          </span>
+          <span class="modus__sub">ca. 15 Min &middot; Musterstra&szlig;e 1</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="category-nav" id="category-nav">
+    <div class="container">
+      <div class="category-nav__inner">
+        <a class="cat-link cat-link--active" href="#kaffee">Kaffee</a>
+        <a class="cat-link" href="#kueche">Küche</a>
+        <a class="cat-link" href="#cocktails">Cocktails</a>
+        <a class="cat-link" href="#suesses">Süßes</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container order-layout">
+
+    <main class="menu">
+
+      <section class="menu-section" id="kaffee">
+        <h2 class="menu-section__title">Kaffee</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Cappuccino" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cappuccino <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Doppelter Espresso mit fein aufgeschäumter Milch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">3,60 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k1" data-name="Cappuccino" data-price="3.60">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Flat White" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Flat White <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Zwei Ristretti, samtige Milch, wenig Schaum</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k2" data-name="Flat White" data-price="4.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Espresso" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Espresso</h3>
+            <p class="menu-card__desc">Aus eigener Röstung, wahlweise doppelt</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,40 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k3" data-name="Espresso" data-price="2.40">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Latte Macchiato" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Latte Macchiato <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Im Glas geschichtet, auf Wunsch mit Hafermilch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,40 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k4" data-name="Latte Macchiato" data-price="4.40">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Chai Latte" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Chai Latte <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Schwarztee mit Kardamom, Zimt und Ingwer</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,60 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k5" data-name="Chai Latte" data-price="4.60">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="kueche">
+        <h2 class="menu-section__title">Aus der Küche</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Frühstücksteller" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Frühstücksteller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Croissant, Käse, Schinken, Ei, Obst und Marmelade</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">14,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="e1" data-name="Frühstücksteller" data-price="14.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Croque Marlene" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Croque Marlene <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Sauerteigbrot, Bergkäse, Kochschinken, Béchamel</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="e2" data-name="Croque Marlene" data-price="11.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Pasta al Limone" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pasta al Limone <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Linguine, Zitrone, Parmesan, schwarzer Pfeffer</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="e3" data-name="Pasta al Limone" data-price="13.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Flammkuchen" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Flammkuchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Crème fraîche, Speck, rote Zwiebeln, Schnittlauch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">12,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="e4" data-name="Flammkuchen" data-price="12.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Bowl mit Falafel" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Bowl mit Falafel <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sesam (K)</span></button></h3>
+            <p class="menu-card__desc">Quinoa, Hummus, Rotkohl, Avocado, Tahinsoße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="e5" data-name="Bowl mit Falafel" data-price="13.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Rührei mit Lachs" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Rührei mit Lachs <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Fisch (D), Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Drei Eier, Räucherlachs, Dill, Sauerteigbrot</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">12,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="e6" data-name="Rührei mit Lachs" data-price="12.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="cocktails">
+        <h2 class="menu-section__title">Cocktails</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Aperol Spritz" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Aperol Spritz <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sulfite (L)</span></button></h3>
+            <p class="menu-card__desc">Aperol, Prosecco, Soda, Orangenscheibe</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Aperol Spritz" data-price="8.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Espresso Martini" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Espresso Martini</h3>
+            <p class="menu-card__desc">Wodka, Kaffeelikör, frischer Espresso aus dem Haus</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c2" data-name="Espresso Martini" data-price="11.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Gin Basil Smash" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Gin Basil Smash</h3>
+            <p class="menu-card__desc">Gin, Basilikum, Zitrone, Zuckersirup</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">10,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c3" data-name="Gin Basil Smash" data-price="10.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Moscow Mule" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Moscow Mule</h3>
+            <p class="menu-card__desc">Wodka, Ginger Beer, Limette, im Kupferbecher</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">10,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c4" data-name="Moscow Mule" data-price="10.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Hugo" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Hugo <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sulfite (L)</span></button></h3>
+            <p class="menu-card__desc">Prosecco, Holunderblüte, Minze, Limette</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c5" data-name="Hugo" data-price="8.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="suesses">
+        <h2 class="menu-section__title">Süßes</h2>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Croissant" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Croissant <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Aus der eigenen Backstube, morgens frisch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,80 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="Croissant" data-price="2.80">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Käsekuchen" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Käsekuchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Cremig, mit Vanille und einem Hauch Zitrone</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s2" data-name="Käsekuchen" data-price="4.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Zimtschnecke" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Zimtschnecke <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Mit Kardamom im Teig und Zuckerguss</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">3,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s3" data-name="Zimtschnecke" data-price="3.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/platzhalter.svg" alt="Schokotarte" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Schokotarte <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Schalenfrüchte (H)</span></button></h3>
+            <p class="menu-card__desc">Dunkle Schokolade, Meersalz, Haselnussboden</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s4" data-name="Schokotarte" data-price="4.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <h3 class="cart-sidebar__title">Deine Bestellung</h3>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-empty" id="cart-empty">
+        <p>Noch keine Artikel im Warenkorb.</p>
+      </div>
+      <div class="cart-summary" id="cart-summary">
+        <div class="cart-summary__row">
+          <span>Zwischensumme</span>
+          <span id="cart-subtotal">0,00 €</span>
+        </div>
+        <div class="cart-summary__row">
+          <span>Lieferung</span>
+          <span>2,50 €</span>
+        </div>
+        <div class="cart-summary__row cart-summary__total">
+          <span>Gesamt</span>
+          <span id="cart-total">0,00 €</span>
+        </div>
+        <div id="stempel-hinweis"></div>
+        <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header">
+      <h3>Deine Bestellung</h3>
+      <button class="cart-drawer__close" id="cart-close" aria-label="Warenkorb schließen">✕</button>
+    </div>
+    <div class="cart-drawer__body">
+      <div class="cart-items" id="cart-items-mobile"></div>
+      <div class="cart-empty" id="cart-empty-mobile">
+        <p>Noch keine Artikel im Warenkorb.</p>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cart-summary-mobile">
+      <div class="cart-summary__row">
+        <span>Zwischensumme</span>
+        <span id="cart-subtotal-mobile">0,00 €</span>
+      </div>
+      <div class="cart-summary__row">
+        <span>Lieferung</span>
+        <span>2,50 €</span>
+      </div>
+      <div class="cart-summary__row cart-summary__total">
+        <span>Gesamt</span>
+        <span id="cart-total-mobile">0,00 €</span>
+      </div>
+      <div id="stempel-hinweis-mobile"></div>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cart-fab">
+    Warenkorb
+    <span class="cart-fab__count" id="cart-fab-count">0</span>
+    <span class="cart-fab__price" id="cart-fab-price">0,00 €</span>
+  </button>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div>
+          <a href="index.html" class="footer__marke">Café <em>Marlene</em></a>
+          <div class="zierlinie"><span></span></div>
+          <p class="footer__text">
+            Coffee, Bar &amp; Bistro<br>
+            Musterstraße 1<br>
+            38100 Braunschweig
+          </p>
+        </div>
+        <div>
+          <p class="footer__kicker">Bestellen und abholen</p>
+          <div class="zierlinie"><span></span></div>
+          <p class="footer__text">
+            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen und
+            zur vereinbarten Zeit abholen.<br>
+            Durchgehend warme Küche ab 11:30 Uhr.
+          </p>
+        </div>
+        <div>
+          <p class="footer__kicker">Öffnungszeiten</p>
+          <div class="zierlinie"><span></span></div>
+          <div class="footer__zeiten">
+            <div class="footer__zeit"><b>Montag bis Donnerstag</b><span>08:00 – 21:00</span></div>
+            <div class="footer__zeit"><b>Freitag und Samstag</b><span>08:00 – 23:00</span></div>
+            <div class="footer__zeit"><b>Sonntag</b><span>Geschlossen</span></div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Café Marlene, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.allergen-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+        if (!isActive) btn.classList.add('active');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+    });
+  </script>
+</body>
+</html>
