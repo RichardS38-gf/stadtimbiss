@@ -387,9 +387,51 @@
 
 @media (max-width: 899px) {
   .hero-menue { display: none; }
-  .hero-top { grid-template-columns: auto 1fr auto; }
   .hero-top__tel span:not(.hero-top__tel-kreis) { display: none; }
   .hero-marke__zusatz { font-size: 0.6rem; letter-spacing: 0.24em; }
+
+  /* Zwei Zeilen statt einer: oben Telefon und Marke, darunter die
+     drei Aktionen. In einer Zeile war das auf einem Telefon nicht
+     unterzubringen und lief seitlich aus dem Fenster.
+
+     Die beiden aeusseren Spalten sind gleich breit. Dadurch sitzt
+     die Marke mittig im Fenster und nicht nur mittig im Restplatz
+     neben dem Telefonknopf. Die dritte Spalte bleibt leer und ist
+     nur Gegengewicht. */
+  .hero-top {
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas:
+      "tel marke leer"
+      "aktionen aktionen aktionen";
+    row-gap: var(--space-4);
+  }
+
+  .hero-top__tel { grid-area: tel; justify-self: start; }
+  .hero-marke { grid-area: marke; }
+
+  .hero-top__aktionen {
+    grid-area: aktionen;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-top__aktionen .btn { padding-inline: 0.7rem; }
+
+  /* Beide Handlungsaufrufe gleich breit untereinander. Nebeneinander
+     waren sie unterschiedlich lang, weil der Text die Breite bestimmt. */
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 330px);
+    margin-inline: auto;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero__actions .btn:has(.ic) { padding: 9px; }
 }
 
 /* Mittiger Inhalt */
@@ -734,6 +776,12 @@ html { overflow-x: hidden; }
   .zeit-band .zeit { padding-inline: var(--container-pad-desktop); }
 }
 
+/* Auf schmalen Schirmen deutlich weniger Luft. 7rem oben und
+   unten sind auf einem Handy fast ein halber Bildschirm. */
+@media (max-width: 899px) {
+  .zeit-band { padding-block: 4rem; margin-block: var(--space-6); }
+}
+
 .zeit-band .titel,
 .zeit-band .zeit__text p {
   color: var(--color-on-dark);
@@ -1039,7 +1087,7 @@ html { overflow-x: hidden; }
    sowie .stamp-card--voll .stamp-slot--filled stehen. */
 .stamp-card .stamp-grid .stamp-slot--filled {
   background-color: var(--color-rose-hell);
-  background-image: url('../Bilder/logo.png');
+  background-image: url('../Bilder/logo.webp');
   background-size: 66%;
   background-position: center;
   background-repeat: no-repeat;

@@ -171,28 +171,31 @@ export const DEMO_RESERVATIONS = [
   }
 ];
 
-// Artikelkatalog fuer die Favoriten-Ansicht
+// Artikelkatalog fuer die Favoriten-Ansicht.
+// Das Croissant (s1) ist nicht mehr im Sortiment, taucht aber in
+// alten Bestellungen weiter auf. Dort tragen die Positionen Name
+// und Preis selbst, der Katalog wird dafuer nicht gebraucht.
 export const KATALOG = {
-  'k1': { name: 'Cappuccino',          price: 3.60,  kategorie: 'Kaffee',    img: 'Bilder/platzhalter.svg' },
-  'k2': { name: 'Flat White',          price: 4.20,  kategorie: 'Kaffee',    img: 'Bilder/platzhalter.svg' },
-  'k3': { name: 'Espresso',            price: 2.40,  kategorie: 'Kaffee',    img: 'Bilder/platzhalter.svg' },
-  'k4': { name: 'Latte Macchiato',     price: 4.40,  kategorie: 'Kaffee',    img: 'Bilder/platzhalter.svg' },
-  'k5': { name: 'Chai Latte',          price: 4.60,  kategorie: 'Kaffee',    img: 'Bilder/platzhalter.svg' },
-  'e1': { name: 'Frühstücksteller',    price: 14.90, kategorie: 'Küche',     img: 'Bilder/platzhalter.svg' },
-  'e2': { name: 'Croque Marlene',      price: 11.50, kategorie: 'Küche',     img: 'Bilder/platzhalter.svg' },
-  'e3': { name: 'Pasta al Limone',     price: 13.90, kategorie: 'Küche',     img: 'Bilder/platzhalter.svg' },
-  'e4': { name: 'Flammkuchen',         price: 12.50, kategorie: 'Küche',     img: 'Bilder/platzhalter.svg' },
-  'e5': { name: 'Bowl mit Falafel',    price: 13.50, kategorie: 'Küche',     img: 'Bilder/platzhalter.svg' },
-  'e6': { name: 'Rührei mit Lachs',    price: 12.90, kategorie: 'Küche',     img: 'Bilder/platzhalter.svg' },
-  'c1': { name: 'Aperol Spritz',       price: 8.50,  kategorie: 'Cocktails', img: 'Bilder/platzhalter.svg' },
-  'c2': { name: 'Espresso Martini',    price: 11.50, kategorie: 'Cocktails', img: 'Bilder/platzhalter.svg' },
-  'c3': { name: 'Gin Basil Smash',     price: 10.50, kategorie: 'Cocktails', img: 'Bilder/platzhalter.svg' },
-  'c4': { name: 'Moscow Mule',         price: 10.90, kategorie: 'Cocktails', img: 'Bilder/platzhalter.svg' },
-  'c5': { name: 'Hugo',                price: 8.90,  kategorie: 'Cocktails', img: 'Bilder/platzhalter.svg' },
-  's1': { name: 'Croissant',           price: 2.80,  kategorie: 'Süßes',     img: 'Bilder/platzhalter.svg' },
-  's2': { name: 'Käsekuchen',          price: 4.50,  kategorie: 'Süßes',     img: 'Bilder/platzhalter.svg' },
-  's3': { name: 'Zimtschnecke',        price: 3.90,  kategorie: 'Süßes',     img: 'Bilder/platzhalter.svg' },
-  's4': { name: 'Schokotarte',         price: 4.90,  kategorie: 'Süßes',     img: 'Bilder/platzhalter.svg' }
+  'k1': { name: 'Cappuccino',          price: 3.60,  kategorie: 'Kaffee',    img: 'Bilder/cappuccino.webp' },
+  'k2': { name: 'Flat White',          price: 4.20,  kategorie: 'Kaffee',    img: 'Bilder/flatwhite.webp' },
+  'k3': { name: 'Espresso',            price: 2.40,  kategorie: 'Kaffee',    img: 'Bilder/espresso.webp' },
+  'k4': { name: 'Latte Macchiato',     price: 4.40,  kategorie: 'Kaffee',    img: 'Bilder/lattemacchiato.webp' },
+  'k5': { name: 'Chai Latte',          price: 4.60,  kategorie: 'Kaffee',    img: 'Bilder/chailatte.webp' },
+  'k6': { name: 'Matcha Latte',        price: 4.80,  kategorie: 'Kaffee',    img: 'Bilder/matchalatte.webp' },
+  'e1': { name: 'Frühstücksteller',    price: 14.90, kategorie: 'Küche',     img: 'Bilder/fruehstuecksteller.webp' },
+  'e2': { name: 'Croque Marlene',      price: 11.50, kategorie: 'Küche',     img: 'Bilder/croquemarlene.webp' },
+  'e3': { name: 'Pasta al Limone',     price: 13.90, kategorie: 'Küche',     img: 'Bilder/pastaallimone.webp' },
+  'e4': { name: 'Flammkuchen',         price: 12.50, kategorie: 'Küche',     img: 'Bilder/flammkuchen.webp' },
+  'e5': { name: 'Bowl mit Falafel',    price: 13.50, kategorie: 'Küche',     img: 'Bilder/bowlfalafel.webp' },
+  'e6': { name: 'Rührei mit Lachs',    price: 12.90, kategorie: 'Küche',     img: 'Bilder/ruehreilachs.webp' },
+  'c1': { name: 'Aperol Spritz',       price: 8.50,  kategorie: 'Cocktails', img: 'Bilder/aperolspritz.webp' },
+  'c2': { name: 'Espresso Martini',    price: 11.50, kategorie: 'Cocktails', img: 'Bilder/espressomartini.webp' },
+  'c3': { name: 'Gin Basil Smash',     price: 10.50, kategorie: 'Cocktails', img: 'Bilder/ginbasilsmash.webp' },
+  'c4': { name: 'Moscow Mule',         price: 10.90, kategorie: 'Cocktails', img: 'Bilder/moscowmule.webp' },
+  'c5': { name: 'Hugo',                price: 8.90,  kategorie: 'Cocktails', img: 'Bilder/hugo.webp' },
+  's2': { name: 'Käsekuchen',          price: 4.50,  kategorie: 'Süßes',     img: 'Bilder/kaesekuchen.webp' },
+  's3': { name: 'Zimtschnecke',        price: 3.90,  kategorie: 'Süßes',     img: 'Bilder/zimtschnecke.webp' },
+  's4': { name: 'Schokotarte',         price: 4.90,  kategorie: 'Süßes',     img: 'Bilder/schokotarte.webp' }
 };
 
 export function demoDatenSatz() {
