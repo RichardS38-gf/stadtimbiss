@@ -206,6 +206,20 @@
     }
     .form-group textarea { resize: vertical; min-height: 100px; }
 
+    /* iOS gibt Datumsfeldern eine eigene Innenhoehe und richtet den
+       Inhalt anders aus. Ohne dieses Zuruecksetzen steht das Feld
+       auf dem Telefon spuerbar hoeher als Name, Telefon und die
+       Auswahlliste daneben. Hoehe deshalb fest auf denselben Wert. */
+    .form-group input[type="date"] {
+      -webkit-appearance: none;
+      appearance: none;
+      display: block;
+      height: 44px;
+      min-height: 44px;
+      line-height: 1.2;
+      padding-block: 0;
+    }
+
     .form-submit { margin-top: var(--space-5); }
 
     /* Success State */
