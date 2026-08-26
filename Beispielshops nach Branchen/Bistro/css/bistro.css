@@ -825,6 +825,36 @@ html { overflow-x: hidden; }
   .kategorien { grid-template-columns: repeat(4, 1fr); }
 }
 
+/* Auf schmalen Schirmen als Wisch-Slider. Vier Kacheln
+   untereinander sind sonst fast drei Bildschirmlaengen.
+   Die negativen Aussenabstaende heben die Innenabstaende des
+   Containers auf, damit der Slider bis an den Bildschirmrand
+   laeuft und die naechste Kachel angeschnitten sichtbar bleibt.
+   Das ist der Hinweis, dass es dort weitergeht. */
+@media (max-width: 899px) {
+  .kategorien {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-4);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-3);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) var(--color-line);
+  }
+
+  .kategorie {
+    flex: 0 0 76%;
+    scroll-snap-align: start;
+  }
+
+  .kategorien::-webkit-scrollbar { height: 4px; }
+  .kategorien::-webkit-scrollbar-track { background: var(--color-line); border-radius: 2px; }
+  .kategorien::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
+}
+
 .kategorie {
   text-align: center;
   padding: var(--space-6) var(--space-5);
@@ -1082,6 +1112,45 @@ html { overflow-x: hidden; }
   .bewertung { text-align: center; }
   .bewertung__sterne { font-size: 1rem; }
   .stimmen-band .zierlinie { justify-content: center; }
+
+  /* Zitate als Wisch-Slider statt untereinander. Die Trennung
+     uebernimmt eine Linie links am Zitat, quer statt laengs.
+
+     Das Abdunkeln der inaktiven Zitate wird hier abgeschaltet.
+     Es ergibt nur Sinn, wenn alle drei gleichzeitig zu sehen
+     sind. Im Slider steht immer nur eines im Bild, und das waere
+     dann womoeglich das abgedunkelte. js/stimmen.js laeuft weiter,
+     setzt aber nur noch wirkungslose Klassen. */
+  .stimmen {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-5);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-4);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-rose) rgba(247, 243, 238, 0.16);
+  }
+
+  .stimme {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+    padding-block: 0;
+    padding-left: var(--space-4);
+    border-bottom: none;
+    border-left: 2px solid rgba(247, 243, 238, 0.25);
+  }
+
+  .stimme::before { display: none; }
+
+  .stimmen--rotiert .stimme,
+  .stimmen--rotiert .stimme--aktiv { opacity: 1; }
+
+  .stimmen::-webkit-scrollbar { height: 4px; }
+  .stimmen::-webkit-scrollbar-track { background: rgba(247, 243, 238, 0.16); border-radius: 2px; }
+  .stimmen::-webkit-scrollbar-thumb { background: var(--color-rose); border-radius: 2px; }
 }
 
 /* ── STEMPELKARTE ──
