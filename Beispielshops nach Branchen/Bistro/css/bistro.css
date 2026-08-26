@@ -741,6 +741,15 @@ html { overflow-x: hidden; }
   .zeit--gedreht .zeit__text { order: 1; }
 }
 
+/* Auf schmalen Schirmen stehen Bild und Text untereinander.
+   Linksbuendiger Text unter einem mittigen Bild wirkt dort
+   verrutscht, deshalb der ganze Block mittig. */
+@media (max-width: 899px) {
+  .zeit__text { text-align: center; }
+  .zeit__text .zierlinie { justify-content: center; }
+  .zeit__text p { margin-inline: auto; }
+}
+
 .zeit__bild {
   aspect-ratio: 16 / 10;
   background-size: cover;
