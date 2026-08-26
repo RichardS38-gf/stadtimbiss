@@ -146,6 +146,37 @@
   .nav .nav__konto { padding: 0.45rem; }
   .nav__menue-btn__text { display: none; }
   .nav__menue-btn { padding: 0.45rem 0.62rem; }
+
+  /* Einzeiler erzwingen. konto.css wird nach diesem Stylesheet
+     geladen und setzt dort eigene Werte auf .nav__inner, deshalb
+     hier zwei Klassen statt einer. Sonst bricht die Kopfzeile auf
+     konto.html und reservieren.html in zwei Zeilen um, waehrend
+     sie auf bestellen.html einzeilig bleibt.
+
+     min-width 0 ist noetig, damit die Marke ueberhaupt schrumpfen
+     darf. Flex-Elemente gehen sonst nie unter ihre Inhaltsbreite,
+     und die Aktionen werden in die naechste Zeile gedrueckt. */
+  .nav .nav__inner {
+    flex-wrap: nowrap;
+    gap: var(--space-3);
+  }
+
+  .nav .nav__marke {
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+  }
+
+  .nav .nav__aktionen { flex-shrink: 0; }
+
+  .nav .nav__wortmarke { font-size: 1.05rem; }
+  .nav .nav__logo-bild { width: 28px; }
+}
+
+@media (max-width: 400px) {
+  .nav .nav__wortmarke { font-size: 0.95rem; }
+  .nav .nav__logo-bild { width: 24px; }
+  .nav .nav__inner { gap: var(--space-2); }
 }
 
 @media (max-width: 480px) {
