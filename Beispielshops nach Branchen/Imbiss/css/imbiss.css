@@ -1,0 +1,1364 @@
+/* imbiss.css — Pommes Paul
+   Eigenes Seiten-Stylesheet. Ersetzt bistro.css vollstaendig.
+
+   Gestaltungsregeln dieses Shops:
+   - Keine Rundungen. Nirgends. Alles Kante.
+   - Ueberschriften immer in Anton und in Versalien.
+   - Warnstreifen (schwarz-gelb, 45 Grad) als Trenner zwischen
+     hellen und dunklen Abschnitten. Ersetzt die Risskante.
+   - Bestellnummern sind Teil der Gestaltung, nicht Beiwerk.
+     Im Imbiss bestellt man "einmal die 17". */
+
+/* ── WARNSTREIFEN ──
+   Wiederkehrendes Trennelement. Als eigenes Element einsetzen:
+   <div class="warnstreifen"></div>
+   Der Streifen ist ein hart abgesetztes Muster, kein weicher
+   Verlauf. Die Kanten muessen scharf bleiben. */
+.warnstreifen {
+  height: 16px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-gelb) 0 16px,
+    var(--color-ink) 16px 32px
+  );
+}
+
+.warnstreifen--schmal { height: 10px; }
+
+/* ── KOPFZEILE ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-ink);
+  border-bottom: 3px solid var(--color-accent);
+}
+
+.nav__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+}
+
+.nav__marke {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.nav__logo-bild {
+  display: block;
+  width: 38px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.nav__wortmarke {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--color-on-dark);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav__wortmarke em { font-style: normal; color: var(--color-accent); }
+
+.nav__zusatz {
+  font-family: var(--font-cond);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gelb);
+  white-space: nowrap;
+}
+
+/* Menue als Ausklapper */
+.nav__menue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-line-dark);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-on-dark);
+  font-family: var(--font-cond);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.nav__menue-btn:hover {
+  border-color: var(--color-gelb);
+  color: var(--color-gelb);
+}
+
+.nav__links {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  flex-direction: column;
+  gap: 0;
+  min-width: 230px;
+  padding: 0;
+  background: var(--color-dark-2);
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+  z-index: 200;
+}
+
+.nav.nav--offen .nav__links { display: flex; }
+
+.nav__links a {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--color-line-dark);
+  font-family: var(--font-cond);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  white-space: nowrap;
+}
+
+.nav__links a:last-child { border-bottom: none; }
+
+.nav__links a:hover {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  opacity: 1;
+}
+
+/* auth.js wuerde einen eigenen Hamburger einsetzen */
+.nav__burger { display: none !important; }
+
+/* Konto-Knopf sitzt hier auf dunklem Grund */
+.nav .nav__konto,
+.nav .nav__konto-name,
+.nav .nav__konto-icon { color: var(--color-on-dark); }
+.nav .nav__konto:hover .nav__konto-icon { color: var(--color-gelb); }
+
+@media (max-width: 900px) {
+  /* Einzeiler erzwingen. konto.css wird nach diesem Stylesheet
+     geladen, deshalb durchgehend zwei Klassen. min-width 0 laesst
+     die Marke schrumpfen, sonst drueckt sie die Aktionen um. */
+  .nav .nav__inner { flex-wrap: nowrap; gap: var(--space-3); }
+  .nav .nav__marke { min-width: 0; flex-shrink: 1; overflow: hidden; }
+  .nav .nav__aktionen { flex-shrink: 0; }
+  .nav .btn__text,
+  .nav .nav__konto-name,
+  .nav__zusatz,
+  .nav__menue-btn__text { display: none; }
+  .nav .nav__aktionen .btn { padding-inline: 0.6rem; gap: 0; }
+  .nav .nav__konto { padding: 0.45rem; }
+  .nav__menue-btn { padding: 0.5rem 0.7rem; }
+  .nav .nav__wortmarke { font-size: 1.1rem; }
+  .nav .nav__logo-bild { width: 28px; }
+}
+
+@media (max-width: 400px) {
+  .nav .nav__wortmarke { font-size: 0.98rem; }
+  .nav .nav__logo-bild { width: 24px; }
+}
+
+@media (max-width: 480px) {
+  .nav__links { left: 0; right: 0; min-width: 0; width: auto; }
+}
+
+/* Sprungmarken nicht unter die Kopfzeile schieben */
+[id] { scroll-margin-top: 88px; }
+
+/* ── TYPOGRAFIE ── */
+.kicker {
+  display: block;
+  font-family: var(--font-cond);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.titel {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 0.98;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* Kurzer, fetter Balken unter der Ueberschrift.
+   Tritt an die Stelle der Zierlinie aus dem Bistro. */
+.balken {
+  width: 64px;
+  height: 5px;
+  background: var(--color-accent);
+  margin-block: var(--space-4) var(--space-5);
+}
+
+.balken--gelb { background: var(--color-gelb); }
+.balken--mitte { margin-inline: auto; }
+
+/* ── ABSCHNITTE ── */
+.abschnitt { padding-block: var(--space-8); }
+.abschnitt--eng { padding-block: var(--space-7); }
+.abschnitt__kopf { margin-bottom: var(--space-6); }
+.abschnitt__kopf--mitte { text-align: center; }
+.abschnitt__kopf--mitte .balken { margin-inline: auto; }
+
+.abschnitt__text {
+  color: var(--color-muted);
+  line-height: 1.75;
+  max-width: 62ch;
+}
+
+.abschnitt--dunkel {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.abschnitt--dunkel .titel { color: var(--color-on-dark); }
+.abschnitt--dunkel .kicker { color: var(--color-gelb); }
+.abschnitt--dunkel .abschnitt__text { color: var(--color-on-dark-mu); }
+
+@media (max-width: 899px) {
+  .abschnitt,
+  .abschnitt--eng { padding-block: var(--space-6); }
+  .abschnitt__kopf { margin-bottom: var(--space-5); }
+}
+
+/* ── BUTTONS ──
+   Zweiteiler: links Text, rechts ein abgesetzter Block mit Pfeil.
+   Sieht aus wie ein gestempeltes Ticket und macht die Richtung
+   sofort klar.
+
+   Der Pfeilblock ist ein ::after, damit im HTML nichts geaendert
+   werden muss. Er ist absolut an die rechte Kante gesetzt und
+   laeuft ueber die volle Innenhoehe. Als normales Flex-Element
+   ginge das nicht: align-self stretch fuellt nur den Inhalts-
+   bereich, die Innenabstaende des Knopfs blieben frei und der
+   Block saesse als Kaestchen mittendrin. */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.72rem 3.5rem 0.72rem 1.3rem;
+  border-radius: 0;
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  transition: transform var(--transition), background var(--transition),
+              color var(--transition), border-color var(--transition);
+}
+
+.btn::before { display: none; }
+
+.btn::after {
+  content: '\2192';
+  position: absolute;
+  /* Minus zwei Pixel, damit der Block den Rahmen des Knopfs
+     ueberdeckt. Bei top/right/bottom auf null endet er innen an
+     der Rahmenkante und laesst einen Streifen stehen. */
+  top: -2px;
+  bottom: -2px;
+  right: -2px;
+  width: 2.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3em;
+  line-height: 1;
+  /* Der Pfeil sitzt in der Schrift unterhalb der Mitte des
+     Zeilenkastens. Der Innenabstand unten schiebt ihn optisch
+     auf die Mitte. */
+  padding-bottom: 0.14em;
+  -webkit-text-stroke: 0.7px currentColor;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn:active { transform: translateY(2px); }
+
+/* Farbstellung: der Koerper ist immer Teerschwarz, die Farbe
+   sitzt nur im Rand und im Pfeilblock. Beim Ueberfahren fuellt
+   sich der Koerper mit der Randfarbe und der Block dreht ins
+   Dunkle.
+
+   Orange steht fuer die Hauptaktion, Gelb fuer die zweite. Der
+   schwarze Koerper haelt beide zusammen und sorgt dafuer, dass
+   die Knoepfe auf hellem wie auf dunklem Grund gleich aussehen. */
+.btn--primary {
+  background: var(--color-ink);
+  border-color: var(--color-accent);
+  color: var(--color-on-dark);
+}
+
+.btn--primary::after {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.btn--primary:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+  opacity: 1;
+}
+
+.btn--primary:hover::after {
+  background: var(--color-ink);
+  color: var(--color-accent);
+}
+
+/* Zweite Aktion in Gelb. btn--gelb, btn--outline und
+   btn--outline-light sehen jetzt gleich aus, die drei Namen
+   bleiben nur bestehen, damit im HTML nichts angefasst werden
+   muss. */
+.btn--gelb,
+.btn--outline,
+.btn--outline-light {
+  background: var(--color-ink);
+  border: 2px solid var(--color-gelb);
+  color: var(--color-on-dark);
+}
+
+.btn--gelb::after,
+.btn--outline::after,
+.btn--outline-light::after {
+  background: var(--color-gelb);
+  color: var(--color-ink);
+}
+
+.btn--gelb:hover,
+.btn--outline:hover,
+.btn--outline-light:hover {
+  background: var(--color-gelb);
+  border-color: var(--color-gelb);
+  color: var(--color-ink);
+  opacity: 1;
+}
+
+.btn--gelb:hover::after,
+.btn--outline:hover::after,
+.btn--outline-light:hover::after {
+  background: var(--color-ink);
+  color: var(--color-gelb);
+}
+
+/* Ueber die volle Breite bleibt der Text mittig, der Block sitzt
+   absolut an der Kante. */
+.btn--full { justify-content: center; }
+
+.btn .ic {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+.btn--sm {
+  font-size: 0.86rem;
+  padding: 0.55rem 2.8rem 0.55rem 1rem;
+}
+
+.btn--sm::after { width: 2.2rem; }
+.btn--sm .ic { width: 20px; height: 20px; }
+
+/* Wo der Text ausgeblendet ist, bleibt sonst nur Symbol und Pfeil
+   nebeneinander stehen. Das ergibt keinen Sinn, also weg damit. */
+@media (max-width: 900px) {
+  .nav .btn--sm::after,
+  .hero-top__aktionen .btn::after { display: none; }
+  .nav .btn--sm,
+  .hero-top__aktionen .btn { padding-inline: 0.6rem; }
+}
+
+/* ── HERO ──
+   Links die Schlagzeile, rechts Anschlagtafel und Foto der Bude.
+   Der Hero traegt kein Hintergrundbild, damit die Schlagzeile auf
+   einer ruhigen Flaeche steht. */
+.hero {
+  position: relative;
+  min-height: 88svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-ink);
+}
+
+.hero > * { position: relative; z-index: 2; }
+
+/* Obere Leiste im Hero */
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid rgba(242, 238, 228, 0.18);
+}
+
+.hero-marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  line-height: 1;
+}
+
+.hero-marke__logo {
+  display: block;
+  width: 52px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.hero-marke__name {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+}
+
+.hero-marke__name em { font-style: normal; color: var(--color-accent); }
+
+/* Zusatz neben der Wortmarke, wie in der Kopfzeile der Unterseiten */
+.hero-marke__zusatz {
+  font-family: var(--font-cond);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gelb);
+  white-space: nowrap;
+}
+
+@media (max-width: 899px) {
+  .hero-marke__zusatz { display: none; }
+}
+
+.hero-top__aktionen {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hero-top__tel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-cond);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-gelb);
+  white-space: nowrap;
+}
+
+.hero-top__tel:hover { color: var(--color-on-dark); opacity: 1; }
+.hero-top__tel .ic { width: 20px; height: 20px; }
+
+.hero-top__aktionen .nav__konto,
+.hero-top__aktionen .nav__konto-name,
+.hero-top__aktionen .nav__konto-icon { color: var(--color-on-dark); }
+.hero-top__aktionen .nav__konto:hover .nav__konto-icon { color: var(--color-gelb); }
+
+/* Mittiger Inhalt, linksbuendig gesetzt */
+.hero__inhalt {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-8);
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--container-pad-mobile);
+}
+
+@media (min-width: 1024px) {
+  .hero__inhalt { padding-inline: var(--container-pad-desktop); }
+}
+
+.hero__kicker {
+  font-family: var(--font-cond);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gelb);
+  margin-bottom: var(--space-4);
+}
+
+.hero__titel {
+  font-family: var(--font-head);
+  /* Groesse ist an der laengsten Zeile ausgerichtet: "Satt wirste
+     hier" braucht in Anton etwa das 6,7-fache der Schriftgroesse
+     an Breite. Bei 1140px Fensterbreite bleiben der linken Spalte
+     rund 700px, daraus ergibt sich die Obergrenze. Groesser und
+     die Zeile bricht um. */
+  font-size: clamp(2.6rem, 7.4vw, 5.9rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-5);
+}
+
+.hero__titel em { font-style: normal; color: var(--color-accent); }
+
+.hero__text {
+  font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+  line-height: 1.6;
+  color: var(--color-on-dark-mu);
+  max-width: 44ch;
+  margin-bottom: var(--space-6);
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Zwei Spalten: links die Schlagzeile, rechts die Anschlagtafel.
+   Ohne Hintergrundfoto darf der Hero ruhig dichter belegt sein. */
+.hero__spalten {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero__spalten {
+    /* Feste Breite rechts statt Anteil. Die rechte Spalte braucht
+       nur so viel Platz wie Foto und Tafel, der Rest gehoert der
+       Schlagzeile. Der Abstand ist bewusst knapp, jeder Pixel hier
+       fehlt der Schlagzeile. */
+    grid-template-columns: minmax(0, 1fr) 390px;
+    gap: var(--space-7);
+  }
+}
+
+/* ── RECHTE SPALTE: TAFEL AUF DEM FOTO ──
+   Reihenfolge im HTML: erst die Tafel, dann das Foto. Das Foto
+   wird per negativem Aussenabstand nach oben gezogen und rutscht
+   damit unter die Tafel. So ueberlappt die Tafel die OBERE Kante
+   des Bildes.
+
+   Die Tafel sitzt buendig am rechten Rand, das Foto ragt links
+   darunter hervor. Bewusst unsymmetrisch. */
+.hero-rechts { position: relative; }
+
+.hero-rechts__foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border: 1px solid var(--color-accent);
+  background: var(--color-dark-2);
+}
+
+@media (min-width: 900px) {
+  .hero-rechts .tafel-info {
+    position: relative;
+    z-index: 1;
+    background: var(--color-ink);
+    /* Versetzt statt buendig: die Tafel ragt rechts ueber die
+       Bildkante hinaus, links bleibt ein breiterer Streifen Foto.
+       Genau dieser Versatz macht es unsymmetrisch. */
+    margin-left: 64px;
+    margin-right: -28px;
+  }
+
+  /* Wie weit das Foto unter die Tafel rutscht. Bewusst nur eine
+     Handbreit, es soll sich beruehren und nicht verdecken. */
+  .hero-rechts__foto { margin-top: -24px; }
+}
+
+/* Pulsschlag. Sehr kleiner Ausschlag, sonst wirkt es wie ein
+   Werbebanner statt wie ein Hinweis. Der Ursprung liegt rechts,
+   damit die Tafel beim Wachsen nicht ueber das Foto wandert. */
+@keyframes tafel-puls {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.035); }
+}
+
+.hero-rechts .tafel-info {
+  transform-origin: 70% center;
+  animation: tafel-puls 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rechts .tafel-info { animation: none; }
+}
+
+@media (max-width: 899px) {
+  /* Kein Ueberlappen auf schmalen Schirmen, dort wird es unruhig.
+     Erst die Tafel, darunter das Foto. */
+  .hero-rechts__foto { margin-top: var(--space-4); }
+}
+
+/* ── ANSCHLAGTAFEL ──
+   Rahmen, oben ein Statusbalken, darunter drei Zeilen.
+   Der Balken sitzt buendig auf der Rahmenkante, deshalb die
+   negativen Aussenabstaende in Hoehe des Innenabstands. */
+.tafel-info {
+  border: 1px solid var(--color-accent);
+  padding: var(--space-5);
+}
+
+.tafel-info__status {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  padding: var(--space-3) var(--space-4);
+  margin: calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-4);
+}
+
+/* Geschlossen: gedeckt statt Signalfarbe */
+.tafel-info__status--zu {
+  background: var(--color-beton);
+  color: var(--color-on-dark);
+}
+
+.tafel-info__status-text {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.tafel-info__zeile {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.tafel-info__zeile:last-child { border-bottom: none; padding-bottom: 0; }
+
+.tafel-info__label {
+  font-family: var(--font-cond);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+}
+
+.tafel-info__wert {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  white-space: nowrap;
+}
+
+.tafel-info__wert--gelb { color: var(--color-gelb); }
+
+@media (max-width: 899px) {
+  .hero { min-height: 0; }
+  .hero-top { flex-wrap: wrap; }
+  .hero-top__tel span:not(.ic) { display: none; }
+  .hero-top__aktionen .btn__text,
+  .hero-top__aktionen .nav__konto-name { display: none; }
+  .hero-top__aktionen .btn { padding-inline: 0.6rem; }
+  .hero__inhalt { padding-block: var(--space-7); }
+  .hero__actions .btn { flex: 1 1 100%; justify-content: center; }
+}
+
+/* ── SCHICHTPLAN ──
+   Tritt an die Stelle der Tageszeiten. Drei breite Streifen
+   untereinander, Bild und Text nebeneinander, die Bildseite
+   wechselt von Zeile zu Zeile.
+
+   Alle Textbloecke stehen auf Teerschwarz. Beim Ueberfahren
+   kippt der Block auf Papierweiss um, Schrift und Grund tauschen
+   also die Rolle. Der Zeitstempel bleibt orange, weil er auf
+   beiden Untergruenden traegt. */
+.schicht {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.schicht__reihe {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 2px solid var(--color-ink);
+}
+
+@media (min-width: 820px) {
+  .schicht__reihe { grid-template-columns: 340px 1fr; }
+
+  /* Gedreht: Text links, Bild rechts. Die Reihenfolge im HTML
+     bleibt gleich, nur die Darstellung dreht sich. */
+  .schicht__reihe--gedreht { grid-template-columns: 1fr 340px; }
+  .schicht__reihe--gedreht .schicht__bild { order: 2; }
+  .schicht__reihe--gedreht .schicht__inhalt { order: 1; }
+}
+
+.schicht__bild {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Bestimmt zusammen mit der Textlaenge die Hoehe der Zeile.
+     Das Bildformat selbst spielt keine Rolle, es wird ueber
+     object-fit auf die Box zugeschnitten. */
+  min-height: 190px;
+  object-fit: cover;
+  background: var(--color-beton);
+}
+
+@media (max-width: 819px) {
+  .schicht__bild { min-height: 0; aspect-ratio: 16 / 10; }
+}
+
+.schicht__inhalt {
+  background: var(--color-ink);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: default;
+  transition: background var(--transition);
+}
+
+.schicht__inhalt:hover { background: var(--color-bg-soft); }
+
+.schicht__kopf {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.schicht__zeit {
+  font-family: var(--font-head);
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.schicht__name {
+  font-family: var(--font-cond);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+  transition: color var(--transition);
+}
+
+.schicht__titel {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  /* Anton laeuft sehr eng. In Versalien und bei dieser Groesse
+     kleben die Buchstaben sonst aneinander. */
+  letter-spacing: 0.05em;
+  line-height: 1.05;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-3);
+  transition: color var(--transition);
+}
+
+.schicht__text {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-on-dark-mu);
+  max-width: 58ch;
+  transition: color var(--transition);
+}
+
+.schicht__inhalt:hover .schicht__name,
+.schicht__inhalt:hover .schicht__text { color: var(--color-muted); }
+.schicht__inhalt:hover .schicht__titel { color: var(--color-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .schicht__inhalt,
+  .schicht__inhalt * { transition: none; }
+}
+
+/* ── KARTE ALS TAFEL ──
+   Bestellnummer, Name, Punktlinie, Preis. So haengt es ueber
+   jeder Theke. Bewusst ohne Bildkacheln. */
+.tafel {
+  background: var(--color-dark-2);
+  padding-block: var(--space-8);
+}
+
+.tafel__kopf { margin-bottom: var(--space-6); }
+.tafel .titel { color: var(--color-on-dark); }
+.tafel .kicker { color: var(--color-gelb); }
+
+/* Reiterleiste ueber der Karte. Die Gruppen werden von
+   js/tafel.js umgeschaltet. Laeuft das Skript nicht, stehen alle
+   Gruppen untereinander und die Reiter sind wirkungslos, die
+   Karte bleibt also lesbar. */
+.tafel-reiter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.tafel-reiter__btn {
+  font-family: var(--font-cond);
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.2rem;
+  border: 2px solid var(--color-line-dark);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-on-dark-mu);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.tafel-reiter__btn:hover {
+  border-color: var(--color-gelb);
+  color: var(--color-gelb);
+}
+
+.tafel-reiter__btn--aktiv,
+.tafel-reiter__btn--aktiv:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.tafel-reiter__btn:focus-visible {
+  outline: 2px solid var(--color-gelb);
+  outline-offset: 2px;
+}
+
+@media (max-width: 599px) {
+  /* Auf schmalen Schirmen als waagerechte Leiste zum Wischen,
+     sonst brechen vier Reiter in drei Zeilen um. */
+  .tafel-reiter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scrollbar-width: none;
+  }
+  .tafel-reiter::-webkit-scrollbar { display: none; }
+}
+
+/* Sichtbar ist immer genau eine Gruppe. Die Klasse setzt
+   js/tafel.js beim Umschalten, die erste Gruppe traegt sie
+   bereits im HTML. */
+.tafel__gruppe { display: none; }
+.tafel__gruppe--aktiv { display: block; }
+
+.tafel__gruppe-name {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-2);
+}
+
+.tafel__gruppe .balken { margin-block: 0 var(--space-4); }
+
+.gericht {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.gericht:last-child { border-bottom: none; }
+
+.gericht__nr {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-accent);
+  width: 3rem;
+  flex-shrink: 0;
+}
+
+.gericht__mitte { flex: 1; min-width: 0; }
+
+.gericht__name {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  line-height: 1.15;
+  margin-bottom: var(--space-1);
+}
+
+.gericht__text {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-on-dark-mu);
+}
+
+/* Punktlinie zwischen Name und Preis. Sie sitzt auf der
+   Grundlinie und wird deshalb ein Stueck angehoben. */
+.gericht__punkte {
+  flex: 1;
+  min-width: 1.5rem;
+  border-bottom: 2px dotted var(--color-line-dark);
+  transform: translateY(-0.3rem);
+}
+
+.gericht__preis {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  color: var(--color-gelb);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .gericht__punkte { display: none; }
+  .gericht { gap: var(--space-2); }
+  .gericht__nr { width: 2.2rem; font-size: 1.25rem; }
+}
+
+/* ── DIE BUDE, Zahlenwand ──
+   Ersetzt den ueblichen Ueber-uns-Absatz. Vier Zahlen und ein
+   Zitat im Emailleschild, dazu rechts oben ein altes Foto. */
+
+/* Ueberschrift links, Foto rechts auf derselben Hoehe */
+.bude-kopf {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .bude-kopf { grid-template-columns: 1fr 320px; }
+}
+
+.bude-kopf .abschnitt__kopf { margin-bottom: 0; }
+
+/* Leicht schief, wie ein an die Wand gepinntes Foto. Zwei Grad
+   reichen: mehr wirkt gebastelt statt beilaeufig. Beim Ueberfahren
+   richtet es sich auf. */
+.bude-foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 7px solid var(--color-on-dark);
+  background: var(--color-beton);
+  transform: rotate(-2.2deg);
+  transition: transform 0.25s ease;
+}
+
+.bude-foto:hover { transform: rotate(0deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bude-foto { transform: none; transition: none; }
+}
+
+.zahlenwand {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 720px) {
+  .zahlenwand { grid-template-columns: repeat(4, 1fr); }
+}
+
+.zahl {
+  border: 2px solid var(--color-line-dark);
+  padding: var(--space-5) var(--space-4);
+  transition: border-color var(--transition);
+}
+
+.zahl:hover { border-color: var(--color-gelb); }
+
+.zahl__wert {
+  font-family: var(--font-head);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  line-height: 1;
+  color: var(--color-gelb);
+}
+
+.zahl__label {
+  font-family: var(--font-cond);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+  margin-top: var(--space-2);
+}
+
+/* Emailleschild mit dem Zitat des Inhabers.
+   Das Zitat wird von js/schreibmaschine.js Zeichen fuer Zeichen
+   ausgeschrieben, sobald der Abschnitt ins Bild kommt. */
+.schild {
+  border: 4px solid var(--color-accent);
+  background: var(--color-dark-2);
+  padding: var(--space-6);
+}
+
+/* Blinkender Balken waehrend des Tippens */
+.schild__text--schreibt::after {
+  content: '';
+  display: inline-block;
+  width: 0.6ch;
+  height: 1em;
+  margin-left: 0.1em;
+  background: var(--color-accent);
+  vertical-align: -0.12em;
+  animation: schreibmarke 0.7s steps(1) infinite;
+}
+
+@keyframes schreibmarke {
+  0%, 50%   { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.schild__text {
+  font-size: var(--text-lg);
+  line-height: 1.75;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-4);
+}
+
+.schild__name {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  color: var(--color-gelb);
+}
+
+.schild__rolle {
+  font-family: var(--font-cond);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+}
+
+/* ── STIMMEN ──
+   Zettel an der Wand, wie sie hinter jeder Theke haengen.
+   Leicht schief, beim Ueberfahren richten sie sich gerade. Nimmt
+   das Motiv des schiefen Fotos aus dem Bude-Abschnitt auf. */
+.stimmen {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 820px) {
+  .stimmen { grid-template-columns: repeat(3, 1fr); }
+}
+
+.bon {
+  position: relative;
+  background: var(--color-bg-soft);
+  border: none;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+/* Jeder Zettel haengt ein bisschen anders. Die Werte bleiben
+   klein, mehr wirkt gebastelt. */
+.bon:nth-child(1) { transform: rotate(-1.8deg); }
+.bon:nth-child(2) { transform: rotate(1.4deg); margin-top: var(--space-4); }
+.bon:nth-child(3) { transform: rotate(-1.1deg); }
+
+.bon:hover { transform: rotate(0deg); }
+
+/* Reisszwecke oben mittig */
+.bon__pin {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  margin: 0 auto var(--space-4);
+}
+
+.bon__sterne {
+  color: var(--color-gelb);
+  letter-spacing: 0.16em;
+  margin-bottom: var(--space-3);
+}
+
+.bon__text {
+  font-family: 'Courier New', ui-monospace, monospace;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--color-ink);
+  flex: 1;
+  margin-bottom: var(--space-4);
+}
+
+.bon__autor {
+  font-family: var(--font-cond);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-top: 2px dashed var(--color-line);
+  padding-top: var(--space-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bon,
+  .bon:nth-child(1),
+  .bon:nth-child(2),
+  .bon:nth-child(3) { transform: none; transition: none; }
+}
+
+@media (max-width: 819px) {
+  /* Im Wisch-Slider bleiben die Zettel gerade. Gedrehte Elemente
+     in einem waagerecht scrollenden Kasten ragen sonst ueber die
+     Kante und werden abgeschnitten. */
+  .stimmen {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-4);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-3);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) var(--color-line-dark);
+  }
+  .bon {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+  .bon:nth-child(1),
+  .bon:nth-child(2),
+  .bon:nth-child(3) { transform: none; margin-top: 0; }
+}
+
+/* ── KONTAKT ── */
+.kontakt {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .kontakt { grid-template-columns: 1fr 1.2fr; }
+}
+
+.kontakt__zeile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: start;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.kontakt__zeile:last-child { border-bottom: none; }
+.kontakt__zeile .ic { width: 22px; height: 22px; color: var(--color-accent); }
+
+.kontakt__label {
+  display: block;
+  font-family: var(--font-cond);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+  margin-bottom: var(--space-1);
+}
+
+.kontakt__wert {
+  color: var(--color-on-dark);
+  line-height: 1.7;
+}
+
+.kontakt__wert a { color: inherit; }
+.kontakt__wert a:hover { color: var(--color-gelb); }
+
+.kontakt__karte {
+  min-height: 340px;
+  border: 2px solid var(--color-line-dark);
+  overflow: hidden;
+}
+
+.kontakt__karte iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+  display: block;
+}
+
+/* ── SPEISEKARTE, Bestellseite ──
+   Die geteilten Regeln aus bestellen.css bleiben, hier nur die
+   Anpassungen an die Schriften dieses Shops. */
+.menu-section__title,
+.menu-card__name {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.cat-link {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── FUSSZEILE ── */
+.footer {
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-5);
+}
+
+.footer-marke {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.footer-marke:hover { opacity: 1; }
+
+.footer-marke__logo {
+  display: block;
+  width: 56px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.footer-marke__name {
+  font-family: var(--font-head);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  line-height: 1;
+}
+
+.footer-marke__name em { font-style: normal; color: var(--color-accent); }
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 820px) {
+  .footer__cols { grid-template-columns: 1.2fr 1fr 1fr; }
+}
+
+.footer__kicker {
+  font-family: var(--font-cond);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.footer__text {
+  font-size: var(--text-sm);
+  line-height: 1.85;
+  color: var(--color-on-dark-mu);
+}
+
+.footer__text a { color: var(--color-on-dark); }
+.footer__text a:hover { color: var(--color-gelb); }
+
+.footer__zeiten {
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.footer__zeit {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  color: var(--color-on-dark-mu);
+  border-bottom: 1px dotted var(--color-line-dark);
+  padding-bottom: var(--space-2);
+}
+
+.footer__zeit b { color: var(--color-on-dark); font-weight: 600; }
+
+.footer__links {
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+.footer__links a {
+  font-family: var(--font-cond);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+}
+
+.footer__links a:hover { color: var(--color-gelb); opacity: 1; }
+
+.footer__divider {
+  border: none;
+  border-top: 1px solid var(--color-line-dark);
+  margin-block: var(--space-5) var(--space-4);
+}
+
+.footer__copy {
+  font-family: var(--font-cond);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+  opacity: 0.7;
+}

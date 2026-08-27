@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pommes Paul — Imbiss in Gelsenkirchen</title>
+  <meta name="description" content="Currywurst, Schnitzel und Taxiteller seit 1978. Abholen oder liefern lassen.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E4501E' stroke-width='2' stroke-linecap='square'><path d='M5 8h14l-1.6 12H6.6L5 8z'/><path d='M8 8V5h8v3'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/imbiss.css?v=29">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+</head>
+<body>
+
+  <!-- ── HERO ──
+       Kopfzeile, Schlagzeile und die drei Angaben, die jemand vor
+       dem Bestellen wissen will, alles auf einem Bildschirm. -->
+  <section class="hero">
+
+    <div class="container hero-top">
+      <a href="index.html" class="hero-marke">
+        <img class="hero-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="hero-marke__name">Pommes <em>Paul</em></span>
+        <span class="hero-marke__zusatz">Imbiss seit 1978</span>
+      </a>
+
+      <div class="hero-top__aktionen">
+        <a href="tel:020944221" class="hero-top__tel">
+          <span data-icon="telefon"></span> <span>0209 / 44 22 10</span>
+        </a>
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline-light btn--sm">
+          <span data-icon="kalender"></span> <span class="btn__text">Tisch</span>
+        </a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">
+          <span data-icon="speisekarte"></span> <span class="btn__text">Bestellen</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__inhalt">
+      <div class="hero__spalten">
+
+        <div class="hero__text-spalte">
+          <span class="hero__kicker">Seit 1978 &middot; Gelsenkirchen</span>
+          <h1 class="hero__titel">Satt wirste hier<br><em>auf jeden Fall</em></h1>
+          <p class="hero__text">
+            Currywurst, Schnitzel, Taxiteller. Große Portionen, alles frisch
+            aus der Fritteuse, und alles auch zum Mitnehmen.
+          </p>
+          <div class="hero__actions">
+            <a href="#karte" class="btn btn--primary">Karte ansehen</a>
+            <a href="reservieren.html" class="btn btn--outline-light">Tisch reservieren</a>
+          </div>
+        </div>
+
+        <!-- Rechte Spalte: Foto der Bude, darauf versetzt die
+             Anschlagtafel. Der Statusbalken wird von js/oeffnung.js
+             aus Wochentag und Uhrzeit berechnet. Laeuft das Skript
+             nicht, bleibt der feste Text stehen. -->
+        <div class="hero-rechts">
+          <aside class="tafel-info">
+            <div class="tafel-info__status" id="status-band">
+              <span class="tafel-info__status-text" id="status-text">Heute geöffnet</span>
+            </div>
+            <div class="tafel-info__zeile">
+              <span class="tafel-info__label">Heute</span>
+              <span class="tafel-info__wert" id="heute-zeit">11 &ndash; 22 Uhr</span>
+            </div>
+            <div class="tafel-info__zeile">
+              <span class="tafel-info__label">Lieferung ab</span>
+              <span class="tafel-info__wert">12,00 &euro;</span>
+            </div>
+            <div class="tafel-info__zeile">
+              <span class="tafel-info__label">Abholung in</span>
+              <span class="tafel-info__wert tafel-info__wert--gelb">15 Min</span>
+            </div>
+          </aside>
+
+          <img class="hero-rechts__foto" src="Bilder/hero.webp" alt="Pommes Paul von der Straße aus gesehen">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="warnstreifen"></div>
+
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <!-- ── SCHICHTPLAN ──
+       Tritt an die Stelle der Tageszeiten. Dieselbe Mechanik,
+       aber in der Sprache der Zielgruppe. -->
+  <section class="abschnitt container" id="schicht">
+    <div class="abschnitt__kopf">
+      <span class="kicker">Wann du kommst</span>
+      <h2 class="titel">Für jede Schicht<br>das Richtige</h2>
+      <div class="balken"></div>
+    </div>
+
+    <div class="schicht">
+
+      <article class="schicht__reihe">
+        <img class="schicht__bild" src="Bilder/mittag.webp" alt="Taxiteller mit Pommes, Gyros und Currywurst">
+        <div class="schicht__inhalt">
+          <div class="schicht__kopf">
+            <span class="schicht__zeit">11 &ndash; 14</span>
+            <span class="schicht__name">Mittagspause</span>
+          </div>
+          <h3 class="schicht__titel">Schnell was Warmes</h3>
+          <p class="schicht__text">
+            In zehn Minuten auf dem Tisch, in zwanzig wieder auf der Baustelle.
+            Taxiteller, Currywurst, Pommes. Wer vorher anruft, kriegt es fertig
+            in die Hand.
+          </p>
+        </div>
+      </article>
+
+      <article class="schicht__reihe schicht__reihe--gedreht">
+        <img class="schicht__bild" src="Bilder/nachmittag.webp" alt="Kaffee und eine Frikadelle im Brötchen am Stehtisch">
+        <div class="schicht__inhalt">
+          <div class="schicht__kopf">
+            <span class="schicht__zeit">14 &ndash; 17</span>
+            <span class="schicht__name">Zwischendurch</span>
+          </div>
+          <h3 class="schicht__titel">Kaffee und ne Frikadelle</h3>
+          <p class="schicht__text">
+            Nachmittags ist es ruhig bei uns. Guter Zeitpunkt für einen Kaffee
+            und eine Frikadelle im Brötchen, wenn du in Ruhe sitzen und die
+            Zeitung durchblättern willst.
+          </p>
+        </div>
+      </article>
+
+      <article class="schicht__reihe">
+        <img class="schicht__bild" src="Bilder/abend.webp" alt="Schnitzel mit Champignonrahm und ein Pils">
+        <div class="schicht__inhalt">
+          <div class="schicht__kopf">
+            <span class="schicht__zeit">17 &ndash; 22</span>
+            <span class="schicht__name">Nach der Schicht</span>
+          </div>
+          <h3 class="schicht__titel">Schnitzel und ein Bier</h3>
+          <p class="schicht__text">
+            Abends wird es voll. Schnitzel mit Champignonrahm, ein Pils dazu,
+            und draußen stehen die Tische, solange es das Wetter zulässt.
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ── KARTE ALS TAFEL ──
+       Auszug aus der Karte in der Machart des Schilds über der
+       Theke. Bestellnummer, Name, Punktlinie, Preis. -->
+  <section class="tafel" id="karte">
+    <div class="container">
+      <div class="tafel__kopf">
+        <span class="kicker">Die Karte</span>
+        <h2 class="titel">Einmal die 17,<br>mit Pommes</h2>
+        <div class="balken balken--gelb"></div>
+      </div>
+
+      <div class="tafel-reiter" role="tablist" aria-label="Kategorien der Karte">
+        <button class="tafel-reiter__btn tafel-reiter__btn--aktiv" type="button" role="tab" aria-selected="true" data-ziel="g-wurst">Wurst und Pommes</button>
+        <button class="tafel-reiter__btn" type="button" role="tab" aria-selected="false" data-ziel="g-pfanne">Aus der Pfanne</button>
+        <button class="tafel-reiter__btn" type="button" role="tab" aria-selected="false" data-ziel="g-grill">Vom Grill</button>
+        <button class="tafel-reiter__btn" type="button" role="tab" aria-selected="false" data-ziel="g-getraenke">Getränke</button>
+      </div>
+
+      <div class="tafel__gruppe tafel__gruppe--aktiv" id="g-wurst" role="tabpanel">
+        <article class="gericht">
+          <span class="gericht__nr">11</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Pommes rot-weiß</p>
+            <p class="gericht__text">Große Portion, Mayo und Ketchup</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">4,50 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">13</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Bratwurst mit Brötchen</p>
+            <p class="gericht__text">Vom Grill, mit Senf und Zwiebeln</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">4,20 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">15</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Currywurst</p>
+            <p class="gericht__text">Unsere Soße, Curry drauf, ohne Beilage</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">4,90 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">17</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Currywurst mit Pommes</p>
+            <p class="gericht__text">Bratwurst, unsere Soße, Pommes Schranke dazu</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">7,90 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">19</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Frikadelle im Brötchen</p>
+            <p class="gericht__text">Hausgemacht, morgens gedreht</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">4,20 &euro;</span>
+        </article>
+      </div>
+
+      <div class="tafel__gruppe" id="g-pfanne" role="tabpanel">
+        <article class="gericht">
+          <span class="gericht__nr">21</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Schnitzel Wiener Art</p>
+            <p class="gericht__text">Paniert, Zitrone, Pommes und ein Schälchen Salat</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">11,90 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">23</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Schnitzel mit Champignonrahm</p>
+            <p class="gericht__text">Rahmsoße mit frischen Champignons, Pommes und Salat</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">13,50 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">25</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Jägerschnitzel</p>
+            <p class="gericht__text">Mit Speck und Zwiebeln in der Soße, Pommes dazu</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">13,50 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">27</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Paprikaschnitzel</p>
+            <p class="gericht__text">Paprikarahm, leicht scharf, Pommes und Salat</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">13,50 &euro;</span>
+        </article>
+      </div>
+
+      <div class="tafel__gruppe" id="g-grill" role="tabpanel">
+        <article class="gericht">
+          <span class="gericht__nr">31</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Taxiteller</p>
+            <p class="gericht__text">Pommes, Gyros, Currywurst und Tzatziki</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">11,50 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">33</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Pita mit Hähnchen</p>
+            <p class="gericht__text">Fladenbrot, Salat, Zwiebeln, Soße nach Wahl</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">7,50 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">35</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Cheeseburger</p>
+            <p class="gericht__text">200 Gramm Rind, Käse, Gurke, Zwiebel, unsere Soße</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">8,90 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">37</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Doppel-Cheeseburger</p>
+            <p class="gericht__text">Zweimal 200 Gramm, doppelt Käse, für den großen Hunger</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">11,90 &euro;</span>
+        </article>
+      </div>
+
+      <div class="tafel__gruppe" id="g-getraenke" role="tabpanel">
+        <article class="gericht">
+          <span class="gericht__nr">41</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Pils 0,33</p>
+            <p class="gericht__text">Aus der Flasche, kalt</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">3,20 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">43</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Cola 0,33</p>
+            <p class="gericht__text">Auch als Cola Mix</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">2,60 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">45</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Wasser 0,25</p>
+            <p class="gericht__text">Mit oder ohne Kohlensäure</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">2,20 &euro;</span>
+        </article>
+
+        <article class="gericht">
+          <span class="gericht__nr">47</span>
+          <div class="gericht__mitte">
+            <p class="gericht__name">Kaffee</p>
+            <p class="gericht__text">Aus der Maschine, mit Milch und Zucker auf Wunsch</p>
+          </div>
+          <span class="gericht__punkte"></span>
+          <span class="gericht__preis">2,20 &euro;</span>
+        </article>
+      </div>
+
+      <div style="margin-top:var(--space-6)">
+        <a href="bestellen.html" class="btn btn--primary">
+          <span data-icon="korb"></span> Bestellen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="warnstreifen"></div>
+
+  <!-- ── DIE BUDE ──
+       Vier Zahlen statt vier Absätzen, dazu das Wort des Inhabers
+       im Emailleschild. -->
+  <section class="abschnitt abschnitt--dunkel" id="bude">
+    <div class="container">
+      <div class="bude-kopf">
+        <div class="abschnitt__kopf">
+          <span class="kicker">Die Bude</span>
+          <h2 class="titel">Dieselbe Ecke<br>seit 47 Jahren</h2>
+          <div class="balken balken--gelb"></div>
+        </div>
+
+        <img class="bude-foto" src="Bilder/werkstor.webp" alt="Der erste Wagen vor dem Werkstor, Ende der siebziger Jahre">
+      </div>
+
+      <div class="zahlenwand">
+        <div class="zahl">
+          <p class="zahl__wert">1978</p>
+          <p class="zahl__label">Aufgemacht</p>
+        </div>
+        <div class="zahl">
+          <p class="zahl__wert">3</p>
+          <p class="zahl__label">Fritteusen</p>
+        </div>
+        <div class="zahl">
+          <p class="zahl__wert">1</p>
+          <p class="zahl__label">Currysoße</p>
+        </div>
+        <div class="zahl">
+          <p class="zahl__wert">0</p>
+          <p class="zahl__label">Schnickschnack</p>
+        </div>
+      </div>
+
+      <div class="schild">
+        <p class="schild__text">
+          Angefangen hat das Ganze mein Vater, mit einem Wagen vor dem Werkstor.
+          Als die Zeche zumachte, sind wir zweihundert Meter weiter in den Laden
+          gezogen. Die Soße kochen wir immer noch nach seinem Zettel, und der
+          hängt hinter der Theke.
+        </p>
+        <p class="schild__name">Paul Kwiatkowski jr.</p>
+        <p class="schild__rolle">Steht seit 1996 selbst an der Theke</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STIMMEN ──
+       Zettel an der Wand, wie sie hinter jeder Theke haengen.
+       Leicht schief, beim Ueberfahren richten sie sich gerade. -->
+  <section class="abschnitt abschnitt--dunkel" id="stimmen">
+    <div class="container">
+      <div class="abschnitt__kopf">
+        <span class="kicker">Was die Stammkundschaft sagt</span>
+        <h2 class="titel">4,7 Sterne<br>auf Google</h2>
+        <div class="balken balken--gelb"></div>
+      </div>
+
+      <div class="stimmen">
+        <article class="bon">
+          <span class="bon__pin"></span>
+          <div class="bon__sterne">★★★★★</div>
+          <p class="bon__text">
+            Beste Currywurst im Umkreis, und die Portion Pommes reicht für zwei.
+            Komme seit zwölf Jahren zum Mittag her.
+          </p>
+          <p class="bon__autor">Dirk S. &middot; vor 2 Wochen</p>
+        </article>
+
+        <article class="bon">
+          <span class="bon__pin"></span>
+          <div class="bon__sterne">★★★★★</div>
+          <p class="bon__text">
+            Schnitzel wie bei Muttern, Rahmsoße extra bestellt und ohne Diskussion
+            bekommen. Preis geht völlig in Ordnung.
+          </p>
+          <p class="bon__autor">Melanie K. &middot; vor 1 Monat</p>
+        </article>
+
+        <article class="bon">
+          <span class="bon__pin"></span>
+          <div class="bon__sterne">★★★★★</div>
+          <p class="bon__text">
+            Bestellt um zehn nach fünf, abgeholt um halb sechs, alles heiß.
+            So muss das sein.
+          </p>
+          <p class="bon__autor">Ahmet Y. &middot; vor 3 Wochen</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KONTAKT ── -->
+  <section class="abschnitt abschnitt--dunkel" id="kontakt">
+    <div class="container">
+      <div class="abschnitt__kopf">
+        <span class="kicker">Wo wir stehen</span>
+        <h2 class="titel">Komm vorbei</h2>
+        <div class="balken balken--gelb"></div>
+      </div>
+
+      <div class="kontakt">
+        <div class="kontakt__liste">
+          <div class="kontakt__zeile">
+            <span data-icon="ort"></span>
+            <div>
+              <span class="kontakt__label">Adresse</span>
+              <p class="kontakt__wert">Bochumer Straße 112<br>45886 Gelsenkirchen</p>
+            </div>
+          </div>
+          <div class="kontakt__zeile">
+            <span data-icon="uhr"></span>
+            <div>
+              <span class="kontakt__label">Öffnungszeiten</span>
+              <p class="kontakt__wert">
+                Montag bis Donnerstag 11 bis 22 Uhr<br>
+                Freitag und Samstag 11 bis 23 Uhr<br>
+                Sonntag 12 bis 21 Uhr
+              </p>
+            </div>
+          </div>
+          <div class="kontakt__zeile">
+            <span data-icon="telefon"></span>
+            <div>
+              <span class="kontakt__label">Telefon</span>
+              <p class="kontakt__wert"><a href="tel:020944221">0209 / 44 22 10</a></p>
+            </div>
+          </div>
+          <div class="kontakt__zeile">
+            <span data-icon="brief"></span>
+            <div>
+              <span class="kontakt__label">E-Mail</span>
+              <p class="kontakt__wert"><a href="mailto:moin@pommes-paul.de">moin@pommes-paul.de</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="kontakt__karte">
+          <iframe
+            src="https://www.google.com/maps?q=Gelsenkirchen,+Deutschland&output=embed&z=13"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Pommes Paul Standort">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FUSSZEILE ── -->
+  <footer class="footer">
+    <div class="container">
+      <a href="index.html" class="footer-marke">
+        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="footer-marke__name">Pommes <em>Paul</em></span>
+      </a>
+
+      <div class="footer__cols">
+        <div>
+          <p class="footer__kicker">Abholen oder liefern</p>
+          <p class="footer__text">
+            Unter <a href="tel:020944221">0209 / 44 22 10</a> anrufen oder
+            online bestellen. Lieferung ab 12,00 € Bestellwert im Umkreis
+            von vier Kilometern.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__kicker">Öffnungszeiten</p>
+          <div class="footer__zeiten">
+            <div class="footer__zeit"><b>Mo bis Do</b><span>11 – 22 Uhr</span></div>
+            <div class="footer__zeit"><b>Fr und Sa</b><span>11 – 23 Uhr</span></div>
+            <div class="footer__zeit"><b>Sonntag</b><span>12 – 21 Uhr</span></div>
+          </div>
+        </div>
+
+        <div>
+          <p class="footer__kicker">Adresse</p>
+          <p class="footer__text">
+            Pommes Paul<br>
+            Bochumer Straße 112<br>
+            45886 Gelsenkirchen
+          </p>
+        </div>
+      </div>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Pommes Paul, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { setupSeite } from './js/auth.js';
+    import { iconsEinsetzen } from './js/icons.js';
+    import { oeffnungAnzeigen } from './js/oeffnung.js';
+    import { tafelReiter } from './js/tafel.js';
+    import { zitatSchreiben } from './js/schreibmaschine.js';
+
+    iconsEinsetzen();
+    oeffnungAnzeigen();
+    tafelReiter();
+    zitatSchreiben();
+    await setupSeite();
+    iconsEinsetzen();
+  </script>
+
+</body>
+</html>

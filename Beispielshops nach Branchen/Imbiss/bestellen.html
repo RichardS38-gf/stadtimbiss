@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pommes Paul — Bestellen</title>
+  <meta name="description" content="Currywurst, Schnitzel, Taxiteller und Burger. Abholen oder liefern lassen in Gelsenkirchen.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E4501E' stroke-width='2' stroke-linecap='square'><path d='M5 8h14l-1.6 12H6.6L5 8z'/><path d='M8 8V5h8v3'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/bestellen.css?v=9">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/imbiss.css?v=29">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <script type="module" src="js/bestellen.js"></script>
+  <script type="module" src="js/menue.js"></script>
+  <style>
+    /* Allergen-Hinweis am Gerichtnamen */
+    .allergen-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--color-line); color: var(--color-muted);
+      font-size: 0.6rem; font-weight: 700; font-family: var(--font-body);
+      font-style: normal; border: none; cursor: pointer; margin-left: 6px;
+      flex-shrink: 0; transition: background 0.15s ease, color 0.15s ease;
+      position: relative; vertical-align: middle; line-height: 1;
+    }
+    .allergen-btn::before { content: 'i'; font-style: italic; }
+    .allergen-btn:hover { background: var(--color-accent); color: #fff; }
+    .allergen-tooltip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); background: var(--color-ink); color: #fff;
+      font-size: 0.75rem; font-family: var(--font-body); font-weight: 400;
+      line-height: 1.5; padding: 0.4rem 0.7rem;
+      white-space: nowrap; z-index: 9999; pointer-events: none;
+      border: 1px solid var(--color-line-dark);
+    }
+    .allergen-btn:hover .allergen-tooltip { display: block; }
+    @media (hover: none) { .allergen-btn.active .allergen-tooltip { display: block; } }
+
+    /* ── KOPFBEREICH ──
+       Dunkles Band mit Titel links und dem Umschalter rechts.
+       Ohne Foto kein Problem: die Flaeche traegt sich selbst. */
+    .order-head {
+      position: relative;
+      background-color: var(--color-ink);
+      background-image: url('Bilder/bestellen.webp');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .order-head::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(12, 11, 9, 0.74);
+    }
+
+    .order-head__inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-content-width);
+      margin-inline: auto;
+      padding-block: var(--space-7);
+      padding-inline: var(--container-pad-mobile);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-items: center;
+    }
+
+    @media (min-width: 900px) { .order-head__inner { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) { .order-head__inner { padding-inline: var(--container-pad-desktop); } }
+
+    .order-head__kicker {
+      display: block;
+      font-family: var(--font-cond);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--color-gelb);
+      margin-bottom: var(--space-3);
+    }
+
+    .order-head__titel {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4.4vw, 3rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      color: var(--color-on-dark);
+      margin-bottom: var(--space-4);
+    }
+
+    .order-head__text p {
+      color: var(--color-on-dark-mu);
+      line-height: 1.7;
+      max-width: 44ch;
+    }
+
+    .order-head .modus {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    @media (max-width: 520px) { .order-head .modus { grid-template-columns: 1fr; } }
+
+    /* Modus-Kacheln: eckig, Rahmen statt Schatten. Die Grundfarben
+       kommen aus bestellen.css, hier Form und Typografie. */
+    .order-head .mode-card {
+      padding: var(--space-4) var(--space-5);
+      border-radius: 0;
+      border: 2px solid var(--color-line-dark);
+      background: var(--color-dark-2);
+      gap: 0;
+    }
+
+    .order-head .mode-card--active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .order-head .modus__kopf {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-3);
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .order-head .modus__name {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      color: var(--color-on-dark);
+      line-height: 1.1;
+    }
+
+    .order-head .modus__preis {
+      font-family: var(--font-cond);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--color-gelb);
+      white-space: nowrap;
+    }
+
+    .order-head .modus__sub {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-on-dark-mu);
+      line-height: 1.5;
+    }
+
+    .order-head .mode-card--active .modus__name,
+    .order-head .mode-card--active .modus__preis,
+    .order-head .mode-card--active .modus__sub { color: var(--color-on-accent); }
+
+    /* ── KARTE ALS TAFEL ──
+       Die Produktkarten aus bestellen.css werden zu Zeilen einer
+       Preistafel umgebaut: Nummer, Name, Beschreibung, Preis,
+       Knopf. Kein Bild.
+
+       Die Klassen .menu-card und .add-to-cart bleiben unbedingt
+       erhalten, daran haengen in bestellen.js der Warenkorb, das
+       Favoritenherz und die Kategoriemarkierung. */
+    .menu-card {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--color-line);
+      border-radius: 0;
+      box-shadow: none;
+      padding: var(--space-5) 0;
+      overflow: visible;
+    }
+
+    .menu-card:hover { transform: none; box-shadow: none; }
+    .menu-card__img { display: none; }
+
+    .menu-card__nr {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--color-accent);
+      width: 3rem;
+      flex-shrink: 0;
+    }
+
+    .menu-card__body { flex: 1; min-width: 0; overflow: visible; }
+
+    .menu-card__name {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: var(--color-ink);
+      margin-bottom: var(--space-1);
+      overflow: visible;
+    }
+
+    .menu-card__desc {
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .menu-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .menu-card__price {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      color: var(--color-ink);
+    }
+
+    .menu-section__title {
+      font-family: var(--font-head);
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2);
+    }
+
+    /* Balken unter der Gruppenueberschrift */
+    .menu-section__title + .balken { margin-block: 0 var(--space-4); }
+
+    @media (max-width: 599px) {
+      .menu-card__nr { width: 2.2rem; font-size: 1.3rem; }
+      .menu-card { gap: var(--space-3); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
+        <span class="nav__wortmarke">Pommes <em>Paul</em></span>
+        <span class="nav__zusatz">Imbiss seit 1978</span>
+      </a>
+      <nav class="nav__links">
+        <a href="index.html#schicht">Wann du kommst</a>
+        <a href="index.html#bude">Die Bude</a>
+        <a href="reservieren.html">Tisch reservieren</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <button class="nav__menue-btn" type="button" aria-label="Menü">
+          <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
+        </button>
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline-light btn--sm">
+          <span data-icon="kalender"></span> <span class="btn__text">Tisch</span>
+        </a>
+        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
+          <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="order-head">
+    <div class="order-head__inner">
+      <div class="order-head__text">
+        <span class="order-head__kicker">Die Karte</span>
+        <h1 class="order-head__titel">Einmal die 17,<br>mit Pommes</h1>
+        <p>Alles frisch in die Fritteuse, wenn du bestellst. Abholen geht schneller, liefern lassen ist bequemer.</p>
+      </div>
+
+      <div class="modus">
+        <button class="modus__option mode-card mode-card--active" data-mode="lieferung">
+          <span class="modus__kopf">
+            <span class="modus__name">Lieferung</span>
+            <span class="modus__preis">2,50 &euro;</span>
+          </span>
+          <span class="modus__sub">ca. 35 Min &middot; ab 12,00 &euro;</span>
+        </button>
+        <button class="modus__option mode-card" data-mode="abholung">
+          <span class="modus__kopf">
+            <span class="modus__name">Abholung</span>
+            <span class="modus__preis">gratis</span>
+          </span>
+          <span class="modus__sub">ca. 15 Min &middot; Bochumer Stra&szlig;e 112</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="warnstreifen warnstreifen--schmal"></div>
+
+  <nav class="category-nav" id="category-nav">
+    <div class="container">
+      <div class="category-nav__inner">
+        <a class="cat-link cat-link--active" href="#theke">Von der Theke</a>
+        <a class="cat-link" href="#pfanne">Aus der Pfanne</a>
+        <a class="cat-link" href="#grill">Vom Grill</a>
+        <a class="cat-link" href="#getraenke">Getränke</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container order-layout">
+
+    <main class="menu">
+
+      <section class="menu-section" id="theke">
+        <h2 class="menu-section__title">Von der Theke</h2>
+        <div class="balken"></div>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">11</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pommes rot-weiß <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Senf (J)</span></button></h3>
+            <p class="menu-card__desc">Große Portion, Mayo und Ketchup</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n11" data-name="Pommes rot-weiß" data-price="4.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">13</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Bratwurst mit Brötchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Senf (J)</span></button></h3>
+            <p class="menu-card__desc">Vom Grill, mit Senf und Zwiebeln</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n13" data-name="Bratwurst mit Brötchen" data-price="4.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">15</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Currywurst <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Senf (J)</span></button></h3>
+            <p class="menu-card__desc">Unsere Soße, Curry drauf, ohne Beilage</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n15" data-name="Currywurst" data-price="4.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">17</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Currywurst mit Pommes <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Senf (J)</span></button></h3>
+            <p class="menu-card__desc">Bratwurst, unsere Soße, Pommes Schranke dazu</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">7,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n17" data-name="Currywurst mit Pommes" data-price="7.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">19</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Frikadelle im Brötchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Senf (J)</span></button></h3>
+            <p class="menu-card__desc">Hausgemacht, morgens gedreht</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n19" data-name="Frikadelle im Brötchen" data-price="4.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="pfanne">
+        <h2 class="menu-section__title">Aus der Pfanne</h2>
+        <div class="balken"></div>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">21</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Schnitzel Wiener Art <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Paniert, Zitrone, Pommes und ein Schälchen Salat</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n21" data-name="Schnitzel Wiener Art" data-price="11.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">23</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Schnitzel mit Champignonrahm <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Rahmsoße mit frischen Champignons, Pommes und Salat</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n23" data-name="Schnitzel mit Champignonrahm" data-price="13.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">25</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Jägerschnitzel <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G), Sellerie (I)</span></button></h3>
+            <p class="menu-card__desc">Mit Speck und Zwiebeln in der Soße, Pommes dazu</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n25" data-name="Jägerschnitzel" data-price="13.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">27</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Paprikaschnitzel <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G), Sellerie (I)</span></button></h3>
+            <p class="menu-card__desc">Paprikarahm, leicht scharf, Pommes und Salat</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n27" data-name="Paprikaschnitzel" data-price="13.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="grill">
+        <h2 class="menu-section__title">Vom Grill</h2>
+        <div class="balken"></div>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">31</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Taxiteller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G), Senf (J)</span></button></h3>
+            <p class="menu-card__desc">Hähnchenfleisch, Pommes, Salat, Knoblauch und scharf</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n31" data-name="Taxiteller" data-price="11.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">33</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pita mit Hähnchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Fladenbrot, Salat, Zwiebeln, Soße nach Wahl</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">7,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n33" data-name="Pita mit Hähnchen" data-price="7.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">35</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cheeseburger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Senf (J)</span></button></h3>
+            <p class="menu-card__desc">200 Gramm Rind, Käse, Gurke, Zwiebel, unsere Soße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n35" data-name="Cheeseburger" data-price="8.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">37</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Doppel-Cheeseburger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Senf (J)</span></button></h3>
+            <p class="menu-card__desc">Zweimal 200 Gramm, doppelt Käse, für den großen Hunger</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">11,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n37" data-name="Doppel-Cheeseburger" data-price="11.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="getraenke">
+        <h2 class="menu-section__title">Getränke</h2>
+        <div class="balken"></div>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">41</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pils 0,33 <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Aus der Flasche, kalt</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">3,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n41" data-name="Pils 0,33" data-price="3.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">43</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cola 0,33</h3>
+            <p class="menu-card__desc">Auch als Cola Mix</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,60 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n43" data-name="Cola 0,33" data-price="2.60">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">45</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Wasser 0,25</h3>
+            <p class="menu-card__desc">Mit oder ohne Kohlensäure</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n45" data-name="Wasser 0,25" data-price="2.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <span class="menu-card__nr">47</span>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Kaffee</h3>
+            <p class="menu-card__desc">Aus der Maschine, mit Milch und Zucker auf Wunsch</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n47" data-name="Kaffee" data-price="2.20">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <h3 class="cart-sidebar__title">Deine Bestellung</h3>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-empty" id="cart-empty">
+        <p>Noch nix drin.</p>
+      </div>
+      <div class="cart-summary" id="cart-summary">
+        <div class="cart-summary__row">
+          <span>Zwischensumme</span>
+          <span id="cart-subtotal">0,00 €</span>
+        </div>
+        <div class="cart-summary__row">
+          <span>Lieferung</span>
+          <span>2,50 €</span>
+        </div>
+        <div class="cart-summary__row cart-summary__total">
+          <span>Gesamt</span>
+          <span id="cart-total">0,00 €</span>
+        </div>
+        <div id="stempel-hinweis"></div>
+        <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header">
+      <h3>Deine Bestellung</h3>
+      <button class="cart-drawer__close" id="cart-close" aria-label="Warenkorb schließen">✕</button>
+    </div>
+    <div class="cart-drawer__body">
+      <div class="cart-items" id="cart-items-mobile"></div>
+      <div class="cart-empty" id="cart-empty-mobile">
+        <p>Noch nix drin.</p>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cart-summary-mobile">
+      <div class="cart-summary__row">
+        <span>Zwischensumme</span>
+        <span id="cart-subtotal-mobile">0,00 €</span>
+      </div>
+      <div class="cart-summary__row">
+        <span>Lieferung</span>
+        <span>2,50 €</span>
+      </div>
+      <div class="cart-summary__row cart-summary__total">
+        <span>Gesamt</span>
+        <span id="cart-total-mobile">0,00 €</span>
+      </div>
+      <div id="stempel-hinweis-mobile"></div>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cart-fab">
+    Warenkorb
+    <span class="cart-fab__count" id="cart-fab-count">0</span>
+    <span class="cart-fab__price" id="cart-fab-price">0,00 €</span>
+  </button>
+
+  <footer class="footer">
+    <div class="container">
+      <a href="index.html" class="footer-marke">
+        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="footer-marke__name">Pommes <em>Paul</em></span>
+      </a>
+
+      <div class="footer__cols">
+        <div>
+          <p class="footer__kicker">Abholen oder liefern</p>
+          <p class="footer__text">
+            Unter <a href="tel:020944221">0209 / 44 22 10</a> anrufen oder
+            online bestellen. Lieferung ab 12,00 € Bestellwert im Umkreis
+            von vier Kilometern.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__kicker">Öffnungszeiten</p>
+          <div class="footer__zeiten">
+            <div class="footer__zeit"><b>Mo bis Do</b><span>11 – 22 Uhr</span></div>
+            <div class="footer__zeit"><b>Fr und Sa</b><span>11 – 23 Uhr</span></div>
+            <div class="footer__zeit"><b>Sonntag</b><span>12 – 21 Uhr</span></div>
+          </div>
+        </div>
+
+        <div>
+          <p class="footer__kicker">Adresse</p>
+          <p class="footer__text">
+            Pommes Paul<br>
+            Bochumer Straße 112<br>
+            45886 Gelsenkirchen
+          </p>
+        </div>
+      </div>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Pommes Paul, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.allergen-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+        if (!isActive) btn.classList.add('active');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+    });
+  </script>
+</body>
+</html>

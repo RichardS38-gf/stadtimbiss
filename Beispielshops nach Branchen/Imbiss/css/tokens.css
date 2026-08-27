@@ -1,0 +1,81 @@
+/* tokens.css — Pommes Paul
+   Teerschwarz, Signalorange und Currygelb auf Betongrau.
+   Bewusst das Gegenteil des Bistros: keine Rundungen, keine
+   weichen Farben, keine Serifen. Plakativ statt gemuetlich. */
+:root {
+  /* Farben */
+  --color-accent:     #E4501E;   /* Signalorange, Currysosse und Warnweste */
+  --color-accent-dk:  #C33F13;
+  --color-on-accent:  #14120F;   /* dunkle Schrift auf Orange, nicht weiss */
+  --color-gelb:       #F5B301;   /* Currygelb, zweiter Akzent */
+  --color-gelb-dk:    #D19700;
+  --color-gold:       #F5B301;   /* Sterne, hier derselbe Gelbton */
+
+  --color-bg:         #F2EEE4;   /* Papierweiss, wie eine Pommestuete */
+  --color-bg-soft:    #FFFFFF;
+  --color-ink:        #14120F;   /* Teerschwarz */
+  --color-muted:      #6B6459;
+  --color-line:       #D8D2C4;
+  --color-dark:       #14120F;   /* Fusszeile und dunkle Baender */
+  --color-dark-2:     #1C1A16;   /* zweiter dunkler Ton, Karte */
+  --color-beton:      #33302A;   /* Betongrau fuer Zwischenbaender */
+  --color-on-dark:    #F2EEE4;
+  --color-on-dark-mu: #8E887A;   /* gedaempft auf dunklem Grund */
+  --color-line-dark:  #3D392F;
+
+  /* Aliasse aus dem Bistro-Farbsatz.
+     konto.css, bestellen.css und checkout.css sind shop-neutral
+     und greifen auf diese Namen zu. Fehlt eine Variable, faellt
+     die ganze Deklaration aus und die Flaeche bleibt farblos.
+     Deshalb bleiben die Namen stehen und zeigen hier auf die
+     Toene dieses Shops. */
+  --color-rose:       #F5B301;   /* war Altrosa, hier Currygelb */
+  --color-rose-hell:  #FBEBC4;   /* helle Toenung fuer Flaechen */
+  --color-mokka:      #33302A;   /* war Mokka, hier Betongrau */
+
+  /* Typografie
+     Anton traegt die Ueberschriften. Eine einzige, sehr fette
+     kondensierte Schrift, wie sie auf Emailleschildern und
+     Preistafeln steht. Sie hat nur einen Schnitt, das ist hier
+     kein Mangel sondern Programm.
+     Barlow fuer Fliesstext, Barlow Condensed fuer Etiketten,
+     Preise und alles Gesperrte. */
+  --font-head:   'Anton', 'Arial Narrow', Impact, sans-serif;
+  --font-body:   'Barlow', system-ui, sans-serif;
+  --font-cond:   'Barlow Condensed', 'Arial Narrow', sans-serif;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* Container */
+  --container-pad-mobile:  1rem;
+  --container-pad-tablet:  1.5rem;
+  --container-pad-desktop: 2rem;
+  --max-content-width:     1140px;
+
+  /* Typografische Skala */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.5rem;
+  --text-5xl:  3.5rem;
+
+  --transition: 0.15s ease;
+
+  /* Kante statt Rundung. Die beiden Variablen bleiben stehen,
+     weil die geteilten Stylesheets sie verwenden. Hier stehen
+     sie bewusst auf null. */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+}

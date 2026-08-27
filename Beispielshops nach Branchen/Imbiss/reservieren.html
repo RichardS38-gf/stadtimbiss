@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tisch reservieren — Pommes Paul</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E4501E' stroke-width='2' stroke-linecap='square'><path d='M5 8h14l-1.6 12H6.6L5 8z'/><path d='M8 8V5h8v3'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/imbiss.css?v=29">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <script type="module" src="js/menue.js"></script>
+  <style>
+    /* Kopfband, gleiche Machart wie auf der Bestellseite */
+    .res-kopf {
+      background: var(--color-ink);
+      color: var(--color-on-dark);
+      padding-block: var(--space-7);
+    }
+
+    .res-kopf__kicker {
+      display: block;
+      font-family: var(--font-cond);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--color-gelb);
+      margin-bottom: var(--space-3);
+    }
+
+    .res-kopf h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 0.98;
+      text-transform: uppercase;
+      color: var(--color-on-dark);
+      margin-bottom: var(--space-4);
+    }
+
+    .res-kopf p {
+      color: var(--color-on-dark-mu);
+      line-height: 1.7;
+      max-width: 48ch;
+    }
+
+    /* Zwei Spalten: Formular links, Hinweise rechts */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .res-grid { grid-template-columns: 1.5fr 1fr; gap: var(--space-7); }
+    }
+
+    .res-form {
+      background: var(--color-bg-soft);
+      border: 2px solid var(--color-ink);
+      padding: var(--space-6);
+    }
+
+    .res-form h2 {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      color: var(--color-ink);
+      margin-bottom: var(--space-5);
+    }
+
+    /* Hinweiskasten in der Machart des Emailleschilds */
+    .res-info {
+      border: 3px solid var(--color-accent);
+      background: var(--color-ink);
+      padding: var(--space-6);
+    }
+
+    .res-info h3 {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      color: var(--color-gelb);
+      margin-bottom: var(--space-4);
+    }
+
+    .res-info__zeile {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+      font-size: var(--text-sm);
+      line-height: 1.65;
+      color: var(--color-on-dark);
+      padding-block: var(--space-3);
+      border-bottom: 1px solid var(--color-line-dark);
+    }
+
+    .res-info__zeile:last-child { border-bottom: none; }
+    .res-info__zeile .ic { width: 20px; height: 20px; color: var(--color-accent); flex-shrink: 0; }
+    .res-info__zeile a { color: var(--color-gelb); }
+
+    /* Formularfelder */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    @media (min-width: 480px) {
+      .form-row--2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+
+    .form-group label {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--color-muted);
+    }
+
+    .form-group label span { text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--color-line);
+      border-radius: 0;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      background: var(--color-bg);
+      transition: border-color 0.15s ease;
+      min-height: 46px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    /* iOS gibt Datumsfeldern eine eigene Innenhoehe und richtet den
+       Inhalt anders aus. Ohne dieses Zuruecksetzen steht das Feld
+       auf dem Telefon hoeher als die Nachbarfelder. */
+    .form-group input[type="date"] {
+      -webkit-appearance: none;
+      appearance: none;
+      display: block;
+      height: 46px;
+      min-height: 46px;
+      line-height: 1.2;
+      padding-block: 0;
+    }
+
+    .form-submit { margin-top: var(--space-5); }
+
+    /* Uhrzeit als Kacheln statt Auswahlliste. Die Radios liegen
+       unsichtbar darunter, das Label ist die sichtbare Kachel.
+       Eigener Block statt .form-group, weil dessen Label-Regel
+       sonst Versalien auf die Kacheln legen wuerde. */
+    .zeit-block { margin-bottom: var(--space-4); }
+
+    .zeit-block__label {
+      display: block;
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--color-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .zeit-wahl { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+    .zeit-wahl input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .zeit-wahl label {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 0.95rem;
+      border: 2px solid var(--color-line);
+      background: var(--color-bg);
+      font-family: var(--font-cond);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .zeit-wahl label:hover { border-color: var(--color-accent); color: var(--color-ink); }
+
+    .zeit-wahl input:checked + label {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-on-accent);
+    }
+
+    .zeit-wahl input:focus-visible + label {
+      outline: 2px solid var(--color-ink);
+      outline-offset: 2px;
+    }
+
+    /* Erfolgsmeldung */
+    .res-success { display: none; text-align: center; padding: var(--space-7) var(--space-5); }
+    .res-success__icon { color: var(--color-accent); margin-bottom: var(--space-4); }
+    .res-success h3 {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      color: var(--color-ink);
+      margin-bottom: var(--space-3);
+    }
+    .res-success p { color: var(--color-muted); margin-bottom: var(--space-5); }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
+        <span class="nav__wortmarke">Pommes <em>Paul</em></span>
+        <span class="nav__zusatz">Imbiss seit 1978</span>
+      </a>
+      <nav class="nav__links">
+        <a href="index.html#schicht">Wann du kommst</a>
+        <a href="bestellen.html">Karte</a>
+        <a href="index.html#bude">Die Bude</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;">
+        <button class="nav__menue-btn" type="button" aria-label="Menü">
+          <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
+        </button>
+        <span id="nav-konto"></span>
+        <a href="bestellen.html" class="btn btn--primary btn--sm"><span data-icon="speisekarte"></span> <span class="btn__text">Bestellen</span></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <div class="res-kopf">
+    <div class="container">
+      <span class="res-kopf__kicker">Tisch reservieren</span>
+      <h1>Für heute Abend<br>ist noch was frei</h1>
+      <p>
+        Wir haben zwölf Tische drinnen und im Sommer sechs davor. Sag uns Tag,
+        Uhrzeit und wie viele ihr seid, wir rufen kurz zurück.
+      </p>
+    </div>
+  </div>
+
+  <div class="warnstreifen warnstreifen--schmal"></div>
+
+  <section class="abschnitt container">
+    <div class="res-grid">
+
+      <div class="res-form">
+        <h2>Deine Reservierung</h2>
+
+        <form id="reservation-form" action="https://formspree.io/f/PLATZHALTER" method="POST">
+          <input type="hidden" name="_subject" value="Neue Tischreservierung — Pommes Paul">
+          <input type="hidden" name="_language" value="de">
+
+          <div class="form-row form-row--2">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" placeholder="Dein Name" required>
+            </div>
+            <div class="form-group">
+              <label for="telefon">Telefon *</label>
+              <input type="tel" id="telefon" name="telefon" placeholder="0209 / ..." required>
+            </div>
+          </div>
+
+          <div class="form-row form-row--2">
+            <div class="form-group">
+              <label for="datum">Datum *</label>
+              <input type="date" id="datum" name="datum" required>
+            </div>
+            <div class="form-group">
+              <label for="personen">Wie viele seid ihr? *</label>
+              <select id="personen" name="personen" required>
+                <option value="" disabled selected>Bitte wählen</option>
+                <option>1 Person</option>
+                <option>2 Personen</option>
+                <option>3 Personen</option>
+                <option>4 Personen</option>
+                <option>5 Personen</option>
+                <option>6 Personen</option>
+                <option>7 Personen</option>
+                <option>8 Personen</option>
+                <option>Mehr als 8 Personen</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="zeit-block">
+            <span class="zeit-block__label">Uhrzeit *</span>
+            <div class="zeit-wahl">
+              <input type="radio" id="z1130" name="uhrzeit" value="11:30" required><label for="z1130">11:30</label>
+              <input type="radio" id="z1200" name="uhrzeit" value="12:00"><label for="z1200">12:00</label>
+              <input type="radio" id="z1230" name="uhrzeit" value="12:30"><label for="z1230">12:30</label>
+              <input type="radio" id="z1300" name="uhrzeit" value="13:00"><label for="z1300">13:00</label>
+              <input type="radio" id="z1700" name="uhrzeit" value="17:00"><label for="z1700">17:00</label>
+              <input type="radio" id="z1730" name="uhrzeit" value="17:30"><label for="z1730">17:30</label>
+              <input type="radio" id="z1800" name="uhrzeit" value="18:00"><label for="z1800">18:00</label>
+              <input type="radio" id="z1830" name="uhrzeit" value="18:30"><label for="z1830">18:30</label>
+              <input type="radio" id="z1900" name="uhrzeit" value="19:00"><label for="z1900">19:00</label>
+              <input type="radio" id="z1930" name="uhrzeit" value="19:30"><label for="z1930">19:30</label>
+              <input type="radio" id="z2000" name="uhrzeit" value="20:00"><label for="z2000">20:00</label>
+              <input type="radio" id="z2030" name="uhrzeit" value="20:30"><label for="z2030">20:30</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nachricht">Anmerkungen <span>(optional)</span></label>
+              <textarea id="nachricht" name="nachricht" placeholder="z.B. Geburtstag, draußen sitzen, Kinderstuhl"></textarea>
+            </div>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn--primary btn--full">Reservierung anfragen</button>
+          </div>
+        </form>
+
+        <div class="res-success" id="res-success">
+          <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
+          <h3>Passt, ist notiert</h3>
+          <p>Wir haben deine Anfrage bekommen und melden uns kurz zur Bestätigung.</p>
+          <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
+        </div>
+      </div>
+
+      <aside class="res-info">
+        <h3>Gut zu wissen</h3>
+        <div class="res-info__zeile">
+          <span data-icon="uhr"></span>
+          <div>Tische halten wir 15 Minuten frei. Wenn es später wird, ruf kurz an.</div>
+        </div>
+        <div class="res-info__zeile">
+          <span data-icon="person"></span>
+          <div>Ab 8 Personen bitte direkt anrufen, dann stellen wir zusammen.</div>
+        </div>
+        <div class="res-info__zeile">
+          <span data-icon="telefon"></span>
+          <div>Lieber schnell klären? <a href="tel:020944221">0209 / 44 22 10</a></div>
+        </div>
+        <div class="res-info__zeile">
+          <span data-icon="ort"></span>
+          <div>Bochumer Straße 112, 45886 Gelsenkirchen</div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <a href="index.html" class="footer-marke">
+        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="footer-marke__name">Pommes <em>Paul</em></span>
+      </a>
+
+      <div class="footer__cols">
+        <div>
+          <p class="footer__kicker">Abholen oder liefern</p>
+          <p class="footer__text">
+            Unter <a href="tel:020944221">0209 / 44 22 10</a> anrufen oder
+            online bestellen. Lieferung ab 12,00 € Bestellwert im Umkreis
+            von vier Kilometern.
+          </p>
+        </div>
+        <div>
+          <p class="footer__kicker">Öffnungszeiten</p>
+          <div class="footer__zeiten">
+            <div class="footer__zeit"><b>Mo bis Do</b><span>11 – 22 Uhr</span></div>
+            <div class="footer__zeit"><b>Fr und Sa</b><span>11 – 23 Uhr</span></div>
+            <div class="footer__zeit"><b>Sonntag</b><span>12 – 21 Uhr</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="footer__kicker">Adresse</p>
+          <p class="footer__text">
+            Pommes Paul<br>
+            Bochumer Straße 112<br>
+            45886 Gelsenkirchen
+          </p>
+        </div>
+      </div>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <hr class="footer__divider">
+      <p class="footer__copy">© 2025 Pommes Paul, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { setupSeite, getProfile, getSession, createReservation } from './js/auth.js';
+    import { iconsEinsetzen } from './js/icons.js';
+
+    await setupSeite();
+    iconsEinsetzen();
+
+    // Formular mit den Kontodaten vorbefuellen
+    const profil = await getProfile();
+    if (await getSession() && profil) {
+      const setz = (id, wert) => {
+        const el = document.getElementById(id);
+        if (el && wert && !el.value) el.value = wert;
+      };
+      setz('name', `${profil.first_name} ${profil.last_name}`.trim());
+      setz('telefon', profil.phone);
+      setz('email', profil.email);
+    }
+
+    // Reservierung im Konto ablegen, damit sie im Tab Reservierungen auftaucht
+    const resForm = document.getElementById('reservation-form');
+    window.__resSpeichern = async () => {
+      const f = resForm;
+      const name = (f.elements.name?.value || '').trim().split(' ');
+      await createReservation({
+        reservation_date: f.elements.datum?.value || '',
+        reservation_time: (f.elements.uhrzeit?.value || '').replace(' Uhr', ''),
+        guests: f.elements.personen?.value || 2,
+        first_name: name[0] || '',
+        last_name: name.slice(1).join(' '),
+        phone: f.elements.telefon?.value || '',
+        email: f.elements.email?.value || '',
+        note: f.elements.nachricht?.value || null
+      });
+    };
+  </script>
+
+  <script>
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10));
+
+    // Mindestdatum = heute
+    const datumInput = document.getElementById('datum');
+    datumInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+
+    // Demo-Betrieb: es wird kein Formspree-Versand ausgeloest, weil dort nur
+    // ein Platzhalter hinterlegt ist. Die Reservierung landet stattdessen im
+    // Kundenkonto. Fuer den Echtbetrieb hier den Fetch wieder aktivieren.
+    const form = document.getElementById('reservation-form');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const btn = form.querySelector('[type="submit"]');
+      btn.textContent = 'Wird gesendet...';
+      btn.disabled = true;
+
+      try {
+        if (window.__resSpeichern) await window.__resSpeichern();
+      } catch (err) {
+        console.error('Reservierung konnte nicht gespeichert werden', err);
+      }
+
+      form.style.display = 'none';
+      document.getElementById('res-success').style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
