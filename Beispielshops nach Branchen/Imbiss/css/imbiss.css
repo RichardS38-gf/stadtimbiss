@@ -470,8 +470,16 @@
   gap: var(--space-2);
 }
 
-/* Konto-Knopf sieht aus wie die Knoepfe daneben und ist durch
-   align-items stretch genauso hoch. */
+/* Konto-Knopf sieht aus wie die Knoepfe daneben und ist genauso
+   hoch.
+
+   auth.js schreibt den Knopf in das span mit der id nav-konto.
+   Ohne display contents waere dieses span das Flex-Element, es
+   wuerde auf volle Hoehe gezogen und der Knopf darin bliebe klein.
+   Mit display contents faellt das span aus dem Layout und der
+   Knopf wird selbst zum Flex-Element. */
+.hero-top__aktionen #nav-konto { display: contents; }
+
 .hero-top__aktionen .nav__konto {
   display: inline-flex;
   align-items: center;
