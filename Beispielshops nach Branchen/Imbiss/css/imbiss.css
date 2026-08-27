@@ -80,76 +80,58 @@
   white-space: nowrap;
 }
 
-/* Menue als Ausklapper */
-.nav__menue-btn {
+/* Aktionsleiste, gleiche Machart wie im Hero der Startseite.
+   align-items stretch zieht alle Elemente auf dieselbe Hoehe,
+   display contents auf der Konto-Huelle sorgt dafuer, dass der
+   Knopf darin selbst zum Flex-Element wird. */
+.nav__aktionen {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.nav__aktionen #nav-konto { display: contents; }
+
+.nav .nav__konto {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--color-line-dark);
-  border-radius: 0;
-  background: transparent;
-  color: var(--color-on-dark);
-  font-family: var(--font-cond);
-  font-size: 0.86rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: border-color var(--transition), background var(--transition), color var(--transition);
-}
-
-.nav__menue-btn:hover {
-  border-color: var(--color-gelb);
-  color: var(--color-gelb);
-}
-
-.nav__links {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  flex-direction: column;
-  gap: 0;
-  min-width: 230px;
-  padding: 0;
-  background: var(--color-dark-2);
+  gap: var(--space-2);
+  padding: 0 1rem;
   border: 2px solid var(--color-accent);
   border-radius: 0;
-  z-index: 200;
-}
-
-.nav.nav--offen .nav__links { display: flex; }
-
-.nav__links a {
-  padding: 0.8rem 1rem;
-  border-bottom: 1px solid var(--color-line-dark);
+  background: var(--color-ink);
   font-family: var(--font-cond);
-  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.86rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-on-dark);
-  white-space: nowrap;
 }
 
-.nav__links a:last-child { border-bottom: none; }
-
-.nav__links a:hover {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
-  opacity: 1;
-}
-
-/* auth.js wuerde einen eigenen Hamburger einsetzen */
-.nav__burger { display: none !important; }
-
-/* Konto-Knopf sitzt hier auf dunklem Grund */
 .nav .nav__konto,
 .nav .nav__konto-name,
 .nav .nav__konto-icon { color: var(--color-on-dark); }
-.nav .nav__konto:hover .nav__konto-icon { color: var(--color-gelb); }
+
+.nav .nav__konto:hover { background: var(--color-accent); opacity: 1; }
+.nav .nav__konto:hover .nav__konto-name,
+.nav .nav__konto:hover .nav__konto-icon { color: var(--color-ink); }
+
+/* Warenkorb auf der Bestellseite in derselben Form */
+.nav__aktionen .cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.9rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  cursor: pointer;
+}
+
+.nav__aktionen .cart-btn:hover { background: var(--color-accent); }
+.nav__aktionen .cart-btn:hover .ic { color: var(--color-ink); }
+.nav__aktionen .cart-btn .ic { width: 22px; height: 22px; }
 
 @media (max-width: 900px) {
   /* Einzeiler erzwingen. konto.css wird nach diesem Stylesheet
@@ -160,11 +142,9 @@
   .nav .nav__aktionen { flex-shrink: 0; }
   .nav .btn__text,
   .nav .nav__konto-name,
-  .nav__zusatz,
-  .nav__menue-btn__text { display: none; }
+  .nav__zusatz { display: none; }
   .nav .nav__aktionen .btn { padding-inline: 0.6rem; gap: 0; }
-  .nav .nav__konto { padding: 0.45rem; }
-  .nav__menue-btn { padding: 0.5rem 0.7rem; }
+  .nav .nav__konto { padding-inline: 0.55rem; }
   .nav .nav__wortmarke { font-size: 1.1rem; }
   .nav .nav__logo-bild { width: 28px; }
 }
@@ -172,10 +152,6 @@
 @media (max-width: 400px) {
   .nav .nav__wortmarke { font-size: 0.98rem; }
   .nav .nav__logo-bild { width: 24px; }
-}
-
-@media (max-width: 480px) {
-  .nav__links { left: 0; right: 0; min-width: 0; width: auto; }
 }
 
 /* Sprungmarken nicht unter die Kopfzeile schieben */

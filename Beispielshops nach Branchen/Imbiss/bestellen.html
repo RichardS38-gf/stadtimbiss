@@ -18,10 +18,9 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/imbiss.css?v=31">
+  <link rel="stylesheet" href="css/imbiss.css?v=32">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/bestellen.js"></script>
-  <script type="module" src="js/menue.js"></script>
   <style>
     /* Allergen-Hinweis am Gerichtnamen */
     .allergen-btn {
@@ -263,16 +262,7 @@
         <span class="nav__wortmarke">Pommes <em>Paul</em></span>
         <span class="nav__zusatz">Imbiss seit 1978</span>
       </a>
-      <nav class="nav__links">
-        <a href="index.html#schicht">Wann du kommst</a>
-        <a href="index.html#bude">Die Bude</a>
-        <a href="reservieren.html">Tisch reservieren</a>
-        <a href="index.html#kontakt">Kontakt</a>
-      </nav>
-      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
-        <button class="nav__menue-btn" type="button" aria-label="Menü">
-          <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
-        </button>
+      <nav class="nav__aktionen">
         <span id="nav-konto"></span>
         <a href="reservieren.html" class="btn btn--outline-light btn--sm">
           <span class="btn__text">Tisch</span>
@@ -280,7 +270,7 @@
         <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
           <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
         </button>
-      </div>
+      </nav>
     </div>
   </header>
 
