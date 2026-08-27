@@ -105,149 +105,268 @@
       max-width: 44ch;
     }
 
+    /* Seite durchgehend schwarz */
+    body { background: var(--color-ink); }
+
+    /* ── UMSCHALTER ──
+       Ein Rahmen, darin ein oranger Block, der auf die gewaehlte
+       Seite faehrt. Die Position haengt an :has(), weil
+       bestellen.js nur die Klasse mode-card--active umsetzt und
+       vom Schalter selbst nichts weiss. */
     .order-head .modus {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-3);
-    }
-
-    @media (max-width: 520px) { .order-head .modus { grid-template-columns: 1fr; } }
-
-    /* Modus-Kacheln: eckig, Rahmen statt Schatten. Die Grundfarben
-       kommen aus bestellen.css, hier Form und Typografie. */
-    .order-head .mode-card {
-      padding: var(--space-4) var(--space-5);
-      border-radius: 0;
+      position: relative;
+      display: inline-flex;
       border: 2px solid var(--color-line-dark);
       background: var(--color-dark-2);
-      gap: 0;
+      overflow: hidden;
     }
 
-    .order-head .mode-card--active {
+    .order-head .modus::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 50%;
       background: var(--color-accent);
-      border-color: var(--color-accent);
+      transition: left 0.25s ease;
     }
 
-    .order-head .modus__kopf {
+    .order-head .modus:has(.modus__option:last-child.mode-card--active)::before { left: 50%; }
+
+    .order-head .mode-card {
+      position: relative;
+      z-index: 1;
+      flex: 1;
       display: flex;
-      justify-content: space-between;
       align-items: baseline;
+      justify-content: center;
       gap: var(--space-3);
-      width: 100%;
-      margin-bottom: 4px;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
     .order-head .modus__name {
       font-family: var(--font-head);
-      font-size: 1.25rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--color-on-dark);
-      line-height: 1.1;
+      color: var(--color-on-dark-mu);
+      transition: color var(--transition);
     }
 
     .order-head .modus__preis {
       font-family: var(--font-cond);
-      font-size: 0.92rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      color: var(--color-gelb);
-      white-space: nowrap;
-    }
-
-    .order-head .modus__sub {
-      font-family: var(--font-body);
-      font-size: var(--text-sm);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--color-on-dark-mu);
-      line-height: 1.5;
+      transition: color var(--transition);
     }
 
     .order-head .mode-card--active .modus__name,
-    .order-head .mode-card--active .modus__preis,
-    .order-head .mode-card--active .modus__sub { color: var(--color-on-accent); }
+    .order-head .mode-card--active .modus__preis { color: var(--color-ink); }
 
-    /* ── KARTE ALS TAFEL ──
-       Die Produktkarten aus bestellen.css werden zu Zeilen einer
-       Preistafel umgebaut: Nummer, Name, Beschreibung, Preis,
-       Knopf. Kein Bild.
+    .modus__info {
+      font-family: var(--font-cond);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-on-dark-mu);
+      margin-top: var(--space-3);
+    }
+
+    /* ── KATEGORIELEISTE ── */
+    .category-nav {
+      background: var(--color-ink);
+      border-bottom: 1px solid var(--color-line-dark);
+    }
+
+    .cat-link { color: var(--color-on-dark-mu); }
+    .cat-link:hover { color: var(--color-on-dark); }
+    .cat-link--active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+    /* ── KARTE ALS BONROLLE ──
+       Kein Rahmen, nur Perforationslinien zwischen den Gruppen.
+       Jede Zeile: Nummer, Name, Punktlinie, Preis, Plus.
 
        Die Klassen .menu-card und .add-to-cart bleiben unbedingt
        erhalten, daran haengen in bestellen.js der Warenkorb, das
        Favoritenherz und die Kategoriemarkierung. */
-    .menu-card {
-      position: relative;
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-4);
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--color-line);
-      border-radius: 0;
-      box-shadow: none;
-      padding: var(--space-5) 0;
-      overflow: visible;
-    }
+    .menu-section { margin-bottom: var(--space-7); }
 
-    .menu-card:hover { transform: none; box-shadow: none; }
-    .menu-card__img { display: none; }
-
-    .menu-card__nr {
-      font-family: var(--font-head);
-      font-size: 1.6rem;
-      line-height: 1;
-      color: var(--color-accent);
-      width: 3rem;
-      flex-shrink: 0;
-    }
-
-    .menu-card__body { flex: 1; min-width: 0; overflow: visible; }
-
-    .menu-card__name {
+    .perf {
       display: flex;
       align-items: center;
-      gap: 4px;
-      font-family: var(--font-head);
-      font-size: 1.2rem;
-      text-transform: uppercase;
-      line-height: 1.15;
-      color: var(--color-ink);
-      margin-bottom: var(--space-1);
-      overflow: visible;
-    }
-
-    .menu-card__desc {
-      font-size: var(--text-sm);
-      line-height: 1.6;
-      color: var(--color-muted);
-      margin-bottom: var(--space-3);
-    }
-
-    .menu-card__footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: var(--space-4);
-    }
-
-    .menu-card__price {
-      font-family: var(--font-head);
-      font-size: 1.35rem;
-      color: var(--color-ink);
-    }
-
-    .menu-section__title {
-      font-family: var(--font-head);
-      font-size: 1.8rem;
-      text-transform: uppercase;
-      color: var(--color-ink);
       margin-bottom: var(--space-2);
     }
 
-    /* Balken unter der Gruppenueberschrift */
-    .menu-section__title + .balken { margin-block: 0 var(--space-4); }
+    .perf__linie { flex: 1; border-top: 2px dashed var(--color-line-dark); }
+
+    .menu-section__title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-gelb);
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .menu-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 2.6rem 1fr auto auto;
+      column-gap: var(--space-3);
+      align-items: baseline;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #241F1A;
+      border-radius: 0;
+      box-shadow: none;
+      padding: var(--space-4) 0;
+      overflow: visible;
+    }
+
+    .menu-card:last-child { border-bottom: none; }
+    .menu-card:hover { transform: none; box-shadow: none; }
+    .menu-card__img { display: none; }
+
+    /* Huelle und Fusszeile fallen aus dem Layout, damit Nummer,
+       Name, Preis und Knopf direkt im Raster der Zeile liegen.
+       Sonst muesste das Markup aller siebzehn Zeilen umgebaut
+       werden, und daran haengt die Warenkorb-Logik. */
+    .menu-card__body,
+    .menu-card__footer { display: contents; }
+
+    .menu-card__nr {
+      grid-column: 1;
+      grid-row: 1;
+      font-family: var(--font-head);
+      font-size: 1.45rem;
+      line-height: 1;
+      color: var(--color-accent);
+    }
+
+    .menu-card__name {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-on-dark);
+      margin: 0;
+      overflow: visible;
+    }
+
+    /* Punktlinie bis zum Preis. Sie waechst als Flex-Element in
+       der Zeile, deshalb braucht sie keine feste Breite. */
+    .menu-card__name::after {
+      content: '';
+      flex: 1;
+      min-width: 1.5rem;
+      border-bottom: 1px dotted var(--color-line-dark);
+      transform: translateY(-0.3rem);
+    }
+
+    .menu-card__desc {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-on-dark-mu);
+      margin: 4px 0 0;
+    }
+
+    .menu-card__price {
+      grid-column: 3;
+      grid-row: 1;
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      color: var(--color-gelb);
+      white-space: nowrap;
+    }
+
+    /* Der Plus-Knopf ist quadratisch. Der Pfeilblock der normalen
+       Knoepfe wird hier ausgeblendet, er passt nicht auf ein
+       Quadrat mit einem Zeichen. */
+    .menu-card .add-to-cart {
+      grid-column: 4;
+      grid-row: 1;
+      align-self: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      padding: 0;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-ink);
+    }
+
+    .menu-card .add-to-cart::after { display: none; }
+    .menu-card .add-to-cart:hover { background: var(--color-gelb); border-color: var(--color-gelb); }
+
+    /* ── WARENKORB ──
+       Schwarzer Kasten mit orangem Rahmen. */
+    .cart-sidebar {
+      background: var(--color-dark-2);
+      border: 2px solid var(--color-accent);
+      border-radius: 0;
+      padding: var(--space-5);
+      color: var(--color-on-dark);
+    }
+
+    .cart-sidebar__title,
+    .cart-drawer__header h3 {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-on-dark);
+    }
+
+    .cart-item {
+      color: var(--color-on-dark);
+      border-bottom: 1px dashed var(--color-line-dark);
+    }
+
+    .cart-item__price { color: var(--color-gelb); }
+
+    .cart-item__qty-input {
+      background: var(--color-ink);
+      border: 1px solid var(--color-line-dark);
+      color: var(--color-on-dark);
+      border-radius: 0;
+    }
+
+    .cart-item__remove { color: var(--color-on-dark-mu); }
+    .cart-empty { color: var(--color-on-dark-mu); }
+
+    .cart-summary { border-top: 2px dashed var(--color-line-dark); }
+    .cart-summary__row { color: var(--color-on-dark-mu); }
+    .cart-summary__total { color: var(--color-on-dark); }
+    .cart-summary__total span:last-child { color: var(--color-gelb); }
+
+    .cart-drawer { background: var(--color-dark-2); color: var(--color-on-dark); }
+    .cart-drawer__close { color: var(--color-on-dark); }
 
     @media (max-width: 599px) {
-      .menu-card__nr { width: 2.2rem; font-size: 1.3rem; }
-      .menu-card { gap: var(--space-3); }
+      .menu-card { grid-template-columns: 2rem 1fr auto auto; column-gap: var(--space-2); }
+      .menu-card__nr { font-size: 1.2rem; }
+      .menu-card__name { font-size: 1rem; }
     }
   </style>
 </head>
@@ -282,21 +401,18 @@
         <p>Alles frisch in die Fritteuse, wenn du bestellst. Abholen geht schneller, liefern lassen ist bequemer.</p>
       </div>
 
-      <div class="modus">
-        <button class="modus__option mode-card mode-card--active" data-mode="lieferung">
-          <span class="modus__kopf">
+      <div>
+        <div class="modus">
+          <button class="modus__option mode-card mode-card--active" type="button" data-mode="lieferung">
             <span class="modus__name">Lieferung</span>
             <span class="modus__preis">2,50 &euro;</span>
-          </span>
-          <span class="modus__sub">ca. 35 Min &middot; ab 12,00 &euro;</span>
-        </button>
-        <button class="modus__option mode-card" data-mode="abholung">
-          <span class="modus__kopf">
+          </button>
+          <button class="modus__option mode-card" type="button" data-mode="abholung">
             <span class="modus__name">Abholung</span>
-            <span class="modus__preis">gratis</span>
-          </span>
-          <span class="modus__sub">ca. 15 Min &middot; Bochumer Stra&szlig;e 112</span>
-        </button>
+            <span class="modus__preis">Gratis</span>
+          </button>
+        </div>
+        <p class="modus__info" id="mode-info">Lieferung in ca. 35 Min &middot; Mindestbestellwert 12,00 &euro;</p>
       </div>
     </div>
   </section>
@@ -306,7 +422,7 @@
   <nav class="category-nav" id="category-nav">
     <div class="container">
       <div class="category-nav__inner">
-        <a class="cat-link cat-link--active" href="#theke">Von der Theke</a>
+        <a class="cat-link cat-link--active" href="#theke">Wurst und Pommes</a>
         <a class="cat-link" href="#pfanne">Aus der Pfanne</a>
         <a class="cat-link" href="#grill">Vom Grill</a>
         <a class="cat-link" href="#getraenke">Getränke</a>
@@ -319,8 +435,11 @@
     <main class="menu">
 
       <section class="menu-section" id="theke">
-        <h2 class="menu-section__title">Von der Theke</h2>
-        <div class="balken"></div>
+        <div class="perf">
+          <span class="perf__linie"></span>
+          <h2 class="menu-section__title">Wurst und Pommes</h2>
+          <span class="perf__linie"></span>
+        </div>
 
         <article class="menu-card">
           <span class="menu-card__nr">11</span>
@@ -329,7 +448,7 @@
             <p class="menu-card__desc">Große Portion, Mayo und Ketchup</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">4,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n11" data-name="Pommes rot-weiß" data-price="4.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n11" data-name="Pommes rot-weiß" data-price="4.50">+</button>
             </div>
           </div>
         </article>
@@ -341,7 +460,7 @@
             <p class="menu-card__desc">Vom Grill, mit Senf und Zwiebeln</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">4,20 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n13" data-name="Bratwurst mit Brötchen" data-price="4.20">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n13" data-name="Bratwurst mit Brötchen" data-price="4.20">+</button>
             </div>
           </div>
         </article>
@@ -353,7 +472,7 @@
             <p class="menu-card__desc">Unsere Soße, Curry drauf, ohne Beilage</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">4,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n15" data-name="Currywurst" data-price="4.90">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n15" data-name="Currywurst" data-price="4.90">+</button>
             </div>
           </div>
         </article>
@@ -365,7 +484,7 @@
             <p class="menu-card__desc">Bratwurst, unsere Soße, Pommes Schranke dazu</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">7,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n17" data-name="Currywurst mit Pommes" data-price="7.90">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n17" data-name="Currywurst mit Pommes" data-price="7.90">+</button>
             </div>
           </div>
         </article>
@@ -377,15 +496,18 @@
             <p class="menu-card__desc">Hausgemacht, morgens gedreht</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">4,20 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n19" data-name="Frikadelle im Brötchen" data-price="4.20">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n19" data-name="Frikadelle im Brötchen" data-price="4.20">+</button>
             </div>
           </div>
         </article>
       </section>
 
       <section class="menu-section" id="pfanne">
-        <h2 class="menu-section__title">Aus der Pfanne</h2>
-        <div class="balken"></div>
+        <div class="perf">
+          <span class="perf__linie"></span>
+          <h2 class="menu-section__title">Aus der Pfanne</h2>
+          <span class="perf__linie"></span>
+        </div>
 
         <article class="menu-card">
           <span class="menu-card__nr">21</span>
@@ -394,7 +516,7 @@
             <p class="menu-card__desc">Paniert, Zitrone, Pommes und ein Schälchen Salat</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">11,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n21" data-name="Schnitzel Wiener Art" data-price="11.90">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n21" data-name="Schnitzel Wiener Art" data-price="11.90">+</button>
             </div>
           </div>
         </article>
@@ -406,7 +528,7 @@
             <p class="menu-card__desc">Rahmsoße mit frischen Champignons, Pommes und Salat</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">13,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n23" data-name="Schnitzel mit Champignonrahm" data-price="13.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n23" data-name="Schnitzel mit Champignonrahm" data-price="13.50">+</button>
             </div>
           </div>
         </article>
@@ -418,7 +540,7 @@
             <p class="menu-card__desc">Mit Speck und Zwiebeln in der Soße, Pommes dazu</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">13,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n25" data-name="Jägerschnitzel" data-price="13.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n25" data-name="Jägerschnitzel" data-price="13.50">+</button>
             </div>
           </div>
         </article>
@@ -430,24 +552,27 @@
             <p class="menu-card__desc">Paprikarahm, leicht scharf, Pommes und Salat</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">13,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n27" data-name="Paprikaschnitzel" data-price="13.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n27" data-name="Paprikaschnitzel" data-price="13.50">+</button>
             </div>
           </div>
         </article>
       </section>
 
       <section class="menu-section" id="grill">
-        <h2 class="menu-section__title">Vom Grill</h2>
-        <div class="balken"></div>
+        <div class="perf">
+          <span class="perf__linie"></span>
+          <h2 class="menu-section__title">Vom Grill</h2>
+          <span class="perf__linie"></span>
+        </div>
 
         <article class="menu-card">
           <span class="menu-card__nr">31</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Taxiteller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G), Senf (J)</span></button></h3>
-            <p class="menu-card__desc">Hähnchenfleisch, Pommes, Salat, Knoblauch und scharf</p>
+            <p class="menu-card__desc">Pommes, Gyros, Currywurst und Tzatziki</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">11,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n31" data-name="Taxiteller" data-price="11.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n31" data-name="Taxiteller" data-price="11.50">+</button>
             </div>
           </div>
         </article>
@@ -459,7 +584,7 @@
             <p class="menu-card__desc">Fladenbrot, Salat, Zwiebeln, Soße nach Wahl</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">7,50 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n33" data-name="Pita mit Hähnchen" data-price="7.50">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n33" data-name="Pita mit Hähnchen" data-price="7.50">+</button>
             </div>
           </div>
         </article>
@@ -471,7 +596,7 @@
             <p class="menu-card__desc">200 Gramm Rind, Käse, Gurke, Zwiebel, unsere Soße</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">8,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n35" data-name="Cheeseburger" data-price="8.90">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n35" data-name="Cheeseburger" data-price="8.90">+</button>
             </div>
           </div>
         </article>
@@ -483,15 +608,18 @@
             <p class="menu-card__desc">Zweimal 200 Gramm, doppelt Käse, für den großen Hunger</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">11,90 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n37" data-name="Doppel-Cheeseburger" data-price="11.90">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n37" data-name="Doppel-Cheeseburger" data-price="11.90">+</button>
             </div>
           </div>
         </article>
       </section>
 
       <section class="menu-section" id="getraenke">
-        <h2 class="menu-section__title">Getränke</h2>
-        <div class="balken"></div>
+        <div class="perf">
+          <span class="perf__linie"></span>
+          <h2 class="menu-section__title">Getränke</h2>
+          <span class="perf__linie"></span>
+        </div>
 
         <article class="menu-card">
           <span class="menu-card__nr">41</span>
@@ -500,7 +628,7 @@
             <p class="menu-card__desc">Aus der Flasche, kalt</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">3,20 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n41" data-name="Pils 0,33" data-price="3.20">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n41" data-name="Pils 0,33" data-price="3.20">+</button>
             </div>
           </div>
         </article>
@@ -512,7 +640,7 @@
             <p class="menu-card__desc">Auch als Cola Mix</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">2,60 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n43" data-name="Cola 0,33" data-price="2.60">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n43" data-name="Cola 0,33" data-price="2.60">+</button>
             </div>
           </div>
         </article>
@@ -524,7 +652,7 @@
             <p class="menu-card__desc">Mit oder ohne Kohlensäure</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">2,20 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n45" data-name="Wasser 0,25" data-price="2.20">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n45" data-name="Wasser 0,25" data-price="2.20">+</button>
             </div>
           </div>
         </article>
@@ -536,7 +664,7 @@
             <p class="menu-card__desc">Aus der Maschine, mit Milch und Zucker auf Wunsch</p>
             <div class="menu-card__footer">
               <span class="menu-card__price">2,20 €</span>
-              <button class="btn btn--primary btn--sm add-to-cart" data-id="n47" data-name="Kaffee" data-price="2.20">+ Hinzufügen</button>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n47" data-name="Kaffee" data-price="2.20">+</button>
             </div>
           </div>
         </article>

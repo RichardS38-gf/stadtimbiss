@@ -144,11 +144,11 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
       badge.classList.add('bounce');
     }
 
-    btn.textContent = '✓ Hinzugefügt';
+    btn.textContent = '✓';
     btn.style.background = '#2a9d4e';
     btn.style.borderColor = '#2a9d4e';
     setTimeout(() => {
-      btn.textContent = '+ Hinzufügen';
+      btn.textContent = '+';
       btn.style.background = '';
       btn.style.borderColor = '';
     }, 1000);
