@@ -1342,6 +1342,25 @@ body.dunkel .form-field textarea:focus {
 
 body.dunkel select option { background: var(--color-dark-2); color: var(--color-on-dark); }
 
+/* Das Kalendersymbol im Datumsfeld zeichnet der Browser selbst
+   und laesst sich nicht einfaerben. Der Filter dreht das dunkle
+   Standardsymbol ins Orange. Die Werte sind angenaehert, eine
+   exakte Farbangabe gibt es dafuer nicht. */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(44%) sepia(88%) saturate(2400%) hue-rotate(348deg) brightness(94%) contrast(94%);
+  cursor: pointer;
+}
+
+/* Knoepfe in Formularfeldern sollen nicht ueber die ganze Spalte
+   laufen. konto.css setzt die Felder auf stretch, deshalb hier
+   beides: justify-self fuer Raster, align-self fuer Flex. */
+.konto-feld .btn,
+.form-field .btn {
+  justify-self: start;
+  align-self: flex-start;
+  width: auto;
+}
+
 /* Zahlungsarten und Fortschritt */
 body.dunkel .payment-option {
   background: transparent;
