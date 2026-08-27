@@ -14,81 +14,46 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/imbiss.css?v=32">
+  <link rel="stylesheet" href="css/imbiss.css?v=33">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <style>
-    /* Kopfband, gleiche Machart wie auf der Bestellseite */
-    .res-kopf {
-      background: var(--color-ink);
-      color: var(--color-on-dark);
-      padding-block: var(--space-7);
-    }
-
-    .res-kopf__kicker {
-      display: block;
-      font-family: var(--font-cond);
-      font-size: 0.86rem;
-      font-weight: 700;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--color-gelb);
-      margin-bottom: var(--space-3);
-    }
-
-    .res-kopf h1 {
-      font-family: var(--font-head);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      line-height: 0.98;
-      text-transform: uppercase;
-      color: var(--color-on-dark);
-      margin-bottom: var(--space-4);
-    }
-
-    .res-kopf p {
-      color: var(--color-on-dark-mu);
-      line-height: 1.7;
-      max-width: 48ch;
-    }
-
-    /* Zwei Spalten: Formular links, Hinweise rechts */
+    /* Zwei Spalten: Formular links, Hinweise rechts.
+       Bewusst ohne Kasten. Auf der Startseite gibt es schon vier
+       gerahmte Elemente, ein fuenftes wiederholt nur. Die Felder
+       tragen deshalb nur eine Linie unten. */
     .res-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--space-6);
+      gap: var(--space-7);
       align-items: start;
     }
 
     @media (min-width: 900px) {
-      .res-grid { grid-template-columns: 1.5fr 1fr; gap: var(--space-7); }
-    }
-
-    .res-form {
-      background: var(--color-bg-soft);
-      border: 2px solid var(--color-ink);
-      padding: var(--space-6);
+      .res-grid { grid-template-columns: 1.6fr 1fr; gap: var(--space-8); }
     }
 
     .res-form h2 {
       font-family: var(--font-head);
-      font-size: 1.6rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--color-ink);
+      color: var(--color-on-dark);
       margin-bottom: var(--space-5);
     }
 
-    /* Hinweiskasten in der Machart des Emailleschilds */
+    /* Hinweise haengen an einer senkrechten orangen Linie */
     .res-info {
-      border: 3px solid var(--color-accent);
-      background: var(--color-ink);
-      padding: var(--space-6);
+      border-left: 2px solid var(--color-accent);
+      padding-left: var(--space-5);
     }
 
     .res-info h3 {
       font-family: var(--font-head);
-      font-size: 1.3rem;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--color-gelb);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-3);
     }
 
     .res-info__zeile {
@@ -96,14 +61,14 @@
       gap: var(--space-3);
       align-items: flex-start;
       font-size: var(--text-sm);
-      line-height: 1.65;
-      color: var(--color-on-dark);
+      line-height: 1.7;
+      color: var(--color-on-dark-mu);
       padding-block: var(--space-3);
       border-bottom: 1px solid var(--color-line-dark);
     }
 
     .res-info__zeile:last-child { border-bottom: none; }
-    .res-info__zeile .ic { width: 20px; height: 20px; color: var(--color-accent); flex-shrink: 0; }
+    .res-info__zeile .ic { width: 18px; height: 18px; color: var(--color-accent); flex-shrink: 0; }
     .res-info__zeile a { color: var(--color-gelb); }
 
     /* Formularfelder */
@@ -135,25 +100,37 @@
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 0.75rem 1rem;
-      border: 2px solid var(--color-line);
+      padding: 0 0 0.5rem;
+      border: none;
+      border-bottom: 2px solid var(--color-line-dark);
       border-radius: 0;
       font-family: var(--font-body);
       font-size: var(--text-base);
-      color: var(--color-ink);
-      background: var(--color-bg);
+      color: var(--color-on-dark);
+      background: transparent;
       transition: border-color 0.15s ease;
-      min-height: 46px;
+      min-height: 40px;
     }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--color-muted); }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
     }
 
-    .form-group textarea { resize: vertical; min-height: 100px; }
+    /* Auswahllisten zeichnen ihren Pfeil selbst und brauchen auf
+       dunklem Grund eine eigene Textfarbe fuer die Optionen. */
+    .form-group select option { background: var(--color-dark-2); color: var(--color-on-dark); }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 84px;
+      padding-top: 0.4rem;
+    }
 
     /* iOS gibt Datumsfeldern eine eigene Innenhoehe und richtet den
        Inhalt anders aus. Ohne dieses Zuruecksetzen steht das Feld
@@ -162,8 +139,8 @@
       -webkit-appearance: none;
       appearance: none;
       display: block;
-      height: 46px;
-      min-height: 46px;
+      height: 40px;
+      min-height: 40px;
       line-height: 1.2;
       padding-block: 0;
     }
@@ -199,18 +176,18 @@
     .zeit-wahl label {
       display: inline-flex;
       align-items: center;
-      padding: 0.55rem 0.95rem;
-      border: 2px solid var(--color-line);
-      background: var(--color-bg);
+      padding: 0.5rem 0.9rem;
+      border: 2px solid var(--color-line-dark);
+      background: transparent;
       font-family: var(--font-cond);
       font-size: 0.95rem;
       font-weight: 600;
-      color: var(--color-muted);
+      color: var(--color-on-dark-mu);
       cursor: pointer;
       transition: background var(--transition), border-color var(--transition), color var(--transition);
     }
 
-    .zeit-wahl label:hover { border-color: var(--color-accent); color: var(--color-ink); }
+    .zeit-wahl label:hover { border-color: var(--color-accent); color: var(--color-on-dark); }
 
     .zeit-wahl input:checked + label {
       background: var(--color-accent);
@@ -219,7 +196,7 @@
     }
 
     .zeit-wahl input:focus-visible + label {
-      outline: 2px solid var(--color-ink);
+      outline: 2px solid var(--color-gelb);
       outline-offset: 2px;
     }
 
@@ -229,11 +206,12 @@
     .res-success h3 {
       font-family: var(--font-head);
       font-size: 1.6rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--color-ink);
+      color: var(--color-on-dark);
       margin-bottom: var(--space-3);
     }
-    .res-success p { color: var(--color-muted); margin-bottom: var(--space-5); }
+    .res-success p { color: var(--color-on-dark-mu); margin-bottom: var(--space-5); }
   </style>
 </head>
 <body>
@@ -255,21 +233,20 @@
 
   <div class="demo-banner" id="demo-banner"></div>
 
-  <div class="res-kopf">
+  <section class="abschnitt abschnitt--dunkel">
     <div class="container">
-      <span class="res-kopf__kicker">Tisch reservieren</span>
-      <h1>Für heute Abend<br>ist noch was frei</h1>
-      <p>
-        Wir haben zwölf Tische drinnen und im Sommer sechs davor. Sag uns Tag,
-        Uhrzeit und wie viele ihr seid, wir rufen kurz zurück.
-      </p>
-    </div>
-  </div>
 
-  <div class="warnstreifen warnstreifen--schmal"></div>
+      <div class="abschnitt__kopf">
+        <span class="kicker">Tisch reservieren</span>
+        <h1 class="titel">Für heute Abend<br>ist noch was frei</h1>
+        <div class="balken balken--gelb"></div>
+        <p class="abschnitt__text">
+          Wir haben zwölf Tische drinnen und im Sommer sechs davor. Sag uns Tag,
+          Uhrzeit und wie viele ihr seid, wir rufen kurz zurück.
+        </p>
+      </div>
 
-  <section class="abschnitt container">
-    <div class="res-grid">
+      <div class="res-grid">
 
       <div class="res-form">
         <h2>Deine Reservierung</h2>
@@ -369,6 +346,7 @@
         </div>
       </aside>
 
+      </div>
     </div>
   </section>
 
