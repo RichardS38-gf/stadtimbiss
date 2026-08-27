@@ -1247,6 +1247,166 @@
   text-transform: uppercase;
 }
 
+/* ── DUNKLE UNTERSEITEN ──
+   Konto, Anmelden, Kasse und Danke laufen auf den geteilten
+   Stylesheets konto.css und checkout.css. Die sind shop-neutral
+   und duerfen nicht angefasst werden.
+
+   Statt jede einzelne Regel zu ueberschreiben, drehen wir die
+   Farbtokens innerhalb des Inhaltsbereichs um. Alle Regeln der
+   geteilten Dateien loesen dadurch automatisch dunkle Werte auf.
+   Ausgeloest wird das ueber die Klasse dunkel am body.
+
+   ACHTUNG: --color-ink ist hier die TEXTFARBE. Kopfzeile und
+   Fusszeile liegen ausserhalb dieser Selektoren, sonst wuerden
+   sie mit umkippen. */
+body.dunkel {
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+}
+
+body.dunkel main,
+body.dunkel .konto-head,
+body.dunkel .konto-tabs,
+body.dunkel .konto-modal,
+body.dunkel .auth-wrap,
+body.dunkel .checkout-steps,
+body.dunkel .checkout-layout,
+body.dunkel .danke-main {
+  --color-bg: #14120F;
+  --color-bg-soft: #1C1A16;
+  --color-ink: #F2EEE4;
+  --color-line: #3D392F;
+  --color-muted: #8E887A;
+  --color-rose-hell: #2A2620;
+}
+
+/* Alle Kaesten bekommen den orangen Rahmen und die harte Kante */
+body.dunkel .konto-card,
+body.dunkel .auth-box,
+body.dunkel .konto-modal__box,
+body.dunkel .form-section,
+body.dunkel .checkout-summary,
+body.dunkel .danke-info,
+body.dunkel .stamp-card {
+  background: var(--color-dark-2);
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Ueberschriften in der Hausschrift */
+body.dunkel .konto-head__gruss,
+body.dunkel .konto-panel__titel,
+body.dunkel .konto-card__titel,
+body.dunkel .auth-box__titel,
+body.dunkel .form-section__title,
+body.dunkel .checkout-summary__title,
+body.dunkel .danke-main h1 {
+  font-family: var(--font-head);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+}
+
+/* Reiter im Konto */
+body.dunkel .konto-tabs { border-bottom: 1px solid var(--color-line-dark); }
+body.dunkel .konto-tab { color: var(--color-on-dark-mu); font-family: var(--font-cond); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+body.dunkel .konto-tab:hover { color: var(--color-on-dark); }
+body.dunkel .konto-tab--active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+/* Eingabefelder: nur eine Linie unten, wie auf der
+   Reservierungsseite. */
+body.dunkel .konto-feld input,
+body.dunkel .konto-feld select,
+body.dunkel .konto-feld textarea,
+body.dunkel .form-field input,
+body.dunkel .form-field select,
+body.dunkel .form-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--color-line-dark);
+  border-radius: 0;
+  color: var(--color-on-dark);
+}
+
+body.dunkel .konto-feld input:focus,
+body.dunkel .konto-feld select:focus,
+body.dunkel .konto-feld textarea:focus,
+body.dunkel .form-field input:focus,
+body.dunkel .form-field select:focus,
+body.dunkel .form-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--color-accent);
+}
+
+body.dunkel select option { background: var(--color-dark-2); color: var(--color-on-dark); }
+
+/* Zahlungsarten und Fortschritt */
+body.dunkel .payment-option {
+  background: transparent;
+  border: 2px solid var(--color-line-dark);
+  border-radius: 0;
+}
+
+body.dunkel .step__nr {
+  background: var(--color-dark-2);
+  border: 2px solid var(--color-line-dark);
+  border-radius: 0;
+  color: var(--color-on-dark-mu);
+}
+
+body.dunkel .step--active .step__nr {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+}
+
+body.dunkel .badge--dark {
+  background: var(--color-accent);
+  color: #14120F;
+  border-radius: 0;
+}
+
+body.dunkel .danke-icon { color: var(--color-accent); }
+
+/* ── STEMPELKARTE ──
+   Ein eingeloester Stempel zeigt das Logo statt eines Hakens.
+   Bewusst hier und nicht in konto.js: die Kontodateien sind
+   shop-neutral. Der Haken bleibt im Markup und wird ausgeblendet.
+
+   Drei Klassen im Selektor, weil konto.css nach diesem Stylesheet
+   geladen wird. */
+.stamp-card .stamp-grid .stamp-slot--filled {
+  background-color: var(--color-dark-2);
+  background-image: url('../Bilder/logo.webp');
+  background-size: 68%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+}
+
+.stamp-card .stamp-grid .stamp-slot--filled svg { display: none; }
+
+.stamp-card .stamp-grid .stamp-slot {
+  border-radius: 0;
+  border-color: var(--color-line-dark);
+}
+
+.stamp-hint {
+  border-color: var(--color-accent);
+  border-radius: 0;
+  color: var(--color-on-dark);
+}
+
+.stamp-hint__zahl {
+  font-family: var(--font-head);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  border-radius: 0;
+}
+
 /* ── FUSSZEILE ── */
 .footer {
   background: var(--color-ink);
