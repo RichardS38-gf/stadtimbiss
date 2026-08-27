@@ -1370,6 +1370,22 @@ body.dunkel .badge--dark {
 
 body.dunkel .danke-icon { color: var(--color-accent); }
 
+/* Elemente, die bewusst dunkel auf Orange oder als dunkler
+   Koerper stehen, brauchen die Tokens in ihrer urspruenglichen
+   Bedeutung zurueck. Sie bekommen sie deshalb in ihrem eigenen
+   Geltungsbereich noch einmal gesetzt.
+
+   Ohne das faerbt sich der Knopfkoerper mit der umgedrehten
+   Variable ein und wird cremefarben, waehrend die Schrift
+   ebenfalls creme bleibt. Genau dann sieht man gar nichts mehr. */
+body.dunkel .btn,
+body.dunkel .stamp-hint__zahl,
+body.dunkel .step__nr,
+body.dunkel .badge--dark {
+  --color-ink: #14120F;
+  --color-on-dark: #F2EEE4;
+}
+
 /* ── STEMPELKARTE ──
    Ein eingeloester Stempel zeigt das Logo statt eines Hakens.
    Bewusst hier und nicht in konto.js: die Kontodateien sind
