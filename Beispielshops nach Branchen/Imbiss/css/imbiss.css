@@ -385,6 +385,14 @@
 .btn--sm::after { width: 2.2rem; }
 .btn--sm .ic { width: 20px; height: 20px; }
 
+/* Doppelter Klassenname, damit spaeter geladene Stylesheets den
+   Innenabstand nicht ueberschreiben. konto.css wird nach diesem
+   Stylesheet geladen; ohne die hoehere Spezifitaet fiel der
+   rechte Innenabstand weg und der Text lief unter den Pfeilblock.
+   Genau das war der abgeschnittene Text in der Kopfzeile. */
+.btn.btn { padding: 0.72rem 3.5rem 0.72rem 1.3rem; }
+.btn--sm.btn--sm { padding: 0.55rem 2.8rem 0.55rem 1rem; }
+
 /* Wo der Text ausgeblendet ist, bleibt sonst nur Symbol und Pfeil
    nebeneinander stehen. Das ergibt keinen Sinn, also weg damit. */
 @media (max-width: 900px) {
@@ -458,29 +466,37 @@
 
 .hero-top__aktionen {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: var(--space-2);
 }
 
-.hero-top__tel {
+/* Konto-Knopf sieht aus wie die Knoepfe daneben und ist durch
+   align-items stretch genauso hoch. */
+.hero-top__aktionen .nav__konto {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  padding: 0 1rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 0;
+  background: var(--color-ink);
   font-family: var(--font-cond);
-  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--color-gelb);
-  white-space: nowrap;
+  font-size: 0.86rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.hero-top__tel:hover { color: var(--color-on-dark); opacity: 1; }
-.hero-top__tel .ic { width: 20px; height: 20px; }
+.hero-top__aktionen .nav__konto:hover {
+  background: var(--color-accent);
+  opacity: 1;
+}
 
 .hero-top__aktionen .nav__konto,
 .hero-top__aktionen .nav__konto-name,
 .hero-top__aktionen .nav__konto-icon { color: var(--color-on-dark); }
-.hero-top__aktionen .nav__konto:hover .nav__konto-icon { color: var(--color-gelb); }
+.hero-top__aktionen .nav__konto:hover .nav__konto-icon { color: var(--color-ink); }
+.hero-top__aktionen .nav__konto:hover .nav__konto-name { color: var(--color-ink); }
 
 /* Mittiger Inhalt, linksbuendig gesetzt */
 .hero__inhalt {
@@ -685,7 +701,6 @@
 @media (max-width: 899px) {
   .hero { min-height: 0; }
   .hero-top { flex-wrap: wrap; }
-  .hero-top__tel span:not(.ic) { display: none; }
   .hero-top__aktionen .btn__text,
   .hero-top__aktionen .nav__konto-name { display: none; }
   .hero-top__aktionen .btn { padding-inline: 0.6rem; }
