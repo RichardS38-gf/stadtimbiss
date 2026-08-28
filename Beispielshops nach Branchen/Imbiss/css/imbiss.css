@@ -709,7 +709,7 @@
 .schicht__reihe {
   display: grid;
   grid-template-columns: 1fr;
-  border: 2px solid var(--color-ink);
+  border: 2px solid var(--color-accent);
 }
 
 @media (min-width: 820px) {
