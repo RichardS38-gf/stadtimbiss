@@ -738,6 +738,24 @@
   .schicht__bild { min-height: 0; aspect-ratio: 16 / 10; }
 }
 
+/* Beim Ueberfahren waechst die ganze Zeile ein Stueck. Der
+   Farbwechsel von Schwarz auf Weiss war auf der jetzt durchgehend
+   dunklen Seite zu grell. */
+.schicht__reihe {
+  transform-origin: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.schicht__reihe:hover {
+  transform: scale(1.015);
+  border-color: var(--color-gelb);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .schicht__reihe { transition: none; }
+  .schicht__reihe:hover { transform: none; }
+}
+
 .schicht__inhalt {
   background: var(--color-ink);
   padding: var(--space-5) var(--space-6);
@@ -745,10 +763,7 @@
   flex-direction: column;
   justify-content: center;
   cursor: default;
-  transition: background var(--transition);
 }
-
-.schicht__inhalt:hover { background: var(--color-bg-soft); }
 
 .schicht__kopf {
   display: flex;
@@ -772,7 +787,6 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-on-dark-mu);
-  transition: color var(--transition);
 }
 
 .schicht__titel {
@@ -785,7 +799,6 @@
   line-height: 1.05;
   color: var(--color-on-dark);
   margin-bottom: var(--space-3);
-  transition: color var(--transition);
 }
 
 .schicht__text {
@@ -793,12 +806,7 @@
   line-height: 1.7;
   color: var(--color-on-dark-mu);
   max-width: 58ch;
-  transition: color var(--transition);
 }
-
-.schicht__inhalt:hover .schicht__name,
-.schicht__inhalt:hover .schicht__text { color: var(--color-muted); }
-.schicht__inhalt:hover .schicht__titel { color: var(--color-ink); }
 
 @media (prefers-reduced-motion: reduce) {
   .schicht__inhalt,
