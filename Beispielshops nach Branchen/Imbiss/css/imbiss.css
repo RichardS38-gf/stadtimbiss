@@ -613,23 +613,35 @@
 }
 
 @media (max-width: 899px) {
-  /* Die Tafel steht nicht ueber die volle Breite und schliesst
-     auch rechts nicht mit dem Foto ab. Der negative Aussenabstand
-     rechts schiebt sie ueber die Bildkante hinaus, damit keine
-     Kante mit der anderen zusammenfaellt.
+  /* Auf schmalen Schirmen schrumpft die Tafel auf ein kleines
+     Schild zusammen: nur noch der orange Statusbalken, ohne
+     Rahmen und ohne die drei Zeilen darunter. Die stehen weiter
+     unten ohnehin in der Fusszeile.
 
-     Das Foto wird per negativem Aussenabstand nach oben gezogen
-     und rutscht unter die Tafel, genau wie auf dem Desktop. */
+     Der negative Aussenabstand rechts schiebt das Schild ueber die
+     Bildkante hinaus, das Foto rutscht per negativem Abstand nach
+     oben darunter. */
   .hero-rechts .tafel-info {
     position: relative;
     z-index: 1;
-    width: 78%;
+    width: fit-content;
     margin-left: auto;
     margin-right: -14px;
-    background: var(--color-ink);
+    border: none;
+    padding: 0;
+    background: transparent;
   }
 
-  .hero-rechts__foto { margin-top: -28px; }
+  .hero-rechts .tafel-info__zeile { display: none; }
+
+  .hero-rechts .tafel-info__status {
+    margin: 0;
+    padding: 0.5rem 1.1rem;
+  }
+
+  .hero-rechts .tafel-info__status-text { font-size: 1rem; }
+
+  .hero-rechts__foto { margin-top: -18px; }
 }
 
 /* ── ANSCHLAGTAFEL ──
