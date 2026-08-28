@@ -1101,7 +1101,7 @@
 
 .banner__bild {
   background-color: var(--color-dark-2);
-  background-image: url('../Bilder/taxi.webp');
+  background-image: url('../Bilder/taxi_banner.webp');
   background-size: cover;
   background-position: center;
   min-height: 220px;

@@ -39,6 +39,10 @@ $breiten = @{
   # Altes Foto im Abschnitt Die Bude, 320px breit
   'werkstor'    = 700
 
+  # Werbebanner
+  'taxi_banner'       = 900
+  'taxiteller_banner' = 500
+
   'bestellen'   = 1800
   'banner'      = 1800
   'reservieren' = 1400
