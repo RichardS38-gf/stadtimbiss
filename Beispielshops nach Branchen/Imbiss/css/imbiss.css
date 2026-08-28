@@ -613,16 +613,19 @@
 }
 
 @media (max-width: 899px) {
-  /* Die Tafel steht nicht ueber die volle Breite, sondern rechts
-     versetzt, und ragt in die obere Kante des Fotos hinein. Das
-     Foto wird dafuer per negativem Aussenabstand nach oben
-     gezogen, genau wie auf dem Desktop. */
+  /* Die Tafel steht nicht ueber die volle Breite und schliesst
+     auch rechts nicht mit dem Foto ab. Der negative Aussenabstand
+     rechts schiebt sie ueber die Bildkante hinaus, damit keine
+     Kante mit der anderen zusammenfaellt.
+
+     Das Foto wird per negativem Aussenabstand nach oben gezogen
+     und rutscht unter die Tafel, genau wie auf dem Desktop. */
   .hero-rechts .tafel-info {
     position: relative;
     z-index: 1;
-    width: 88%;
+    width: 78%;
     margin-left: auto;
-    margin-right: 0;
+    margin-right: -14px;
     background: var(--color-ink);
   }
 
@@ -701,11 +704,14 @@
   .hero-top__aktionen .btn { padding-inline: 0.6rem; }
   .hero__inhalt { padding-block: var(--space-7); }
 
-  /* Beide Handlungsaufrufe gleich breit, aber nicht ueber die
-     ganze Zeile. */
+  /* Beide Handlungsaufrufe gleich breit, nicht ueber die ganze
+     Zeile, und mittig in der Sektion. */
+  .hero__actions { justify-content: center; }
+
   .hero__actions .btn {
     flex: 1 1 100%;
     max-width: 300px;
+    margin-inline: auto;
   }
 }
 
