@@ -1076,6 +1076,22 @@
   .banner { animation: none; }
 }
 
+@keyframes banner-puls-klein {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.012); }
+}
+
+@media (max-width: 819px) {
+  /* Kleinerer Ausschlag ueber eine eigene Animation. Drei Prozent
+     sind bei der schmalen Inhaltsbreite mehr, als der Innenabstand
+     des Containers auffangen kann, und der Banner stiesse an den
+     Bildschirmrand.
+
+     Keyframes lassen sich nicht in eine Media Query schachteln,
+     deshalb zwei getrennte Animationen. */
+  .banner { animation-name: banner-puls-klein; }
+}
+
 @media (min-width: 820px) {
   .banner { grid-template-columns: 0.9fr 1.1fr; }
 }

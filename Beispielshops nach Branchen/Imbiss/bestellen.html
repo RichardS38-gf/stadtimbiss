@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/imbiss.css?v=44">
+  <link rel="stylesheet" href="css/imbiss.css?v=45">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/bestellen.js"></script>
   <style>
@@ -448,10 +448,55 @@
     .cart-drawer { background: var(--color-dark-2); color: var(--color-on-dark); }
     .cart-drawer__close { color: var(--color-on-dark); }
 
+    /* Auf schmalen Schirmen reicht die Breite fuer fuenf Spalten
+       nicht. Preis wandert unter den Namen, Plus und Herz stehen
+       rechts untereinander, die Punktlinie faellt weg. */
     @media (max-width: 599px) {
-      .menu-card { grid-template-columns: 72px 1fr auto auto auto; column-gap: var(--space-3); }
-      .menu-card__img { width: 72px; height: 72px; }
-      .menu-card__name { font-size: 1rem; }
+      .menu-card {
+        grid-template-columns: 64px 1fr auto;
+        column-gap: var(--space-3);
+        row-gap: 2px;
+        align-items: start;
+        padding: var(--space-4) 0;
+      }
+
+      .menu-card__img {
+        width: 64px;
+        height: 64px;
+        grid-row: 1 / span 3;
+      }
+
+      .menu-card__name {
+        grid-column: 2;
+        grid-row: 1;
+        font-size: 1rem;
+        line-height: 1.2;
+      }
+
+      .menu-card__name::after { display: none; }
+
+      .menu-card__desc { grid-column: 2; grid-row: 2; }
+
+      .menu-card__price {
+        grid-column: 2;
+        grid-row: 3;
+        font-size: 1.1rem;
+        margin-top: 4px;
+      }
+
+      .menu-card .add-to-cart { grid-column: 3; grid-row: 1; align-self: start; }
+      .menu-card .fav-herz { grid-column: 3; grid-row: 2; align-self: start; }
+
+      /* Der Kippschalter braucht mit beiden Beschriftungen rund
+         320 Pixel. Das ist auf einem Telefon zu viel. */
+      .order-head .modus { gap: var(--space-3); }
+      .order-head .modus__name { font-size: 1.15rem; }
+      .order-head .modus__preis { font-size: 0.86rem; }
+      .modus__schalter { width: 68px; height: 38px; }
+      .modus__knopf { width: 28px; height: 28px; top: 3px; left: 3px; }
+      .modus:has([data-mode="abholung"].mode-card--active) .modus__knopf {
+        left: calc(100% - 31px);
+      }
     }
   </style>
 </head>
