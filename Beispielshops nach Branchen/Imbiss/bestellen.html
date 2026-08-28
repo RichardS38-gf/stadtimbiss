@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/imbiss.css?v=37">
+  <link rel="stylesheet" href="css/imbiss.css?v=38">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/bestellen.js"></script>
   <style>
@@ -143,7 +143,7 @@
 
     .order-head .modus__name {
       font-family: var(--font-head);
-      font-size: 1.15rem;
+      font-size: 1.45rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--color-on-dark-mu);
@@ -153,7 +153,7 @@
     .order-head .modus__preis {
       font-family: var(--font-cond);
       font-weight: 700;
-      font-size: 0.82rem;
+      font-size: 1rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--color-on-dark-mu);
@@ -163,39 +163,47 @@
     .order-head .mode-card--active .modus__name { color: var(--color-on-dark); }
     .order-head .mode-card--active .modus__preis { color: var(--color-gelb); }
 
-    /* Die Schiene */
+    /* Die Schiene.
+       Einzige Stelle im Shop mit Rundungen. Das ist Absicht: ein
+       Kippschalter wird nur als solcher gelesen, wenn er die Form
+       hat, die man von Schaltern kennt. Ueberall sonst bleibt es
+       bei der harten Kante. */
     .modus__schalter {
       position: relative;
-      width: 74px;
-      height: 36px;
+      width: 92px;
+      height: 46px;
       flex-shrink: 0;
       border: 2px solid var(--color-line-dark);
-      border-radius: 0;
+      border-radius: 999px;
       background: var(--color-dark-2);
       padding: 0;
       cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
     }
 
     .modus__knopf {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 50%;
+      top: 4px;
+      left: 4px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
       background: var(--color-accent);
       transition: left 0.22s ease;
     }
 
-    .modus:has([data-mode="abholung"].mode-card--active) .modus__knopf { left: 50%; }
+    .modus:has([data-mode="abholung"].mode-card--active) .modus__knopf {
+      left: calc(100% - 38px);
+    }
 
     .modus__schalter:hover { border-color: var(--color-accent); }
 
     .modus__info {
       font-family: var(--font-cond);
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--color-on-dark-mu);
+      color: var(--color-on-dark);
       margin-top: var(--space-4);
     }
 
