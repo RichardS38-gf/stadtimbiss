@@ -248,8 +248,8 @@
     .menu-card {
       position: relative;
       display: grid;
-      grid-template-columns: 64px 2.6rem 1fr auto auto auto;
-      column-gap: var(--space-3);
+      grid-template-columns: 96px 1fr auto auto auto;
+      column-gap: var(--space-4);
       align-items: baseline;
       background: transparent;
       border: none;
@@ -263,16 +263,20 @@
     .menu-card:last-child { border-bottom: none; }
     .menu-card:hover { transform: none; box-shadow: none; }
 
-    /* Kleines Bild links vor der Nummer. Bewusst klein und
-       quadratisch, damit die Zeile eine Zeile bleibt und die
-       Bonrolle ihren Charakter behaelt. */
+    /* Bild links. Die Bestellnummer steht weiterhin im Markup,
+       wird hier aber ausgeblendet: neben dem Bild waren es zwei
+       Erkennungsmerkmale nebeneinander, und das Bild ist das
+       staerkere. Zum Zurueckholen genuegt es, diese eine Regel
+       zu entfernen. */
+    .menu-card__nr { display: none; }
+
     .menu-card__img {
       display: block;
       grid-column: 1;
       grid-row: 1 / span 2;
       align-self: center;
-      width: 64px;
-      height: 64px;
+      width: 96px;
+      height: 96px;
       object-fit: cover;
       border: 1px solid var(--color-line-dark);
       background: var(--color-dark-2);
@@ -286,8 +290,6 @@
     .menu-card__footer { display: contents; }
 
     .menu-card__nr {
-      grid-column: 2;
-      grid-row: 1;
       font-family: var(--font-head);
       font-size: 1.45rem;
       line-height: 1;
@@ -295,7 +297,7 @@
     }
 
     .menu-card__name {
-      grid-column: 3;
+      grid-column: 2;
       grid-row: 1;
       display: flex;
       align-items: center;
@@ -320,7 +322,7 @@
     }
 
     .menu-card__desc {
-      grid-column: 3;
+      grid-column: 2;
       grid-row: 2;
       font-size: var(--text-sm);
       line-height: 1.6;
@@ -329,7 +331,7 @@
     }
 
     .menu-card__price {
-      grid-column: 4;
+      grid-column: 3;
       grid-row: 1;
       font-family: var(--font-head);
       font-size: 1.2rem;
@@ -341,7 +343,7 @@
        Knoepfe wird hier ausgeblendet, er passt nicht auf ein
        Quadrat mit einem Zeichen. */
     .menu-card .add-to-cart {
-      grid-column: 5;
+      grid-column: 4;
       grid-row: 1;
       align-self: center;
       width: 2.1rem;
@@ -365,7 +367,7 @@
        Spalte, gleiche Groesse wie der Knopf daneben. */
     .menu-card .fav-herz {
       position: static;
-      grid-column: 6;
+      grid-column: 5;
       grid-row: 1;
       align-self: center;
       width: 2.1rem;
@@ -454,9 +456,8 @@
     .cart-drawer__close { color: var(--color-on-dark); }
 
     @media (max-width: 599px) {
-      .menu-card { grid-template-columns: 48px 2rem 1fr auto auto auto; column-gap: var(--space-2); }
-      .menu-card__img { width: 48px; height: 48px; }
-      .menu-card__nr { font-size: 1.2rem; }
+      .menu-card { grid-template-columns: 72px 1fr auto auto auto; column-gap: var(--space-3); }
+      .menu-card__img { width: 72px; height: 72px; }
       .menu-card__name { font-size: 1rem; }
     }
   </style>
