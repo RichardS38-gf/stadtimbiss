@@ -613,9 +613,20 @@
 }
 
 @media (max-width: 899px) {
-  /* Kein Ueberlappen auf schmalen Schirmen, dort wird es unruhig.
-     Erst die Tafel, darunter das Foto. */
-  .hero-rechts__foto { margin-top: var(--space-4); }
+  /* Die Tafel steht nicht ueber die volle Breite, sondern rechts
+     versetzt, und ragt in die obere Kante des Fotos hinein. Das
+     Foto wird dafuer per negativem Aussenabstand nach oben
+     gezogen, genau wie auf dem Desktop. */
+  .hero-rechts .tafel-info {
+    position: relative;
+    z-index: 1;
+    width: 88%;
+    margin-left: auto;
+    margin-right: 0;
+    background: var(--color-ink);
+  }
+
+  .hero-rechts__foto { margin-top: -28px; }
 }
 
 /* ── ANSCHLAGTAFEL ──
@@ -689,7 +700,13 @@
   .hero-top__aktionen .nav__konto-name { display: none; }
   .hero-top__aktionen .btn { padding-inline: 0.6rem; }
   .hero__inhalt { padding-block: var(--space-7); }
-  .hero__actions .btn { flex: 1 1 100%; justify-content: center; }
+
+  /* Beide Handlungsaufrufe gleich breit, aber nicht ueber die
+     ganze Zeile. */
+  .hero__actions .btn {
+    flex: 1 1 100%;
+    max-width: 300px;
+  }
 }
 
 /* ── SCHICHTPLAN ──
