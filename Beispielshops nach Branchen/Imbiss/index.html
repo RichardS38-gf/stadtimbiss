@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/imbiss.css?v=40">
+  <link rel="stylesheet" href="css/imbiss.css?v=41">
   <link rel="stylesheet" href="css/konto.css?v=1">
 </head>
 <body>
@@ -409,17 +409,6 @@
           <p class="zahl__label">Schnickschnack</p>
         </div>
       </div>
-
-      <div class="schild">
-        <p class="schild__text">
-          Angefangen hat das Ganze mein Vater, mit einem Wagen vor dem Werkstor.
-          Als die Zeche zumachte, sind wir zweihundert Meter weiter in den Laden
-          gezogen. Die Soße kochen wir immer noch nach seinem Zettel, und der
-          hängt hinter der Theke.
-        </p>
-        <p class="schild__name">Paul Kwiatkowski jr.</p>
-        <p class="schild__rolle">Steht seit 1996 selbst an der Theke</p>
-      </div>
     </div>
   </section>
 
@@ -427,7 +416,7 @@
        Links das Taxi als Bildflaeche, rechts der Text auf Schwarz,
        der freigestellte Teller liegt auf der Naht und verklammert
        beide Haelften. -->
-  <section class="abschnitt--eng abschnitt--dunkel">
+  <section class="abschnitt--eng abschnitt--dunkel banner-abschnitt">
     <div class="container">
       <div class="banner">
         <div class="banner__bild"></div>
@@ -600,12 +589,10 @@
     import { iconsEinsetzen } from './js/icons.js';
     import { oeffnungAnzeigen } from './js/oeffnung.js';
     import { tafelReiter } from './js/tafel.js';
-    import { zitatSchreiben } from './js/schreibmaschine.js';
 
     iconsEinsetzen();
     oeffnungAnzeigen();
     tafelReiter();
-    zitatSchreiben();
     await setupSeite();
     iconsEinsetzen();
   </script>
