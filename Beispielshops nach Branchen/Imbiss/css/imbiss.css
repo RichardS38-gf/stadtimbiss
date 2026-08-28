@@ -893,21 +893,28 @@
 .gericht {
   display: flex;
   align-items: baseline;
-  gap: var(--space-3);
+  gap: var(--space-4);
   padding-block: var(--space-4);
   border-bottom: 1px solid var(--color-line-dark);
 }
 
 .gericht:last-child { border-bottom: none; }
 
-.gericht__nr {
-  font-family: var(--font-head);
-  font-size: 1.5rem;
-  line-height: 1;
-  color: var(--color-accent);
-  width: 3rem;
+/* Bild links. Die Bestellnummer bleibt im Markup, wird aber
+   ausgeblendet: neben dem Bild waren es zwei Erkennungsmerkmale
+   nebeneinander. Zum Zurueckholen genuegt es, die Regel mit
+   display none zu entfernen. */
+.gericht__bild {
+  width: 88px;
+  height: 88px;
   flex-shrink: 0;
+  align-self: center;
+  object-fit: cover;
+  border: 1px solid var(--color-line-dark);
+  background: var(--color-dark-2);
 }
+
+.gericht__nr { display: none; }
 
 .gericht__mitte { flex: 1; min-width: 0; }
 
@@ -945,8 +952,8 @@
 
 @media (max-width: 599px) {
   .gericht__punkte { display: none; }
-  .gericht { gap: var(--space-2); }
-  .gericht__nr { width: 2.2rem; font-size: 1.25rem; }
+  .gericht { gap: var(--space-3); }
+  .gericht__bild { width: 64px; height: 64px; }
 }
 
 /* ── DIE BUDE, Zahlenwand ──
