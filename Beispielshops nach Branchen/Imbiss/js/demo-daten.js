@@ -174,28 +174,24 @@ export const DEMO_RESERVATIONS = [
 ];
 
 // Artikelkatalog fuer die Favoriten-Ansicht.
-// Die Karte dieses Shops kommt ohne Produktfotos aus, deshalb steht
-// hier bei allen Artikeln der Platzhalter. Wenn du spaeter Bilder
-// haben willst, reichen vier Kategoriebilder statt siebzehn
-// Einzelaufnahmen.
 export const KATALOG = {
-  'n11': { name: 'Pommes rot-weiß',               price: 4.50,  kategorie: 'Von der Theke', img: 'Bilder/platzhalter.svg' },
-  'n13': { name: 'Bratwurst mit Brötchen',        price: 4.20,  kategorie: 'Von der Theke', img: 'Bilder/platzhalter.svg' },
-  'n15': { name: 'Currywurst',                    price: 4.90,  kategorie: 'Von der Theke', img: 'Bilder/platzhalter.svg' },
-  'n17': { name: 'Currywurst mit Pommes',         price: 7.90,  kategorie: 'Von der Theke', img: 'Bilder/platzhalter.svg' },
-  'n19': { name: 'Frikadelle im Brötchen',        price: 4.20,  kategorie: 'Von der Theke', img: 'Bilder/platzhalter.svg' },
-  'n21': { name: 'Schnitzel Wiener Art',          price: 11.90, kategorie: 'Aus der Pfanne', img: 'Bilder/platzhalter.svg' },
-  'n23': { name: 'Schnitzel mit Champignonrahm',  price: 13.50, kategorie: 'Aus der Pfanne', img: 'Bilder/platzhalter.svg' },
-  'n25': { name: 'Jägerschnitzel',                price: 13.50, kategorie: 'Aus der Pfanne', img: 'Bilder/platzhalter.svg' },
-  'n27': { name: 'Paprikaschnitzel',              price: 13.50, kategorie: 'Aus der Pfanne', img: 'Bilder/platzhalter.svg' },
-  'n31': { name: 'Taxiteller',                    price: 11.50, kategorie: 'Vom Grill',     img: 'Bilder/platzhalter.svg' },
-  'n33': { name: 'Pita mit Hähnchen',             price: 7.50,  kategorie: 'Vom Grill',     img: 'Bilder/platzhalter.svg' },
-  'n35': { name: 'Cheeseburger',                  price: 8.90,  kategorie: 'Vom Grill',     img: 'Bilder/platzhalter.svg' },
-  'n37': { name: 'Doppel-Cheeseburger',           price: 11.90, kategorie: 'Vom Grill',     img: 'Bilder/platzhalter.svg' },
-  'n41': { name: 'Pils 0,33',                     price: 3.20,  kategorie: 'Getränke',      img: 'Bilder/platzhalter.svg' },
-  'n43': { name: 'Cola 0,33',                     price: 2.60,  kategorie: 'Getränke',      img: 'Bilder/platzhalter.svg' },
-  'n45': { name: 'Wasser 0,25',                   price: 2.20,  kategorie: 'Getränke',      img: 'Bilder/platzhalter.svg' },
-  'n47': { name: 'Kaffee',                        price: 2.20,  kategorie: 'Getränke',      img: 'Bilder/platzhalter.svg' }
+  'n11': { name: 'Pommes rot-weiß',               price: 4.50,  kategorie: 'Wurst und Pommes', img: 'Bilder/pommesrotweiss.webp' },
+  'n13': { name: 'Bratwurst mit Brötchen',        price: 4.20,  kategorie: 'Wurst und Pommes', img: 'Bilder/bratwurstmitbroetchen.webp' },
+  'n15': { name: 'Currywurst',                    price: 4.90,  kategorie: 'Wurst und Pommes', img: 'Bilder/currywurst.webp' },
+  'n17': { name: 'Currywurst mit Pommes',         price: 7.90,  kategorie: 'Wurst und Pommes', img: 'Bilder/currywurstpommes.webp' },
+  'n19': { name: 'Frikadelle im Brötchen',        price: 4.20,  kategorie: 'Wurst und Pommes', img: 'Bilder/frikadelle.webp' },
+  'n21': { name: 'Schnitzel Wiener Art',          price: 11.90, kategorie: 'Aus der Pfanne',   img: 'Bilder/wienerschnitzel.webp' },
+  'n23': { name: 'Schnitzel mit Champignonrahm',  price: 13.50, kategorie: 'Aus der Pfanne',   img: 'Bilder/champignonschnitzel.webp' },
+  'n25': { name: 'Jägerschnitzel',                price: 13.50, kategorie: 'Aus der Pfanne',   img: 'Bilder/jaegerschnitzel.webp' },
+  'n27': { name: 'Paprikaschnitzel',              price: 13.50, kategorie: 'Aus der Pfanne',   img: 'Bilder/paprikarahmschnitzel.webp' },
+  'n31': { name: 'Taxiteller',                    price: 11.50, kategorie: 'Vom Grill',        img: 'Bilder/taxiteller.webp' },
+  'n33': { name: 'Pita mit Hähnchen',             price: 7.50,  kategorie: 'Vom Grill',        img: 'Bilder/pita.webp' },
+  'n35': { name: 'Cheeseburger',                  price: 8.90,  kategorie: 'Vom Grill',        img: 'Bilder/cheeseburger.webp' },
+  'n37': { name: 'Doppel-Cheeseburger',           price: 11.90, kategorie: 'Vom Grill',        img: 'Bilder/doppelcheeseburger.webp' },
+  'n41': { name: 'Pils 0,33',                     price: 3.20,  kategorie: 'Getränke',         img: 'Bilder/pils.webp' },
+  'n43': { name: 'Cola 0,33',                     price: 2.60,  kategorie: 'Getränke',         img: 'Bilder/cola.webp' },
+  'n45': { name: 'Wasser 0,25',                   price: 2.20,  kategorie: 'Getränke',         img: 'Bilder/wasser.webp' },
+  'n47': { name: 'Kaffee',                        price: 2.20,  kategorie: 'Getränke',         img: 'Bilder/kaffee.webp' }
 };
 
 export function demoDatenSatz() {

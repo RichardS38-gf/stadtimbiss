@@ -248,7 +248,7 @@
     .menu-card {
       position: relative;
       display: grid;
-      grid-template-columns: 2.6rem 1fr auto auto auto;
+      grid-template-columns: 64px 2.6rem 1fr auto auto auto;
       column-gap: var(--space-3);
       align-items: baseline;
       background: transparent;
@@ -262,7 +262,21 @@
 
     .menu-card:last-child { border-bottom: none; }
     .menu-card:hover { transform: none; box-shadow: none; }
-    .menu-card__img { display: none; }
+
+    /* Kleines Bild links vor der Nummer. Bewusst klein und
+       quadratisch, damit die Zeile eine Zeile bleibt und die
+       Bonrolle ihren Charakter behaelt. */
+    .menu-card__img {
+      display: block;
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      align-self: center;
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border: 1px solid var(--color-line-dark);
+      background: var(--color-dark-2);
+    }
 
     /* Huelle und Fusszeile fallen aus dem Layout, damit Nummer,
        Name, Preis und Knopf direkt im Raster der Zeile liegen.
@@ -272,7 +286,7 @@
     .menu-card__footer { display: contents; }
 
     .menu-card__nr {
-      grid-column: 1;
+      grid-column: 2;
       grid-row: 1;
       font-family: var(--font-head);
       font-size: 1.45rem;
@@ -281,7 +295,7 @@
     }
 
     .menu-card__name {
-      grid-column: 2;
+      grid-column: 3;
       grid-row: 1;
       display: flex;
       align-items: center;
@@ -306,7 +320,7 @@
     }
 
     .menu-card__desc {
-      grid-column: 2;
+      grid-column: 3;
       grid-row: 2;
       font-size: var(--text-sm);
       line-height: 1.6;
@@ -315,7 +329,7 @@
     }
 
     .menu-card__price {
-      grid-column: 3;
+      grid-column: 4;
       grid-row: 1;
       font-family: var(--font-head);
       font-size: 1.2rem;
@@ -327,7 +341,7 @@
        Knoepfe wird hier ausgeblendet, er passt nicht auf ein
        Quadrat mit einem Zeichen. */
     .menu-card .add-to-cart {
-      grid-column: 4;
+      grid-column: 5;
       grid-row: 1;
       align-self: center;
       width: 2.1rem;
@@ -351,7 +365,7 @@
        Spalte, gleiche Groesse wie der Knopf daneben. */
     .menu-card .fav-herz {
       position: static;
-      grid-column: 5;
+      grid-column: 6;
       grid-row: 1;
       align-self: center;
       width: 2.1rem;
@@ -414,6 +428,23 @@
     .cart-item__remove { color: var(--color-on-dark-mu); }
     .cart-empty { color: var(--color-on-dark-mu); }
 
+    .cart-empty__titel {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-on-dark);
+      margin-bottom: var(--space-2);
+    }
+
+    .cart-empty__text {
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-on-dark-mu);
+      max-width: 30ch;
+      margin-inline: auto;
+    }
+
     .cart-summary { border-top: 2px dashed var(--color-line-dark); }
     .cart-summary__row { color: var(--color-on-dark-mu); }
     .cart-summary__total { color: var(--color-on-dark); }
@@ -423,7 +454,8 @@
     .cart-drawer__close { color: var(--color-on-dark); }
 
     @media (max-width: 599px) {
-      .menu-card { grid-template-columns: 2rem 1fr auto auto auto; column-gap: var(--space-2); }
+      .menu-card { grid-template-columns: 48px 2rem 1fr auto auto auto; column-gap: var(--space-2); }
+      .menu-card__img { width: 48px; height: 48px; }
       .menu-card__nr { font-size: 1.2rem; }
       .menu-card__name { font-size: 1rem; }
     }
@@ -506,6 +538,7 @@
         </div>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/pommesrotweiss.webp" alt="" loading="lazy">
           <span class="menu-card__nr">11</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Pommes rot-weiß <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Senf (J)</span></button></h3>
@@ -518,6 +551,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/bratwurstmitbroetchen.webp" alt="" loading="lazy">
           <span class="menu-card__nr">13</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Bratwurst mit Brötchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Senf (J)</span></button></h3>
@@ -530,6 +564,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/currywurst.webp" alt="" loading="lazy">
           <span class="menu-card__nr">15</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Currywurst <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Senf (J)</span></button></h3>
@@ -542,6 +577,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/currywurstpommes.webp" alt="" loading="lazy">
           <span class="menu-card__nr">17</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Currywurst mit Pommes <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Senf (J)</span></button></h3>
@@ -554,6 +590,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/frikadelle.webp" alt="" loading="lazy">
           <span class="menu-card__nr">19</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Frikadelle im Brötchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Senf (J)</span></button></h3>
@@ -574,6 +611,7 @@
         </div>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/wienerschnitzel.webp" alt="" loading="lazy">
           <span class="menu-card__nr">21</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Schnitzel Wiener Art <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G)</span></button></h3>
@@ -586,6 +624,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/champignonschnitzel.webp" alt="" loading="lazy">
           <span class="menu-card__nr">23</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Schnitzel mit Champignonrahm <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G)</span></button></h3>
@@ -598,6 +637,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/jaegerschnitzel.webp" alt="" loading="lazy">
           <span class="menu-card__nr">25</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Jägerschnitzel <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G), Sellerie (I)</span></button></h3>
@@ -610,6 +650,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/paprikarahmschnitzel.webp" alt="" loading="lazy">
           <span class="menu-card__nr">27</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Paprikaschnitzel <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Ei (C), Milch (G), Sellerie (I)</span></button></h3>
@@ -630,6 +671,7 @@
         </div>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/taxiteller.webp" alt="" loading="lazy">
           <span class="menu-card__nr">31</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Taxiteller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G), Senf (J)</span></button></h3>
@@ -642,6 +684,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/pita.webp" alt="" loading="lazy">
           <span class="menu-card__nr">33</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Pita mit Hähnchen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
@@ -654,6 +697,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/cheeseburger.webp" alt="" loading="lazy">
           <span class="menu-card__nr">35</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Cheeseburger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Senf (J)</span></button></h3>
@@ -666,6 +710,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/doppelcheeseburger.webp" alt="" loading="lazy">
           <span class="menu-card__nr">37</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Doppel-Cheeseburger <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C), Senf (J)</span></button></h3>
@@ -686,6 +731,7 @@
         </div>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/pils.webp" alt="" loading="lazy">
           <span class="menu-card__nr">41</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Pils 0,33 <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
@@ -698,6 +744,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/cola.webp" alt="" loading="lazy">
           <span class="menu-card__nr">43</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Cola 0,33</h3>
@@ -710,6 +757,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/wasser.webp" alt="" loading="lazy">
           <span class="menu-card__nr">45</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Wasser 0,25</h3>
@@ -722,6 +770,7 @@
         </article>
 
         <article class="menu-card">
+          <img class="menu-card__img" width="64" height="64" src="Bilder/kaffee.webp" alt="" loading="lazy">
           <span class="menu-card__nr">47</span>
           <div class="menu-card__body">
             <h3 class="menu-card__name">Kaffee</h3>
@@ -740,7 +789,8 @@
       <h3 class="cart-sidebar__title">Deine Bestellung</h3>
       <div class="cart-items" id="cart-items"></div>
       <div class="cart-empty" id="cart-empty">
-        <p>Noch nix drin.</p>
+        <p class="cart-empty__titel">Noch nix drin.</p>
+        <p class="cart-empty__text">Such dir was von der Karte aus, tipp auf das Plus, dann sammelt es sich hier.</p>
       </div>
       <div class="cart-summary" id="cart-summary">
         <div class="cart-summary__row">
@@ -771,7 +821,8 @@
     <div class="cart-drawer__body">
       <div class="cart-items" id="cart-items-mobile"></div>
       <div class="cart-empty" id="cart-empty-mobile">
-        <p>Noch nix drin.</p>
+        <p class="cart-empty__titel">Noch nix drin.</p>
+        <p class="cart-empty__text">Such dir was von der Karte aus, tipp auf das Plus, dann sammelt es sich hier.</p>
       </div>
     </div>
     <div class="cart-drawer__footer" id="cart-summary-mobile">
