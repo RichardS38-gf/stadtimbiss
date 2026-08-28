@@ -770,7 +770,37 @@
 }
 
 @media (max-width: 819px) {
-  .schicht__bild { min-height: 0; aspect-ratio: 16 / 10; }
+  /* Auf schmalen Schirmen als Wisch-Slider. Drei Zeilen
+     untereinander sind sonst drei Bildschirmlaengen.
+
+     Das Bild steht im Format 4:3, genau dem Format der Dateien.
+     Damit deckt sich der Ausschnitt mit dem Bild und es wird
+     nichts abgeschnitten. Bei 16:10 fehlten oben und unten
+     Streifen. */
+  .schicht {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-4);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-3);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) var(--color-line-dark);
+  }
+
+  .schicht__reihe {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+
+  /* Kein Wachsen im Slider, das ragt sonst ueber die Kante des
+     scrollenden Kastens und wird abgeschnitten. Zwei Klassen,
+     weil die Hover-Regel im Stylesheet weiter unten steht. */
+  .schicht .schicht__reihe:hover { transform: none; }
+
+  .schicht__bild { min-height: 0; aspect-ratio: 4 / 3; }
 }
 
 /* Beim Ueberfahren waechst die ganze Zeile ein Stueck. Der
