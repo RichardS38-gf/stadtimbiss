@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
-  <link rel="stylesheet" href="css/imbiss.css?v=36">
+  <link rel="stylesheet" href="css/imbiss.css?v=37">
   <link rel="stylesheet" href="css/konto.css?v=1">
   <script type="module" src="js/bestellen.js"></script>
   <style>
@@ -109,51 +109,41 @@
     body { background: var(--color-ink); }
 
     /* ── UMSCHALTER ──
-       Ein Rahmen, darin ein oranger Block, der auf die gewaehlte
-       Seite faehrt. Die Position haengt an :has(), weil
-       bestellen.js nur die Klasse mode-card--active umsetzt und
-       vom Schalter selbst nichts weiss. */
+       Echter Kippschalter: links und rechts die Beschriftung,
+       dazwischen eine Schiene mit orangem Block, der auf die
+       gewaehlte Seite faehrt.
+
+       Die Position haengt an :has(), weil bestellen.js nur die
+       Klasse mode-card--active umsetzt und vom Schalter selbst
+       nichts weiss. Die Schiene ist zusaetzlich anklickbar, das
+       erledigt ein kurzes Skript am Ende der Seite. */
     .order-head .modus {
-      position: relative;
       display: inline-flex;
-      border: 2px solid var(--color-line-dark);
-      background: var(--color-dark-2);
-      overflow: hidden;
+      align-items: center;
+      gap: var(--space-4);
+      border: none;
+      background: transparent;
     }
-
-    .order-head .modus::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 50%;
-      background: var(--color-accent);
-      transition: left 0.25s ease;
-    }
-
-    .order-head .modus:has(.modus__option:last-child.mode-card--active)::before { left: 50%; }
 
     .order-head .mode-card {
-      position: relative;
-      z-index: 1;
-      flex: 1;
       display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: var(--space-3);
-      padding: 0.8rem 1.5rem;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0;
       border: none;
       border-radius: 0;
       background: transparent;
       box-shadow: none;
       cursor: pointer;
+      text-align: left;
       white-space: nowrap;
     }
 
+    .order-head .mode-card:last-of-type { text-align: right; }
+
     .order-head .modus__name {
       font-family: var(--font-head);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--color-on-dark-mu);
@@ -163,15 +153,42 @@
     .order-head .modus__preis {
       font-family: var(--font-cond);
       font-weight: 700;
-      font-size: 0.84rem;
-      letter-spacing: 0.08em;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--color-on-dark-mu);
       transition: color var(--transition);
     }
 
-    .order-head .mode-card--active .modus__name,
-    .order-head .mode-card--active .modus__preis { color: var(--color-ink); }
+    .order-head .mode-card--active .modus__name { color: var(--color-on-dark); }
+    .order-head .mode-card--active .modus__preis { color: var(--color-gelb); }
+
+    /* Die Schiene */
+    .modus__schalter {
+      position: relative;
+      width: 74px;
+      height: 36px;
+      flex-shrink: 0;
+      border: 2px solid var(--color-line-dark);
+      border-radius: 0;
+      background: var(--color-dark-2);
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .modus__knopf {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      background: var(--color-accent);
+      transition: left 0.22s ease;
+    }
+
+    .modus:has([data-mode="abholung"].mode-card--active) .modus__knopf { left: 50%; }
+
+    .modus__schalter:hover { border-color: var(--color-accent); }
 
     .modus__info {
       font-family: var(--font-cond);
@@ -179,7 +196,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--color-on-dark-mu);
-      margin-top: var(--space-3);
+      margin-top: var(--space-4);
     }
 
     /* ── KATEGORIELEISTE ── */
@@ -441,6 +458,11 @@
             <span class="modus__name">Lieferung</span>
             <span class="modus__preis">2,50 &euro;</span>
           </button>
+
+          <button class="modus__schalter" type="button" id="modus-schalter" aria-label="Zwischen Lieferung und Abholung wechseln">
+            <span class="modus__knopf"></span>
+          </button>
+
           <button class="modus__option mode-card" type="button" data-mode="abholung">
             <span class="modus__name">Abholung</span>
             <span class="modus__preis">Gratis</span>
@@ -817,6 +839,13 @@
   </footer>
 
   <script>
+    // Die Schiene des Kippschalters loest den jeweils anderen
+    // Knopf aus. bestellen.js haengt seine Logik an die beiden
+    // Beschriftungen, die Schiene kennt es nicht.
+    document.getElementById('modus-schalter')?.addEventListener('click', () => {
+      document.querySelector('.modus__option:not(.mode-card--active)')?.click();
+    });
+
     document.querySelectorAll('.allergen-btn').forEach(btn => {
       btn.addEventListener('click', e => {
         e.stopPropagation();
