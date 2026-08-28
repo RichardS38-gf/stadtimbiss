@@ -1061,7 +1061,7 @@
    wirkt wie ein zuckendes Werbebanner statt wie ein Hinweis. */
 @keyframes banner-puls {
   0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.015); }
+  50%      { transform: scale(1.03); }
 }
 
 @media (prefers-reduced-motion: reduce) {
