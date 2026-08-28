@@ -1080,6 +1080,110 @@
   color: var(--color-on-dark-mu);
 }
 
+/* ── WERBEBANNER ──
+   Zwei Haelften: links das Taxi als Bildflaeche, rechts der Text.
+   Der freigestellte Teller liegt absolut auf der Naht zwischen
+   beiden und verklammert sie.
+
+   Der Banner steht bewusst nicht ueber die volle Breite, sondern
+   im Inhaltsbereich. */
+.banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 2px solid var(--color-accent);
+  background: var(--color-ink);
+}
+
+@media (min-width: 820px) {
+  .banner { grid-template-columns: 0.9fr 1.1fr; }
+}
+
+.banner__bild {
+  background-color: var(--color-dark-2);
+  background-image: url('../Bilder/taxi.webp');
+  background-size: cover;
+  background-position: center;
+  min-height: 220px;
+}
+
+.banner__text {
+  background: var(--color-ink);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (min-width: 820px) {
+  /* Platz fuer den Teller, der von links hereinragt */
+  .banner__text { padding-left: 5.5rem; }
+}
+
+.banner__kicker {
+  font-family: var(--font-cond);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-gelb);
+  margin-bottom: var(--space-3);
+}
+
+.banner__titel {
+  font-family: var(--font-head);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-3);
+}
+
+.banner__titel em { font-style: normal; color: var(--color-accent); }
+
+.banner__sub {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-on-dark-mu);
+  max-width: 42ch;
+  margin-bottom: var(--space-5);
+}
+
+/* Der Teller. Der Rand in der Grundfarbe setzt ihn vom Foto ab,
+   sonst verschwimmt der freigestellte Rand mit dem Hintergrund. */
+.banner__teller {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+@media (min-width: 820px) {
+  .banner__teller {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    width: 190px;
+    height: 190px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 819px) {
+  /* Untereinander: Foto oben, Teller mittig auf der Naht,
+     Text darunter. */
+  .banner__teller {
+    margin: -75px auto -20px;
+    position: relative;
+    z-index: 1;
+  }
+  .banner__text { align-items: center; text-align: center; }
+  .banner__sub { margin-inline: auto; }
+}
+
 /* ── STIMMEN ──
    Zettel an der Wand, wie sie hinter jeder Theke haengen.
    Leicht schief, beim Ueberfahren richten sie sich gerade. Nimmt
