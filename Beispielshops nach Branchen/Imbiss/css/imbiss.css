@@ -53,10 +53,21 @@
 
 .nav__logo-bild {
   display: block;
-  width: 38px;
+  width: 52px;
   height: auto;
   flex-shrink: 0;
 }
+
+/* Symbole in den Kopfzeilen-Knoepfen.
+   Auf dem Desktop tragen die Knoepfe Text und brauchen keins.
+   Auf Mobil wird der Text ausgeblendet, dann bleibt sonst ein
+   leerer Knopf stehen.
+
+   Der Selektor zielt auf .ic und nicht auf die Klasse im HTML:
+   iconsEinsetzen() ersetzt den span per outerHTML, dabei geht
+   jede dort gesetzte Klasse verloren. */
+.nav .btn--sm .ic,
+.hero-top__aktionen .btn .ic { display: none; }
 
 .nav__wortmarke {
   font-family: var(--font-head);
@@ -143,15 +154,14 @@
   .nav .btn__text,
   .nav .nav__konto-name,
   .nav__zusatz { display: none; }
+  .nav .btn--sm .ic { display: block; }
   .nav .nav__aktionen .btn { padding-inline: 0.6rem; gap: 0; }
   .nav .nav__konto { padding-inline: 0.55rem; }
   .nav .nav__wortmarke { font-size: 1.1rem; }
-  .nav .nav__logo-bild { width: 28px; }
 }
 
 @media (max-width: 400px) {
   .nav .nav__wortmarke { font-size: 0.98rem; }
-  .nav .nav__logo-bild { width: 24px; }
 }
 
 /* Sprungmarken nicht unter die Kopfzeile schieben */
@@ -713,6 +723,7 @@
   .hero-top { flex-wrap: wrap; }
   .hero-top__aktionen .btn__text,
   .hero-top__aktionen .nav__konto-name { display: none; }
+  .hero-top__aktionen .btn .ic { display: block; }
   .hero-top__aktionen .btn { padding-inline: 0.6rem; }
   .hero__inhalt { padding-block: var(--space-7); }
 
@@ -1254,7 +1265,7 @@
   .banner__teller {
     position: absolute;
     top: 220px;
-    left: var(--space-5);
+    left: -12px;
     transform: translateY(-50%);
     width: 112px;
     height: 112px;
