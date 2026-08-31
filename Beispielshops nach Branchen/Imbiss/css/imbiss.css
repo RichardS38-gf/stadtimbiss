@@ -1615,6 +1615,24 @@ body.dunkel .badge--dark {
   border-radius: 0;
 }
 
+/* ── DEMO-BANNER ──
+   Die Zeile mit dem Demo-Hinweis kommt aus auth.js und wird in
+   konto.css hell gestaltet. Diese Datei wird nach imbiss.css
+   geladen, deshalb der doppelte Klassenname. */
+.demo-banner.demo-banner {
+  background: var(--color-dark-2);
+  color: var(--color-on-dark);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.demo-banner.demo-banner a {
+  color: var(--color-gelb);
+}
+
+.demo-banner.demo-banner a:hover {
+  color: var(--color-accent);
+}
+
 /* ── FUSSZEILE ── */
 .footer {
   background: var(--color-ink);
