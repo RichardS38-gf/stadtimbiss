@@ -39,6 +39,9 @@ $breiten = @{
   # Altes Foto im Abschnitt Die Bude, 320px breit
   'werkstor'    = 700
 
+  # Bauarbeiter neben der Ueberschrift des Schichtplans, 280px
+  'bauarbeiter' = 620
+
   # Werbebanner
   'taxi_banner'       = 900
   'taxiteller_banner' = 500
