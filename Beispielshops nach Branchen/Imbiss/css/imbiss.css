@@ -802,34 +802,29 @@
   }
 }
 
-/* Das freigestellte Motiv steht links neben den drei Zeilen,
-   nicht neben der Ueberschrift. Kein Rahmen, kein Beschnitt, es
-   steht frei auf dem schwarzen Grund wie die Deko-Motive im
-   Bistro. Es braucht deshalb ein PNG mit transparentem
-   Hintergrund. */
-.schicht-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-}
+/* Freigestelltes Motiv am linken Bildschirmrand, ausserhalb des
+   Inhaltsbereichs von 1140 Pixeln. Gleiche Machart wie die
+   Deko-Motive im Bistro.
 
-@media (min-width: 1000px) {
-  .schicht-layout {
-    grid-template-columns: 190px 1fr;
-    gap: var(--space-7);
+   Es erscheint erst ab 1500 Pixeln Fensterbreite. Darunter ist
+   links vom Inhalt kein Platz, und das Motiv wuerde ueber die
+   Kacheln laufen. Das Bild braucht einen transparenten
+   Hintergrund, sonst sieht man ein Rechteck. */
+#schicht { position: relative; overflow: hidden; }
+
+.schicht-deko { display: none; }
+
+@media (min-width: 1500px) {
+  .schicht-deko {
+    display: block;
+    position: absolute;
+    left: var(--space-5);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 210px;
+    height: auto;
+    pointer-events: none;
   }
-}
-
-.schicht-deko {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-@media (max-width: 999px) {
-  /* Auf schmalen Schirmen weg. Darunter liegt der Wisch-Slider,
-     ein stehendes Motiv davor macht die Sektion nur laenger. */
-  .schicht-deko { display: none; }
 }
 
 /* ── SCHICHTPLAN ──
