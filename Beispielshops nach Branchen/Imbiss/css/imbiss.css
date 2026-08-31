@@ -802,36 +802,34 @@
   }
 }
 
-/* Kopf des Schichtplans: links das freigestellte Motiv, rechts
-   die Ueberschrift. Kein Rahmen und kein Beschnitt, das Bild
-   steht frei auf dem schwarzen Grund, wie die Deko-Motive im
+/* Das freigestellte Motiv steht links neben den drei Zeilen,
+   nicht neben der Ueberschrift. Kein Rahmen, kein Beschnitt, es
+   steht frei auf dem schwarzen Grund wie die Deko-Motive im
    Bistro. Es braucht deshalb ein PNG mit transparentem
    Hintergrund. */
-.schicht-kopf {
+.schicht-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6);
   align-items: center;
-  margin-bottom: var(--space-6);
 }
 
-@media (min-width: 900px) {
-  .schicht-kopf { grid-template-columns: 300px 1fr; }
+@media (min-width: 1000px) {
+  .schicht-layout {
+    grid-template-columns: 190px 1fr;
+    gap: var(--space-7);
+  }
 }
 
-.schicht-kopf .abschnitt__kopf { margin-bottom: 0; }
-
-.schicht-kopf__foto {
+.schicht-deko {
   display: block;
   width: 100%;
   height: auto;
 }
 
-@media (max-width: 899px) {
-  /* Auf Mobil ganz weg. Darunter liegt der Wisch-Slider, und ein
-     stehendes Motiv davor macht die Sektion nur laenger. */
-  .schicht-kopf__foto { display: none; }
-  .schicht-kopf { gap: 0; }
+@media (max-width: 999px) {
+  /* Auf schmalen Schirmen weg. Darunter liegt der Wisch-Slider,
+     ein stehendes Motiv davor macht die Sektion nur laenger. */
+  .schicht-deko { display: none; }
 }
 
 /* ── SCHICHTPLAN ──
