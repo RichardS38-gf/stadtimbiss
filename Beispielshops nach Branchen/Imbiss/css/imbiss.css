@@ -800,7 +800,17 @@
      weil die Hover-Regel im Stylesheet weiter unten steht. */
   .schicht .schicht__reihe:hover { transform: none; }
 
-  .schicht__bild { min-height: 0; aspect-ratio: 4 / 3; }
+  /* height auto ist hier entscheidend. Die Grundregel setzt
+     height 100 Prozent, und weil sich im Slider alle Zeilen auf
+     dieselbe Hoehe ziehen, wurde das Bild so hoch wie die
+     laengste Karte. object-fit cover hat dann seitlich alles
+     weggeschnitten, das Bild wirkte stark herangezoomt. */
+  .schicht__bild {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    align-self: start;
+  }
 }
 
 /* Beim Ueberfahren waechst die ganze Zeile ein Stueck. Der
