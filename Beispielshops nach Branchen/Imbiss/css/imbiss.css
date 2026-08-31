@@ -38,8 +38,13 @@
    Dafuer braucht es drei Dinge zusammen: nowrap am Container,
    min-width 0 an der Marke, damit sie ueberhaupt schrumpfen darf,
    und flex-shrink 0 an den Aktionen, damit die Knoepfe ihre
-   Groesse behalten. Fehlt eines davon, bricht die Zeile um. */
-.nav__inner {
+   Groesse behalten. Fehlt eines davon, bricht die Zeile um.
+
+   ALLE DREI mit zwei Klassen. konto.css wird nach dieser Datei
+   geladen und setzt dieselben Selektoren mit einer Klasse. Bei
+   gleicher Spezifitaet gewinnt die spaetere Datei, und dann
+   bricht die Kopfzeile wieder um. */
+.nav .nav__inner {
   position: relative;
   display: flex;
   align-items: center;
@@ -49,7 +54,7 @@
   flex-wrap: nowrap;
 }
 
-.nav__marke {
+.nav .nav__marke {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
@@ -103,7 +108,7 @@
    align-items stretch zieht alle Elemente auf dieselbe Hoehe,
    display contents auf der Konto-Huelle sorgt dafuer, dass der
    Knopf darin selbst zum Flex-Element wird. */
-.nav__aktionen {
+.nav .nav__aktionen {
   display: flex;
   align-items: stretch;
   gap: var(--space-2);
@@ -111,7 +116,7 @@
   flex-shrink: 0;
 }
 
-.nav__aktionen #nav-konto { display: contents; }
+.nav .nav__aktionen #nav-konto { display: contents; }
 
 .nav .nav__konto {
   display: inline-flex;
@@ -137,7 +142,7 @@
 .nav .nav__konto:hover .nav__konto-icon { color: var(--color-ink); }
 
 /* Warenkorb auf der Bestellseite in derselben Form */
-.nav__aktionen .cart-btn {
+.nav .nav__aktionen .cart-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -157,7 +162,7 @@
 /* Der Zusatz neben der Wortmarke verschwindet schon frueh. Er ist
    das erste, was Platz kostet, und das unwichtigste in der Zeile. */
 @media (max-width: 1100px) {
-  .nav__zusatz { display: none; }
+  .nav .nav__zusatz { display: none; }
 }
 
 @media (max-width: 900px) {
