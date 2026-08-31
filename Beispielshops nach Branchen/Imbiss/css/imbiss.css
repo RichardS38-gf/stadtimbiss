@@ -34,6 +34,11 @@
   border-bottom: 3px solid var(--color-accent);
 }
 
+/* Die Kopfzeile ist IMMER einzeilig, in jeder Fensterbreite.
+   Dafuer braucht es drei Dinge zusammen: nowrap am Container,
+   min-width 0 an der Marke, damit sie ueberhaupt schrumpfen darf,
+   und flex-shrink 0 an den Aktionen, damit die Knoepfe ihre
+   Groesse behalten. Fehlt eines davon, bricht die Zeile um. */
 .nav__inner {
   position: relative;
   display: flex;
@@ -48,7 +53,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  flex-shrink: 0;
+  min-width: 0;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 
 .nav__logo-bild {
@@ -101,6 +108,7 @@
   align-items: stretch;
   gap: var(--space-2);
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .nav__aktionen #nav-konto { display: contents; }
@@ -139,22 +147,23 @@
   background: var(--color-ink);
   color: var(--color-on-dark);
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .nav__aktionen .cart-btn:hover { background: var(--color-accent); }
 .nav__aktionen .cart-btn:hover .ic { color: var(--color-ink); }
 .nav__aktionen .cart-btn .ic { width: 22px; height: 22px; }
 
-@media (max-width: 900px) {
-  /* Einzeiler erzwingen. konto.css wird nach diesem Stylesheet
-     geladen, deshalb durchgehend zwei Klassen. min-width 0 laesst
-     die Marke schrumpfen, sonst drueckt sie die Aktionen um. */
-  .nav .nav__inner { flex-wrap: nowrap; gap: var(--space-3); }
-  .nav .nav__marke { min-width: 0; flex-shrink: 1; overflow: hidden; }
-  .nav .nav__aktionen { flex-shrink: 0; }
-  .nav .btn__text,
-  .nav .nav__konto-name,
+/* Der Zusatz neben der Wortmarke verschwindet schon frueh. Er ist
+   das erste, was Platz kostet, und das unwichtigste in der Zeile. */
+@media (max-width: 1100px) {
   .nav__zusatz { display: none; }
+}
+
+@media (max-width: 900px) {
+  .nav .nav__inner { gap: var(--space-3); }
+  .nav .btn__text,
+  .nav .nav__konto-name { display: none; }
   .nav .btn--sm .ic { display: block; }
   .nav .nav__aktionen .btn { padding-inline: 0.6rem; gap: 0; }
   .nav .nav__konto { padding-inline: 0.55rem; }
@@ -404,12 +413,13 @@
 
 .hero > * { position: relative; z-index: 2; }
 
-/* Obere Leiste im Hero */
+/* Auch im Hero der Startseite gilt: immer einzeilig. */
 .hero-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
+  flex-wrap: nowrap;
   padding-block: var(--space-4);
   border-bottom: 1px solid rgba(242, 238, 228, 0.18);
 }
@@ -419,6 +429,9 @@
   align-items: center;
   gap: var(--space-3);
   line-height: 1;
+  min-width: 0;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 
 .hero-marke__logo {
@@ -456,6 +469,7 @@
   display: flex;
   align-items: stretch;
   gap: var(--space-2);
+  flex-shrink: 0;
 }
 
 /* Konto-Knopf sieht aus wie die Knoepfe daneben und ist genauso
@@ -722,20 +736,9 @@
 
 @media (max-width: 899px) {
   .hero { min-height: 0; }
-
-  /* Einzeilig erzwingen. Ohne min-width 0 darf die Marke nicht
-     schrumpfen und drueckt die Aktionen in die naechste Zeile.
-     Dieselbe Loesung wie in der Kopfzeile der Unterseiten. */
-  .hero-top {
-    flex-wrap: nowrap;
-    gap: var(--space-3);
-  }
-
-  .hero-marke { min-width: 0; flex-shrink: 1; overflow: hidden; }
+  .hero-top { gap: var(--space-3); }
   .hero-marke__name { font-size: 1.25rem; }
   .hero-marke__logo { width: 52px; }
-  .hero-top__aktionen { flex-shrink: 0; }
-
   .hero-top__aktionen .btn__text,
   .hero-top__aktionen .nav__konto-name { display: none; }
   .hero-top__aktionen .btn .ic { display: block; }
