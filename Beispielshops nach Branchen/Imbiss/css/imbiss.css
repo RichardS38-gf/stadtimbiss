@@ -63,11 +63,21 @@
   overflow: hidden;
 }
 
-.nav__logo-bild {
+/* Das Logo darf nie schrumpfen und nie abgeschnitten werden.
+   Wenn die Marke zu wenig Platz hat, gibt stattdessen die
+   Wortmarke nach: sie bekommt min-width 0 und schneidet ab.
+   Ohne das klemmt der Container das Logo ab, weil die Wortmarke
+   mit nowrap nicht unter ihre Inhaltsbreite geht. */
+.nav .nav__logo-bild {
   display: block;
   width: 52px;
   height: auto;
   flex-shrink: 0;
+}
+
+.nav .nav__wortmarke {
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* Symbole in den Kopfzeilen-Knoepfen.
