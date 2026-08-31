@@ -1245,13 +1245,23 @@
 }
 
 @media (max-width: 819px) {
-  /* Untereinander: Foto oben, Teller mittig auf der Naht,
-     Text darunter. */
+  /* Untereinander: Foto oben, Text darunter. Der Teller liegt
+     links auf der Naht zwischen beiden, also genau auf der
+     Unterkante des Fotos.
+
+     Die 220px sind die Hoehe von .banner__bild. Wenn du die dort
+     aenderst, muss dieser Wert mit. */
   .banner__teller {
-    margin: -75px auto -20px;
-    position: relative;
+    position: absolute;
+    top: 220px;
+    left: var(--space-5);
+    transform: translateY(-50%);
+    width: 112px;
+    height: 112px;
+    margin: 0;
     z-index: 1;
   }
+
   .banner__text { align-items: center; text-align: center; }
   .banner__sub { margin-inline: auto; }
 }
