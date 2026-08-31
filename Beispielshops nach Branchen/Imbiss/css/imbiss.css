@@ -180,8 +180,23 @@
   .nav .btn__text,
   .nav .nav__konto-name { display: none; }
   .nav .btn--sm .ic { display: block; }
-  .nav .nav__aktionen .btn { padding-inline: 0.6rem; gap: 0; }
-  .nav .nav__konto { padding-inline: 0.55rem; }
+
+  /* Ohne Text sind die Knoepfe Quadrate. Feste Groesse statt
+     Innenabstaenden: der rechte Abstand stammt vom Pfeilblock,
+     der hier ausgeblendet ist, und blaehte die Knoepfe sonst auf
+     das Doppelte auf. Genau das hat der Wortmarke den Platz
+     genommen. */
+  .nav .nav__aktionen .btn,
+  .nav .nav__aktionen .cart-btn,
+  .nav .nav__konto {
+    width: 44px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .nav .nav__aktionen .btn::after { display: none; }
+
   .nav .nav__wortmarke { font-size: 1.25rem; }
 }
 
@@ -757,7 +772,17 @@
   .hero-top__aktionen .btn__text,
   .hero-top__aktionen .nav__konto-name { display: none; }
   .hero-top__aktionen .btn .ic { display: block; }
-  .hero-top__aktionen .btn { padding-inline: 0.6rem; }
+
+  /* Gleiche Quadrate wie in der Kopfzeile der Unterseiten */
+  .hero-top__aktionen .btn,
+  .hero-top__aktionen .nav__konto {
+    width: 44px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .hero-top__aktionen .btn::after { display: none; }
   .hero__inhalt { padding-block: var(--space-7); }
 
   /* Beide Handlungsaufrufe gleich breit, nicht ueber die ganze
