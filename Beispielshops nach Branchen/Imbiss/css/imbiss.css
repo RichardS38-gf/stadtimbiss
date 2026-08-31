@@ -60,14 +60,13 @@
   gap: 0.6rem;
   min-width: 0;
   flex-shrink: 1;
-  overflow: hidden;
 }
 
-/* Das Logo darf nie schrumpfen und nie abgeschnitten werden.
-   Wenn die Marke zu wenig Platz hat, gibt stattdessen die
-   Wortmarke nach: sie bekommt min-width 0 und schneidet ab.
-   Ohne das klemmt der Container das Logo ab, weil die Wortmarke
-   mit nowrap nicht unter ihre Inhaltsbreite geht. */
+/* Weder Logo noch Wortmarke duerfen schrumpfen oder abgeschnitten
+   werden. Kein overflow hidden: das hat die Wortmarke frueher
+   stillschweigend gekappt, statt das Platzproblem sichtbar zu
+   machen. Wenn es eng wird, geht stattdessen die Schriftgroesse
+   in den Media Queries weiter herunter. */
 .nav .nav__logo-bild {
   display: block;
   width: 52px;
@@ -76,8 +75,7 @@
 }
 
 .nav .nav__wortmarke {
-  min-width: 0;
-  overflow: hidden;
+  flex-shrink: 0;
 }
 
 /* Symbole in den Kopfzeilen-Knoepfen.
@@ -184,12 +182,17 @@
   /* Ohne Text sind die Knoepfe Quadrate. Feste Groesse statt
      Innenabstaenden: der rechte Abstand stammt vom Pfeilblock,
      der hier ausgeblendet ist, und blaehte die Knoepfe sonst auf
-     das Doppelte auf. Genau das hat der Wortmarke den Platz
-     genommen. */
+     das Doppelte auf.
+
+     align-self center ist noetig, weil die Leiste auf stretch
+     steht. Ohne das werden die Quadrate auf die volle Zeilenhoehe
+     gezogen und sind hohe schmale Rechtecke. */
   .nav .nav__aktionen .btn,
   .nav .nav__aktionen .cart-btn,
   .nav .nav__konto {
     width: 44px;
+    height: 44px;
+    align-self: center;
     padding: 0;
     gap: 0;
     justify-content: center;
@@ -202,7 +205,9 @@
 
 @media (max-width: 400px) {
   .nav .nav__wortmarke,
-  .hero-marke__name { font-size: 1.05rem; }
+  .hero-marke__name { font-size: 1rem; }
+  .nav .nav__logo-bild,
+  .hero-marke__logo { width: 42px; }
 }
 
 /* Sprungmarken nicht unter die Kopfzeile schieben */
@@ -461,7 +466,6 @@
   line-height: 1;
   min-width: 0;
   flex-shrink: 1;
-  overflow: hidden;
 }
 
 .hero-marke__logo {
@@ -777,6 +781,8 @@
   .hero-top__aktionen .btn,
   .hero-top__aktionen .nav__konto {
     width: 44px;
+    height: 44px;
+    align-self: center;
     padding: 0;
     gap: 0;
     justify-content: center;
