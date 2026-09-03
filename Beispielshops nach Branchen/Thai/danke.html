@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vielen Dank — Sabai Sabai</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A24B' stroke-width='1.5' stroke-linecap='round'><path d='M12 3c3 3 4.5 5.6 4.5 8.4A4.5 4.5 0 0 1 12 16a4.5 4.5 0 0 1-4.5-4.6C7.5 8.6 9 6 12 3z'/><path d='M12 16v5'/></svg>">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Karla:wght@400;500;600&family=Noto+Sans+Thai:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/checkout.css?v=2">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <link rel="stylesheet" href="css/thai.css?v=37">
+</head>
+<body class="dunkel">
+
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
+        <span class="nav__wortmarke">Sabai <em>Sabai</em></span>
+        <span class="nav__zusatz">Thai Küche</span>
+      </a>
+      <nav class="nav__aktionen">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline-light btn--sm"><span data-icon="kalender"></span><span class="btn__text">Tisch</span></a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm"><span data-icon="korb"></span><span class="btn__text">Bestellen</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <!-- Hauptinhalt -->
+  <main class="danke-main container">
+    <div class="danke-icon">✓</div>
+    <h1>Vielen Dank!</h1>
+    <p>Vielen Dank! Deine Bestellung ist bei uns. Die K&uuml;che legt los.</p>
+
+    <div class="danke-info">
+      <div class="danke-info__item">
+        <strong>Bestellnummer</strong>
+        <span id="danke-nummer">SB-0000</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Voraussichtliche Lieferzeit</strong>
+        <span>ca. 30 Minuten</span>
+      </div>
+      <div class="danke-info__item">
+        <strong>Gesamtbetrag</strong>
+        <span id="danke-summe">0,00 €</span>
+      </div>
+    </div>
+
+    <!-- Stempel-Rueckmeldung -->
+    <div id="danke-stempel" style="max-width:520px;margin-inline:auto"></div>
+
+    <div style="display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;margin-top:var(--space-5)">
+      <a href="konto.html#stempelkarte" class="btn btn--primary">Meine Stempelkarte</a>
+      <a href="index.html" class="btn btn--outline">Zurück zur Startseite</a>
+    </div>
+  </main>
+
+  <script type="module">
+    import { setupSeite, getStampCard, TREUE } from './js/auth.js';
+    import { iconsEinsetzen } from './js/icons.js';
+
+    await setupSeite();
+    iconsEinsetzen();
+
+    function fmt(n) {
+      return Number(n).toFixed(2).replace('.', ',') + ' €';
+    }
+
+    // Daten aus dem Checkout uebernehmen
+    let daten = null;
+    try {
+      daten = JSON.parse(sessionStorage.getItem('si_letzte_bestellung'));
+    } catch {
+      daten = null;
+    }
+
+    if (daten) {
+      document.getElementById('danke-nummer').textContent = daten.order_number;
+      document.getElementById('danke-summe').textContent = fmt(daten.total);
+      sessionStorage.removeItem('si_letzte_bestellung');
+    }
+
+    // Stempel-Rueckmeldung
+    const el = document.getElementById('danke-stempel');
+    const stempel = daten ? daten.stempel : null;
+    const karte = await getStampCard();
+
+    if (stempel && stempel.vergeben && stempel.karte_voll) {
+      el.innerHTML = `
+        <div class="stamp-hint" style="border-style:solid">
+          <span class="stamp-hint__zahl">${TREUE.target_stamps}/${TREUE.target_stamps}</span>
+          <span>Deine Stempelkarte ist <strong>voll</strong>.
+          Der Gutschein über ${TREUE.reward_description.toLowerCase()} liegt in deinem Konto.</span>
+        </div>`;
+    } else if (stempel && stempel.vergeben) {
+      el.innerHTML = `
+        <div class="stamp-hint" style="border-style:solid">
+          <span class="stamp-hint__zahl">${stempel.stempel_stand}/${TREUE.target_stamps}</span>
+          <span>Stempel <strong>${stempel.stempel_stand} von ${TREUE.target_stamps}</strong> gesammelt.
+          Noch ${stempel.verbleibend} bis zu deiner Belohnung.</span>
+        </div>`;
+    } else if (stempel && stempel.grund === 'unter_mindestwert') {
+      el.innerHTML = `
+        <div class="stamp-hint">
+          <span class="stamp-hint__zahl">${karte ? karte.stamps_count : 0}/${TREUE.target_stamps}</span>
+          <span>Für einen Stempel hätten ${fmt(stempel.fehlbetrag)} mehr Warenwert gefehlt.
+          Beim nächsten Mal klappt es.</span>
+        </div>`;
+    } else if (stempel && stempel.grund === 'rabatt_kombiniert') {
+      el.innerHTML = `
+        <div class="stamp-hint">
+          <span class="stamp-hint__zahl">!</span>
+          <span>Für Bestellungen mit eingelöstem Gutschein gibt es keinen Stempel.</span>
+        </div>`;
+    }
+
+    // Sticky Nav Shadow beim Scrollen
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
+</body>
+</html>

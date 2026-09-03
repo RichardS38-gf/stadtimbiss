@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabai Sabai — Thailändisch essen in Braunschweig</title>
+  <meta name="description" content="Currys, die zwei Tage ziehen. Wok bei voller Flamme. Schärfe, die du selbst bestimmst.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A24B' stroke-width='1.5' stroke-linecap='round'><path d='M12 3c3 3 4.5 5.6 4.5 8.4A4.5 4.5 0 0 1 12 16a4.5 4.5 0 0 1-4.5-4.6C7.5 8.6 9 6 12 3z'/><path d='M12 16v5'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Karla:wght@400;500;600&family=Noto+Sans+Thai:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <link rel="stylesheet" href="css/thai.css?v=39">
+</head>
+<body>
+
+  <!-- ── HERO ──
+       Links der Text, rechts das Bild im Bogen. Der Bogen ist die
+       Leitform der Seite und kehrt bei den Kategorien wieder. -->
+  <section class="hero">
+
+    <div class="container hero-top">
+      <a href="index.html" class="hero-marke">
+        <img class="hero-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="hero-marke__name">Sabai <em>Sabai</em></span>
+      </a>
+
+      <div class="hero-top__aktionen">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline-light btn--sm">
+          <span data-icon="kalender"></span><span class="btn__text">Tisch</span>
+        </a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">
+          <span data-icon="korb"></span><span class="btn__text">Bestellen</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__inhalt">
+      <div class="hero__spalte">
+        <span class="hero__kicker">Bangkok in Braunschweig</span>
+        <div class="zier"></div>
+        <h1 class="hero__titel">Sabai Sabai</h1>
+
+        <p class="hero__eintrag">
+          <span class="hero__eintrag-wort">sa&middot;bai</span>
+          <span class="hero__eintrag-gram">Adjektiv, thail&auml;ndisch</span>
+
+          <span class="hero__eintrag-bed">
+            <span>wohlig</span>
+            <span>entspannt</span>
+            <span>ohne Eile</span>
+          </span>
+        </p>
+
+        <p class="hero__text">
+          Currys, die zwei Tage ziehen. Wok bei voller Flamme. Und Schärfe,
+          die du selbst bestimmst.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#kategorien" class="btn btn--primary">Karte ansehen</a>
+          <a href="reservieren.html" class="btn btn--outline-light">Tisch reservieren</a>
+        </div>
+      </div>
+
+      <img class="hero__bild" src="Bilder/hero.webp" alt="Gastraum mit Currys und Reis auf dem Tisch">
+    </div>
+  </section>
+
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <!-- ── SO ISST MAN BEI UNS ──
+       Ersetzt das uebliche Ueber-uns.
+
+       Die Sektion ist vier Bildschirmhoehen hoch. Darin sitzt eine
+       Buehne mit position sticky, die stehen bleibt, waehrend die
+       Sektion vorbeiscrollt. js/tischdreh.js rechnet den
+       Scrollfortschritt in einen Drehwinkel um und blendet immer
+       genau einen der vier Texte ein. -->
+  <section class="tisch-sektion" id="tisch">
+    <div class="container">
+      <div class="abschnitt__kopf">
+        <h2 class="titel">Konzept</h2>
+        <div class="zier"></div>
+      </div>
+    </div>
+
+    <div class="tisch-bahn" id="tisch-bahn">
+      <div class="tisch-buehne">
+
+        <img class="tisch-bild" id="tisch-bild" src="Bilder/rundertisch.webp" alt="Runder Tisch mit thailändischen Gerichten von oben">
+
+        <div class="tisch-punkt tisch-punkt--1" data-punkt>
+          <p class="tisch-punkt__titel">Ein Gericht pro Person, dazu Reis</p>
+          <p class="tisch-punkt__text">Bei uns bestellt nicht jeder für sich. Alles kommt auf den Tisch, jeder nimmt sich.</p>
+        </div>
+
+        <div class="tisch-punkt tisch-punkt--2" data-punkt>
+          <p class="tisch-punkt__titel">Mischt scharf und mild</p>
+          <p class="tisch-punkt__text">Ein Curry, ein Salat, etwas aus dem Wok. Das Zusammenspiel macht es aus, nicht das einzelne Gericht.</p>
+        </div>
+
+        <div class="tisch-punkt tisch-punkt--3" data-punkt>
+          <p class="tisch-punkt__titel">Der Reis ist die Hauptsache</p>
+          <p class="tisch-punkt__text">Essen gehen heißt auf Thai kin khao, also Reis essen. Alles andere ist streng genommen Beilage.</p>
+        </div>
+
+        <div class="tisch-punkt tisch-punkt--4" data-punkt>
+          <p class="tisch-punkt__titel">Nachwürzen gehört dazu</p>
+          <p class="tisch-punkt__text">Chili in Fischsauce, Zucker und Essig stehen auf dem Tisch. Damit stellt sich jeder sein Gericht selbst ein.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KATEGORIEN ──
+       Grosse Liste statt Kachelreihe. Beim Ueberfahren einer Zeile
+       wechselt das Bild rechts. So ist immer nur ein Bild im Blick,
+       statt dass vier miteinander konkurrieren.
+
+       Ohne Skript bleibt das erste Bild stehen und die Liste
+       funktioniert als normale Linkliste. -->
+  <section class="abschnitt container" id="kategorien">
+    <div class="kat">
+
+      <div class="kat__liste">
+        <div class="abschnitt__kopf">
+          <h2 class="titel">Speisekarte</h2>
+          <div class="zier"></div>
+        </div>
+
+        <a class="kat__zeile" href="bestellen.html#vorspeisen" data-kat="0">
+          <span class="kat__name">Vorspeisen</span>
+          <span class="thai-schrift">ของทานเล่น</span>
+        </a>
+        <a class="kat__zeile" href="bestellen.html#suppen" data-kat="1">
+          <span class="kat__name">Suppen</span>
+          <span class="thai-schrift">ต้มยำ</span>
+        </a>
+        <a class="kat__zeile" href="bestellen.html#currys" data-kat="2">
+          <span class="kat__name">Currys</span>
+          <span class="thai-schrift">แกง</span>
+        </a>
+        <a class="kat__zeile" href="bestellen.html#wok" data-kat="3">
+          <span class="kat__name">Aus dem Wok</span>
+          <span class="thai-schrift">ผัด</span>
+        </a>
+
+        <div class="kat__aktion">
+          <a href="bestellen.html" class="btn btn--primary">Ganze Karte</a>
+        </div>
+      </div>
+
+      <div class="kat__buehne" id="kat-buehne">
+        <img class="kat__bild kat__bild--an" src="Bilder/vorspeisen.webp" alt="" loading="lazy">
+        <img class="kat__bild" src="Bilder/suppen.webp" alt="" loading="lazy">
+        <img class="kat__bild" src="Bilder/currys.webp" alt="" loading="lazy">
+        <img class="kat__bild" src="Bilder/wok.webp" alt="" loading="lazy">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ZUTATEN ──
+       Fuenf Grundzutaten, die in fast jedem Gericht stecken.
+       Bewusst auf hellem Grund: die Seite ist sonst durchgehend
+       Jade, und die Kreisform kommt sonst nirgends vor.
+
+       js/zutaten.js blendet die Kacheln nacheinander ein, sobald
+       die Sektion ins Bild kommt. Ohne Skript stehen sie einfach
+       da. -->
+  <section class="abschnitt container" id="zutaten">
+    <div class="abschnitt__kopf">
+      <h2 class="titel">Unsere Lieblingszutaten</h2>
+      <div class="zier"></div>
+    </div>
+
+    <div class="zutaten">
+      <article class="zutat" data-zutat>
+        <img class="zutat__bild" src="Bilder/galgant.webp" alt="" loading="lazy">
+        <p class="zutat__name">Galgant</p>
+        <p class="thai-schrift">ข่า</p>
+        <p class="zutat__text">Sieht aus wie Ingwer, schmeckt harziger und kaum scharf.</p>
+      </article>
+
+      <article class="zutat" data-zutat>
+        <img class="zutat__bild" src="Bilder/zitronengras.webp" alt="" loading="lazy">
+        <p class="zutat__name">Zitronengras</p>
+        <p class="thai-schrift">ตะไคร้</p>
+        <p class="zutat__text">Gibt die Frische. Wird mitgekocht, aber nicht mitgegessen.</p>
+      </article>
+
+      <article class="zutat" data-zutat>
+        <img class="zutat__bild" src="Bilder/limettenblatt.webp" alt="" loading="lazy">
+        <p class="zutat__name">Limettenblatt</p>
+        <p class="thai-schrift">ใบมะกรูด</p>
+        <p class="zutat__text">Der Duft, den man sofort mit Thai verbindet.</p>
+      </article>
+
+      <article class="zutat" data-zutat>
+        <img class="zutat__bild" src="Bilder/fischsauce.webp" alt="" loading="lazy">
+        <p class="zutat__name">Fischsauce</p>
+        <p class="thai-schrift">น้ำปลา</p>
+        <p class="zutat__text">Steht bei uns statt Salz. Riecht kräftig, schmeckt rund.</p>
+      </article>
+
+      <article class="zutat" data-zutat>
+        <img class="zutat__bild" src="Bilder/palmzucker.webp" alt="" loading="lazy">
+        <p class="zutat__name">Palmzucker</p>
+        <p class="thai-schrift">น้ำตาลปี๊บ</p>
+        <p class="zutat__text">Karamellig. Bringt Schärfe und Säure ins Gleichgewicht.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── WERBEBANNER ──
+       Kein Reklamekasten, sondern ein Abschnitt in der Sprache der
+       Seite: dieselbe Zierlinie, dieselbe Knopfform. Die Wirkung
+       kommt allein aus dem Anschnitt, das Tuk-Tuk ragt links aus
+       dem Bild heraus und wirkt dadurch in Fahrt.
+
+       Das Bild muss freigestellt sein, also mit transparentem
+       Hintergrund. -->
+  <section class="abschnitt abschnitt--dunkel banner" id="lieferung">
+    <div class="container banner__inhalt">
+
+      <img class="banner__bild" src="Bilder/tuktuk.webp" alt="Tuk-Tuk in Fahrt" loading="lazy">
+
+      <div>
+        <span class="kicker">Freitag bis Sonntag</span>
+        <h2 class="titel">Am Wochenende<br>liefern wir <em>gratis</em></h2>
+        <div class="zier"></div>
+        <p class="abschnitt__text">
+          Ab 20 &euro; Bestellwert, im Umkreis von f&uuml;nf Kilometern.
+          Ohne Mindestmenge, ohne Kleingedrucktes.
+        </p>
+        <div class="banner__aktion">
+          <a href="bestellen.html" class="btn btn--primary">Jetzt bestellen</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── KUNDENBEWERTUNGEN ──
+       Links die Kennzahl als feste Kachel, damit sie dauerhaft im
+       Blick bleibt. Rechts laeuft das Band daran vorbei.
+
+       Die Karten stehen zweimal im Markup, damit die Wiederholung
+       nahtlos ist: die Animation schiebt um genau die halbe Breite,
+       dann beginnt der zweite Satz an derselben Stelle wie vorher
+       der erste. -->
+  <section class="abschnitt abschnitt--dunkel" id="stimmen">
+    <div class="container">
+      <div class="abschnitt__kopf">
+        <h2 class="titel">Kundenbewertungen</h2>
+        <div class="zier"></div>
+      </div>
+    </div>
+
+    <div class="stimmen-reihe">
+
+      <div class="stimmen-score">
+        <p class="stimmen-score__zahl">4,8</p>
+        <p class="stimmen-score__sterne">★★★★★</p>
+        <p class="stimmen-score__anzahl">218 Bewertungen<br>bei Google</p>
+      </div>
+
+      <div class="stimmenband">
+        <div class="stimmenband__lauf">
+
+          <article class="stimme">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Das Tom Yum schmeckt wie in Bangkok. Endlich fragt jemand nach, wie scharf ich es wirklich will.</p>
+            <p class="stimme__autor">Nina B. &middot; vor 2 Wochen</p>
+          </article>
+
+          <article class="stimme">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Wir waren zu viert und haben alles geteilt, genau wie es auf der Seite steht. War großartig.</p>
+            <p class="stimme__autor">Tobias R. &middot; vor 1 Monat</p>
+          </article>
+
+          <article class="stimme">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Massaman mit Rind, dazu ein Chang. Ruhiger Laden, freundlich, faire Preise.</p>
+            <p class="stimme__autor">Yasmin K. &middot; vor 3 Wochen</p>
+          </article>
+
+          <article class="stimme">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Der Papayasalat ist wirklich scharf, nicht auf deutsch scharf. Endlich.</p>
+            <p class="stimme__autor">Jonas M. &middot; vor 5 Wochen</p>
+          </article>
+
+          <article class="stimme">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Haben uns beraten lassen und drei Gerichte für den Tisch bestellt. Kommen wieder.</p>
+            <p class="stimme__autor">Sarah L. &middot; vor 2 Monaten</p>
+          </article>
+
+          <!-- Zweiter Satz, identisch. Nur fuer die nahtlose
+               Wiederholung, deshalb vor Vorlesesoftware versteckt. -->
+          <article class="stimme" aria-hidden="true">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Das Tom Yum schmeckt wie in Bangkok. Endlich fragt jemand nach, wie scharf ich es wirklich will.</p>
+            <p class="stimme__autor">Nina B. &middot; vor 2 Wochen</p>
+          </article>
+
+          <article class="stimme" aria-hidden="true">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Wir waren zu viert und haben alles geteilt, genau wie es auf der Seite steht. War großartig.</p>
+            <p class="stimme__autor">Tobias R. &middot; vor 1 Monat</p>
+          </article>
+
+          <article class="stimme" aria-hidden="true">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Massaman mit Rind, dazu ein Chang. Ruhiger Laden, freundlich, faire Preise.</p>
+            <p class="stimme__autor">Yasmin K. &middot; vor 3 Wochen</p>
+          </article>
+
+          <article class="stimme" aria-hidden="true">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Der Papayasalat ist wirklich scharf, nicht auf deutsch scharf. Endlich.</p>
+            <p class="stimme__autor">Jonas M. &middot; vor 5 Wochen</p>
+          </article>
+
+          <article class="stimme" aria-hidden="true">
+            <span class="stimme__sterne">★★★★★</span>
+            <p class="stimme__text">Haben uns beraten lassen und drei Gerichte für den Tisch bestellt. Kommen wieder.</p>
+            <p class="stimme__autor">Sarah L. &middot; vor 2 Monaten</p>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ÖFFNUNGSZEITEN ──
+       Links die Antwort auf die eigentliche Frage, bis wann heute
+       geoeffnet ist, dazu die Adresse als Text. Rechts die ganze
+       Woche. Keine eingebettete Karte: der Kartenausschnitt sagt
+       nichts, und wer die Route braucht, landet ueber den Link
+       direkt in seiner Karten-App.
+
+       js/oeffnung.js fuellt die grosse Zeile und die Restzeit und
+       hebt den heutigen Tag hervor. Die Zeiten stehen hier UND in
+       oeffnung.js, beim Aendern also beide Stellen anfassen. -->
+  <section class="abschnitt abschnitt--dunkel" id="kontakt">
+    <div class="container">
+      <div class="kontakt">
+
+        <div>
+          <div class="abschnitt__kopf">
+            <h2 class="titel">Öffnungszeiten</h2>
+            <div class="zier"></div>
+          </div>
+
+          <p class="jetzt__gross" id="oeffnung-gross">
+            <span>Heute bis</span>
+            <em>22 Uhr</em>
+            <span>ge&ouml;ffnet</span>
+          </p>
+          <p class="jetzt__rest" id="oeffnung-rest"></p>
+
+          <p class="kontakt__adresse">
+            Musterstraße 14, 38100 Braunschweig<br>
+            <a href="tel:0531000000">0531 / 000 000</a> &middot;
+            <a href="mailto:hallo@sabai-sabai.de">hallo@sabai-sabai.de</a>
+          </p>
+
+          <a class="route" href="https://www.google.com/maps/search/?api=1&amp;query=Musterstra%C3%9Fe+14,+38100+Braunschweig"
+             target="_blank" rel="noopener">Route öffnen &rarr;</a>
+        </div>
+
+        <div class="woche">
+          <div class="woche__tag" data-tag="1">
+            <span class="woche__name">Montag</span><span class="woche__zeit">Ruhetag</span>
+          </div>
+          <div class="woche__tag" data-tag="2">
+            <span class="woche__name">Dienstag</span><span class="woche__zeit">17 – 22 Uhr</span>
+          </div>
+          <div class="woche__tag" data-tag="3">
+            <span class="woche__name">Mittwoch</span><span class="woche__zeit">17 – 22 Uhr</span>
+          </div>
+          <div class="woche__tag" data-tag="4">
+            <span class="woche__name">Donnerstag</span><span class="woche__zeit">17 – 22 Uhr</span>
+          </div>
+          <div class="woche__tag" data-tag="5">
+            <span class="woche__name">Freitag</span><span class="woche__zeit">17 – 23 Uhr</span>
+          </div>
+          <div class="woche__tag" data-tag="6">
+            <span class="woche__name">Samstag</span><span class="woche__zeit">17 – 23 Uhr</span>
+          </div>
+          <div class="woche__tag" data-tag="0">
+            <span class="woche__name">Sonntag</span><span class="woche__zeit">12 – 21 Uhr</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FUSSZEILE ──
+       Alles auf einer Achse, im Hintergrund dasselbe Monogramm wie
+       im Hero. Die Oeffnungszeiten stehen hier als eine Zeile, weil
+       sie weiter oben ohnehin ausfuehrlich als Kachelband stehen. -->
+  <footer class="footer">
+    <div class="container">
+      <a href="index.html" class="footer-marke">
+        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="footer-marke__name">Sabai <em>Sabai</em></span>
+      </a>
+
+      <p class="footer__zeile">
+        Musterstraße 14, 38100 Braunschweig<br>
+        <a href="tel:0531000000">0531 / 000 000</a> &middot;
+        <a href="mailto:hallo@sabai-sabai.de">hallo@sabai-sabai.de</a><br>
+        Di bis Do 17–22 &middot; Fr und Sa 17–23 &middot; So 12–21 &middot; Mo Ruhetag
+      </p>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <p class="footer__copy">© 2025 Sabai Sabai, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+
+  <script type="module">
+    import { setupSeite } from './js/auth.js';
+    import { iconsEinsetzen } from './js/icons.js';
+    import { tischDrehung } from './js/tischdreh.js';
+    import { kategorienBildwechsel } from './js/kategorien.js';
+    import { zutatenEinblenden } from './js/zutaten.js';
+    import { oeffnungAnzeigen } from './js/oeffnung.js';
+
+    iconsEinsetzen();
+    tischDrehung();
+    kategorienBildwechsel();
+    zutatenEinblenden();
+    oeffnungAnzeigen();
+    await setupSeite();
+    iconsEinsetzen();
+  </script>
+
+</body>
+</html>

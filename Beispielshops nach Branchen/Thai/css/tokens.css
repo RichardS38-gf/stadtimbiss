@@ -1,0 +1,81 @@
+/* tokens.css — Sabai Sabai
+   Jadegruen, Gold und Reispapier. Bewusst anders als die vier
+   anderen Shops: keine harten Kanten, keine kraeftigen
+   Signalfarben, sondern gedeckte Toene und ein warmes Gold als
+   einziger Akzent. */
+:root {
+  /* Farben */
+  --color-accent:     #C9A24B;   /* Gold, der einzige Akzent */
+  --color-accent-dk:  #A8853A;
+  --color-on-accent:  #0E3B32;   /* Jade auf Gold, nicht Weiss */
+  --color-chili:      #B8342A;   /* nur fuer die Schaerfeskala */
+  --color-gold:       #C9A24B;   /* Sterne */
+
+  --color-bg:         #F6F1E7;   /* Reispapier */
+  --color-bg-soft:    #FFFFFF;
+  --color-ink:        #0E3B32;   /* Jade, Schrift und dunkle Flaechen */
+  --color-jade-hell:  #123F35;   /* zweiter dunkler Ton */
+  --color-muted:      #5E7A70;
+  --color-line:       #DCD3C2;
+  --color-dark:       #0E3B32;
+  --color-dark-2:     #123F35;
+  --color-on-dark:    #F6F1E7;
+  --color-on-dark-mu: #A9BDB4;
+  --color-line-dark:  rgba(201, 162, 75, 0.28);
+
+  /* Aliasse aus dem Bistro-Farbsatz.
+     konto.css, bestellen.css und checkout.css sind shop-neutral
+     und greifen auf diese Namen zu. Fehlt eine Variable, faellt
+     die ganze Deklaration aus und die Flaeche bleibt farblos. */
+  --color-rose:       #C9A24B;
+  --color-rose-hell:  #EFE6D2;
+  --color-mokka:      #123F35;
+
+  /* Typografie
+     Cormorant Garamond traegt die Ueberschriften: eine helle
+     Renaissance-Antiqua, die mit viel Weissraum und grossen
+     Graden am besten wirkt. Deshalb stehen Ueberschriften hier
+     duenn und gross statt fett.
+     Karla fuer Fliesstext und Etiketten. */
+  --font-head:   'Cormorant Garamond', Georgia, serif;
+  --font-body:   'Karla', system-ui, sans-serif;
+  --font-cond:   'Karla', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* Container */
+  --container-pad-mobile:  1rem;
+  --container-pad-tablet:  1.5rem;
+  --container-pad-desktop: 2rem;
+  --max-content-width:     1140px;
+
+  /* Typografische Skala */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.5rem;
+  --text-5xl:  3.5rem;
+
+  --transition: 0.2s ease;
+
+  /* Leichte Rundung. Die grosse Form ist der Bogen, der wird
+     einzeln gesetzt. */
+  --radius-sm: 3px;
+  --radius-md: 4px;
+
+  /* Der Bogen. Wiederkehrende Form der Seite, oben halbrund,
+     unten fast gerade. */
+  --bogen: 180px 180px var(--radius-md) var(--radius-md);
+}

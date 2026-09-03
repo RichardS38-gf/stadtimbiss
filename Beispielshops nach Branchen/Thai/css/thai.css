@@ -1,0 +1,1764 @@
+/* thai.css — Sabai Sabai
+   Eigenes Seiten-Stylesheet.
+
+   Gestaltungsregeln dieses Shops:
+   - Der Bogen ist die Leitform: Bilder und Kacheln sind oben
+     halbrund. Zitat der Tempelarchitektur, ohne folkloristisch
+     zu werden.
+   - Ueberschriften duenn und gross in Cormorant, nie fett.
+   - Gold ist der einzige Akzent. Chilirot kommt ausschliesslich
+     in der Schaerfeskala vor, sonst nirgends.
+   - Trenner ist eine goldene Haarlinie mit einer Raute in der
+     Mitte, nicht eine Flaeche.
+
+   Reihenfolge im HTML: thai.css wird ALS LETZTES geladen, nach
+   konto.css. Sonst gewinnen dort gesetzte Regeln. */
+
+/* ── ZIERLINIE ──
+   Zwei Linien statt einer: die obere kraeftig ueber die volle
+   Breite, die untere schwaecher und kuerzer. Die Asymmetrie gibt
+   Richtung und verhindert, dass es wie ein Trennstrich aus einem
+   Formular aussieht.
+
+   Im Markup:  <div class="zier"></div>
+   Das leere span von frueher wird nicht mehr gebraucht, stoert
+   aber auch nicht. */
+.zier {
+  margin-block: var(--space-4) var(--space-5);
+  height: 7px;
+  max-width: 340px;
+  /* Zwei Verlaeufe als zwei Linien. Getrennte Deckkraefte gehen
+     bei einem Element nicht, deshalb steckt die Abstufung in den
+     Farben selbst. */
+  background-image:
+    linear-gradient(rgba(201, 162, 75, 0.75), rgba(201, 162, 75, 0.75)),
+    linear-gradient(rgba(201, 162, 75, 0.3), rgba(201, 162, 75, 0.3));
+  background-size: 100% 1px, 62% 1px;
+  background-position: 0 0, 0 6px;
+  background-repeat: no-repeat;
+}
+
+/* Kurze Fassung, etwa unter dem Kicker im Hero: nur die obere
+   Linie. */
+.zier--kurz {
+  max-width: 120px;
+  height: 1px;
+  margin-block: var(--space-3) var(--space-4);
+  background-size: 100% 1px;
+  background-position: 0 0;
+}
+
+.zier--mitte { margin-inline: auto; }
+
+/* Auf hellem Grund braucht die schwaechere Linie etwas mehr
+   Deckkraft, sonst verschwindet sie auf Reispapier. */
+.abschnitt:not(.abschnitt--dunkel) .zier {
+  background-image:
+    linear-gradient(rgba(201, 162, 75, 0.9), rgba(201, 162, 75, 0.9)),
+    linear-gradient(rgba(201, 162, 75, 0.45), rgba(201, 162, 75, 0.45));
+}
+
+/* ── KOPFZEILE ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-ink);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+/* Immer einzeilig. nowrap am Container, min-width 0 an der Marke,
+   flex-shrink 0 an den Aktionen. Alles mit zwei Klassen, damit es
+   unabhaengig von der Ladereihenfolge greift. */
+.nav .nav__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+}
+
+.nav .nav__marke {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.nav .nav__logo-bild {
+  display: block;
+  width: 46px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.nav .nav__wortmarke {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+  letter-spacing: 0.06em;
+  color: var(--color-on-dark);
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav .nav__wortmarke em { font-style: normal; color: var(--color-accent); }
+
+.nav .nav__zusatz {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.nav .nav__aktionen {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.nav .nav__aktionen #nav-konto { display: contents; }
+
+.nav .nav__konto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--color-line-dark);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav .nav__konto,
+.nav .nav__konto-name,
+.nav .nav__konto-icon { color: var(--color-on-dark); }
+
+.nav .nav__konto:hover { border-color: var(--color-accent); opacity: 1; }
+.nav .nav__konto:hover .nav__konto-icon { color: var(--color-accent); }
+
+/* Warenkorb auf der Bestellseite */
+.nav .nav__aktionen .cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--color-line-dark);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-on-dark);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav .nav__aktionen .cart-btn:hover { border-color: var(--color-accent); }
+.nav .nav__aktionen .cart-btn .ic { width: 20px; height: 20px; }
+
+/* Der Zusatz verschwindet zuerst, er kostet Platz und traegt am
+   wenigsten. */
+@media (max-width: 1100px) {
+  .nav .nav__zusatz { display: none; }
+}
+
+@media (max-width: 900px) {
+  .nav .nav__inner { gap: var(--space-3); min-height: 66px; }
+  .nav .btn__text,
+  .nav .nav__konto-name { display: none; }
+  .nav .btn--sm .ic { display: block; }
+
+  /* Ohne Text sind es runde Knoepfe in fester Groesse. */
+  .nav .nav__aktionen .btn,
+  .nav .nav__aktionen .cart-btn,
+  .nav .nav__konto {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .nav .nav__wortmarke { font-size: 1.2rem; }
+  .nav .nav__logo-bild { width: 38px; }
+}
+
+/* Sprungmarken nicht unter die Kopfzeile schieben */
+[id] { scroll-margin-top: 96px; }
+
+/* Der Zusatz neben der Wortmarke ist ueberall abgeschaltet.
+   Zum Zurueckholen genuegt es, diese Regel zu entfernen. */
+.nav__zusatz,
+.hero-marke__zusatz { display: none; }
+
+/* ── TYPOGRAFIE ── */
+.kicker {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.titel {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+
+.titel em { font-style: normal; color: var(--color-accent); }
+
+/* Thailändische Schrift, ueberall wo sie vorkommt */
+.thai-schrift {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* ── ABSCHNITTE ── */
+.abschnitt { padding-block: var(--space-8); }
+.abschnitt--eng { padding-block: var(--space-7); }
+.abschnitt__kopf { margin-bottom: var(--space-6); max-width: 62ch; }
+.abschnitt__kopf--mitte { text-align: center; margin-inline: auto; }
+
+.abschnitt__text {
+  color: var(--color-muted);
+  line-height: 1.85;
+  max-width: 60ch;
+}
+
+.abschnitt--dunkel {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.abschnitt--dunkel .titel { color: var(--color-on-dark); }
+.abschnitt--dunkel .abschnitt__text { color: var(--color-on-dark-mu); }
+
+@media (max-width: 899px) {
+  .abschnitt,
+  .abschnitt--eng { padding-block: var(--space-7); }
+}
+
+/* ── BUTTONS ──
+   Rauten links und rechts der Schrift, dasselbe Zeichen wie in
+   der Zierlinie. Beim Ueberfahren drehen sie sich um eine halbe
+   Umdrehung und die Schrift sperrt weiter auf. Zwei kleine
+   Bewegungen, die zusammen wirken, als wuerde der Knopf sich
+   oeffnen.
+
+   Die Rauten haengen an currentColor und folgen damit
+   automatisch der Schriftfarbe jeder Knopfvariante. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition), letter-spacing 0.25s ease;
+}
+
+.btn::before,
+.btn::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  background: currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.35s ease;
+}
+
+.btn:hover { letter-spacing: 0.22em; }
+.btn:hover::before,
+.btn:hover::after { transform: rotate(225deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn::before,
+  .btn::after { transition: none; }
+  .btn:hover { letter-spacing: 0.16em; }
+  .btn:hover::before,
+  .btn:hover::after { transform: rotate(45deg); }
+}
+
+/* Beide Knopfarten sind im Ruhezustand nur Umriss und fuellen
+   sich erst beim Ueberfahren. Der Unterschied liegt allein in der
+   Farbe: Gold fuer die Hauptaktion, Cremeweiss fuer die zweite. */
+.btn--primary {
+  background: transparent;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.btn--primary:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+  opacity: 1;
+}
+
+/* Umriss auf hellem Grund */
+.btn--outline {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.btn--outline:hover {
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  opacity: 1;
+}
+
+/* Umriss auf dunklem Grund */
+.btn--outline-light {
+  background: transparent;
+  color: var(--color-on-dark);
+  border-color: rgba(246, 241, 231, 0.4);
+}
+
+.btn--outline-light:hover {
+  background: var(--color-on-dark);
+  border-color: var(--color-on-dark);
+  color: var(--color-ink);
+  opacity: 1;
+}
+
+/* Kleine Knoepfe tragen keine Rauten. In der Kopfzeile stehen sie
+   auf Mobil als 42er Quadrate mit reinem Symbol, dort waeren die
+   Rauten nur Unruhe. */
+.btn--sm {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.74rem;
+  gap: var(--space-2);
+}
+
+.btn--sm::before,
+.btn--sm::after { display: none; }
+
+.btn--sm:hover { letter-spacing: 0.16em; }
+
+.btn .ic { width: 20px; height: 20px; flex-shrink: 0; color: inherit; background: none; padding: 0; }
+
+/* ── HERO ──
+   Genau eine Bildschirmhoehe. Das Bild liegt absolut auf der
+   rechten Haelfte und laeuft dabei bis ganz nach oben, also auch
+   hinter der Kopfzeile durch. Kopfzeile und Text liegen mit
+   z-index darueber. */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  overflow: hidden;
+}
+
+/* Monogrammmuster ueber den gesamten Hero, Kopfzeile
+   eingeschlossen. Bilder/monogramm.svg ist eine 150er Kachel, in
+   deren Mitte das Logo klein steht. Der Abstand im Muster entsteht
+   durch die leere Flaeche der Kachel.
+
+   Warum nicht logo.webp direkt: in CSS steuert background-size bei
+   einem Rasterbild gleichzeitig die Groesse des Zeichens UND den
+   Kachelabstand. Getrennt geht das nur, wenn das Zeichen im Bild
+   selbst schon Rand hat.
+
+   Zwei Lagen, die zweite um eine halbe Kachel versetzt. Eine
+   einzelne Lage waere ein Karomuster, erst der Versatz ergibt ein
+   Monogramm. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.09;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url('../Bilder/monogramm.svg'), url('../Bilder/monogramm.svg');
+  background-size: 150px 150px, 150px 150px;
+  background-position: 0 0, 75px 75px;
+  background-repeat: repeat, repeat;
+}
+
+@media (max-width: 899px) {
+  .hero::before {
+    background-size: 110px 110px, 110px 110px;
+    background-position: 0 0, 55px 55px;
+  }
+}
+
+.hero-top {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: nowrap;
+  padding-block: var(--space-4);
+}
+
+.hero-marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  line-height: 1;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.hero-marke__logo { display: block; width: 46px; height: auto; flex-shrink: 0; }
+
+.hero-marke__name {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+  letter-spacing: 0.06em;
+  color: var(--color-on-dark);
+  flex-shrink: 0;
+}
+
+.hero-marke__name em { font-style: normal; color: var(--color-accent); }
+
+.hero-marke__zusatz {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.hero-top__aktionen {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.hero-top__aktionen .nav__konto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--color-line-dark);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+}
+
+.hero-top__aktionen #nav-konto { display: contents; }
+
+/* Inhalt: links der Text, rechts das Bild randlos bis an die
+   Fensterkante. Der Bogen sitzt deshalb nur noch oben links.
+
+   .hero__inhalt traegt bewusst KEINE Klasse container: das Bild
+   soll ueber die 1140 Pixel hinauslaufen. Stattdessen bekommt die
+   Textspalte den Innenabstand, der sonst vom Container kaeme, und
+   richtet sich damit an derselben Kante aus wie alle anderen
+   Abschnitte. */
+.hero__inhalt {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.hero__spalte {
+  padding-inline: var(--container-pad-mobile);
+  padding-block: var(--space-7);
+}
+
+@media (min-width: 900px) {
+  .hero__inhalt {
+    grid-template-columns: minmax(0, 1fr) 46%;
+    align-items: center;
+  }
+
+  .hero__spalte {
+    padding-block: var(--space-8);
+    padding-right: var(--space-7);
+    /* Links buendig mit dem Inhaltsbereich der uebrigen
+       Abschnitte, egal wie breit das Fenster ist. */
+    padding-left: max(
+      var(--container-pad-desktop),
+      calc((100vw - var(--max-content-width)) / 2)
+    );
+  }
+}
+
+.hero__kicker {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.hero__titel {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(3.6rem, 8vw, 7rem);
+  line-height: 1.0;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-4);
+}
+
+.hero__titel em { font-style: normal; color: var(--color-on-dark); }
+
+/* Woerterbucheintrag unter der Marke.
+   Die drei Teile stehen wie im Lexikon: Wort mit Trennpunkt,
+   grammatische Angabe kursiv, dann die Bedeutung. Der senkrechte
+   Goldstrich links bindet den Block an die Zierlinien der Seite. */
+.hero__eintrag {
+  border-left: 1px solid var(--color-line-dark);
+  padding-left: var(--space-5);
+  margin-bottom: var(--space-5);
+  max-width: 34ch;
+}
+
+.hero__eintrag-wort {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  color: var(--color-accent);
+  margin-right: var(--space-3);
+}
+
+.hero__eintrag-gram {
+  font-family: var(--font-head);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  color: var(--color-on-dark-mu);
+}
+
+/* Die Bedeutungen wechseln im Loop, wie ein Woerterbuch, das
+   seine Eintraege durchblaettert. Drei Wortlagen liegen absolut
+   uebereinander, jede blendet drei Sekunden auf und schiebt sich
+   dabei leicht nach oben.
+
+   Der Kasten braucht eine feste Hoehe, weil die Lagen absolut
+   positioniert sind und sonst keinen Platz beanspruchen wuerden.
+   Sie richtet sich nach der Schriftgroesse, damit sie bei jeder
+   Fensterbreite passt. */
+.hero__eintrag-bed {
+  display: block;
+  position: relative;
+  height: 1.35em;
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  line-height: 1.25;
+  color: var(--color-on-dark);
+  margin-top: var(--space-2);
+}
+
+.hero__eintrag-bed > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  opacity: 0;
+  animation: bedeutung 9s ease-in-out infinite;
+}
+
+.hero__eintrag-bed > span:nth-child(1) { animation-delay: 0s; }
+.hero__eintrag-bed > span:nth-child(2) { animation-delay: 3s; }
+.hero__eintrag-bed > span:nth-child(3) { animation-delay: 6s; }
+
+@keyframes bedeutung {
+  0%        { opacity: 0; transform: translateY(8px); }
+  4%, 29%   { opacity: 1; transform: translateY(0); }
+  33%, 100% { opacity: 0; transform: translateY(-8px); }
+}
+
+/* Ohne Bewegung stehen alle drei Bedeutungen untereinander,
+   damit niemand Inhalt verpasst. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__eintrag-bed { height: auto; }
+  .hero__eintrag-bed > span {
+    position: static;
+    display: block;
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}
+
+.hero__text {
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  line-height: 1.75;
+  color: var(--color-on-dark-mu);
+  max-width: 40ch;
+  margin-bottom: var(--space-6);
+}
+
+.hero__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+/* ── BOGEN ──
+   Die Leitform. Ueberall dort, wo ein Bild eine eigene Flaeche
+   bekommt. */
+.bogen {
+  display: block;
+  width: 100%;
+  border-radius: var(--bogen);
+  border: 1px solid var(--color-line-dark);
+  object-fit: cover;
+  background: var(--color-dark-2);
+}
+
+/* Das Hero-Bild liegt auf der rechten Haelfte. Die linke Kante
+   ist durchgehend gerundet, ohne gerades Stueck dazwischen: dafuer
+   sind die beiden Radien zusammen so hoch wie das Bild.
+
+   Zwei Werte je Ecke, waagerecht 200 Pixel und senkrecht 50
+   Prozent. Der Prozentwert bezieht sich auf die Bildhoehe, oben
+   und unten zusammen ergeben sie damit genau die volle Hoehe und
+   die Kante wird eine durchgehende Woelbung. Ueber die 200 Pixel
+   stellst du ein, wie weit sie ausschwingt. */
+/* Der Bildausschnitt sitzt unten: die Gerichte stehen im Foto am
+   unteren Rand und wuerden bei mittiger Ausrichtung abgeschnitten. */
+.hero__bild {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 78%;
+  background: var(--color-dark-2);
+  border-left: 1px solid var(--color-line-dark);
+  border-radius: 200px 0 0 200px / 50% 0 0 50%;
+  z-index: 0;
+}
+
+@media (max-width: 899px) {
+  /* Untereinander: Text oben, Bild darunter ueber die volle
+     Breite, oben als Bogen. */
+  .hero__bild {
+    position: static;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--color-line-dark);
+    border-bottom: none;
+    border-radius: 160px 160px 0 0;
+  }
+
+  .hero { min-height: 0; }
+  .hero__inhalt { padding-block: 0; }
+  .hero-top { min-height: 66px; }
+  .hero-marke__zusatz { display: none; }
+  .hero-marke__name { font-size: 1.2rem; }
+  .hero-marke__logo { width: 38px; }
+  .hero-top__aktionen .btn__text,
+  .hero-top__aktionen .nav__konto-name { display: none; }
+  .hero-top__aktionen .btn,
+  .hero-top__aktionen .nav__konto {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+  }
+  .hero__actions .btn { flex: 1 1 100%; max-width: 320px; }
+}
+
+/* ── SPEISEKARTE ──
+   Zeilen mit Name, thailaendischer Schrift, Beschreibung, Preis
+   und Schaerfeskala. */
+.karte-reiter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.karte-reiter__btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.karte-reiter__btn:hover { border-color: var(--color-accent); }
+
+.karte-reiter__btn--aktiv,
+.karte-reiter__btn--aktiv:hover {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-on-dark);
+}
+
+.karte-reiter__btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+@media (max-width: 599px) {
+  .karte-reiter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scrollbar-width: none;
+  }
+  .karte-reiter::-webkit-scrollbar { display: none; }
+}
+
+/* Sichtbar ist immer genau eine Gruppe. Die Klasse setzt
+   js/tafel.js, die erste Gruppe traegt sie bereits im HTML. */
+.karte-gruppe { display: none; }
+.karte-gruppe--aktiv { display: block; }
+
+.speise {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.speise:last-child { border-bottom: none; }
+
+.speise__mitte { flex: 1; min-width: 0; }
+
+.speise__name {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.speise__thai { margin: 2px 0 var(--space-2); }
+
+.speise__text {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.speise__rechts { text-align: right; flex-shrink: 0; }
+
+.speise__preis {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: var(--color-ink);
+  white-space: nowrap;
+  margin-bottom: var(--space-2);
+}
+
+/* Schaerfeskala. Drei Schoten, die gefuellten in Chilirot.
+   Chilirot kommt NUR hier vor. */
+.schaerfe {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.schaerfe__schote {
+  width: 10px;
+  height: 10px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: rgba(14, 59, 50, 0.18);
+}
+
+.schaerfe__schote--an { background: var(--color-chili); }
+
+.abschnitt--dunkel .speise { border-bottom-color: var(--color-line-dark); }
+.abschnitt--dunkel .speise__name,
+.abschnitt--dunkel .speise__preis { color: var(--color-on-dark); }
+.abschnitt--dunkel .speise__text,
+.abschnitt--dunkel .thai-schrift { color: var(--color-on-dark-mu); }
+.abschnitt--dunkel .schaerfe__schote { background: rgba(246, 241, 231, 0.18); }
+
+@media (max-width: 599px) {
+  .speise { gap: var(--space-4); }
+  .speise__name { font-size: 1.25rem; }
+}
+
+/* ── KONZEPT ──
+   Das runde Tischbild bleibt mittig stehen und dreht sich mit dem
+   Scrollfortschritt, drumherum erscheint jeweils genau ein Text.
+
+   Die Sektion ist vier Bildschirmhoehen hoch. Darin sitzt die
+   Buehne mit position sticky, eine Bildschirmhoehe hoch, und
+   bleibt stehen, waehrend die Sektion vorbeiscrollt. Weniger
+   Strecke geht nicht, sonst bleibt keine Zeit zum Lesen.
+
+   js/tischdreh.js setzt die Klasse tisch-bahn--js. Ohne Skript
+   bleiben alle vier Texte sichtbar, der Effekt kann den Inhalt
+   also nicht verschlucken. */
+.tisch-sektion {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  padding-top: var(--space-8);
+}
+
+/* .titel steht standardmaessig schon in Jadegruen, hier also
+   nichts umzustellen. */
+.tisch-bahn { position: relative; }
+
+.tisch-buehne {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tisch-bild {
+  display: block;
+  width: min(38vw, 420px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-soft);
+}
+
+.tisch-punkt { max-width: 30ch; }
+
+.tisch-punkt__titel {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+.tisch-punkt__text {
+  font-size: var(--text-sm);
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+
+/* Ohne Skript: einfache Liste, mittig unter dem Bild */
+.tisch-bahn:not(.tisch-bahn--js) .tisch-buehne {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-block: var(--space-7);
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-mobile);
+}
+
+.tisch-bahn:not(.tisch-bahn--js) .tisch-punkt {
+  max-width: 46ch;
+  text-align: center;
+}
+
+/* Mit Skript: Buehne bleibt stehen, Texte liegen um das Bild */
+@media (min-width: 900px) {
+  .tisch-bahn--js { height: 400vh; }
+
+  .tisch-bahn--js .tisch-buehne {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  .tisch-bahn--js .tisch-punkt {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    pointer-events: none;
+  }
+
+  .tisch-bahn--js .tisch-punkt--an {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Im Uhrzeigersinn um das Bild herum */
+  .tisch-bahn--js .tisch-punkt--1 { left: 8%;  top: 22%; }
+  .tisch-bahn--js .tisch-punkt--2 { right: 8%; top: 26%; text-align: right; }
+  .tisch-bahn--js .tisch-punkt--3 { right: 10%; bottom: 24%; text-align: right; }
+  .tisch-bahn--js .tisch-punkt--4 { left: 10%; bottom: 22%; }
+}
+
+/* ── KATEGORIEN ──
+   Links eine grosse Liste, rechts ein Bild, das beim Ueberfahren
+   wechselt. Statt vier Kacheln, die um Aufmerksamkeit
+   konkurrieren, ist immer nur ein Bild im Blick.
+
+   Die vier Bilder liegen absolut uebereinander, sichtbar ist
+   jeweils eines. Deshalb gibt es beim Wechsel kein Nachladen und
+   kein Flackern. */
+.kat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .kat { grid-template-columns: 1fr 320px; gap: var(--space-8); }
+}
+
+.kat__zeile {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  /* Jade statt der sandfarbenen Linie, damit die Trenner zu den
+     Kacheln der Oeffnungszeiten passen. */
+  border-bottom: 1px solid rgba(14, 59, 50, 0.28);
+  transition: padding-left var(--transition);
+}
+
+.kat__zeile:last-child { border-bottom: none; }
+
+.kat__name {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  line-height: 1;
+  color: var(--color-ink);
+  transition: color var(--transition);
+}
+
+.kat__zeile:hover,
+.kat__zeile--an { padding-left: var(--space-4); opacity: 1; }
+
+.kat__zeile:hover .kat__name,
+.kat__zeile--an .kat__name { color: var(--color-accent); }
+
+.kat__buehne {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 29px;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg-soft);
+}
+
+.kat__bild {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.kat__bild--an { opacity: 1; }
+
+.kat__aktion { margin-top: var(--space-6); }
+
+@media (max-width: 899px) {
+  /* Auf schmalen Schirmen steht das Bild oben, die Liste
+     darunter. Der Wechsel bleibt, er wird dort nur beim
+     Antippen ausgeloest. */
+  .kat { grid-template-columns: 1fr; }
+  .kat__buehne { order: -1; aspect-ratio: 4 / 3; }
+}
+
+/* ── ZUTATEN ──
+   Fuenf runde Bilder auf hellem Grund. Der Kreis ist die dritte
+   Form der Seite neben Bogen und Rechteck und kommt sonst
+   nirgends vor.
+
+   js/zutaten.js setzt die Klasse zutaten--js und blendet die
+   Kacheln nacheinander ein. Ohne Skript stehen sie einfach da. */
+.zutaten {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6) var(--space-5);
+}
+
+@media (min-width: 760px) {
+  .zutaten { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* Bild, Name und thailaendische Schrift stehen immer, der
+   Fliesstext erscheint erst beim Ueberfahren. */
+.zutat { text-align: center; }
+
+.zutat__bild {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  margin-bottom: var(--space-4);
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.zutat:hover .zutat__bild {
+  transform: scale(1.04);
+  border-color: var(--color-accent);
+}
+
+.zutat__name {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--color-ink);
+  transition: color var(--transition);
+}
+
+.zutat:hover .zutat__name { color: var(--color-accent); }
+
+.zutat .thai-schrift { margin-bottom: var(--space-2); }
+
+/* Der Fliesstext ist im Ruhezustand unsichtbar, belegt seinen
+   Platz aber weiter. Ohne das wuerden die Kacheln beim Ueberfahren
+   in der Hoehe springen und die ganze Reihe verschieben. */
+.zutat__text {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  color: var(--color-muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.zutat:hover .zutat__text,
+.zutat:focus-within .zutat__text {
+  opacity: 1;
+  transform: none;
+}
+
+@media (hover: none) {
+  /* Auf Touchgeraeten gibt es kein Ueberfahren, dort stehen die
+     Texte dauerhaft. */
+  .zutat__text { opacity: 1; transform: none; }
+}
+
+/* Einblenden. Die Verzoegerung je Kachel setzt das Skript. */
+.zutaten--js .zutat {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.zutaten--js .zutat--an {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── WERBEBANNER ──
+   Kein Reklamekasten, sondern ein Abschnitt in der Sprache der
+   Seite. Die Wirkung kommt aus dem Anschnitt: das Tuk-Tuk ragt
+   links aus dem Bild heraus und wirkt dadurch in Fahrt. In einem
+   Rahmen stuende es still.
+
+   Das Bild braucht einen transparenten Hintergrund. */
+.banner { overflow: hidden; }
+
+.banner__inhalt {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .banner__inhalt { grid-template-columns: 44% 1fr; gap: var(--space-7); }
+}
+
+.banner__bild {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 900px) {
+  /* Der negative Aussenabstand zieht das Bild ueber die linke
+     Kante des Inhaltsbereichs hinaus. Genau das erzeugt den
+     Eindruck von Fahrt. */
+  .banner__bild {
+    width: calc(100% + 80px);
+    max-width: none;
+    margin-left: -80px;
+  }
+}
+
+.banner__aktion { margin-top: var(--space-6); }
+
+.banner .titel em { font-style: normal; color: var(--color-accent); }
+
+/* ── KUNDENBEWERTUNGEN ──
+   Links die Kennzahl als feste Kachel, damit sie dauerhaft im
+   Blick bleibt. Rechts laeuft das Band daran vorbei und blendet
+   zum rechten Rand hin aus.
+
+   Die Reihe steht ausserhalb des Containers, damit das Band bis an
+   die Fensterkante laufen kann. Die Kennzahl bekommt deshalb den
+   Innenabstand einzeln, damit sie an derselben Kante steht wie
+   alle anderen Abschnitte. */
+.stimmen-reihe {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  /* Die erste Spalte ist der linke Seitenrand PLUS 240 Pixel fuer
+     die Kennzahl. Ohne den Seitenrand in der Spaltenbreite frisst
+     der Innenabstand die Spalte auf und der Text wird gequetscht.
+
+     minmax(0, 1fr) fuer das Band: die Mindestbreite einer
+     1fr-Spalte richtet sich sonst nach ihrem Inhalt, und das Band
+     ist mit max-content sehr breit. */
+  .stimmen-reihe {
+    grid-template-columns:
+      calc(max(var(--container-pad-desktop), (100vw - var(--max-content-width)) / 2) + 240px)
+      minmax(0, 1fr);
+    align-items: stretch;
+  }
+}
+
+.stimmen-score {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: var(--container-pad-mobile) var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .stimmen-score {
+    padding-bottom: 0;
+    padding-left: max(
+      var(--container-pad-desktop),
+      calc((100vw - var(--max-content-width)) / 2)
+    );
+    border-right: 1px solid var(--color-line-dark);
+  }
+}
+
+.stimmen-score__zahl {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(3.4rem, 6vw, 4.6rem);
+  line-height: 1;
+  color: var(--color-on-dark);
+}
+
+.stimmen-score__sterne {
+  color: var(--color-accent);
+  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  margin-block: var(--space-2) var(--space-3);
+}
+
+.stimmen-score__anzahl {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+  line-height: 1.7;
+}
+
+/* Endlos laufendes Band. Die Karten stehen zweimal im Markup, die
+   Animation schiebt um genau die halbe Breite. Dadurch beginnt der
+   zweite Satz exakt dort, wo vorher der erste stand, und man sieht
+   den Sprung nicht.
+
+   Die Maske blendet nur rechts aus. Links steht die Kennzahl, dort
+   waere ein Ausblenden falsch. */
+.stimmenband {
+  /* min-width 0 ist die zweite Haelfte der Absicherung. Auch ein
+     Rasterelement bekommt sonst eine Mindestbreite nach seinem
+     Inhalt und waechst ueber seine Spalte hinaus. */
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, #000 84%, transparent);
+  mask-image: linear-gradient(90deg, #000 84%, transparent);
+}
+
+.stimmenband__lauf {
+  display: flex;
+  width: max-content;
+  animation: stimmen-lauf 60s linear infinite;
+}
+
+/* Anhalten, sobald die Maus darauf steht. Sonst kann man ein
+   laengeres Zitat nicht zu Ende lesen. */
+.stimmenband:hover .stimmenband__lauf { animation-play-state: paused; }
+
+@keyframes stimmen-lauf {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Ohne Bewegung wird aus dem Band ein Wisch-Slider. */
+  .stimmenband { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .stimmenband__lauf { animation: none; }
+}
+
+.stimme {
+  width: 340px;
+  flex-shrink: 0;
+  padding-inline: var(--space-6);
+  border-right: 1px solid var(--color-line-dark);
+}
+
+.stimme__sterne {
+  display: block;
+  color: var(--color-accent);
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  margin-bottom: var(--space-3);
+}
+
+.stimme__text {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-4);
+}
+
+.stimme__autor {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+}
+
+@media (max-width: 599px) {
+  .stimme { width: 280px; padding-inline: var(--space-5); }
+  .stimme__text { font-size: 1.15rem; }
+}
+
+/* ── ÖFFNUNGSZEITEN ──
+   Links die grosse Zeitangabe und die Adresse, rechts die Woche.
+   Keine eingebettete Karte, dafuer ein Link in die Karten-App.
+   Das spart nebenbei das Datenschutzthema eines Google-iframes. */
+.kontakt {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .kontakt { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+
+/* Die grosse Zeile, dreizeilig. js/oeffnung.js schreibt die drei
+   Teile hinein. */
+.jetzt__gross {
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  line-height: 1.12;
+  color: var(--color-on-dark);
+  margin-bottom: var(--space-3);
+}
+
+.jetzt__gross span { display: block; }
+
+/* Die Uhrzeit steht groesser und in Gold, darunter ein Strich,
+   der wie getippt hereinlaeuft und wieder verschwindet.
+   width fit-content, damit der Strich genau so breit wird wie die
+   Uhrzeit und nicht wie die ganze Zeile. */
+.jetzt__gross em {
+  display: block;
+  position: relative;
+  width: fit-content;
+  font-style: normal;
+  font-size: 1.45em;
+  line-height: 1.05;
+  color: var(--color-accent);
+  margin-block: 0.1em 0.22em;
+}
+
+.jetzt__gross em::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.12em;
+  height: 2px;
+  width: 0;
+  background: var(--color-accent);
+  animation: schreibstrich 5.5s ease-in-out infinite;
+}
+
+@keyframes schreibstrich {
+  0%        { width: 0; }
+  22%, 62%  { width: 100%; }
+  84%, 100% { width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jetzt__gross em::after { width: 100%; animation: none; }
+}
+
+.jetzt__rest {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+  margin-bottom: var(--space-6);
+}
+
+.route {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border-bottom: 1px solid var(--color-line-dark);
+  padding-bottom: var(--space-1);
+  transition: border-color var(--transition);
+}
+
+.route:hover { border-bottom-color: var(--color-accent); opacity: 1; }
+
+.woche { display: grid; }
+
+.woche__tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-line-dark);
+  border-radius: 0;
+  transition: color var(--transition), background var(--transition);
+}
+
+.woche__tag:last-child { border-bottom: none; }
+
+.woche__name {
+  font-size: 1.05rem;
+  color: var(--color-on-dark-mu);
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 400;
+}
+
+.woche__zeit {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--color-on-dark-mu);
+  white-space: nowrap;
+}
+
+/* Der heutige Tag, hervorgehoben von js/oeffnung.js. Eigene
+   Flaeche plus goldene Zeit, damit er auf einen Blick zu finden
+   ist. */
+.woche__tag--heute {
+  background: var(--color-dark-2);
+  border-radius: 10px;
+  border-bottom-color: transparent;
+}
+
+.woche__tag--heute .woche__name { color: var(--color-on-dark); }
+.woche__tag--heute .woche__zeit { color: var(--color-accent); }
+
+.kontakt__adresse {
+  font-size: var(--text-sm);
+  line-height: 1.9;
+  color: var(--color-on-dark-mu);
+  margin-bottom: var(--space-5);
+}
+
+.kontakt__adresse a { color: var(--color-on-dark); }
+.kontakt__adresse a:hover { color: var(--color-accent); }
+
+/* Die beiden Sektionen ohne Einleitungstext brauchen mehr Luft
+   zwischen Ueberschrift und Inhalt. Sonst steht die Zierlinie zu
+   dicht am ersten Element. */
+#zutaten .abschnitt__kopf,
+#stimmen .abschnitt__kopf { margin-bottom: var(--space-8); }
+
+/* ── MONOGRAMM-FLAECHE ──
+   Klammert mehrere Abschnitte zusammen, damit das Muster ueber
+   alle durchlaeuft. Zwei getrennte Muster wuerden an der Naht neu
+   ansetzen, weil background-position sich immer auf das eigene
+   Element bezieht, und der Versatz waere sichtbar. */
+.mono-flaeche {
+  position: relative;
+  background: var(--color-ink);
+  overflow: hidden;
+}
+
+.mono-flaeche::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  pointer-events: none;
+  background-image: url('../Bilder/monogramm.svg'), url('../Bilder/monogramm.svg');
+  background-size: 150px 150px, 150px 150px;
+  background-position: 0 0, 75px 75px;
+  background-repeat: repeat, repeat;
+}
+
+.mono-flaeche > * { position: relative; }
+
+/* Die Abschnitte in der Flaeche bringen eigene Hintergruende mit
+   und wuerden das Muster sonst zudecken. Innerhalb der Flaeche
+   sind sie deshalb durchsichtig, den Jade-Grund liefert die
+   Flaeche selbst. */
+.mono-flaeche .abschnitt--dunkel,
+.mono-flaeche .footer { background: transparent; }
+
+/* Die Fusszeile bringt ihr eigenes Muster mit, damit sie auf den
+   Unterseiten nicht leer bleibt. Innerhalb der Flaeche waere es
+   doppelt. */
+.mono-flaeche .footer::before { display: none; }
+
+/* ── FUSSZEILE ──
+   Alles auf einer Achse, im Hintergrund dasselbe Monogramm wie im
+   Hero. Es liegt auf einem Pseudoelement, damit die Deckkraft nur
+   das Muster trifft und nicht den Inhalt.
+
+   Das Muster laeuft ueber die volle Fensterbreite. Der Container
+   darin bleibt bei 1140 Pixeln. */
+.footer {
+  position: relative;
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  padding-block: var(--space-8) var(--space-5);
+  text-align: center;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  pointer-events: none;
+  background-image: url('../Bilder/monogramm.svg'), url('../Bilder/monogramm.svg');
+  background-size: 150px 150px, 150px 150px;
+  background-position: 0 0, 75px 75px;
+  background-repeat: repeat, repeat;
+}
+
+.footer > * { position: relative; }
+
+/* Marke mittig, Logo ueber dem Namen */
+.footer-marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.footer-marke:hover { opacity: 1; }
+.footer-marke__logo { display: block; width: 58px; height: auto; }
+
+.footer-marke__name {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  letter-spacing: 0.06em;
+  color: var(--color-on-dark);
+}
+
+.footer-marke__name em { font-style: normal; color: var(--color-accent); }
+
+.footer__zeile {
+  font-size: var(--text-sm);
+  line-height: 2;
+  color: var(--color-on-dark-mu);
+  margin-bottom: var(--space-6);
+}
+
+.footer__zeile a { color: var(--color-on-dark); }
+.footer__zeile a:hover { color: var(--color-accent); opacity: 1; }
+
+.footer__links {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-line-dark);
+}
+
+.footer__links a {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+}
+
+.footer__links a:hover { color: var(--color-accent); opacity: 1; }
+
+.footer__copy {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-mu);
+  opacity: 0.65;
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 599px) {
+  .footer__links { gap: var(--space-4); }
+  .footer-marke__logo { width: 46px; }
+}
+
+/* ── DUNKLE UNTERSEITEN ──
+   Konto, Anmelden, Kasse und Danke laufen auf den geteilten
+   Stylesheets konto.css und checkout.css. Die sind shop-neutral
+   und duerfen nicht angefasst werden.
+
+   Statt jede einzelne Regel zu ueberschreiben, drehen wir die
+   Farbtokens innerhalb des Inhaltsbereichs um. Alle Regeln der
+   geteilten Dateien loesen dadurch automatisch dunkle Werte auf.
+   Ausgeloest wird das ueber die Klasse dunkel am body.
+
+   ACHTUNG: --color-ink ist innerhalb dieser Selektoren die
+   TEXTFARBE. Kopfzeile und Fusszeile liegen ausserhalb, sonst
+   wuerden sie mit umkippen. */
+body.dunkel {
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+}
+
+body.dunkel main,
+body.dunkel .konto-head,
+body.dunkel .konto-tabs,
+body.dunkel .konto-modal,
+body.dunkel .auth-wrap,
+body.dunkel .checkout-steps,
+body.dunkel .checkout-layout,
+body.dunkel .danke-main {
+  --color-bg: #0E3B32;
+  --color-bg-soft: #123F35;
+  --color-ink: #F6F1E7;
+  --color-line: rgba(201, 162, 75, 0.28);
+  --color-muted: #A9BDB4;
+  --color-rose-hell: #17493D;
+}
+
+/* Kaesten bekommen den goldenen Haarstrich statt einer Flaeche */
+body.dunkel .konto-card,
+body.dunkel .auth-box,
+body.dunkel .konto-modal__box,
+body.dunkel .form-section,
+body.dunkel .checkout-summary,
+body.dunkel .danke-info,
+body.dunkel .stamp-card {
+  background: var(--color-dark-2);
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+/* Ueberschriften in der Hausschrift, duenn und gross */
+body.dunkel .konto-head__gruss,
+body.dunkel .konto-panel__titel,
+body.dunkel .konto-card__titel,
+body.dunkel .auth-box__titel,
+body.dunkel .form-section__title,
+body.dunkel .checkout-summary__title,
+body.dunkel .danke-main h1 {
+  font-family: var(--font-head);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--color-on-dark);
+}
+
+/* Reiter im Konto */
+body.dunkel .konto-tabs { border-bottom: 1px solid var(--color-line-dark); }
+body.dunkel .konto-tab {
+  color: var(--color-on-dark-mu);
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+body.dunkel .konto-tab:hover { color: var(--color-on-dark); }
+body.dunkel .konto-tab--active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+/* Eingabefelder: nur eine Linie unten, wie auf der
+   Reservierungsseite. */
+body.dunkel .konto-feld input,
+body.dunkel .konto-feld select,
+body.dunkel .konto-feld textarea,
+body.dunkel .form-field input,
+body.dunkel .form-field select,
+body.dunkel .form-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-line-dark);
+  border-radius: 0;
+  color: var(--color-on-dark);
+}
+
+body.dunkel .konto-feld input:focus,
+body.dunkel .konto-feld select:focus,
+body.dunkel .konto-feld textarea:focus,
+body.dunkel .form-field input:focus,
+body.dunkel .form-field select:focus,
+body.dunkel .form-field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--color-accent);
+}
+
+body.dunkel select option { background: var(--color-dark-2); color: var(--color-on-dark); }
+
+/* Knoepfe in Formularfeldern nicht ueber die ganze Spalte ziehen.
+   konto.css setzt die Felder auf stretch, deshalb beides:
+   justify-self fuer Raster, align-self fuer Flex. */
+.konto-feld .btn,
+.form-field .btn {
+  justify-self: start;
+  align-self: flex-start;
+  width: auto;
+}
+
+body.dunkel .payment-option {
+  background: transparent;
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-md);
+}
+
+body.dunkel .step__nr {
+  background: transparent;
+  border: 1px solid var(--color-line-dark);
+  color: var(--color-on-dark-mu);
+}
+
+body.dunkel .step--active .step__nr {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+body.dunkel .badge--dark {
+  background: var(--color-accent);
+  color: #0E3B32;
+}
+
+body.dunkel .danke-icon { color: var(--color-accent); }
+
+/* Elemente, die bewusst dunkel auf Gold oder als dunkler Koerper
+   stehen, brauchen die Tokens in ihrer urspruenglichen Bedeutung
+   zurueck. Ohne das faerbt sich zum Beispiel der Knopfkoerper mit
+   der umgedrehten Variable ein und wird cremefarben, waehrend die
+   Schrift ebenfalls creme bleibt. */
+body.dunkel .btn,
+body.dunkel .stamp-hint__zahl,
+body.dunkel .step__nr,
+body.dunkel .badge--dark {
+  --color-ink: #0E3B32;
+  --color-on-dark: #F6F1E7;
+}
+
+/* ── STEMPELKARTE ──
+   Ein eingeloester Stempel zeigt das Logo statt eines Hakens.
+   Bewusst hier und nicht in konto.js: die Kontodateien sind
+   shop-neutral. Der Haken bleibt im Markup und wird ausgeblendet. */
+.stamp-card .stamp-grid .stamp-slot--filled {
+  background-color: var(--color-dark-2);
+  background-image: url('../Bilder/logo.webp');
+  background-size: 66%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid var(--color-accent);
+}
+
+.stamp-card .stamp-grid .stamp-slot--filled svg { display: none; }
+
+.stamp-card .stamp-grid .stamp-slot { border-color: var(--color-line-dark); }
+
+.stamp-hint { border-color: var(--color-line-dark); color: var(--color-on-dark); }
+
+.stamp-hint__zahl {
+  font-family: var(--font-head);
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* ── MARKE MITTIG IN DER KOPFZEILE ──
+   Steht bewusst am Ende der Datei. Die Grundregeln fuer
+   .nav__inner und .hero-top stehen weiter oben und wuerden bei
+   gleicher Spezifitaet gewinnen, wenn dieser Block davor stuende.
+
+   Ab Tabletbreite sitzt die Marke in der Mitte, die Aktionen
+   liegen absolut am rechten Rand. Auf schmalen Schirmen bleibt es
+   beim Nebeneinander, sonst kollidiert beides. */
+@media (min-width: 900px) {
+  .nav .nav__inner,
+  .hero-top {
+    position: relative;
+    justify-content: center;
+  }
+
+  .nav .nav__marke,
+  .hero-marke { flex-shrink: 0; }
+
+  .nav .nav__aktionen,
+  .hero-top__aktionen {
+    position: absolute;
+    right: var(--container-pad-desktop);
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
+  }
+}
+
+/* ── DEMO-BANNER ──
+   Kommt aus auth.js und wird in konto.css hell gestaltet. */
+.demo-banner.demo-banner {
+  background: var(--color-dark-2);
+  color: var(--color-on-dark);
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.demo-banner.demo-banner a { color: var(--color-accent); }

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabai Sabai — Bestellen</title>
+  <meta name="description" content="Currys, Suppen und Wok-Gerichte online bestellen. Abholen oder liefern lassen in Braunschweig.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A24B' stroke-width='1.5' stroke-linecap='round'><path d='M12 3c3 3 4.5 5.6 4.5 8.4A4.5 4.5 0 0 1 12 16a4.5 4.5 0 0 1-4.5-4.6C7.5 8.6 9 6 12 3z'/><path d='M12 16v5'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Karla:wght@400;500;600&family=Noto+Sans+Thai:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/bestellen.css?v=9">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <link rel="stylesheet" href="css/thai.css?v=37">
+  <script type="module" src="js/bestellen.js"></script>
+  <style>
+    /* ── KOPFBEREICH ──
+       Titel links, Umschalter rechts, alles auf Jade. */
+    .order-head {
+      background: var(--color-ink);
+      color: var(--color-on-dark);
+      padding-block: var(--space-7);
+    }
+
+    .order-head__inner {
+      max-width: var(--max-content-width);
+      margin-inline: auto;
+      padding-inline: var(--container-pad-mobile);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      align-items: center;
+    }
+
+    @media (min-width: 900px) { .order-head__inner { grid-template-columns: 1fr auto; } }
+    @media (min-width: 1024px) { .order-head__inner { padding-inline: var(--container-pad-desktop); } }
+
+    .order-head__titel {
+      font-family: var(--font-head);
+      font-weight: 300;
+      font-size: clamp(2.2rem, 4.4vw, 3.2rem);
+      line-height: 1.08;
+      color: var(--color-on-dark);
+      margin-bottom: var(--space-3);
+    }
+
+    .order-head__text p {
+      color: var(--color-on-dark-mu);
+      line-height: 1.85;
+      max-width: 44ch;
+    }
+
+    /* Umschalter: zwei Pillen nebeneinander, die gewaehlte gefuellt.
+       Die Grundfarben kommen aus bestellen.css, hier Form und
+       Typografie. */
+    .order-head .modus {
+      display: inline-flex;
+      gap: var(--space-2);
+      padding: 5px;
+      border: 1px solid var(--color-line-dark);
+      border-radius: 999px;
+    }
+
+    .order-head .mode-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      box-shadow: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .order-head .mode-card--active { background: var(--color-accent); }
+
+    .order-head .modus__name {
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--color-on-dark);
+      line-height: 1.1;
+    }
+
+    .order-head .modus__preis {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-on-dark-mu);
+    }
+
+    .order-head .mode-card--active .modus__name,
+    .order-head .mode-card--active .modus__preis { color: var(--color-on-accent); }
+
+    .modus__info {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-on-dark-mu);
+      margin-top: var(--space-3);
+    }
+
+    /* ── KATEGORIELEISTE ── */
+    .category-nav {
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .cat-link {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    .cat-link:hover { color: var(--color-ink); }
+    .cat-link--active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+    /* ── SPEISEKARTE ──
+       Die Produktkarten aus bestellen.css werden zu Zeilen:
+       Bild im Bogen, Name mit thailaendischer Schrift,
+       Beschreibung, Preis, Schaerfe, Knopf.
+
+       Die Klassen .menu-card und .add-to-cart bleiben unbedingt
+       erhalten, daran haengen in bestellen.js der Warenkorb, das
+       Favoritenherz und die Kategoriemarkierung. */
+    .menu-section { margin-bottom: var(--space-8); }
+
+    .menu-section__title {
+      font-family: var(--font-head);
+      font-weight: 300;
+      font-size: 2.2rem;
+      color: var(--color-ink);
+      margin-bottom: 0;
+    }
+
+    .menu-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 108px 1fr auto;
+      column-gap: var(--space-5);
+      align-items: center;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--color-line);
+      border-radius: 0;
+      box-shadow: none;
+      padding: var(--space-5) 0;
+      overflow: visible;
+    }
+
+    .menu-card:last-child { border-bottom: none; }
+    .menu-card:hover { transform: none; box-shadow: none; }
+
+    /* Bild im Bogen, die Leitform der Seite */
+    .menu-card__img {
+      display: block;
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      width: 108px;
+      height: 144px;
+      object-fit: cover;
+      border-radius: 90px 90px var(--radius-md) var(--radius-md);
+      border: 1px solid var(--color-line);
+      background: var(--color-bg-soft);
+    }
+
+    /* Huelle und Fusszeile fallen aus dem Layout, damit Name,
+       Preis und Knopf direkt im Raster der Zeile liegen. Sonst
+       muesste das Markup jeder Zeile umgebaut werden, und daran
+       haengt die Warenkorb-Logik. */
+    .menu-card__body,
+    .menu-card__footer { display: contents; }
+
+    .menu-card__name {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      color: var(--color-ink);
+      margin: 0;
+    }
+
+    .menu-card__desc {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: var(--text-sm);
+      line-height: 1.7;
+      color: var(--color-muted);
+      margin: 4px 0 0;
+    }
+
+    .menu-card__preisblock {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-3);
+    }
+
+    .menu-card__price {
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--color-ink);
+      white-space: nowrap;
+    }
+
+    .menu-card .add-to-cart { white-space: nowrap; }
+
+    /* Favoritenherz. bestellen.js haengt es als letztes Kind in die
+       Karte, aus bestellen.css kommt es absolut positioniert in der
+       oberen rechten Ecke. Im Zeilenraster liegt es damit auf dem
+       Preis, deshalb zurueck ins Raster. */
+    .menu-card .fav-herz {
+      position: static;
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+      align-self: start;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--color-line);
+      border-radius: 999px;
+      color: var(--color-muted);
+      box-shadow: none;
+      cursor: pointer;
+      margin-top: -6px;
+    }
+
+    .menu-card .fav-herz:hover,
+    .menu-card .fav-herz--aktiv { border-color: var(--color-accent); color: var(--color-accent); }
+
+    @media (max-width: 699px) {
+      .menu-card {
+        grid-template-columns: 84px 1fr;
+        column-gap: var(--space-4);
+        align-items: start;
+      }
+      .menu-card__img { width: 84px; height: 112px; grid-row: 1 / span 3; }
+      .menu-card__name { font-size: 1.25rem; }
+      .menu-card__preisblock {
+        grid-column: 2;
+        grid-row: 3;
+        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-4);
+        margin-top: var(--space-3);
+      }
+      .menu-card .fav-herz { grid-column: 2; grid-row: 1; justify-self: end; }
+    }
+
+    /* ── WARENKORB ── */
+    .cart-sidebar {
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+    }
+
+    .cart-sidebar__title,
+    .cart-drawer__header h3 {
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--color-ink);
+    }
+
+    .cart-empty__titel {
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2);
+    }
+
+    .cart-empty__text {
+      font-size: var(--text-sm);
+      line-height: 1.7;
+      color: var(--color-muted);
+      max-width: 30ch;
+      margin-inline: auto;
+    }
+
+    /* Allergen-Hinweis am Gerichtnamen */
+    .allergen-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--color-line); color: var(--color-muted);
+      font-size: 0.6rem; font-weight: 700; font-family: var(--font-body);
+      border: none; cursor: pointer; margin-left: 6px;
+      flex-shrink: 0; position: relative; vertical-align: middle; line-height: 1;
+    }
+    .allergen-btn::before { content: 'i'; font-style: italic; }
+    .allergen-btn:hover { background: var(--color-accent); color: var(--color-on-accent); }
+    .allergen-tooltip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); background: var(--color-ink); color: var(--color-on-dark);
+      font-size: 0.75rem; font-family: var(--font-body); font-weight: 400;
+      line-height: 1.5; padding: 0.4rem 0.7rem; border-radius: var(--radius-sm);
+      white-space: nowrap; z-index: 9999; pointer-events: none;
+    }
+    .allergen-btn:hover .allergen-tooltip { display: block; }
+    @media (hover: none) { .allergen-btn.active .allergen-tooltip { display: block; } }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
+        <span class="nav__wortmarke">Sabai <em>Sabai</em></span>
+        <span class="nav__zusatz">Thai Küche</span>
+      </a>
+      <nav class="nav__aktionen">
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline-light btn--sm">
+          <span data-icon="kalender"></span><span class="btn__text">Tisch</span>
+        </a>
+        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
+          <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="order-head">
+    <div class="order-head__inner">
+      <div class="order-head__text">
+        <span class="kicker">Die Karte</span>
+        <h1 class="order-head__titel">Schärfe bestimmst<br>du selbst</h1>
+        <p>Die Schoten zeigen, wie wir das Gericht in Thailand servieren würden. Sag uns beim Bestellen, wie du es magst.</p>
+      </div>
+
+      <div>
+        <div class="modus">
+          <button class="modus__option mode-card mode-card--active" type="button" data-mode="lieferung">
+            <span class="modus__name">Lieferung</span>
+            <span class="modus__preis">3,50 &euro;</span>
+          </button>
+          <button class="modus__option mode-card" type="button" data-mode="abholung">
+            <span class="modus__name">Abholung</span>
+            <span class="modus__preis">Gratis</span>
+          </button>
+        </div>
+        <p class="modus__info" id="mode-info">Lieferung in ca. 45 Min &middot; Mindestbestellwert 20,00 &euro;</p>
+      </div>
+    </div>
+  </section>
+
+  <nav class="category-nav" id="category-nav">
+    <div class="container">
+      <div class="category-nav__inner">
+        <a class="cat-link cat-link--active" href="#vorspeisen">Vorspeisen</a>
+        <a class="cat-link" href="#suppen">Suppen</a>
+        <a class="cat-link" href="#currys">Currys</a>
+        <a class="cat-link" href="#wok">Aus dem Wok</a>
+        <a class="cat-link" href="#beilagen">Beilagen</a>
+        <a class="cat-link" href="#suesses">Süßes</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container order-layout">
+
+    <main class="menu">
+
+      <section class="menu-section" id="vorspeisen">
+        <h2 class="menu-section__title">Vorspeisen</h2>
+        <div class="zier zier--kurz"></div>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/porpiatod.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Por Pia Tod <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Soja (F)</span></button></h3>
+            <p class="menu-card__desc">ปอเปี๊ยะทอด &middot; Frühlingsrollen mit Gemüse und Glasnudeln, süß-saure Sauce</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">7,50 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Por Pia Tod" data-price="7.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/somtam.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Som Tam Thai <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Erdnuss (E), Fisch (D)</span></button></h3>
+            <p class="menu-card__desc">ส้มตำไทย &middot; Papayasalat mit Limette, Erdnuss und Kirschtomate</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">11,90 €</span>
+              <span class="schaerfe" aria-label="sehr scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v2" data-name="Som Tam Thai" data-price="11.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/satay.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Satay Gai <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Erdnuss (E)</span></button></h3>
+            <p class="menu-card__desc">สะเต๊ะไก่ &middot; Hähnchenspieße mit Kurkuma und Kokosmilch, Erdnusssauce</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">9,50 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v3" data-name="Satay Gai" data-price="9.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/miangkham.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Miang Kham <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D), Erdnuss (E)</span></button></h3>
+            <p class="menu-card__desc">เมี่ยงคำ &middot; Blätter zum Selbstfalten, Kokos, Limette, Ingwer, Erdnuss</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">8,90 €</span>
+              <span class="schaerfe" aria-label="leicht scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="v4" data-name="Miang Kham" data-price="8.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="suppen">
+        <h2 class="menu-section__title">Suppen</h2>
+        <div class="zier zier--kurz"></div>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/tomyum.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Tom Yum Goong <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Fisch (D)</span></button></h3>
+            <p class="menu-card__desc">ต้มยำกุ้ง &middot; Scharf-saure Suppe mit Garnelen, Zitronengras und Galgant</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">12,50 €</span>
+              <span class="schaerfe" aria-label="scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="Tom Yum Goong" data-price="12.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/tomkha.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Tom Kha Gai <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D)</span></button></h3>
+            <p class="menu-card__desc">ต้มข่าไก่ &middot; Kokossuppe mit Hähnchen, Galgant und Champignons</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">11,50 €</span>
+              <span class="schaerfe" aria-label="leicht scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s2" data-name="Tom Kha Gai" data-price="11.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="currys">
+        <h2 class="menu-section__title">Currys</h2>
+        <div class="zier zier--kurz"></div>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/gaengkeowwan.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Gaeng Keow Wan <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D)</span></button></h3>
+            <p class="menu-card__desc">แกงเขียวหวาน &middot; Grünes Curry mit Kokosmilch, Aubergine und Basilikum</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">14,50 €</span>
+              <span class="schaerfe" aria-label="scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Gaeng Keow Wan" data-price="14.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/massaman.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Gaeng Massaman <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Erdnuss (E), Fisch (D)</span></button></h3>
+            <p class="menu-card__desc">แกงมัสมั่น &middot; Rind, Kartoffel, Erdnuss, Zimt und Kardamom</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">16,90 €</span>
+              <span class="schaerfe" aria-label="leicht scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c2" data-name="Gaeng Massaman" data-price="16.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/panaeng.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Panaeng Nuea <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Erdnuss (E), Fisch (D)</span></button></h3>
+            <p class="menu-card__desc">พะแนงเนื้อ &middot; Rind in dickem Kokos-Curry mit Limettenblatt</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">16,50 €</span>
+              <span class="schaerfe" aria-label="scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c3" data-name="Panaeng Nuea" data-price="16.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/gaengpedped.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Gaeng Ped Ped <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Fisch (D)</span></button></h3>
+            <p class="menu-card__desc">แกงเผ็ดเป็ด &middot; Rotes Curry mit Ente, Ananas und Kirschtomate</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">17,50 €</span>
+              <span class="schaerfe" aria-label="sehr scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="c4" data-name="Gaeng Ped Ped" data-price="17.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="wok">
+        <h2 class="menu-section__title">Aus dem Wok</h2>
+        <div class="zier zier--kurz"></div>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/padthai.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pad Thai Goong <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Krebstiere (B), Ei (C), Erdnuss (E)</span></button></h3>
+            <p class="menu-card__desc">ผัดไทยกุ้ง &middot; Reisbandnudeln mit Garnelen, Tamarinde, Ei und Erdnuss</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">13,90 €</span>
+              <span class="schaerfe" aria-label="leicht scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="w1" data-name="Pad Thai Goong" data-price="13.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/padkrapao.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pad Krapao Moo <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Soja (F)</span></button></h3>
+            <p class="menu-card__desc">ผัดกะเพราหมู &middot; Schwein mit heiligem Basilikum, Chili und Spiegelei</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">13,50 €</span>
+              <span class="schaerfe" aria-label="sehr scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="w2" data-name="Pad Krapao Moo" data-price="13.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/khaopad.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Khao Pad Sapparod <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Cashew (H)</span></button></h3>
+            <p class="menu-card__desc">ข้าวผัดสับปะรด &middot; Gebratener Reis in der Ananas, mit Cashew und Rosine</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">13,90 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="w3" data-name="Khao Pad Sapparod" data-price="13.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/padseeew.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pad See Ew <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Ei (C), Soja (F), Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">ผัดซีอิ๊ว &middot; Breite Reisnudeln mit dunkler Sojasauce und Brokkoli</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">13,50 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="w4" data-name="Pad See Ew" data-price="13.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="beilagen">
+        <h2 class="menu-section__title">Beilagen</h2>
+        <div class="zier zier--kurz"></div>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/jasminreis.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Jasminreis</h3>
+            <p class="menu-card__desc">ข้าวหอมมะลิ &middot; Gedämpft, für jedes Curry</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">3,50 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n1" data-name="Jasminreis" data-price="3.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/kokosreis.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Kokosreis</h3>
+            <p class="menu-card__desc">ข้าวมะพร้าว &middot; In Kokosmilch gegart, leicht süß</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">4,50 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="n2" data-name="Kokosreis" data-price="4.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="suesses">
+        <h2 class="menu-section__title">Süßes</h2>
+        <div class="zier zier--kurz"></div>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/mangostickyrice.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Mango Sticky Rice</h3>
+            <p class="menu-card__desc">ข้าวเหนียวมะม่วง &middot; Klebreis mit Kokosmilch und frischer Mango</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">6,90 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d1" data-name="Mango Sticky Rice" data-price="6.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/gluaytod.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Gluay Tod <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">กล้วยทอด &middot; Frittierte Banane mit Honig und Sesam</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">5,90 €</span>
+              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="d2" data-name="Gluay Tod" data-price="5.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <h3 class="cart-sidebar__title">Deine Bestellung</h3>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-empty" id="cart-empty">
+        <p class="cart-empty__titel">Noch nichts ausgewählt</p>
+        <p class="cart-empty__text">Denk dran: bei uns teilt man. Ein Gericht pro Person, dazu Reis für den Tisch.</p>
+      </div>
+      <div class="cart-summary" id="cart-summary">
+        <div class="cart-summary__row">
+          <span>Zwischensumme</span>
+          <span id="cart-subtotal">0,00 €</span>
+        </div>
+        <div class="cart-summary__row">
+          <span>Lieferung</span>
+          <span>3,50 €</span>
+        </div>
+        <div class="cart-summary__row cart-summary__total">
+          <span>Gesamt</span>
+          <span id="cart-total">0,00 €</span>
+        </div>
+        <div id="stempel-hinweis"></div>
+        <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header">
+      <h3>Deine Bestellung</h3>
+      <button class="cart-drawer__close" id="cart-close" aria-label="Warenkorb schließen">✕</button>
+    </div>
+    <div class="cart-drawer__body">
+      <div class="cart-items" id="cart-items-mobile"></div>
+      <div class="cart-empty" id="cart-empty-mobile">
+        <p class="cart-empty__titel">Noch nichts ausgewählt</p>
+        <p class="cart-empty__text">Denk dran: bei uns teilt man. Ein Gericht pro Person, dazu Reis für den Tisch.</p>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cart-summary-mobile">
+      <div class="cart-summary__row">
+        <span>Zwischensumme</span>
+        <span id="cart-subtotal-mobile">0,00 €</span>
+      </div>
+      <div class="cart-summary__row">
+        <span>Lieferung</span>
+        <span>3,50 €</span>
+      </div>
+      <div class="cart-summary__row cart-summary__total">
+        <span>Gesamt</span>
+        <span id="cart-total-mobile">0,00 €</span>
+      </div>
+      <div id="stempel-hinweis-mobile"></div>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cart-fab">
+    Warenkorb
+    <span class="cart-fab__count" id="cart-fab-count">0</span>
+    <span class="cart-fab__price" id="cart-fab-price">0,00 €</span>
+  </button>
+
+  <footer class="footer">
+    <div class="container">
+      <a href="index.html" class="footer-marke">
+        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="footer-marke__name">Sabai <em>Sabai</em></span>
+      </a>
+
+      <p class="footer__zeile">
+        Musterstraße 14, 38100 Braunschweig<br>
+        <a href="tel:0531000000">0531 / 000 000</a> &middot;
+        <a href="mailto:hallo@sabai-sabai.de">hallo@sabai-sabai.de</a><br>
+        Di bis Do 17–22 &middot; Fr und Sa 17–23 &middot; So 12–21 &middot; Mo Ruhetag
+      </p>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <p class="footer__copy">© 2025 Sabai Sabai, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.allergen-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+        if (!isActive) btn.classList.add('active');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+    });
+  </script>
+</body>
+</html>
