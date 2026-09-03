@@ -830,7 +830,7 @@
 .tisch-sektion {
   background: var(--color-bg);
   color: var(--color-ink);
-  padding-top: var(--space-8);
+  padding-top: var(--space-7);
 }
 
 /* .titel steht standardmaessig schon in Jadegruen, hier also
@@ -846,7 +846,7 @@
 
 .tisch-bild {
   display: block;
-  width: min(38vw, 420px);
+  width: min(30vw, 340px);
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
@@ -887,14 +887,21 @@
   text-align: center;
 }
 
-/* Mit Skript: Buehne bleibt stehen, Texte liegen um das Bild */
+/* Mit Skript: Buehne bleibt stehen, Texte liegen um das Bild.
+
+   Die Buehne bekommt den Inhaltsbereich von 1140 Pixeln, damit
+   die Texte an denselben Kanten stehen wie in allen anderen
+   Abschnitten. Ohne das haengen sie am Fensterrand. */
 @media (min-width: 900px) {
-  .tisch-bahn--js { height: 400vh; }
+  .tisch-bahn--js { height: 320vh; }
 
   .tisch-bahn--js .tisch-buehne {
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: 82vh;
+    max-width: var(--max-content-width);
+    margin-inline: auto;
+    padding-inline: var(--container-pad-desktop);
   }
 
   .tisch-bahn--js .tisch-punkt {
@@ -911,11 +918,12 @@
     pointer-events: auto;
   }
 
-  /* Im Uhrzeigersinn um das Bild herum */
-  .tisch-bahn--js .tisch-punkt--1 { left: 8%;  top: 22%; }
-  .tisch-bahn--js .tisch-punkt--2 { right: 8%; top: 26%; text-align: right; }
-  .tisch-bahn--js .tisch-punkt--3 { right: 10%; bottom: 24%; text-align: right; }
-  .tisch-bahn--js .tisch-punkt--4 { left: 10%; bottom: 22%; }
+  /* Im Uhrzeigersinn um das Bild herum. Die Werte beziehen sich
+     auf die Buehne, also auf die 1140 Pixel. */
+  .tisch-bahn--js .tisch-punkt--1 { left: var(--container-pad-desktop);  top: 14%; }
+  .tisch-bahn--js .tisch-punkt--2 { right: var(--container-pad-desktop); top: 20%; text-align: right; }
+  .tisch-bahn--js .tisch-punkt--3 { right: var(--container-pad-desktop); bottom: 16%; text-align: right; }
+  .tisch-bahn--js .tisch-punkt--4 { left: var(--container-pad-desktop);  bottom: 14%; }
 }
 
 /* ── KATEGORIEN ──
