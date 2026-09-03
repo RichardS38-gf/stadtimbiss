@@ -453,6 +453,13 @@
   white-space: nowrap;
 }
 
+/* Das Konto steht ganz links am Rand des Inhaltsbereichs, die
+   Marke mittig, die Aktionen rechts. */
+.hero-top__konto {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
 .hero-top__aktionen {
   display: flex;
   align-items: center;
@@ -460,20 +467,42 @@
   flex-shrink: 0;
 }
 
-.hero-top__aktionen .nav__konto {
+/* Die beiden Knoepfe tragen dieselben Rauten wie die grossen im
+   Hero. .btn--sm blendet sie sonst aus, hier also wieder an. */
+.hero-top__aktionen .btn--sm::before,
+.hero-top__aktionen .btn--sm::after { display: block; }
+
+.hero-top__aktionen .btn--sm:hover { letter-spacing: 0.22em; }
+
+/* Konto in Cremeweiss, mit demselben Fuellen beim Ueberfahren wie
+   der helle Umriss-Knopf. */
+.hero-top .nav__konto {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.6rem 0.9rem;
-  border: 1px solid var(--color-line-dark);
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(246, 241, 231, 0.4);
   border-radius: 999px;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-on-dark);
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition);
 }
 
-.hero-top__aktionen #nav-konto { display: contents; }
+.hero-top .nav__konto .ic,
+.hero-top .nav__konto-icon,
+.hero-top .nav__konto-name { color: currentColor; }
+
+.hero-top .nav__konto:hover {
+  background: var(--color-on-dark);
+  border-color: var(--color-on-dark);
+  color: var(--color-ink);
+  opacity: 1;
+}
 
 /* Inhalt: links der Text, rechts das Bild randlos bis an die
    Fensterkante. Der Bogen sitzt deshalb nur noch oben links.
@@ -680,16 +709,9 @@
   .hero-marke__zusatz { display: none; }
   .hero-marke__name { font-size: 1.2rem; }
   .hero-marke__logo { width: 38px; }
-  .hero-top__aktionen .btn__text,
-  .hero-top__aktionen .nav__konto-name { display: none; }
   .hero-top__aktionen .btn,
-  .hero-top__aktionen .nav__konto {
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    gap: 0;
-    justify-content: center;
-  }
+  .hero-top .nav__konto { padding-inline: 0.85rem; }
+  .hero-top .nav__konto-name { display: none; }
   .hero__actions .btn { flex: 1 1 100%; max-width: 320px; }
 }
 
@@ -1817,6 +1839,15 @@ body.dunkel .badge--dark {
     top: 50%;
     transform: translateY(-50%);
     margin-left: 0;
+  }
+
+  /* Das Konto steht gegenueber, am linken Rand des
+     Inhaltsbereichs. */
+  .hero-top__konto {
+    position: absolute;
+    left: var(--container-pad-desktop);
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
