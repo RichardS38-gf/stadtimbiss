@@ -1129,6 +1129,16 @@
   .banner__inhalt { grid-template-columns: 44% 1fr; gap: var(--space-7); }
 }
 
+/* Mit Skript faehrt das Bild beim Scrollen von links herein und
+   beim Zurueckscrollen wieder hinaus. js/tuktuk.js setzt dafuer
+   den Wert von transform bei jedem Scrollschritt neu, deshalb
+   steht hier kein transform, nur die Ausgangswerte fuer den
+   Zustand ohne Skript. */
+.banner--js .banner__bild {
+  opacity: 0;
+  will-change: transform;
+}
+
 .banner__bild {
   display: block;
   width: 100%;
