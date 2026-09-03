@@ -47,8 +47,8 @@ $breiten = @{
   # Kategoriebilder, 320px breit
   'vorspeisen'  = 640
   'suppen'      = 640
-  'currys'      = 640
-  'wok'         = 640
+  'curry'       = 640
+  'ausdemwok'   = 640
 
   # Zutaten, rund, bis 200px breit
   'galgant'       = 440
