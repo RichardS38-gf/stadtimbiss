@@ -1143,6 +1143,11 @@
   display: block;
   width: 100%;
   height: auto;
+  /* Der Rauch ist im Bild hart abgeschnitten. Die Maske blendet
+     die linke Kante weich aus, dadurch laeuft er aus, statt
+     abzubrechen. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 26%);
 }
 
 @media (min-width: 900px) {
