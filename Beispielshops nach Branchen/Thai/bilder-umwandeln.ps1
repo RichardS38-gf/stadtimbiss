@@ -41,8 +41,8 @@ $breiten = @{
   # bis 420px angezeigt
   'rundertisch' = 900
 
-  # Freigestelltes Tuk-Tuk im Werbebanner, bis 560px angezeigt
-  'tuktuk'      = 1200
+  # Freigestelltes Tuk-Tuk im Werbebanner, bis 660px angezeigt
+  'tuktuk_banner' = 1400
 
   # Kategoriebilder, 320px breit
   'vorspeisen'  = 640

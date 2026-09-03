@@ -35,11 +35,11 @@ export function tuktukFahrt() {
     const fenster = window.innerHeight;
 
     // Der Start liegt bewusst nicht an der Fensterunterkante,
-    // sondern erst bei 70 Prozent der Fensterhoehe. Sonst ist die
+    // sondern erst bei 55 Prozent der Fensterhoehe. Sonst ist die
     // Fahrt schon vorbei, bevor die Sektion richtig im Blick ist.
     // 1 ist erreicht, sobald die Sektionsmitte die Fenstermitte
     // erreicht hat.
-    const start = fenster * 0.7;
+    const start = fenster * 0.55;
     const ende = fenster / 2 - rect.height / 2;
     const strecke = start - ende;
     if (strecke <= 0) return;

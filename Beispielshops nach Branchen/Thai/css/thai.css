@@ -1126,7 +1126,7 @@
 }
 
 @media (min-width: 900px) {
-  .banner__inhalt { grid-template-columns: 44% 1fr; gap: var(--space-7); }
+  .banner__inhalt { grid-template-columns: 52% 1fr; gap: var(--space-6); }
 }
 
 /* Mit Skript faehrt das Bild beim Scrollen von links herein und
@@ -1150,9 +1150,9 @@
      Kante des Inhaltsbereichs hinaus. Genau das erzeugt den
      Eindruck von Fahrt. */
   .banner__bild {
-    width: calc(100% + 80px);
+    width: calc(100% + 120px);
     max-width: none;
-    margin-left: -80px;
+    margin-left: -120px;
   }
 }
 
