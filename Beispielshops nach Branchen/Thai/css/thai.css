@@ -850,8 +850,7 @@
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid var(--color-line);
-  background: var(--color-bg-soft);
+  background: transparent;
 }
 
 .tisch-punkt { max-width: 26ch; }
@@ -860,7 +859,9 @@
   font-family: var(--font-head);
   font-weight: 400;
   font-size: clamp(1.7rem, 2.6vw, 2.3rem);
-  line-height: 1.15;
+  /* Reichlich Zeilenabstand, damit der Unterstrich nicht in die
+     naechste Zeile ragt. */
+  line-height: 1.4;
   color: var(--color-ink);
   margin-bottom: var(--space-3);
 }
@@ -871,7 +872,7 @@
 .tisch-punkt__titel em {
   font-style: normal;
   border-bottom: 1px solid var(--color-accent);
-  padding-bottom: 0.08em;
+  padding-bottom: 0.04em;
 }
 
 .tisch-punkt__text {
@@ -913,6 +914,15 @@
     padding-inline: var(--container-pad-desktop);
   }
 
+  /* Die Ueberschrift steht in der Buehne und bleibt damit stehen,
+     waehrend die Texte durchlaufen. */
+  .tisch-bahn--js .abschnitt__kopf {
+    position: absolute;
+    top: var(--space-6);
+    left: var(--container-pad-desktop);
+    margin-bottom: 0;
+  }
+
   .tisch-bahn--js .tisch-punkt {
     position: absolute;
     opacity: 0;
@@ -929,10 +939,10 @@
 
   /* Im Uhrzeigersinn um das Bild herum. Die Werte beziehen sich
      auf die Buehne, also auf die 1140 Pixel. */
-  .tisch-bahn--js .tisch-punkt--1 { left: var(--container-pad-desktop);  top: 14%; }
-  .tisch-bahn--js .tisch-punkt--2 { right: var(--container-pad-desktop); top: 20%; text-align: right; }
+  .tisch-bahn--js .tisch-punkt--1 { left: var(--container-pad-desktop);  top: 26%; }
+  .tisch-bahn--js .tisch-punkt--2 { right: var(--container-pad-desktop); top: 26%; text-align: right; }
   .tisch-bahn--js .tisch-punkt--3 { right: var(--container-pad-desktop); bottom: 16%; text-align: right; }
-  .tisch-bahn--js .tisch-punkt--4 { left: var(--container-pad-desktop);  bottom: 14%; }
+  .tisch-bahn--js .tisch-punkt--4 { left: var(--container-pad-desktop);  bottom: 16%; }
 }
 
 /* ── KATEGORIEN ──
