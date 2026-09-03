@@ -1024,9 +1024,8 @@
 }
 
 /* ── ZUTATEN ──
-   Fuenf runde Bilder auf hellem Grund. Der Kreis ist die dritte
-   Form der Seite neben Bogen und Rechteck und kommt sonst
-   nirgends vor.
+   Fuenf Bilder auf hellem Grund, quadratisch mit 20 Pixeln
+   Rundung.
 
    js/zutaten.js setzt die Klasse zutaten--js und blendet die
    Kacheln nacheinander ein. Ohne Skript stehen sie einfach da. */
@@ -1048,7 +1047,7 @@
   display: block;
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 50%;
+  border-radius: 20px;
   object-fit: cover;
   background: var(--color-bg-soft);
   border: 1px solid var(--color-line);

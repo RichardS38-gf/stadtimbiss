@@ -50,12 +50,12 @@ $breiten = @{
   'curry'       = 640
   'ausdemwok'   = 640
 
-  # Zutaten, rund, bis 200px breit
+  # Zutaten, quadratisch, bis 200px breit
   'galgant'       = 440
   'zitronengras'  = 440
   'limettenblatt' = 440
   'fischsauce'    = 440
-  'palmzucker'    = 440
+  'palmenzucker'  = 440
 }
 
 # Alles, was hier nicht steht, ist ein Gerichtbild der Karte.
