@@ -846,7 +846,7 @@
 
 .tisch-bild {
   display: block;
-  width: min(30vw, 340px);
+  width: min(36vw, 430px);
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
@@ -863,6 +863,15 @@
   line-height: 1.15;
   color: var(--color-ink);
   margin-bottom: var(--space-3);
+}
+
+/* Unterstrichene Stelle in der Ueberschrift. Nicht text-decoration,
+   sondern eine eigene Linie: die laesst sich in Farbe und Abstand
+   steuern und laeuft nicht durch die Unterlaengen. */
+.tisch-punkt__titel em {
+  font-style: normal;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 0.08em;
 }
 
 .tisch-punkt__text {
