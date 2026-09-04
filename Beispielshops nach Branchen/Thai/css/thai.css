@@ -1700,7 +1700,7 @@
   .nav .nav__inner,
   .hero-top {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     row-gap: var(--space-4);
     column-gap: var(--space-3);
     padding-block: var(--space-4);
