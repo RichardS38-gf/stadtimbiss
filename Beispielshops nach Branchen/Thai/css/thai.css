@@ -1682,6 +1682,179 @@
   .footer-marke__logo { width: 46px; }
 }
 
+/* ==========================================================
+   MOBIL
+   Steht bewusst am Ende der Datei, damit diese Regeln nach
+   allen anderen greifen. Ohne das gewinnt bei gleicher
+   Spezifitaet die weiter oben stehende Regel.
+   ========================================================== */
+@media (max-width: 900px) {
+
+  /* ── KOPFZEILE ──
+     Marke oben ueber die volle Breite und mittig, darunter die
+     drei Knoepfe in gleichen Abstaenden.
+
+     display contents auf den Aktionen loest deren Kasten auf,
+     dadurch werden Konto und Knoepfe direkte Kinder der Zeile und
+     lassen sich zusammen verteilen. */
+  .nav .nav__inner,
+  .hero-top {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: var(--space-4);
+    column-gap: var(--space-3);
+    padding-block: var(--space-4);
+  }
+
+  .nav .nav__marke,
+  .hero-marke {
+    order: -1;
+    flex: 0 0 100%;
+    justify-content: center;
+  }
+
+  .nav .nav__aktionen,
+  .hero-top__aktionen { display: contents; }
+
+  .nav .nav__konto-slot,
+  .hero-top__konto { flex: 1 1 0; min-width: 0; }
+
+  .nav .nav__konto,
+  .hero-top .nav__konto { width: 100%; justify-content: center; }
+
+  .nav .nav__aktionen .btn,
+  .hero-top__aktionen .btn,
+  .nav .cart-btn { flex: 1 1 0; justify-content: center; }
+
+  /* ── HERO ──
+     Reihenfolge: Ueberschrift, Woerterbucheintrag, Fliesstext,
+     Bild, Knoepfe. Das Bild steht im Markup vor dem Text, deshalb
+     wird es ueber order nach hinten geschoben.
+
+     display contents auf der Spalte loest ihren Kasten auf, damit
+     ihre Kinder und das Bild in einer gemeinsamen Reihenfolge
+     liegen. */
+  .hero { min-height: 0; }
+
+  .hero__inhalt {
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--container-pad-mobile);
+    padding-block: var(--space-6) var(--space-7);
+  }
+
+  .hero__spalte { display: contents; }
+
+  .hero__bild {
+    position: static;
+    order: 6;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border: none;
+    border-radius: 20px;
+    margin-block: var(--space-5);
+  }
+
+  .hero__actions { order: 7; }
+
+  /* ── KONZEPT ──
+     Das Bild bleibt oben stehen und dreht sich weiter mit dem
+     Scrollen, die vier Punkte laufen darunter durch. Der jeweils
+     aktive steht voll da, die anderen sind abgeblendet.
+     js/tischdreh.js setzt dafuer die Klasse tisch-bahn--mobil. */
+  .tisch-sektion { padding-top: var(--space-6); }
+
+  .tisch-buehne {
+    flex-direction: column;
+    align-items: stretch;
+    padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-7);
+  }
+
+  .tisch-buehne .abschnitt__kopf { text-align: left; }
+
+  .tisch-bild {
+    width: 190px;
+    align-self: center;
+    margin-bottom: var(--space-6);
+    transition: transform 0.3s linear;
+  }
+
+  .tisch-punkt { max-width: none; text-align: left; }
+
+  .tisch-bahn--mobil .tisch-bild {
+    position: sticky;
+    top: 90px;
+    z-index: 1;
+  }
+
+  .tisch-bahn--mobil .tisch-punkt {
+    opacity: 0.22;
+    transition: opacity 0.4s ease;
+    margin-block: var(--space-7);
+  }
+
+  .tisch-bahn--mobil .tisch-punkt--an { opacity: 1; }
+
+  /* ── SPEISEKARTE ──
+     Das durchschaltende Bild braucht ein Ueberfahren mit der Maus,
+     das es auf dem Telefon nicht gibt. */
+  .kat__buehne { display: none; }
+
+  /* ── ZUTATEN ──
+     Wisch-Slider mit zwei Kacheln im Blick. */
+  .zutaten {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-4);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scroll-padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-3);
+    scrollbar-width: none;
+  }
+
+  .zutaten::-webkit-scrollbar { display: none; }
+
+  .zutat {
+    flex: 0 0 calc(50% - var(--space-4) / 2);
+    scroll-snap-align: start;
+  }
+
+  /* ── WERBEBANNER ──
+     Reihenfolge: Ueberschrift, Fliesstext, Tuk-Tuk, Knopf. */
+  .banner__inhalt {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .banner__inhalt > div { display: contents; }
+  .banner__bild { order: 5; margin-block: var(--space-5); }
+  .banner__aktion { order: 6; margin-top: 0; }
+
+  /* ── KUNDENBEWERTUNGEN ──
+     Kennzahl gross und mittig ueber dem Band. */
+  .stimmen-score {
+    align-items: center;
+    text-align: center;
+    padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-6);
+  }
+
+  .stimmen-score__zahl { font-size: 4.6rem; }
+  .stimmen-score__sterne { font-size: 1.15rem; }
+  .stimmen-score__anzahl { font-size: 0.82rem; }
+
+  /* ── ÖFFNUNGSZEITEN ── */
+  .woche__tag { padding: var(--space-2) var(--space-3); }
+  .woche__name { font-size: 0.85rem; }
+  .woche__zeit { font-size: 1rem; }
+}
+
 /* ── DUNKLE UNTERSEITEN ──
    Konto, Anmelden, Kasse und Danke laufen auf den geteilten
    Stylesheets konto.css und checkout.css. Die sind shop-neutral

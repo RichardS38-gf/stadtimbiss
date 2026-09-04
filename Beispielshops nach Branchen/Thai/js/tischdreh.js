@@ -30,12 +30,12 @@ export function tischDrehung() {
   // Punkten sichtbar.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Auf schmalen Schirmen ist neben dem Bild kein Platz fuer Text,
-  // dort bleibt es ebenfalls bei der Liste.
-  const schmal = window.matchMedia('(max-width: 899px)');
-  if (schmal.matches) return;
-
-  bahn.classList.add('tisch-bahn--js');
+  // Auf schmalen Schirmen ist neben dem Bild kein Platz fuer Text.
+  // Dort bleibt das Bild oben stehen und dreht sich weiter, die
+  // Punkte laufen darunter durch und werden nacheinander
+  // hervorgehoben.
+  const schmal = window.matchMedia('(max-width: 900px)').matches;
+  bahn.classList.add(schmal ? 'tisch-bahn--mobil' : 'tisch-bahn--js');
 
   let angefordert = false;
 
@@ -51,6 +51,30 @@ export function tischDrehung() {
     p = Math.min(1, Math.max(0, p));
 
     bild.style.transform = `rotate(${p * DREHUNG_GRAD}deg)`;
+
+    // Auf Mobil richtet sich der aktive Punkt danach, welcher der
+    // Fenstermitte am naechsten steht. Das ist genauer als der
+    // Scrollfortschritt, weil die Punkte dort unterschiedlich hoch
+    // sind.
+    if (schmal) {
+      const mitte = window.innerHeight * 0.55;
+      let bester = 0;
+      let kleinster = Infinity;
+
+      punkte.forEach((el, i) => {
+        const r = el.getBoundingClientRect();
+        const abstand = Math.abs(r.top + r.height / 2 - mitte);
+        if (abstand < kleinster) {
+          kleinster = abstand;
+          bester = i;
+        }
+      });
+
+      punkte.forEach((el, i) => {
+        el.classList.toggle('tisch-punkt--an', i === bester);
+      });
+      return;
+    }
 
     // Die Bahn in so viele Abschnitte teilen, wie es Texte gibt.
     // Das 0.999 verhindert, dass am Ende ein Index zu hoch kommt.
