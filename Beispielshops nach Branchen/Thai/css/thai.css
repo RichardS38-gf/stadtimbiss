@@ -1933,7 +1933,7 @@
   .banner .titel { margin-bottom: var(--space-3); }
   .banner .zier { margin-block: var(--space-3); }
   .banner .abschnitt__text { margin-bottom: 0; }
-  .banner__bild { margin-block: var(--space-4) var(--space-4); }
+  .banner__bild { margin-block: var(--space-2) var(--space-4); }
 
   /* Bewertungen: Kennzahl dicht unter die Ueberschrift */
   #stimmen .abschnitt__kopf { margin-bottom: var(--space-4); }
