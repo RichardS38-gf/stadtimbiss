@@ -204,6 +204,23 @@
 
     @media (max-width: 899px) { .modus__info { text-align: left; } }
 
+    /* Warenkorbknopf in der Kopfzeile: eckig und cremeweiss
+       umrandet wie der Kontoknopf gegenueber. */
+    .nav .cart-btn {
+      border: 1px solid rgba(246, 241, 231, 0.4);
+      border-radius: 0;
+      background: transparent;
+      color: var(--color-on-dark);
+      transition: background var(--transition), color var(--transition),
+                  border-color var(--transition);
+    }
+
+    .nav .cart-btn:hover {
+      background: var(--color-on-dark);
+      border-color: var(--color-on-dark);
+      color: var(--color-ink);
+    }
+
     /* ── KATEGORIELEISTE ──
        Klebt unter der Kopfzeile. Der z-index von 90 kommt aus
        bestellen.css und bleibt, damit sie ueber den Karten liegt. */
