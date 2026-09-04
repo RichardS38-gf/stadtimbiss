@@ -147,7 +147,9 @@
   gap: var(--space-2);
   padding: 0.6rem 1rem;
   border: 1px solid rgba(246, 241, 231, 0.4);
-  border-radius: 999px;
+  /* Eckig wie alle anderen Knoepfe der Seite. Rundungen gibt es
+     nur bei den Bildern. */
+  border-radius: 0;
   background: transparent;
   font-size: 0.78rem;
   font-weight: 600;
@@ -495,7 +497,7 @@
   gap: var(--space-2);
   padding: 0.6rem 1rem;
   border: 1px solid rgba(246, 241, 231, 0.4);
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
   font-size: 0.78rem;
   font-weight: 600;
