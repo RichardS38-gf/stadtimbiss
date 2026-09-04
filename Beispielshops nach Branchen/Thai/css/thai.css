@@ -1887,7 +1887,10 @@
   .titel,
   .abschnitt__text,
   .kicker,
-  .zier--mitte {
+  .zier--mitte,
+  .tisch-punkt,
+  .tisch-punkt__titel,
+  .tisch-punkt__text {
     text-align: left;
     margin-inline: 0;
   }
@@ -1903,6 +1906,26 @@
     max-width: none;
     margin-inline: 0;
   }
+
+  /* ── ABSTAENDE ──
+     Zusammengehoeriges rueckt zusammen, zwischen den Sektionen
+     bleibt Luft. */
+
+  /* Konzept: Bild dicht unter die Ueberschrift */
+  .tisch-buehne .abschnitt__kopf { margin-bottom: var(--space-4); }
+  .tisch-bild { margin-bottom: var(--space-5); }
+
+  /* Banner: alles enger zusammen, dafuer mehr Luft oben und unten */
+  .banner { padding-block: var(--space-7); }
+  .banner .kicker { margin-bottom: var(--space-2); }
+  .banner .titel { margin-bottom: var(--space-3); }
+  .banner .zier { margin-block: var(--space-3); }
+  .banner .abschnitt__text { margin-bottom: 0; }
+  .banner__bild { margin-block: var(--space-4) var(--space-4); }
+
+  /* Bewertungen: Kennzahl dicht unter die Ueberschrift */
+  #stimmen .abschnitt__kopf { margin-bottom: var(--space-4); }
+  .stimmen-score { padding-block: 0 var(--space-5); }
 }
 
 /* ── DUNKLE UNTERSEITEN ──
