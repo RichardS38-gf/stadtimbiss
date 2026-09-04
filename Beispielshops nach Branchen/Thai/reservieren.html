@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/thai.css?v=63">
+  <link rel="stylesheet" href="css/thai.css?v=64">
   <style>
     /* ── KOPFZEILE MIT MONOGRAMM ──
        Auf den Unterseiten ist die Kopfzeile die einzige dunkle
@@ -397,9 +397,11 @@
   <script type="module">
     import { setupSeite, getProfile, getSession, createReservation } from './js/auth.js';
     import { iconsEinsetzen } from './js/icons.js';
+    import { menueAufbauen } from './js/menue.js';
 
     await setupSeite();
     iconsEinsetzen();
+    menueAufbauen();
 
     // Formular mit den Kontodaten vorbefuellen
     const profil = await getProfile();

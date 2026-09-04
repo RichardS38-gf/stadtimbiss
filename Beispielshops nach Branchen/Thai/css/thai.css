@@ -1691,20 +1691,22 @@
 @media (max-width: 900px) {
 
   /* ── KOPFZEILE ──
-     Marke oben ueber die volle Breite und mittig, darunter die
-     drei Knoepfe in gleichen Abstaenden.
-
-     display contents auf den Aktionen loest deren Kasten auf,
-     dadurch werden Konto und Knoepfe direkte Kinder der Zeile und
-     lassen sich zusammen verteilen. */
+     Marke mittig, rechts daneben der Knopf zum Aufklappen. Die
+     drei Schaltflaechen liegen im Klappfeld darunter und stehen
+     dort untereinander. js/menue.js haengt sie dorthin um. */
   .nav .nav__inner,
   .hero-top {
+    position: relative;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     row-gap: var(--space-4);
     column-gap: var(--space-3);
     padding-block: var(--space-4);
   }
+
+  /* Das Klappfeld haengt unter der Kopfzeile und darf nicht
+     abgeschnitten werden. */
+  .nav { overflow: visible; }
 
   .nav .nav__marke,
   .hero-marke {
@@ -1713,18 +1715,58 @@
     justify-content: center;
   }
 
-  .nav .nav__aktionen,
-  .hero-top__aktionen { display: contents; }
+  .menue-btn {
+    position: absolute;
+    right: var(--container-pad-mobile);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 11px;
+    border: 1px solid rgba(246, 241, 231, 0.4);
+    background: transparent;
+    cursor: pointer;
+  }
 
-  .nav .nav__konto-slot,
-  .hero-top__konto { flex: 0 0 auto; min-width: 0; }
+  .menue-btn__strich {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: var(--color-on-dark);
+  }
 
-  .nav .nav__konto,
-  .hero-top .nav__konto { justify-content: center; }
+  .menue-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 120;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--container-pad-mobile);
+    background: var(--color-ink);
+    border-top: 1px solid var(--color-line-dark);
+    border-bottom: 1px solid var(--color-line-dark);
+  }
 
-  .nav .nav__aktionen .btn,
-  .hero-top__aktionen .btn,
-  .nav .cart-btn { flex: 0 0 auto; justify-content: center; }
+  .menue-panel--offen { display: flex; }
+
+  .menue-panel .btn,
+  .menue-panel .nav__konto,
+  .menue-panel .cart-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Der Kontokasten faellt aus dem Layout, sein Inhalt soll die
+     volle Breite bekommen. */
+  .menue-panel .hero-top__konto,
+  .menue-panel .nav__konto-slot { display: block; }
 
   /* ── HERO ──
      Reihenfolge: Ueberschrift, Woerterbucheintrag, Fliesstext,
