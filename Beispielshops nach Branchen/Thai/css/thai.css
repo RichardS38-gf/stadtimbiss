@@ -1756,7 +1756,7 @@
     margin-block: var(--space-5);
   }
 
-  .hero__actions { order: 7; }
+  .hero__actions { order: 7; justify-content: center; }
 
   /* ── KONZEPT ──
      Das Bild bleibt oben stehen und dreht sich weiter mit dem
@@ -1803,7 +1803,9 @@
   .kat__buehne { display: none; }
 
   /* ── ZUTATEN ──
-     Wisch-Slider mit zwei Kacheln im Blick. */
+     Wisch-Slider. Eine Zutat steht gross im Blick, von der
+     naechsten schaut ein Streifen herein. Genau dieser Streifen
+     zeigt, dass es weitergeht. */
   .zutaten {
     display: flex;
     grid-template-columns: none;
@@ -1820,20 +1822,23 @@
   .zutaten::-webkit-scrollbar { display: none; }
 
   .zutat {
-    flex: 0 0 calc(50% - var(--space-4) / 2);
+    flex: 0 0 78%;
     scroll-snap-align: start;
   }
 
   /* ── WERBEBANNER ──
      Reihenfolge: Ueberschrift, Fliesstext, Tuk-Tuk, Knopf. */
+  .banner { padding-block: var(--space-4); }
+
   .banner__inhalt {
     display: flex;
     flex-direction: column;
     gap: 0;
+    text-align: left;
   }
 
   .banner__inhalt > div { display: contents; }
-  .banner__bild { order: 5; margin-block: var(--space-5); }
+  .banner__bild { order: 5; margin-block: var(--space-3); }
   .banner__aktion { order: 6; margin-top: 0; }
 
   /* ── KUNDENBEWERTUNGEN ──
@@ -1849,7 +1854,26 @@
   .stimmen-score__sterne { font-size: 1.15rem; }
   .stimmen-score__anzahl { font-size: 0.82rem; }
 
-  /* ── ÖFFNUNGSZEITEN ── */
+  /* ── ÖFFNUNGSZEITEN ──
+     Reihenfolge: Ueberschrift, grosse Zeile, Restzeit, Wochen-
+     tabelle, Adresse, Route. Die linke Spalte wird dafuer mit
+     display contents aufgeloest, damit die Tabelle zwischen ihre
+     Kinder rutschen kann. */
+  .kontakt { display: flex; flex-direction: column; gap: 0; }
+  .kontakt > div:first-child { display: contents; }
+
+  .woche { order: 5; margin-block: var(--space-5); }
+  .kontakt__adresse { order: 6; }
+  .route { order: 7; align-self: flex-start; }
+
+  /* Die grosse Zeile steht zweizeilig statt dreizeilig: Einleitung
+     und Uhrzeit nebeneinander, der Nachsatz darunter. */
+  .jetzt__gross span:first-of-type,
+  .jetzt__gross em { display: inline; }
+
+  .jetzt__gross em { margin-inline: 0.2em 0; }
+  .jetzt__gross span:last-of-type { display: block; }
+
   .woche__tag { padding: var(--space-2) var(--space-3); }
   .woche__name { font-size: 0.85rem; }
   .woche__zeit { font-size: 1rem; }
