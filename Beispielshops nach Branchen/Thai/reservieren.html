@@ -85,7 +85,9 @@
       .res__bild {
         aspect-ratio: 4 / 3;
         height: auto;
-        border-radius: 0 0 160px 160px;
+        border-radius: 20px;
+        margin: var(--container-pad-mobile) var(--container-pad-mobile) 0;
+        width: calc(100% - var(--container-pad-mobile) * 2);
       }
     }
 
@@ -264,6 +266,7 @@
       </a>
 
       <nav class="nav__aktionen">
+        <a href="#reservation-form" class="btn btn--outline-light btn--sm">Tisch</a>
         <a href="bestellen.html" class="btn btn--primary btn--sm">Bestellen</a>
       </nav>
     </div>

@@ -205,12 +205,17 @@
     @media (max-width: 899px) { .modus__info { text-align: left; } }
 
     /* Warenkorbknopf in der Kopfzeile: eckig und cremeweiss
-       umrandet wie der Kontoknopf gegenueber. */
+       umrandet wie der Kontoknopf gegenueber. Masse und Hoehe wie
+       die Textknoepfe, damit die drei in einer Reihe gleich
+       aussehen. */
     .nav .cart-btn {
       border: 1px solid rgba(246, 241, 231, 0.4);
       border-radius: 0;
       background: transparent;
       color: var(--color-on-dark);
+      min-height: 0;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
       transition: background var(--transition), color var(--transition),
                   border-color var(--transition);
     }
