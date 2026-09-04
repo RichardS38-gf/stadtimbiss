@@ -202,6 +202,14 @@
   .nav .nav__aktionen .btn,
   .nav .nav__konto { padding-inline: 0.85rem; }
 
+  /* Die Rauten kosten je Knopf rund 30 Pixel Breite. In der
+     Kopfzeile eines Telefons stehen daneben noch Konto, Marke und
+     ein zweiter Knopf, deshalb hier ohne. */
+  .nav .nav__aktionen .btn--sm::before,
+  .nav .nav__aktionen .btn--sm::after,
+  .hero-top__aktionen .btn--sm::before,
+  .hero-top__aktionen .btn--sm::after { display: none; }
+
   .nav .nav__wortmarke { font-size: 1.2rem; }
   .nav .nav__logo-bild { width: 38px; }
 }

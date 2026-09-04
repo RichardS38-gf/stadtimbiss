@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/thai.css?v=54">
+  <link rel="stylesheet" href="css/thai.css?v=55">
   <script type="module" src="js/bestellen.js"></script>
   <style>
     /* ── KOPFZEILE MIT MONOGRAMM ──
@@ -220,6 +220,32 @@
       border-color: var(--color-on-dark);
       color: var(--color-ink);
     }
+
+    /* ── MOBIL ──
+       Der Warenkorbknopf am unteren Rand kommt aus bestellen.css
+       und traegt dort noch die Farben des Imbisses: weisse Schrift
+       auf Gold und ein roter Schlagschatten. Beides passt hier
+       nicht. */
+    .cart-fab {
+      background: var(--color-accent);
+      color: var(--color-on-accent);
+      border-radius: 0;
+      box-shadow: 0 4px 20px rgba(10, 50, 42, 0.45);
+    }
+
+    .cart-fab__count {
+      background: var(--color-ink);
+      color: var(--color-accent);
+      border-radius: 0;
+    }
+
+    .cart-drawer,
+    .cart-drawer__header,
+    .cart-drawer__footer { border-color: var(--color-line); }
+
+    /* Die Sprungmarken der Kategorien muessen unter Kopfzeile und
+       Leiste landen, sonst steht die Ueberschrift dahinter. */
+    .menu-section { scroll-margin-top: 140px; }
 
     /* ── KATEGORIELEISTE ──
        Klebt unter der Kopfzeile. Der z-index von 90 kommt aus
