@@ -1691,17 +1691,21 @@
 @media (max-width: 900px) {
 
   /* ── KOPFZEILE ──
-     Marke mittig, rechts daneben der Knopf zum Aufklappen. Die
-     drei Schaltflaechen liegen im Klappfeld darunter und stehen
-     dort untereinander. js/menue.js haengt sie dorthin um. */
+     Drei Spalten: links eine leere Spalte als Gegengewicht, in der
+     Mitte die Marke, rechts der Knopf zum Aufklappen. So steht die
+     Marke wirklich mittig und beide sitzen auf einer Linie.
+
+     Die drei Schaltflaechen liegen im Klappfeld darunter und
+     stehen dort untereinander. js/menue.js haengt sie dorthin um. */
   .nav .nav__inner,
   .hero-top {
     position: relative;
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: var(--space-4);
-    column-gap: var(--space-3);
-    padding-block: var(--space-4);
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 0;
+    padding-block: var(--space-3);
   }
 
   /* Das Klappfeld haengt unter der Kopfzeile und darf nicht
@@ -1710,16 +1714,12 @@
 
   .nav .nav__marke,
   .hero-marke {
-    order: -1;
-    flex: 0 0 100%;
+    grid-column: 2;
     justify-content: center;
   }
 
   .menue-btn {
-    position: absolute;
-    right: var(--container-pad-mobile);
-    top: 50%;
-    transform: translateY(-50%);
+    grid-column: 3;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/thai.css?v=64">
+  <link rel="stylesheet" href="css/thai.css?v=65">
   <script type="module" src="js/bestellen.js"></script>
   <script type="module">
     import { menueAufbauen } from './js/menue.js';
@@ -50,6 +50,14 @@
        Kopfzeile. Hier waere er die Trennlinie, die gerade weg
        soll. */
     .nav.scrolled { box-shadow: none; }
+
+    /* Das Ausklappmenue haengt unter der Kopfzeile. overflow
+       hidden von oben wuerde es abschneiden, deshalb auf Mobil
+       zurueck auf visible. Das Muster braucht kein hidden, es
+       liegt ohnehin nur innerhalb der Flaeche. */
+    @media (max-width: 900px) {
+      .nav { overflow: visible; }
+    }
 
     .nav::before {
       content: '';

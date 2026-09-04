@@ -15,13 +15,21 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/thai.css?v=64">
+  <link rel="stylesheet" href="css/thai.css?v=65">
   <style>
     /* ── KOPFZEILE MIT MONOGRAMM ──
        Auf den Unterseiten ist die Kopfzeile die einzige dunkle
        Flaeche oben. Das Muster bindet sie an Hero und Fusszeile
        der Startseite. */
     .nav { position: relative; overflow: hidden; }
+
+    /* Das Ausklappmenue haengt unter der Kopfzeile. overflow
+       hidden wuerde es abschneiden, deshalb auf Mobil zurueck auf
+       visible. Das Muster braucht kein hidden, es liegt ohnehin
+       nur innerhalb der Flaeche. */
+    @media (max-width: 900px) {
+      .nav { overflow: visible; }
+    }
 
     .nav::before {
       content: '';
