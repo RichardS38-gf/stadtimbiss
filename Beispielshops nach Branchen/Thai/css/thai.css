@@ -117,6 +117,13 @@
   white-space: nowrap;
 }
 
+/* Kopfzeile der Unterseiten: Konto links, Marke mittig, Aktionen
+   rechts. Dieselbe Aufteilung wie im Hero der Startseite. */
+.nav .nav__konto-slot {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
 .nav .nav__aktionen {
   display: flex;
   align-items: center;
@@ -125,27 +132,44 @@
   flex-shrink: 0;
 }
 
+/* Die Knoepfe tragen dieselben Rauten wie die grossen im Hero.
+   .btn--sm blendet sie sonst aus. */
+.nav .nav__aktionen .btn--sm::before,
+.nav .nav__aktionen .btn--sm::after { display: block; }
+
+.nav .nav__aktionen .btn--sm:hover { letter-spacing: 0.22em; }
+
 .nav .nav__aktionen #nav-konto { display: contents; }
 
 .nav .nav__konto {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.6rem 0.9rem;
-  border: 1px solid var(--color-line-dark);
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(246, 241, 231, 0.4);
   border-radius: 999px;
   background: transparent;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition);
 }
 
 .nav .nav__konto,
 .nav .nav__konto-name,
 .nav .nav__konto-icon { color: var(--color-on-dark); }
 
-.nav .nav__konto:hover { border-color: var(--color-accent); opacity: 1; }
-.nav .nav__konto:hover .nav__konto-icon { color: var(--color-accent); }
+.nav .nav__konto:hover {
+  background: var(--color-on-dark);
+  border-color: var(--color-on-dark);
+  color: var(--color-ink);
+  opacity: 1;
+}
+
+.nav .nav__konto:hover .nav__konto-icon,
+.nav .nav__konto:hover .nav__konto-name { color: var(--color-ink); }
 
 /* Warenkorb auf der Bestellseite */
 .nav .nav__aktionen .cart-btn {
@@ -172,20 +196,9 @@
 
 @media (max-width: 900px) {
   .nav .nav__inner { gap: var(--space-3); min-height: 66px; }
-  .nav .btn__text,
   .nav .nav__konto-name { display: none; }
-  .nav .btn--sm .ic { display: block; }
-
-  /* Ohne Text sind es runde Knoepfe in fester Groesse. */
   .nav .nav__aktionen .btn,
-  .nav .nav__aktionen .cart-btn,
-  .nav .nav__konto {
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    gap: 0;
-    justify-content: center;
-  }
+  .nav .nav__konto { padding-inline: 0.85rem; }
 
   .nav .nav__wortmarke { font-size: 1.2rem; }
   .nav .nav__logo-bild { width: 38px; }
@@ -808,19 +821,38 @@
 }
 
 /* Schaerfeskala. Drei Schoten, die gefuellten in Chilirot.
-   Chilirot kommt NUR hier vor. */
+   Chilirot kommt NUR hier vor.
+
+   Die Form entsteht aus zwei Teilen: der Koerper ist ein
+   laenglicher Tropfen mit unterschiedlichen Radien oben und unten,
+   der Stiel sitzt als Pseudoelement schraeg darauf. Der Stiel
+   erbt den Hintergrund vom Koerper und faerbt sich damit
+   automatisch mit. */
 .schaerfe {
   display: inline-flex;
-  gap: 4px;
+  gap: 5px;
   align-items: center;
 }
 
 .schaerfe__schote {
-  width: 10px;
-  height: 10px;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
+  position: relative;
+  width: 8px;
+  height: 17px;
+  border-radius: 50% 50% 45% 45% / 22% 22% 78% 78%;
+  transform: rotate(10deg);
   background: rgba(14, 59, 50, 0.18);
+}
+
+.schaerfe__schote::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 2px;
+  width: 3px;
+  height: 7px;
+  border-radius: 2px;
+  background: inherit;
+  transform: rotate(-28deg);
 }
 
 .schaerfe__schote--an { background: var(--color-chili); }
@@ -1843,7 +1875,8 @@ body.dunkel .badge--dark {
 
   /* Das Konto steht gegenueber, am linken Rand des
      Inhaltsbereichs. */
-  .hero-top__konto {
+  .hero-top__konto,
+  .nav .nav__konto-slot {
     position: absolute;
     left: var(--container-pad-desktop);
     top: 50%;

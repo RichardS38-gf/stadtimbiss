@@ -190,7 +190,11 @@ export const KATALOG = {
   'n1': { name: 'Jasminreis',         thai: 'ข้าวหอมมะลิ',   price: 3.50,  kategorie: 'Beilagen',    schaerfe: 0, img: 'Bilder/jasminreis.webp' },
   'n2': { name: 'Kokosreis',          thai: 'ข้าวมะพร้าว',   price: 4.50,  kategorie: 'Beilagen',    schaerfe: 0, img: 'Bilder/kokosreis.webp' },
   'd1': { name: 'Mango Sticky Rice',  thai: 'ข้าวเหนียวมะม่วง', price: 6.90, kategorie: 'Süßes',    schaerfe: 0, img: 'Bilder/mangostickyrice.webp' },
-  'd2': { name: 'Gluay Tod',          thai: 'กล้วยทอด',      price: 5.90,  kategorie: 'Süßes',       schaerfe: 0, img: 'Bilder/gluaytod.webp' }
+  'd2': { name: 'Gluay Tod',          thai: 'กล้วยทอด',      price: 5.90,  kategorie: 'Süßes',       schaerfe: 0, img: 'Bilder/gluaytod.webp' },
+  'g1': { name: 'Cha Yen',            thai: 'ชาเย็น',        price: 4.50,  kategorie: 'Getränke',    schaerfe: 0, img: 'Bilder/chayen.webp' },
+  'g2': { name: 'Nam Manao',          thai: 'น้ำมะนาว',      price: 4.20,  kategorie: 'Getränke',    schaerfe: 0, img: 'Bilder/nammanao.webp' },
+  'g3': { name: 'Singha',             thai: 'สิงห์',         price: 4.90,  kategorie: 'Getränke',    schaerfe: 0, img: 'Bilder/singha.webp' },
+  'g4': { name: 'Nam Maprao',         thai: 'น้ำมะพร้าว',    price: 5.50,  kategorie: 'Getränke',    schaerfe: 0, img: 'Bilder/nammaprao.webp' }
 };
 
 export function demoDatenSatz() {

@@ -15,49 +15,104 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/thai.css?v=37">
+  <link rel="stylesheet" href="css/thai.css?v=53">
   <style>
-    /* Zwei Spalten: links das Bild im Bogen mit den Hinweisen
-       darunter, rechts das Formular. Der Bogen ist die Leitform
-       der Seite und kehrt hier wieder. */
-    .res-grid {
+    /* ── KOPFZEILE MIT MONOGRAMM ──
+       Auf den Unterseiten ist die Kopfzeile die einzige dunkle
+       Flaeche oben. Das Muster bindet sie an Hero und Fusszeile
+       der Startseite. */
+    .nav { position: relative; overflow: hidden; }
+
+    .nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.09;
+      pointer-events: none;
+      background-image: url('Bilder/monogramm.svg'), url('Bilder/monogramm.svg');
+      background-size: 150px 150px, 150px 150px;
+      background-position: 0 0, 75px 75px;
+      background-repeat: repeat, repeat;
+    }
+
+    .nav > * { position: relative; }
+
+    /* ── AUFBAU ──
+       Links das Bild randlos bis an die Fensterkante, rechts das
+       Formular. Spiegelbild zum Hero der Startseite: dort sitzt
+       die Woelbung links, hier rechts.
+
+       Die Sektion traegt bewusst keinen Container, sonst koennte
+       das Bild nicht bis an den Rand laufen. Die Formularspalte
+       bekommt ihren Innenabstand deshalb selbst. */
+    .res {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--space-7);
-      align-items: start;
+      background: var(--color-bg);
     }
 
     @media (min-width: 900px) {
-      .res-grid { grid-template-columns: 340px 1fr; gap: var(--space-8); }
+      /* Genau eine Bildschirmhoehe, abzueglich der Kopfzeile.
+         Das Formular scrollt innerhalb der Spalte, falls es
+         nicht hineinpasst, statt die Sektion zu strecken. */
+      .res {
+        grid-template-columns: 42% 1fr;
+        align-items: stretch;
+        min-height: calc(100vh - 76px);
+      }
     }
 
-    .res-bild { aspect-ratio: 3 / 4; margin-bottom: var(--space-5); }
-
-    .res-info__zeile {
-      display: flex;
-      gap: var(--space-3);
-      align-items: flex-start;
-      font-size: var(--text-sm);
-      line-height: 1.8;
-      color: var(--color-on-dark-mu);
-      padding-block: var(--space-3);
-      border-bottom: 1px solid var(--color-line-dark);
+    .res__bild {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      background: var(--color-bg-soft);
     }
 
-    .res-info__zeile:last-child { border-bottom: none; }
-    .res-info__zeile .ic { width: 18px; height: 18px; color: var(--color-accent); flex-shrink: 0; }
-    .res-info__zeile a { color: var(--color-accent); }
-
-    .res-form h2 {
-      font-family: var(--font-head);
-      font-weight: 300;
-      font-size: 2rem;
-      color: var(--color-on-dark);
-      margin-bottom: var(--space-5);
+    @media (min-width: 900px) {
+      /* Rechte Kante durchgehend gewoelbt, ohne gerades Stueck:
+         zwei Werte je Ecke, waagerecht 200 Pixel und senkrecht 50
+         Prozent. Oben und unten ergeben zusammen die volle Hoehe. */
+      .res__bild {
+        min-height: 0;
+        border-radius: 0 200px 200px 0 / 0 50% 50% 0;
+      }
     }
 
-    /* Formularfelder: nur eine Linie unten, wie ein ausgefuellter
-       Zettel. Kasten waere auf dem dunklen Grund zu schwer. */
+    @media (max-width: 899px) {
+      .res__bild {
+        aspect-ratio: 4 / 3;
+        height: auto;
+        border-radius: 0 0 160px 160px;
+      }
+    }
+
+    .res__spalte {
+      padding-inline: var(--container-pad-mobile);
+      padding-block: var(--space-7);
+    }
+
+    @media (min-width: 900px) {
+      .res__spalte {
+        padding-block: var(--space-7);
+        padding-left: var(--space-7);
+        /* Rechts buendig mit dem Inhaltsbereich der uebrigen
+           Seiten, egal wie breit das Fenster ist. */
+        padding-right: max(
+          var(--container-pad-desktop),
+          calc((100vw - var(--max-content-width)) / 2)
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+
+    /* ── FORMULAR ──
+       Felder nur mit Linie unten, wie ein ausgefuellter Zettel.
+       Ein Kasten waere auf dem hellen Grund zu schwer. */
     .form-row {
       display: grid;
       grid-template-columns: 1fr;
@@ -70,11 +125,11 @@
     .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
 
     .form-group label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--color-on-dark-mu);
+      color: var(--color-muted);
     }
 
     .form-group label span { text-transform: none; letter-spacing: 0; font-weight: 400; }
@@ -85,11 +140,11 @@
       width: 100%;
       padding: 0 0 0.5rem;
       border: none;
-      border-bottom: 1px solid var(--color-line-dark);
+      border-bottom: 1px solid rgba(14, 59, 50, 0.28);
       border-radius: 0;
       font-family: var(--font-body);
       font-size: var(--text-base);
-      color: var(--color-on-dark);
+      color: var(--color-ink);
       background: transparent;
       transition: border-color var(--transition);
       min-height: 40px;
@@ -105,11 +160,6 @@
       border-bottom-color: var(--color-accent);
     }
 
-    /* Auswahllisten zeichnen ihre Optionen im System-Stil. Auf
-       dunklem Grund braucht es eine eigene Farbe, sonst steht
-       Schwarz auf Schwarz. */
-    .form-group select option { background: var(--color-dark-2); color: var(--color-on-dark); }
-
     .form-group textarea { resize: vertical; min-height: 84px; padding-top: 0.4rem; }
 
     /* iOS gibt Datumsfeldern eine eigene Innenhoehe. Ohne dieses
@@ -124,24 +174,21 @@
       padding-block: 0;
     }
 
-    input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(72%) sepia(35%) saturate(560%) hue-rotate(2deg) brightness(92%);
-      cursor: pointer;
-    }
+    input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; }
 
-    /* Uhrzeit als Kacheln. Die Radios liegen unsichtbar darunter,
+    /* Uhrzeit als Chips. Die Radios liegen unsichtbar darunter,
        das Label ist die sichtbare Kachel. Eigener Block statt
        .form-group, weil dessen Label-Regel sonst Versalien auf die
-       Kacheln legen wuerde. */
+       Chips legen wuerde. */
     .zeit-block { margin-bottom: var(--space-5); }
 
     .zeit-block__label {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--color-on-dark-mu);
+      color: var(--color-muted);
       margin-bottom: var(--space-3);
     }
 
@@ -153,16 +200,16 @@
       display: inline-flex;
       align-items: center;
       padding: 0.5rem 1rem;
-      border: 1px solid var(--color-line-dark);
+      border: 1px solid rgba(14, 59, 50, 0.28);
       border-radius: 999px;
       background: transparent;
       font-size: 0.9rem;
-      color: var(--color-on-dark-mu);
+      color: var(--color-muted);
       cursor: pointer;
       transition: background var(--transition), border-color var(--transition), color var(--transition);
     }
 
-    .zeit-wahl label:hover { border-color: var(--color-accent); color: var(--color-on-dark); }
+    .zeit-wahl label:hover { border-color: var(--color-accent); color: var(--color-ink); }
 
     .zeit-wahl input:checked + label {
       background: var(--color-accent);
@@ -174,44 +221,63 @@
 
     .form-submit { margin-top: var(--space-6); }
 
+    /* Die Hinweise stehen als schmale Zeile unter dem Formular,
+       nicht mehr als eigene Spalte. */
+    .res-info {
+      margin-top: var(--space-7);
+      padding-top: var(--space-5);
+      border-top: 1px solid rgba(14, 59, 50, 0.2);
+      display: grid;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      line-height: 1.75;
+      color: var(--color-muted);
+    }
+
+    .res-info a { color: var(--color-ink); }
+    .res-info a:hover { color: var(--color-accent); }
+
     /* Erfolgsmeldung */
-    .res-success { display: none; text-align: center; padding: var(--space-7) var(--space-5); }
+    .res-success { display: none; }
     .res-success__icon { color: var(--color-accent); margin-bottom: var(--space-4); }
-    .res-success h3 {
+
+    .res-success h2 {
       font-family: var(--font-head);
       font-weight: 300;
-      font-size: 2rem;
-      color: var(--color-on-dark);
+      font-size: 2.2rem;
+      color: var(--color-ink);
       margin-bottom: var(--space-3);
     }
-    .res-success p { color: var(--color-on-dark-mu); margin-bottom: var(--space-5); }
+
+    .res-success p { color: var(--color-muted); margin-bottom: var(--space-5); }
   </style>
 </head>
 <body>
 
   <header class="nav">
     <div class="container nav__inner">
+      <span id="nav-konto" class="nav__konto-slot"></span>
+
       <a href="index.html" class="nav__marke">
         <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
         <span class="nav__wortmarke">Sabai <em>Sabai</em></span>
-        <span class="nav__zusatz">Thai Küche</span>
       </a>
+
       <nav class="nav__aktionen">
-        <span id="nav-konto"></span>
-        <a href="bestellen.html" class="btn btn--primary btn--sm">
-          <span data-icon="korb"></span><span class="btn__text">Bestellen</span>
-        </a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">Bestellen</a>
       </nav>
     </div>
   </header>
 
   <div class="demo-banner" id="demo-banner"></div>
 
-  <section class="abschnitt abschnitt--dunkel">
-    <div class="container">
+  <section class="res">
+
+    <img class="res__bild" src="Bilder/reservieren.webp" alt="Blick in den Gastraum">
+
+    <div class="res__spalte">
 
       <div class="abschnitt__kopf">
-        <span class="kicker">Tisch reservieren</span>
         <h1 class="titel">Wir halten<br><em>einen Platz frei</em></h1>
         <div class="zier"></div>
         <p class="abschnitt__text">
@@ -220,107 +286,83 @@
         </p>
       </div>
 
-      <div class="res-grid">
+      <form id="reservation-form" action="https://formspree.io/f/PLATZHALTER" method="POST">
+        <input type="hidden" name="_subject" value="Neue Tischreservierung — Sabai Sabai">
+        <input type="hidden" name="_language" value="de">
 
-        <div>
-          <img class="bogen res-bild" src="Bilder/reservieren.webp" alt="Blick in den Gastraum">
-
-          <div class="res-info">
-            <div class="res-info__zeile">
-              <span data-icon="uhr"></span>
-              <div>Tische halten wir 20 Minuten frei. Wenn es später wird, ruf kurz an.</div>
-            </div>
-            <div class="res-info__zeile">
-              <span data-icon="person"></span>
-              <div>Ab 8 Personen bitte anrufen, dann stellen wir zusammen.</div>
-            </div>
-            <div class="res-info__zeile">
-              <span data-icon="telefon"></span>
-              <div>Lieber direkt klären? <a href="tel:0531000000">0531 / 000 000</a></div>
-            </div>
-            <div class="res-info__zeile">
-              <span data-icon="ort"></span>
-              <div>Musterstraße 14, 38100 Braunschweig. Montag ist Ruhetag.</div>
-            </div>
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" placeholder="Dein Name" required>
+          </div>
+          <div class="form-group">
+            <label for="telefon">Telefon *</label>
+            <input type="tel" id="telefon" name="telefon" placeholder="0531 / ..." required>
           </div>
         </div>
 
-        <div class="res-form">
-          <h2>Deine Reservierung</h2>
-
-          <form id="reservation-form" action="https://formspree.io/f/PLATZHALTER" method="POST">
-            <input type="hidden" name="_subject" value="Neue Tischreservierung — Sabai Sabai">
-            <input type="hidden" name="_language" value="de">
-
-            <div class="form-row form-row--2">
-              <div class="form-group">
-                <label for="name">Name *</label>
-                <input type="text" id="name" name="name" placeholder="Dein Name" required>
-              </div>
-              <div class="form-group">
-                <label for="telefon">Telefon *</label>
-                <input type="tel" id="telefon" name="telefon" placeholder="0531 / ..." required>
-              </div>
-            </div>
-
-            <div class="form-row form-row--2">
-              <div class="form-group">
-                <label for="datum">Datum *</label>
-                <input type="date" id="datum" name="datum" required>
-              </div>
-              <div class="form-group">
-                <label for="personen">Wie viele seid ihr? *</label>
-                <select id="personen" name="personen" required>
-                  <option value="" disabled selected>Bitte wählen</option>
-                  <option>1 Person</option>
-                  <option>2 Personen</option>
-                  <option>3 Personen</option>
-                  <option>4 Personen</option>
-                  <option>5 Personen</option>
-                  <option>6 Personen</option>
-                  <option>7 Personen</option>
-                  <option>8 Personen</option>
-                  <option>Mehr als 8 Personen</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="zeit-block">
-              <span class="zeit-block__label">Uhrzeit *</span>
-              <div class="zeit-wahl">
-                <input type="radio" id="z1700" name="uhrzeit" value="17:00" required><label for="z1700">17:00</label>
-                <input type="radio" id="z1730" name="uhrzeit" value="17:30"><label for="z1730">17:30</label>
-                <input type="radio" id="z1800" name="uhrzeit" value="18:00"><label for="z1800">18:00</label>
-                <input type="radio" id="z1830" name="uhrzeit" value="18:30"><label for="z1830">18:30</label>
-                <input type="radio" id="z1900" name="uhrzeit" value="19:00"><label for="z1900">19:00</label>
-                <input type="radio" id="z1930" name="uhrzeit" value="19:30"><label for="z1930">19:30</label>
-                <input type="radio" id="z2000" name="uhrzeit" value="20:00"><label for="z2000">20:00</label>
-                <input type="radio" id="z2030" name="uhrzeit" value="20:30"><label for="z2030">20:30</label>
-                <input type="radio" id="z2100" name="uhrzeit" value="21:00"><label for="z2100">21:00</label>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="nachricht">Anmerkungen <span>(optional)</span></label>
-                <textarea id="nachricht" name="nachricht" placeholder="z.B. Geburtstag, Allergien, Kinderstuhl"></textarea>
-              </div>
-            </div>
-
-            <div class="form-submit">
-              <button type="submit" class="btn btn--primary">Reservierung anfragen</button>
-            </div>
-          </form>
-
-          <div class="res-success" id="res-success">
-            <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
-            <h3>Ist notiert</h3>
-            <p>Wir haben deine Anfrage bekommen und melden uns kurz zur Bestätigung.</p>
-            <a href="index.html" class="btn btn--primary">Zurück zur Startseite</a>
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="datum">Datum *</label>
+            <input type="date" id="datum" name="datum" required>
+          </div>
+          <div class="form-group">
+            <label for="personen">Wie viele seid ihr? *</label>
+            <select id="personen" name="personen" required>
+              <option value="" disabled selected>Bitte wählen</option>
+              <option>1 Person</option>
+              <option>2 Personen</option>
+              <option>3 Personen</option>
+              <option>4 Personen</option>
+              <option>5 Personen</option>
+              <option>6 Personen</option>
+              <option>7 Personen</option>
+              <option>8 Personen</option>
+              <option>Mehr als 8 Personen</option>
+            </select>
           </div>
         </div>
 
+        <div class="zeit-block">
+          <span class="zeit-block__label">Uhrzeit *</span>
+          <div class="zeit-wahl">
+            <input type="radio" id="z1700" name="uhrzeit" value="17:00" required><label for="z1700">17:00</label>
+            <input type="radio" id="z1730" name="uhrzeit" value="17:30"><label for="z1730">17:30</label>
+            <input type="radio" id="z1800" name="uhrzeit" value="18:00"><label for="z1800">18:00</label>
+            <input type="radio" id="z1830" name="uhrzeit" value="18:30"><label for="z1830">18:30</label>
+            <input type="radio" id="z1900" name="uhrzeit" value="19:00"><label for="z1900">19:00</label>
+            <input type="radio" id="z1930" name="uhrzeit" value="19:30"><label for="z1930">19:30</label>
+            <input type="radio" id="z2000" name="uhrzeit" value="20:00"><label for="z2000">20:00</label>
+            <input type="radio" id="z2030" name="uhrzeit" value="20:30"><label for="z2030">20:30</label>
+            <input type="radio" id="z2100" name="uhrzeit" value="21:00"><label for="z2100">21:00</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nachricht">Anmerkungen <span>(optional)</span></label>
+            <textarea id="nachricht" name="nachricht" placeholder="z.B. Geburtstag, Allergien, Kinderstuhl"></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn btn--outline">Reservierung anfragen</button>
+        </div>
+      </form>
+
+      <div class="res-success" id="res-success">
+        <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
+        <h2>Ist notiert</h2>
+        <p>Wir haben deine Anfrage bekommen und melden uns kurz zur Bestätigung.</p>
+        <a href="index.html" class="btn btn--outline">Zurück zur Startseite</a>
       </div>
+
+      <div class="res-info">
+        <div>Tische halten wir 20 Minuten frei. Wenn es später wird, ruf kurz an.</div>
+        <div>Ab 8 Personen bitte anrufen, dann stellen wir zusammen.</div>
+        <div>Lieber direkt klären? <a href="tel:0531000000">0531 / 000 000</a> &middot; Montag ist Ruhetag.</div>
+      </div>
+
     </div>
   </section>
 

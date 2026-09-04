@@ -17,16 +17,83 @@
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/thai.css?v=37">
+  <link rel="stylesheet" href="css/thai.css?v=53">
   <script type="module" src="js/bestellen.js"></script>
   <style>
+    /* ── KOPFZEILE MIT MONOGRAMM ──
+       Das Muster laeuft von der Kopfzeile durch in den
+       Kopfbereich, ohne Trennlinie dazwischen.
+
+       Die Kopfzeile bleibt sticky, deshalb koennen beide nicht in
+       einem gemeinsamen Kasten liegen. Stattdessen bekommt der
+       Kopfbereich das Muster um die Hoehe der Kopfzeile nach oben
+       versetzt, dann setzt die Kachelung genau dort an, wo sie
+       oben aufgehoert hat. */
+    /* position sticky MUSS bleiben. Fuer das Muster braucht es nur
+       einen Positionierungskontext, und sticky ist einer. Mit
+       relative wuerde die Kopfzeile wegscrollen und die Karten
+       liefen in der Luecke darueber durch. */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow: hidden;
+      border-bottom: none;
+      box-shadow: none;
+    }
+
+    /* Beim Scrollen setzt orient.css einen Schatten unter die
+       Kopfzeile. Hier waere er die Trennlinie, die gerade weg
+       soll. */
+    .nav.scrolled { box-shadow: none; }
+
+    .nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      pointer-events: none;
+      background-image: url('Bilder/monogramm.svg'), url('Bilder/monogramm.svg');
+      background-size: 150px 150px, 150px 150px;
+      background-position: 0 0, 75px 75px;
+      background-repeat: repeat, repeat;
+    }
+
+    .nav > * { position: relative; }
+
     /* ── KOPFBEREICH ──
-       Titel links, Umschalter rechts, alles auf Jade. */
+       Titel links, Umschalter rechts, alles auf Jade mit
+       Monogramm wie im Hero. */
     .order-head {
+      position: relative;
       background: var(--color-ink);
       color: var(--color-on-dark);
       padding-block: var(--space-7);
+      overflow: hidden;
     }
+
+    /* Versatz um die 76 Pixel der Kopfzeile, damit das Muster
+       nahtlos weiterlaeuft. */
+    .order-head::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      pointer-events: none;
+      background-image: url('Bilder/monogramm.svg'), url('Bilder/monogramm.svg');
+      background-size: 150px 150px, 150px 150px;
+      background-position: 0 -76px, 75px -1px;
+      background-repeat: repeat, repeat;
+    }
+
+    /* Auf schmalen Schirmen ist die Kopfzeile 66 Pixel hoch. */
+    @media (max-width: 900px) {
+      .order-head::before {
+        background-position: 0 -66px, 75px 9px;
+      }
+    }
+
+    .order-head > * { position: relative; }
 
     .order-head__inner {
       max-width: var(--max-content-width);
@@ -56,38 +123,62 @@
       max-width: 44ch;
     }
 
-    /* Umschalter: zwei Pillen nebeneinander, die gewaehlte gefuellt.
-       Die Grundfarben kommen aus bestellen.css, hier Form und
-       Typografie. */
+    /* ── UMSCHALTER ──
+       Zwei Karten nebeneinander statt zweier Pillen. Jede nennt
+       Name, Preis und Dauer, die gewaehlte ist golden umrandet und
+       traegt einen Haken. So ist die Wahl eine Entscheidung mit
+       Begruendung und nicht nur ein Schalter.
+
+       Die Klassen .modus, .mode-card und data-mode bleiben
+       unbedingt erhalten, daran haengt bestellen.js. */
     .order-head .modus {
-      display: inline-flex;
-      gap: var(--space-2);
-      padding: 5px;
-      border: 1px solid var(--color-line-dark);
-      border-radius: 999px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      border: none;
+      padding: 0;
+      min-width: min(100%, 340px);
     }
 
     .order-head .mode-card {
+      position: relative;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      padding: 0.7rem 1.4rem;
-      border: none;
-      border-radius: 999px;
+      align-items: flex-start;
+      gap: 4px;
+      padding: var(--space-4) var(--space-5);
+      border: 1px solid var(--color-line-dark);
+      border-radius: 20px;
       background: transparent;
       box-shadow: none;
       cursor: pointer;
-      white-space: nowrap;
-      transition: background var(--transition), color var(--transition);
+      text-align: left;
+      transition: border-color var(--transition), background var(--transition);
     }
 
-    .order-head .mode-card--active { background: var(--color-accent); }
+    .order-head .mode-card:hover { border-color: var(--color-accent); }
+
+    .order-head .mode-card--active {
+      border-color: var(--color-accent);
+      background: var(--color-dark-2);
+    }
+
+    /* Haken in der oberen rechten Ecke der gewaehlten Karte */
+    .order-head .mode-card--active::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
 
     .order-head .modus__name {
       font-family: var(--font-head);
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1.45rem;
       color: var(--color-on-dark);
       line-height: 1.1;
     }
@@ -100,21 +191,30 @@
       color: var(--color-on-dark-mu);
     }
 
-    .order-head .mode-card--active .modus__name,
-    .order-head .mode-card--active .modus__preis { color: var(--color-on-accent); }
+    .order-head .mode-card--active .modus__preis { color: var(--color-accent); }
 
     .modus__info {
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--color-on-dark-mu);
       margin-top: var(--space-3);
+      text-align: right;
     }
 
-    /* ── KATEGORIELEISTE ── */
+    @media (max-width: 899px) { .modus__info { text-align: left; } }
+
+    /* ── KATEGORIELEISTE ──
+       Klebt unter der Kopfzeile. Der z-index von 90 kommt aus
+       bestellen.css und bleibt, damit sie ueber den Karten liegt. */
     .category-nav {
+      top: 76px;
       background: var(--color-bg);
       border-bottom: 1px solid var(--color-line);
+    }
+
+    @media (max-width: 900px) {
+      .category-nav { top: 66px; }
     }
 
     .cat-link {
@@ -130,14 +230,35 @@
     .cat-link--active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
 
     /* ── SPEISEKARTE ──
-       Die Produktkarten aus bestellen.css werden zu Zeilen:
-       Bild im Bogen, Name mit thailaendischer Schrift,
-       Beschreibung, Preis, Schaerfe, Knopf.
+       Kacheln im Raster: Bild oben, darunter Name, thailaendische
+       Schrift, Beschreibung, dann Preis und Knopf am Fuss.
 
        Die Klassen .menu-card und .add-to-cart bleiben unbedingt
        erhalten, daran haengen in bestellen.js der Warenkorb, das
-       Favoritenherz und die Kategoriemarkierung. */
-    .menu-section { margin-bottom: var(--space-8); }
+       Favoritenherz und die Kategoriemarkierung.
+
+       Das Raster liegt auf .menu-section selbst, damit im Markup
+       kein zusaetzlicher Kasten noetig ist. Ueberschrift und
+       Zierlinie laufen ueber alle Spalten. */
+    .menu-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6) var(--space-5);
+      margin-bottom: var(--space-8);
+    }
+
+    @media (min-width: 620px) {
+      .menu-section { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1280px) {
+      .menu-section { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .menu-section__title,
+    .menu-section > .zier {
+      grid-column: 1 / -1;
+    }
 
     .menu-section__title {
       font-family: var(--font-head);
@@ -149,73 +270,73 @@
 
     .menu-card {
       position: relative;
-      display: grid;
-      grid-template-columns: 108px 1fr auto;
-      column-gap: var(--space-5);
-      align-items: center;
+      display: flex;
+      flex-direction: column;
       background: transparent;
       border: none;
-      border-bottom: 1px solid var(--color-line);
       border-radius: 0;
       box-shadow: none;
-      padding: var(--space-5) 0;
+      padding: 0;
       overflow: visible;
     }
 
-    .menu-card:last-child { border-bottom: none; }
     .menu-card:hover { transform: none; box-shadow: none; }
 
-    /* Bild im Bogen, die Leitform der Seite */
     .menu-card__img {
       display: block;
-      grid-column: 1;
-      grid-row: 1 / span 2;
-      width: 108px;
-      height: 144px;
+      width: 100%;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
-      border-radius: 90px 90px var(--radius-md) var(--radius-md);
+      border-radius: 20px;
       border: 1px solid var(--color-line);
       background: var(--color-bg-soft);
+      margin-bottom: var(--space-4);
+      transition: transform 0.35s ease, border-color 0.35s ease;
     }
 
-    /* Huelle und Fusszeile fallen aus dem Layout, damit Name,
-       Preis und Knopf direkt im Raster der Zeile liegen. Sonst
-       muesste das Markup jeder Zeile umgebaut werden, und daran
-       haengt die Warenkorb-Logik. */
-    .menu-card__body,
-    .menu-card__footer { display: contents; }
+    .menu-card:hover .menu-card__img {
+      transform: translateY(-6px);
+      border-color: var(--color-accent);
+    }
+
+    /* Huelle und Fusszeile tragen im Zeilenlayout display contents.
+       In der Kachel brauchen sie wieder ihren eigenen Fluss, damit
+       der Preisblock unten stehen kann. */
+    .menu-card__body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
 
     .menu-card__name {
-      grid-column: 2;
-      grid-row: 1;
       display: flex;
       align-items: center;
       gap: 6px;
       font-family: var(--font-head);
       font-weight: 400;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       line-height: 1.2;
       color: var(--color-ink);
       margin: 0;
     }
 
     .menu-card__desc {
-      grid-column: 2;
-      grid-row: 2;
       font-size: var(--text-sm);
       line-height: 1.7;
       color: var(--color-muted);
-      margin: 4px 0 0;
+      margin: var(--space-2) 0 var(--space-4);
+      flex: 1;
     }
 
+    /* Preis, Schaerfe und Knopf in einer Zeile am Fuss der Kachel */
     .menu-card__preisblock {
-      grid-column: 3;
-      grid-row: 1 / span 2;
-      text-align: right;
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
+      justify-content: space-between;
       gap: var(--space-3);
+      flex-wrap: wrap;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--color-line);
     }
 
     .menu-card__price {
@@ -226,60 +347,51 @@
       white-space: nowrap;
     }
 
-    .menu-card .add-to-cart { white-space: nowrap; }
+    .menu-card .add-to-cart { white-space: nowrap; margin-left: auto; }
 
     /* Favoritenherz. bestellen.js haengt es als letztes Kind in die
-       Karte, aus bestellen.css kommt es absolut positioniert in der
-       oberen rechten Ecke. Im Zeilenraster liegt es damit auf dem
-       Preis, deshalb zurueck ins Raster. */
+       Karte, aus bestellen.css kommt es absolut positioniert. In
+       der Kachel sitzt es damit richtig, nur Farben und Rand
+       kommen von hier. */
     .menu-card .fav-herz {
-      position: static;
-      grid-column: 3;
-      grid-row: 1;
-      justify-self: end;
-      align-self: start;
+      top: var(--space-3);
+      right: var(--space-3);
       width: 34px;
       height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent;
+      background: var(--color-bg);
       border: 1px solid var(--color-line);
       border-radius: 999px;
       color: var(--color-muted);
       box-shadow: none;
       cursor: pointer;
-      margin-top: -6px;
     }
 
     .menu-card .fav-herz:hover,
     .menu-card .fav-herz--aktiv { border-color: var(--color-accent); color: var(--color-accent); }
 
     @media (max-width: 699px) {
-      .menu-card {
-        grid-template-columns: 84px 1fr;
-        column-gap: var(--space-4);
-        align-items: start;
-      }
-      .menu-card__img { width: 84px; height: 112px; grid-row: 1 / span 3; }
       .menu-card__name { font-size: 1.25rem; }
-      .menu-card__preisblock {
-        grid-column: 2;
-        grid-row: 3;
-        align-items: flex-start;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--space-4);
-        margin-top: var(--space-3);
-      }
-      .menu-card .fav-herz { grid-column: 2; grid-row: 1; justify-self: end; }
     }
 
-    /* ── WARENKORB ── */
+    /* ── WARENKORB ──
+       Steht als eigene Spalte rechts und bleibt beim Scrollen
+       stehen, damit die Summe immer sichtbar ist.
+
+       Der Abstand von oben ist die Summe aus Kopfzeile (76) und
+       Kategorieleiste (56), beide kleben ebenfalls. Ohne das
+       schiebt sich der Warenkorb unter sie. */
     .cart-sidebar {
+      position: sticky;
+      top: 148px;
+      z-index: 1;
+      max-height: calc(100vh - 168px);
+      overflow-y: auto;
       background: var(--color-bg-soft);
       border: 1px solid var(--color-line);
-      border-radius: var(--radius-md);
+      border-radius: 20px;
       padding: var(--space-5);
     }
 
@@ -335,16 +447,15 @@
 
   <header class="nav">
     <div class="container nav__inner">
+      <span id="nav-konto" class="nav__konto-slot"></span>
+
       <a href="index.html" class="nav__marke">
         <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
         <span class="nav__wortmarke">Sabai <em>Sabai</em></span>
-        <span class="nav__zusatz">Thai Küche</span>
       </a>
+
       <nav class="nav__aktionen">
-        <span id="nav-konto"></span>
-        <a href="reservieren.html" class="btn btn--outline-light btn--sm">
-          <span data-icon="kalender"></span><span class="btn__text">Tisch</span>
-        </a>
+        <a href="reservieren.html" class="btn btn--outline-light btn--sm">Tisch</a>
         <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
           <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
         </button>
@@ -355,7 +466,6 @@
   <section class="order-head">
     <div class="order-head__inner">
       <div class="order-head__text">
-        <span class="kicker">Die Karte</span>
         <h1 class="order-head__titel">Schärfe bestimmst<br>du selbst</h1>
         <p>Die Schoten zeigen, wie wir das Gericht in Thailand servieren würden. Sag uns beim Bestellen, wie du es magst.</p>
       </div>
@@ -364,11 +474,11 @@
         <div class="modus">
           <button class="modus__option mode-card mode-card--active" type="button" data-mode="lieferung">
             <span class="modus__name">Lieferung</span>
-            <span class="modus__preis">3,50 &euro;</span>
+            <span class="modus__preis">3,50 &euro; &middot; ca. 45 Min</span>
           </button>
           <button class="modus__option mode-card" type="button" data-mode="abholung">
             <span class="modus__name">Abholung</span>
-            <span class="modus__preis">Gratis</span>
+            <span class="modus__preis">Gratis &middot; ca. 20 Min</span>
           </button>
         </div>
         <p class="modus__info" id="mode-info">Lieferung in ca. 45 Min &middot; Mindestbestellwert 20,00 &euro;</p>
@@ -384,7 +494,8 @@
         <a class="cat-link" href="#currys">Currys</a>
         <a class="cat-link" href="#wok">Aus dem Wok</a>
         <a class="cat-link" href="#beilagen">Beilagen</a>
-        <a class="cat-link" href="#suesses">Süßes</a>
+        <a class="cat-link" href="#suesses">S&uuml;&szlig;es</a>
+        <a class="cat-link" href="#getraenke">Getr&auml;nke</a>
       </div>
     </div>
   </nav>
@@ -652,6 +763,59 @@
               <span class="menu-card__price">5,90 €</span>
               <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="d2" data-name="Gluay Tod" data-price="5.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="getraenke">
+        <h2 class="menu-section__title">Getr&auml;nke</h2>
+        <div class="zier zier--kurz"></div>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/chayen.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cha Yen <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">ชาเย็น &middot; Thai-Eistee mit Kondensmilch, gerührt und süß</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">4,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Cha Yen" data-price="4.50">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/nammanao.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Nam Manao</h3>
+            <p class="menu-card__desc">น้ำมะนาว &middot; Limettenlimonade mit Minze, frisch gepresst</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">4,20 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Nam Manao" data-price="4.20">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/singha.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Singha <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">สิงห์ &middot; Thailändisches Lager, 0,33 Liter</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">4,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g3" data-name="Singha" data-price="4.90">Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" src="Bilder/nammaprao.webp" alt="" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Nam Maprao</h3>
+            <p class="menu-card__desc">น้ำมะพร้าว &middot; Kokoswasser, direkt aus der jungen Nuss</p>
+            <div class="menu-card__footer menu-card__preisblock">
+              <span class="menu-card__price">5,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g4" data-name="Nam Maprao" data-price="5.50">Hinzufügen</button>
             </div>
           </div>
         </article>

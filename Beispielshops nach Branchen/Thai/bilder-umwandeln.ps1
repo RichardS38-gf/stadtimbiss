@@ -49,6 +49,9 @@ $breiten = @{
   'suppen'      = 640
   'curry'       = 640
   'ausdemwok'   = 640
+  'beilagen'    = 640
+  'suesses'     = 640
+  'getraenke'   = 640
 
   # Zutaten, quadratisch, bis 200px breit
   'galgant'       = 440
