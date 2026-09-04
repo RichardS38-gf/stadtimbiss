@@ -1907,6 +1907,18 @@
     margin-inline: 0;
   }
 
+  /* Auf dem Desktop zentriert align-items die Spalten senkrecht.
+     In der Mobilfassung sind daraus Spalten geworden, und dort
+     schrumpft dieselbe Regel jedes Kind auf seine Inhaltsbreite
+     und rueckt es in die Mitte. Deshalb zurueck auf stretch. */
+  .banner__inhalt,
+  .kontakt,
+  .hero__inhalt,
+  .tisch-buehne {
+    align-items: stretch;
+    text-align: left;
+  }
+
   /* ── ABSTAENDE ──
      Zusammengehoeriges rueckt zusammen, zwischen den Sektionen
      bleibt Luft. */
