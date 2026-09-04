@@ -1717,14 +1717,14 @@
   .hero-top__aktionen { display: contents; }
 
   .nav .nav__konto-slot,
-  .hero-top__konto { flex: 1 1 0; min-width: 0; }
+  .hero-top__konto { flex: 0 0 auto; min-width: 0; }
 
   .nav .nav__konto,
-  .hero-top .nav__konto { width: 100%; justify-content: center; }
+  .hero-top .nav__konto { justify-content: center; }
 
   .nav .nav__aktionen .btn,
   .hero-top__aktionen .btn,
-  .nav .cart-btn { flex: 1 1 0; justify-content: center; }
+  .nav .cart-btn { flex: 0 0 auto; justify-content: center; }
 
   /* ── HERO ──
      Reihenfolge: Ueberschrift, Woerterbucheintrag, Fliesstext,
