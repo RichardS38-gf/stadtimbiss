@@ -914,6 +914,10 @@
   width: 100%;
 }
 
+/* Die Punktskala gehoert zur Mobilfassung, auf dem Desktop
+   erscheint jeder Text an eigener Stelle und braucht sie nicht. */
+.tisch-dots { display: none; }
+
 .tisch-bahn { position: relative; }
 
 .tisch-buehne {
@@ -1888,12 +1892,43 @@
   .tisch-punkt__titel { font-size: 1.35rem; line-height: 1.3; }
   .tisch-punkt__text { font-size: 0.9rem; }
 
+  /* Punktskala unter dem Text. Sie zeigt, dass noch mehr kommt,
+     damit niemand weiterscrollt, bevor der naechste Text da ist.
+     Sie laeuft im selben 20-Sekunden-Takt wie die Texte, also
+     ohne Skript und ohne Abstimmung. */
+  .tisch-dots {
+    display: flex;
+    grid-column: 2;
+    grid-row: 3;
+    gap: 8px;
+    margin-top: var(--space-4);
+  }
+
+  .tisch-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(14, 59, 50, 0.18);
+    animation: marke-an 20s ease-in-out infinite;
+  }
+
+  .tisch-dots span:nth-child(1) { animation-delay: 0s; }
+  .tisch-dots span:nth-child(2) { animation-delay: 5s; }
+  .tisch-dots span:nth-child(3) { animation-delay: 10s; }
+  .tisch-dots span:nth-child(4) { animation-delay: 15s; }
+
+  @keyframes marke-an {
+    0%, 24%   { background: var(--color-accent); }
+    25%, 100% { background: rgba(14, 59, 50, 0.18); }
+  }
+
   /* Ohne Bewegung stehen alle vier Texte untereinander, sonst
      waere fuer diese Nutzer nur einer von vier lesbar. */
   @media (prefers-reduced-motion: reduce) {
     .tisch-buehne { display: flex; flex-direction: column; align-items: stretch; }
     .tisch-bild { width: 170px; align-self: center; animation: none; margin-bottom: var(--space-5); }
     .tisch-punkt { opacity: 1; animation: none; margin-bottom: var(--space-6); }
+    .tisch-dots { display: none; }
   }
 
   /* ── SPEISEKARTE ──
