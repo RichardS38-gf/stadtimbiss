@@ -1847,30 +1847,32 @@
     transition: transform 0.15s linear;
   }
 
-  /* scroll-snap-type steht auf proximity, nicht auf mandatory.
-     Bei mandatory sucht Safari nach jeder Layoutaenderung, etwa
-     wenn das Bild darueber nachlaedt, ein neues Rastziel und
-     springt dabei mitten in den Slider. */
-  .tisch-slider {
+  /* Der Slider wird per Skript verschoben, nicht gescrollt. Das
+     Fenster schneidet nur ab, die Spur darin traegt das transform.
+     Kein scroll-snap: damit kann Safari nach Layoutaenderungen
+     nicht mehr an einen fremden Rastpunkt springen. */
+  .tisch-slider { overflow: hidden; }
+
+  .tisch-spur {
     display: flex;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
     gap: var(--space-4);
-    scrollbar-width: none;
+    transition: transform 0.4s ease;
+    /* Senkrecht scrollt weiter die Seite, waagerecht faengt das
+       Skript die Wischer ab. */
+    touch-action: pan-y;
+    cursor: grab;
   }
 
-  .tisch-slider::-webkit-scrollbar { display: none; }
+  /* Waehrend des Ziehens folgt die Spur dem Finger ohne
+     Nachlaufen. */
+  .tisch-spur--zieht { transition: none; cursor: grabbing; }
 
   /* 82 Prozent der Sliderbreite: eine Karte steht vollstaendig im
-     Bild, von der naechsten schaut ein Streifen herein.
-     width statt flex-basis, weil flex-basis zusammen mit
-     min-width auto die Karte wieder aufziehen kann. */
+     Bild, von der naechsten schaut ein Streifen herein. */
   .tisch-slider .tisch-punkt {
     flex: 0 0 auto;
     width: 82%;
     min-width: 0;
-    scroll-snap-align: start;
     max-width: none;
     margin-block: 0;
     opacity: 1;
@@ -1878,6 +1880,7 @@
     border: none;
     border-radius: 0;
     min-height: 210px;
+    user-select: none;
   }
 
   .tisch-punkt__nr {
@@ -1896,15 +1899,18 @@
   .tisch-dots {
     display: flex;
     justify-content: center;
-    gap: 7px;
+    gap: 9px;
     margin-top: var(--space-5);
   }
 
-  .tisch-dots span {
-    width: 6px;
-    height: 6px;
+  .tisch-dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
     border-radius: 50%;
     background: rgba(14, 59, 50, 0.2);
+    cursor: pointer;
     transition: background var(--transition);
   }
 

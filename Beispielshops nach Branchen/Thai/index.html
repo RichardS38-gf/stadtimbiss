@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/thai.css?v=72">
+  <link rel="stylesheet" href="css/thai.css?v=73">
 </head>
 <body>
 
@@ -451,14 +451,19 @@
 
 
   <script type="module">
+    /* Die Versionsnummern hinter den Modulpfaden sind wichtig.
+       Ohne sie haelt der Browser, vor allem Safari auf dem
+       Telefon, alte Fassungen der Module beliebig lange fest.
+       Bei jeder Aenderung an einer dieser Dateien die Nummer
+       hochsetzen. */
     import { setupSeite } from './js/auth.js';
     import { iconsEinsetzen } from './js/icons.js';
-    import { tischDrehung } from './js/tischdreh.js';
-    import { kategorienBildwechsel } from './js/kategorien.js';
-    import { zutatenEinblenden } from './js/zutaten.js';
-    import { oeffnungAnzeigen } from './js/oeffnung.js';
-    import { tuktukFahrt } from './js/tuktuk.js';
-    import { menueAufbauen } from './js/menue.js';
+    import { tischDrehung } from './js/tischdreh.js?v=4';
+    import { kategorienBildwechsel } from './js/kategorien.js?v=1';
+    import { zutatenEinblenden } from './js/zutaten.js?v=1';
+    import { oeffnungAnzeigen } from './js/oeffnung.js?v=2';
+    import { tuktukFahrt } from './js/tuktuk.js?v=2';
+    import { menueAufbauen } from './js/menue.js?v=1';
 
     iconsEinsetzen();
     menueAufbauen();
