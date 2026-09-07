@@ -15,7 +15,11 @@
    Klassen, die dieses Skript setzt. */
 
 const DREHUNG_GRAD = 140;
-const DREHUNG_JE_KARTE = 35;
+
+/* Grad je Karte im Wisch-Slider. Deutlich mehr als auf dem
+   Desktop pro Abschnitt, weil auf dem Telefon nur vier Wischer
+   zur Verfuegung stehen und die Drehung sonst kaum auffaellt. */
+const DREHUNG_JE_KARTE = 90;
 
 export function tischDrehung() {
   const bahn = document.getElementById('tisch-bahn');

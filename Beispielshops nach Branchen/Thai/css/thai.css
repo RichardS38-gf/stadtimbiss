@@ -1814,6 +1814,15 @@
     padding-bottom: var(--space-7);
   }
 
+  /* Die Ueberschrift steht linksbuendig. Ueber die Kennung, damit
+     die Regel gegen alles gewinnt, was allgemeiner ist. */
+  #tisch .abschnitt__kopf,
+  #tisch .titel,
+  #tisch .zier {
+    text-align: left;
+    margin-inline: 0;
+  }
+
   .tisch-buehne .abschnitt__kopf { text-align: left; }
 
   .tisch-bild {
