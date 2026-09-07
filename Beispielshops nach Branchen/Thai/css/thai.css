@@ -1801,10 +1801,10 @@
   .hero__actions { order: 7; justify-content: center; }
 
   /* ── KONZEPT ──
-     Das Bild bleibt oben stehen und dreht sich weiter mit dem
-     Scrollen, die vier Punkte laufen darunter durch. Der jeweils
-     aktive steht voll da, die anderen sind abgeblendet.
-     js/tischdreh.js setzt dafuer die Klasse tisch-bahn--mobil. */
+     Wisch-Slider: das Bild steht oben und dreht sich beim Wischen
+     mit, die vier Punkte liegen als Karten nebeneinander. Punkte
+     darunter zeigen den Stand. js/tischdreh.js baut das um und
+     setzt die Klasse tisch-bahn--mobil. */
   .tisch-sektion { padding-top: var(--space-6); }
 
   .tisch-buehne {
@@ -1817,27 +1817,63 @@
   .tisch-buehne .abschnitt__kopf { text-align: left; }
 
   .tisch-bild {
-    width: 190px;
+    width: 160px;
     align-self: center;
-    margin-bottom: var(--space-6);
-    transition: transform 0.3s linear;
+    margin-bottom: var(--space-5);
+    transition: transform 0.15s linear;
   }
 
-  .tisch-punkt { max-width: none; text-align: left; }
-
-  .tisch-bahn--mobil .tisch-bild {
-    position: sticky;
-    top: 90px;
-    z-index: 1;
+  .tisch-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-4);
+    margin-inline: calc(var(--container-pad-mobile) * -1);
+    padding-inline: var(--container-pad-mobile);
+    scrollbar-width: none;
   }
 
-  .tisch-bahn--mobil .tisch-punkt {
-    opacity: 0.22;
-    transition: opacity 0.4s ease;
-    margin-block: var(--space-7);
+  .tisch-slider::-webkit-scrollbar { display: none; }
+
+  .tisch-slider .tisch-punkt {
+    flex: 0 0 84%;
+    scroll-snap-align: center;
+    max-width: none;
+    margin-block: 0;
+    opacity: 1;
+    padding: var(--space-5);
+    border: 1px solid rgba(14, 59, 50, 0.22);
+    border-radius: 20px;
   }
 
-  .tisch-bahn--mobil .tisch-punkt--an { opacity: 1; }
+  .tisch-punkt__nr {
+    display: block;
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .tisch-punkt__titel { font-size: 1.5rem; }
+  .tisch-punkt__text { font-size: 0.95rem; }
+
+  .tisch-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: var(--space-5);
+  }
+
+  .tisch-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(14, 59, 50, 0.2);
+    transition: background var(--transition);
+  }
+
+  .tisch-dots__an { background: var(--color-accent); }
 
   /* ── SPEISEKARTE ──
      Das durchschaltende Bild braucht ein Ueberfahren mit der Maus,

@@ -1,21 +1,21 @@
 /* tischdreh.js — Sabai Sabai
-   Dreht das runde Tischbild im Abschnitt "So isst man bei uns"
-   mit dem Scrollfortschritt und blendet dabei immer genau einen
-   der vier Texte ein.
+   Der Abschnitt "Konzept" hat zwei Fassungen.
 
-   Aufbau im HTML:
-   - .tisch-bahn ist vier Bildschirmhoehen hoch
-   - darin sitzt .tisch-buehne mit position sticky, eine
-     Bildschirmhoehe hoch, und bleibt stehen
-   - der Scrollfortschritt innerhalb der Bahn, ein Wert von 0 bis 1,
-     steuert Drehwinkel und sichtbaren Text
+   Auf breiten Schirmen bleibt das runde Tischbild mittig stehen
+   und dreht sich mit dem Scrollfortschritt, drumherum erscheint
+   jeweils genau einer der vier Texte.
 
-   Laeuft das Skript nicht, bleiben alle vier Texte sichtbar. Das
-   Stylesheet blendet sie nur aus, wenn die Klasse tisch-bahn--js
-   gesetzt ist, und die setzt dieses Skript. So kann der Effekt den
-   Inhalt nicht verschlucken. */
+   Auf schmalen Schirmen wird daraus ein Wisch-Slider: die vier
+   Texte liegen als Karten nebeneinander, das Bild steht darueber
+   und dreht sich beim Wischen mit. Punkte unter dem Slider zeigen,
+   wo man ist.
+
+   Laeuft das Skript nicht, bleiben alle vier Texte sichtbar und
+   stehen untereinander. Das Ausblenden und der Umbau haengen an
+   Klassen, die dieses Skript setzt. */
 
 const DREHUNG_GRAD = 140;
+const DREHUNG_JE_KARTE = 35;
 
 export function tischDrehung() {
   const bahn = document.getElementById('tisch-bahn');
@@ -30,12 +30,83 @@ export function tischDrehung() {
   // Punkten sichtbar.
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Auf schmalen Schirmen ist neben dem Bild kein Platz fuer Text.
-  // Dort bleibt das Bild oben stehen und dreht sich weiter, die
-  // Punkte laufen darunter durch und werden nacheinander
-  // hervorgehoben.
-  const schmal = window.matchMedia('(max-width: 900px)').matches;
-  bahn.classList.add(schmal ? 'tisch-bahn--mobil' : 'tisch-bahn--js');
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    sliderAufbauen(bahn, bild, punkte);
+    return;
+  }
+
+  drehungAmScroll(bahn, bild, punkte);
+}
+
+/* ── Mobil: Wisch-Slider ──────────────────────────────────────── */
+function sliderAufbauen(bahn, bild, punkte) {
+  bahn.classList.add('tisch-bahn--mobil');
+
+  const slider = document.createElement('div');
+  slider.className = 'tisch-slider';
+
+  // Die Karten wandern in den Slider und bekommen eine Zaehlung.
+  punkte.forEach((el, i) => {
+    const nr = document.createElement('span');
+    nr.className = 'tisch-punkt__nr';
+    nr.textContent = `0${i + 1} / 0${punkte.length}`;
+    el.prepend(nr);
+    slider.appendChild(el);
+  });
+
+  bild.after(slider);
+
+  // Punkte als Standanzeige
+  const dots = document.createElement('div');
+  dots.className = 'tisch-dots';
+  punkte.forEach(() => dots.appendChild(document.createElement('span')));
+  slider.after(dots);
+
+  const marken = Array.from(dots.children);
+  marken[0].classList.add('tisch-dots__an');
+
+  let angefordert = false;
+
+  function rechnen() {
+    angefordert = false;
+
+    // Kartenbreite samt Abstand ergibt sich aus dem ersten Kind.
+    // Fest verdrahtete Werte waeren hier falsch, die Breite haengt
+    // an der Fenstergroesse.
+    const erste = slider.firstElementChild;
+    if (erste === null) return;
+
+    const schritt = erste.getBoundingClientRect().width +
+      parseFloat(getComputedStyle(slider).columnGap || 0);
+    if (schritt <= 0) return;
+
+    const index = Math.min(
+      punkte.length - 1,
+      Math.round(slider.scrollLeft / schritt)
+    );
+
+    // Der Drehwinkel folgt dem Wischen fliessend, nicht in Stufen.
+    const fortschritt = slider.scrollLeft / schritt;
+    bild.style.transform = `rotate(${fortschritt * DREHUNG_JE_KARTE}deg)`;
+
+    marken.forEach((m, i) => {
+      m.classList.toggle('tisch-dots__an', i === index);
+    });
+  }
+
+  function anfordern() {
+    if (angefordert) return;
+    angefordert = true;
+    requestAnimationFrame(rechnen);
+  }
+
+  slider.addEventListener('scroll', anfordern, { passive: true });
+  rechnen();
+}
+
+/* ── Desktop: Drehung am Scrollfortschritt ────────────────────── */
+function drehungAmScroll(bahn, bild, punkte) {
+  bahn.classList.add('tisch-bahn--js');
 
   let angefordert = false;
 
@@ -51,30 +122,6 @@ export function tischDrehung() {
     p = Math.min(1, Math.max(0, p));
 
     bild.style.transform = `rotate(${p * DREHUNG_GRAD}deg)`;
-
-    // Auf Mobil richtet sich der aktive Punkt danach, welcher der
-    // Fenstermitte am naechsten steht. Das ist genauer als der
-    // Scrollfortschritt, weil die Punkte dort unterschiedlich hoch
-    // sind.
-    if (schmal) {
-      const mitte = window.innerHeight * 0.55;
-      let bester = 0;
-      let kleinster = Infinity;
-
-      punkte.forEach((el, i) => {
-        const r = el.getBoundingClientRect();
-        const abstand = Math.abs(r.top + r.height / 2 - mitte);
-        if (abstand < kleinster) {
-          kleinster = abstand;
-          bester = i;
-        }
-      });
-
-      punkte.forEach((el, i) => {
-        el.classList.toggle('tisch-punkt--an', i === bester);
-      });
-      return;
-    }
 
     // Die Bahn in so viele Abschnitte teilen, wie es Texte gibt.
     // Das 0.999 verhindert, dass am Ende ein Index zu hoch kommt.
