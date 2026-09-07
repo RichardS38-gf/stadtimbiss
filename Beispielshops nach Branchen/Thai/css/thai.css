@@ -1866,21 +1866,29 @@
   .tisch-slider::-webkit-scrollbar { display: none; }
 
   /* Eine Karte steht vollstaendig im Bild, von der naechsten
-     schauen 40 Pixel herein. Einrasten am linken Rand, mittig
-     wuerde die erste Karte hinausschieben. */
+     schauen 40 Pixel herein.
+
+     Die Breite kommt aus 100vw abzueglich der Seitenabstaende,
+     nicht aus Prozent der Elternbreite. Prozentangaben haben hier
+     mehrfach danebengelegen, weil flex-basis mit min-width auto
+     zusammen die Karte wieder aufziehen kann. */
   .tisch-slider .tisch-punkt {
-    flex: 0 0 calc(100% - 40px);
+    flex: 0 0 auto;
+    width: calc(100vw - var(--container-pad-mobile) * 2 - 40px);
+    min-width: 0;
     scroll-snap-align: start;
     max-width: none;
     margin-block: 0;
     opacity: 1;
-    padding: var(--space-5);
-    border: 1px solid rgba(14, 59, 50, 0.22);
-    border-radius: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    min-height: 210px;
   }
 
   .tisch-punkt__nr {
     display: block;
+    text-align: left;
     font-family: var(--font-head);
     font-size: 0.95rem;
     letter-spacing: 0.1em;
