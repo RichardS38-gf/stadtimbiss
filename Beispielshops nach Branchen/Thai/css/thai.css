@@ -899,6 +899,16 @@
 
 /* .titel steht standardmaessig schon in Jadegruen, hier also
    nichts umzustellen. */
+/* Die Ueberschrift steht linksbuendig, unabhaengig von der
+   Bildschirmbreite. Auf dem Desktop liegt sie absolut in der
+   Buehne, dort aendert das nichts. Auf Mobil ist sie ein Kind der
+   Spalte und wuerde von align-items center sonst mittig gesetzt. */
+.tisch-buehne .abschnitt__kopf {
+  align-self: flex-start;
+  text-align: left;
+  width: 100%;
+}
+
 .tisch-bahn { position: relative; }
 
 .tisch-buehne {
@@ -1849,7 +1859,7 @@
   /* Einrasten am linken Rand, nicht mittig. Mittig wuerde die
      erste Karte nach links aus dem Inhaltsbereich schieben. */
   .tisch-slider .tisch-punkt {
-    flex: 0 0 76%;
+    flex: 0 0 70%;
     scroll-snap-align: start;
     max-width: none;
     margin-block: 0;
