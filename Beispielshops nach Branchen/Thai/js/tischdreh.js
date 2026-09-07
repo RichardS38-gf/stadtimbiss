@@ -72,7 +72,18 @@ function sliderAufbauen(bahn, bild, punkte) {
   // Beim Aufbau haengt der Browser mitunter an einer alten
   // Scrollposition oder rueckt ein Element ins Bild. Beides
   // wuerde die erste Karte halb nach links schieben.
-  slider.scrollLeft = 0;
+  //
+  // Das Zuruecksetzen muss mehrfach passieren: einmal sofort,
+  // einmal im naechsten Bild und einmal, wenn alle Bilder geladen
+  // sind. Genau dann rechnet Safari das Layout neu und springt
+  // sonst wieder weg.
+  function anfangSetzen() {
+    slider.scrollLeft = 0;
+  }
+
+  anfangSetzen();
+  requestAnimationFrame(anfangSetzen);
+  window.addEventListener('load', anfangSetzen);
 
   let angefordert = false;
 

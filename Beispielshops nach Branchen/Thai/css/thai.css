@@ -1847,34 +1847,28 @@
     transition: transform 0.15s linear;
   }
 
-  /* Der Slider bleibt innerhalb des Inhaltsbereichs. Negative
-     Aussenabstaende wie beim Zutaten-Slider waeren hier falsch,
-     weil die Karten Rahmen haben und am Rand angeschnitten
-     wirken wuerden.
-
-     overscroll-behavior verhindert, dass ein Wischer am Ende des
-     Sliders die Seite mitzieht. */
+  /* scroll-snap-type steht auf proximity, nicht auf mandatory.
+     Bei mandatory sucht Safari nach jeder Layoutaenderung, etwa
+     wenn das Bild darueber nachlaedt, ein neues Rastziel und
+     springt dabei mitten in den Slider. */
   .tisch-slider {
     display: flex;
     overflow-x: auto;
     overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     gap: var(--space-4);
     scrollbar-width: none;
   }
 
   .tisch-slider::-webkit-scrollbar { display: none; }
 
-  /* Eine Karte steht vollstaendig im Bild, von der naechsten
-     schauen 40 Pixel herein.
-
-     Die Breite kommt aus 100vw abzueglich der Seitenabstaende,
-     nicht aus Prozent der Elternbreite. Prozentangaben haben hier
-     mehrfach danebengelegen, weil flex-basis mit min-width auto
-     zusammen die Karte wieder aufziehen kann. */
+  /* 82 Prozent der Sliderbreite: eine Karte steht vollstaendig im
+     Bild, von der naechsten schaut ein Streifen herein.
+     width statt flex-basis, weil flex-basis zusammen mit
+     min-width auto die Karte wieder aufziehen kann. */
   .tisch-slider .tisch-punkt {
     flex: 0 0 auto;
-    width: calc(100vw - var(--container-pad-mobile) * 2 - 40px);
+    width: 82%;
     min-width: 0;
     scroll-snap-align: start;
     max-width: none;
