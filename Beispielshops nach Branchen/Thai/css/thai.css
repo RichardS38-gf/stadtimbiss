@@ -1823,21 +1823,25 @@
     transition: transform 0.15s linear;
   }
 
+  /* Der Slider bleibt innerhalb des Inhaltsbereichs. Negative
+     Aussenabstaende wie beim Zutaten-Slider waeren hier falsch,
+     weil die Karten Rahmen haben und am Rand angeschnitten
+     wirken wuerden. */
   .tisch-slider {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: var(--space-4);
-    margin-inline: calc(var(--container-pad-mobile) * -1);
-    padding-inline: var(--container-pad-mobile);
     scrollbar-width: none;
   }
 
   .tisch-slider::-webkit-scrollbar { display: none; }
 
+  /* Einrasten am linken Rand, nicht mittig. Mittig wuerde die
+     erste Karte nach links aus dem Inhaltsbereich schieben. */
   .tisch-slider .tisch-punkt {
-    flex: 0 0 84%;
-    scroll-snap-align: center;
+    flex: 0 0 76%;
+    scroll-snap-align: start;
     max-width: none;
     margin-block: 0;
     opacity: 1;
