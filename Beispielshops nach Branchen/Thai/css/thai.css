@@ -1816,105 +1816,75 @@
   .hero__actions { order: 7; justify-content: center; }
 
   /* ── KONZEPT ──
-     Wisch-Slider: das Bild steht oben und dreht sich beim Wischen
-     mit, die vier Punkte liegen als Karten nebeneinander. Punkte
-     darunter zeigen den Stand. js/tischdreh.js baut das um und
-     setzt die Klasse tisch-bahn--mobil. */
+     Bild links, Text rechts, beide bleiben beim Scrollen stehen.
+     Das Bild dreht sich, der Text wird ausgetauscht.
+
+     Die Bahn ist drei Bildschirmhoehen hoch, darin klebt die
+     Buehne. Die vier Texte liegen alle in derselben Rasterzelle
+     und damit uebereinander, sichtbar ist einer. Dadurch springt
+     die Hoehe beim Wechseln nicht.
+
+     js/tischdreh.js setzt die Klasse tisch-bahn--mobil. */
   .tisch-sektion { padding-top: var(--space-6); }
 
-  .tisch-buehne {
+  .tisch-bahn--mobil { height: 320vh; }
+
+  .tisch-bahn--mobil .tisch-buehne {
+    position: sticky;
+    top: 84px;
+    display: grid;
+    grid-template-columns: 34% 1fr;
+    grid-template-rows: auto auto;
+    column-gap: var(--space-4);
+    align-items: center;
+    padding-inline: var(--container-pad-mobile);
+    padding-bottom: var(--space-6);
+    min-height: 0;
+  }
+
+  .tisch-bahn--mobil .abschnitt__kopf {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: var(--space-6);
+  }
+
+  .tisch-bahn--mobil .tisch-bild {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    margin: 0;
+    align-self: center;
+    transition: transform 0.15s linear;
+  }
+
+  /* Alle vier in derselben Zelle, also uebereinander */
+  .tisch-bahn--mobil .tisch-punkt {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .tisch-bahn--mobil .tisch-punkt--an { opacity: 1; }
+
+  .tisch-punkt__titel { font-size: 1.35rem; line-height: 1.3; }
+  .tisch-punkt__text { font-size: 0.9rem; }
+
+  /* Fallback ohne Skript: alles untereinander */
+  .tisch-bahn:not(.tisch-bahn--mobil) .tisch-buehne {
     flex-direction: column;
     align-items: stretch;
     padding-inline: var(--container-pad-mobile);
     padding-bottom: var(--space-7);
   }
 
-  /* Die Ueberschrift steht linksbuendig. Ueber die Kennung, damit
-     die Regel gegen alles gewinnt, was allgemeiner ist. */
-  #tisch .abschnitt__kopf,
-  #tisch .titel,
-  #tisch .zier {
-    text-align: left;
-    margin-inline: 0;
-  }
-
-  .tisch-buehne .abschnitt__kopf { text-align: left; }
-
-  .tisch-bild {
-    width: 160px;
+  .tisch-bahn:not(.tisch-bahn--mobil) .tisch-bild {
+    width: 170px;
     align-self: center;
     margin-bottom: var(--space-5);
-    transition: transform 0.15s linear;
   }
-
-  /* Der Slider wird per Skript verschoben, nicht gescrollt. Das
-     Fenster schneidet nur ab, die Spur darin traegt das transform.
-     Kein scroll-snap: damit kann Safari nach Layoutaenderungen
-     nicht mehr an einen fremden Rastpunkt springen. */
-  .tisch-slider { overflow: hidden; }
-
-  .tisch-spur {
-    display: flex;
-    gap: var(--space-4);
-    transition: transform 0.4s ease;
-    /* Senkrecht scrollt weiter die Seite, waagerecht faengt das
-       Skript die Wischer ab. */
-    touch-action: pan-y;
-    cursor: grab;
-  }
-
-  /* Waehrend des Ziehens folgt die Spur dem Finger ohne
-     Nachlaufen. */
-  .tisch-spur--zieht { transition: none; cursor: grabbing; }
-
-  /* 82 Prozent der Sliderbreite: eine Karte steht vollstaendig im
-     Bild, von der naechsten schaut ein Streifen herein. */
-  .tisch-slider .tisch-punkt {
-    flex: 0 0 auto;
-    width: 82%;
-    min-width: 0;
-    max-width: none;
-    margin-block: 0;
-    opacity: 1;
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    min-height: 210px;
-    user-select: none;
-  }
-
-  .tisch-punkt__nr {
-    display: block;
-    text-align: left;
-    font-family: var(--font-head);
-    font-size: 0.95rem;
-    letter-spacing: 0.1em;
-    color: var(--color-accent);
-    margin-bottom: var(--space-2);
-  }
-
-  .tisch-punkt__titel { font-size: 1.5rem; }
-  .tisch-punkt__text { font-size: 0.95rem; }
-
-  .tisch-dots {
-    display: flex;
-    justify-content: center;
-    gap: 9px;
-    margin-top: var(--space-5);
-  }
-
-  .tisch-dots button {
-    width: 8px;
-    height: 8px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: rgba(14, 59, 50, 0.2);
-    cursor: pointer;
-    transition: background var(--transition);
-  }
-
-  .tisch-dots__an { background: var(--color-accent); }
 
   /* ── SPEISEKARTE ──
      Das durchschaltende Bild braucht ein Ueberfahren mit der Maus,
