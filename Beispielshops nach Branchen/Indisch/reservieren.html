@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tisch reservieren — Anaar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C88B4A' stroke-width='1.5'><path d='M12 2 22 12 12 22 2 12z'/><path d='M12 8 16 12 12 16 8 12z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Yatra+One&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <link rel="stylesheet" href="css/indisch.css?v=10">
+  <style>
+    /* Bild links, Formular rechts. Die Sektion traegt bewusst
+       keinen Container, sonst koennte das Bild nicht bis an den
+       Rand laufen. Die Formularspalte bekommt ihren Innenabstand
+       deshalb selbst. */
+    .res { display: grid; grid-template-columns: 1fr; background: var(--color-bg); }
+
+    @media (min-width: 900px) {
+      /* Genau eine Bildschirmhoehe, abzueglich der Kopfzeile.
+         Das Formular scrollt innerhalb der Spalte, falls es
+         nicht hineinpasst, statt die Sektion zu strecken. */
+      .res {
+        grid-template-columns: 42% 1fr;
+        align-items: stretch;
+        min-height: calc(100vh - 76px);
+      }
+    }
+
+    .res__bild {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      background: var(--color-bg-soft);
+    }
+
+    @media (min-width: 900px) {
+      .res__bild { min-height: 0; }
+    }
+
+    @media (max-width: 899px) {
+      .res__bild {
+        aspect-ratio: 4 / 3;
+        height: auto;
+      }
+    }
+
+    .res__spalte {
+      padding-inline: var(--container-pad-mobile);
+      padding-block: var(--space-7);
+    }
+
+    @media (min-width: 900px) {
+      .res__spalte {
+        padding-block: var(--space-7);
+        padding-left: var(--space-7);
+        /* Rechts buendig mit dem Inhaltsbereich der uebrigen
+           Seiten, egal wie breit das Fenster ist. */
+        padding-right: max(
+          var(--container-pad-desktop),
+          calc((100vw - var(--max-content-width)) / 2)
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+
+    /* ── FORMULAR ──
+       Felder nur mit Linie unten, wie ein ausgefuellter Zettel.
+       Ein Kasten waere auf dem hellen Grund zu schwer. */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+
+    @media (min-width: 480px) { .form-row--2 { grid-template-columns: 1fr 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+
+    .form-group label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    .form-group label span { text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0 0 0.5rem;
+      border: none;
+      border-bottom: 1px solid var(--color-line);
+      border-radius: 0;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      background: transparent;
+      transition: border-color var(--transition);
+      min-height: 40px;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--color-muted); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-bottom-color: var(--color-accent);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 84px; padding-top: 0.4rem; }
+
+    /* iOS gibt Datumsfeldern eine eigene Innenhoehe. Ohne dieses
+       Zuruecksetzen steht das Feld hoeher als die Nachbarfelder. */
+    .form-group input[type="date"] {
+      -webkit-appearance: none;
+      appearance: none;
+      display: block;
+      height: 40px;
+      min-height: 40px;
+      line-height: 1.2;
+      padding-block: 0;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; }
+
+    /* Uhrzeit als Chips. Die Radios liegen unsichtbar darunter,
+       das Label ist die sichtbare Kachel. Eigener Block statt
+       .form-group, weil dessen Label-Regel sonst Versalien auf die
+       Chips legen wuerde. */
+    .zeit-block { margin-bottom: var(--space-5); }
+
+    .zeit-block__label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .zeit-wahl { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+    .zeit-wahl input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+
+    .zeit-wahl label {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--color-line);
+      background: transparent;
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .zeit-wahl label:hover { border-color: var(--color-accent); color: var(--color-ink); }
+
+    .zeit-wahl input:checked + label {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-on-accent);
+    }
+
+    .zeit-wahl input:focus-visible + label { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+    .form-submit { margin-top: var(--space-6); }
+
+    /* Die Hinweise stehen als schmale Zeile unter dem Formular,
+       nicht mehr als eigene Spalte. */
+    .res-info {
+      margin-top: var(--space-7);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--color-line);
+      display: grid;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      line-height: 1.75;
+      color: var(--color-muted);
+    }
+
+    .res-info a { color: var(--color-ink); }
+    .res-info a:hover { color: var(--color-accent); }
+
+    /* Erfolgsmeldung */
+    .res-success { display: none; }
+    .res-success__icon { color: var(--color-accent); margin-bottom: var(--space-4); }
+
+    .res-success h2 {
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 2.1rem;
+      color: var(--color-ink);
+      margin-bottom: var(--space-3);
+    }
+
+    .res-success p { color: var(--color-muted); margin-bottom: var(--space-5); }
+  </style>
+</head>
+<body>
+
+  <!-- Demo-Banner steht als erstes Element, noch vor der
+       Kopfzeile. Inhalt kommt aus js/auth.js. -->
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
+        <span class="nav__wortmarke">Anaar</span>
+      </a>
+
+      <nav class="nav__aktionen">
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="index.html#kontakt">Kontakt</a>
+        <span id="nav-konto" class="nav__konto-slot"></span>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">Online bestellen</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="res">
+
+    <img class="res__bild" src="Bilder/reservieren.webp" alt="Blick in den Gastraum">
+
+    <div class="res__spalte">
+
+      <div class="abschnitt__kopf">
+        <span class="kicker">Reservierung</span>
+        <h1 class="titel">Wir halten Ihnen<br><em>einen Platz frei</em></h1>
+        <p class="abschnitt__text" style="margin-top:var(--space-4)">
+          Sagen Sie uns Tag, Uhrzeit und wie viele Sie sind. Wir melden uns
+          kurz zur Bestätigung.
+        </p>
+      </div>
+
+      <form id="reservation-form" action="https://formspree.io/f/PLATZHALTER" method="POST">
+        <input type="hidden" name="_subject" value="Neue Tischreservierung — Anaar">
+        <input type="hidden" name="_language" value="de">
+
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" placeholder="Dein Name" required>
+          </div>
+          <div class="form-group">
+            <label for="telefon">Telefon *</label>
+            <input type="tel" id="telefon" name="telefon" placeholder="0531 / ..." required>
+          </div>
+        </div>
+
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="datum">Datum *</label>
+            <input type="date" id="datum" name="datum" required>
+          </div>
+          <div class="form-group">
+            <label for="personen">Wie viele seid ihr? *</label>
+            <select id="personen" name="personen" required>
+              <option value="" disabled selected>Bitte wählen</option>
+              <option>1 Person</option>
+              <option>2 Personen</option>
+              <option>3 Personen</option>
+              <option>4 Personen</option>
+              <option>5 Personen</option>
+              <option>6 Personen</option>
+              <option>7 Personen</option>
+              <option>8 Personen</option>
+              <option>Mehr als 8 Personen</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="zeit-block">
+          <span class="zeit-block__label">Uhrzeit *</span>
+          <div class="zeit-wahl">
+            <input type="radio" id="z1700" name="uhrzeit" value="17:00" required><label for="z1700">17:00</label>
+            <input type="radio" id="z1730" name="uhrzeit" value="17:30"><label for="z1730">17:30</label>
+            <input type="radio" id="z1800" name="uhrzeit" value="18:00"><label for="z1800">18:00</label>
+            <input type="radio" id="z1830" name="uhrzeit" value="18:30"><label for="z1830">18:30</label>
+            <input type="radio" id="z1900" name="uhrzeit" value="19:00"><label for="z1900">19:00</label>
+            <input type="radio" id="z1930" name="uhrzeit" value="19:30"><label for="z1930">19:30</label>
+            <input type="radio" id="z2000" name="uhrzeit" value="20:00"><label for="z2000">20:00</label>
+            <input type="radio" id="z2030" name="uhrzeit" value="20:30"><label for="z2030">20:30</label>
+            <input type="radio" id="z2100" name="uhrzeit" value="21:00"><label for="z2100">21:00</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nachricht">Anmerkungen <span>(optional)</span></label>
+            <textarea id="nachricht" name="nachricht" placeholder="z.B. Geburtstag, Allergien, Kinderstuhl"></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn btn--outline">Reservierung anfragen</button>
+        </div>
+      </form>
+
+      <div class="res-success" id="res-success">
+        <div class="res-success__icon"><span data-icon="haken" data-icon-class="ic ic--xl"></span></div>
+        <h2>Ist notiert</h2>
+        <p>Wir haben deine Anfrage bekommen und melden uns kurz zur Bestätigung.</p>
+        <a href="index.html" class="btn btn--outline">Zurück zur Startseite</a>
+      </div>
+
+      <div class="res-info">
+        <div>Tische halten wir 20 Minuten frei. Wenn es später wird, ruf kurz an.</div>
+        <div>Ab 8 Personen bitte anrufen, dann stellen wir zusammen.</div>
+        <div>Lieber direkt klären? <a href="tel:0531000000">0531 / 000 000</a> &middot; Montag ist Ruhetag.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <a href="index.html" class="footer-marke">
+        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="footer-marke__name">Anaar</span>
+      </a>
+
+      <div class="footer__cols">
+        <div>
+          <p class="footer__kicker">Abholen oder liefern</p>
+          <p class="footer__text">
+            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder online
+            bestellen. Lieferung ab 20,00 € im Umkreis von fünf Kilometern.
+          </p>
+        </div>
+        <div>
+          <p class="footer__kicker">Adresse</p>
+          <p class="footer__text">Musterstraße 14<br>38100 Braunschweig</p>
+        </div>
+        <div>
+          <p class="footer__kicker">Öffnungszeiten</p>
+          <p class="footer__text">Di bis Do 17 – 23 Uhr<br>Fr 17 – 24, Sa 12 – 24<br>So 12 – 22, Mo Ruhetag</p>
+        </div>
+      </div>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { setupSeite, getProfile, getSession, createReservation } from './js/auth.js';
+    import { iconsEinsetzen } from './js/icons.js';
+    import { menueAufbauen } from './js/menue.js?v=1';
+
+    await setupSeite();
+    iconsEinsetzen();
+    menueAufbauen();
+
+    // Formular mit den Kontodaten vorbefuellen
+    const profil = await getProfile();
+    if (await getSession() && profil) {
+      const setz = (id, wert) => {
+        const el = document.getElementById(id);
+        if (el && wert && !el.value) el.value = wert;
+      };
+      setz('name', `${profil.first_name} ${profil.last_name}`.trim());
+      setz('telefon', profil.phone);
+    }
+
+    // Reservierung im Konto ablegen, damit sie im Tab
+    // Reservierungen auftaucht
+    const resForm = document.getElementById('reservation-form');
+    window.__resSpeichern = async () => {
+      const f = resForm;
+      const name = (f.elements.name?.value || '').trim().split(' ');
+      await createReservation({
+        reservation_date: f.elements.datum?.value || '',
+        reservation_time: (f.elements.uhrzeit?.value || '').replace(' Uhr', ''),
+        guests: f.elements.personen?.value || 2,
+        first_name: name[0] || '',
+        last_name: name.slice(1).join(' '),
+        phone: f.elements.telefon?.value || '',
+        email: f.elements.email?.value || '',
+        note: f.elements.nachricht?.value || null
+      });
+    };
+  </script>
+
+  <script>
+    // Mindestdatum = heute
+    const datumInput = document.getElementById('datum');
+    datumInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+
+    // Demo-Betrieb: es wird kein Formspree-Versand ausgeloest, weil
+    // dort nur ein Platzhalter hinterlegt ist. Die Reservierung
+    // landet stattdessen im Kundenkonto. Fuer den Echtbetrieb hier
+    // den Fetch wieder aktivieren.
+    const form = document.getElementById('reservation-form');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const btn = form.querySelector('[type="submit"]');
+      btn.textContent = 'Wird gesendet...';
+      btn.disabled = true;
+
+      try {
+        if (window.__resSpeichern) await window.__resSpeichern();
+      } catch (err) {
+        console.error('Reservierung konnte nicht gespeichert werden', err);
+      }
+
+      form.style.display = 'none';
+      document.getElementById('res-success').style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>

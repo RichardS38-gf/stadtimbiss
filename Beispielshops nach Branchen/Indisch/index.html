@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anaar — The Taste of India</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23E11B22'><circle cx='12' cy='13' r='7'/><path d='M12 6c0-2 1-3 3-4-1 2 0 3 0 4z' fill='%23C8A45C'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Yatra+One&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=1">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <link rel="stylesheet" href="css/indisch.css?v=10">
+  <style>
+    /* Das Hero-Foto steht hier und nicht im Stylesheet, weil es
+       die einzige Stelle ist, an der es vorkommt. */
+    .hero { background-image: url('Bilder/hero2.webp'); }
+  </style>
+</head>
+<body>
+
+  <!-- ── DEMO-BANNER ──
+       Steht auf allen Seiten als erstes Element, noch vor der
+       Kopfzeile. Inhalt kommt aus js/auth.js. -->
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <!-- ── KOPFZEILE ── -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <img class="nav__logo-bild" src="Bilder/logo.webp" alt="">
+        <span class="nav__wortmarke">Anaar</span>
+      </a>
+
+      <nav class="nav__aktionen">
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="reservieren.html">Reservieren</a>
+        <a class="nav__link" href="index.html#kontakt">Kontakt</a>
+        <span id="nav-konto" class="nav__konto-slot"></span>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">Online bestellen</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── HERO ──
+       Formatfuellendes Foto, darauf mittig der Text. Das Foto
+       ist hell, deshalb steht der Text dunkel und braucht keinen
+       Verlauf darunter. -->
+  <section class="hero">
+    <div class="container hero__inhalt">
+      <img class="hero__logo" src="Bilder/logo.webp" alt="Anaar">
+      <a href="bestellen.html" class="btn btn--primary">Online bestellen <span class="btn__pfeil">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- ── UEBER UNS ──
+       Text links, rechts zwei versetzte Bilder. -->
+  <section class="abschnitt" id="ueberuns">
+    <div class="container ueber">
+
+      <div>
+        <span class="kicker">Anaar Restaurant</span>
+        <h2 class="titel">&Uuml;ber uns</h2>
+        <p class="abschnitt__text" style="margin-top: var(--space-5)">
+          Tauchen Sie ein in die Welt der nordindischen K&uuml;che. Anaar ist
+          ein Familienbetrieb, der seit &uuml;ber 20 Jahren f&uuml;r ehrliche
+          indische Spezialit&auml;ten steht und heute in zweiter Generation
+          gef&uuml;hrt wird.
+        </p>
+        <p class="abschnitt__text" style="margin-top: var(--space-4)">
+          Wir verbinden die Rezepte unserer Familie mit frischen Zutaten und
+          Gew&uuml;rzen, die wir jeden Morgen selbst r&ouml;sten und m&ouml;rsern. Von den
+          Spezialit&auml;ten aus dem Tandoor bis zum Dal, der zw&ouml;lf Stunden
+          zieht, wird jedes Gericht einzeln zubereitet.
+        </p>
+        <p class="abschnitt__text" style="margin-top: var(--space-4)">
+          Schon beim Betreten tauchen Sie ein in die indische Kultur. Unsere
+          Servicekr&auml;fte beraten Sie bei der Bestellung und sprechen
+          Empfehlungen aus, auch zu den Gew&uuml;rzen und Weinen. Nat&uuml;rlich
+          k&ouml;nnen Sie telefonisch bestellen und Ihr Men&uuml; auf dem Weg nach
+          Hause abholen.
+        </p>
+        <p class="abschnitt__text" style="margin-top: var(--space-5)">
+          Ihre Familie Anand
+        </p>
+
+        <div style="margin-top: var(--space-6)">
+          <a href="reservieren.html" class="btn btn--primary">Tisch reservieren <span class="btn__pfeil">&rarr;</span></a>
+        </div>
+      </div>
+
+      <div class="ueber__bilder">
+        <img class="ueber__bild" src="Bilder/ueberuns.webp" alt="Currys auf dem Tisch" loading="lazy">
+        <img class="ueber__bild" src="Bilder/ueberuns2.webp" alt="Unser K&uuml;chenteam" loading="lazy">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── DREI VERSPRECHEN ── -->
+  <section class="abschnitt abschnitt--sand">
+    <div class="container">
+      <div class="bewertung">
+        <div style="text-align:center">
+          <h3 class="zeile__titel" style="font-size:1.6rem">Authentischer Genuss</h3>
+          <p class="zeile__text">
+            Unsere Rezepte kommen aus Delhi und Punjab. Cremige Currys,
+            würzige Tandoori-Gerichte, frisches Naan aus dem Lehmofen.
+          </p>
+          <a href="bestellen.html" class="btn btn--outline btn--sm">Jetzt bestellen</a>
+        </div>
+        <div style="text-align:center">
+          <h3 class="zeile__titel" style="font-size:1.6rem">Tradition und Moderne</h3>
+          <p class="zeile__text">
+            Alte Gewürztraditionen, moderne Küche. Jedes Gericht wird frisch
+            zubereitet, nichts kommt vorgekocht aus dem Eimer.
+          </p>
+          <a href="bestellen.html" class="btn btn--outline btn--sm">Jetzt bestellen</a>
+        </div>
+        <div style="text-align:center">
+          <h3 class="zeile__titel" style="font-size:1.6rem">Indien bei Ihnen</h3>
+          <p class="zeile__text">
+            Im Restaurant, als Lieferung oder für Ihre Feier. Wir bringen
+            Indien dorthin, wo Sie gerade sind.
+          </p>
+          <a href="reservieren.html" class="btn btn--outline btn--sm">Tisch reservieren</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KATEGORIEN ALS WECHSELZEILEN ──
+       Bild und Text tauschen in jeder zweiten Zeile die Seite.
+       Das Bild steht im Markup immer zuerst, die Klasse
+       zeile--gedreht schiebt es im Raster nach rechts. -->
+  <section class="abschnitt container" id="karte">
+    <div class="kopf-mitte">
+      <span class="kicker">Speisekarte</span>
+      <h2 class="titel">Der Geschmack Indiens,<br>direkt bei Ihnen</h2>
+    </div>
+
+    <div class="zeile">
+      <img class="zeile__bild" src="Bilder/kat-vorspeisen.webp" alt="" loading="lazy">
+      <div>
+        <span class="kicker">Appetizer</span>
+        <h3 class="zeile__titel">Vorspeisen &amp; Suppen</h3>
+        <p class="zeile__text">
+          Lassen Sie sich von unseren Vorspeisen und Suppen auf eine Reise
+          durch Indien entführen. Samosa, Pakora und Chaat mit frischen
+          Chutneys sorgen für den Start Ihres Menüs.
+        </p>
+        <a href="bestellen.html#vorspeisen" class="btn btn--outline">Jetzt bestellen</a>
+      </div>
+    </div>
+
+    <div class="zeile zeile--gedreht">
+      <img class="zeile__bild" src="Bilder/kat-tandoor.webp" alt="" loading="lazy">
+      <div>
+        <span class="kicker">Taste and Comfort</span>
+        <h3 class="zeile__titel">Aus dem Tandoor</h3>
+        <p class="zeile__text">
+          Über Nacht in Joghurt und Masala eingelegt, dann bei 400 Grad an
+          die Wand des Lehmofens. Von zartem Hähnchen über Lammspieße bis
+          zu Garnelen in Ajwain.
+        </p>
+        <a href="bestellen.html#tandoor" class="btn btn--outline">Jetzt bestellen</a>
+      </div>
+    </div>
+
+    <div class="zeile">
+      <img class="zeile__bild" src="Bilder/kat-currys.webp" alt="" loading="lazy">
+      <div>
+        <span class="kicker">Signature Dishes</span>
+        <h3 class="zeile__titel">Currys</h3>
+        <p class="zeile__text">
+          Vom milden Korma mit Mandel und Safran bis zum Vindaloo aus Goa,
+          das wirklich scharf ist. Die Schoten auf der Karte zeigen, wie wir
+          es in Delhi servieren würden.
+        </p>
+        <a href="bestellen.html#currys" class="btn btn--outline">Jetzt bestellen</a>
+      </div>
+    </div>
+
+    <div class="zeile zeile--gedreht" style="margin-bottom:0">
+      <img class="zeile__bild" src="Bilder/kat-vegetarisch.webp" alt="" loading="lazy">
+      <div>
+        <span class="kicker">Vegetarian Special</span>
+        <h3 class="zeile__titel">Vegetarisch &amp; Vegan</h3>
+        <p class="zeile__text">
+          Die indische Küche ist von Haus aus reich an vegetarischen
+          Gerichten. Palak Paneer, Chana Masala und ein Dal Makhani, der
+          zwölf Stunden auf kleiner Flamme zieht.
+        </p>
+        <a href="bestellen.html#vegetarisch" class="btn btn--outline">Jetzt bestellen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BEWERTUNGEN ── -->
+  <section class="abschnitt abschnitt--sand" id="stimmen">
+    <div class="container">
+      <div class="kopf-mitte">
+        <span class="kicker">Was Gäste sagen</span>
+        <h2 class="titel">4,7 von 5 bei Google</h2>
+        <p class="abschnitt__text">Aus 184 Bewertungen der letzten zwei Jahre.</p>
+      </div>
+
+      <div class="bewertung">
+        <article class="stimme">
+          <p class="stimme__sterne">★★★★★</p>
+          <p class="stimme__text">Das Murgh Makhani ist das beste, das ich außerhalb von London gegessen habe.</p>
+          <p class="stimme__autor">Nina B. · vor 2 Wochen</p>
+        </article>
+        <article class="stimme">
+          <p class="stimme__sterne">★★★★★</p>
+          <p class="stimme__text">Endlich ein Vindaloo, das wirklich scharf ist. Und das Naan kommt heiß aus dem Ofen.</p>
+          <p class="stimme__autor">Tobias R. · vor 1 Monat</p>
+        </article>
+        <article class="stimme">
+          <p class="stimme__sterne">★★★★★</p>
+          <p class="stimme__text">Wir waren zu sechst und haben quer durch die Karte bestellt. Kein Gericht war schwach.</p>
+          <p class="stimme__autor">Yasmin K. · vor 3 Wochen</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OEFFNUNGSZEITEN ──
+       Die Zeiten stehen hier UND in js/oeffnung.js. Beim Aendern
+       also beide Stellen anfassen. Dafuer steht die Woche auch
+       ohne Skript vollstaendig da. -->
+  <section class="abschnitt container" id="kontakt">
+    <div class="kopf-mitte">
+      <span class="kicker">Wo wir sind</span>
+      <h2 class="titel">Öffnungszeiten</h2>
+    </div>
+
+    <div class="zeiten">
+      <div>
+        <p class="jetzt" id="oeffnung-gross">Heute bis <em>23 Uhr</em> geöffnet</p>
+        <p class="jetzt__rest" id="oeffnung-rest"></p>
+
+        <p class="adresse">
+          Musterstraße 14, 38100 Braunschweig<br>
+          <a href="tel:0531000000">0531 / 000 000</a> ·
+          <a href="mailto:hallo@anaar.de">hallo@anaar.de</a>
+        </p>
+
+        <a class="route" href="https://www.google.com/maps/search/?api=1&amp;query=Musterstra%C3%9Fe+14,+38100+Braunschweig"
+           target="_blank" rel="noopener">Route öffnen &rarr;</a>
+      </div>
+
+      <div class="woche">
+        <div class="woche__tag" data-tag="1"><span class="woche__name">Montag</span><span class="woche__zeit">Ruhetag</span></div>
+        <div class="woche__tag" data-tag="2"><span class="woche__name">Dienstag</span><span class="woche__zeit">17 – 23 Uhr</span></div>
+        <div class="woche__tag" data-tag="3"><span class="woche__name">Mittwoch</span><span class="woche__zeit">17 – 23 Uhr</span></div>
+        <div class="woche__tag" data-tag="4"><span class="woche__name">Donnerstag</span><span class="woche__zeit">17 – 23 Uhr</span></div>
+        <div class="woche__tag" data-tag="5"><span class="woche__name">Freitag</span><span class="woche__zeit">17 – 24 Uhr</span></div>
+        <div class="woche__tag" data-tag="6"><span class="woche__name">Samstag</span><span class="woche__zeit">12 – 24 Uhr</span></div>
+        <div class="woche__tag" data-tag="0"><span class="woche__name">Sonntag</span><span class="woche__zeit">12 – 22 Uhr</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FUSSZEILE ── -->
+  <footer class="footer">
+    <div class="container">
+      <a href="index.html" class="footer-marke">
+        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+        <span class="footer-marke__name">Anaar</span>
+      </a>
+
+      <div class="footer__cols">
+        <div>
+          <p class="footer__kicker">Abholen oder liefern</p>
+          <p class="footer__text">
+            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder online
+            bestellen. Lieferung ab 20,00 € im Umkreis von fünf Kilometern.
+          </p>
+        </div>
+        <div>
+          <p class="footer__kicker">Adresse</p>
+          <p class="footer__text">Musterstraße 14<br>38100 Braunschweig</p>
+        </div>
+        <div>
+          <p class="footer__kicker">Öffnungszeiten</p>
+          <p class="footer__text">Di bis Do 17 – 23 Uhr<br>Fr 17 – 24, Sa 12 – 24<br>So 12 – 22, Mo Ruhetag</p>
+        </div>
+      </div>
+
+      <nav class="footer__links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#">Allergene &amp; Zusatzstoffe</a>
+      </nav>
+
+      <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    /* Die Versionsnummern hinter den Modulpfaden verhindern, dass
+       der Browser alte Fassungen festhaelt. Bei jeder Aenderung
+       an einer dieser Dateien die Nummer hochsetzen. */
+    import { setupSeite } from './js/auth.js';
+    import { iconsEinsetzen } from './js/icons.js';
+    import { oeffnungAnzeigen } from './js/oeffnung.js?v=1';
+    import { menueAufbauen } from './js/menue.js?v=1';
+    import { heroBlende } from './js/heroblende.js?v=1';
+
+    iconsEinsetzen();
+    menueAufbauen();
+    oeffnungAnzeigen();
+    heroBlende();
+    await setupSeite();
+    iconsEinsetzen();
+  </script>
+
+</body>
+</html>
