@@ -1,24 +1,18 @@
 /* tischdreh.js — Sabai Sabai
-   Abschnitt "Konzept": das runde Tischbild bleibt beim Scrollen
-   stehen und dreht sich, daneben wird der Text ausgetauscht.
+   Abschnitt "Konzept" auf breiten Schirmen: das runde Tischbild
+   bleibt beim Scrollen stehen und dreht sich, drumherum erscheint
+   jeweils genau einer der vier Texte.
 
-   Auf breiten Schirmen liegen die vier Texte um das Bild herum,
-   auf schmalen stehen Bild und Text nebeneinander. Der Ablauf ist
-   in beiden Faellen derselbe, nur der Drehwinkel und das Layout
-   unterscheiden sich. Deshalb gibt es hier nur eine Funktion.
-
-   Kein Slider, kein Wischen, kein eigenes Scrollen: die Position
-   ergibt sich allein daraus, wie weit die Sektion durchgelaufen
-   ist. Damit kann der Browser nichts verstellen.
+   Auf schmalen Schirmen steigt dieses Skript aus. Dort erledigt
+   das Stylesheet alles: die Texte wechseln auf Zeit und das Bild
+   dreht sich in Stufen mit. Der Grund ist die Hoehe. Ein Wechsel
+   am Scrollstand braucht Scrollstrecke, und die Sektion soll auf
+   dem Telefon flach bleiben.
 
    Laeuft das Skript nicht, stehen alle vier Texte untereinander.
-   Das Ausblenden haengt an Klassen, die dieses Skript setzt. */
+   Das Ausblenden haengt an einer Klasse, die dieses Skript setzt. */
 
 const DREHUNG_DESKTOP = 140;
-
-/* Auf Mobil mehr Drehung, weil das Bild kleiner ist und die
-   Bewegung sonst kaum auffaellt. */
-const DREHUNG_MOBIL = 270;
 
 export function tischDrehung() {
   const bahn = document.getElementById('tisch-bahn');
@@ -34,9 +28,16 @@ export function tischDrehung() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const schmal = window.matchMedia('(max-width: 900px)').matches;
-  bahn.classList.add(schmal ? 'tisch-bahn--mobil' : 'tisch-bahn--js');
 
-  const drehung = schmal ? DREHUNG_MOBIL : DREHUNG_DESKTOP;
+  // Auf schmalen Schirmen macht das alles das Stylesheet: die
+  // Texte wechseln dort auf Zeit und das Bild dreht sich in
+  // Stufen mit. Ein Wechsel am Scrollstand braucht zwangslaeufig
+  // Scrollstrecke, und die Sektion soll flach bleiben.
+  if (schmal) return;
+
+  bahn.classList.add('tisch-bahn--js');
+
+  const drehung = DREHUNG_DESKTOP;
 
   let angefordert = false;
 

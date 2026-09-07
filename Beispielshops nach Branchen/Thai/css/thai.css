@@ -1816,74 +1816,84 @@
   .hero__actions { order: 7; justify-content: center; }
 
   /* ── KONZEPT ──
-     Bild links, Text rechts, beide bleiben beim Scrollen stehen.
-     Das Bild dreht sich, der Text wird ausgetauscht.
+     Bild links, Text rechts. Die vier Texte wechseln auf Zeit,
+     das Bild dreht sich dabei in Stufen mit. Alles im
+     Stylesheet, das Skript steigt auf Mobil aus.
 
-     Die Bahn ist drei Bildschirmhoehen hoch, darin klebt die
-     Buehne. Die vier Texte liegen alle in derselben Rasterzelle
-     und damit uebereinander, sichtbar ist einer. Dadurch springt
-     die Hoehe beim Wechseln nicht.
+     Grund: ein Wechsel am Scrollstand braucht Scrollstrecke, und
+     genau die soll die Sektion hier nicht haben.
 
-     js/tischdreh.js setzt die Klasse tisch-bahn--mobil. */
+     Die vier Texte liegen in derselben Rasterzelle und damit
+     uebereinander. Die Zelle ist so hoch wie der laengste Text,
+     dadurch springt beim Wechseln nichts. */
   .tisch-sektion { padding-top: var(--space-6); }
+  .tisch-bahn { height: auto; }
 
-  .tisch-bahn--mobil { height: 320vh; }
-
-  .tisch-bahn--mobil .tisch-buehne {
-    position: sticky;
-    top: 84px;
+  .tisch-buehne {
     display: grid;
     grid-template-columns: 34% 1fr;
     grid-template-rows: auto auto;
-    column-gap: var(--space-4);
+    column-gap: var(--space-5);
     align-items: center;
     padding-inline: var(--container-pad-mobile);
-    padding-bottom: var(--space-6);
+    padding-bottom: var(--space-7);
     min-height: 0;
   }
 
-  .tisch-bahn--mobil .abschnitt__kopf {
+  .tisch-buehne .abschnitt__kopf {
     grid-column: 1 / -1;
     grid-row: 1;
     margin-bottom: var(--space-6);
   }
 
-  .tisch-bahn--mobil .tisch-bild {
+  .tisch-bild {
     grid-column: 1;
     grid-row: 2;
     width: 100%;
     margin: 0;
-    align-self: center;
-    transition: transform 0.15s linear;
+    animation: teller-dreht 20s ease-in-out infinite;
   }
 
-  /* Alle vier in derselben Zelle, also uebereinander */
-  .tisch-bahn--mobil .tisch-punkt {
+  .tisch-punkt {
     grid-column: 2;
     grid-row: 2;
     max-width: none;
     margin: 0;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    animation: punkt-wechselt 20s ease-in-out infinite;
   }
 
-  .tisch-bahn--mobil .tisch-punkt--an { opacity: 1; }
+  /* Vier Texte, 20 Sekunden Umlauf, also 5 Sekunden je Text. */
+  .tisch-punkt:nth-of-type(1) { animation-delay: 0s; }
+  .tisch-punkt:nth-of-type(2) { animation-delay: 5s; }
+  .tisch-punkt:nth-of-type(3) { animation-delay: 10s; }
+  .tisch-punkt:nth-of-type(4) { animation-delay: 15s; }
+
+  @keyframes punkt-wechselt {
+    0%        { opacity: 0; transform: translateY(6px); }
+    3%, 22%   { opacity: 1; transform: none; }
+    25%, 100% { opacity: 0; transform: translateY(-6px); }
+  }
+
+  /* Eine Vierteldrehung je Text, in einem Umlauf also einmal
+     ganz herum. */
+  @keyframes teller-dreht {
+    0%, 20%    { transform: rotate(0deg); }
+    25%, 45%   { transform: rotate(90deg); }
+    50%, 70%   { transform: rotate(180deg); }
+    75%, 95%   { transform: rotate(270deg); }
+    100%       { transform: rotate(360deg); }
+  }
 
   .tisch-punkt__titel { font-size: 1.35rem; line-height: 1.3; }
   .tisch-punkt__text { font-size: 0.9rem; }
 
-  /* Fallback ohne Skript: alles untereinander */
-  .tisch-bahn:not(.tisch-bahn--mobil) .tisch-buehne {
-    flex-direction: column;
-    align-items: stretch;
-    padding-inline: var(--container-pad-mobile);
-    padding-bottom: var(--space-7);
-  }
-
-  .tisch-bahn:not(.tisch-bahn--mobil) .tisch-bild {
-    width: 170px;
-    align-self: center;
-    margin-bottom: var(--space-5);
+  /* Ohne Bewegung stehen alle vier Texte untereinander, sonst
+     waere fuer diese Nutzer nur einer von vier lesbar. */
+  @media (prefers-reduced-motion: reduce) {
+    .tisch-buehne { display: flex; flex-direction: column; align-items: stretch; }
+    .tisch-bild { width: 170px; align-self: center; animation: none; margin-bottom: var(--space-5); }
+    .tisch-punkt { opacity: 1; animation: none; margin-bottom: var(--space-6); }
   }
 
   /* ── SPEISEKARTE ──
