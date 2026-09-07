@@ -69,6 +69,11 @@ function sliderAufbauen(bahn, bild, punkte) {
   const marken = Array.from(dots.children);
   marken[0].classList.add('tisch-dots__an');
 
+  // Beim Aufbau haengt der Browser mitunter an einer alten
+  // Scrollposition oder rueckt ein Element ins Bild. Beides
+  // wuerde die erste Karte halb nach links schieben.
+  slider.scrollLeft = 0;
+
   let angefordert = false;
 
   function rechnen() {

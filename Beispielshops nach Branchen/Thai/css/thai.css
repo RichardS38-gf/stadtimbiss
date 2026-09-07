@@ -197,6 +197,11 @@
 }
 
 @media (max-width: 900px) {
+
+  /* Kein waagerechtes Scrollen der ganzen Seite. Die Slider haben
+     ihr eigenes Scrollen, alles was darueber hinausragt, soll
+     abgeschnitten werden statt die Seite zu verschieben. */
+  html, body { overflow-x: hidden; }
   .nav .nav__inner { gap: var(--space-3); min-height: 66px; }
   .nav .nav__konto-name { display: none; }
   .nav .nav__aktionen .btn,
@@ -1845,10 +1850,14 @@
   /* Der Slider bleibt innerhalb des Inhaltsbereichs. Negative
      Aussenabstaende wie beim Zutaten-Slider waeren hier falsch,
      weil die Karten Rahmen haben und am Rand angeschnitten
-     wirken wuerden. */
+     wirken wuerden.
+
+     overscroll-behavior verhindert, dass ein Wischer am Ende des
+     Sliders die Seite mitzieht. */
   .tisch-slider {
     display: flex;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     gap: var(--space-4);
     scrollbar-width: none;
@@ -1856,10 +1865,11 @@
 
   .tisch-slider::-webkit-scrollbar { display: none; }
 
-  /* Einrasten am linken Rand, nicht mittig. Mittig wuerde die
-     erste Karte nach links aus dem Inhaltsbereich schieben. */
+  /* Eine Karte steht vollstaendig im Bild, von der naechsten
+     schauen 40 Pixel herein. Einrasten am linken Rand, mittig
+     wuerde die erste Karte hinausschieben. */
   .tisch-slider .tisch-punkt {
-    flex: 0 0 70%;
+    flex: 0 0 calc(100% - 40px);
     scroll-snap-align: start;
     max-width: none;
     margin-block: 0;
