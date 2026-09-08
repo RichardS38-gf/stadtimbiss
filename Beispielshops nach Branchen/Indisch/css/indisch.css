@@ -325,22 +325,42 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 
 .nav .nav__aktionen #nav-konto { display: contents; }
 
+/* Der Konto-Knopf wird von js/auth.js erzeugt und traegt eigene
+   Klassen. Damit er wie die uebrigen CTAs aussieht, bekommt er
+   hier die Masse von .btn--sm, statt das shop-neutrale Skript zu
+   aendern. Das Personensymbol bleibt aus, der Vorname genuegt.
+   display: inline beim Namen nimmt die Regel aus orient.css
+   zurueck, die ihn auf schmalen Schirmen ausblendet — ohne Symbol
+   waere der Knopf dort sonst leer. */
 .nav .nav__konto {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
+  justify-content: center;
+  gap: 0;
+  padding: 0.75rem 1.3rem;
+  min-height: 0;
+  border: 1px solid var(--color-accent);
+  background: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  transition: background var(--transition), border-color var(--transition);
 }
 
 .nav .nav__konto,
-.nav .nav__konto-name,
-.nav .nav__konto-icon { color: var(--color-ink); }
+.nav .nav__konto-name { color: var(--color-on-dark); }
 
-.nav .nav__konto:hover,
-.nav .nav__konto:hover .nav__konto-icon,
-.nav .nav__konto:hover .nav__konto-name { color: var(--color-accent); opacity: 1; }
+.nav .nav__konto-name { display: inline; }
+
+.nav .nav__konto-icon { display: none; }
+
+.nav .nav__konto:hover {
+  background: var(--color-accent-dk);
+  border-color: var(--color-accent-dk);
+}
+
+.nav .nav__konto:hover .nav__konto-name { color: var(--color-on-dark); opacity: 1; }
 
 .nav .cart-btn {
   border: none;
@@ -1118,18 +1138,19 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 
 /* ── DEMO-BANNER ──
    Steht auf jeder Seite als erstes Element, noch vor der
-   Kopfzeile. Orange mit weisser Schrift, damit sofort klar ist,
-   dass es sich um eine Demo handelt. */
+   Kopfzeile. Weiss mit orangefarbener Schrift und einer duennen
+   Linie darunter, damit er sich von der ebenfalls weissen
+   Kopfzeile abgrenzt. */
 .demo-banner {
-  background: var(--color-accent);
-  color: #fff;
+  background: #fff;
+  color: var(--color-accent);
   font-size: 0.8rem;
-  border-bottom: none;
+  border-bottom: 1px solid var(--color-accent);
 }
 
 .demo-banner a {
-  color: #fff;
+  color: var(--color-accent);
   text-decoration: underline;
 }
 
-.demo-banner a:hover { color: #fff; opacity: 0.8; }
+.demo-banner a:hover { color: var(--color-accent-dk); opacity: 1; }
