@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/indisch.css?v=10">
+  <link rel="stylesheet" href="css/indisch.css?v=24">
   <script type="module" src="js/konto.js"></script>
 </head>
 <body>
@@ -293,36 +293,40 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <a href="index.html" class="footer-marke">
-        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
-        <span class="footer-marke__name">Anaar</span>
-      </a>
+      <p class="footer__kicker">Abholen oder liefern</p>
+      <p class="footer__tel"><a href="tel:0531000000">0531 / 000 000</a></p>
+      <p class="footer__ruf-text">
+        oder online bestellen &middot; Lieferung ab 20,00 € im Umkreis von fünf Kilometern
+      </p>
 
-      <div class="footer__cols">
-        <div>
-          <p class="footer__kicker">Abholen oder liefern</p>
-          <p class="footer__text">
-            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder online
-            bestellen. Lieferung ab 20,00 € im Umkreis von fünf Kilometern.
-          </p>
-        </div>
-        <div>
-          <p class="footer__kicker">Adresse</p>
-          <p class="footer__text">Musterstraße 14<br>38100 Braunschweig</p>
-        </div>
-        <div>
-          <p class="footer__kicker">Öffnungszeiten</p>
-          <p class="footer__text">Di bis Do 17 – 23 Uhr<br>Fr 17 – 24, Sa 12 – 24<br>So 12 – 22, Mo Ruhetag</p>
-        </div>
+      <div class="footer__leiste">
+        <p class="footer__zeile">Musterstraße 14, 38100 Braunschweig</p>
+        <p class="footer__zeile footer__zeile--zeiten">
+          <span>Di – Do 17 – 23 Uhr</span>
+          <span>Fr 17 – 24</span>
+          <span>Sa 12 – 24</span>
+          <span>So 12 – 22</span>
+          <span>Mo Ruhetag</span>
+        </p>
       </div>
 
-      <nav class="footer__links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-        <a href="index.html#kontakt">Kontakt</a>
-        <a href="#">Allergene &amp; Zusatzstoffe</a>
-      </nav>
-      <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+      <div class="footer__unten">
+        <a href="index.html" class="footer-marke">
+          <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+          <span class="footer-marke__name">Anaar</span>
+        </a>
+
+        <div class="footer__abbinder">
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="index.html#kontakt">Kontakt</a>
+            <a href="#">Allergene &amp; Zusatzstoffe</a>
+          </nav>
+
+          <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+        </div>
+      </div>
     </div>
   </footer>
 

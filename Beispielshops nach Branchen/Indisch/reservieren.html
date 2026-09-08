@@ -15,63 +15,83 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/indisch.css?v=10">
+  <link rel="stylesheet" href="css/indisch.css?v=24">
   <style>
-    /* Bild links, Formular rechts. Die Sektion traegt bewusst
-       keinen Container, sonst koennte das Bild nicht bis an den
-       Rand laufen. Die Formularspalte bekommt ihren Innenabstand
-       deshalb selbst. */
-    .res { display: grid; grid-template-columns: 1fr; background: var(--color-bg); }
+    /* Formular links, zwei versetzte Bilder rechts — dasselbe
+       Motiv wie im Abschnitt Ueber uns auf der Startseite. Die
+       Sektion laeuft jetzt im normalen Container mit, die frueher
+       randlose Bildhaelfte ist weg. */
+    .res { background: var(--color-bg); padding-block: var(--space-7); }
+
+    .res__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
 
     @media (min-width: 900px) {
-      /* Genau eine Bildschirmhoehe, abzueglich der Kopfzeile.
-         Das Formular scrollt innerhalb der Spalte, falls es
-         nicht hineinpasst, statt die Sektion zu strecken. */
-      .res {
-        grid-template-columns: 42% 1fr;
-        align-items: stretch;
-        min-height: calc(100vh - 76px);
+      /* Die Bildspalte ist die breitere von beiden, und beide
+         Spalten stehen vertikal mittig zueinander. */
+      .res__grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: var(--space-7);
+        align-items: center;
+      }
+    }
+
+    .res__spalte { min-width: 0; }
+
+    /* Auf schmalen Schirmen steht nur das linke Bild, und zwar
+       ueber dem Formular. Das zweite waere dort nur Beiwerk. */
+    .res__bilder { order: -1; }
+
+    @media (min-width: 900px) {
+      /* Zwei gleich grosse Bilder nebeneinander, das rechte hoeher
+         gesetzt. Beide ragen mit einem negativen Aussenabstand
+         ueber die Mitte, dadurch der Ueberstand. */
+      .res__bilder {
+        order: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
       }
     }
 
     .res__bild {
-      display: block;
-      width: 100%;
-      height: 100%;
-      min-height: 320px;
-      object-fit: cover;
+      overflow: hidden;
+      margin: 0;
+      position: relative;
       background: var(--color-bg-soft);
     }
 
-    @media (min-width: 900px) {
-      .res__bild { min-height: 0; }
+    .res__bild img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
     }
 
-    @media (max-width: 899px) {
-      .res__bild {
-        aspect-ratio: 4 / 3;
-        height: auto;
+    .res__bild:hover img { transform: scale(1.06); }
+
+    .res__bild--links { aspect-ratio: 4 / 3; }
+
+    .res__bild--rechts { display: none; }
+
+    @media (min-width: 900px) {
+      /* Liegt oben, die Kante des linken Bildes sitzt also ueber
+         dem rechten. */
+      .res__bild--links {
+        aspect-ratio: 3 / 4;
+        margin-top: var(--space-7);
+        margin-right: calc(var(--space-5) * -1);
+        z-index: 1;
       }
-    }
 
-    .res__spalte {
-      padding-inline: var(--container-pad-mobile);
-      padding-block: var(--space-7);
-    }
-
-    @media (min-width: 900px) {
-      .res__spalte {
-        padding-block: var(--space-7);
-        padding-left: var(--space-7);
-        /* Rechts buendig mit dem Inhaltsbereich der uebrigen
-           Seiten, egal wie breit das Fenster ist. */
-        padding-right: max(
-          var(--container-pad-desktop),
-          calc((100vw - var(--max-content-width)) / 2)
-        );
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+      .res__bild--rechts {
+        display: block;
+        aspect-ratio: 3 / 4;
+        margin-left: calc(var(--space-5) * -1);
       }
     }
 
@@ -127,9 +147,11 @@
 
     .form-group textarea { resize: vertical; min-height: 84px; padding-top: 0.4rem; }
 
-    /* iOS gibt Datumsfeldern eine eigene Innenhoehe. Ohne dieses
-       Zuruecksetzen steht das Feld hoeher als die Nachbarfelder. */
-    .form-group input[type="date"] {
+    /* iOS gibt Datums- und Zeitfeldern eine eigene Innenhoehe.
+       Ohne dieses Zuruecksetzen stehen sie hoeher als die
+       Nachbarfelder. */
+    .form-group input[type="date"],
+    .form-group input[type="time"] {
       -webkit-appearance: none;
       appearance: none;
       display: block;
@@ -139,49 +161,8 @@
       padding-block: 0;
     }
 
-    input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; }
-
-    /* Uhrzeit als Chips. Die Radios liegen unsichtbar darunter,
-       das Label ist die sichtbare Kachel. Eigener Block statt
-       .form-group, weil dessen Label-Regel sonst Versalien auf die
-       Chips legen wuerde. */
-    .zeit-block { margin-bottom: var(--space-5); }
-
-    .zeit-block__label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-      margin-bottom: var(--space-3);
-    }
-
-    .zeit-wahl { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-
-    .zeit-wahl input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-
-    .zeit-wahl label {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--color-line);
-      background: transparent;
-      font-size: 0.9rem;
-      color: var(--color-muted);
-      cursor: pointer;
-      transition: background var(--transition), border-color var(--transition), color var(--transition);
-    }
-
-    .zeit-wahl label:hover { border-color: var(--color-accent); color: var(--color-ink); }
-
-    .zeit-wahl input:checked + label {
-      background: var(--color-accent);
-      border-color: var(--color-accent);
-      color: var(--color-on-accent);
-    }
-
-    .zeit-wahl input:focus-visible + label { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator { cursor: pointer; }
 
     .form-submit { margin-top: var(--space-6); }
 
@@ -190,16 +171,16 @@
     .res-info {
       margin-top: var(--space-7);
       padding-top: var(--space-5);
-      border-top: 1px solid var(--color-line);
+      border-top: 1px solid var(--color-accent);
       display: grid;
       gap: var(--space-3);
       font-size: var(--text-sm);
       line-height: 1.75;
-      color: var(--color-muted);
+      color: var(--color-accent);
     }
 
-    .res-info a { color: var(--color-ink); }
-    .res-info a:hover { color: var(--color-accent); }
+    .res-info a { color: var(--color-accent); text-decoration: underline; }
+    .res-info a:hover { color: var(--color-accent-dk); }
 
     /* Erfolgsmeldung */
     .res-success { display: none; }
@@ -230,19 +211,17 @@
       </a>
 
       <nav class="nav__aktionen">
-        <a class="nav__link" href="index.html">Home</a>
         <a class="nav__link" href="index.html#kontakt">Kontakt</a>
         <span id="nav-konto" class="nav__konto-slot"></span>
-        <a href="bestellen.html" class="btn btn--primary btn--sm">Online bestellen</a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">Online bestellen <span class="btn__pfeil">&rarr;</span></a>
       </nav>
     </div>
   </header>
 
   <section class="res">
+    <div class="container res__grid">
 
-    <img class="res__bild" src="Bilder/reservieren.webp" alt="Blick in den Gastraum">
-
-    <div class="res__spalte">
+      <div class="res__spalte">
 
       <div class="abschnitt__kopf">
         <span class="kicker">Reservierung</span>
@@ -274,6 +253,13 @@
             <input type="date" id="datum" name="datum" required>
           </div>
           <div class="form-group">
+            <label for="uhrzeit">Uhrzeit *</label>
+            <input type="time" id="uhrzeit" name="uhrzeit" step="900" required>
+          </div>
+        </div>
+
+        <div class="form-row form-row--2">
+          <div class="form-group">
             <label for="personen">Wie viele seid ihr? *</label>
             <select id="personen" name="personen" required>
               <option value="" disabled selected>Bitte wählen</option>
@@ -290,30 +276,8 @@
           </div>
         </div>
 
-        <div class="zeit-block">
-          <span class="zeit-block__label">Uhrzeit *</span>
-          <div class="zeit-wahl">
-            <input type="radio" id="z1700" name="uhrzeit" value="17:00" required><label for="z1700">17:00</label>
-            <input type="radio" id="z1730" name="uhrzeit" value="17:30"><label for="z1730">17:30</label>
-            <input type="radio" id="z1800" name="uhrzeit" value="18:00"><label for="z1800">18:00</label>
-            <input type="radio" id="z1830" name="uhrzeit" value="18:30"><label for="z1830">18:30</label>
-            <input type="radio" id="z1900" name="uhrzeit" value="19:00"><label for="z1900">19:00</label>
-            <input type="radio" id="z1930" name="uhrzeit" value="19:30"><label for="z1930">19:30</label>
-            <input type="radio" id="z2000" name="uhrzeit" value="20:00"><label for="z2000">20:00</label>
-            <input type="radio" id="z2030" name="uhrzeit" value="20:30"><label for="z2030">20:30</label>
-            <input type="radio" id="z2100" name="uhrzeit" value="21:00"><label for="z2100">21:00</label>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nachricht">Anmerkungen <span>(optional)</span></label>
-            <textarea id="nachricht" name="nachricht" placeholder="z.B. Geburtstag, Allergien, Kinderstuhl"></textarea>
-          </div>
-        </div>
-
         <div class="form-submit">
-          <button type="submit" class="btn btn--outline">Reservierung anfragen</button>
+          <button type="submit" class="btn btn--primary">Reservierung anfragen <span class="btn__pfeil">&rarr;</span></button>
         </div>
       </form>
 
@@ -326,8 +290,17 @@
 
       <div class="res-info">
         <div>Tische halten wir 20 Minuten frei. Wenn es später wird, ruf kurz an.</div>
-        <div>Ab 8 Personen bitte anrufen, dann stellen wir zusammen.</div>
-        <div>Lieber direkt klären? <a href="tel:0531000000">0531 / 000 000</a> &middot; Montag ist Ruhetag.</div>
+      </div>
+
+      </div>
+
+      <div class="res__bilder">
+        <figure class="res__bild res__bild--links">
+          <img src="Bilder/reservieren.webp" alt="Blick in den Gastraum">
+        </figure>
+        <figure class="res__bild res__bild--rechts">
+          <img src="Bilder/reservieren2.webp" alt="Gedeckter Tisch">
+        </figure>
       </div>
 
     </div>
@@ -335,37 +308,40 @@
 
   <footer class="footer">
     <div class="container">
-      <a href="index.html" class="footer-marke">
-        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
-        <span class="footer-marke__name">Anaar</span>
-      </a>
+      <p class="footer__kicker">Abholen oder liefern</p>
+      <p class="footer__tel"><a href="tel:0531000000">0531 / 000 000</a></p>
+      <p class="footer__ruf-text">
+        oder online bestellen &middot; Lieferung ab 20,00 € im Umkreis von fünf Kilometern
+      </p>
 
-      <div class="footer__cols">
-        <div>
-          <p class="footer__kicker">Abholen oder liefern</p>
-          <p class="footer__text">
-            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder online
-            bestellen. Lieferung ab 20,00 € im Umkreis von fünf Kilometern.
-          </p>
-        </div>
-        <div>
-          <p class="footer__kicker">Adresse</p>
-          <p class="footer__text">Musterstraße 14<br>38100 Braunschweig</p>
-        </div>
-        <div>
-          <p class="footer__kicker">Öffnungszeiten</p>
-          <p class="footer__text">Di bis Do 17 – 23 Uhr<br>Fr 17 – 24, Sa 12 – 24<br>So 12 – 22, Mo Ruhetag</p>
-        </div>
+      <div class="footer__leiste">
+        <p class="footer__zeile">Musterstraße 14, 38100 Braunschweig</p>
+        <p class="footer__zeile footer__zeile--zeiten">
+          <span>Di – Do 17 – 23 Uhr</span>
+          <span>Fr 17 – 24</span>
+          <span>Sa 12 – 24</span>
+          <span>So 12 – 22</span>
+          <span>Mo Ruhetag</span>
+        </p>
       </div>
 
-      <nav class="footer__links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-        <a href="index.html#kontakt">Kontakt</a>
-        <a href="#">Allergene &amp; Zusatzstoffe</a>
-      </nav>
+      <div class="footer__unten">
+        <a href="index.html" class="footer-marke">
+          <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+          <span class="footer-marke__name">Anaar</span>
+        </a>
 
-      <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+        <div class="footer__abbinder">
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="index.html#kontakt">Kontakt</a>
+            <a href="#">Allergene &amp; Zusatzstoffe</a>
+          </nav>
+
+          <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+        </div>
+      </div>
     </div>
   </footer>
 

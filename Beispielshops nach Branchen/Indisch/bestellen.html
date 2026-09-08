@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/indisch.css?v=10">
+  <link rel="stylesheet" href="css/indisch.css?v=24">
   <script type="module" src="js/bestellen.js"></script>
   <script type="module">
     import { menueAufbauen } from './js/menue.js?v=1';
@@ -28,6 +28,33 @@
        der Kopfzeile durch, deshalb liegen beide in einer Flaeche
        und die Kopfzeile hat hier keinen unteren Rand. */
     .nav { border-bottom: none; box-shadow: none; }
+
+    /* Reservieren und Warenkorb stehen rechts als Knopfpaar. Der
+       Warenkorb ist der gefuellte von beiden, weil er hier die
+       Hauptaktion ist. */
+    .cart-btn {
+      border: 2px solid var(--color-accent);
+      background: var(--color-accent);
+      color: var(--color-on-dark);
+      min-width: 40px;
+      min-height: 36px;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .cart-btn:hover {
+      background: var(--color-accent-dk);
+      border-color: var(--color-accent-dk);
+    }
+
+    /* Auf orangem Grund muss die Zahl umgekehrt laufen. */
+    .cart-btn .cart-badge {
+      top: -8px;
+      right: -8px;
+      background: #fff;
+      color: var(--color-accent);
+    }
     .nav.scrolled { box-shadow: none; }
 
     .order-head {
@@ -308,64 +335,259 @@
     .cart-drawer,
     .cart-drawer__header,
     .cart-drawer__footer { border-color: var(--color-line); }
-    /* ── KORREKTUREN ZUM NEUEN DESIGN ──
-       Die Regeln oben stammen aus dem ersten Entwurf mit Indigo
-       und gekappten Ecken. Alles, was dazu nicht mehr passt,
-       wird hier zurueckgenommen. Steht am Ende, damit es
+    /* ── ANPASSUNG AUF DAS NEUE DESIGN (Entwurf C1) ──
+       Die Regeln oben stammen aus dem ersten Entwurf mit Indigo,
+       Kacheln und gekappten Ecken. Alles, was dazu nicht mehr
+       passt, wird hier zurueckgenommen. Steht am Ende, damit es
        gewinnt.
 
-       Beim naechsten groesseren Umbau dieser Seite gehoeren die
-       Regeln oben aufgeraeumt statt ueberschrieben. */
+       Beim naechsten groesseren Umbau gehoeren die Regeln oben
+       aufgeraeumt statt ueberschrieben. */
     .nav { border-bottom: 1px solid var(--color-line); }
 
-    /* Kopfbereich hell statt Indigo */
+    /* Kopfbereich: orangefarbenes Band mit Jali-Muster, wie das
+       Laufband auf der Startseite. */
     .order-head {
-      background: var(--color-bg-soft);
-      color: var(--color-muted);
+      background-color: var(--color-accent);
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.10) 0 1px, transparent 1px 14px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.10) 0 1px, transparent 1px 14px);
+      color: #fff;
       text-align: center;
     }
 
-    .order-head__inner { grid-template-columns: 1fr; justify-items: center; }
-
-    @media (min-width: 900px) {
-      .order-head__inner { grid-template-columns: 1fr; }
+    .order-head__inner {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: var(--space-5);
     }
 
-    .order-head__titel { color: var(--color-ink); }
-    .order-head__text p { color: var(--color-muted); margin-inline: auto; }
+    @media (min-width: 900px) { .order-head__inner { grid-template-columns: 1fr; } }
 
-    /* Umschalter: zwei helle Karten, die gewaehlte rot umrandet */
-    .order-head .modus { min-width: min(100%, 380px); }
+    .order-head .kicker { color: #FBE3CE; }
+    .order-head__titel { color: #fff; margin-bottom: 0; }
+
+    /* Umschalter: ein zweiteiliger Schalter statt zwei Karten,
+       die gewaehlte Haelfte weiss. Eckig, wie alles hier. */
+    .order-head .modus {
+      display: inline-flex;
+      gap: 0;
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.12);
+    }
 
     .order-head .mode-card {
       clip-path: none;
-      background: #fff;
-      border-color: var(--color-line);
+      flex-direction: row;
       align-items: center;
-      text-align: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-5);
+      border: none;
+      background: transparent;
+      box-shadow: none;
     }
 
-    .order-head .mode-card:hover { border-color: var(--color-accent); }
+    .order-head .mode-card:hover { background: rgba(255, 255, 255, 0.18); border: none; }
 
-    .order-head .mode-card--active {
-      border-color: var(--color-accent);
-      background: #fff;
-      box-shadow: inset 0 0 0 1px var(--color-accent);
+    .order-head .mode-card--active { background: #fff; border: none; box-shadow: none; }
+
+    .order-head .modus__name {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
     }
 
-    .order-head .modus__name { color: var(--color-ink); }
-    .order-head .modus__preis { color: var(--color-muted); }
+    .order-head .modus__preis { color: #FBE3CE; }
+    .order-head .mode-card--active .modus__name { color: var(--color-accent); }
     .order-head .mode-card--active .modus__preis { color: var(--color-accent); }
-    .modus__info { color: var(--color-muted); text-align: center; }
 
-    /* Kategorieleiste und Karten */
+    .modus__info { color: #FBE3CE; text-align: center; }
+
+    /* Kategorieleiste */
     .category-nav { top: 84px; background: #fff; }
     @media (max-width: 900px) { .category-nav { top: 74px; } }
 
-    .menu-card__img { clip-path: none; }
-    .menu-card .fav-herz { background: #fff; }
+    /* ── SPEISEKARTE ALS KARTENZEILEN ──
+       Eine Zeile je Gericht: kleines Bild, Name mit Punktlinie
+       zum Preis, Beschreibung darunter. Kein Raster, keine
+       Kacheln. */
+    .menu-section { display: block; margin-bottom: var(--space-8); }
 
-    .menu-section__title { font-weight: 700; }
+    .menu-section__title { font-weight: 700; margin-bottom: var(--space-2); }
+
+    .menu-card {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-4);
+      padding-block: var(--space-4);
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .menu-card:last-child { border-bottom: none; }
+
+    .menu-card__img {
+      flex: none;
+      width: 64px;
+      height: 64px;
+      aspect-ratio: 1;
+      margin-bottom: 0;
+      clip-path: none;
+    }
+
+    .menu-card:hover .menu-card__img { transform: none; }
+
+    /* Name und Preis in einer Zeile, Beschreibung darunter in
+       derselben Spalte wie der Name. */
+    .menu-card__body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "name preis"
+        "desc preis";
+      column-gap: var(--space-4);
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .menu-card__name {
+      grid-area: name;
+      font-size: 1.15rem;
+      align-items: baseline;
+      gap: var(--space-3);
+    }
+
+    /* Punktlinie vom Namen bis zum Preis. Nicht --color-line-dark,
+       das ist ein fast durchsichtiges Gold und praktisch
+       unsichtbar. */
+    .menu-card__name::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px dotted var(--color-line);
+      transform: translateY(-8px);
+    }
+
+    .menu-card__desc {
+      grid-area: desc;
+      margin: 2px 0 0;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    /* Zutatenhinweis: ein kleines eckiges i hinter dem Namen. Der
+       Hinweis liegt im span und erscheint beim Zeigen oder bei
+       Tastaturfokus. Fuer .allergen-btn gab es vorher gar keine
+       Regeln, der Text stand also offen im Knopf. */
+    .allergen-btn {
+      position: relative;
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: 1px solid var(--color-accent);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: help;
+      /* Haengt sonst an der Grundlinie des Namens und sitzt damit
+         zu tief. Ein Stueck hoeher steht er neben der Mitte der
+         Grossbuchstaben. */
+      position: relative;
+      top: -3px;
+      transition: color var(--transition), border-color var(--transition);
+    }
+
+    /* Das i sitzt sonst leicht neben der Mitte: die Punze unter
+       der Grundlinie zaehlt zur Zeilenhoehe, die Buchstabenlaufweite
+       schiebt nach links. Beides wird hier ausgeglichen. */
+    .allergen-btn::before {
+      content: "i";
+      display: block;
+      line-height: 1;
+      letter-spacing: 0;
+      transform: translate(0.5px, 1px);
+    }
+
+    .allergen-btn:hover,
+    .allergen-btn:focus-visible {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+
+    .allergen-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      width: max-content;
+      max-width: 220px;
+      padding: 6px 10px;
+      background: var(--color-ink);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      line-height: 1.5;
+      text-transform: none;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+
+    .allergen-btn:hover .allergen-tooltip,
+    .allergen-btn:focus-visible .allergen-tooltip { opacity: 1; visibility: visible; }
+
+    .menu-card__preisblock {
+      grid-area: preis;
+      border-top: none;
+      padding-top: 0;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+    }
+
+    .menu-card__price { color: var(--color-accent); }
+    .menu-card .add-to-cart { margin-left: 0; }
+
+    /* Das Herz haengt js/bestellen.js hinten an die Zeile, es
+       steht also nicht mehr frei ueber dem Bild. */
+    .menu-card .fav-herz {
+      position: static;
+      flex: none;
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border: 1px solid var(--color-line);
+    }
+
+    /* Auf schmalen Schirmen bricht die Zeile um, dann ergibt die
+       Punktlinie keinen Sinn mehr. */
+    @media (max-width: 619px) {
+      .menu-card { align-items: flex-start; }
+
+      .menu-card__body {
+        grid-template-columns: 1fr;
+        grid-template-areas: "name" "desc" "preis";
+      }
+
+      .menu-card__name::after { display: none; }
+
+      .menu-card__preisblock {
+        justify-content: flex-start;
+        margin-top: var(--space-3);
+      }
+    }
 
     /* Warenkorb: Abstand ist Kopfzeile plus Kategorieleiste */
     .cart-sidebar { top: 156px; max-height: calc(100vh - 176px); background: var(--color-bg-soft); }
@@ -388,9 +610,8 @@
       </a>
 
       <nav class="nav__aktionen">
-        <a class="nav__link" href="index.html">Home</a>
-        <a class="nav__link" href="reservieren.html">Reservieren</a>
         <span id="nav-konto" class="nav__konto-slot"></span>
+        <a href="reservieren.html" class="btn btn--primary btn--sm">Reservieren <span class="btn__pfeil">&rarr;</span></a>
         <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
           <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
         </button>
@@ -402,8 +623,7 @@
     <div class="order-head__inner">
       <div class="order-head__text">
         <span class="kicker">Speisekarte</span>
-        <h1 class="order-head__titel">Schärfe sagst du uns</h1>
-        <p>Die Schoten zeigen, wie wir das Gericht in Delhi servieren würden. Milder oder schärfer geht immer, sag es einfach beim Bestellen.</p>
+        <h1 class="order-head__titel">Was darf es sein?</h1>
       </div>
 
       <div>
@@ -448,7 +668,6 @@
             <p class="menu-card__desc">समोसा &middot; Drei Teigtaschen mit Kartoffel, Erbse und Kreuzkümmel, dazu Tamarindenchutney</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">6,50 &euro;</span>
-              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="v1" data-name="Samosa" data-price="6.50">Hinzufügen</button>
             </div>
           </div>
@@ -461,7 +680,6 @@
             <p class="menu-card__desc">प्याज़ भजिया &middot; Zwiebelringe in Kichererbsenteig, frittiert, mit Minzjoghurt</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">6,90 &euro;</span>
-              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="v2" data-name="Onion Bhaji" data-price="6.90">Hinzufügen</button>
             </div>
           </div>
@@ -474,7 +692,6 @@
             <p class="menu-card__desc">पापड़ी चाट &middot; Knusprige Teigplättchen mit Joghurt, Kichererbsen, Chutney und Granatapfel</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">7,90 &euro;</span>
-              <span class="schaerfe" aria-label="mittel"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="v3" data-name="Papdi Chaat" data-price="7.90">Hinzufügen</button>
             </div>
           </div>
@@ -492,7 +709,6 @@
             <p class="menu-card__desc">मुर्ग़ टिक्का &middot; Hähnchenbrust über Nacht in Joghurt und Masala, dann in den Lehmofen</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">13,90 &euro;</span>
-              <span class="schaerfe" aria-label="mittel"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="t1" data-name="Murgh Tikka" data-price="13.90">Hinzufügen</button>
             </div>
           </div>
@@ -505,7 +721,6 @@
             <p class="menu-card__desc">सीख कबाब &middot; Lammhack mit Ingwer, Koriander und Chili am Spieß</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">14,50 &euro;</span>
-              <span class="schaerfe" aria-label="mittel"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="t2" data-name="Seekh Kebab" data-price="14.50">Hinzufügen</button>
             </div>
           </div>
@@ -518,7 +733,6 @@
             <p class="menu-card__desc">पनीर टिक्का &middot; Frischkäse mit Paprika und Zwiebel, im Tandoor gegrillt</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">12,90 &euro;</span>
-              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="t3" data-name="Paneer Tikka" data-price="12.90">Hinzufügen</button>
             </div>
           </div>
@@ -531,7 +745,6 @@
             <p class="menu-card__desc">तंदूरी झींगा &middot; Garnelen in Ajwain und Zitrone, kurz und heiß gegrillt</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">17,90 &euro;</span>
-              <span class="schaerfe" aria-label="mittel"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="t4" data-name="Tandoori Jhinga" data-price="17.90">Hinzufügen</button>
             </div>
           </div>
@@ -549,7 +762,6 @@
             <p class="menu-card__desc">मुर्ग़ मखनी &middot; Butter Chicken in Tomate, Rahm und Kaschu, mild und samtig</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">15,50 &euro;</span>
-              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="c1" data-name="Murgh Makhani" data-price="15.50">Hinzufügen</button>
             </div>
           </div>
@@ -562,7 +774,6 @@
             <p class="menu-card__desc">रोगन जोश &middot; Lamm aus Kaschmir mit Kashmiri-Chili, Fenchel und Ingwer</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">17,50 &euro;</span>
-              <span class="schaerfe" aria-label="mittel"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="c2" data-name="Rogan Josh" data-price="17.50">Hinzufügen</button>
             </div>
           </div>
@@ -575,7 +786,6 @@
             <p class="menu-card__desc">विंदालू &middot; Schwein in Essig, Knoblauch und viel Chili, aus Goa. Wirklich scharf</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">16,50 &euro;</span>
-              <span class="schaerfe" aria-label="sehr scharf"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="c3" data-name="Vindaloo" data-price="16.50">Hinzufügen</button>
             </div>
           </div>
@@ -588,7 +798,6 @@
             <p class="menu-card__desc">कोरमा &middot; Hähnchen in Mandel, Kokos und Safran, ohne jede Schärfe</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">15,90 &euro;</span>
-              <span class="schaerfe" aria-label="nicht scharf"><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="c4" data-name="Korma" data-price="15.90">Hinzufügen</button>
             </div>
           </div>
@@ -606,7 +815,6 @@
             <p class="menu-card__desc">पालक पनीर &middot; Spinat mit Frischkäse, Ingwer und Bockshornklee</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">13,50 &euro;</span>
-              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Palak Paneer" data-price="13.50">Hinzufügen</button>
             </div>
           </div>
@@ -619,7 +827,6 @@
             <p class="menu-card__desc">दाल मखनी &middot; Schwarze Linsen, zwölf Stunden geköchelt, mit Butter gebunden</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">12,50 &euro;</span>
-              <span class="schaerfe" aria-label="mild"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Dal Makhani" data-price="12.50">Hinzufügen</button>
             </div>
           </div>
@@ -632,7 +839,6 @@
             <p class="menu-card__desc">छोले मसाला &middot; Kichererbsen in Tomate mit Amchur, also getrockneter Mango</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">12,90 &euro;</span>
-              <span class="schaerfe" aria-label="mittel"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="g3" data-name="Chana Masala" data-price="12.90">Hinzufügen</button>
             </div>
           </div>
@@ -645,7 +851,6 @@
             <p class="menu-card__desc">बैंगन भर्ता &middot; Aubergine über offener Flamme geröstet, dann mit Zwiebel zerdrückt</p>
             <div class="menu-card__footer menu-card__preisblock">
               <span class="menu-card__price">13,90 &euro;</span>
-              <span class="schaerfe" aria-label="mittel"><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote schaerfe__schote--an"></span><span class="schaerfe__schote"></span></span>
               <button class="btn btn--primary btn--sm add-to-cart" data-id="g4" data-name="Baingan Bharta" data-price="13.90">Hinzufügen</button>
             </div>
           </div>
@@ -814,37 +1019,40 @@
 
   <footer class="footer">
     <div class="container">
-      <a href="index.html" class="footer-marke">
-        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
-        <span class="footer-marke__name">Anaar</span>
-      </a>
+      <p class="footer__kicker">Abholen oder liefern</p>
+      <p class="footer__tel"><a href="tel:0531000000">0531 / 000 000</a></p>
+      <p class="footer__ruf-text">
+        oder online bestellen &middot; Lieferung ab 20,00 € im Umkreis von fünf Kilometern
+      </p>
 
-      <div class="footer__cols">
-        <div>
-          <p class="footer__kicker">Abholen oder liefern</p>
-          <p class="footer__text">
-            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder online
-            bestellen. Lieferung ab 20,00 € im Umkreis von fünf Kilometern.
-          </p>
-        </div>
-        <div>
-          <p class="footer__kicker">Adresse</p>
-          <p class="footer__text">Musterstraße 14<br>38100 Braunschweig</p>
-        </div>
-        <div>
-          <p class="footer__kicker">Öffnungszeiten</p>
-          <p class="footer__text">Di bis Do 17 – 23 Uhr<br>Fr 17 – 24, Sa 12 – 24<br>So 12 – 22, Mo Ruhetag</p>
-        </div>
+      <div class="footer__leiste">
+        <p class="footer__zeile">Musterstraße 14, 38100 Braunschweig</p>
+        <p class="footer__zeile footer__zeile--zeiten">
+          <span>Di – Do 17 – 23 Uhr</span>
+          <span>Fr 17 – 24</span>
+          <span>Sa 12 – 24</span>
+          <span>So 12 – 22</span>
+          <span>Mo Ruhetag</span>
+        </p>
       </div>
 
-      <nav class="footer__links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-        <a href="index.html#kontakt">Kontakt</a>
-        <a href="#">Allergene &amp; Zusatzstoffe</a>
-      </nav>
+      <div class="footer__unten">
+        <a href="index.html" class="footer-marke">
+          <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+          <span class="footer-marke__name">Anaar</span>
+        </a>
 
-      <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+        <div class="footer__abbinder">
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="index.html#kontakt">Kontakt</a>
+            <a href="#">Allergene &amp; Zusatzstoffe</a>
+          </nav>
+
+          <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+        </div>
+      </div>
     </div>
   </footer>
 

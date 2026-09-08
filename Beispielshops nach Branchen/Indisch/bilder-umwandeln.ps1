@@ -37,28 +37,33 @@ $breiten = @{
   # Ladezeit.
   'hero2'            = 2400
 
-  # Bild auf der Reservierungsseite, bis 620px breit
-  'reservieren'      = 1300
-
-  # Lehmofen in der Tandoor-Sektion, bis 540px breit
-  'tandoor'          = 1100
+  # Die zwei versetzten Bilder auf der Reservierungsseite,
+  # Hochformat 3:4, je bis etwa 340px breit angezeigt
+  'reservieren'      = 700
+  'reservieren2'     = 700
 
   # Die zwei versetzten Bilder in der Ueber-uns-Sektion,
   # Hochformat 3:4, bis 380px breit angezeigt
   'ueberuns'         = 800
   'ueberuns2'        = 800
 
-  # Kategoriebilder auf der Startseite, quadratisch, in den
-  # Wechselzeilen bis 560px breit
-  'kat-vorspeisen'   = 1100
-  'kat-tandoor'      = 1100
-  'kat-currys'       = 1100
-  'kat-vegetarisch'  = 1100
+  # Gastraum in der Sektion mit Bewertungen und Zeiten,
+  # bis 620px breit angezeigt
+  'gastraum'         = 1300
+
+  # Kategoriebilder in den Wechselzeilen der Startseite,
+  # quadratisch, bis 560px breit angezeigt
+  'vorspeise'        = 1100
+  'tandoor'          = 1100
+  'curry'            = 1100
+  'vegetarisch'      = 1100
 }
 
 # Alles, was hier nicht steht, ist ein Gerichtbild der Karte.
-# Anzeige bis 360px breit im Hochformat, also 720px Zielbreite.
-$standardBreite = 720
+# In den Kartenzeilen der Bestellseite werden sie als 64px-Quadrat
+# angezeigt. 300 statt 128 laesst Luft, falls die Zeilen spaeter
+# groessere Bilder bekommen.
+$standardBreite = 300
 
 $dateien = Get-ChildItem -Path $quelle -Filter *.png
 $vorher = 0

@@ -92,7 +92,7 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--color-accent);
   margin-bottom: var(--space-3);
 }
 
@@ -117,6 +117,51 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 .abschnitt { padding-block: var(--space-8); }
 
 .abschnitt--sand { background: var(--color-bg-soft); }
+
+/* Orangefarbenes Band. Alles darauf wird weiss. Das Jali-Gitter,
+   das durchbrochene Steingitter indischer Palaeste, gibt der
+   Flaeche Struktur, ohne mit dem Text zu konkurrieren. Es kommt
+   nur an dieser Stelle vor. */
+.abschnitt--akzent {
+  position: relative;
+  background: var(--color-accent);
+  overflow: hidden;
+}
+
+.abschnitt--akzent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23ffffff' stroke-width='1.2'%3E%3Cpath d='M36 0 72 36 36 72 0 36z'/%3E%3Cpath d='M36 18 54 36 36 54 18 36z'/%3E%3C/svg%3E");
+  background-size: 72px 72px;
+  background-repeat: repeat;
+}
+
+.abschnitt--akzent > * { position: relative; }
+
+.abschnitt--akzent .titel,
+.abschnitt--akzent .abschnitt__text { color: #fff; }
+
+.abschnitt--akzent .kicker { color: #fff; opacity: 0.85; }
+
+.abschnitt--akzent .btn--outline,
+.abschnitt--akzent .btn--outline-light {
+  background: #fff;
+  border-color: #fff;
+  color: var(--color-ink);
+}
+
+.abschnitt--akzent .btn--outline::after,
+.abschnitt--akzent .btn--outline-light::after { background: var(--color-ink); }
+
+.abschnitt--akzent .btn--outline:hover,
+.abschnitt--akzent .btn--outline-light:hover {
+  border-color: var(--color-ink);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(43, 43, 43, 0.25);
+}
 
 /* ── KNOEPFE ──
    Eckig, Versalien, weite Sperrung. Drei Arten: Orange fuer die
@@ -266,16 +311,17 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   flex-shrink: 0;
 }
 
-/* Textlinks in der Kopfzeile */
+/* Textlinks in der Kopfzeile, im selben Orange wie die
+   Hauptaktion, aber ohne Flaeche. */
 .nav__link {
   font-size: 0.82rem;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-ink);
+  color: var(--color-accent);
 }
 
-.nav__link:hover { color: var(--color-accent); opacity: 1; }
+.nav__link:hover { color: var(--color-accent-dk); opacity: 1; }
 
 .nav .nav__aktionen #nav-konto { display: contents; }
 
@@ -453,8 +499,23 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
-  background: var(--color-bg-soft);
 }
+
+/* Einfliegen beim Scrollen. Den Startzustand setzt
+   js/einfliegen.js ueber die Klasse kat-flug am Abschnitt, damit
+   die Bilder ohne Skript sichtbar bleiben.
+
+   Das Bild kommt von der Seite herein, auf der es steht: in der
+   normalen Zeile von links, in der gedrehten von rechts. */
+.kat-flug .zeile__bild {
+  opacity: 0;
+  transform: translateX(-70px);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.kat-flug .zeile--gedreht .zeile__bild { transform: translateX(70px); }
+
+.kat-flug .zeile__bild.ist-da { opacity: 1; transform: none; }
 
 .zeile__titel {
   font-family: var(--font-head);
@@ -500,7 +561,299 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 
 .schaerfe__schote--an { background: var(--color-chili); }
 
-/* ── BEWERTUNGEN ── */
+/* ── LAUFBAND ──
+   Die Kategorien laufen endlos von rechts nach links durch das
+   orangefarbene Band.
+
+   Der Trick sind zwei identische Spuren hintereinander. Die
+   erste laeuft um ihre volle Breite nach links, in dem Moment
+   steht die zweite genau an deren Ausgangsposition. Der Sprung
+   zurueck ist deshalb nicht zu sehen.
+
+   Die Maske an den Seiten laesst die Namen weich auslaufen,
+   statt sie hart abzuschneiden. */
+.laufband {
+  display: flex;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.laufband__spur {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-shrink: 0;
+  padding-right: var(--space-6);
+  white-space: nowrap;
+  animation: laufband-zieht 34s linear infinite;
+}
+
+.laufband__wort {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: #fff;
+}
+
+/* Kleine Raute zwischen den Woertern */
+.laufband__punkt {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.55);
+  transform: rotate(45deg);
+}
+
+@keyframes laufband-zieht {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* Ohne Bewegung steht das Band still. Sichtbar bleibt die erste
+   Spur, das reicht als Aufzaehlung. */
+@media (prefers-reduced-motion: reduce) {
+  .laufband__spur { animation: none; }
+}
+
+/* ── ZWEI SPALTEN ──
+   Bewertungen und Oeffnungszeiten in einer Sektion: links ein
+   Foto, rechts zwei Karten, die darueber liegen.
+
+   Die Zitatkarte greift mit einem negativen Aussenabstand ins
+   Bild hinein, das orangefarbene Kaestchen mit den Zeiten sitzt
+   darunter und leicht versetzt. Die z-index-Werte sorgen dafuer,
+   dass die Zeiten oben liegen.
+
+   Auf Mobil stehen alle drei Teile untereinander, ohne Ueberlappen
+   und ohne Versatz. Auf einem Telefon waere dafuer kein Platz. */
+.duo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .duo { grid-template-columns: 1.15fr 0.85fr; gap: 0; }
+}
+
+.duo__bild {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Karte von Google. Als iframe eingebunden, damit sie sich
+   verschieben und zoomen laesst. */
+.duo__map {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+}
+
+/* Weisse Karte mit duennem orangefarbenem Rahmen */
+.duo__karte {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border: 1px solid var(--color-accent);
+  padding: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  /* Die beiden Kacheln sind gegeneinander versetzt: die
+     Zitatkarte greift ins Bild, das Kaestchen darunter ist von
+     links weiter eingeruecht und schliesst rechts nicht mit ihr
+     ab. */
+  .duo__karte { margin-left: -80px; margin-right: 40px; }
+}
+
+/* Orangefarbenes Kaestchen mit den Zeiten. Bewusst klein
+   gehalten: es fasst die Woche in vier Zeilen zusammen, statt
+   jeden Tag einzeln aufzuzaehlen. */
+.duo__zeiten {
+  position: relative;
+  z-index: 3;
+  background: var(--color-accent);
+  color: #fff;
+  padding: var(--space-4) var(--space-5);
+  box-shadow: 0 14px 40px rgba(168, 72, 6, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Beim Ueberfahren waechst das Kaestchen leicht und der Schatten
+   wird tiefer. */
+.duo__zeiten:hover {
+  transform: scale(1.05);
+  box-shadow: 0 22px 60px rgba(168, 72, 6, 0.42);
+}
+
+@media (min-width: 900px) {
+  .duo__zeiten {
+    margin: -28px -30px 0 90px;
+    /* Ursprung oben rechts, damit das Kaestchen beim Wachsen
+       nicht weiter ueber den rechten Rand hinauswandert. */
+    transform-origin: top right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duo__zeiten { transition: none; }
+  .duo__zeiten:hover { transform: none; }
+}
+
+/* In der Karte ist das Anfuehrungszeichen fehl am Platz, dort
+   steht das Zitat ohnehin fuer sich. */
+.duo .zitate::before { display: none; }
+.duo .zitate { text-align: left; }
+.duo .zitate__bahn { max-width: none; }
+
+/* Die Kennzahl steht in der Karte unter dem Zitat, abgesetzt
+   durch eine Linie. */
+.duo__kennzahl {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+}
+
+/* ── BEWERTUNGEN ──
+   Ein grosses Zitat statt dreier kleiner. Die drei Zitate liegen
+   in derselben Rasterzelle und damit uebereinander, sichtbar ist
+   eines. Sie wechseln auf Zeit, wie im Hero die Sektionen.
+
+   Das riesige Anfuehrungszeichen im Hintergrund ist ein
+   Pseudoelement, also kein Bild und kein zusaetzliches Markup. */
+.zitate {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.zitate::before {
+  content: '”';
+  position: absolute;
+  top: -0.42em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-head);
+  font-size: 20rem;
+  line-height: 1;
+  color: rgba(210, 96, 12, 0.1);
+  pointer-events: none;
+}
+
+.zitate__inhalt { position: relative; }
+
+.zitate__kennzahl {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.zitate__zahl {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.zitate__sterne {
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  color: var(--color-accent);
+}
+
+.zitate__anzahl {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+/* Die drei Zitate uebereinander in einer Rasterzelle. Die Zelle
+   ist so hoch wie das laengste Zitat, dadurch springt beim
+   Wechseln nichts. */
+.zitate__bahn {
+  display: grid;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.zitat {
+  grid-area: 1 / 1;
+  opacity: 0;
+  animation: zitat-wechselt 18s ease-in-out infinite;
+}
+
+/* Drei Zitate, 18 Sekunden Umlauf, also 6 Sekunden je Zitat. */
+.zitat:nth-of-type(1) { animation-delay: 0s; }
+.zitat:nth-of-type(2) { animation-delay: 6s; }
+.zitat:nth-of-type(3) { animation-delay: 12s; }
+
+@keyframes zitat-wechselt {
+  0%        { opacity: 0; transform: translateY(8px); }
+  4%, 30%   { opacity: 1; transform: none; }
+  34%, 100% { opacity: 0; transform: translateY(-8px); }
+}
+
+.zitat__text {
+  font-family: var(--font-head);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  line-height: 1.45;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+
+.zitat__autor {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Standanzeige, laeuft im selben Takt wie die Zitate. */
+.zitate__punkte {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: var(--space-6);
+  position: relative;
+}
+
+.zitate__punkte span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(43, 43, 43, 0.18);
+  animation: zitat-marke 18s ease-in-out infinite;
+}
+
+.zitate__punkte span:nth-child(1) { animation-delay: 0s; }
+.zitate__punkte span:nth-child(2) { animation-delay: 6s; }
+.zitate__punkte span:nth-child(3) { animation-delay: 12s; }
+
+@keyframes zitat-marke {
+  0%, 32%   { background: var(--color-accent); }
+  33%, 100% { background: rgba(43, 43, 43, 0.18); }
+}
+
+/* Ohne Bewegung stehen alle drei Zitate untereinander. */
+@media (prefers-reduced-motion: reduce) {
+  .zitate__bahn { display: grid; gap: var(--space-6); }
+  .zitat { grid-area: auto; opacity: 1; animation: none; }
+  .zitate__punkte { display: none; }
+}
+
+/* ── BEWERTUNGEN, alte Kartenfassung ──
+   Bleibt fuer andere Seiten verfuegbar. */
 .bewertung {
   display: grid;
   grid-template-columns: 1fr;
@@ -531,6 +884,29 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   text-transform: uppercase;
   color: var(--color-muted);
 }
+
+/* Weisse Schrift im orangefarbenen Kaestchen, alles eine Spur
+   kleiner als sonst. */
+.duo__zeiten .jetzt,
+.duo__zeiten .jetzt em { color: #fff; }
+.duo__zeiten .jetzt { font-size: 1.3rem; margin-bottom: var(--space-2); }
+.duo__zeiten .jetzt__rest { color: rgba(255, 255, 255, 0.7); margin-bottom: var(--space-4); }
+
+.duo__zeiten .woche__tag {
+  padding: 0.35rem 0;
+  border-bottom: none;
+}
+
+.duo__zeiten .woche__name,
+.duo__zeiten .woche__zeit {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+}
+
+.duo__zeiten .adresse { color: rgba(255, 255, 255, 0.85); font-size: 0.88rem; }
+.duo__zeiten .adresse a { color: #fff; }
+.duo__zeiten .route { color: #fff; font-size: 0.7rem; }
 
 /* ── OEFFNUNGSZEITEN ── */
 .zeiten {
@@ -602,44 +978,105 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 }
 
 /* ── FUSSZEILE ──
-   Hell, Logo mittig, darunter drei Spalten. */
+   Hell und ruhig, wie die uebrigen Flaechen. Die orangefarbene
+   Linie darueber setzt die Kante, die der weisse Grund sonst
+   nicht hergibt. Sie sitzt bewusst nicht direkt an der Sektion
+   darueber, sondern mit Abstand.
+
+   Aufbau: die Rufnummer steht als Blickfang oben, weil der
+   Anruf beim Restaurant die haeufigste Handlung ist. Darunter
+   eine einzeilige Leiste mit Adresse und Zeiten zwischen zwei
+   duennen Linien. Ganz unten die Wortmarke links, Rechtslinks
+   und Copyright rechts. */
 .footer {
-  background: var(--color-bg-soft);
+  background: #fff;
   color: var(--color-muted);
   padding-block: var(--space-7) var(--space-5);
   text-align: center;
+  border-top: 1px solid var(--color-accent);
+  margin-top: var(--space-8);
 }
-
-.footer-marke {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
-}
-
-.footer-marke__logo { display: block; width: 180px; height: auto; }
-
-.footer-marke__name { display: none; }
-
-.footer__cols {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  padding-bottom: var(--space-5);
-  border-bottom: 1px solid var(--color-line);
-  text-align: left;
-}
-
-@media (min-width: 760px) { .footer__cols { grid-template-columns: repeat(3, 1fr); } }
 
 .footer__kicker {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--color-accent);
   margin-bottom: var(--space-3);
 }
+
+/* Rufnummer. Playfair, damit sie wie eine Ueberschrift wirkt
+   und nicht wie ein Datenfeld. */
+.footer__tel {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  color: var(--color-accent);
+}
+
+.footer__tel a { color: inherit; }
+.footer__tel a:hover { color: var(--color-accent-dk); }
+
+.footer__ruf-text {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+}
+
+/* Leiste mit Adresse und Zeiten, zwei Zeilen. Die Trennpunkte
+   kommen aus ::after, damit im Umbruch kein Punkt allein
+   stehenbleibt. */
+.footer__leiste {
+  max-width: 780px;
+  margin: var(--space-6) auto 0;
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  font-size: 0.95rem;
+  color: var(--color-ink);
+}
+
+.footer__zeile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+  line-height: 1.9;
+}
+
+.footer__zeile--zeiten { color: var(--color-muted); }
+
+.footer__zeile span::after {
+  content: "·";
+  margin-left: var(--space-4);
+  color: var(--color-accent);
+}
+
+.footer__zeile span:last-child::after { content: none; }
+
+.footer__unten {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  text-align: left;
+}
+
+.footer-marke {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.footer-marke__logo { display: block; width: 150px; height: auto; }
+
+.footer-marke__name { display: none; }
+
+.footer__abbinder { margin-left: auto; text-align: right; }
 
 .footer__text { font-size: 0.95rem; line-height: 1.9; color: var(--color-muted); }
 .footer__text a { color: var(--color-ink); }
@@ -649,8 +1086,7 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   display: flex;
   gap: var(--space-5);
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: var(--space-5);
+  justify-content: flex-end;
 }
 
 .footer__links a {
@@ -669,18 +1105,31 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   text-transform: uppercase;
   color: var(--color-muted);
   opacity: 0.7;
-  margin-top: var(--space-5);
+  margin-top: var(--space-3);
+}
+
+/* Unter 760 px steht alles mittig untereinander, sonst kippt
+   die untere Zeile. */
+@media (max-width: 759px) {
+  .footer__unten { flex-direction: column; align-items: center; text-align: center; }
+  .footer__abbinder { margin-left: 0; text-align: center; }
+  .footer__links { justify-content: center; }
 }
 
 /* ── DEMO-BANNER ──
    Steht auf jeder Seite als erstes Element, noch vor der
-   Kopfzeile. Die Linie unten trennt ihn von der weissen
-   Kopfzeile, sonst verschwimmen beide Flaechen. */
+   Kopfzeile. Orange mit weisser Schrift, damit sofort klar ist,
+   dass es sich um eine Demo handelt. */
 .demo-banner {
-  background: var(--color-bg-soft);
-  color: var(--color-muted);
+  background: var(--color-accent);
+  color: #fff;
   font-size: 0.8rem;
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: none;
 }
 
-.demo-banner a { color: var(--color-accent); }
+.demo-banner a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.demo-banner a:hover { color: #fff; opacity: 0.8; }

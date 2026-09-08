@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/components.css?v=1">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/indisch.css?v=10">
+  <link rel="stylesheet" href="css/indisch.css?v=24">
   <style>
     /* Das Hero-Foto steht hier und nicht im Stylesheet, weil es
        die einzige Stelle ist, an der es vorkommt. */
@@ -27,10 +27,6 @@
        Kopfzeile. Inhalt kommt aus js/auth.js. -->
   <div class="demo-banner" id="demo-banner"></div>
 
-  <!-- ── DEMO-BANNER ──
-       Steht auf allen Seiten als erstes Element, noch vor der
-       Kopfzeile. Inhalt kommt aus js/auth.js. -->
-
   <!-- ── KOPFZEILE ── -->
   <header class="nav">
     <div class="container nav__inner">
@@ -40,11 +36,10 @@
       </a>
 
       <nav class="nav__aktionen">
-        <a class="nav__link" href="index.html">Home</a>
-        <a class="nav__link" href="reservieren.html">Reservieren</a>
         <a class="nav__link" href="index.html#kontakt">Kontakt</a>
+        <a class="nav__link" href="reservieren.html">Reservieren</a>
         <span id="nav-konto" class="nav__konto-slot"></span>
-        <a href="bestellen.html" class="btn btn--primary btn--sm">Online bestellen</a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">Online bestellen <span class="btn__pfeil">&rarr;</span></a>
       </nav>
     </div>
   </header>
@@ -104,34 +99,42 @@
     </div>
   </section>
 
-  <!-- ── DREI VERSPRECHEN ── -->
-  <section class="abschnitt abschnitt--sand">
-    <div class="container">
-      <div class="bewertung">
-        <div style="text-align:center">
-          <h3 class="zeile__titel" style="font-size:1.6rem">Authentischer Genuss</h3>
-          <p class="zeile__text">
-            Unsere Rezepte kommen aus Delhi und Punjab. Cremige Currys,
-            würzige Tandoori-Gerichte, frisches Naan aus dem Lehmofen.
-          </p>
-          <a href="bestellen.html" class="btn btn--outline btn--sm">Jetzt bestellen</a>
-        </div>
-        <div style="text-align:center">
-          <h3 class="zeile__titel" style="font-size:1.6rem">Tradition und Moderne</h3>
-          <p class="zeile__text">
-            Alte Gewürztraditionen, moderne Küche. Jedes Gericht wird frisch
-            zubereitet, nichts kommt vorgekocht aus dem Eimer.
-          </p>
-          <a href="bestellen.html" class="btn btn--outline btn--sm">Jetzt bestellen</a>
-        </div>
-        <div style="text-align:center">
-          <h3 class="zeile__titel" style="font-size:1.6rem">Indien bei Ihnen</h3>
-          <p class="zeile__text">
-            Im Restaurant, als Lieferung oder für Ihre Feier. Wir bringen
-            Indien dorthin, wo Sie gerade sind.
-          </p>
-          <a href="reservieren.html" class="btn btn--outline btn--sm">Tisch reservieren</a>
-        </div>
+  <!-- ── LAUFBAND ──
+       Die Kategorien laufen endlos durch. Die zweite Spur ist eine
+       genaue Kopie der ersten, nur dadurch ist der Umlauf
+       nahtlos. Beim Aendern der Woerter also BEIDE Spuren
+       anfassen, sonst springt das Band. -->
+  <section class="abschnitt abschnitt--akzent">
+    <div class="container kopf-mitte" style="margin-bottom: var(--space-6)">
+      <span class="kicker">Aus unserer K&uuml;che</span>
+      <h2 class="titel">Alles frisch angesetzt, jeden Tag</h2>
+    </div>
+
+    <div class="laufband" aria-label="Unsere Kategorien">
+      <div class="laufband__spur">
+        <span class="laufband__wort">Vorspeisen</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Suppen</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Tandoori</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Currys</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Biryani</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Vegetarisch</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Naan &amp; Brot</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Chutneys</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Lassi</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">S&uuml;&szlig;es</span><i class="laufband__punkt"></i>
+      </div>
+
+      <div class="laufband__spur" aria-hidden="true">
+        <span class="laufband__wort">Vorspeisen</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Suppen</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Tandoori</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Currys</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Biryani</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Vegetarisch</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Naan &amp; Brot</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Chutneys</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">Lassi</span><i class="laufband__punkt"></i>
+        <span class="laufband__wort">S&uuml;&szlig;es</span><i class="laufband__punkt"></i>
       </div>
     </div>
   </section>
@@ -147,7 +150,7 @@
     </div>
 
     <div class="zeile">
-      <img class="zeile__bild" src="Bilder/kat-vorspeisen.webp" alt="" loading="lazy">
+      <img class="zeile__bild" src="Bilder/vorspeise.webp" alt="" loading="lazy">
       <div>
         <span class="kicker">Appetizer</span>
         <h3 class="zeile__titel">Vorspeisen &amp; Suppen</h3>
@@ -156,12 +159,12 @@
           durch Indien entführen. Samosa, Pakora und Chaat mit frischen
           Chutneys sorgen für den Start Ihres Menüs.
         </p>
-        <a href="bestellen.html#vorspeisen" class="btn btn--outline">Jetzt bestellen</a>
+        <a href="bestellen.html#vorspeisen" class="btn btn--primary">Alle Vorspeisen <span class="btn__pfeil">&rarr;</span></a>
       </div>
     </div>
 
     <div class="zeile zeile--gedreht">
-      <img class="zeile__bild" src="Bilder/kat-tandoor.webp" alt="" loading="lazy">
+      <img class="zeile__bild" src="Bilder/tandoor.webp" alt="" loading="lazy">
       <div>
         <span class="kicker">Taste and Comfort</span>
         <h3 class="zeile__titel">Aus dem Tandoor</h3>
@@ -170,12 +173,12 @@
           die Wand des Lehmofens. Von zartem Hähnchen über Lammspieße bis
           zu Garnelen in Ajwain.
         </p>
-        <a href="bestellen.html#tandoor" class="btn btn--outline">Jetzt bestellen</a>
+        <a href="bestellen.html#tandoor" class="btn btn--primary">Alle Tandoori-Gerichte <span class="btn__pfeil">&rarr;</span></a>
       </div>
     </div>
 
     <div class="zeile">
-      <img class="zeile__bild" src="Bilder/kat-currys.webp" alt="" loading="lazy">
+      <img class="zeile__bild" src="Bilder/curry.webp" alt="" loading="lazy">
       <div>
         <span class="kicker">Signature Dishes</span>
         <h3 class="zeile__titel">Currys</h3>
@@ -184,12 +187,12 @@
           das wirklich scharf ist. Die Schoten auf der Karte zeigen, wie wir
           es in Delhi servieren würden.
         </p>
-        <a href="bestellen.html#currys" class="btn btn--outline">Jetzt bestellen</a>
+        <a href="bestellen.html#currys" class="btn btn--primary">Alle Currys <span class="btn__pfeil">&rarr;</span></a>
       </div>
     </div>
 
     <div class="zeile zeile--gedreht" style="margin-bottom:0">
-      <img class="zeile__bild" src="Bilder/kat-vegetarisch.webp" alt="" loading="lazy">
+      <img class="zeile__bild" src="Bilder/vegetarisch.webp" alt="" loading="lazy">
       <div>
         <span class="kicker">Vegetarian Special</span>
         <h3 class="zeile__titel">Vegetarisch &amp; Vegan</h3>
@@ -198,111 +201,126 @@
           Gerichten. Palak Paneer, Chana Masala und ein Dal Makhani, der
           zwölf Stunden auf kleiner Flamme zieht.
         </p>
-        <a href="bestellen.html#vegetarisch" class="btn btn--outline">Jetzt bestellen</a>
+        <a href="bestellen.html#vegetarisch" class="btn btn--primary">Alle vegetarischen Gerichte <span class="btn__pfeil">&rarr;</span></a>
       </div>
     </div>
   </section>
 
-  <!-- ── BEWERTUNGEN ── -->
-  <section class="abschnitt abschnitt--sand" id="stimmen">
-    <div class="container">
-      <div class="kopf-mitte">
-        <span class="kicker">Was Gäste sagen</span>
-        <h2 class="titel">4,7 von 5 bei Google</h2>
-        <p class="abschnitt__text">Aus 184 Bewertungen der letzten zwei Jahre.</p>
-      </div>
+  <!-- ── BEWERTUNGEN UND OEFFNUNGSZEITEN ──
+       Eine Sektion, zwei Spalten. Links das Zitat, das auf Zeit
+       wechselt, rechts die Woche.
 
-      <div class="bewertung">
-        <article class="stimme">
-          <p class="stimme__sterne">★★★★★</p>
-          <p class="stimme__text">Das Murgh Makhani ist das beste, das ich außerhalb von London gegessen habe.</p>
-          <p class="stimme__autor">Nina B. · vor 2 Wochen</p>
-        </article>
-        <article class="stimme">
-          <p class="stimme__sterne">★★★★★</p>
-          <p class="stimme__text">Endlich ein Vindaloo, das wirklich scharf ist. Und das Naan kommt heiß aus dem Ofen.</p>
-          <p class="stimme__autor">Tobias R. · vor 1 Monat</p>
-        </article>
-        <article class="stimme">
-          <p class="stimme__sterne">★★★★★</p>
-          <p class="stimme__text">Wir waren zu sechst und haben quer durch die Karte bestellt. Kein Gericht war schwach.</p>
-          <p class="stimme__autor">Yasmin K. · vor 3 Wochen</p>
-        </article>
-      </div>
-    </div>
-  </section>
+       Beim Aendern der Zahl der Zitate muessen auch die
+       Verzoegerungen im Stylesheet angepasst werden, dort sind
+       drei hinterlegt.
 
-  <!-- ── OEFFNUNGSZEITEN ──
        Die Zeiten stehen hier UND in js/oeffnung.js. Beim Aendern
        also beide Stellen anfassen. Dafuer steht die Woche auch
        ohne Skript vollstaendig da. -->
-  <section class="abschnitt container" id="kontakt">
-    <div class="kopf-mitte">
+  <section class="abschnitt" id="kontakt">
+    <div class="container kopf-mitte">
       <span class="kicker">Wo wir sind</span>
-      <h2 class="titel">Öffnungszeiten</h2>
+      <h2 class="titel">&Ouml;ffnungszeiten</h2>
     </div>
 
-    <div class="zeiten">
+    <div class="container duo">
+
+      <iframe class="duo__map"
+              src="https://www.google.com/maps?q=Musterstra%C3%9Fe+14,+38100+Braunschweig&amp;output=embed"
+              title="Karte mit unserem Standort"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+
       <div>
-        <p class="jetzt" id="oeffnung-gross">Heute bis <em>23 Uhr</em> geöffnet</p>
-        <p class="jetzt__rest" id="oeffnung-rest"></p>
+        <div class="duo__karte zitate" id="stimmen">
+          <div class="zitate__inhalt">
 
-        <p class="adresse">
-          Musterstraße 14, 38100 Braunschweig<br>
-          <a href="tel:0531000000">0531 / 000 000</a> ·
-          <a href="mailto:hallo@anaar.de">hallo@anaar.de</a>
-        </p>
+            <div class="zitate__bahn">
+              <article class="zitat">
+                <p class="zitat__text">Das Murgh Makhani ist das beste, das ich au&szlig;erhalb von London gegessen habe.</p>
+                <p class="zitat__autor">Nina B. &middot; vor 2 Wochen</p>
+              </article>
+              <article class="zitat">
+                <p class="zitat__text">Endlich ein Vindaloo, das wirklich scharf ist. Und das Naan kommt hei&szlig; aus dem Ofen.</p>
+                <p class="zitat__autor">Tobias R. &middot; vor 1 Monat</p>
+              </article>
+              <article class="zitat">
+                <p class="zitat__text">Wir waren zu sechst und haben quer durch die Karte bestellt. Kein Gericht war schwach.</p>
+                <p class="zitat__autor">Yasmin K. &middot; vor 3 Wochen</p>
+              </article>
+            </div>
 
-        <a class="route" href="https://www.google.com/maps/search/?api=1&amp;query=Musterstra%C3%9Fe+14,+38100+Braunschweig"
-           target="_blank" rel="noopener">Route öffnen &rarr;</a>
+            <p class="duo__kennzahl">
+              <span class="zitate__zahl">4,7</span>
+              <span class="zitate__sterne">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span class="zitate__anzahl">184 Bewertungen bei Google</span>
+            </p>
+
+          </div>
+        </div>
+
+        <div class="duo__zeiten">
+          <p class="jetzt" id="oeffnung-gross">Heute bis <em>23 Uhr</em> ge&ouml;ffnet</p>
+          <p class="jetzt__rest" id="oeffnung-rest"></p>
+
+          <!-- Die Tage sind zusammengefasst, deshalb ohne
+               data-tag. js/oeffnung.js hebt hier keinen Tag
+               hervor, fuellt aber weiterhin die grosse Zeile
+               und die Restzeit darueber. -->
+          <div class="woche">
+            <div class="woche__tag"><span class="woche__name">Dienstag bis Donnerstag</span><span class="woche__zeit">17 &ndash; 23 Uhr</span></div>
+            <div class="woche__tag"><span class="woche__name">Freitag und Samstag</span><span class="woche__zeit">17 &ndash; 24 Uhr</span></div>
+            <div class="woche__tag"><span class="woche__name">Sonntag</span><span class="woche__zeit">12 &ndash; 22 Uhr</span></div>
+            <div class="woche__tag"><span class="woche__name">Montag</span><span class="woche__zeit">Ruhetag</span></div>
+          </div>
+
+          <p class="adresse" style="margin-top: var(--space-4); margin-bottom: 0">
+            Musterstra&szlig;e 14, 38100 Braunschweig<br>
+            <a href="tel:0531000000">0531 / 000 000</a>
+          </p>
+        </div>
       </div>
 
-      <div class="woche">
-        <div class="woche__tag" data-tag="1"><span class="woche__name">Montag</span><span class="woche__zeit">Ruhetag</span></div>
-        <div class="woche__tag" data-tag="2"><span class="woche__name">Dienstag</span><span class="woche__zeit">17 – 23 Uhr</span></div>
-        <div class="woche__tag" data-tag="3"><span class="woche__name">Mittwoch</span><span class="woche__zeit">17 – 23 Uhr</span></div>
-        <div class="woche__tag" data-tag="4"><span class="woche__name">Donnerstag</span><span class="woche__zeit">17 – 23 Uhr</span></div>
-        <div class="woche__tag" data-tag="5"><span class="woche__name">Freitag</span><span class="woche__zeit">17 – 24 Uhr</span></div>
-        <div class="woche__tag" data-tag="6"><span class="woche__name">Samstag</span><span class="woche__zeit">12 – 24 Uhr</span></div>
-        <div class="woche__tag" data-tag="0"><span class="woche__name">Sonntag</span><span class="woche__zeit">12 – 22 Uhr</span></div>
-      </div>
     </div>
   </section>
 
   <!-- ── FUSSZEILE ── -->
   <footer class="footer">
     <div class="container">
-      <a href="index.html" class="footer-marke">
-        <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
-        <span class="footer-marke__name">Anaar</span>
-      </a>
+      <p class="footer__kicker">Abholen oder liefern</p>
+      <p class="footer__tel"><a href="tel:0531000000">0531 / 000 000</a></p>
+      <p class="footer__ruf-text">
+        oder online bestellen &middot; Lieferung ab 20,00 € im Umkreis von fünf Kilometern
+      </p>
 
-      <div class="footer__cols">
-        <div>
-          <p class="footer__kicker">Abholen oder liefern</p>
-          <p class="footer__text">
-            Unter <a href="tel:0531000000">0531 / 000 000</a> anrufen oder online
-            bestellen. Lieferung ab 20,00 € im Umkreis von fünf Kilometern.
-          </p>
-        </div>
-        <div>
-          <p class="footer__kicker">Adresse</p>
-          <p class="footer__text">Musterstraße 14<br>38100 Braunschweig</p>
-        </div>
-        <div>
-          <p class="footer__kicker">Öffnungszeiten</p>
-          <p class="footer__text">Di bis Do 17 – 23 Uhr<br>Fr 17 – 24, Sa 12 – 24<br>So 12 – 22, Mo Ruhetag</p>
-        </div>
+      <div class="footer__leiste">
+        <p class="footer__zeile">Musterstraße 14, 38100 Braunschweig</p>
+        <p class="footer__zeile footer__zeile--zeiten">
+          <span>Di – Do 17 – 23 Uhr</span>
+          <span>Fr 17 – 24</span>
+          <span>Sa 12 – 24</span>
+          <span>So 12 – 22</span>
+          <span>Mo Ruhetag</span>
+        </p>
       </div>
 
-      <nav class="footer__links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-        <a href="#kontakt">Kontakt</a>
-        <a href="#">Allergene &amp; Zusatzstoffe</a>
-      </nav>
+      <div class="footer__unten">
+        <a href="index.html" class="footer-marke">
+          <img class="footer-marke__logo" src="Bilder/logo.webp" alt="">
+          <span class="footer-marke__name">Anaar</span>
+        </a>
 
-      <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+        <div class="footer__abbinder">
+          <nav class="footer__links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="#">Allergene &amp; Zusatzstoffe</a>
+          </nav>
+
+          <p class="footer__copy">© 2025 Anaar, alle Rechte vorbehalten</p>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -315,11 +333,13 @@
     import { oeffnungAnzeigen } from './js/oeffnung.js?v=1';
     import { menueAufbauen } from './js/menue.js?v=1';
     import { heroBlende } from './js/heroblende.js?v=1';
+    import { bilderEinfliegen } from './js/einfliegen.js?v=1';
 
     iconsEinsetzen();
     menueAufbauen();
     oeffnungAnzeigen();
     heroBlende();
+    bilderEinfliegen();
     await setupSeite();
     iconsEinsetzen();
   </script>
