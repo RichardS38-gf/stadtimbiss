@@ -28,33 +28,6 @@
        der Kopfzeile durch, deshalb liegen beide in einer Flaeche
        und die Kopfzeile hat hier keinen unteren Rand. */
     .nav { border-bottom: none; box-shadow: none; }
-
-    /* Reservieren und Warenkorb stehen rechts als Knopfpaar. Der
-       Warenkorb ist der gefuellte von beiden, weil er hier die
-       Hauptaktion ist. */
-    .cart-btn {
-      border: 2px solid var(--color-accent);
-      background: var(--color-accent);
-      color: var(--color-on-dark);
-      min-width: 40px;
-      min-height: 36px;
-      font-size: 1.15rem;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-
-    .cart-btn:hover {
-      background: var(--color-accent-dk);
-      border-color: var(--color-accent-dk);
-    }
-
-    /* Auf orangem Grund muss die Zahl umgekehrt laufen. */
-    .cart-btn .cart-badge {
-      top: -8px;
-      right: -8px;
-      background: #fff;
-      color: var(--color-accent);
-    }
     .nav.scrolled { box-shadow: none; }
 
     .order-head {
@@ -676,9 +649,6 @@
       <nav class="nav__aktionen">
         <span id="nav-konto" class="nav__konto-slot"></span>
         <a href="reservieren.html" class="btn btn--primary btn--sm">Reservieren <span class="btn__pfeil">&rarr;</span></a>
-        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
-          <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
-        </button>
       </nav>
     </div>
   </header>
