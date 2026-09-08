@@ -329,6 +329,11 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
    Klassen. Damit er wie die uebrigen CTAs aussieht, bekommt er
    hier die Masse von .btn--sm, statt das shop-neutrale Skript zu
    aendern. Das Personensymbol bleibt aus, der Vorname genuegt.
+
+   line-height und border-radius stehen ausdruecklich hier: aus
+   konto.css kaeme sonst eine Rundung von 8px, und ohne die feste
+   Zeilenhoehe waere der Knopf rund 8px hoeher als der CTA daneben.
+
    display: inline beim Namen nimmt die Regel aus orient.css
    zurueck, die ihn auf schmalen Schirmen ausblendet — ohne Symbol
    waere der Knopf dort sonst leer. */
@@ -336,13 +341,16 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   gap: 0;
   padding: 0.75rem 1.3rem;
   min-height: 0;
   border: 1px solid var(--color-accent);
+  border-radius: 0;
   background: var(--color-accent);
   font-size: 0.72rem;
   font-weight: 700;
+  line-height: 1;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   transition: background var(--transition), border-color var(--transition);
@@ -1154,3 +1162,26 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 }
 
 .demo-banner a:hover { color: var(--color-accent-dk); opacity: 1; }
+
+/* ── STEMPELKARTE ──
+   Statt des Hakens aus dem shop-neutralen js/konto.js traegt ein
+   gefuelltes Feld das Logo. Der Haken wird ausgeblendet, das Logo
+   kommt als Hintergrundbild. Deshalb wird das Feld hell statt
+   orange, sonst verschwindet die dunkelrote Wortmarke darin. */
+.stamp-slot--filled {
+  background-color: #fff;
+  background-image: url('../Bilder/logo.webp');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 74%;
+  border: 2px solid var(--color-accent);
+}
+
+.stamp-slot--filled svg { display: none; }
+
+/* Bei voller Karte ist der Kartengrund selbst orange, das helle
+   Feld passt dort unveraendert. */
+.stamp-card--voll .stamp-slot--filled {
+  background-color: #fff;
+  border-color: #fff;
+}

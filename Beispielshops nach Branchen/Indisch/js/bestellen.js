@@ -4,6 +4,19 @@ import { addToCart, getCart, getCartTotal, getCartCount, updateQty, removeFromCa
 import { setupSeite, getStampPreview, isFavorite, toggleFavorite, TREUE } from './auth.js';
 import { iconsEinsetzen } from './icons.js';
 
+/* Die Liefergebuehr haengt am Umschalter oben. Vorher stand an
+   drei Stellen eine feste 2,50 aus dem Thai-Shop im Code. */
+const LIEFERKOSTEN = 3.90;
+
+function gebuehr() {
+  const aktiv = document.querySelector('.mode-card--active, .mode-btn--active');
+  return aktiv && aktiv.dataset.mode === 'abholung' ? 0 : LIEFERKOSTEN;
+}
+
+function euro(betrag) {
+  return betrag.toFixed(2).replace('.', ',') + ' \u20ac';
+}
+
 // ---------- Cart-Item HTML ----------
 function cartItemHTML(item) {
   return `
@@ -82,8 +95,14 @@ function renderCart() {
   if (summaryEl) summaryEl.style.display = 'block';
 
   const subtotal = getCartTotal();
-  if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
-  if (totalEl) totalEl.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+  if (subtotalEl) subtotalEl.textContent = euro(subtotal);
+
+  const feeEl = document.getElementById('cart-fee');
+  const feeLabelEl = document.getElementById('cart-fee-label');
+  if (feeLabelEl) feeLabelEl.textContent = gebuehr() === 0 ? 'Abholung' : 'Liefergebühr';
+  if (feeEl) feeEl.textContent = gebuehr() === 0 ? 'gratis' : euro(gebuehr());
+
+  if (totalEl) totalEl.textContent = euro(subtotal + gebuehr());
 
   itemsEl.innerHTML = cart.map(cartItemHTML).join('');
 }
@@ -106,7 +125,7 @@ function renderCartMobile() {
   if (fabEl) {
     fabEl.classList.toggle('visible', count > 0);
     if (fabCount) fabCount.textContent = count;
-    if (fabPrice) fabPrice.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+    if (fabPrice) fabPrice.textContent = euro(subtotal + gebuehr());
   }
 
   if (!itemsEl) return;
@@ -120,8 +139,8 @@ function renderCartMobile() {
 
   if (emptyEl) emptyEl.style.display = 'none';
   if (summaryEl) summaryEl.style.display = 'block';
-  if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
-  if (totalEl) totalEl.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+  if (subtotalEl) subtotalEl.textContent = euro(subtotal);
+  if (totalEl) totalEl.textContent = euro(subtotal + gebuehr());
 
   itemsEl.innerHTML = cart.map(cartItemHTML).join('');
 }
@@ -159,6 +178,11 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
 bindCartEvents(document.getElementById('cart-items'));
 bindCartEvents(document.getElementById('cart-items-mobile'));
 
+// Beim Laden einmal zeichnen, damit ein Korb aus einer frueheren
+// Sitzung sofort steht.
+renderCart();
+renderCartMobile();
+
 // ---------- Lieferung/Abholung Toggle ----------
 const modeBtns = document.querySelectorAll('.mode-btn, .mode-card');
 const modeInfo = document.getElementById('mode-info');
@@ -175,6 +199,11 @@ modeBtns.forEach(btn => {
         ? 'Lieferung in ca. 45 Min · Mindestbestellwert 20,00 €'
         : 'Abholung in ca. 25 Min · Musterstraße 14, Braunschweig';
     }
+
+    // Die Gebuehr steckt in der Summe, also beide Ansichten neu
+    // zeichnen.
+    renderCart();
+    renderCartMobile();
   });
 });
 

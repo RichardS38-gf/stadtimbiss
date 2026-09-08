@@ -16,8 +16,8 @@
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/indisch.css?v=25">
-  <script type="module" src="js/bestellen.js"></script>
+  <link rel="stylesheet" href="css/indisch.css?v=26">
+  <script type="module" src="js/bestellen.js?v=2"></script>
   <script type="module">
     import { menueAufbauen } from './js/menue.js?v=1';
     menueAufbauen();
@@ -589,8 +589,72 @@
       }
     }
 
-    /* Warenkorb: Abstand ist Kopfzeile plus Kategorieleiste */
-    .cart-sidebar { top: 156px; max-height: calc(100vh - 176px); background: var(--color-bg-soft); }
+    /* Warenkorb: orangefarbener Kasten mit weisser Schrift.
+       Abstand oben ist Kopfzeile plus Kategorieleiste. */
+    .cart-sidebar {
+      top: 156px;
+      max-height: calc(100vh - 176px);
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #fff;
+    }
+
+    .cart-sidebar h2 { color: #fff; }
+
+    .cart-sidebar .cart-item { border-color: rgba(255, 255, 255, 0.35); }
+
+    .cart-sidebar .cart-item__name,
+    .cart-sidebar .cart-item__price { color: #fff; }
+
+    .cart-sidebar .cart-item__remove { color: #fff; }
+    .cart-sidebar .cart-item__remove:hover { color: var(--color-ink); }
+
+    .cart-sidebar .cart-item__qty-input {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: #fff;
+    }
+
+    .cart-leer { font-size: var(--text-sm); color: rgba(255, 255, 255, 0.8); }
+
+    /* Im Ausklappkorb steht derselbe Satz auf hellem Grund. */
+    .cart-drawer .cart-leer { color: var(--color-muted); }
+
+    /* Von js/bestellen.js auf block bzw. none gesetzt, leer also
+       ausgeblendet. */
+    .cart-summe { display: none; margin-top: var(--space-4); }
+
+    .cart-summe__zeile {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding-block: var(--space-2);
+      font-size: 0.95rem;
+    }
+
+    .cart-summe__zeile--gesamt {
+      margin-top: var(--space-2);
+      padding-top: var(--space-3);
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .cart-summe .btn { margin-top: var(--space-4); }
+
+    /* Der gestrichelte Rahmen des Stempelhinweises ist orange und
+       auf orangem Grund unsichtbar. */
+    .cart-sidebar .stamp-hint { border-color: rgba(255, 255, 255, 0.6); color: #fff; }
+    .cart-sidebar .stamp-hint__zahl { background: #fff; color: var(--color-accent); }
+
+    /* Kategorieleiste in Orange */
+    .cat-link { color: var(--color-accent); }
+    .cat-link:hover { color: var(--color-accent-dk); }
+    .cat-link--active { color: var(--color-accent-dk); }
+
+    /* Im mobilen Ausklappkorb bleibt der Grund hell, dort steht
+       der Kasten ueber dem ganzen Schirm. */
+    .cart-drawer__footer .cart-summe__zeile--gesamt { border-top-color: var(--color-line); }
 
     .cart-fab { box-shadow: 0 4px 20px rgba(43, 43, 43, 0.3); }
     .cart-fab__count { background: #fff; color: var(--color-accent); }
@@ -996,14 +1060,34 @@
 
     <aside class="cart-sidebar" id="cart-sidebar">
       <h2>Deine Bestellung</h2>
-      <div id="cart-items-sidebar"></div>
-      <div id="cart-summary-sidebar"></div>
+
+      <p class="cart-leer" id="cart-empty">Noch nichts ausgewählt.</p>
+
+      <div id="cart-items"></div>
+      <div id="stempel-hinweis"></div>
+
+      <div class="cart-summe" id="cart-summary">
+        <div class="cart-summe__zeile">
+          <span>Zwischensumme</span>
+          <span id="cart-subtotal">0,00 &euro;</span>
+        </div>
+        <div class="cart-summe__zeile">
+          <span id="cart-fee-label">Liefergebühr</span>
+          <span id="cart-fee">3,90 &euro;</span>
+        </div>
+        <div class="cart-summe__zeile cart-summe__zeile--gesamt">
+          <span>Summe</span>
+          <span id="cart-total">0,00 &euro;</span>
+        </div>
+        <a href="checkout.html" class="btn btn--outline-light btn--sm btn--full">Zur Kasse <span class="btn__pfeil">&rarr;</span></a>
+      </div>
     </aside>
   </div>
 
   <button class="cart-fab" id="cart-fab" aria-label="Warenkorb öffnen">
     <span data-icon="korb"></span>
     <span class="cart-fab__count" id="cart-fab-count">0</span>
+    <span class="cart-fab__price" id="cart-fab-price"></span>
   </button>
 
   <div class="cart-drawer" id="cart-drawer">
@@ -1011,8 +1095,24 @@
       <h2>Deine Bestellung</h2>
       <button class="cart-drawer__close" id="cart-close" aria-label="Schließen">&times;</button>
     </div>
-    <div class="cart-drawer__body" id="cart-items-drawer"></div>
-    <div class="cart-drawer__footer" id="cart-summary-drawer"></div>
+
+    <div class="cart-drawer__body">
+      <p class="cart-leer" id="cart-empty-mobile">Noch nichts ausgewählt.</p>
+      <div id="cart-items-mobile"></div>
+      <div id="stempel-hinweis-mobile"></div>
+    </div>
+
+    <div class="cart-drawer__footer" id="cart-summary-mobile">
+      <div class="cart-summe__zeile">
+        <span>Zwischensumme</span>
+        <span id="cart-subtotal-mobile">0,00 &euro;</span>
+      </div>
+      <div class="cart-summe__zeile cart-summe__zeile--gesamt">
+        <span>Summe</span>
+        <span id="cart-total-mobile">0,00 &euro;</span>
+      </div>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse <span class="btn__pfeil">&rarr;</span></a>
+    </div>
   </div>
 
   <div class="cart-overlay" id="cart-overlay"></div>
