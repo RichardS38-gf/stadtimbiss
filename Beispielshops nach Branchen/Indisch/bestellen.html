@@ -16,10 +16,10 @@
   <link rel="stylesheet" href="css/bestellen.css?v=9">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <link rel="stylesheet" href="css/konto.css?v=1">
-  <link rel="stylesheet" href="css/indisch.css?v=27">
+  <link rel="stylesheet" href="css/indisch.css?v=29">
   <script type="module" src="js/bestellen.js?v=2"></script>
   <script type="module">
-    import { menueAufbauen } from './js/menue.js?v=1';
+    import { menueAufbauen } from './js/menue.js?v=2';
     menueAufbauen();
   </script>
   <style>
@@ -624,6 +624,19 @@
     .cat-link { color: var(--color-accent); }
     .cat-link:hover { color: var(--color-accent-dk); }
     .cat-link--active { color: var(--color-accent-dk); }
+
+    /* Die Leiste scrollte seitlich, wodurch auf dem Telefon die
+       letzten Kategorien unsichtbar blieben. Jetzt bricht sie um
+       und steht mittig — bei sieben Kategorien ergibt das zwei
+       Zeilen, vier und drei. */
+    .category-nav__inner {
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow-x: visible;
+      white-space: normal;
+    }
+
+    .cat-link { padding-inline: 1rem; }
 
     /* Im mobilen Ausklappkorb bleibt der Grund hell, dort steht
        der Kasten ueber dem ganzen Schirm. */

@@ -45,10 +45,15 @@ export function menueAufbauen() {
   feld.id = 'menue-panel';
   knopf.setAttribute('aria-controls', 'menue-panel');
 
-  if (kontoSlot !== null) feld.appendChild(kontoSlot);
+  /* Der Konto-Knopf soll im Klappfeld zuletzt stehen. Deshalb
+     erst aus der Reihe nehmen, dann die uebrigen Knoepfe in ihrer
+     Reihenfolge umhaengen und ihn hinten anfuegen. Ergibt Kontakt,
+     Reservieren, Online bestellen, Konto. */
+  if (kontoSlot !== null) kontoSlot.remove();
   while (aktionen.firstElementChild !== null) {
     feld.appendChild(aktionen.firstElementChild);
   }
+  if (kontoSlot !== null) feld.appendChild(kontoSlot);
   aktionen.remove();
 
   zeile.appendChild(knopf);

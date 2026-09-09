@@ -303,6 +303,14 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 
 .nav__wortmarke { display: none; }
 
+/* js/auth.js legt in setupSeite() ein eigenes Burger-Menue an. Das
+   schaltet .nav--offen und damit .nav__links — in diesem Shop
+   liegen die Knoepfe aber in .menue-panel, das js/menue.js baut.
+   Der Knopf aus auth.js bewirkt also nichts und stand als zweiter,
+   schwarzer Burger daneben. Ausgeblendet statt entfernt, weil
+   auth.js in allen acht Shops dieselbe Datei ist. */
+.nav .nav__burger { display: none; }
+
 /* ── KOPFZEILE AUF SCHMALEN SCHIRMEN ──
    js/menue.js haengt beim Laden alle Knoepfe samt Konto-Kasten in
    ein Klappfeld und baut einen Burger dazu. Die zugehoerigen
@@ -344,21 +352,24 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
     background: var(--color-accent);
   }
 
-  /* Das Feld haengt unter der Kopfzeile am rechten Rand. Der
-     Bezug ist .nav__inner, deshalb steht dort position: relative. */
+  /* Das Feld haengt unter der Kopfzeile und laeuft ueber die ganze
+     Breite. Der Bezug ist .nav__inner, das den Innenabstand des
+     Containers traegt — die negativen Werte heben ihn auf, damit
+     das Feld bis an beide Bildschirmkanten reicht. */
   .menue-panel {
     display: none;
     position: absolute;
     top: 100%;
-    right: 0;
+    left: calc(-1 * var(--container-pad-mobile));
+    right: calc(-1 * var(--container-pad-mobile));
     z-index: 60;
-    min-width: 210px;
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-2);
-    padding: var(--space-4);
+    padding: var(--space-4) var(--container-pad-mobile);
     background: #fff;
-    border: 1px solid var(--color-accent);
+    border-top: 1px solid var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
   }
 
   .menue-panel--offen { display: flex; }
@@ -806,17 +817,23 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   }
 }
 
-/* Auf dem Telefon derselbe Gedanke in kleinerem Maszstab: das
-   Kaestchen ist schmaler als die Karte darueber, ragt ein Stueck
-   in sie hinein und schliesst mit keiner ihrer Kanten ab. Der
+/* Auf dem Telefon derselbe Gedanke in kleinerem Maszstab: die
+   Bewertungskarte sitzt schmaler am linken Rand, das Kaestchen am
+   rechten, und es ragt nur noch acht Pixel in die Karte. Bei
+   32px Innenabstand der Karte bleibt der Text damit frei. Der
    negative Abstand muss die Luecke des Rasters mit aufheben,
    deshalb die Rechnung. */
 @media (max-width: 899px) {
+  .duo__karte {
+    width: 94%;
+    margin-right: auto;
+  }
+
   .duo__zeiten {
-    width: 88%;
-    margin-top: calc(-1 * var(--space-5) - 22px);
+    width: 86%;
+    margin-top: calc(-1 * var(--space-5) - 8px);
     margin-left: auto;
-    margin-right: var(--space-5);
+    margin-right: 0;
     transform-origin: top right;
   }
 }
