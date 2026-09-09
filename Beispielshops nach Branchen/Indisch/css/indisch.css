@@ -731,8 +731,8 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
    darunter und leicht versetzt. Die z-index-Werte sorgen dafuer,
    dass die Zeiten oben liegen.
 
-   Auf Mobil stehen alle drei Teile untereinander, ohne Ueberlappen
-   und ohne Versatz. Auf einem Telefon waere dafuer kein Platz. */
+   Auf Mobil stehen die drei Teile untereinander, das Kaestchen
+   bleibt aber versetzt und ragt in die Karte darueber. */
 .duo {
   display: grid;
   grid-template-columns: 1fr;
@@ -802,6 +802,21 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
     margin: -28px -30px 0 90px;
     /* Ursprung oben rechts, damit das Kaestchen beim Wachsen
        nicht weiter ueber den rechten Rand hinauswandert. */
+    transform-origin: top right;
+  }
+}
+
+/* Auf dem Telefon derselbe Gedanke in kleinerem Maszstab: das
+   Kaestchen ist schmaler als die Karte darueber, ragt ein Stueck
+   in sie hinein und schliesst mit keiner ihrer Kanten ab. Der
+   negative Abstand muss die Luecke des Rasters mit aufheben,
+   deshalb die Rechnung. */
+@media (max-width: 899px) {
+  .duo__zeiten {
+    width: 88%;
+    margin-top: calc(-1 * var(--space-5) - 22px);
+    margin-left: auto;
+    margin-right: var(--space-5);
     transform-origin: top right;
   }
 }
