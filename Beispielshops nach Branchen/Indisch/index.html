@@ -40,11 +40,15 @@
       will-change: transform;
     }
 
-    .hero__gericht--curry       { top: -7%;    left: -5%;  width: 21%; }
-    .hero__gericht--tandoor     { top: -16%;   left: 24%;  width: 30%; }
-    .hero__gericht--vegetarisch { top: -6%;    right: -4%; width: 23%; }
-    .hero__gericht--naan        { bottom: -14%; right: 1%;  width: 26%; }
-    .hero__gericht--kheer       { bottom: -9%;  left: 0%;   width: 19%; }
+    /* Groesser und enger gesetzt, damit zwischen den Gerichten
+       weniger leere Flaeche bleibt. Das Bild oben mittig steht
+       bewusst weit ueber der Kante, sonst laeuft es hinter das
+       Logo. */
+    .hero__gericht--curry       { top: -10%;    left: -8%;  width: 28%; }
+    .hero__gericht--tandoor     { top: -34%;    left: 22%;  width: 34%; }
+    .hero__gericht--vegetarisch { top: -10%;    right: -9%; width: 30%; }
+    .hero__gericht--naan        { bottom: -16%; right: -3%; width: 30%; }
+    .hero__gericht--kheer       { bottom: -14%; left: -4%;  width: 28%; }
 
     /* Der Inhalt liegt ueber den Bildern. */
     .hero__inhalt { position: relative; z-index: 2; }
