@@ -17,12 +17,49 @@
   <link rel="stylesheet" href="css/konto.css?v=1">
   <link rel="stylesheet" href="css/indisch.css?v=31">
   <style>
-    /* Das Hero-Foto steht hier und nicht im Stylesheet, weil es
-       die einzige Stelle ist, an der es vorkommt. */
-    .hero { background-image: url('Bilder/hero2.webp'); }
+    /* ── HERO ──
+       Auf dem Desktop kein Hintergrundfoto mehr: die Gerichte
+       liegen als einzelne, freigestellte Bilder darin und lassen
+       sich deshalb bewegen. Der Grund bleibt weiss.
+
+       Alle Werte in Prozent, damit die Anordnung bei jeder
+       Fensterbreite gleich bleibt. Negative Werte schieben ein
+       Bild ueber die Kante, overflow: hidden schneidet es ab. */
+    .hero { overflow: hidden; }
+
+    .hero__streu {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero__gericht {
+      position: absolute;
+      display: block;
+      height: auto;
+      will-change: transform;
+    }
+
+    .hero__gericht--curry       { top: -7%;    left: -5%;  width: 21%; }
+    .hero__gericht--tandoor     { top: -16%;   left: 24%;  width: 30%; }
+    .hero__gericht--vegetarisch { top: -6%;    right: -4%; width: 23%; }
+    .hero__gericht--naan        { bottom: -14%; right: 1%;  width: 26%; }
+    .hero__gericht--kheer       { bottom: -9%;  left: 0%;   width: 19%; }
+
+    /* Der Inhalt liegt ueber den Bildern. */
+    .hero__inhalt { position: relative; z-index: 2; }
+
+    /* Unter 900px die feste Fassung: Foto im Hintergrund, keine
+       Einzelbilder. Die Fotoregeln stehen bewusst in Abfragen und
+       nicht unbedingt, sonst wuerden sie das Zuruecksetzen auf dem
+       Desktop ueberschreiben. */
+    @media (max-width: 899px) {
+      .hero__streu { display: none; }
+      .hero { background-image: url('Bilder/hero2.webp'); }
+    }
 
     /* Auf dem Telefon ein eigenes Hochformat. Das Querformat
-       oben wuerde links und rechts fast zur Haelfte beschnitten. */
+       wuerde links und rechts fast zur Haelfte beschnitten. */
     @media (max-width: 619px) {
       .hero { background-image: url('Bilder/hero_mobil.webp'); }
     }
@@ -51,10 +88,22 @@
   </header>
 
   <!-- ── HERO ──
-       Formatfuellendes Foto, darauf mittig der Text. Das Foto
-       ist hell, deshalb steht der Text dunkel und braucht keinen
-       Verlauf darunter. -->
+       Auf dem Desktop liegen fuenf freigestellte Gerichte einzeln
+       auf weissem Grund, jedes ueber eine Kante hinausgeschoben
+       und damit angeschnitten. js/heroparallax.js verschiebt sie
+       beim Scrollen mit unterschiedlichem Tempo.
+
+       Auf dem Telefon bleibt das feste Foto im Hintergrund, dort
+       waere fuer fuenf Bilder kein Platz. -->
   <section class="hero">
+    <div class="hero__streu" aria-hidden="true">
+      <img class="hero__gericht hero__gericht--curry"       src="Bilder/curry.webp"       alt="" data-tempo="0.16" data-dreh="-1.5">
+      <img class="hero__gericht hero__gericht--tandoor"     src="Bilder/tandoor.webp"     alt="" data-tempo="0.30" data-dreh="1">
+      <img class="hero__gericht hero__gericht--vegetarisch" src="Bilder/vegetarisch.webp" alt="" data-tempo="0.12" data-dreh="2">
+      <img class="hero__gericht hero__gericht--naan"        src="Bilder/garlicnaan.webp"  alt="" data-tempo="0.42" data-dreh="-2">
+      <img class="hero__gericht hero__gericht--kheer"       src="Bilder/kheer.webp"       alt="" data-tempo="0.24" data-dreh="1.5">
+    </div>
+
     <div class="container hero__inhalt">
       <img class="hero__logo" src="Bilder/logo.webp" alt="Anaar">
       <a href="bestellen.html" class="btn btn--primary">Online bestellen <span class="btn__pfeil">&rarr;</span></a>
@@ -340,11 +389,13 @@
     import { menueAufbauen } from './js/menue.js?v=2';
     import { heroBlende } from './js/heroblende.js?v=1';
     import { bilderEinfliegen } from './js/einfliegen.js?v=1';
+    import { heroParallax } from './js/heroparallax.js?v=1';
 
     iconsEinsetzen();
     menueAufbauen();
     oeffnungAnzeigen();
     heroBlende();
+    heroParallax();
     bilderEinfliegen();
     await setupSeite();
     iconsEinsetzen();
