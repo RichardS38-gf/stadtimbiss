@@ -352,24 +352,25 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
     background: var(--color-accent);
   }
 
-  /* Das Feld haengt unter der Kopfzeile und laeuft ueber die ganze
-     Breite. Der Bezug ist .nav__inner, das den Innenabstand des
-     Containers traegt — die negativen Werte heben ihn auf, damit
-     das Feld bis an beide Bildschirmkanten reicht. */
+  /* Das Feld haengt unter der Kopfzeile am rechten Rand, also
+     unter dem Burger. Nicht ganz die volle Breite: rechts
+     schliesst es mit dem Textrand ab, links bleibt ein Rest der
+     Seite sichtbar. */
   .menue-panel {
     display: none;
     position: absolute;
     top: 100%;
-    left: calc(-1 * var(--container-pad-mobile));
-    right: calc(-1 * var(--container-pad-mobile));
+    right: 0;
+    left: auto;
     z-index: 60;
+    width: 68%;
+    min-width: 210px;
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-2);
-    padding: var(--space-4) var(--container-pad-mobile);
+    padding: var(--space-4);
     background: #fff;
-    border-top: 1px solid var(--color-accent);
-    border-bottom: 1px solid var(--color-accent);
+    border: 1px solid var(--color-accent);
   }
 
   .menue-panel--offen { display: flex; }
