@@ -42,6 +42,9 @@ $breiten = @{
   'reservieren'      = 700
   'reservieren2'     = 700
 
+  # Hero auf dem Telefon, Hochformat ueber die ganze Flaeche
+  'hero_mobil'       = 1080
+
   # Die zwei versetzten Bilder in der Ueber-uns-Sektion,
   # Hochformat 3:4, bis 380px breit angezeigt
   'ueberuns'         = 800

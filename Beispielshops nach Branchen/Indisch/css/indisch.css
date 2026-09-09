@@ -303,6 +303,79 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 
 .nav__wortmarke { display: none; }
 
+/* ── KOPFZEILE AUF SCHMALEN SCHIRMEN ──
+   js/menue.js haengt beim Laden alle Knoepfe samt Konto-Kasten in
+   ein Klappfeld und baut einen Burger dazu. Die zugehoerigen
+   Regeln fehlten bisher komplett, deshalb standen die Knoepfe
+   ungeordnet uebereinander und der Burger war unsichtbar.
+
+   Die Klassennamen kommen aus menue.js: .menue-btn fuer den
+   Knopf, .menue-panel fuer das Feld, .menue-panel--offen fuer den
+   aufgeklappten Zustand. */
+@media (max-width: 900px) {
+  .nav .nav__inner {
+    position: relative;
+    gap: var(--space-3);
+    min-height: 64px;
+  }
+
+  .nav__logo-bild { width: 104px; }
+
+  .menue-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .menue-btn__strich {
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin-inline: auto;
+    background: var(--color-accent);
+  }
+
+  /* Das Feld haengt unter der Kopfzeile am rechten Rand. Der
+     Bezug ist .nav__inner, deshalb steht dort position: relative. */
+  .menue-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 60;
+    min-width: 210px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: #fff;
+    border: 1px solid var(--color-accent);
+  }
+
+  .menue-panel--offen { display: flex; }
+
+  .menue-panel .nav__link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .menue-panel .btn,
+  .menue-panel .nav__konto {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .nav .nav__aktionen {
   display: flex;
   align-items: center;
@@ -388,6 +461,11 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
 .hero {
   position: relative;
   min-height: 100vh;
+  /* svh statt vh, weil Safari auf dem Telefon die Flaeche unter
+     der Adressleiste mitzaehlt. Der Hero springt sonst beim
+     Scrollen. Die vh-Zeile darueber bleibt als Rueckfall fuer
+     aeltere Browser stehen. */
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
