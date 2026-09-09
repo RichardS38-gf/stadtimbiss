@@ -534,6 +534,14 @@ body.dunkel { background: var(--color-bg); color: var(--color-muted); }
   align-items: center;
 }
 
+/* Auf dem Telefon stehen Kicker und Ueberschrift mittig, der
+   Fliesstext darunter bleibt linksbuendig — zentrierte Absaetze
+   mit vier Zeilen lesen sich schlecht. */
+@media (max-width: 899px) {
+  .ueber .kicker,
+  .ueber .titel { text-align: center; }
+}
+
 @media (min-width: 900px) {
   /* Die Bildspalte ist breiter als die Textspalte, damit die
      beiden Bilder gross stehen. Der Text vertraegt das, weil er
