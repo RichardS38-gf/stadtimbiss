@@ -101,7 +101,7 @@
    geladen, deshalb hier mit hoeherer Spezifitaet. */
 .stamp-card .stamp-grid .stamp-slot--filled {
   background-color: var(--color-bg-soft);
-  background-image: url('../Bilder/Logo.png');
+  background-image: url('../Bilder/logo.png');
   background-size: 76%;
   background-position: center;
   background-repeat: no-repeat;
@@ -451,7 +451,7 @@
   transform: translate(-50%, -50%);
   width: min(150%, 820px);
   aspect-ratio: 1;
-  background-image: url('../Bilder/Logo.png');
+  background-image: url('../Bilder/logo.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

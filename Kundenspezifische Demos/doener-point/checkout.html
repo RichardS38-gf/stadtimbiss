@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kasse — Bosporus Grill</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F6E73' stroke-width='1.6' stroke-linecap='round'><path d='M12 2.6v18.8'/><path d='M8.4 20.6h7.2'/><path d='M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z'/></svg>">
+  <title>Kasse — Döner Point</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='%230F0F10'/><path d='M12 3l1.6 3.3H9.8L12 3zM8.6 8h6.8l-.7 4.4H9.3L8.6 8zm1 5.8h4.8L13.4 18h-2.8l-1-4.2zM12 19l1.1 2.4h-2.2L12 19z' fill='%23E11F1C'/></svg>">
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,8 +29,7 @@
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="nav__marke">
-        <img class="nav__logo-bild" src="Bilder/Logo.png" alt="">
-        <span class="nav__wortmarke"><span>Bosporus</span><span>Grillrestaurant</span></span>
+        <img class="nav__logo-bild" src="Bilder/logo.png" alt="Döner Point">
       </a>
       <nav class="nav__links">
         <a href="index.html#herkunft">Über uns</a>
@@ -177,7 +176,11 @@
         </div>
         <div class="cart-summary__row">
           <span>Lieferung</span>
-          <span>2,00 €</span>
+          <span>kostenlos</span>
+        </div>
+        <div class="cart-summary__row">
+          <span>Filiale</span>
+          <span id="checkout-filiale">Neuss</span>
         </div>
         <div class="cart-summary__row" id="rabatt-zeile" style="display:none">
           <span>Rabatt</span>
@@ -197,11 +200,20 @@
   <script type="module">
     import { getCart, getCartTotal, clearCart } from './js/cart.js';
     import { iconsEinsetzen } from './js/icons.js';
+    import { filialeOderStandard } from './js/filiale.js?v=1';
     import {
       setupSeite, getSession, getProfile, getAddresses, getDefaultAddress,
       getDefaultPaymentMethod, getStampPreview, checkVoucher, createOrder,
       LIEFERKOSTEN, TREUE
     } from './js/auth.js';
+
+    /* Im Checkout muss stehen, aus welcher Filiale bestellt wird —
+       bei 30 km zwischen Neuss und Köln ist das keine Nebensache. */
+    {
+      const f = filialeOderStandard();
+      const ziel = document.getElementById('checkout-filiale');
+      if (ziel !== null) ziel.textContent = `${f.name}, ${f.strasse}`;
+    }
 
     await setupSeite();
     iconsEinsetzen();
