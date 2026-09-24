@@ -18,6 +18,20 @@
   --color-blut-dk:    #4A0A0A;
   --color-saffron:    #D9A441;   /* Sterne, Auszeichnungen */
 
+  /* Das Grundgeruest stammt vom Bosporus Grill und nutzt an 43
+     Stellen ein Kupfer als zweiten Akzent, ueberwiegend als
+     Textfarbe. Ohne dieses Token fielen alle diese Regeln
+     ersatzlos weg. Es zeigt deshalb auf das Logorot: der Shop
+     bleibt bei Schwarz und Rot, statt eine dritte Farbe
+     einzufuehren, die niemand bestellt hat.
+
+     Wenn der Laden mehr Tiefe vertraegt, waere hier Gold der
+     naechstliegende Kandidat — Schwarz, Rot und Gold ist bei
+     Doenerlaeden eine gelaeufige Kombination. Dann einfach auf
+     --color-saffron zeigen lassen. */
+  --color-copper:     #E11F1C;
+  --color-copper-dk:  #A81410;
+
   --color-bg:         #0F0F10;   /* Grund, fast schwarz */
   --color-bg-soft:    #1A1A1C;   /* Karten, abgesetzte Baender */
   --color-ink:        #F4F1EE;   /* Schrift auf dunklem Grund */

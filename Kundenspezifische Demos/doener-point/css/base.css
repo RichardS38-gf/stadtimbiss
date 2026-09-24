@@ -1,4 +1,4 @@
-/* base.css — Stadtimbiss */
+/* base.css — Döner Point */
 body {
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -8,12 +8,25 @@ body {
   line-height: 1.6;
 }
 
+/* Ueberschriften in Rubik 900, Versalien und enger Laufweite.
+   Das kommt der Wortmarke am naechsten: dieselbe geometrische
+   Konstruktion, dasselbe Gewicht, dieselbe dichte Setzung. */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-head);
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
   color: var(--color-ink);
+}
+
+/* h4 bis h6 tragen oft Zwischenzeilen und Kartentitel. Versalien
+   waeren dort zu laut, deshalb nur fett. */
+h4, h5, h6 {
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.2;
 }
 
 h1 { font-size: var(--text-4xl); }

@@ -38,18 +38,18 @@ export const FILIALEN = [
     maps: 'https://www.google.com/maps?q=Niederstra%C3%9Fe+11,+41460+Neuss&output=embed'
   },
   {
-    id: 'filiale2',
-    name: 'Zweite Filiale',
-    strasse: 'Musterstraße 1',
-    plz: '00000',
-    ort: 'Ort folgt',
-    telefon: '00000 000000',
+    id: 'koeln',
+    name: 'Köln Schildergasse',
+    strasse: 'Krebsgasse 1',
+    plz: '50667',
+    ort: 'Köln',
+    telefon: '0176 57871881',
+    /* Zeiten noch nicht bestaetigt, vorerst wie in Neuss. */
     zeiten: 'Täglich 11:00 – 22:00 Uhr',
     lieferzeit: 'ca. 40 Min',
     abholzeit: 'ca. 20 Min',
     karte: 'standard',
-    maps: null,
-    platzhalter: true
+    maps: 'https://www.google.com/maps?q=Krebsgasse+1,+50667+K%C3%B6ln&output=embed'
   }
 ];
 
