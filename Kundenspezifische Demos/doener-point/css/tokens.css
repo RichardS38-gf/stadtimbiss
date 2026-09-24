@@ -1,0 +1,70 @@
+/* tokens.css — Döner Point
+   Schwarz und Dunkelrot, Akzent ist das Rot aus dem Logo.
+
+   Das Logorot #E11F1C ist aus der Logodatei gemessen, nicht
+   geschaetzt. Es traegt alle Hauptaktionen. Das Dunkelrot
+   daneben ist fuer Flaechen gedacht, auf denen Text steht —
+   auf dem Signalrot waere Fliesstext auf Dauer anstrengend.
+
+   Achtung: dieser Shop ist dunkel, die uebrigen Beispielshops
+   sind hell. Ueberall dort, wo eine Regel #fff fest verdrahtet
+   hat statt ein Token zu nutzen, muss nachgezogen werden. */
+:root {
+  /* Farben */
+  --color-accent:     #E11F1C;   /* Logorot, Hauptaktion */
+  --color-accent-dk:  #A81410;   /* gedrueckter Zustand, Hover */
+  --color-on-accent:  #FFFFFF;
+  --color-blut:       #6E0F0F;   /* Dunkelrot fuer Flaechen */
+  --color-blut-dk:    #4A0A0A;
+  --color-saffron:    #D9A441;   /* Sterne, Auszeichnungen */
+
+  --color-bg:         #0F0F10;   /* Grund, fast schwarz */
+  --color-bg-soft:    #1A1A1C;   /* Karten, abgesetzte Baender */
+  --color-ink:        #F4F1EE;   /* Schrift auf dunklem Grund */
+  --color-muted:      #A39C97;
+  --color-line:       #2C2C2F;
+  --color-dark:       #000000;   /* Kopfzeile, Fusszeile */
+  --color-on-dark:    #F4F1EE;
+
+  /* Typografie
+     Rubik traegt die Ueberschriften, kraeftig und breit genug
+     fuer schwarzen Grund. Inter bleibt fuer Fliesstext und
+     Bedienelemente. */
+  --font-head:   'Rubik', system-ui, sans-serif;
+  --font-body:   'Inter', system-ui, sans-serif;
+  --font-script: 'Caveat', cursive;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* Container */
+  --container-pad-mobile:  1rem;
+  --container-pad-tablet:  1.5rem;
+  --container-pad-desktop: 2rem;
+  --max-content-width:     1140px;
+
+  /* Typografische Skala */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.5rem;
+  --text-5xl:  3.5rem;
+
+  --transition: 0.2s ease;
+
+  /* Eckig bleibt eckig. Die Werte stehen nur, weil fremde
+     Regeln sie referenzieren. */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+}

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bosporus Grill — Bestellen</title>
+  <meta name="description" content="Bestelle beim Bosporus Grill: Döner vom Spieß, Kebab vom Holzkohlegrill, Meze und Süßes. Lieferung oder Abholung in Braunschweig.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F6E73' stroke-width='1.6' stroke-linecap='round'><path d='M12 2.6v18.8'/><path d='M8.4 20.6h7.2'/><path d='M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Reem+Kufi:wght@500;600;700&family=Lalezar&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css?v=2">
+  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=1">
+  <link rel="stylesheet" href="css/bestellen.css?v=9">
+  <link rel="stylesheet" href="css/doenerpoint.css?v=46">
+  <link rel="stylesheet" href="css/orient.css?v=6">
+  <link rel="stylesheet" href="css/konto.css?v=1">
+  <script type="module" src="js/bestellen.js"></script>
+  <script type="module" src="js/menue.js"></script>
+  <style>
+    .allergen-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--color-line); color: var(--color-muted);
+      font-size: 0.6rem; font-weight: 700; font-family: var(--font-body);
+      font-style: normal; border: none; cursor: pointer; margin-left: 6px;
+      flex-shrink: 0; transition: background 0.15s ease, color 0.15s ease;
+      position: relative; vertical-align: middle; line-height: 1;
+    }
+    .allergen-btn::before { content: 'i'; font-style: italic; }
+    .allergen-btn:hover { background: var(--color-accent); color: #fff; }
+    .allergen-tooltip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); background: var(--color-dark); color: #fff;
+      font-size: 0.75rem; font-family: var(--font-body); font-weight: 400;
+      line-height: 1.5; padding: 0.4rem 0.7rem; border-radius: 6px;
+      white-space: nowrap; z-index: 9999; pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .allergen-btn:hover .allergen-tooltip { display: block; }
+    @media (hover: none) { .allergen-btn.active .allergen-tooltip { display: block; } }
+    .menu-card__name { display: flex; align-items: center; gap: 4px; overflow: visible; }
+    .menu-card__body { overflow: visible; }
+    .menu-card { overflow: visible; }
+
+    .menu-section__title { font-family: var(--font-head); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; }
+    .menu-section__sub {
+      font-family: 'Lalezar', var(--font-head); font-size: 1.25rem;
+      color: var(--color-copper); letter-spacing: 0.04em;
+      margin-top: -0.2rem; margin-bottom: var(--space-4);
+    }
+
+    /* Kategorienleiste und Gerichtnamen in derselben Schrift
+       wie die Abschnittstitel */
+    .cat-link {
+      font-family: var(--font-head);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      font-size: var(--text-base);
+    }
+
+    .menu-card__name {
+      font-family: var(--font-head);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+<body class="sand">
+  <!-- Demo-Banner steht als erstes Element, noch vor der
+       Kopfzeile. Inhalt kommt aus js/auth.js. -->
+  <div class="demo-banner" id="demo-banner"></div>
+
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__marke">
+        <img class="nav__logo-bild" src="Bilder/Logo.png" alt="">
+        <span class="nav__wortmarke"><span>Bosporus</span><span>Grillrestaurant</span></span>
+      </a>
+      <nav class="nav__links">
+        <a href="index.html#herkunft">Über uns</a>
+        <a href="bestellen.html">Speisekarte</a>
+        <a href="reservieren.html">Reservieren</a>
+        <a href="index.html#stimmen">Bewertungen</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
+        <button class="nav__menue-btn" type="button" aria-label="Menü">
+          <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
+        </button>
+        <span id="nav-konto"></span>
+        <a href="reservieren.html" class="btn btn--outline btn--sm">
+          <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
+        </a>
+        <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
+          <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="order-mode">
+    <div class="container">
+      <div class="modus">
+        <button class="modus__option mode-card mode-card--active" data-mode="lieferung">
+          <span class="modus__kopf">
+            <span class="modus__name">Lieferung</span>
+            <span class="modus__preis">ab 2,00 &euro;</span>
+          </span>
+          <span class="modus__sub">ca. 30 Min &middot; Mindestbestellwert 10,00 &euro;</span>
+        </button>
+        <button class="modus__option mode-card" data-mode="abholung">
+          <span class="modus__kopf">
+            <span class="modus__name">Abholung</span>
+            <span class="modus__preis">kostenlos</span>
+          </span>
+          <span class="modus__sub">ca. 10 Min &middot; Musterstra&szlig;e 1</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="category-nav" id="category-nav">
+    <div class="container">
+      <div class="category-nav__inner">
+        <a class="cat-link cat-link--active" href="#doener">Döner &amp; Dürüm</a>
+        <a class="cat-link" href="#grill">Vom Grill</a>
+        <a class="cat-link" href="#meze">Meze</a>
+        <a class="cat-link" href="#suesses">Süßes &amp; Getränke</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container order-layout">
+
+    <main class="menu">
+
+      <section class="menu-section" id="doener">
+        <h2 class="menu-section__title">Döner &amp; Dürüm</h2>
+        <p class="menu-section__sub" hidden></p>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/doenerkebap.png" alt="Döner Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Döner Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Sesam (K)</span></button></h3>
+            <p class="menu-card__desc">Kalbfleisch, Salat, Zwiebeln, Tomate, hausgemachte Soße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">7,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k1" data-name="Döner Kebab" data-price="7.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/dueruemdoener.png" alt="Dürüm Döner" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Dürüm Döner <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Im dünnen Yufka-Fladen gerollt, mit Salat und Soße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k2" data-name="Dürüm Döner" data-price="8.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/doenerteller.png" alt="Döner Teller" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Döner Teller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Mit Reis oder Pommes, Salat, Cacık und Fladenbrot</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k3" data-name="Döner Teller" data-price="13.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/yufkachicken.png" alt="Yufka Chicken" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Yufka Chicken <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Hähnchen vom Spieß, Salat, Joghurtsoße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k4" data-name="Yufka Chicken" data-price="8.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/lahmacun.png" alt="Lahmacun" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Lahmacun <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A)</span></button></h3>
+            <p class="menu-card__desc">Dünner Teigfladen mit Hackfleisch, Petersilie, Zitrone</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">5,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k5" data-name="Lahmacun" data-price="5.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/pide.png" alt="Pide mit Käse" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pide mit Käse <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Schiffchen aus dem Ofen, mit Käse und Ei</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">8,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="k6" data-name="Pide mit Käse" data-price="8.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="grill">
+        <h2 class="menu-section__title">Vom Grill</h2>
+        <p class="menu-section__sub" hidden></p>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/adanakebab.png" alt="Adana Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Adana Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Handgehacktes Lammhack, scharf, mit Bulgur und Salat</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">15,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g1" data-name="Adana Kebab" data-price="15.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/siskebab.png" alt="Şiş Kebab" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Şiş Kebab <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Marinierte Hähnchenwürfel vom Spieß, mit Reis</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">14,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g2" data-name="Şiş Kebab" data-price="14.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/k%C3%B6fte.png" alt="Köfte" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Köfte <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Hausgemachte Hackbällchen mit Kreuzkümmel</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">13,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g3" data-name="Köfte" data-price="13.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/lammkotelett.png" alt="Lammkotelett" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Lammkotelett <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Vier Stück vom Holzkohlegrill, mit Grillgemüse</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">18,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g4" data-name="Lammkotelett" data-price="18.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/mixedgrillteller.png" alt="Mixed Grill Teller" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Mixed Grill Teller <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G), Ei (C)</span></button></h3>
+            <p class="menu-card__desc">Adana, Şiş, Köfte und Lamm auf einem Teller</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">21,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="g5" data-name="Mixed Grill Teller" data-price="21.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="meze">
+        <h2 class="menu-section__title">Meze &amp; Beilagen</h2>
+        <p class="menu-section__sub" hidden></p>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/hummus.png" alt="Hummus" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Hummus <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sesam (K)</span></button></h3>
+            <p class="menu-card__desc">Kichererbsencreme mit Tahin, Olivenöl und Paprika</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">5,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="m1" data-name="Hummus" data-price="5.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/cacik.png" alt="Cacık" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cacık <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Hausgemachter Joghurt mit Gurke, Knoblauch und Minze</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="m2" data-name="Cacık" data-price="4.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/sucuk.png" alt="Sucuk" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Sucuk</h3>
+            <p class="menu-card__desc">Gegrillte Knoblauchwurst mit Fladenbrot</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">6,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="m3" data-name="Sucuk" data-price="6.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/falafel.png" alt="Falafel" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Falafel <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Sesam (K)</span></button></h3>
+            <p class="menu-card__desc">Sechs Stück, dazu Tahinsoße</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">6,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="m4" data-name="Falafel" data-price="6.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/pommes.png" alt="Pommes" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Pommes</h3>
+            <p class="menu-card__desc">Mit Salz oder scharfem Gewürz</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">3,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="m5" data-name="Pommes" data-price="3.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="menu-section" id="suesses">
+        <h2 class="menu-section__title">Süßes &amp; Getränke</h2>
+        <p class="menu-section__sub" hidden></p>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/baklava.png" alt="Baklava" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Baklava <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Schalenfrüchte (H), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Drei Stück mit Pistazie</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">4,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s1" data-name="Baklava" data-price="4.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/kuenefe.png" alt="Künefe" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Künefe <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Gluten (A), Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Warmer Käsekuchen aus Engelshaar, mit Sirup</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">6,50 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="s2" data-name="Künefe" data-price="6.50">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/ayran.png" alt="Ayran 0,25l" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Ayran 0,25l <button class="allergen-btn" aria-label="Allergene"><span class="allergen-tooltip">Milch (G)</span></button></h3>
+            <p class="menu-card__desc">Hausgemacht, leicht gesalzen</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">1,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="t1" data-name="Ayran 0,25l" data-price="1.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/cay.png" alt="Çay" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Çay</h3>
+            <p class="menu-card__desc">Türkischer Schwarztee im Glas</p>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,00 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="t2" data-name="Çay" data-price="2.00">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <img class="menu-card__img" width="120" height="120" src="Bilder/cola.png" alt="Cola 0,33l" loading="lazy">
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">Cola 0,33l</h3>
+            <div class="menu-card__footer">
+              <span class="menu-card__price">2,90 €</span>
+              <button class="btn btn--primary btn--sm add-to-cart" data-id="t3" data-name="Cola 0,33l" data-price="2.90">+ Hinzufügen</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <h3 class="cart-sidebar__title">Deine Bestellung</h3>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-empty" id="cart-empty">
+        <p>Noch keine Artikel im Warenkorb.</p>
+      </div>
+      <div class="cart-summary" id="cart-summary">
+        <div class="cart-summary__row">
+          <span>Zwischensumme</span>
+          <span id="cart-subtotal">0,00 €</span>
+        </div>
+        <div class="cart-summary__row">
+          <span>Lieferung</span>
+          <span>2,00 €</span>
+        </div>
+        <div class="cart-summary__row cart-summary__total">
+          <span>Gesamt</span>
+          <span id="cart-total">0,00 €</span>
+        </div>
+        <div id="stempel-hinweis"></div>
+        <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header">
+      <h3>Deine Bestellung</h3>
+      <button class="cart-drawer__close" id="cart-close" aria-label="Warenkorb schließen">✕</button>
+    </div>
+    <div class="cart-drawer__body">
+      <div class="cart-items" id="cart-items-mobile"></div>
+      <div class="cart-empty" id="cart-empty-mobile">
+        <p>Noch keine Artikel im Warenkorb.</p>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cart-summary-mobile">
+      <div class="cart-summary__row">
+        <span>Zwischensumme</span>
+        <span id="cart-subtotal-mobile">0,00 €</span>
+      </div>
+      <div class="cart-summary__row">
+        <span>Lieferung</span>
+        <span>2,00 €</span>
+      </div>
+      <div class="cart-summary__row cart-summary__total">
+        <span>Gesamt</span>
+        <span id="cart-total-mobile">0,00 €</span>
+      </div>
+      <div id="stempel-hinweis-mobile"></div>
+      <a href="checkout.html" class="btn btn--primary btn--full">Zur Kasse</a>
+    </div>
+  </div>
+
+  <button class="cart-fab" id="cart-fab">
+    Warenkorb
+    <span class="cart-fab__count" id="cart-fab-count">0</span>
+    <span class="cart-fab__price" id="cart-fab-price">0,00 €</span>
+  </button>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div class="footer__col">
+          <a href="index.html" class="footer__marke">
+            <img class="footer__logo" src="Bilder/Logo.png" alt="">
+            <span class="footer__wortmarke"><span>Bosporus</span><span>Grillrestaurant</span></span>
+          </a>
+          <p class="footer__claim">Döner, Kebab und Meze. Seit 1988 in Braunschweig.</p>
+          <address class="footer__contact">
+            Musterstraße 1, 38100 Braunschweig<br>
+            Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
+            E-Mail: <a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a>
+          </address>
+        </div>
+        <nav class="footer__col footer__links">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Kontakt</a>
+          <a href="#">Allergene &amp; Zusatzstoffe</a>
+        </nav>
+      </div>
+      <hr class="footer__divider">
+      <p class="footer__copy">&copy; 2025 Bosporus Grill, alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.allergen-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isActive = btn.classList.contains('active');
+        document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+        if (!isActive) btn.classList.add('active');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.allergen-btn.active').forEach(b => b.classList.remove('active'));
+    });
+  </script>
+</body>
+</html>
