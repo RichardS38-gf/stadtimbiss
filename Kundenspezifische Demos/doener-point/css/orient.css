@@ -105,32 +105,53 @@ button { color: inherit; }
 .cat-link { color: var(--color-ink); }
 
 /* ── BUTTONS ──
-   Fruehere Fassung setzte das Icon in einen hellen Kreis am linken
-   Ende der Pille. Bei Doener Point steht das Icon ohne Kreis
-   direkt im Knopf, im roten Knopf schwarz. */
+   In diesem Shop sehen alle Knoepfe gleich aus: rot gefuellt,
+   weisse Schrift, weisses Icon. Die Varianten aus components.css
+   — outline, outline-light, dark — werden hier bewusst
+   gleichgezogen. Die Klassen bleiben im Markup stehen, damit das
+   Grundgeruest unveraendert bleibt, sie faerben nur nichts mehr
+   Eigenes.
+
+   Diese Datei wird nach components.css geladen und gewinnt
+   deshalb. konto.css kommt danach, faerbt aber keine Knoepfe. */
 .btn {
   border-radius: 999px;
   gap: 10px;
 }
 
-.btn .ic {
+.btn,
+.btn--primary,
+.btn--outline,
+.btn--outline-light,
+.btn--dark {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.btn:hover,
+.btn--primary:hover,
+.btn--outline:hover,
+.btn--outline-light:hover,
+.btn--dark:hover {
+  background: var(--color-accent-dk);
+  border-color: var(--color-accent-dk);
+  color: #fff;
+  opacity: 1;
+}
+
+.btn .ic,
+.btn svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  color: currentColor;
+  color: #fff;
+  stroke: #fff;
   vertical-align: middle;
 }
 
-/* Im roten Knopf steht das Icon schwarz, die Schrift bleibt
-   weiss. */
-.btn--primary .ic { color: var(--color-dark); }
-
-.btn--sm .ic { width: 18px; height: 18px; }
-
-/* Der Umrissknopf war hier mit Kupfer gefuellt, damit sich zwei
-   Knoepfe nebeneinander unterscheiden. Da Kupfer in diesem Shop
-   auf das Logorot zeigt, sahen beide gleich aus. Er bleibt jetzt
-   die Definition aus components.css: durchsichtig mit rotem Rand. */
+.btn--sm .ic,
+.btn--sm svg { width: 18px; height: 18px; }
 
 .btn--primary:hover {
   background: var(--color-accent-dk);

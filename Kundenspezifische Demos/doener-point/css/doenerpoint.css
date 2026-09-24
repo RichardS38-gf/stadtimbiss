@@ -2398,8 +2398,8 @@ body.hat-maske { overflow: hidden; }
 .hero-dp .nav__konto svg {
   width: 18px;
   height: 18px;
-  color: var(--color-dark);
-  stroke: var(--color-dark);
+  color: #fff;
+  stroke: #fff;
 }
 
 .hero-dp .nav__konto-name { color: var(--color-on-dark); }
