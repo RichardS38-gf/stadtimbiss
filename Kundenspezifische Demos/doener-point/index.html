@@ -15,8 +15,8 @@
   <link rel="stylesheet" href="css/tokens.css?v=3">
   <link rel="stylesheet" href="css/base.css?v=2">
   <link rel="stylesheet" href="css/layout.css?v=2">
-  <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/doenerpoint.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=2">
+  <link rel="stylesheet" href="css/doenerpoint.css?v=3">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <script type="module" src="js/menue.js"></script>
   <link rel="stylesheet" href="css/konto.css?v=1">
@@ -29,48 +29,53 @@
 
   <div class="demo-banner" id="demo-banner"></div>
 
-  <section class="hero">
+  <!-- ── HERO ──
+       Ein einziges formatfuellendes Bild, alles mittig darauf:
+       Logo oben mit Konto links und den beiden Knoepfen rechts,
+       darunter das Menue, in der Mitte Orte, Titel und CTAs.
 
-    <div class="hero__panel">
-      <a href="index.html" class="hero__marke">
-        <img class="hero__logo" src="Bilder/logo.png" alt="Döner Point">
+       Das Hintergrundbild liegt als WebP vor: 325 KB statt 2,5 MB
+       als PNG, bei gleichen 1456x816. Laedt das Bild nicht, traegt
+       der dunkle Grund die Sektion, die Schrift bleibt lesbar. -->
+  <section class="hero-dp" style="background-image:url('Bilder/hero.webp')">
+
+    <div class="hero-dp__kopf container">
+      <div class="hero-dp__kopf-links">
+        <span id="nav-konto"></span>
+      </div>
+
+      <a href="index.html" class="hero-dp__marke">
+        <img src="Bilder/logo.png" alt="Döner Point">
       </a>
 
-      <div class="hero__inhalt">
-        <p class="hero__nummer">Neuss &middot; Köln</p>
-        <h1 class="hero__title">Döner<em>as you love it</em></h1>
-        <p class="hero__sub">Frisch vom Spieß, 100 % Halal. Wraps, İskender, Teller und Bundles für die ganze Runde. In zwei Läden, an beiden dieselbe Karte.</p>
-        <div class="hero__actions">
-          <a href="bestellen.html" class="btn btn--primary">
-            <span data-icon="korb"></span> Jetzt bestellen
-          </a>
-          <a href="reservieren.html" class="btn btn--outline">
-            <span data-icon="tisch"></span> Tisch reservieren
-          </a>
-        </div>
+      <div class="hero-dp__kopf-rechts">
+        <a href="reservieren.html" class="btn btn--outline btn--sm">
+          <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
+        </a>
+        <a href="bestellen.html" class="btn btn--primary btn--sm">
+          <span data-icon="korb"></span> <span class="btn__text">Bestellen</span>
+        </a>
       </div>
     </div>
 
-    <div class="hero__bild" style="background-image:url('Bilder/laden-aussen.jpg')" role="img" aria-label="Döner Point von außen">
-      <div class="hero-nav nav">
-        <div class="nav__inner" style="display:contents">
-          <button class="nav__menue-btn" type="button" aria-label="Menü">
-            <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
-          </button>
-          <nav class="hero-nav__links nav__links">
-            <a href="#herkunft">Über uns</a>
-            <a href="#karte">Karte</a>
-            <a href="reservieren.html">Reservieren</a>
-            <a href="#stimmen">Stimmen</a>
-            <a href="#kontakt">Kontakt</a>
-          </nav>
-          <div class="hero-nav__aktionen nav__aktionen">
-            <span id="nav-konto"></span>
-            <a href="bestellen.html" class="btn btn--primary btn--sm">
-              <span data-icon="korb"></span> <span class="btn__text">Bestellen</span>
-            </a>
-          </div>
-        </div>
+    <nav class="hero-dp__menue container">
+      <a href="#herkunft">Über uns</a>
+      <a href="#karte">Karte</a>
+      <a href="reservieren.html">Reservieren</a>
+      <a href="#stimmen">Stimmen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <div class="hero-dp__mitte container">
+      <p class="hero-dp__orte">Neuss &middot; Köln</p>
+      <h1 class="hero-dp__titel">Döner <span>|</span> Finger Food <span>|</span> Grill</h1>
+      <div class="hero-dp__actions">
+        <a href="bestellen.html" class="btn btn--primary">
+          <span data-icon="korb"></span> Jetzt bestellen
+        </a>
+        <a href="reservieren.html" class="btn btn--outline-light">
+          <span data-icon="tisch"></span> Tisch reservieren
+        </a>
       </div>
     </div>
 

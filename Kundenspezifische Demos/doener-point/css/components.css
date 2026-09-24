@@ -29,6 +29,21 @@
   opacity: 1;
 }
 
+/* Icons im roten Knopf stehen schwarz, die Schrift bleibt weiss.
+   Die Icons aus js/icons.js zeichnen mit currentColor, deshalb
+   genuegt color am SVG selbst. Gilt fuer alle Seiten. */
+.btn--primary .ic,
+.btn--primary svg {
+  color: var(--color-dark);
+  stroke: var(--color-dark);
+}
+
+.btn--primary:hover .ic,
+.btn--primary:hover svg {
+  color: var(--color-dark);
+  stroke: var(--color-dark);
+}
+
 .btn--outline {
   background: transparent;
   color: var(--color-accent);

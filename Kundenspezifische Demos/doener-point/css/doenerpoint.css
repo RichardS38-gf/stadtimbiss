@@ -2306,4 +2306,152 @@ body.hat-maske { overflow: hidden; }
   .filiale-schalter { width: 100%; }
 }
 
+/* ── HERO DÖNER POINT ──
+   Ein formatfuellendes Bild, alles mittig darauf. Loest den alten
+   zweispaltigen Hero des Bosporus Grill ab; dessen Regeln unter
+   .hero stehen noch im Stylesheet und greifen ins Leere, weil das
+   Markup jetzt .hero-dp heisst. Sie gehoeren beim naechsten
+   Aufraeumen entfernt. */
+.hero-dp {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: var(--space-5) var(--space-8);
+  background-color: var(--color-dark);
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Dunkler Schleier ueber dem Foto. Ohne ihn haengt die Lesbarkeit
+   am Zufall des Bildes, und das Bild wird noch getauscht. */
+.hero-dp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.45) 42%,
+    rgba(0, 0, 0, 0.82) 100%);
+}
+
+.hero-dp > * { position: relative; z-index: 1; }
+
+/* Kopfzeile: Konto links, Logo mittig, Knoepfe rechts. Die
+   aeusseren Spalten sind gleich breit, damit das Logo wirklich
+   in der Mitte steht und nicht neben der Mitte. */
+.hero-dp__kopf {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.hero-dp__kopf-links { justify-self: start; }
+
+.hero-dp__kopf-rechts {
+  justify-self: end;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.hero-dp__marke img {
+  display: block;
+  width: clamp(210px, 26vw, 400px);
+  height: auto;
+}
+
+/* Der Konto-Knopf kommt aus js/auth.js und ist fuer helle
+   Kopfzeilen gebaut. Hier steht er auf dem Foto. */
+.hero-dp .nav__konto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hero-dp .nav__konto:hover { border-color: var(--color-accent); opacity: 1; }
+.hero-dp .nav__konto .ic { color: #fff; stroke: #fff; }
+
+.hero-dp__menue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.hero-dp__menue a {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+}
+
+.hero-dp__menue a:hover { color: var(--color-accent); opacity: 1; }
+
+/* margin-block: auto schiebt den Mittelteil in die verbleibende
+   Hoehe und haelt ihn dort mittig, egal wie hoch der Kopf wird. */
+.hero-dp__mitte { margin-block: auto; padding-top: var(--space-7); }
+
+.hero-dp__orte {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.hero-dp__titel {
+  font-size: clamp(2.3rem, 7vw, 5.4rem);
+  color: #fff;
+  margin-top: var(--space-4);
+}
+
+/* Die Trennstriche sind duenner und rot, damit die drei Begriffe
+   als Gruppe lesbar bleiben. */
+.hero-dp__titel span {
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-inline: 0.15em;
+}
+
+.hero-dp__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 760px) {
+  .hero-dp__kopf {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: var(--space-3);
+  }
+
+  .hero-dp__marke { order: 1; }
+  .hero-dp__kopf-links { order: 2; justify-self: center; }
+  .hero-dp__kopf-rechts { order: 3; justify-self: center; }
+
+  .hero-dp__menue { gap: var(--space-2) var(--space-4); }
+  .hero-dp__menue a { font-size: 0.72rem; }
+}
+
 /* deploy trigger */
