@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/base.css?v=2">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=3">
-  <link rel="stylesheet" href="css/doenerpoint.css?v=5">
+  <link rel="stylesheet" href="css/doenerpoint.css?v=6">
   <link rel="stylesheet" href="css/orient.css?v=8">
   <script type="module" src="js/menue.js"></script>
   <link rel="stylesheet" href="css/konto.css?v=1">
@@ -109,42 +109,51 @@
       <a href="bestellen.html" class="link-accent">Alles ansehen</a>
     </div>
 
-    <div class="index-liste">
-      <a href="bestellen.html#sparangebote" class="index-zeile">
-        <span class="index-zeile__nr">01</span>
-        <span class="index-zeile__name">Sparangebote</span>
-        <span class="index-zeile__meta">13 Menüs · ab 11,99 €</span>
-        <span class="index-zeile__pfeil" data-icon="haken"></span>
+    <!-- Kacheln mit freigestelltem Gerichtbild und roter
+         Beschriftung. Die Bilder werden noch erzeugt; solange sie
+         fehlen, setzt onerror eine ruhige Flaeche statt des
+         zerbrochenen Symbols. -->
+    <div class="kat-grid">
+      <a href="bestellen.html#sandwiches" class="kat-kachel">
+        <img class="kat-kachel__bild" src="Bilder/kat-sandwich.webp" alt="" loading="lazy"
+             onerror="this.classList.add('kat-kachel__bild--leer')">
+        <span class="kat-kachel__meta">3 Gerichte &middot; ab 9,49 &euro;</span>
+        <span class="kat-kachel__label">Sandwich</span>
       </a>
-      <a href="bestellen.html#wrap" class="index-zeile">
-        <span class="index-zeile__nr">02</span>
-        <span class="index-zeile__name">Wraps &amp; Sandwiches</span>
-        <span class="index-zeile__meta">9 Gerichte · ab 8,49 €</span>
-        <span class="index-zeile__pfeil" data-icon="haken"></span>
+
+      <a href="bestellen.html#wrap" class="kat-kachel">
+        <img class="kat-kachel__bild" src="Bilder/kat-wrap.webp" alt="" loading="lazy"
+             onerror="this.classList.add('kat-kachel__bild--leer')">
+        <span class="kat-kachel__meta">6 Gerichte &middot; ab 8,49 &euro;</span>
+        <span class="kat-kachel__label">Wrap</span>
       </a>
-      <a href="bestellen.html#iskender" class="index-zeile">
-        <span class="index-zeile__nr">03</span>
-        <span class="index-zeile__name">İskender &amp; Teller</span>
-        <span class="index-zeile__meta">3 Gerichte · ab 15,99 €</span>
-        <span class="index-zeile__pfeil" data-icon="haken"></span>
+
+      <a href="bestellen.html#doener" class="kat-kachel">
+        <img class="kat-kachel__bild" src="Bilder/kat-doener.webp" alt="" loading="lazy"
+             onerror="this.classList.add('kat-kachel__bild--leer')">
+        <span class="kat-kachel__meta">4 Gerichte &middot; ab 9,99 &euro;</span>
+        <span class="kat-kachel__label">Döner</span>
       </a>
-      <a href="bestellen.html#box" class="index-zeile">
-        <span class="index-zeile__nr">04</span>
-        <span class="index-zeile__name">Box, Burrito &amp; Lahmacun</span>
-        <span class="index-zeile__meta">5 Gerichte · ab 6,50 €</span>
-        <span class="index-zeile__pfeil" data-icon="haken"></span>
+
+      <a href="bestellen.html#suesses" class="kat-kachel">
+        <img class="kat-kachel__bild" src="Bilder/kat-suesses.webp" alt="" loading="lazy"
+             onerror="this.classList.add('kat-kachel__bild--leer')">
+        <span class="kat-kachel__meta">7 Artikel &middot; ab 5,90 &euro;</span>
+        <span class="kat-kachel__label">Süßes</span>
       </a>
-      <a href="bestellen.html#snacks" class="index-zeile">
-        <span class="index-zeile__nr">05</span>
-        <span class="index-zeile__name">Snacks</span>
-        <span class="index-zeile__meta">7 Artikel · ab 5,00 €</span>
-        <span class="index-zeile__pfeil" data-icon="haken"></span>
+
+      <a href="bestellen.html#lahmacun" class="kat-kachel">
+        <img class="kat-kachel__bild" src="Bilder/kat-lahmacun.webp" alt="" loading="lazy"
+             onerror="this.classList.add('kat-kachel__bild--leer')">
+        <span class="kat-kachel__meta">2 Gerichte &middot; ab 6,50 &euro;</span>
+        <span class="kat-kachel__label">Lahmacun</span>
       </a>
-      <a href="bestellen.html#suesses" class="index-zeile">
-        <span class="index-zeile__nr">06</span>
-        <span class="index-zeile__name">Süßspeisen &amp; Getränke</span>
-        <span class="index-zeile__meta">27 Artikel · ab 0,75 €</span>
-        <span class="index-zeile__pfeil" data-icon="haken"></span>
+
+      <a href="bestellen.html#snacks" class="kat-kachel">
+        <img class="kat-kachel__bild" src="Bilder/kat-snacks.webp" alt="" loading="lazy"
+             onerror="this.classList.add('kat-kachel__bild--leer')">
+        <span class="kat-kachel__meta">7 Artikel &middot; ab 5,00 &euro;</span>
+        <span class="kat-kachel__label">Snacks</span>
       </a>
     </div>
   </section>

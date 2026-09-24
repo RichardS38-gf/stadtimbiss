@@ -232,12 +232,10 @@ export const DEMO_RESERVATIONS = [
 export const KATEGORIEN = [
   { id: 'sparangebote', name: 'Sparangebote' },
   { id: 'sandwiches',   name: 'Sandwiches' },
-  { id: 'wrap',         name: 'Wrap' },
-  { id: 'hatay',        name: 'Hatay Wrap' },
+  { id: 'wrap',         name: 'Wraps' },
   { id: 'lahmacun',     name: 'Türkische Pizza' },
-  { id: 'box',          name: 'Döner Box' },
+  { id: 'doener',       name: 'Döner' },
   { id: 'iskender',     name: 'İskender' },
-  { id: 'teller',       name: 'Döner Teller' },
   { id: 'burrito',      name: 'Burrito' },
   { id: 'snacks',       name: 'Snacks' },
   { id: 'suesses',      name: 'Süßspeisen' },
@@ -279,22 +277,22 @@ export const KATALOG = {
   'w5': { name: 'Gemüse Wrap', price: 9.49, kategorie: 'wrap', img: 'Bilder/gemuese-wrap.webp', beschreibung: 'Tortilla mit Gemüse nach Wahl, Salatmix und drei Soßen' },
 
   /* Hatay */
-  'h1': { name: 'Döner Wrap mit Hatay Soße', price: 10.99, kategorie: 'hatay', img: 'Bilder/hatay-wrap.webp', beschreibung: 'Fleisch nach Wahl mit der speziellen Hatay Soße und verschiedenen Beilagen' },
+  'h1': { name: 'Döner Wrap mit Hatay Soße', price: 10.99, kategorie: 'wrap', img: 'Bilder/hatay-wrap.webp', beschreibung: 'Fleisch nach Wahl mit der speziellen Hatay Soße und verschiedenen Beilagen' },
 
   /* Türkische Pizza */
   'l1': { name: 'Türkische Pizza Wrap', price: 11.50, kategorie: 'lahmacun', img: 'Bilder/lahmacun-wrap.webp', beschreibung: 'Lahmacun gerollt, mit Fleisch nach Wahl, Soßen und Beilagen' },
   'l2': { name: 'Türkische Pizza Classic', price: 6.50, kategorie: 'lahmacun', img: 'Bilder/lahmacun-classic.webp', beschreibung: 'Klassisch mit speziellen Soßen und verschiedenen Beilagen' },
 
-  /* Döner Box */
-  'b1': { name: 'Döner Box mit Pommes', price: 9.99, kategorie: 'box', img: 'Bilder/box-pommes.webp', beschreibung: 'Fleisch nach Wahl mit Pommes' },
-  'b2': { name: 'Döner Box mit Salat', price: 9.99, kategorie: 'box', img: 'Bilder/box-salat.webp', beschreibung: 'Fleisch nach Wahl mit Salat' },
+  /* Döner: Teller, Reis und Box */
+  'b1': { name: 'Döner Box mit Pommes', price: 9.99, kategorie: 'doener', img: 'Bilder/box-pommes.webp', beschreibung: 'Fleisch nach Wahl mit Pommes' },
+  'b2': { name: 'Döner Box mit Salat', price: 9.99, kategorie: 'doener', img: 'Bilder/box-salat.webp', beschreibung: 'Fleisch nach Wahl mit Salat' },
 
   /* İskender */
   'i1': { name: 'İskender mit TomatenSoße', price: 17.99, kategorie: 'iskender', img: 'Bilder/iskender.webp', beschreibung: 'Knusprige Pide, Fleisch vom Spieß, Iskender-Soße, Joghurt und Butterfett' },
 
   /* Döner Teller */
-  't1': { name: 'Döner auf Reis', price: 15.99, kategorie: 'teller', img: 'Bilder/doener-reis.webp', beschreibung: 'Fleisch nach Wahl mit Reis, Pommes, frischen Tomaten und sauren Gurken' },
-  't2': { name: 'Döner Teller', price: 15.99, kategorie: 'teller', img: 'Bilder/doener-teller.webp', beschreibung: 'Fleisch nach Wahl dazu Pommes und Salat' },
+  't1': { name: 'Döner auf Reis', price: 15.99, kategorie: 'doener', img: 'Bilder/doener-reis.webp', beschreibung: 'Fleisch nach Wahl mit Reis, Pommes, frischen Tomaten und sauren Gurken' },
+  't2': { name: 'Döner Teller', price: 15.99, kategorie: 'doener', img: 'Bilder/doener-teller.webp', beschreibung: 'Fleisch nach Wahl dazu Pommes und Salat' },
 
   /* Burrito */
   'u1': { name: 'Burrito', price: 11.00, kategorie: 'burrito', img: 'Bilder/burrito.webp', beschreibung: 'Mit Reis, Döner, Beilagen und speziellen Soßen' },

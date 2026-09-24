@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=3">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
-  <link rel="stylesheet" href="css/doenerpoint.css?v=5">
+  <link rel="stylesheet" href="css/doenerpoint.css?v=6">
   <link rel="stylesheet" href="css/orient.css?v=8">
   <link rel="stylesheet" href="css/konto.css?v=1">
 
@@ -58,6 +58,20 @@
       border: 1px solid var(--color-line);
       object-fit: none;
     }
+
+    /* Die Leiste war einzeilig und schnitt hinten ab, dadurch
+       waren die letzten Kategorien nicht erreichbar. Sie bricht
+       jetzt um und steht mittig. */
+    .category-nav__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-2) var(--space-4);
+      overflow: visible;
+      white-space: normal;
+    }
+
+    .cat-link { padding-inline: 0; }
   </style>
 </head>
 <body>

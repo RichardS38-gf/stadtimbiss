@@ -2473,4 +2473,92 @@ body.hat-maske { overflow: hidden; }
   .hero-dp__menue a { font-size: 0.72rem; }
 }
 
+/* ── ÜBER UNS: BILDER ──
+   Abgerundet und beim Zeigen leicht groesser. overflow: hidden am
+   Rahmen, damit das Hintergrundbild beim Wachsen nicht ueber die
+   Rundung hinauslaeuft — die Bilder liegen als background-image
+   auf den Elementen, nicht als img. */
+.ueber__bild-gross,
+.ueber__bild-klein {
+  border-radius: 20px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.ueber__bild-gross:hover,
+.ueber__bild-klein:hover {
+  transform: scale(1.04);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5);
+}
+
+/* ── KATEGORIEKACHELN ──
+   Helle Kachel mit rotem Rand, freigestelltem Gerichtbild und
+   roter Beschriftung darunter. Bewusst hell auf dem schwarzen
+   Grund, damit die freigestellten Bilder ohne Kante sitzen. */
+.kat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--space-5);
+}
+
+.kat-kachel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-4) var(--space-5);
+  background: #fff;
+  border: 2px solid var(--color-accent);
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kat-kachel:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+.kat-kachel__bild {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  margin-bottom: auto;
+}
+
+/* Greift, solange das Bild fehlt. Das onerror im Markup setzt
+   die Klasse. */
+.kat-kachel__bild--leer {
+  background: #F1F0EE;
+  border-radius: 12px;
+  object-fit: none;
+}
+
+.kat-kachel__meta {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: #6B6B6B;
+}
+
+.kat-kachel__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.1rem;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: 10px;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.kat-kachel:hover .kat-kachel__label { background: var(--color-accent-dk); }
+
 /* deploy trigger */
