@@ -104,51 +104,33 @@ button { color: inherit; }
 .mode-card--active { color: var(--color-on-accent, #fff); }
 .cat-link { color: var(--color-ink); }
 
-/* ── BUTTONS: Pille mit Icon-Kreis ──
-   Das Icon sitzt in einem hellen Kreis am linken Ende der Pille.
-   Gilt auf allen Seiten. */
+/* ── BUTTONS ──
+   Fruehere Fassung setzte das Icon in einen hellen Kreis am linken
+   Ende der Pille. Bei Doener Point steht das Icon ohne Kreis
+   direkt im Knopf, im roten Knopf schwarz. */
 .btn {
   border-radius: 999px;
-  gap: 12px;
+  gap: 10px;
 }
 
-/* Nur Buttons mit Icon bekommen den asymmetrischen Innenabstand */
-.btn:has(.ic) { padding: 7px 24px 7px 7px; }
-.btn--sm:has(.ic) { padding: 5px 18px 5px 5px; }
-
 .btn .ic {
-  width: 34px;
-  height: 34px;
-  padding: 7px;
-  box-sizing: border-box;
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
-  background: var(--color-bg-soft);
-  color: var(--color-accent);
+  color: currentColor;
   vertical-align: middle;
 }
 
-.btn--sm .ic { width: 28px; height: 28px; padding: 6px; }
+/* Im roten Knopf steht das Icon schwarz, die Schrift bleibt
+   weiss. */
+.btn--primary .ic { color: var(--color-dark); }
 
-/* Zweite Variante in Kupfer, damit sich die beiden Buttons
-   nebeneinander unterscheiden. */
-.btn--outline,
-.btn--outline-light {
-  background: var(--color-copper);
-  color: var(--color-on-accent);
-  border-color: var(--color-copper);
-}
+.btn--sm .ic { width: 18px; height: 18px; }
 
-.btn--outline:hover,
-.btn--outline-light:hover {
-  background: var(--color-copper-dk);
-  border-color: var(--color-copper-dk);
-  color: var(--color-on-accent);
-  opacity: 1;
-}
-
-.btn--outline .ic,
-.btn--outline-light .ic { color: var(--color-copper); }
+/* Der Umrissknopf war hier mit Kupfer gefuellt, damit sich zwei
+   Knoepfe nebeneinander unterscheiden. Da Kupfer in diesem Shop
+   auf das Logorot zeigt, sahen beide gleich aus. Er bleibt jetzt
+   die Definition aus components.css: durchsichtig mit rotem Rand. */
 
 .btn--primary:hover {
   background: var(--color-accent-dk);

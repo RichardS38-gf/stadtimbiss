@@ -2366,24 +2366,43 @@ body.hat-maske { overflow: hidden; }
 }
 
 /* Der Konto-Knopf kommt aus js/auth.js und ist fuer helle
-   Kopfzeilen gebaut. Hier steht er auf dem Foto. */
+   Kopfzeilen gebaut. Hier bekommt er dasselbe Format wie die
+   beiden CTAs daneben: rote Pille, weisse Schrift, schwarzes
+   Icon, Masse von .btn--sm. */
 .hero-dp .nav__konto {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: 0.5rem 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.35);
-  color: #fff;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  min-height: 36px;
+  border: 2px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-on-dark);
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 600;
+  line-height: 1;
   white-space: nowrap;
 }
 
-.hero-dp .nav__konto:hover { border-color: var(--color-accent); opacity: 1; }
-.hero-dp .nav__konto .ic { color: #fff; stroke: #fff; }
+.hero-dp .nav__konto:hover {
+  background: var(--color-accent-dk);
+  border-color: var(--color-accent-dk);
+  opacity: 1;
+}
+
+.hero-dp .nav__konto .ic,
+.hero-dp .nav__konto svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-dark);
+  stroke: var(--color-dark);
+}
+
+.hero-dp .nav__konto-name { color: var(--color-on-dark); }
 
 .hero-dp__menue {
   display: flex;
