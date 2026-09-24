@@ -2165,4 +2165,145 @@
   font-size: var(--text-sm);
 }
 
+/* ── FILIALWAHL ──
+   Die Maske baut js/filiale.js und haengt sie an den body. Beim
+   ersten Betreten der Bestellseite laesst sie sich nicht
+   schliessen — vor dem ersten Artikel muss feststehen, wohin die
+   Bestellung geht. Spaeter oeffnet der Schalter in der Kopfzeile
+   dieselbe Maske, dann mit Abbrechen. */
+.filialwahl {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.82);
+}
+
+/* Haelt die Seite hinter der Maske still. */
+body.hat-maske { overflow: hidden; }
+
+.filialwahl__fenster {
+  width: min(100%, 560px);
+  padding: var(--space-6);
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-accent);
+  text-align: center;
+}
+
+.filialwahl__kicker {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.filialwahl__titel {
+  font-size: var(--text-3xl);
+  margin-top: var(--space-2);
+}
+
+.filialwahl__text {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-3);
+}
+
+.filialwahl__karten {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 560px) {
+  .filialwahl__karten { grid-template-columns: 1fr 1fr; }
+}
+
+.filialwahl__karte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.filialwahl__karte:hover,
+.filialwahl__karte:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-blut-dk);
+  outline: none;
+}
+
+.filialwahl__name {
+  font-family: var(--font-head);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+}
+
+.filialwahl__adresse { color: var(--color-ink); font-size: var(--text-sm); line-height: 1.5; }
+.filialwahl__zeiten { color: var(--color-muted); font-size: var(--text-xs); }
+
+.filialwahl__abbrechen {
+  margin-top: var(--space-5);
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.filialwahl__abbrechen:hover { color: var(--color-accent); }
+
+/* Schalter in der Kopfzeile */
+.filiale-schalter {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 0.35rem 0.7rem;
+  background: none;
+  border: 1px solid var(--color-line);
+  cursor: pointer;
+  line-height: 1.1;
+  transition: border-color var(--transition);
+}
+
+.filiale-schalter:hover { border-color: var(--color-accent); }
+
+.filiale-schalter__label {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.filiale-schalter__name {
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+/* Auf schmalen Schirmen nimmt js/menue.js die Knoepfe in das
+   Klappfeld. Dort darf der Schalter die volle Breite haben. */
+@media (max-width: 900px) {
+  .filiale-schalter { width: 100%; }
+}
+
 /* deploy trigger */
