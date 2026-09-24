@@ -1,8 +1,18 @@
-// bestellen.js — Stadtimbiss Bestellseite
+// bestellen.js — Döner Point Bestellseite
 
 import { addToCart, getCart, getCartTotal, getCartCount, updateQty, removeFromCart } from './cart.js';
 import { setupSeite, getStampPreview, isFavorite, toggleFavorite, TREUE } from './auth.js';
 import { iconsEinsetzen } from './icons.js';
+import { LIEFERKOSTEN } from './demo-daten.js';
+
+/* Die Liefergebuehr stand hier dreimal fest auf 2,50 aus dem
+   Bosporus-Shop. Bei Doener Point ist die Lieferung kostenlos,
+   die Gesamtsumme war damit immer 2,50 Euro zu hoch. Jetzt kommt
+   der Wert aus demo-daten.js, also aus derselben Quelle wie die
+   Angaben im Umschalter. */
+function summe(subtotal) {
+  return (subtotal + LIEFERKOSTEN).toFixed(2).replace('.', ',') + ' \u20ac';
+}
 
 // ---------- Cart-Item HTML ----------
 function cartItemHTML(item) {
@@ -83,7 +93,7 @@ function renderCart() {
 
   const subtotal = getCartTotal();
   if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
-  if (totalEl) totalEl.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+  if (totalEl) totalEl.textContent = summe(subtotal);
 
   itemsEl.innerHTML = cart.map(cartItemHTML).join('');
 }
@@ -106,7 +116,7 @@ function renderCartMobile() {
   if (fabEl) {
     fabEl.classList.toggle('visible', count > 0);
     if (fabCount) fabCount.textContent = count;
-    if (fabPrice) fabPrice.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+    if (fabPrice) fabPrice.textContent = summe(subtotal);
   }
 
   if (!itemsEl) return;
@@ -121,7 +131,7 @@ function renderCartMobile() {
   if (emptyEl) emptyEl.style.display = 'none';
   if (summaryEl) summaryEl.style.display = 'block';
   if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
-  if (totalEl) totalEl.textContent = (subtotal + 2.50).toFixed(2).replace('.', ',') + ' €';
+  if (totalEl) totalEl.textContent = summe(subtotal);
 
   itemsEl.innerHTML = cart.map(cartItemHTML).join('');
 }

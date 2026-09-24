@@ -3,56 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bosporus Grill — Döner und Grillspezialitäten</title>
-  <meta name="description" content="Döner vom Drehspieß und Kebab vom Holzkohlegrill. Frisch, ehrlich, jeden Tag. Jetzt online bestellen oder Tisch reservieren.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F6E73' stroke-width='1.6' stroke-linecap='round'><path d='M12 2.6v18.8'/><path d='M8.4 20.6h7.2'/><path d='M12 4.4c-2.9 1-4.6 3.6-4.6 6.6 0 3.2 1.9 5.6 4.6 6.6 2.7-1 4.6-3.4 4.6-6.6 0-3-1.7-5.6-4.6-6.6z'/></svg>">
+  <title>Döner Point — Neuss und Köln</title>
+  <meta name="description" content="Döner Point: frisch vom Spieß, 100 % Halal. Wraps, İskender, Döner Teller und Bundles. Zwei Standorte in Neuss und Köln. Online bestellen oder abholen.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' fill='%230F0F10'/><path d='M12 3l1.6 3.3H9.8L12 3zM8.6 8h6.8l-.7 4.4H9.3L8.6 8zm1 5.8h4.8L13.4 18h-2.8l-1-4.2zM12 19l1.1 2.4h-2.2L12 19z' fill='%23E11F1C'/></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/tokens.css?v=2">
-  <link rel="stylesheet" href="css/base.css?v=1">
+  <link rel="stylesheet" href="css/tokens.css?v=3">
+  <link rel="stylesheet" href="css/base.css?v=2">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=1">
-  <link rel="stylesheet" href="css/doenerpoint.css?v=1">
+  <link rel="stylesheet" href="css/doenerpoint.css?v=2">
   <link rel="stylesheet" href="css/orient.css?v=6">
   <script type="module" src="js/menue.js"></script>
   <link rel="stylesheet" href="css/konto.css?v=1">
 </head>
 <body>
-  <!-- Demo-Banner steht als erstes Element, noch vor der
-       Kopfzeile. Inhalt kommt aus js/auth.js. -->
+  <!-- Die Texte dieser Seite sind Entwuerfe. Alles, was eine
+       Tatsachenbehauptung ist — Gruendungsjahr, Herkunft, Zahlen —
+       gehoert vor der Uebergabe vom Betreiber bestaetigt. Bewusst
+       steht hier nichts, was wir nicht belegen koennen. -->
+
   <div class="demo-banner" id="demo-banner"></div>
 
-  <!-- Demo-Hinweis ganz oben, ueber Kopfzeile und Logo -->
-
-  <!-- Hero: Flaeche links, randloses Bild rechts, Navigation darueber -->
   <section class="hero">
 
     <div class="hero__panel">
       <a href="index.html" class="hero__marke">
-        <img class="hero__logo" src="Bilder/Logo.png" alt="">
-        <span class="hero__wortmarke"><span>Bosporus</span><span>Grillrestaurant</span></span>
+        <img class="hero__logo" src="Bilder/logo.png" alt="Döner Point">
       </a>
 
       <div class="hero__inhalt">
-        <p class="hero__nummer">Braunschweig &middot; seit 1988</p>
-        <h1 class="hero__title">Bosporus<em>Grillrestaurant</em></h1>
-        <p class="hero__sub">Döner vom Spieß, den wir jeden Morgen selbst stecken. Kebab über Holzkohle, nicht über Gas. Mehr Geheimnis steckt nicht dahinter.</p>
+        <p class="hero__nummer">Neuss &middot; Köln</p>
+        <h1 class="hero__title">Döner<em>as you love it</em></h1>
+        <p class="hero__sub">Frisch vom Spieß, 100 % Halal. Wraps, İskender, Teller und Bundles für die ganze Runde. In zwei Läden, an beiden dieselbe Karte.</p>
         <div class="hero__actions">
           <a href="bestellen.html" class="btn btn--primary">
             <span data-icon="korb"></span> Jetzt bestellen
           </a>
-          <a href="reservieren.html" class="btn btn--outline">
-            <span data-icon="tisch"></span> Tisch reservieren
+          <a href="#kontakt" class="btn btn--outline">
+            <span data-icon="ort"></span> Standorte
           </a>
         </div>
       </div>
     </div>
 
-    <div class="hero__bild" style="background-image:url('Bilder/hero_d%C3%B6ner.png')" role="img" aria-label="Gastraum des Bosporus Grill">
+    <div class="hero__bild" style="background-image:url('Bilder/laden-aussen.jpg')" role="img" aria-label="Döner Point von außen">
       <div class="hero-nav nav">
         <div class="nav__inner" style="display:contents">
           <button class="nav__menue-btn" type="button" aria-label="Menü">
@@ -66,9 +65,6 @@
           </nav>
           <div class="hero-nav__aktionen nav__aktionen">
             <span id="nav-konto"></span>
-            <a href="reservieren.html" class="btn btn--outline btn--sm">
-              <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
-            </a>
             <a href="bestellen.html" class="btn btn--primary btn--sm">
               <span data-icon="korb"></span> <span class="btn__text">Bestellen</span>
             </a>
@@ -79,79 +75,19 @@
 
   </section>
 
-  <!-- Laufband -->
-  <div class="ticker">
-    <div class="ticker__track">
-      <div class="ticker__gruppe">
-        <span class="ticker__item">Täglich 11 bis 23 Uhr</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Lieferung ab 2,00 Euro</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Holzkohlegrill</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">100 % Halal</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Fladenbrot täglich frisch</span>
-        <span class="ticker__punkt">●</span>
-      </div>
-      <div class="ticker__gruppe" aria-hidden="true">
-        <span class="ticker__item">Täglich 11 bis 23 Uhr</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Lieferung ab 2,00 Euro</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Holzkohlegrill</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">100 % Halal</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Fladenbrot täglich frisch</span>
-        <span class="ticker__punkt">●</span>
-      </div>
-      <div class="ticker__gruppe" aria-hidden="true">
-        <span class="ticker__item">Täglich 11 bis 23 Uhr</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Lieferung ab 2,00 Euro</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Holzkohlegrill</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">100 % Halal</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Fladenbrot täglich frisch</span>
-        <span class="ticker__punkt">●</span>
-      </div>
-      <div class="ticker__gruppe" aria-hidden="true">
-        <span class="ticker__item">Täglich 11 bis 23 Uhr</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Lieferung ab 2,00 Euro</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Holzkohlegrill</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">100 % Halal</span>
-        <span class="ticker__punkt">●</span>
-        <span class="ticker__item">Fladenbrot täglich frisch</span>
-        <span class="ticker__punkt">●</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Ueber uns -->
   <section class="ueber container" id="herkunft">
     <div class="ueber__bilder">
-      <div class="ueber__stoerer">1988<small>gegründet</small></div>
-      <div class="ueber__bild-gross" style="background-image:url('Bilder/%C3%9Cberuns.png')" role="img" aria-label="Am Grill"></div>
-      <div class="ueber__bild-klein" style="background-image:url('Bilder/Detail.png')" role="img" aria-label="Detail vom Spieß"></div>
+      <div class="ueber__stoerer">100%<small>halal</small></div>
+      <div class="ueber__bild-gross" style="background-image:url('Bilder/gastraum.jpg')" role="img" aria-label="Gastraum"></div>
+      <div class="ueber__bild-klein" style="background-image:url('Bilder/tresen.jpg')" role="img" aria-label="Tresen"></div>
     </div>
 
     <div class="ueber__text">
       <span class="eyebrow">01 — Über uns</span>
-      <h2>Ein Familienbetrieb, kein Franchise</h2>
-      <p class="ueber__lead">Mein Vater kam 1988 aus Adana nach Braunschweig, mit einem Rezept im Kopf und wenig sonst. Den ersten Spieß hat er selbst gesteckt. Daran hat sich bis heute nichts geändert.</p>
-      <p>Wir sind kein Imbiss, der nebenbei grillt. Der Ocakbaşı, also der offene Holzkohlegrill, steht bei uns mitten im Raum. Man sieht, wer kocht, und man riecht es, bevor man die Tür aufmacht.</p>
-      <p>Das Fleisch kommt vom selben Betrieb wie vor dreißig Jahren, der Joghurt für den Cacık wird morgens angesetzt, das Fladenbrot backen wir mehrmals am Tag. Nichts davon ist besonders modern. Es schmeckt nur besser.</p>
-
-      <blockquote class="ueber__zitat">
-        <p>Wer den Spieß nicht selbst steckt, weiß nicht, was drin ist.</p>
-        <cite>Mehmet, Inhaber</cite>
-      </blockquote>
+      <h2>Mehr als nur Döner</h2>
+      <p class="ueber__lead">Döner Point steht für frisch belegte Wraps, Fleisch vom Spieß und eine Karte, die über den Klassiker hinausgeht. Alles Fleisch ist Halal.</p>
+      <p>Neben Döner Wrap und Sandwich gibt es İskender mit Joghurt und Butterfett, Döner auf Reis, Burrito und Taco. Die Soßen sind hausgemacht, die Hatay Soße gibt es so nur bei uns.</p>
+      <p>Zwei Läden, dieselbe Karte, dieselben Preise: Niederstraße in Neuss und Krebsgasse an der Schildergasse in Köln. Bestellt wird für die Filiale, die dir am nächsten liegt.</p>
 
       <a href="bestellen.html" class="btn btn--primary">
         <span data-icon="korb"></span> Zur Karte
@@ -159,25 +95,27 @@
     </div>
   </section>
 
-  <!-- Kennzahlen -->
+  <!-- Kennzahlen. Bewertungszahlen stammen von den Lieferportalen
+       und gehoeren vor dem Livegang geprueft. -->
   <section class="zahlen">
     <div class="container zahlen__grid">
       <div>
-        <div class="zahl__wert" data-ziel="37">0</div>
-        <div class="zahl__label">Jahre Grilltradition</div>
+        <div class="zahl__wert" data-ziel="2">0</div>
+        <div class="zahl__label">Standorte</div>
       </div>
       <div>
-        <div class="zahl__wert" data-ziel="480" data-suffix="+">0</div>
-        <div class="zahl__label">Google Bewertungen</div>
+        <div class="zahl__wert" data-ziel="470" data-suffix="+">0</div>
+        <div class="zahl__label">Bewertungen</div>
       </div>
       <div>
-        <div class="zahl__wert" data-ziel="4,7">0</div>
+        <div class="zahl__wert" data-ziel="4,5">0</div>
         <div class="zahl__label">Sterne im Schnitt</div>
       </div>
     </div>
   </section>
 
-  <!-- Karte als Indexliste -->
+  <!-- Karte als Indexliste. Anzahl und Startpreise stammen aus
+       js/demo-daten.js und muessen bei Kartenaenderungen mit. -->
   <section class="abschnitt container" id="karte">
     <div class="kopf">
       <div>
@@ -188,68 +126,79 @@
     </div>
 
     <div class="index-liste">
-      <a href="bestellen.html#doener" class="index-zeile">
+      <a href="bestellen.html#sparangebote" class="index-zeile">
         <span class="index-zeile__nr">01</span>
-        <span class="index-zeile__name">Döner &amp; Dürüm</span>
-        <span class="index-zeile__meta">6 Gerichte · ab 5,50 €</span>
+        <span class="index-zeile__name">Sparangebote</span>
+        <span class="index-zeile__meta">13 Menüs · ab 11,99 €</span>
         <span class="index-zeile__pfeil" data-icon="haken"></span>
       </a>
-      <a href="bestellen.html#grill" class="index-zeile">
+      <a href="bestellen.html#wrap" class="index-zeile">
         <span class="index-zeile__nr">02</span>
-        <span class="index-zeile__name">Vom Grill</span>
-        <span class="index-zeile__meta">5 Gerichte · ab 13,90 €</span>
+        <span class="index-zeile__name">Wraps &amp; Sandwiches</span>
+        <span class="index-zeile__meta">9 Gerichte · ab 8,49 €</span>
         <span class="index-zeile__pfeil" data-icon="haken"></span>
       </a>
-      <a href="bestellen.html#meze" class="index-zeile">
+      <a href="bestellen.html#iskender" class="index-zeile">
         <span class="index-zeile__nr">03</span>
-        <span class="index-zeile__name">Meze &amp; Beilagen</span>
-        <span class="index-zeile__meta">5 Artikel · ab 3,50 €</span>
+        <span class="index-zeile__name">İskender &amp; Teller</span>
+        <span class="index-zeile__meta">3 Gerichte · ab 15,99 €</span>
+        <span class="index-zeile__pfeil" data-icon="haken"></span>
+      </a>
+      <a href="bestellen.html#box" class="index-zeile">
+        <span class="index-zeile__nr">04</span>
+        <span class="index-zeile__name">Box, Burrito &amp; Lahmacun</span>
+        <span class="index-zeile__meta">5 Gerichte · ab 6,50 €</span>
+        <span class="index-zeile__pfeil" data-icon="haken"></span>
+      </a>
+      <a href="bestellen.html#snacks" class="index-zeile">
+        <span class="index-zeile__nr">05</span>
+        <span class="index-zeile__name">Snacks</span>
+        <span class="index-zeile__meta">7 Artikel · ab 5,00 €</span>
         <span class="index-zeile__pfeil" data-icon="haken"></span>
       </a>
       <a href="bestellen.html#suesses" class="index-zeile">
-        <span class="index-zeile__nr">04</span>
-        <span class="index-zeile__name">Süßes &amp; Getränke</span>
-        <span class="index-zeile__meta">5 Artikel · ab 1,90 €</span>
+        <span class="index-zeile__nr">06</span>
+        <span class="index-zeile__name">Süßspeisen &amp; Getränke</span>
+        <span class="index-zeile__meta">27 Artikel · ab 0,75 €</span>
         <span class="index-zeile__pfeil" data-icon="haken"></span>
       </a>
     </div>
   </section>
 
-  <!-- Service -->
   <section class="abschnitt--eng container" id="service">
     <div class="kopf">
       <div>
         <span class="kopf__nr">03 — Service</span>
-        <h2>Mehr als nur Bestellen</h2>
+        <h2>Für einen oder für alle</h2>
       </div>
     </div>
 
     <div class="service">
-      <div class="service__bild" style="background-image:url('Bilder/buffet.png')" role="img" aria-label="Aufgebautes Grillbuffet">
+      <div class="service__bild" style="background-image:url('Bilder/tresen.jpg')" role="img" aria-label="Tresen im Laden">
         <div class="service__bild-inhalt">
-          <p class="service__bild-titel">Wir kommen<br>auch zu dir</p>
-          <a href="index.html#kontakt" class="btn btn--primary btn--sm">
-            <span data-icon="brief"></span> Anfrage senden
+          <p class="service__bild-titel">Abholen<br>in 20 Minuten</p>
+          <a href="bestellen.html" class="btn btn--primary btn--sm">
+            <span data-icon="korb"></span> Zur Karte
           </a>
         </div>
       </div>
 
       <div class="service__kacheln">
         <article class="service-kachel">
-          <h3 class="service-kachel__titel">Catering</h3>
-          <p class="service-kachel__text">Grillstation mit Koch für Feiern ab 20 Personen, bei dir vor Ort aufgebaut.</p>
+          <h3 class="service-kachel__titel">Lieferung</h3>
+          <p class="service-kachel__text">Kostenlos ab 19,90 Euro Bestellwert, in etwa 40 Minuten bei dir.</p>
         </article>
         <article class="service-kachel">
-          <h3 class="service-kachel__titel">Familienfeiern</h3>
-          <p class="service-kachel__text">Eigener Bereich im Lokal für bis zu 40 Gäste, mit abgestimmtem Menü.</p>
+          <h3 class="service-kachel__titel">Abholung</h3>
+          <p class="service-kachel__text">Vorbestellen und in rund 20 Minuten in Neuss oder Köln mitnehmen.</p>
         </article>
         <article class="service-kachel">
-          <h3 class="service-kachel__titel">Firmenessen</h3>
-          <p class="service-kachel__text">Mittagslieferung ins Büro, auf Rechnung und pünktlich zur Pause.</p>
+          <h3 class="service-kachel__titel">Bundles</h3>
+          <p class="service-kachel__text">Party Bundle und Premium Bundle für Gruppen, fertig zusammengestellt.</p>
         </article>
         <article class="service-kachel">
-          <h3 class="service-kachel__titel">Abholplatten</h3>
-          <p class="service-kachel__text">Vorbestellte Grillplatten für zuhause, fertig zum Mitnehmen.</p>
+          <h3 class="service-kachel__titel">Zwei Standorte</h3>
+          <p class="service-kachel__text">Gleiche Karte, gleiche Preise. Beim Bestellen die Filiale wählen.</p>
         </article>
       </div>
 
@@ -257,32 +206,32 @@
     </div>
   </section>
 
-  <!-- Werbebanner -->
-  <section class="aktion" style="background-image:url('Bilder/banner_neu.png')">
+  <section class="aktion" style="background-image:url('Bilder/laden-aussen.jpg')">
     <div class="aktion__inner">
       <div>
-        <p class="aktion__kicker">Jeden Dienstag</p>
+        <p class="aktion__kicker">Der Klassiker</p>
         <div class="aktion__titelzeile">
-          <h2 class="aktion__titel">Döner-Tag</h2>
+          <h2 class="aktion__titel">DP Box Menü</h2>
           <div class="aktion__preis">
-            <b>5,50 €</b>
-            <span>statt 7,50</span>
+            <b>11,99 €</b>
+            <span>Box, Pommes, Getränk</span>
           </div>
         </div>
-        <p class="aktion__text">Jeder Döner Kebab den ganzen Tag für 5,50 Euro, im Laden und zum Mitnehmen. Ohne Code, ohne Mindestbestellwert.</p>
-        <a href="bestellen.html" class="btn btn--primary">
+        <p class="aktion__text">Döner Box mit Pommes und einem Softgetränk. Das günstigste Menü der Karte, jeden Tag verfügbar.</p>
+        <a href="bestellen.html#sparangebote" class="btn btn--primary">
           <span data-icon="korb"></span> Jetzt bestellen
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Stimmen -->
+  <!-- Stimmen: Beispieltexte. Vor dem Livegang entweder echte
+       Google-Bewertungen einholen oder den Abschnitt entfernen. -->
   <section class="abschnitt container" id="stimmen">
     <div class="kopf">
       <div>
         <span class="kopf__nr">04 — Stimmen</span>
-        <h2>4,7 Sterne, über 480 Bewertungen</h2>
+        <h2>Was Gäste sagen</h2>
       </div>
       <a href="#" class="link-accent">Auf Google ansehen</a>
     </div>
@@ -292,30 +241,31 @@
       <div class="stimmen__buehne">
         <div class="stimme-slide">
           <div class="stimme-slide__sterne">★★★★★</div>
-          <p class="stimme-slide__text">Der beste Adana in Braunschweig, und ich habe wirklich alle durch. Man schmeckt sofort, dass das Fleisch von Hand gehackt ist.</p>
-          <p class="stimme-slide__autor">Kevin B. &middot; vor 2 Wochen</p>
+          <p class="stimme-slide__text">Der Wrap mit der Hatay Soße ist eine eigene Klasse. Seitdem bestelle ich nichts anderes mehr.</p>
+          <p class="stimme-slide__autor">Beispielbewertung</p>
         </div>
         <div class="stimme-slide">
           <div class="stimme-slide__sterne">★★★★★</div>
-          <p class="stimme-slide__text">Wir holen hier seit Jahren freitags für die ganze Familie. Immer freundlich, immer heiß, immer gleich gut.</p>
-          <p class="stimme-slide__autor">Sandra M. &middot; vor 1 Monat</p>
+          <p class="stimme-slide__text">İskender mit Steakdöner, dazu zwei Etagen zum Sitzen. Essen kam schnell und war heiß.</p>
+          <p class="stimme-slide__autor">Beispielbewertung</p>
         </div>
         <div class="stimme-slide">
           <div class="stimme-slide__sterne">★★★★★</div>
-          <p class="stimme-slide__text">Das Fladenbrot kommt frisch aus dem Ofen und der Cacık ist selbstgemacht. Man merkt den Unterschied sofort.</p>
-          <p class="stimme-slide__autor">Tobias L. &middot; vor 3 Wochen</p>
+          <p class="stimme-slide__text">Große Portionen, faire Preise, freundliches Personal. Lieferung war pünktlich und vollständig.</p>
+          <p class="stimme-slide__autor">Beispielbewertung</p>
         </div>
       </div>
       <div class="stimmen__balken"><i></i></div>
     </div>
   </section>
 
-  <!-- Kontakt -->
+  <!-- Kontakt: die Startseite bleibt neutral und zeigt beide
+       Filialen. Die Karte steht auf Neuss. -->
   <section class="abschnitt container" id="kontakt">
     <div class="kopf">
       <div>
         <span class="kopf__nr">05 — Kontakt</span>
-        <h2>Kontakt &amp; Reservierung</h2>
+        <h2>Zwei Standorte</h2>
       </div>
     </div>
 
@@ -323,9 +273,17 @@
       <div class="kontakt-kachel">
         <div class="kontakt-kachel__kopf">
           <span data-icon="ort"></span>
-          <span class="kontakt-kachel__label">Adresse</span>
+          <span class="kontakt-kachel__label">Neuss</span>
         </div>
-        <p class="kontakt-kachel__wert">Musterstraße 1<br>38100 Braunschweig</p>
+        <p class="kontakt-kachel__wert">Niederstraße 11<br>41460 Neuss<br><a href="tel:021317188372">02131 7188372</a></p>
+      </div>
+
+      <div class="kontakt-kachel">
+        <div class="kontakt-kachel__kopf">
+          <span data-icon="ort"></span>
+          <span class="kontakt-kachel__label">Köln Schildergasse</span>
+        </div>
+        <p class="kontakt-kachel__wert">Krebsgasse 1<br>50667 Köln<br><a href="tel:017657871881">0176 57871881</a></p>
       </div>
 
       <div class="kontakt-kachel">
@@ -333,89 +291,52 @@
           <span data-icon="uhr"></span>
           <span class="kontakt-kachel__label">Öffnungszeiten</span>
         </div>
-        <p class="kontakt-kachel__wert">Täglich 11:00 bis 23:00 Uhr<br>Fr und Sa bis 01:00 Uhr</p>
+        <p class="kontakt-kachel__wert">Täglich 11:00 bis 22:00 Uhr<br>an beiden Standorten</p>
       </div>
 
       <div class="kontakt-kachel">
         <div class="kontakt-kachel__kopf">
-          <span data-icon="telefon"></span>
-          <span class="kontakt-kachel__label">Telefon</span>
+          <span data-icon="korb"></span>
+          <span class="kontakt-kachel__label">Bestellen</span>
         </div>
-        <p class="kontakt-kachel__wert"><a href="tel:0531000000">0531 / 000 000</a></p>
-      </div>
-
-      <div class="kontakt-kachel">
-        <div class="kontakt-kachel__kopf">
-          <span data-icon="brief"></span>
-          <span class="kontakt-kachel__label">E-Mail</span>
-        </div>
-        <p class="kontakt-kachel__wert"><a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a></p>
+        <p class="kontakt-kachel__wert"><a href="bestellen.html">Online bestellen</a><br>Lieferung ab 19,90 €</p>
       </div>
     </div>
 
     <div class="kontakt-karte">
       <iframe
-        src="https://www.google.com/maps?q=Braunschweig,+Deutschland&output=embed&z=13"
+        src="https://www.google.com/maps?q=Niederstra%C3%9Fe+11,+41460+Neuss&output=embed"
         allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="Bosporus Grill Standort">
+        title="Döner Point Neuss">
       </iframe>
     </div>
   </section>
-
-  <div class="bilderband">
-    <div class="bilderband__track">
-      <div class="bilderband__gruppe">
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie1.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie2.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie3.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie4.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie5.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie6.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie7.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie8.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie9.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie10.png')"></div>
-      </div>
-      <div class="bilderband__gruppe" aria-hidden="true">
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie1.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie2.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie3.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie4.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie5.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie6.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie7.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie8.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie9.png')"></div>
-        <div class="bilderband__bild" style="background-image:url('Bilder/galerie10.png')"></div>
-      </div>
-    </div>
-  </div>
 
   <footer class="footer">
     <div class="container">
       <div class="footer__cols">
         <div>
           <a href="index.html" class="footer__marke">
-            <img class="footer__logo" src="Bilder/Logo.png" alt="">
-            <span class="footer__wortmarke"><span>Bosporus</span><span>Grillrestaurant</span></span>
+            <img class="footer__logo" src="Bilder/logo.png" alt="Döner Point">
           </a>
-          <p class="footer__claim">Döner, Kebab und Meze. Seit 1988 in Braunschweig.</p>
+          <p class="footer__claim">Frisch vom Spieß. 100 % Halal.</p>
           <address class="footer__contact">
-            Musterstraße 1, 38100 Braunschweig<br>
-            Telefon: <a href="tel:0531000000">0531 / 000 000</a><br>
-            E-Mail: <a href="mailto:merhaba@bosporus-grill.de">merhaba@bosporus-grill.de</a>
+            Niederstraße 11, 41460 Neuss<br>
+            Telefon: <a href="tel:021317188372">02131 7188372</a><br>
+            Krebsgasse 1, 50667 Köln<br>
+            Telefon: <a href="tel:017657871881">0176 57871881</a>
           </address>
         </div>
         <nav class="footer__links">
           <a href="#">Impressum</a>
           <a href="#">Datenschutz</a>
-          <a href="#">Kontakt</a>
+          <a href="#kontakt">Kontakt</a>
           <a href="#">Allergene &amp; Zusatzstoffe</a>
         </nav>
       </div>
       <hr class="footer__divider">
-      <p class="footer__copy">© 2025 Bosporus Grill, alle Rechte vorbehalten</p>
+      <p class="footer__copy">© 2026 Döner Point, alle Rechte vorbehalten</p>
     </div>
   </footer>
 
