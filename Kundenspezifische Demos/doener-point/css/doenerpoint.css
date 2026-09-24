@@ -2497,10 +2497,22 @@ body.hat-maske { overflow: hidden; }
    Helle Kachel mit rotem Rand, freigestelltem Gerichtbild und
    roter Beschriftung darunter. Bewusst hell auf dem schwarzen
    Grund, damit die freigestellten Bilder ohne Kante sitzen. */
+/* Immer drei Kacheln nebeneinander, also zwei Reihen zu drei.
+   Feste Spaltenzahl statt auto-fit, damit die Aufteilung nicht je
+   nach Fensterbreite zwischen zwei und vier springt. Auf dem
+   Tablet zwei, auf dem Telefon eine. */
 .kat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--space-5);
+}
+
+@media (min-width: 620px) {
+  .kat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .kat-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 .kat-kachel {
