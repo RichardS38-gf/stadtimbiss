@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 66px;
+  min-height: 84px;
   gap: var(--space-4);
   flex-wrap: nowrap;
 }
@@ -309,7 +309,12 @@
 
 /* ── KOPFZEILE DER UNTERSEITEN ──
    Die Startseite hat ihre Navigation im Hero. Alle anderen Seiten
-   nutzen diese Kopfzeile mit demselben Logo und derselben Schrift. */
+   nutzen diese Kopfzeile: links nur das Logo, rechts die Knoepfe.
+   Kein Textmenue mehr.
+
+   Das Logo ist eine breite Wortmarke, keine runde Bildmarke wie
+   im Grundgeruest — deshalb wird es ueber die Breite gesetzt und
+   nicht ueber eine feste Kantenlaenge. */
 .nav__marke {
   display: inline-flex;
   align-items: center;
@@ -319,7 +324,8 @@
 
 .nav__logo-bild {
   display: block;
-  width: 52px;
+  width: clamp(150px, 20vw, 240px);
+  height: auto;
   flex-shrink: 0;
 }
 
@@ -344,13 +350,13 @@
 }
 
 @media (max-width: 900px) {
-  .nav__logo-bild { width: 40px; }
+  .nav__logo-bild { width: 150px; }
   .nav__wortmarke { font-size: 1rem; }
   .nav__wortmarke span + span { display: none; }
 }
 
 @media (max-width: 480px) {
-  .nav__logo-bild { width: 34px; }
+  .nav__logo-bild { width: 118px; }
   .nav__wortmarke { font-size: 0.9rem; }
 }
 
@@ -2467,7 +2473,11 @@ body.hat-maske { overflow: hidden; }
 
   .hero-dp__marke { order: 1; }
   .hero-dp__kopf-links { order: 2; justify-self: center; }
-  .hero-dp__kopf-rechts { order: 3; justify-self: center; }
+
+  /* Reservieren und Bestellen sind auf dem Telefon doppelt: sie
+     stehen mittig im Hero ohnehin gross da. In der Kopfzeile
+     draengen sie nur Logo und Konto zusammen. */
+  .hero-dp__kopf-rechts { display: none; }
 
   .hero-dp__menue { gap: var(--space-2) var(--space-4); }
   .hero-dp__menue a { font-size: 0.72rem; }
@@ -2515,62 +2525,540 @@ body.hat-maske { overflow: hidden; }
   .kat-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ── KATEGORIEKACHELN ──
+   Name in Rot ueber der Kachel, darunter der Rahmen mit dem
+   freigestellten Gerichtbild. Kein heller Grund mehr: die Bilder
+   haben einen Alphakanal und stehen direkt auf Schwarz. */
 .kat-kachel {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--space-3);
-  padding: var(--space-6) var(--space-4) var(--space-5);
-  background: #fff;
-  border: 2px solid var(--color-accent);
-  border-radius: 20px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.kat-kachel:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5);
-  opacity: 1;
+.kat-kachel:hover { transform: translateY(-6px); opacity: 1; }
+
+.kat-kachel__titel {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Der Rahmen umschliesst das Foto jetzt randlos. overflow: hidden
+   schneidet das Bild auf die Rundung zu. */
+.kat-kachel__rahmen {
+  display: block;
+  overflow: hidden;
+  border: 2px solid var(--color-accent);
+  border-radius: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.kat-kachel:hover .kat-kachel__rahmen {
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
 }
 
 .kat-kachel__bild {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
-  margin-bottom: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-/* Greift, solange das Bild fehlt. Das onerror im Markup setzt
-   die Klasse. */
-.kat-kachel__bild--leer {
-  background: #F1F0EE;
-  border-radius: 12px;
-  object-fit: none;
+.kat-kachel:hover .kat-kachel__bild { transform: scale(1.05); }
+
+/* ── ANSPRUCH MIT SLIDER ──
+   Links der Text, rechts drei Karten uebereinander gestapelt, von
+   denen immer genau eine sichtbar ist. Gestapelt statt
+   nebeneinander geschoben: so bleibt die Hoehe ruhig und nichts
+   laeuft seitlich aus dem Layout. js/vorteile.js schaltet. */
+.vorteile {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+  align-items: center;
 }
 
-.kat-kachel__meta {
+@media (min-width: 900px) {
+  .vorteile { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+}
+
+.vorteile__kicker {
+  display: block;
   font-family: var(--font-body);
-  font-size: var(--text-sm);
-  color: #6B6B6B;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
 }
 
-.kat-kachel__label {
+.vorteile__text h2 { margin-bottom: var(--space-4); }
+.vorteile__text p { color: var(--color-muted); margin-bottom: var(--space-4); }
+.vorteile__text .btn { margin-top: var(--space-2); }
+
+.vorteile__slider { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* Ohne JavaScript stehen die drei Karten schlicht untereinander
+   und sind alle lesbar. Erst wenn js/vorteile.js laeuft, setzt es
+   die Klasse --js an die Buehne, stapelt sie uebereinander und
+   blendet bis auf eine alle aus. So verschwindet die Sektion nie
+   ganz, auch nicht bei blockierten Modulen. */
+.vorteile__buehne {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.vorteile__buehne--js {
+  gap: 0;
+  min-height: 260px;
+}
+
+.vorteil {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 2px solid var(--color-accent);
+  border-radius: 20px;
+}
+
+/* Alle Karten liegen im selben Rasterfeld uebereinander. Die
+   Buehne ist damit so hoch wie die laengste Karte und springt
+   beim Wechsel nicht. */
+.vorteile__buehne--js .vorteil {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
+}
+
+.vorteile__buehne--js .vorteil--aktiv {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* iconsEinsetzen() ersetzt das <span data-icon> vollstaendig durch
+   das SVG. Die Klasse vorteil__icon ueberlebt das nicht, deshalb
+   wird hier das SVG innerhalb der Karte angesprochen. */
+.vorteil .ic {
+  width: 46px;
+  height: 46px;
+  stroke-width: 1.1;
+  color: var(--color-accent);
+}
+
+.vorteil__titel {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.vorteil__text { color: var(--color-muted); }
+
+/* Steuerung: Pfeil, Punkte, Pfeil. Die Pfeile stehen im HTML auf
+   hidden und werden von js/vorteile.js sichtbar gemacht — ohne
+   Schaltung haetten sie keine Funktion. */
+.vorteile__steuerung,
+.stimmen__steuerung {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.stimmen__steuerung { margin-top: var(--space-5); }
+
+.vorteile__pfeil,
+.stimmen__pfeil {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.55rem 1.1rem;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  padding: 0;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  background: none;
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.vorteile__pfeil:hover,
+.stimmen__pfeil:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.vorteile__punkte {
+  display: none;
+  gap: var(--space-2);
+}
+
+.vorteile__buehne--js ~ .vorteile__steuerung .vorteile__punkte { display: flex; }
+
+.vorteile__punkt {
+  width: 34px;
+  height: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: var(--color-line);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.vorteile__punkt--aktiv { background: var(--color-accent); }
+.vorteile__punkt:hover { background: var(--color-accent-dk); }
+
+/* ── AKTIONSBAND ──
+   Schraeg laufendes Band ueber einem Foto, darunter das Angebot.
+   Bewusst flacher als der alte Werbebanner.
+
+   Das Band nutzt die .ticker-Mechanik aus diesem Stylesheet: zwei
+   identische Gruppen, die Animation verschiebt um genau eine
+   Gruppenbreite, dadurch entsteht keine Luecke. Hier nur in Rot
+   mit weisser Schrift und um drei Grad gekippt. */
+.aktion-dp {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-8) var(--space-7);
+  background-color: var(--color-bg-soft);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Dunkler Verlauf nach rechts, damit der Text auf jedem Foto
+   steht. Links bleibt das Bild offen. */
+.aktion-dp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.55) 45%,
+    rgba(0, 0, 0, 0.82) 100%);
+}
+
+.aktion-dp > * { position: relative; z-index: 1; }
+
+/* Breiter als die Sektion und gekippt, damit an den Ecken keine
+   Luecke entsteht. overflow: hidden an der Sektion schneidet den
+   Ueberstand ab. */
+.ticker--schraeg {
+  position: absolute;
+  top: 34px;
+  left: -4%;
+  width: 108%;
+  transform: rotate(-3deg);
+  z-index: 2;
+  background: var(--color-accent);
+  border-block: none;
+  padding-block: var(--space-3);
+}
+
+.ticker--schraeg .ticker__item {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.ticker--schraeg .ticker__gruppe { gap: var(--space-7); padding-right: var(--space-7); }
+
+.aktion-dp__inhalt {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: var(--space-7);
+}
+
+/* Ab Tablet steht der Text rechts, links bleibt das Foto frei. */
+@media (min-width: 760px) {
+  .aktion-dp__inhalt { grid-template-columns: 1fr 1fr; }
+  .aktion-dp__text { grid-column: 2; }
+}
+
+.aktion-dp__titel {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: #fff;
+}
+
+/* Der rote Kasten mit dem Preis. */
+.aktion-dp__preis {
+  display: inline-block;
+  margin-top: var(--space-4);
+  padding: 0.6rem 1.2rem;
   background: var(--color-accent);
   color: #fff;
   border-radius: 10px;
   font-family: var(--font-head);
   font-weight: 900;
-  font-size: 0.92rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
   line-height: 1.1;
 }
 
-.kat-kachel:hover .kat-kachel__label { background: var(--color-accent-dk); }
+.aktion-dp__sub {
+  max-width: 46ch;
+  margin-top: var(--space-4);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.aktion-dp .btn { margin-top: var(--space-5); }
+
+/* ── KUNDENSTIMMEN ──
+   Linksbuendig, eine Stimme nach der anderen, Punkte darunter.
+   Derselbe Stapelaufbau wie beim Vorteile-Slider: ohne JavaScript
+   stehen alle Stimmen untereinander, erst js/vorteile.js setzt
+   die Klasse --js und blendet bis auf eine alle aus.
+
+   Achtung: .stimmen und .stimme gab es in diesem Stylesheet schon
+   aus zwei aelteren Bausteinen des Grundgeruests, beide mit
+   Kasten, Rahmen und Rundung. Die Werte werden hier ausdruecklich
+   zurueckgesetzt, sonst sitzt das Zitat in einer grauen Kachel in
+   einem schwarzen Kasten. */
+.stimmen__meta {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin-top: var(--space-2);
+}
+
+.stimmen__stern { color: var(--color-accent); }
+
+.stimmen {
+  margin-top: var(--space-6);
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.stimmen__buehne {
+  display: grid;
+  gap: var(--space-5);
+  min-height: 0;
+}
+
+.stimmen__buehne--js { gap: 0; min-height: 190px; }
+
+.stimme {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.stimmen__buehne--js .stimme {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.45s ease, visibility 0.45s;
+}
+
+.stimmen__buehne--js .stimme--aktiv { opacity: 1; visibility: visible; }
+
+.stimme__sterne {
+  color: var(--color-accent);
+  font-size: 1.15rem;
+  letter-spacing: 0.24em;
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+.stimme__text {
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--color-ink);
+  max-width: 60ch;
+}
+
+.stimme__autor {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.stimmen__punkte {
+  display: none;
+  gap: var(--space-2);
+}
+
+.stimmen__buehne--js ~ .stimmen__steuerung .stimmen__punkte { display: flex; }
+
+.stimmen__punkt {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-line);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.stimmen__punkt--aktiv { background: var(--color-accent); }
+.stimmen__punkt:hover { background: var(--color-accent-dk); }
+
+/* ── STANDORTE ──
+   Links zwei Karten, rechts die Google-Karte. Die aktive Karte
+   traegt den roten Rand. Ohne JavaScript stehen beide Karten da
+   und die Google-Karte zeigt Neuss — lesbar, nur nicht
+   umschaltbar. */
+.standorte {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .standorte { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+}
+
+.standorte__wahl {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.standort {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--color-bg-soft);
+  border: 2px solid var(--color-line);
+  border-radius: 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.standort:hover { border-color: var(--color-accent); }
+
+.standort--aktiv {
+  border-color: var(--color-accent);
+  background: rgba(225, 31, 28, 0.10);
+}
+
+.standort__stadt {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.standort__adresse {
+  color: var(--color-ink);
+  line-height: 1.6;
+}
+
+.standort__zeile {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.standort__zeile .ic {
+  width: 16px;
+  height: 16px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.standorte__karte {
+  overflow: hidden;
+  border: 2px solid var(--color-accent);
+  border-radius: 20px;
+  min-height: 340px;
+}
+
+.standorte__karte iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+}
+
+/* Das Bilderband steht auf dunklem Grund, der Graufilter aus dem
+   Grundgeruest wuerde es dort matt machen. */
+.bilderband__bild { filter: none; }
+
+/* Filialwahl ueber dem Umschalter. Bewusst ohne Kasten: nur
+   Beschriftung und Auswahl, mittig. Der Pfeil wird selbst
+   gezeichnet, weil das Standardfeld je nach System anders
+   aussieht. */
+.filialzeile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.filialzeile label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.filialzeile__wahl {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0 1.4rem 0 0;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  cursor: pointer;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23E11F1C' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 12px 8px;
+}
+
+.filialzeile__wahl:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+
+/* Das Ausklappfenster selbst zeichnet das System. Auf dunklem
+   Grund sieht helle Schrift auf hellem Feld sonst schlecht aus. */
+.filialzeile__wahl option {
+  background: var(--color-bg-soft);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  text-transform: none;
+}
 
 /* deploy trigger */

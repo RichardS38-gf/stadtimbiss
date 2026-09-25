@@ -65,6 +65,12 @@ function maskeBauen(schliessbar) {
   for (const knopf of feld.querySelectorAll('.filialwahl__karte')) {
     knopf.addEventListener('click', () => {
       setFiliale(knopf.dataset.filiale);
+
+      /* Die Wahl aus der Maske ins Ausklappfeld uebernehmen, sonst
+         stuenden dort zwei verschiedene Angaben. */
+      const wahl = document.getElementById('filiale-wahl');
+      if (wahl !== null) wahl.value = knopf.dataset.filiale;
+
       maskeSchliessen();
       anzeigeAktualisieren();
     });
@@ -108,6 +114,11 @@ export function anzeigeAktualisieren() {
   const schalterName = document.getElementById('filiale-name');
   if (schalterName !== null) schalterName.textContent = f.name;
 
+  /* Das Ausklappfeld wird bewusst NICHT aus dem Speicher
+     vorbelegt. Beim Oeffnen der Seite steht dort immer die
+     Aufforderung; erst eine Wahl in diesem Besuch traegt den Ort
+     ein. */
+
   const abholzeile = document.querySelector('[data-mode="abholung"] .modus__sub');
   if (abholzeile !== null) {
     abholzeile.textContent = `${f.abholzeit} \u00b7 ${f.strasse}, ${f.ort}`;
@@ -140,10 +151,68 @@ export function anzeigeAktualisieren() {
    feststehen, wohin die Bestellung geht. Auf allen anderen
    Seiten genuegt die Anzeige. */
 export function filialeAufbauen({ zwingend = false } = {}) {
-  anzeigeAktualisieren();
+  /* Das Ausklappfeld wird aus den Daten gefuellt, damit eine
+     dritte Filiale spaeter nur in demo-daten.js eingetragen
+     werden muss.
+
+     Der erste Eintrag ist eine Aufforderung ohne Wert. Sie steht
+     nur so lange da, bis jemand gewaehlt hat — danach nimmt
+     anzeigeAktualisieren den echten Ort. So sieht niemand einen
+     Ort, den er nicht selbst gewaehlt hat. */
+  const wahl = document.getElementById('filiale-wahl');
+  if (wahl !== null) {
+    const optionen = FILIALEN
+      .map((f) => `<option value="${f.id}">${f.name}</option>`)
+      .join('');
+
+    wahl.innerHTML =
+      '<option value="" disabled selected>Bitte auswählen</option>' + optionen;
+
+    wahl.addEventListener('change', () => {
+      if (wahl.value === '') return;
+      setFiliale(wahl.value);
+      anzeigeAktualisieren();
+    });
+  }
+
+  /* Nur wenn schon eine Wahl gespeichert ist, werden Adresse und
+     Zeiten eingetragen. Das Ausklappfeld selbst bleibt auf der
+     Aufforderung stehen — siehe anzeigeAktualisieren. */
+  if (getFiliale() !== null) anzeigeAktualisieren();
 
   const schalter = document.getElementById('filiale-schalter');
   if (schalter !== null) schalter.addEventListener('click', maskeOeffnen);
 
   if (zwingend && getFiliale() === null) maskeBauen(false);
+}
+
+/* Standortwahl auf der Startseite: zwei Karten, eine davon aktiv,
+   die Google-Karte folgt der Auswahl. Das hat nichts mit der
+   gespeicherten Bestellfiliale zu tun — hier geht es nur darum,
+   welchen Laden man gerade ansieht. Deshalb wird nichts
+   gespeichert. */
+export function standorteAufbauen() {
+  const karten = Array.from(document.querySelectorAll('.standort[data-filiale]'));
+  if (karten.length === 0) return;
+
+  const karte = document.getElementById('filiale-karte');
+
+  function waehle(id) {
+    const f = FILIALEN.find((x) => x.id === id);
+    if (f === undefined) return;
+
+    for (const k of karten) {
+      const an = k.dataset.filiale === id;
+      k.classList.toggle('standort--aktiv', an);
+      k.setAttribute('aria-pressed', an ? 'true' : 'false');
+    }
+
+    if (karte !== null && f.maps) karte.src = f.maps;
+  }
+
+  for (const k of karten) {
+    k.addEventListener('click', () => waehle(k.dataset.filiale));
+  }
+
+  waehle(karten[0].dataset.filiale);
 }

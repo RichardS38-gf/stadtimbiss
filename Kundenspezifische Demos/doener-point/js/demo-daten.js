@@ -145,7 +145,7 @@ export const DEMO_ORDERS = [
   bestellung('ord-7', 'DP-2418', 6, 'lieferung', [
     { product_id: 't2', name: 'Döner Teller', unit_price: 15.99, qty: 1 },
     { product_id: 'n2', name: 'Pommes Frites', unit_price: 6.50, qty: 1 },
-    { product_id: 'g3', name: 'Ayran 0,25l', unit_price: 2.50, qty: 2 }
+    { product_id: 'n1', name: 'Onion Rings', unit_price: 5.00, qty: 1 }
   ]),
   bestellung('ord-6', 'DP-2377', 15, 'abholung', [
     { product_id: 'i1', name: 'İskender mit spezieller TomatenSoße', unit_price: 17.99, qty: 1 },
@@ -154,11 +154,11 @@ export const DEMO_ORDERS = [
   bestellung('ord-5', 'DP-2301', 24, 'lieferung', [
     { product_id: 'w2', name: 'Döner Wrap', unit_price: 10.99, qty: 2 },
     { product_id: 'n1', name: 'Onion Rings', unit_price: 5.00, qty: 1 },
-    { product_id: 'g4', name: 'Coca-Cola 0,33l', unit_price: 2.75, qty: 2 }
+    { product_id: 'd7', name: 'Baklava, 4 Stück', unit_price: 6.00, qty: 1 }
   ]),
   bestellung('ord-4', 'DP-2266', 33, 'abholung', [
     { product_id: 'l2', name: 'Türkische Pizza Classic (Lahmacun)', unit_price: 6.50, qty: 1 },
-    { product_id: 'g3', name: 'Ayran 0,25l', unit_price: 2.50, qty: 1 }
+    { product_id: 'n4', name: 'Falafel', unit_price: 5.00, qty: 1 }
   ], { payment_type: 'bar' }),
   bestellung('ord-3', 'DP-2198', 45, 'lieferung', [
     { product_id: 'a12', name: 'DP Box Menü', unit_price: 11.99, qty: 1 },
@@ -168,7 +168,7 @@ export const DEMO_ORDERS = [
   bestellung('ord-2', 'DP-2104', 58, 'lieferung', [
     { product_id: 's2', name: 'Sandwich Döner', unit_price: 9.99, qty: 1 },
     { product_id: 'h1', name: 'Döner Wrap mit spezieller Hatay Soße', unit_price: 10.99, qty: 1 },
-    { product_id: 'g6', name: 'Fanta Orange 0,33l', unit_price: 2.75, qty: 1 }
+    { product_id: 'd1', name: 'Kazandibi', unit_price: 5.90, qty: 1 }
   ]),
   bestellung('ord-1', 'DP-2011', 72, 'abholung', [
     { product_id: 'u1', name: 'Burrito', unit_price: 11.00, qty: 1 },
@@ -238,9 +238,7 @@ export const KATEGORIEN = [
   { id: 'iskender',     name: 'İskender' },
   { id: 'burrito',      name: 'Burrito' },
   { id: 'snacks',       name: 'Snacks' },
-  { id: 'suesses',      name: 'Süßspeisen' },
-  { id: 'sossen',       name: 'Soßen' },
-  { id: 'getraenke',    name: 'Getränke' }
+  { id: 'suesses',      name: 'Süßspeisen' }
 ];
 
 /* ── ARTIKELKATALOG ──
@@ -313,44 +311,7 @@ export const KATALOG = {
   'd4': { name: 'Himbeer-Schoko Dessert', price: 6.90, kategorie: 'suesses', img: 'Bilder/himbeer-dessert.webp', beschreibung: 'Milchcreme mit Schokolade, Himbeere und Kokosnuss' },
   'd5': { name: 'Oreo Creme Dessert', price: 6.90, kategorie: 'suesses', img: 'Bilder/oreo-dessert.webp', beschreibung: 'Hausgemachte Milchcreme mit Oreo-Keks und Stückchen' },
   'd6': { name: 'Tiramisu Dessert', price: 6.90, kategorie: 'suesses', img: 'Bilder/tiramisu.webp', beschreibung: 'Hausgemacht, mit cremiger Mascarpone und feinem Kakao' },
-  'd7': { name: 'Baklava, 4 Stück', price: 6.00, kategorie: 'suesses', img: 'Bilder/baklava.webp', beschreibung: 'Filoteig mit gehackten Nüssen, getränkt in süßem Sirup' },
-
-  /* Soßen, alle 20 ml */
-  'z1':  { name: 'Samurai Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Pikante Mayonnaise mit feuriger Note' },
-  'z2':  { name: 'Jopi Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Würzige Spezialsoße, perfekt zu Snacks' },
-  'z3':  { name: 'Käse Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Cremige Käsesauce, ideal zum Dippen' },
-  'z4':  { name: 'Scharfe Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Pikant und feurig im Geschmack' },
-  'z5':  { name: 'Knoblauch Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Intensiv, perfekt zu Döner, Pommes und Snacks' },
-  'z6':  { name: 'Kräuter Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Frisch und würzig, die Ergänzung zum Döner' },
-  'z7':  { name: 'Chee Köfte Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Würzig, typisch für Chee Köfte' },
-  'z8':  { name: 'Curryketchup', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Fruchtig-würziger Curry-Ketchup' },
-  'z9':  { name: 'Feuer Afrikas Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Scharf und heißwürzig mit afrikanischem Flair' },
-  'z10': { name: 'Burger Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Geschmackvolle Soße für Burger' },
-  'z11': { name: 'Mayonnaise', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Cremig und mild im Geschmack' },
-  'z12': { name: 'Ketchup', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Klassischer Tomatenketchup' },
-  'z13': { name: 'Senf Soße', price: 0.75, kategorie: 'sossen', img: 'Bilder/sosse.webp', beschreibung: 'Aromatischer Senf, leicht scharf' },
-
-  /* Getränke */
-  'g1':  { name: 'Uludag 0,33l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/uludag.webp', beschreibung: '' },
-  'g2':  { name: 'Fuze Tea Zitrone 0,4l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/fuzetea-zitrone.webp', beschreibung: 'Schwarzer Tee mit fruchtiger Zitronen-Note' },
-  'g3':  { name: 'Ayran 0,25l', price: 2.50, kategorie: 'getraenke', img: 'Bilder/ayran.webp', beschreibung: '' },
-  'g4':  { name: 'Coca-Cola 0,33l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/cola.webp', beschreibung: 'Enthält Koffein' },
-  'g5':  { name: 'Coca-Cola Zero 0,33l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/cola-zero.webp', beschreibung: 'Ohne Zucker, enthält Koffein' },
-  'g6':  { name: 'Fanta Orange 0,33l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/fanta.webp', beschreibung: '' },
-  'g7':  { name: 'Fanta Exotic 0,33l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/fanta-exotic.webp', beschreibung: 'Intensiver Fruchtgeschmack' },
-  'g8':  { name: 'Mezzo Mix 0,33l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/mezzomix.webp', beschreibung: 'Cola und Orange, enthält Koffein' },
-  'g9':  { name: 'Sprite 0,33l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/sprite.webp', beschreibung: 'Limette und Zitrone' },
-  'g10': { name: 'Fuze Tea Pfirsich 0,4l', price: 2.75, kategorie: 'getraenke', img: 'Bilder/fuzetea-pfirsich.webp', beschreibung: 'Schwarzer Tee mit Pfirsich-Note' },
-  'g11': { name: 'Capri-Sun Kirsch 0,2l', price: 2.25, kategorie: 'getraenke', img: 'Bilder/caprisun.webp', beschreibung: '' },
-  'g12': { name: 'Capri-Sun Orange 0,2l', price: 2.25, kategorie: 'getraenke', img: 'Bilder/caprisun.webp', beschreibung: '' },
-  'g13': { name: 'Capri-Sun Multivitamin 0,2l', price: 2.25, kategorie: 'getraenke', img: 'Bilder/caprisun.webp', beschreibung: '' },
-  'g14': { name: 'ViO still 0,5l', price: 2.00, kategorie: 'getraenke', img: 'Bilder/vio.webp', beschreibung: 'Stilles Mineralwasser, zzgl. 0,25 € Pfand' },
-  'g15': { name: 'ViO spritzig 0,5l', price: 2.00, kategorie: 'getraenke', img: 'Bilder/vio.webp', beschreibung: 'Mit Kohlensäure, zzgl. 0,25 € Pfand' },
-  'g16': { name: 'Red Bull 0,25l', price: 3.00, kategorie: 'getraenke', img: 'Bilder/redbull.webp', beschreibung: 'Zzgl. 0,25 € Pfand' },
-  'g17': { name: 'Şalgam Suyu 0,3l normal', price: 2.00, kategorie: 'getraenke', img: 'Bilder/salgam.webp', beschreibung: '' },
-  'g18': { name: 'Şalgam Suyu 0,3l scharf', price: 2.00, kategorie: 'getraenke', img: 'Bilder/salgam.webp', beschreibung: '' },
-  'g19': { name: 'Turşu Suyu 0,2l', price: 2.00, kategorie: 'getraenke', img: 'Bilder/tursu.webp', beschreibung: '' },
-  'g20': { name: 'Wasser 0,5l', price: 2.00, kategorie: 'getraenke', img: 'Bilder/vio.webp', beschreibung: '' }
+  'd7': { name: 'Baklava, 4 Stück', price: 6.00, kategorie: 'suesses', img: 'Bilder/baklava.webp', beschreibung: 'Filoteig mit gehackten Nüssen, getränkt in süßem Sirup' }
 };
 
 export function demoDatenSatz() {

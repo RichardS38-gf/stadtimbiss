@@ -2,3 +2,8 @@
 Thumbs.db
 .vercel
 node_modules/
+
+# Ausgabeordner von bilder-umwandeln.ps1. Enthaelt dieselben Bilder
+# ein zweites Mal und wird bei jedem Lauf neu erzeugt. Gilt fuer alle
+# Shops, nicht nur fuer einen.
+Bilder-webp/

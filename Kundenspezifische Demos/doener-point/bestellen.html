@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=3">
   <link rel="stylesheet" href="css/bestellen.css?v=9">
-  <link rel="stylesheet" href="css/doenerpoint.css?v=7">
+  <link rel="stylesheet" href="css/doenerpoint.css?v=14">
   <link rel="stylesheet" href="css/orient.css?v=8">
   <link rel="stylesheet" href="css/konto.css?v=1">
 
@@ -26,12 +26,11 @@
        an die entstandenen Knoepfe. -->
   <script type="module">
     import { karteAufbauen } from './js/karte.js?v=1';
-    import { filialeAufbauen } from './js/filiale.js?v=1';
+    import { filialeAufbauen } from './js/filiale.js?v=3';
     karteAufbauen();
     filialeAufbauen({ zwingend: true });
   </script>
   <script type="module" src="js/bestellen.js"></script>
-  <script type="module" src="js/menue.js"></script>
 
   <style>
     /* Kategorieleiste und Gerichtnamen in der Schrift der
@@ -84,25 +83,13 @@
       <a href="index.html" class="nav__marke">
         <img class="nav__logo-bild" src="Bilder/logo.png" alt="Döner Point">
       </a>
-      <nav class="nav__links">
-        <a href="index.html#herkunft">Über uns</a>
-        <a href="bestellen.html">Speisekarte</a>
-        <a href="reservieren.html">Reservieren</a>
-        <a href="index.html#kontakt">Kontakt</a>
-      </nav>
       <div class="nav__aktionen" style="display:flex;gap:0.5rem;align-items:center;margin-left:auto;">
-        <button class="nav__menue-btn" type="button" aria-label="Menü">
-          <span aria-hidden="true">☰</span><span class="nav__menue-btn__text">Menü</span>
-        </button>
-
-        <!-- Zeigt die gewaehlte Filiale und oeffnet die Maske
-             erneut. Text kommt aus js/filiale.js. -->
-        <button class="filiale-schalter" id="filiale-schalter" type="button">
-          <span class="filiale-schalter__label">Filiale</span>
-          <span class="filiale-schalter__name" id="filiale-name">Neuss</span>
-        </button>
-
         <span id="nav-konto"></span>
+
+        <a href="reservieren.html" class="btn btn--primary btn--sm">
+          <span data-icon="tisch"></span> <span class="btn__text">Reservieren</span>
+        </a>
+
         <button class="cart-btn" id="cart-toggle" aria-label="Warenkorb">
           <span data-icon="korb"></span> <span class="cart-badge" id="cart-count">0</span>
         </button>
@@ -112,6 +99,14 @@
 
   <div class="order-mode">
     <div class="container">
+
+      <!-- Filialwahl, mittig ueber dem Umschalter. Die Optionen
+           baut js/filiale.js aus demo-daten.js. -->
+      <p class="filialzeile">
+        <label for="filiale-wahl">Filiale:</label>
+        <select id="filiale-wahl" class="filialzeile__wahl"></select>
+      </p>
+
       <div class="modus">
         <button class="modus__option mode-card mode-card--active" data-mode="lieferung">
           <span class="modus__kopf">

@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/base.css?v=2">
   <link rel="stylesheet" href="css/layout.css?v=2">
   <link rel="stylesheet" href="css/components.css?v=3">
-  <link rel="stylesheet" href="css/doenerpoint.css?v=7">
+  <link rel="stylesheet" href="css/doenerpoint.css?v=14">
   <link rel="stylesheet" href="css/orient.css?v=8">
   <script type="module" src="js/menue.js"></script>
   <link rel="stylesheet" href="css/konto.css?v=1">
@@ -62,7 +62,7 @@
       <a href="#herkunft">Über uns</a>
       <a href="#karte">Karte</a>
       <a href="reservieren.html">Reservieren</a>
-      <a href="#stimmen">Stimmen</a>
+      <a href="#stimmen">Bewertungen</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
 
@@ -106,202 +106,275 @@
       <div>
         <h2>Speisekarte</h2>
       </div>
-      <a href="bestellen.html" class="link-accent">Alles ansehen</a>
+      <a href="bestellen.html" class="btn btn--primary btn--sm">
+        <span data-icon="korb"></span> Jetzt bestellen
+      </a>
     </div>
 
-    <!-- Kacheln mit freigestelltem Gerichtbild und roter
-         Beschriftung. Die Bilder werden noch erzeugt; solange sie
-         fehlen, setzt onerror eine ruhige Flaeche statt des
-         zerbrochenen Symbols. -->
+    <!-- Kacheln mit freigestelltem Gerichtbild. Der Name steht in
+         Rot ueber der Kachel. Die Bilder haben einen Alphakanal,
+         deshalb braucht es keinen hellen Grund dahinter. -->
     <div class="kat-grid">
       <a href="bestellen.html#sandwiches" class="kat-kachel">
-        <img class="kat-kachel__bild" src="Bilder/kat-sandwich.webp" alt="" loading="lazy"
-             onerror="this.classList.add('kat-kachel__bild--leer')">
-        <span class="kat-kachel__meta">3 Gerichte &middot; ab 9,49 &euro;</span>
-        <span class="kat-kachel__label">Sandwich</span>
+        <span class="kat-kachel__titel">Sandwich</span>
+        <span class="kat-kachel__rahmen">
+          <img class="kat-kachel__bild" src="Bilder/kat-sandwich.webp" alt="" loading="lazy">
+        </span>
       </a>
 
       <a href="bestellen.html#wrap" class="kat-kachel">
-        <img class="kat-kachel__bild" src="Bilder/kat-wrap.webp" alt="" loading="lazy"
-             onerror="this.classList.add('kat-kachel__bild--leer')">
-        <span class="kat-kachel__meta">6 Gerichte &middot; ab 8,49 &euro;</span>
-        <span class="kat-kachel__label">Wrap</span>
+        <span class="kat-kachel__titel">Wrap</span>
+        <span class="kat-kachel__rahmen">
+          <img class="kat-kachel__bild" src="Bilder/kat-wrap.webp" alt="" loading="lazy">
+        </span>
       </a>
 
       <a href="bestellen.html#doener" class="kat-kachel">
-        <img class="kat-kachel__bild" src="Bilder/kat-doener.webp" alt="" loading="lazy"
-             onerror="this.classList.add('kat-kachel__bild--leer')">
-        <span class="kat-kachel__meta">4 Gerichte &middot; ab 9,99 &euro;</span>
-        <span class="kat-kachel__label">Döner</span>
+        <span class="kat-kachel__titel">Döner</span>
+        <span class="kat-kachel__rahmen">
+          <img class="kat-kachel__bild" src="Bilder/kat-doener.webp" alt="" loading="lazy">
+        </span>
       </a>
 
       <a href="bestellen.html#suesses" class="kat-kachel">
-        <img class="kat-kachel__bild" src="Bilder/kat-suesses.webp" alt="" loading="lazy"
-             onerror="this.classList.add('kat-kachel__bild--leer')">
-        <span class="kat-kachel__meta">7 Artikel &middot; ab 5,90 &euro;</span>
-        <span class="kat-kachel__label">Süßes</span>
+        <span class="kat-kachel__titel">Süßes</span>
+        <span class="kat-kachel__rahmen">
+          <img class="kat-kachel__bild" src="Bilder/kat-suesses.webp" alt="" loading="lazy">
+        </span>
       </a>
 
       <a href="bestellen.html#lahmacun" class="kat-kachel">
-        <img class="kat-kachel__bild" src="Bilder/kat-lahmacun.webp" alt="" loading="lazy"
-             onerror="this.classList.add('kat-kachel__bild--leer')">
-        <span class="kat-kachel__meta">2 Gerichte &middot; ab 6,50 &euro;</span>
-        <span class="kat-kachel__label">Lahmacun</span>
+        <span class="kat-kachel__titel">Lahmacun</span>
+        <span class="kat-kachel__rahmen">
+          <img class="kat-kachel__bild" src="Bilder/kat-lahmacun.webp" alt="" loading="lazy">
+        </span>
       </a>
 
       <a href="bestellen.html#snacks" class="kat-kachel">
-        <img class="kat-kachel__bild" src="Bilder/kat-snacks.webp" alt="" loading="lazy"
-             onerror="this.classList.add('kat-kachel__bild--leer')">
-        <span class="kat-kachel__meta">7 Artikel &middot; ab 5,00 &euro;</span>
-        <span class="kat-kachel__label">Snacks</span>
+        <span class="kat-kachel__titel">Snacks</span>
+        <span class="kat-kachel__rahmen">
+          <img class="kat-kachel__bild" src="Bilder/kat-snacks.webp" alt="" loading="lazy">
+        </span>
       </a>
     </div>
   </section>
 
+  <!-- ── ANSPRUCH ──
+       Links der Text, rechts drei Karten, die js/vorteile.js
+       durchlaufen laesst. -->
   <section class="abschnitt--eng container" id="service">
-    <div class="kopf">
-      <div>
-        <h2>Für einen oder für alle</h2>
-      </div>
-    </div>
+    <div class="vorteile">
 
-    <div class="service">
-      <div class="service__bild" style="background-image:url('Bilder/tresen.jpg')" role="img" aria-label="Tresen im Laden">
-        <div class="service__bild-inhalt">
-          <p class="service__bild-titel">Abholen<br>in 20 Minuten</p>
-          <a href="bestellen.html" class="btn btn--primary btn--sm">
-            <span data-icon="korb"></span> Zur Karte
-          </a>
+      <div class="vorteile__text">
+        <span class="vorteile__kicker">Unser Anspruch</span>
+        <h2>Warum Döner Point</h2>
+        <p>Wir machen keinen Döner von der Stange. Das Fleisch ist zu hundert Prozent Halal und kommt frisch vom Spieß, die Soßen setzen wir selbst an.</p>
+        <p>Dazu eine Karte, die weiter geht als der Klassiker: İskender mit Joghurt und Butterfett, Döner auf Reis, Burrito, Taco und Bundles für die ganze Runde. In Neuss und in Köln, zu denselben Preisen.</p>
+        <a href="bestellen.html" class="btn btn--primary">
+          <span data-icon="korb"></span> Jetzt bestellen
+        </a>
+      </div>
+
+      <div class="vorteile__slider">
+        <div class="vorteile__buehne">
+
+          <article class="vorteil">
+            <span class="vorteil__icon" data-icon="drehspiess" data-icon-class="ic ic--lg"></span>
+            <h3 class="vorteil__titel">100 % Halal</h3>
+            <p class="vorteil__text">Alles Fleisch ist Halal und wird frisch vom Spieß geschnitten, nicht vorgeschnitten aufgewärmt.</p>
+          </article>
+
+          <article class="vorteil">
+            <span class="vorteil__icon" data-icon="meze" data-icon-class="ic ic--lg"></span>
+            <h3 class="vorteil__titel">Eigene Soßen</h3>
+            <p class="vorteil__text">Von Knoblauch bis Hatay: unsere Soßen sind hausgemacht. Die Hatay Soße gibt es so nur bei uns.</p>
+          </article>
+
+          <article class="vorteil">
+            <span class="vorteil__icon" data-icon="roller" data-icon-class="ic ic--lg"></span>
+            <h3 class="vorteil__titel">Kostenlose Lieferung</h3>
+            <p class="vorteil__text">Ab 19,90 Euro liefern wir ohne Aufpreis, in etwa 40 Minuten. Abholung geht in rund 20 Minuten.</p>
+          </article>
+
+        </div>
+
+        <div class="vorteile__steuerung">
+          <button class="vorteile__pfeil" type="button" data-richtung="zurueck" aria-label="Vorherige Karte" hidden>&larr;</button>
+
+          <div class="vorteile__punkte" role="tablist" aria-label="Vorteile">
+            <button class="vorteile__punkt" type="button" role="tab" aria-label="100 % Halal"></button>
+            <button class="vorteile__punkt" type="button" role="tab" aria-label="Eigene Soßen"></button>
+            <button class="vorteile__punkt" type="button" role="tab" aria-label="Kostenlose Lieferung"></button>
+          </div>
+
+          <button class="vorteile__pfeil" type="button" data-richtung="vor" aria-label="Nächste Karte" hidden>&rarr;</button>
         </div>
       </div>
 
-      <div class="service__kacheln">
-        <article class="service-kachel">
-          <h3 class="service-kachel__titel">Lieferung</h3>
-          <p class="service-kachel__text">Kostenlos ab 19,90 Euro Bestellwert, in etwa 40 Minuten bei dir.</p>
-        </article>
-        <article class="service-kachel">
-          <h3 class="service-kachel__titel">Abholung</h3>
-          <p class="service-kachel__text">Vorbestellen und in rund 20 Minuten in Neuss oder Köln mitnehmen.</p>
-        </article>
-        <article class="service-kachel">
-          <h3 class="service-kachel__titel">Bundles</h3>
-          <p class="service-kachel__text">Party Bundle und Premium Bundle für Gruppen, fertig zusammengestellt.</p>
-        </article>
-        <article class="service-kachel">
-          <h3 class="service-kachel__titel">Zwei Standorte</h3>
-          <p class="service-kachel__text">Gleiche Karte, gleiche Preise. Beim Bestellen die Filiale wählen.</p>
-        </article>
-      </div>
-
-      <p class="slider-hinweis">Wischen für mehr</p>
     </div>
   </section>
 
-  <section class="aktion" style="background-image:url('Bilder/laden-aussen.jpg')">
-    <div class="aktion__inner">
-      <div>
-        <p class="aktion__kicker">Der Klassiker</p>
-        <div class="aktion__titelzeile">
-          <h2 class="aktion__titel">DP Box Menü</h2>
-          <div class="aktion__preis">
-            <b>11,99 €</b>
-            <span>Box, Pommes, Getränk</span>
-          </div>
+  <!-- ── AKTION ──
+       Schraeg laufendes Band, darunter das Angebot auf einem
+       formatfuellenden Foto. Bilder/aktion.webp fehlt noch; bis
+       dahin traegt der dunkle Grund die Sektion. -->
+  <section class="aktion-dp" style="background-image:url('Bilder/aktion.webp')">
+
+    <div class="ticker ticker--schraeg" aria-hidden="true">
+      <div class="ticker__track">
+        <div class="ticker__gruppe">
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
         </div>
-        <p class="aktion__text">Döner Box mit Pommes und einem Softgetränk. Das günstigste Menü der Karte, jeden Tag verfügbar.</p>
-        <a href="bestellen.html#sparangebote" class="btn btn--primary">
+        <div class="ticker__gruppe">
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+          <span class="ticker__item">100 % Halal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container aktion-dp__inhalt">
+      <div class="aktion-dp__text">
+        <h2 class="aktion-dp__titel">Jeden Donnerstag<br>Döner Tag</h2>
+        <p class="aktion-dp__preis">7 &euro; statt 9 &euro;</p>
+        <p class="aktion-dp__sub">Den ganzen Donnerstag, im Laden und zum Mitnehmen. Ohne Code, ohne Mindestbestellwert.</p>
+        <a href="bestellen.html" class="btn btn--primary">
           <span data-icon="korb"></span> Jetzt bestellen
         </a>
       </div>
     </div>
+
   </section>
 
-  <!-- Stimmen: Beispieltexte. Vor dem Livegang entweder echte
+  <!-- ── STIMMEN ──
+       Beispieltexte. Vor dem Livegang entweder echte
        Google-Bewertungen einholen oder den Abschnitt entfernen. -->
   <section class="abschnitt container" id="stimmen">
     <div class="kopf">
       <div>
-        <h2>Was Gäste sagen</h2>
+        <h2>Was unsere Gäste sagen</h2>
+        <p class="stimmen__meta"><span class="stimmen__stern">★</span> 4,5 Sterne auf Google &middot; über 470 Bewertungen</p>
       </div>
-      <a href="#" class="link-accent">Auf Google ansehen</a>
+      <a href="#" class="link-accent">Alle Bewertungen &rarr;</a>
     </div>
 
     <div class="stimmen">
-      <span class="stimmen__zeichen" aria-hidden="true">&rdquo;</span>
       <div class="stimmen__buehne">
-        <div class="stimme-slide">
-          <div class="stimme-slide__sterne">★★★★★</div>
-          <p class="stimme-slide__text">Der Wrap mit der Hatay Soße ist eine eigene Klasse. Seitdem bestelle ich nichts anderes mehr.</p>
-          <p class="stimme-slide__autor">Beispielbewertung</p>
-        </div>
-        <div class="stimme-slide">
-          <div class="stimme-slide__sterne">★★★★★</div>
-          <p class="stimme-slide__text">İskender mit Steakdöner, dazu zwei Etagen zum Sitzen. Essen kam schnell und war heiß.</p>
-          <p class="stimme-slide__autor">Beispielbewertung</p>
-        </div>
-        <div class="stimme-slide">
-          <div class="stimme-slide__sterne">★★★★★</div>
-          <p class="stimme-slide__text">Große Portionen, faire Preise, freundliches Personal. Lieferung war pünktlich und vollständig.</p>
-          <p class="stimme-slide__autor">Beispielbewertung</p>
-        </div>
+
+        <blockquote class="stimme">
+          <div class="stimme__sterne">★★★★★</div>
+          <p class="stimme__text">„Der Wrap mit der Hatay Soße ist eine eigene Klasse. Seitdem bestelle ich nichts anderes mehr.“</p>
+          <footer class="stimme__autor">Beispielbewertung &middot; Google</footer>
+        </blockquote>
+
+        <blockquote class="stimme">
+          <div class="stimme__sterne">★★★★★</div>
+          <p class="stimme__text">„İskender mit Steakdöner, dazu zwei Etagen zum Sitzen. Essen kam schnell und war heiß.“</p>
+          <footer class="stimme__autor">Beispielbewertung &middot; Google</footer>
+        </blockquote>
+
+        <blockquote class="stimme">
+          <div class="stimme__sterne">★★★★★</div>
+          <p class="stimme__text">„Große Portionen, faire Preise, freundliches Personal. Lieferung war pünktlich und vollständig.“</p>
+          <footer class="stimme__autor">Beispielbewertung &middot; Google</footer>
+        </blockquote>
+
       </div>
-      <div class="stimmen__balken"><i></i></div>
+
+      <div class="stimmen__steuerung">
+        <button class="stimmen__pfeil" type="button" data-richtung="zurueck" aria-label="Vorherige Bewertung" hidden>&larr;</button>
+
+        <div class="stimmen__punkte" role="tablist" aria-label="Bewertungen">
+          <button class="stimmen__punkt" type="button" role="tab" aria-label="Bewertung 1"></button>
+          <button class="stimmen__punkt" type="button" role="tab" aria-label="Bewertung 2"></button>
+          <button class="stimmen__punkt" type="button" role="tab" aria-label="Bewertung 3"></button>
+        </div>
+
+        <button class="stimmen__pfeil" type="button" data-richtung="vor" aria-label="Nächste Bewertung" hidden>&rarr;</button>
+      </div>
     </div>
   </section>
 
-  <!-- Kontakt: die Startseite bleibt neutral und zeigt beide
-       Filialen. Die Karte steht auf Neuss. -->
+  <!-- ── STANDORTE ──
+       Links zwei Karten, rechts die Google-Karte. Ein Klick auf
+       eine Karte schaltet die Google-Karte um; das macht
+       js/filiale.js, die Adressen kommen aus js/demo-daten.js. -->
   <section class="abschnitt container" id="kontakt">
     <div class="kopf">
       <div>
         <h2>Zwei Standorte</h2>
       </div>
+      <a href="reservieren.html" class="btn btn--primary btn--sm">
+        <span data-icon="tisch"></span> Tisch reservieren
+      </a>
     </div>
 
-    <div class="kontakt-kacheln">
-      <div class="kontakt-kachel">
-        <div class="kontakt-kachel__kopf">
-          <span data-icon="ort"></span>
-          <span class="kontakt-kachel__label">Neuss</span>
-        </div>
-        <p class="kontakt-kachel__wert">Niederstraße 11<br>41460 Neuss<br><a href="tel:021317188372">02131 7188372</a></p>
+    <div class="standorte">
+      <div class="standorte__wahl">
+
+        <button class="standort" type="button" data-filiale="neuss" aria-pressed="true">
+          <span class="standort__stadt">Neuss</span>
+          <span class="standort__adresse">Niederstraße 11<br>41460 Neuss</span>
+          <span class="standort__zeile"><span data-icon="telefon"></span> 02131 7188372</span>
+          <span class="standort__zeile"><span data-icon="uhr"></span> Täglich 11:00 – 22:00 Uhr</span>
+        </button>
+
+        <button class="standort" type="button" data-filiale="koeln" aria-pressed="false">
+          <span class="standort__stadt">Köln Schildergasse</span>
+          <span class="standort__adresse">Krebsgasse 1<br>50667 Köln</span>
+          <span class="standort__zeile"><span data-icon="telefon"></span> 0176 57871881</span>
+          <span class="standort__zeile"><span data-icon="uhr"></span> Täglich 11:00 – 22:00 Uhr</span>
+        </button>
+
       </div>
 
-      <div class="kontakt-kachel">
-        <div class="kontakt-kachel__kopf">
-          <span data-icon="ort"></span>
-          <span class="kontakt-kachel__label">Köln Schildergasse</span>
-        </div>
-        <p class="kontakt-kachel__wert">Krebsgasse 1<br>50667 Köln<br><a href="tel:017657871881">0176 57871881</a></p>
+      <div class="standorte__karte">
+        <iframe
+          id="filiale-karte"
+          src="https://www.google.com/maps?q=Niederstra%C3%9Fe+11,+41460+Neuss&output=embed"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Standort Döner Point">
+        </iframe>
       </div>
-
-      <div class="kontakt-kachel">
-        <div class="kontakt-kachel__kopf">
-          <span data-icon="uhr"></span>
-          <span class="kontakt-kachel__label">Öffnungszeiten</span>
-        </div>
-        <p class="kontakt-kachel__wert">Täglich 11:00 bis 22:00 Uhr<br>an beiden Standorten</p>
-      </div>
-
-      <div class="kontakt-kachel">
-        <div class="kontakt-kachel__kopf">
-          <span data-icon="tisch"></span>
-          <span class="kontakt-kachel__label">Tisch reservieren</span>
-        </div>
-        <p class="kontakt-kachel__wert"><a href="reservieren.html">Platz vorbestellen</a><br>für beide Standorte</p>
-      </div>
-    </div>
-
-    <div class="kontakt-karte">
-      <iframe
-        src="https://www.google.com/maps?q=Niederstra%C3%9Fe+11,+41460+Neuss&output=embed"
-        allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Döner Point Neuss">
-      </iframe>
     </div>
   </section>
+
+  <!-- Bilderband, laeuft endlos nach links und haelt beim Zeigen
+       an. Zwei identische Gruppen sorgen fuer den nahtlosen
+       Uebergang. Alle acht Bilder liegen quadratisch vor. -->
+  <div class="bilderband">
+    <div class="bilderband__track">
+      <div class="bilderband__gruppe">
+        <div class="bilderband__bild" style="background-image:url('Bilder/band1.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band2.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band-gastraum.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band3.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band-tresen.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band4.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band-laden-aussen.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band5.webp')"></div>
+      </div>
+      <div class="bilderband__gruppe" aria-hidden="true">
+        <div class="bilderband__bild" style="background-image:url('Bilder/band1.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band2.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band-gastraum.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band3.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band-tresen.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band4.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band-laden-aussen.webp')"></div>
+        <div class="bilderband__bild" style="background-image:url('Bilder/band5.webp')"></div>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="container">
@@ -333,8 +406,13 @@
   <script type="module">
     import { setupSeite } from './js/auth.js';
     import { iconsEinsetzen } from './js/icons.js';
+    import { vorteileStarten, stimmenStarten } from './js/vorteile.js?v=3';
+    import { standorteAufbauen } from './js/filiale.js?v=3';
 
     iconsEinsetzen();
+    vorteileStarten();
+    stimmenStarten();
+    standorteAufbauen();
     await setupSeite();
     iconsEinsetzen();
   </script>
