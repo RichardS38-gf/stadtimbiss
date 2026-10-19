@@ -12,8 +12,6 @@
 // Siehe Specs/datenmodell.md
 
 import { addToCart, updateQty, clearCart } from './cart.js';
-// Setzt das Label "KI-generiert" auf alle Bilder (Art. 50 KI-VO)
-import './ki-kennzeichnung.js';
 import { demoDatenSatz, LIEFERKOSTEN } from './demo-daten.js';
 
 // Lieferkosten kommen aus demo-daten.js, weil sie sich je Shop
@@ -668,6 +666,11 @@ export async function cancelReservation(id) {
 // HTML-Datei kopiert werden muss.
 // ---------------------------------------------------------------
 
+// KI-Hinweis im Banner (Art. 50 KI-VO). Alle Bilder der Demoshops sind
+// KI-generiert, deshalb ein Hinweis fuer die ganze Seite statt eines
+// Labels auf jedem Bild. Der Banner steht auf jeder Seite ganz oben.
+const KI_HINWEIS = '<span class="demo-banner__ki">· Alle Bilder sind KI-generiert</span>';
+
 export async function renderDemoBanner(zielId = 'demo-banner') {
   const ziel = document.getElementById(zielId);
   if (!ziel) return;
@@ -680,6 +683,7 @@ export async function renderDemoBanner(zielId = 'demo-banner') {
       <div class="demo-banner__inner">
         <span class="demo-banner__text">
           Demo-Modus: angemeldet als ${profil.first_name} ${profil.last_name}
+          ${KI_HINWEIS}
         </span>
         <span class="demo-banner__actions">
           <button type="button" class="demo-banner__link" data-demo="reset">Zurücksetzen</button>
@@ -690,7 +694,7 @@ export async function renderDemoBanner(zielId = 'demo-banner') {
   } else {
     ziel.innerHTML = `
       <div class="demo-banner__inner">
-        <span class="demo-banner__text">Demo-Modus: nicht angemeldet</span>
+        <span class="demo-banner__text">Demo-Modus: nicht angemeldet ${KI_HINWEIS}</span>
         <span class="demo-banner__actions">
           <button type="button" class="demo-banner__link" data-demo="login">Als Demo-Kunde anmelden</button>
         </span>
