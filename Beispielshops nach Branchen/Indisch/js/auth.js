@@ -12,6 +12,8 @@
 // Siehe Specs/datenmodell.md
 
 import { addToCart, updateQty, clearCart } from './cart.js';
+// Setzt das Label "KI-generiert" auf alle Bilder (Art. 50 KI-VO)
+import './ki-kennzeichnung.js';
 import { demoDatenSatz, LIEFERKOSTEN } from './demo-daten.js';
 
 // Lieferkosten kommen aus demo-daten.js, weil sie sich je Shop
